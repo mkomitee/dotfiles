@@ -48,6 +48,18 @@ class Subtree(object):
             sys.exit(1)
         out.close()
         err.close()
+        null.close()
+
+
+def git_status():
+    null = open('/dev/null', 'a')
+    command = ['git', 'status']
+    try:
+        subprocess.check_call(command, stdin=null, stdout=null, stderr=null)
+    except subprocess.CalledProcessError:
+        sys.stderr.write("Problem checking git status\n")
+        sys.exit(1)
+    null.close()
 
 
 def read_subtrees(config_file):
@@ -57,6 +69,7 @@ def read_subtrees(config_file):
 
 
 if __name__ == '__main__':
+    git_status()
     for subtree in read_subtrees('repositories.csv'):
         subtree.deploy()
 
