@@ -1,0 +1,22 @@
+set editing-mode vi
+set keymap vi
+
+set expand-tilde on
+set visible-stats on
+
+set editing-mode vi
+$if mode=vi
+    set keymap vi-command
+    # these are for vi-command mode
+    "\C-p": history-search-backward
+    "\C-n": history-search-forward
+    "\e[A": history-search-backward
+    "\e[B": history-search-forward
+    set keymap vi-insert
+    # these are for vi-insert mode
+    "\C-p": history-search-backward
+    "\C-n": history-search-forward
+    "\e[A": history-search-backward
+    "\e[B": history-search-forward
+$endif
+

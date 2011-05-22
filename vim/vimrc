@@ -1,0 +1,545 @@
+
+" Folding cheet sheet
+" zR    open all folds
+" zM    close all folds
+" za    toggle fold at cursor position
+" zj    move down to start of next fold
+" zk    move up to end of previous fold
+
+" Pre-local loading (set variables to influence module loading) {{{1
+" Include user's local vim config
+if filereadable(expand("~/.vimrc.pre-local"))
+  source ~/.vimrc.pre-local
+endif
+
+
+" Load Plugins. {{{1
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
+"let g:GetLatestVimScripts_allowautoinstall=1
+
+" Setup directories {{{1
+silent execute '!mkdir -p $HOME/.vimbackup'
+silent execute '!mkdir -p $HOME/.vimswap'
+silent execute '!mkdir -p $HOME/.vimviews'
+
+" Preferences {{{1
+" Use Vim settings, rather then Vi settings (much better!).
+" This must be first, because it changes other options as a side effect.
+filetype plugin on
+filetype plugin indent on
+set nocompatible
+set backspace=indent,eol
+set history=10000       " keep lots of command line history
+set undolevels=10000    " lots of undoing too
+set showcmd             " display incomplete commands
+set incsearch           " do incremental searching
+set visualbell t_vb=    " no beep or bell
+set number              " line numbers
+set cursorline          " highlight the line with the cursor
+set cursorcolumn        " highlight the column with the cursor
+set tabstop=4           " Tab counts as 4 spaces
+set softtabstop=4       " Soft tabs ARE 4 spaces
+set shiftwidth=4        " Autoindent using 4 spaces
+set textwidth=0
+set expandtab           " Expand tabs to spaces
+set hidden              " buffers not in the foreground are hidden
+set nowrap              " No wrapping
+set backupdir=$HOME/.vimbackup/ " backup files
+set directory=$HOME/.vimswap/   " swap files
+set viewdir=$HOME/.vimviews/    " view files
+set laststatus=2        " always show the status line
+set clipboard+=unnamed  " use the x11 clipboard for yanking
+set scrolloff=5         " keep 5 lines for context while scrolling
+set sidescrolloff=5     " same for left-right
+set splitbelow          " drr
+set ignorecase          " case insensitive searching, ...
+set smartcase           " unless the search term includes a capital
+set title               " vim changes xterm window title
+set foldcolumn=2        " add 2 to the gutter to show folds
+set cmdheight=1         " drr
+set shortmess+=filmnrxoOtTI
+set iskeyword+=:
+set listchars=precedes:<,extends:>,eol:$,tab:\|_
+set list
+set wildmenu
+set wildmode=list:longest
+syntax enable
+set background=dark
+color ir_black
+if &t_Co < 16
+    set t_Co=16
+endif
+
+" In many terminal emulators the mouse works just fine, thus enable it.
+if has('mouse')
+    set mouse=a
+endif
+
+" Switch syntax highlighting on, when the terminal has colors
+" Also switch on highlighting the last used search pattern.
+syntax on
+set hlsearch
+
+" Statusline {{{1
+set statusline=   " clear the statusline for when vimrc is reloaded
+set statusline+=%-3.3n\                      " buffer number
+set statusline+=%t\                          " file name
+set statusline+=%h%m%r%w                     " flags
+set statusline+=[%{strlen(&ft)?&ft:'none'},  " filetype
+set statusline+=%{strlen(&fenc)?&fenc:&enc}, " encoding
+set statusline+=%{&fileformat}               " file format
+set statusline+=%{HasPaste()}]               " whether we're in paste mode
+if exists('g:loaded_fugitive')
+    set statusline+=%{fugitive#statusline()} " git branch
+endif
+set statusline+=%=                           " right align
+set statusline+=col:%v\                      " current column
+set statusline+=lin:%l/%L\                   " line
+set statusline+=%p%%                         " percentage through file
+
+function! HasPaste()
+    if &paste
+        return ',paste'
+    else
+        return ''
+    endif
+endfunction
+
+" If we change focus away from vim, goto normal mode
+au FocusLost,TabLeave * call feedkeys("\<C-\>\<C-n>")
+
+augroup vimmemory
+    au!
+    " When editing a file, always jump to the last known cursor position.
+    " Don't do it when the position is invalid or when inside an event handler
+    " (happens when dropping a file on gvim).
+    " Also don't do it when the mark is in the first line, that is the default
+    " position when opening a file.
+    au BufReadPost *
+       \ if line("'\"") > 1 && line("'\"") <= line("$")  |
+       \   exe "normal! g`\"" |
+       \ endif
+    " use views to restore more state
+    au BufWinLeave * silent! mkview
+    au BufWinEnter * silent! loadview
+augroup END
+
+" Lines > 80 Characters should be highlighted
+highlight OverLength ctermbg=3 ctermfg=white guibg=#af8700 guifg=white
+
+" Autoload changes for vimrc
+au BufWritePost .vimrc source ~/.vimrc
+
+
+" Filetype Specific Configuration {{{1
+" MAN Syntax {{{2
+au Filetype man setlocal nolist
+" Text Syntax {{{2
+au FileType text setlocal wrap
+
+" Commit Message Syntax {{{2
+au FileType svn,gitcommit au! vimmemory
+au FileType svn,gitcommit set autoindent
+
+" Vim Syntax {{{2
+au FileType vim let w:m1=matchadd('OverLength', '\%>80v.\+', -1)
+
+" Perl Syntax {{{2
+au FileType perl let w:m1=matchadd('OverLength', '\%>80v.\+', -1)
+if exists('loaded_taglist')
+    au FileType perl :autocmd BufWritePost * :TlistUpdate
+endif
+if exists('g:loaded_indent_guides')
+    au FileType perl :IndentGuidesEnable
+endif
+au FileType perl setlocal equalprg=perltidy
+au FileType perl setlocal omnifunc=PerlComplete
+
+" Ruby Syntax {{{2
+au FileType ruby let w:m1=matchadd('OverLength', '\%>80v.\+', -1)
+if exists('loaded_taglist')
+    au FileType ruby :autocmd BufWritePost * :TlistUpdate
+endif
+if exists('g:loaded_indent_guides')
+    au FileType ruby :IndentGuidesEnable
+endif
+au FileType ruby setlocal omnifunc=rubycomplete#Complete
+au FileType ruby let g:rubycomplete_buffer_loading=1
+au FileType ruby let g:rubycomplete_classes_in_global=1
+
+" Python Syntax {{{2
+au FileType python let w:m1=matchadd('OverLength', '\%>80v.\+', -1)
+if exists('loaded_taglist')
+    au FileType python :autocmd BufWritePost * :TlistUpdate
+endif
+if exists('g:loaded_indent_guides')
+    au FileType python :IndentGuidesEnable
+endif
+au FileType python setlocal omnifunc=pythoncomplete#Complete
+au FileType python setlocal equalprg=PythonTidy
+
+" Shell Script Syntax {{{2
+au FileType sh,bash,zsh let w:m1=matchadd('OverLength', '\%>80v.\+', -1)
+if exists('loaded_taglist')
+    au FileType sh,bash,zsh :autocmd BufWritePost * :TlistUpdate
+endif
+
+" Toggles & Switches (Leader commands) {{{1
+let mapleader = ","
+
+" Open the current buffer in a vertically split window with the next page of
+" text on it.
+noremap <silent> <Leader>vs ggzR:<C-u>let @z=&so<CR>:set so=0 noscb<CR>:set columns=178<CR>:bo vs<CR>zRLjzt:setl scb<CR><C-w>p:setl scb<CR>:let &so=@z<CR>
+
+" Easier navigation between open windows
+map <C-k> <C-W>k
+map <C-j> <C-W>j
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
+" Reselect visually selected text after indenting
+vmap > >gv
+vmap < <gv
+
+" Select the last edited/pasted text
+nmap gv `[v`]
+nmap <Leader>+ <C-W>+
+nmap <Leader>- <C-W>-
+nmap <Leader>= <C-W>=
+nmap <Leader>> <C-W>>
+nmap <Leader>< <C-W><
+" make Y consistant with C and D
+noremap Y y$
+
+" Allow tab completion
+"imap <Tab> <C-N>
+"imap <S-Tab> <C-P>
+
+" Easily modify vimrc
+nmap <leader>ev :e $MYVIMRC<CR>
+
+" Move current line down/up
+map <C-Down> ]e
+map <C-Up> [e
+
+" Move visually selected lines down/up
+vmap <C-Down> ]egv
+vmap <C-Up> [egv
+
+" Move visual selection back/forwards
+set ww+=<,>
+vmap <C-Left> x<Left>P`[v`]
+vmap <C-Right> x<Right>P`[v`]
+
+" My main typos, these arent used in commands so why not?
+cmap WQ wq
+cmap wQ wq
+
+" sudo write-file in case you opened a file you dont have privileges to write
+cmap w!! w !sudo tee % >/dev/null<cr>
+
+" Smarter Pasting!
+nmap <Leader>p :set paste<CR>"*p;set nopaste<CR>
+
+" Custom commands and functions {{{1
+" Toggles for location and quickfix window {{{2
+function! GetBufferList()
+  redir =>buflist
+  silent! ls
+  redir END
+  return buflist
+endfunction
+
+function! ToggleList(bufname, pfx)
+  let buflist = GetBufferList()
+  for bufnum in map(filter(split(buflist, '\n'), 'v:val =~ "'.a:bufname.'"'), 'str2nr(matchstr(v:val, "\\d\\+"))')
+    if bufwinnr(bufnum) != -1
+      exec(a:pfx.'close')
+      return
+    endif
+  endfor
+  if a:pfx == 'l' && len(getloclist(0)) == 0
+      echohl ErrorMsg
+      echo "Location List is Empty."
+      return
+  endif
+  let winnr = winnr()
+  exec(a:pfx.'open')
+  if winnr() != winnr
+    wincmd p
+  endif
+endfunction
+
+nmap <silent> <leader>lw :call ToggleList("Location List", 'l')<CR>
+nmap <silent> <leader>qw :call ToggleList("Quickfix List", 'c')<CR>
+
+"Templates {{{1
+autocmd! BufNewFile * silent! 0r ~/.vim/skel/tmpl.%:e
+
+" Diff between buffer and the unwritten file {{{2
+if !exists(":DiffOrig")
+    command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
+                \ | wincmd p | diffthis
+endif
+
+" Strip trailing whitespaces  {{{2
+function! Preserve(command)
+    " Preparation: save last search, and cursor position.
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " Do the business:
+    execute a:command
+    " Clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
+endfunction
+nmap _$ :call Preserve("%s/\\s\\+$//e")<CR>
+nmap _= :call Preserve("normal gg=G")<CR>
+
+" Search for current visual selection with */# {{{2
+" Tip tip from: http://amix.dk/blog/viewEntry/19334
+function! CmdLine(str)
+    exe "menu Foo.Bar :" . a:str
+    emenu Foo.Bar
+    unmenu Foo
+endfunction
+
+function! VisualSearch(direction) range
+    let l:saved_reg = @"
+    execute "normal! vgvy"
+
+    let l:pattern = escape(@", '\\/.*$^~[]')
+    let l:pattern = substitute(l:pattern, "\n$", "", "")
+
+    if a:direction == 'b'
+        execute "normal ?" . l:pattern . "^M"
+    elseif a:direction == 'gv'
+        call CmdLine("vimgrep " . '/'. l:pattern . '/' . ' **/*.')
+    elseif a:direction == 'f'
+        execute "normal /" . l:pattern . "^M"
+    endif
+
+    let @/ = l:pattern
+    let @" = l:saved_reg
+endfunction
+
+" Generate a color pallette {{{2
+function! Colorize()
+    let num = 255
+    while num >= 0
+        exec 'hi col_'.num.' ctermbg='.num.' ctermfg=white'
+        exec 'syn match col_'.num.' "ctermbg='.num.':...." containedIn=All'
+        call append(0, 'ctermbg='.num.':....')
+        let num = num - 1
+    endwhile
+endfunction
+
+" Pasting Buffers {{{2
+fu! PasteWindow(direction)
+    if exists("g:yanked_buffer")
+        if a:direction == 'edit'
+            let temp_buffer = bufnr('%')
+        endif
+
+        exec a:direction . " +buffer" . g:yanked_buffer
+
+        if a:direction == 'edit'
+            let g:yanked_buffer = temp_buffer
+        endif
+    endif
+endf
+
+"yank/paste buffers
+:nmap <silent> <leader>wy  :let g:yanked_buffer=bufnr('%')<cr>
+:nmap <silent> <leader>wd  :let g:yanked_buffer=bufnr('%')<cr>:q<cr>
+:nmap <silent> <leader>wp :call PasteWindow('edit')<cr>
+:nmap <silent> <leader>ws :call PasteWindow('split')<cr>
+:nmap <silent> <leader>wv :call PasteWindow('vsplit')<cr>
+
+" Configure plugins {{{1
+" TaskList {{{2
+map <Leader>l <Plug>TaskList
+let g:tlTokenList = ["FIXME", "TODO", "HERE", "NOTE"]
+
+" vim Indent Guides {{{2
+let g:indent_guides_auto_colors = 0
+let g:indent_guides_guide_size = 1
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd guibg=#eee8d5 ctermbg=7
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#eee8d5 ctermbg=7
+
+" vimpager {{{2
+"let vimpager_use_gvim = 1 
+
+" Easy Motion {{{2
+let g:EasyMotion_leader_key='<Leader>m'
+" Secure Modelines {{{2
+set nomodeline
+let g:secure_modelines_verbose = 1
+let g:secure_modelines_modelines = 15
+let g:secure_modelines_allowed_items = [
+                \ "textwidth",   "tw",
+                \ "softtabstop", "sts",
+                \ "tabstop",     "ts",
+                \ "shiftwidth",  "sw",
+                \ "expandtab",   "et",   "noexpandtab", "noet",
+                \ "filetype",    "ft",
+                \ "foldmethod",  "fdm",
+                \ "readonly",    "ro",   "noreadonly", "noro",
+                \ "rightleft",   "rl",   "norightleft", "norl",
+                \ "nowrap",
+                \ ]
+
+" taglist {{{2
+let g:tlist_auto_open = 1
+let g:tlist_auto_update = 1
+let g:tlist_exit_onlywindow = 1
+
+" Showmarks {{{2
+let g:showmarks_enable=1
+let g:showmarks_include="abcdefghijklmnopqrstuvwxyz"
+let g:showmarks_textlower="\t>"
+
+" Vimwiki {{{2
+let g:vimwiki_list = [{'path': '~/dotfiles/wiki', 'path_html': '~/dotfiles/wiki_html', 'auto_export': 1}]
+let g:vimwiki_folding = 1
+map <Leader>w<Leader>i <Plug>VimwikiIndex
+map <Leader>w<Leader>s <Plug>VimwikiUISelect
+map <Leader>w<Leader>w <Plug>VimwikiMakeDiaryNote
+map <Leader>wt<Leader>w <Plug>VimwikiTabMakeDiaryNote
+map <Leader>wt<Leader>i <Plug>VimwikiTabIndex
+
+" Command-T {{{2
+map <Leader>ct :CommandT<CR>
+
+" FuzzyFinder {{{2
+map <Leader>fb :FufBuffer<CR>
+map <Leader>ff :FufFile<CR>
+
+" Ack {{{2
+noremap <Leader>g :Ack!<space><C-r><C-w><CR>
+let ackprg="~/scripts/ack -H --nocolor --nogroup --column --flush"
+
+" Terminal {{{2
+noremap <Leader>z :ConqueTerm zsh<CR>
+
+" Tabularize {{{2
+nmap <Leader>a= :Tabularize /=<CR>
+vmap <Leader>a= :Tabularize /=<CR>
+nmap <Leader>a: :Tabularize /:\zs<CR>
+vmap <Leader>a: :Tabularize /:\zs<CR>
+
+" NERDCommenter {{{2
+" When we comment something with the NERDComment Toggle, reselect
+vmap <Leader>cc :call NERDComment(1, "norm")<CR>gv*/
+vmap <Leader>c<space> :call NERDComment(1, "toggle")<CR>gv
+vmap <Leader>cm :call NERDComment(1, "minimal")<CR>gv
+vmap <Leader>cs :call NERDComment(1, "sexy")<CR>gv
+vmap <Leader>ci :call NERDComment(1, "invert")<CR>gv
+vmap <Leader>cy :call NERDComment(1, "yank")<CR>gv
+vmap <Leader>cl :call NERDComment(1, "alignLeft")<CR>gv
+vmap <Leader>cb :call NERDComment(1, "alignBoth")<CR>gv
+vmap <Leader>cn :call NERDComment(1, "nested")<CR>gv
+vmap <Leader>cu :call NERDComment(1, "uncomment")<CR>gv
+
+" bufexplorer.vim {{{2
+function! ToggleBufferExplorer()
+    if expand('%') == "[BufExplorer]"
+        close
+    else
+        BufExplorer
+    endif
+endfunction
+function! ToggleBufferExplorerVertical()
+    if expand('%') == "[BufExplorer]"
+        close
+    else
+        BufExplorerVerticalSplit
+    endif
+endfunction
+function! ToggleBufferExplorerHorizontal()
+    if expand('%') == "[BufExplorer]"
+        close
+    else
+        BufExplorerHorizontalSplit
+    endif
+endfunction
+map <Leader>be :call ToggleBufExplorer()<CR>
+map <Leader>bs :call ToggleBufferExplorerHorizontal()<CR>
+map <Leader>bv :call ToggleBufferExplorerVertical()<CR>
+let g:bufExplorerDefaultHelp=0
+let g:bufExokirerFubdActuve=1
+
+" NERDTree.vim {{{2
+let NERDTreeIgnore=['\~$', '\.swp$', '^CVS$', '\.svn$', '^CVSROOT$', '^\.git$', '\.pyc$', '\.pyo$', '\.swp$']
+map <Leader>dd :NERDTreeToggle<CR>
+map <Leader>df :NERDTreeFind<CR>
+let NERDTreeShowBookmarks=1
+let NERDTreeQuitOnOpen=1
+let NERDTreeHighlightCursorLine=1
+
+
+autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
+
+" Close all open buffers on entering a window if the only
+" buffer that's left is the NERDTree buffer
+function! s:CloseIfOnlyNerdTreeLeft()
+  if exists("t:NERDTreeBufName")
+    if bufwinnr(t:NERDTreeBufName) != -1
+      if winnr("$") == 1
+        q
+      endif
+    endif
+  endif
+endfunction
+
+
+" notes.vim {{{2
+let g:notes_location=glob("~/Docs/Notes")
+
+" Scratch {{{2
+function! ToggleMyScratch()
+    let file_name     = '~/.scratch'
+    let buffer_number = bufnr(file_name)
+    let window_number = bufwinnr(buffer_number)
+    if buffer_number == -1
+        exe 'split' . file_name
+    else
+        if window_number != -1
+            if winnr() != window_number
+                exe window_number . "wincmd w"
+            else
+                write
+                quit
+            endif
+        else
+            exe 'split' . file_name
+        endif
+    endif
+endfunction
+map <leader>s   :call ToggleMyScratch()<CR>
+
+" Taglist {{{2
+map <leader>t :Tlist<CR>
+
+" Supertab {{{2
+let g:SuperTabDefaultCompletionType = "context"
+
+" Stuff that seems smart but I dont know what its for {{{1
+" CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
+" so that you can undo CTRL-U after inserting a line break.
+"inoremap <C-U> <C-G>u<C-U>
+
+" Stuff thats useful once in a while {{{1
+"nmap <silent> <Leader>'   :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
+" Post-local loading (site customizations) {{{1
+if filereadable(expand("~/.vimrc.post-local"))
+  source ~/.vimrc.post-local
+endif
+
+
+" Modelines: {{{1
+" vim: nowrap fdm=marker ft=vim
+" }}}

@@ -1,0 +1,167 @@
+%toc Table of Contents
+%title Title of the page
+
+= Notes =
+* To open today's diary page, ,w,w
+* To open the root, ,ww
+* To start a table, :VimwikiTable
+
+= Toggleable list of todo items =
+  * [X] Toggle list item on/off.
+    * [X] Simple toggling between [ ] and [X].
+    * [X] All list's subitems should be toggled on/off appropriately.
+    * [X] Toggle child subitems only if current line is list item
+    * [X] Parent list item should be toggled depending on it's child items.
+  * [X] Make numbered list items toggleable too
+  * [X] Add highlighting to list item boxes
+  * [X] Add [ ] to the next created with o, O and <CR> list item.
+  * [ ] To toggle something as done, use <C-Space> note, it toggles children too.
+
+= Font styles =
+* *bold text*
+* _italic text_
+* ~~strikeout text~~
+* `code (no syntax) text`
+* super^script^
+* sub,,script,,
+
+= Links =
+== Internal Links ==
+* CapitalizedWordsConnectedAsLink
+* !CapitalizedWordsConnectedNotLink
+* [[This is a link]]
+* [[the_link|Displayed text for the link]]
+* [[the_link][Displayed text for the link]]
+
+== External ==
+* http://code.google.com/p/vimwiki
+* [http://habamax.ru/blog habamax home page]
+
+== Images and Image Links ==
+* http://someaddr.com/picture.jpg
+* [[images/picture.jpg]]
+* [[http://someaddr.com/picture.jpg]]
+* [[http://someaddr.com/picture.jpg|picture]]
+* [[http://someaddr.com/picture.jpg|picture|]] 
+* [[http://someaddr.com/picture.jpg|picture|width:150px; height: 120px;]] 
+* [[http://someaddr.com/picture.jpg||width:150px; height: 120px;]] 
+* [http://someaddr.com/page.html http://someaddr.com/thumbnail.jpg] 
+* [[http://someaddr.com/page.html|http://someaddr.com/thumbnail.jpg]] 
+
+= header1 =
+== header2 ==
+=== header3 ===
+==== header4 ====
+===== header5 =====
+====== header6 ======
+
+= Paragraphs =
+This is the
+first paragraph
+
+This is the second
+paragraph
+
+= Lists =
+== Unordered Lists ==
+=== With * ===
+  * Bulleted list item 1
+  * Bulleted list item 2
+    * Bulleted list sub item 1
+    * Bulleted list sub item 2
+    * more ...
+      * and more ...
+      * ...
+    * Bulleted list sub item 3
+    * etc.
+
+=== With - ===
+  - Bulleted list item 1
+  - Bulleted list item 2
+    - Bulleted list sub item 1
+    - Bulleted list sub item 2
+    - more ...
+      - and more ...
+      - ...
+    - Bulleted list sub item 3
+    - etc.
+
+=== And a Mix ===
+  - Bulleted list item 1
+  - Bulleted list item 2
+    * Bulleted list sub item 1
+    * Bulleted list sub item 2
+    * more ...
+      - and more ...
+      - ...
+    * Bulleted list sub item 3
+    * etc.
+
+== Ordered Lists ==
+  # Numbered list item 1
+  # Numbered list item 2
+    # Numbered list sub item 1
+    # Numbered list sub item 2
+    # more ...
+      # and more ...
+      # ...
+    # Numbered list sub item 3
+    # etc.
+
+== Ordered and Unordered Lists ==
+  * Bulleted list item 1
+  * Bulleted list item 2
+    # Numbered list sub item 1
+    # Numbered list sub item 2
+
+
+== Multiline list items ==
+  * Bulleted list item 1
+    List item 1 continued line.
+    List item 1 next continued line.
+  * Bulleted list item 2
+    * Bulleted list sub item 1
+      List sub item 1 continued line.
+      List sub item 1 next continued line.
+    * Bulleted list sub item 2
+    * etc.
+
+== Definition lists: ==
+Term 1:: Definition 1
+Term 2::
+::Definition 2
+::Definition 3
+
+= Tables =
+ | Year | Temperature (low) | Temperature (high) |
+ |------+-------------------+--------------------|
+ | 1900 | -10               | 25                 |
+ | 1910 | -15               | 30                 |
+ | 1920 | -10               | 32                 |
+ | 1930 | _N/A_             | _N/A_              |
+ | 1940 | -2                | 40                 |
+
+= Preformatted Text =
+{{{
+  Tyger! Tyger! burning bright
+   In the forests of the night,
+    What immortal hand or eye
+     Could frame thy fearful symmetry?
+  In what distant deeps or skies
+   Burnt the fire of thine eyes?
+    On what wings dare he aspire?
+     What the hand dare sieze the fire?
+}}}
+
+{{{class="brush: python"
+ def hello(world):
+     for x in range(10):
+         print("Hello {0} number {1}".format(world, x))
+}}}
+
+= Blockquotes =
+    This would be a blockquote in vimwiki. It is not highlighted in vim but
+    could be styled by css in html. Blockquotes are usually used to quote a
+    long piece of text from another source. The trick is indenting all the
+    text with 4 or more spaces.
+

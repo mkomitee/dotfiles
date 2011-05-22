@@ -1,0 +1,3 @@
+#!/bin/sh
+
+gvim -c 'set lines=1000' -c 'set columns=200' -c 'vsplit' $*

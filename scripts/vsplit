@@ -1,0 +1,17 @@
+#!/bin/sh
+if [ ! -z "$1" ]; then
+    echo "$1" | grep '^/' > /dev/null 2>&1
+    if [ $? == 0 ]; then
+        FILE="$1"
+    else
+        FILE="`pwd`/$1"
+    fi
+    COMMAND=":botright vsplit $FILE<CR>"
+    if [ ! -z "$2" ]; then
+        COMMAND=":set columns+=$2<CR>$COMMAND"
+    fi
+    gvim --remote-send "$COMMAND" > /dev/null 2>&1
+    if [ $? != 0 ]; then
+        gvim $FILE
+    fi
+fi

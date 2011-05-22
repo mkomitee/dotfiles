@@ -1,0 +1,168 @@
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css" />
+<title>vim_notes</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+<h1 id="toc_1">Surrounding stuff</h1>
+<table>
+<tr>
+<th>Old text</th>
+<th>Command</th>
+<th>New text</th>
+</tr>
+<tr>
+<td>"Hello *world!"</td>
+<td>ds"</td>
+<td>Hello world!</td>
+</tr>
+<tr>
+<td>[123+4*56]/2</td>
+<td>cs])</td>
+<td>(123+456)/2</td>
+</tr>
+<tr>
+<td>"Look ma, I'm *HTML!"</td>
+<td>cs"&lt;q&gt;</td>
+<td>&lt;q&gt;Look ma, I'm HTML!&lt;/q&gt;</td>
+</tr>
+<tr>
+<td>if *x&gt;3 {</td>
+<td>ysW(</td>
+<td>if ( x&gt;3 ) {</td>
+</tr>
+<tr>
+<td>my $str = *whee!;</td>
+<td>vlllls'</td>
+<td>my $str = 'whee!';</td>
+</tr>
+<tr>
+<td>*hello world</td>
+<td>v2ws"</td>
+<td>"hello world"</td>
+</tr>
+</table>
+
+<h1 id="toc_2">Select a python or otherwise indented block block vii</h1>
+<p>
+vii will select the contents of the innermost block
+vai will also select the start of the block
+</p>
+
+<p>
+Leaves in VISUAL mode with the text selected.
+</p>
+
+<h1 id="toc_3">Select a ruby block vir</h1>
+<p>
+vir will select the contents of the innermost block
+var will also select the start / end of the block
+</p>
+
+<p>
+Leaves in VISUAL mode with the text selected.
+</p>
+
+<h1 id="toc_4">Select Inside vi"</h1>
+<p>
+vi" vi( vi[ vi&lt; etc, to select text inside something. 
+va" va( va[ va&lt; etc, to select the delimiter as well.
+</p>
+
+<p>
+Leaves in VISUAL mode with the text selected.
+</p>
+
+<h1 id="toc_5">Change Inside: ci"</h1>
+<p>
+ci" ci( ci[ ci&lt; etc, to replace text inside something. 
+ca" ca( ca[ ca&lt; etc, to replace the delimiter as well.
+</p>
+
+<p>
+Leaves in INSERT mode with cursor between the containing marks.
+</p>
+
+<h1 id="toc_6">Delete Inside: di"</h1>
+<p>
+di" di( di[ di&lt; etd, to delete text inside something. 
+da" da( da[ da&lt; etd, to delete the delimiter as well
+</p>
+
+<p>
+Leaves in NORMAL mode with cursor on the last containing mark.
+</p>
+
+<h1 id="toc_7">Change Inside Tag: cit</h1>
+<p>
+cit to replace text inside a xml/html tag
+cat to replace the tag as well.
+</p>
+
+<p>
+Laves in INSERT mode with cursor between the tags.
+</p>
+
+<h1 id="toc_8">Delete Inside Tag: cit</h1>
+<p>
+dit to delete text inside a xml/html tag
+dat to delete the tag as well.
+</p>
+
+<p>
+Laves in NORMAL mode with cursor at the start of the closing tag.
+</p>
+
+<h1 id="toc_9">Macros</h1>
+
+<ol>
+<li>
+qN to start recording
+</li>
+<li>
+a string of editing commands
+</li>
+<li>
+q to stop recording
+</li>
+<li>
+@q to replay the macro
+</li>
+</ol>
+
+<h1 id="toc_10">Marks</h1>
+
+<ol>
+<li>
+Set a mark with mn (where n is pretty much any key)
+</li>
+<li>
+Goto a mark with 'n (where n is the key you used when setting it)
+</li>
+<li>
+,mt To toggle showmarks on and off.
+</li>
+<li>
+,mm To add the next available mark.
+</li>
+<li>
+,mh To clear the current mark.
+</li>
+<li>
+,ma To clear all marks in the current buffer
+</li>
+</ol>
+
+<h1 id="toc_11">Running Commands</h1>
+<ol>
+<li>
+to run a command :!command
+</li>
+<li>
+to run a command and put the output in the current buffer, :.!command
+</li>
+</ol>
+
+</body>
+</html>

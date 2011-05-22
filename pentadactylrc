@@ -1,0 +1,22 @@
+set guioptions+=mTBbrs
+set editor="~/bin/gvim -f"
+
+" 1Password Integration
+map pw :emenu View.Login with 1Password<CR>
+
+" Configuration Edit
+map ev :!~/bin/gvim ~/.pentadactylrc<CR>
+map ep :!~/bin/gvim ~/.pentadactylrc<CR>
+
+" Configuration Reload
+map vr :source ~/.pentadactylrc<CR>
+map pr :source ~/.pentadactylrc<CR>
+
+set passkeys+=mail.google.com:jk<CR>,gi
+set passkeys+=www.google.com/reader/view/:jku<CR>,gi
+
+map -modes=n,v,c,i,t <M-f> <Nop>
+map -modes=n,v,c,i,t <C-f> <Nop>
+map -modes=n,v,c,i,t <M-g> <Nop>
+map -modes=n,v,c,i,t <C-g> <Nop>
+map -modes=n,v,c,i,t <F3> <Nop>

@@ -27,5 +27,5 @@ vim/bundle,git://github.com/vim-scripts/vimwiki.git
 vim/bundle,git://github.com/vim-scripts/python_match.vim.git
 vim/bundle,git://github.com/vim-scripts/securemodelines.git
 vim/bundle,git://github.com/spiiph/vim-space.git
+vim/bundle,https://github.com/wgibbs/vim-irblack.git
 ,git://github.com/robbyrussell/oh-my-zsh.git
-vim/bundles,https://github.com/wgibbs/vim-irblack.git

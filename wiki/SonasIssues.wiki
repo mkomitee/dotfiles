@@ -1,0 +1,5 @@
+* Creating a new fileset using mkfset OR creates a fileset but it doesnt show up in the output of cli lsfset or in the bui
+    * The result is I cannot link it using cli commands or from the bui.
+    * I can link it with root and I can export it using the bui and/or the cli.
+
+* Problems with ESTALE v ENOENT

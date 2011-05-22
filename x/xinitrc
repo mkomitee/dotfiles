@@ -1,0 +1,53 @@
+#!/bin/sh
+# $Xorg: xinitrc.cpp,v 1.3 2000/08/17 19:54:30 cpqbld Exp $
+
+set -x
+
+userresources="$HOME"/.Xresources
+usermodmap="$HOME"/.Xmodmap
+sysresources=/usr/X11R6/lib/X11/xinit/.Xresources
+sysmodmap=/usr/X11R6/lib/X11/xinit/.Xmodmap
+
+# merge in defaults and keymaps
+
+#if [ -f "$sysresources" ]; then
+#    xrdb -merge "$sysresources"
+#fi
+
+if [ -f "$sysmodmap" ]; then
+    xmodmap "$sysmodmap"
+fi
+
+if [ -f "$userresources" ]; then
+    xrdb "$userresources"
+fi
+
+if [ -f "$usermodmap" ]; then
+    xmodmap "$usermodmap"
+fi
+
+#
+# enable localhost access
+#
+xhost localhost
+#
+# generate Xauthority key
+#
+### xauth generate $DISPLAY
+#
+# capture the new Xauthority key
+#
+### xauthkey=`xauth list $DISPLAY | awk '{print $2 " " $3}'`
+#
+# add the new Xauthority key for $HOSTNAME:0
+#
+### xauth add $HOSTNAME:0 $xauthkey
+
+set +x
+
+#
+# script must not exit
+#
+while [ 1 ]; do
+    sleep 10000
+done
