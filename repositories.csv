@@ -33,3 +33,4 @@ vim/bundle,git://github.com/ajf/puppet-vim.git
 ,git://github.com/robbyrussell/oh-my-zsh.git
 vim/bundle,git://github.com/vim-scripts/Color-Sampler-Pack.git
 vim/bundle,git://github.com/vim-scripts/gnupg.git
+vim/bundle,git://github.com/vim-scripts/Gist.vim.git
