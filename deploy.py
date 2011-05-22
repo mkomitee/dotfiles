@@ -37,7 +37,7 @@ class Subtree(object):
         null = open('/dev/null', 'a')
         out  = open('/dev/stdout', 'a')
         err  = open('/dev/stdout', 'a')
-        command += ['--prefix', self.path, '--squash', self.repository]
+        command += ['--prefix', self.path, '--squash', self.repository, 'master']
         print(' '.join(command))
         try:
             subprocess.check_call(command, stdin=null, stdout=out, stderr=err)
