@@ -11,18 +11,21 @@ import sys
 import os
 import re
 import subprocess
+import csv
 
 class Subtree(object):
-    def __init__(self, line):
-        data = line.strip().split()
+    def __init__(self, data):
         self.prefix = data[0]
         self.repository = data[1]
         m = re.search('/([^/]*)$', self.repository)
         base = re.sub('.git$', '', m.group(1))
-        self.path = '%s/%s' % (self.prefix, base)
+        if self.prefix == '':
+            self.path = base
+        else:
+            self.path = '%s/%s' % (self.prefix, base)
 
     def __repr__(self):
-        return('''Subtree(prefix='%s', repository='%s')''' % (self.prefix, 
+        return('''Subtree(path='%s', repository='%s')''' % (self.path, 
                                                               self.repository))
 
     def is_deployed(self):
@@ -48,14 +51,13 @@ class Subtree(object):
 
 
 def read_subtrees(config_file):
-    f = open(config_file)
-    subtrees = [Subtree(l.strip()) for l in f.readlines()]
-    f.close()
+    config = csv.reader(open(config_file), delimiter=',')
+    subtrees = [Subtree(line) for line in config]
     return subtrees
 
 
 if __name__ == '__main__':
-    for subtree in read_subtrees('repositories'):
+    for subtree in read_subtrees('repositories.csv'):
         subtree.deploy()
 
 # vim: set ft=python ts=4 sw=4 et:
