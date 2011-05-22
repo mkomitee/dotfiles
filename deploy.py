@@ -10,8 +10,7 @@
 import sys
 import os
 import re
-from collections import namedtuple
-import pprint
+import subprocess
 
 class Subtree(object):
     def __init__(self, line):
@@ -23,17 +22,28 @@ class Subtree(object):
         self.path = '%s/%s' % (self.prefix, base)
 
     def __repr__(self):
-        return('''Subtree(prefix='%s', repository='%s')''' % (self.prefix, self.repository))
+        return('''Subtree(prefix='%s', repository='%s')''' % (self.prefix, 
+                                                              self.repository))
 
     def is_deployed(self):
         return(os.path.exists(self.path))
 
     def deploy(self):
+        command = ['git', 'subtree']
         if self.is_deployed():
-            command = ['git', 'subtree', 'pull', '--prefix', self.path, '--squash', self.repository]
+            command.append('pull')
         else:
-            command = ['git', 'subtree', 'add', '--prefix', self.path, '--squash', self.repository]
-        pprint.pprint(command)
+            command.append('add')
+        null = open('/dev/null', 'a')
+        out  = open('/dev/stdout', 'a')
+        err  = open('/dev/stdout', 'a')
+        command += ['--prefix', self.path, '--squash', self.repository]
+        try:
+            subprocess.check_call(command, stdin=null, stdout=out, stderr=err)
+        except subprocess.CalledProcessError:
+            sys.exit(1)
+        out.close()
+        err.close()
 
 
 def read_subtrees(config_file):
