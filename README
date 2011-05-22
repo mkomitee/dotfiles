@@ -1,0 +1,18 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=2100
+
+*textobj-user* is a Vim plugin to SUPPORT writing user-defined text objects,
+especially, simple text objects which can be defined by regular expression.
+
+Note that this plugin only provides functions to support writing user-defined
+text objects, and this plugin does not provide any useful text objects.  That
+is your work.
+
+
+Requirements:
+- Vim 7.0 or later
+
+Latest version:
+http://github.com/kana/vim-textobj-user
+
+Document in HTML format:
+http://kana.github.com/config/vim/textobj-user.html
