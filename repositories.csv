@@ -29,5 +29,5 @@ vim/bundle,git://github.com/vim-scripts/securemodelines.git
 vim/bundle,git://github.com/vim-scripts/TaskList.vim.git
 vim/bundle,git://github.com/spiiph/vim-space.git
 vim/bundle,https://github.com/wgibbs/vim-irblack.git
-vim/bundle/,git://github.com/ajf/puppet-vim.git
+vim/bundle,git://github.com/ajf/puppet-vim.git
 ,git://github.com/robbyrussell/oh-my-zsh.git
