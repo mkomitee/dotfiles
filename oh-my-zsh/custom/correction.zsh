@@ -1,0 +1,1 @@
+setopt nocorrect_all
