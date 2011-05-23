@@ -87,6 +87,11 @@ def read_subtrees(config_file):
 
 if __name__ == '__main__':
     git_status()
+    # repositories.csv should be a csv file with two fields per line. The
+    # first field is where in your repository (relative path) you want the
+    # subtree installed, and the second should be the git repositories url
+    # e.g:
+    # vim/bundle,git://github.com/vim-scripts/Gist.vim.git
     for subtree in read_subtrees('repositories.csv'):
         subtree.deploy()
 
