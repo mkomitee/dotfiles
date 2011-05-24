@@ -13,7 +13,7 @@ for plugin ($plugins) fpath=($ZSH/plugins/$plugin $fpath)
 
 # Load and run compinit
 autoload -U compinit
-compinit -i
+compinit -i -u -d "${HOME}/.zcompdumps/${HOST%%.*}-${EUID}-$ZSH_VERSION"
 
 # Load all of the plugins that were defined in ~/.zshrc
 for plugin ($plugins); do
