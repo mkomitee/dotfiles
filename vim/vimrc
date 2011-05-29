@@ -125,12 +125,8 @@ augroup vimmemory
     au BufWinEnter * silent! loadview
 augroup END
 
-" Lines > 80 Characters should be highlighted
-highlight OverLength ctermbg=3 ctermfg=white guibg=#af8700 guifg=white
-
 " Autoload changes for vimrc
 au BufWritePost .vimrc source ~/.vimrc
-
 
 " Filetype Specific Configuration {{{1
 " MAN Syntax {{{2
@@ -143,10 +139,10 @@ au FileType svn,gitcommit au! vimmemory
 au FileType svn,gitcommit set autoindent
 
 " Vim Syntax {{{2
-au FileType vim let w:m1=matchadd('OverLength', '\%>80v.\+', -1)
+au FileType vim call ColorColumn()
 
 " Perl Syntax {{{2
-au FileType perl let w:m1=matchadd('OverLength', '\%>80v.\+', -1)
+au FileType perl call ColorColumn()
 if exists('loaded_taglist')
     au FileType perl :autocmd BufWritePost * :TlistUpdate
 endif
@@ -157,7 +153,7 @@ au FileType perl setlocal equalprg=perltidy
 au FileType perl setlocal omnifunc=PerlComplete
 
 " Ruby Syntax {{{2
-au FileType ruby let w:m1=matchadd('OverLength', '\%>80v.\+', -1)
+au FileType ruby call ColorColumn()
 if exists('loaded_taglist')
     au FileType ruby :autocmd BufWritePost * :TlistUpdate
 endif
@@ -169,7 +165,7 @@ au FileType ruby let g:rubycomplete_buffer_loading=1
 au FileType ruby let g:rubycomplete_classes_in_global=1
 
 " Python Syntax {{{2
-au FileType python let w:m1=matchadd('OverLength', '\%>80v.\+', -1)
+au FileType python call ColorColumn()
 if exists('loaded_taglist')
     au FileType python :autocmd BufWritePost * :TlistUpdate
 endif
@@ -180,7 +176,7 @@ au FileType python setlocal omnifunc=pythoncomplete#Complete
 au FileType python setlocal equalprg=PythonTidy
 
 " Shell Script Syntax {{{2
-au FileType sh,bash,zsh let w:m1=matchadd('OverLength', '\%>80v.\+', -1)
+au FileType sh,bash,zsh call ColorColumn()
 if exists('loaded_taglist')
     au FileType sh,bash,zsh :autocmd BufWritePost * :TlistUpdate
 endif
@@ -243,6 +239,15 @@ cmap w!! w !sudo tee % >/dev/null<cr>
 nmap <Leader>p :set paste<CR>"*p;set nopaste<CR>
 
 " Custom commands and functions {{{1
+" Backwards compatible colorcolumn {{{2
+function! ColorColumn()
+    if exists("+colorcolumn") 
+        set colorcolumn=80
+    else
+        au BufWinEnter * let w:m1=matchadd('ErrorMsg', '\%80v.', -1)
+    endif
+endfunction
+
 " Toggles for location and quickfix window {{{2
 function! GetBufferList()
   redir =>buflist
