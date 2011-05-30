@@ -14,7 +14,7 @@
 "        Fix contributed by Gerhard Siegesmund <gerhard DoT siegesmund AT orange-digital dOT de>
 
 " Map the key combination ,i to look up the current word with lbdbq.
-map ,i :call LbdbQuery(expand("<cword>"))<cr>
+map <Leader>i :call LbdbQuery(expand("<cword>"))<cr>
 
 func! LbdbQuery ( username )
   echo a:username
