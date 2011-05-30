@@ -135,6 +135,8 @@ set foldtext=CustomFoldText()
 au Filetype man setlocal nolist
 " Text Syntax {{{2
 au FileType text setlocal wrap
+" Mail Syntax {{{2
+au FileType mail setlocal wrap
 
 " Commit Message Syntax {{{2
 au FileType svn,gitcommit au! vimmemory
