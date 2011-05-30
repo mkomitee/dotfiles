@@ -61,7 +61,7 @@ set cmdheight=1         " drr
 set shortmess+=filmnrxoOtTI
 set iskeyword+=:
 set listchars=precedes:<,extends:>,eol:$,tab:\|_
-set list
+set nolist
 set wildmenu
 set wildmode=list:longest
 syntax enable
@@ -144,6 +144,7 @@ au FileType svn,gitcommit set autoindent
 
 " Vim Syntax {{{2
 au FileType vim call ColorColumn()
+au FileType vim setlocal list
 
 " Perl Syntax {{{2
 au FileType perl call ColorColumn()
@@ -152,6 +153,7 @@ if exists('g:loaded_indent_guides')
 endif
 au FileType perl setlocal equalprg=perltidy
 au FileType perl setlocal omnifunc=PerlComplete
+au FileType perl setlocal list
 
 " Ruby Syntax {{{2
 au FileType ruby call ColorColumn()
@@ -161,9 +163,11 @@ endif
 au FileType ruby setlocal omnifunc=rubycomplete#Complete
 au FileType ruby let g:rubycomplete_buffer_loading=1
 au FileType ruby let g:rubycomplete_classes_in_global=1
+au FileType ruby setlocal list
 
 " Python Syntax {{{2
 au FileType python call ColorColumn()
+au FileType python setlocal list
 if exists('g:loaded_indent_guides')
     au FileType python :IndentGuidesEnable
 endif
@@ -172,6 +176,7 @@ au FileType python setlocal equalprg=PythonTidy
 
 " Shell Script Syntax {{{2
 au FileType sh,bash,zsh call ColorColumn()
+au FileType sh,bash,zsh setlocal list
 
 " Toggles & Switches (Leader commands) {{{1
 let mapleader = ","
