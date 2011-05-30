@@ -145,9 +145,6 @@ au FileType vim call ColorColumn()
 
 " Perl Syntax {{{2
 au FileType perl call ColorColumn()
-if exists('loaded_taglist')
-    au FileType perl :autocmd BufWritePost * :TlistUpdate
-endif
 if exists('g:loaded_indent_guides')
     au FileType perl :IndentGuidesEnable
 endif
@@ -156,9 +153,6 @@ au FileType perl setlocal omnifunc=PerlComplete
 
 " Ruby Syntax {{{2
 au FileType ruby call ColorColumn()
-if exists('loaded_taglist')
-    au FileType ruby :autocmd BufWritePost * :TlistUpdate
-endif
 if exists('g:loaded_indent_guides')
     au FileType ruby :IndentGuidesEnable
 endif
@@ -168,9 +162,6 @@ au FileType ruby let g:rubycomplete_classes_in_global=1
 
 " Python Syntax {{{2
 au FileType python call ColorColumn()
-if exists('loaded_taglist')
-    au FileType python :autocmd BufWritePost * :TlistUpdate
-endif
 if exists('g:loaded_indent_guides')
     au FileType python :IndentGuidesEnable
 endif
@@ -179,9 +170,6 @@ au FileType python setlocal equalprg=PythonTidy
 
 " Shell Script Syntax {{{2
 au FileType sh,bash,zsh call ColorColumn()
-if exists('loaded_taglist')
-    au FileType sh,bash,zsh :autocmd BufWritePost * :TlistUpdate
-endif
 
 " Toggles & Switches (Leader commands) {{{1
 let mapleader = ","
@@ -423,10 +411,10 @@ let g:secure_modelines_allowed_items = [
                 \ "nowrap",
                 \ ]
 
-" taglist {{{2
-let g:tlist_auto_open = 1
-let g:tlist_auto_update = 1
-let g:tlist_exit_onlywindow = 1
+" tagbar {{{2
+map <leader>t :TagbarToggle<CR>
+let g:tagbar_expand = 1
+let g:tagbar_sort = 1
 
 " Showmarks {{{2
 let g:showmarks_enable=1
@@ -551,9 +539,6 @@ function! ToggleMyScratch()
     endif
 endfunction
 map <leader>s   :call ToggleMyScratch()<CR>
-
-" Taglist {{{2
-map <leader>t :Tlist<CR>
 
 " Supertab {{{2
 let g:SuperTabDefaultCompletionType = "context"
