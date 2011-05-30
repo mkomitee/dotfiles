@@ -215,7 +215,8 @@ noremap Y y$
 "imap <S-Tab> <C-P>
 
 " Easily modify vimrc
-nmap <leader>ev :e $MYVIMRC<CR>
+nmap <leader>ev :split $MYVIMRC<CR>
+nmap <leader>egv :split $MYGVIMRC<CR>
 
 " Move current line down/up
 map <C-Down> ]e
