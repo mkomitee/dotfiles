@@ -36,3 +36,4 @@ vim/bundle,git://github.com/vim-scripts/gnupg.git
 vim/bundle,git://github.com/vim-scripts/Gist.vim.git
 vim/bundle,git://github.com/vim-scripts/Gundo.git
 vim/bundle,git://github.com/vim-scripts/gitv.git
+vim/bundle,git://github.com/fmeyer/vim-pigraph.git
