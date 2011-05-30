@@ -128,6 +128,8 @@ augroup END
 " Autoload changes for vimrc
 au BufWritePost .vimrc source ~/.vimrc
 
+set foldtext=CustomFoldText()
+
 " Filetype Specific Configuration {{{1
 " MAN Syntax {{{2
 au Filetype man setlocal nolist
@@ -279,7 +281,7 @@ endfunction
 nmap <silent> <leader>lw :call ToggleList("Location List", 'l')<CR>
 nmap <silent> <leader>qw :call ToggleList("Quickfix List", 'c')<CR>
 
-"Templates {{{1
+" Templates {{{1
 autocmd! BufNewFile * silent! 0r ~/.vim/skel/tmpl.%:e
 
 " Diff between buffer and the unwritten file {{{2
@@ -287,6 +289,30 @@ if !exists(":DiffOrig")
     command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
                 \ | wincmd p | diffthis
 endif
+
+" Custom fold text {{{2
+fu! CustomFoldText()
+    "get first non-blank line
+    let fs = v:foldstart
+    while getline(fs) =~ '^\s*$' | let fs = nextnonblank(fs + 1)
+    endwhile
+    if fs > v:foldend
+        let line = getline(v:foldstart)
+    else
+        let line = substitute(getline(fs), '\t', repeat(' ', &tabstop), 'g')
+    endif
+
+    let w = winwidth(0) - &foldcolumn - (&number ? 8 : 0)
+    let foldSize = 1 + v:foldend - v:foldstart
+    let foldSizeStr = " " . foldSize . " lines "
+    let foldLevelStr = repeat("+--", v:foldlevel)
+    let lineCount = line("$")
+    let foldPercentage = printf("[%.1f", (foldSize*1.0)/lineCount*100) . "%] "
+    let expansionString = repeat(".", w - strwidth(foldSizeStr.line.foldLevelStr.foldPercentage))
+    return line . expansionString . foldSizeStr . foldPercentage . foldLevelStr
+endf
+
+
 
 " Strip trailing whitespaces  {{{2
 function! Preserve(command)
