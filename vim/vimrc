@@ -174,6 +174,8 @@ endif
 au FileType python setlocal omnifunc=pythoncomplete#Complete
 au FileType python setlocal equalprg=PythonTidy
 
+let g:tagbar_ctags_use_tagfiles = 1
+
 " Shell Script Syntax {{{2
 au FileType sh,bash,zsh call ColorColumn()
 au FileType sh,bash,zsh setlocal list
