@@ -76,4 +76,5 @@
 (if (file-exists-p user-specific-dir)
   (mapc #'load (directory-files user-specific-dir nil ".*el$")))
 
+(load "~/.emacs.d/mkomitee.el")
 ;;; init.el ends here
