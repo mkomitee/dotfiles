@@ -1,43 +1,40 @@
 ;;; For emacsclient
 (server-start)
 
-;;; Themes, ...
-(require 'color-theme)
-(require 'color-theme-solarized)
-(color-theme-solarized-light)
+(defconst emacs-config-dir "~/.emacs.d/configs/")
+(defconst emacs-vendor-dir "~/.emacs.d/vendor/")
+(defun get-subdirs (directory)
+  "Get a list of subdirectories under a given directory"
+  (apply 'nconc (mapcar (lambda (fa)
+                        (and
+                         (eq (cadr fa) t)
+                         (not (equal (car fa) "."))
+                         (not (equal (car fa) ".."))
+                         (list (car fa))))
+                        (directory-files-and-attributes directory))))
 
-;;; Snippets
-(require 'yasnippet)
-(yas/initialize)
-(yas/load-directory "~/.emacs.d/snippets/")
+(defun add-dirs-to-loadpath (dir-name)
+  "add subdirs of your vendor directory to the load path"
+  (dolist (subdir (get-subdirs dir-name))
+    (setq load-path (cons (concat dir-name subdir) load-path))
+    (message "Added %s to load path" subdir)))
 
-;;; Textmate Mode
-(add-to-list 'load-path "~/.emacs.d/vendor/textmate.el")
-(require 'textmate)
-(textmate-mode)
+(add-dirs-to-loadpath emacs-vendor-dir)
 
-;;; Line numbers, ...
-(setq linum-format "%5.d ")
-(global-linum-mode 1)
+(defun load-cfg-files (filelist)
+  (dolist (file filelist)
+    (let ((filename (expand-file-name (concat emacs-config-dir file ".el"))))
+      (if (file-exists-p filename)
+          (progn
+            (load (concat filename))
+            (message "Loaded config file: %s" filename))
+       (message "Could not load file: %s" filename)))))
 
-;;; Setup spaces/tabs
-(setq indent-tabs-mode nil)
-(setq-default indent-tabs-mode nil)
-(setq default-tab-width 4)
-(setq tab-width 4)
-(setq c-basic-indent 4)
+(load-cfg-files '("cfg_generic"
+                  "cfg_textmate"
+                  "cfg_python"
+                  "cfg_perl"
+                  "cfg_ruby"
+                  "cfg_snippets"))
 
-;;; Ruby Config
-(add-hook 'ruby-mode-hook 'whitespace-mode)
-(add-hook 'ruby-mode-hook 'flymake-mode)
-(add-hook 'ruby-mode-hook 'rainbow-delimiters-mode)
 
-;;; Python Config
-(add-hook 'python-mode-hook 'whitespace-mode)
-(add-hook 'python-mode-hook 'flymake-mode)
-(add-hook 'python-mode-hook 'rainbow-delimiters-mode)
-
-;;; Perl Config
-(add-hook 'perl-mode-hook 'whitespace-mode)
-(add-hook 'perl-mode-hook 'flymake-mode)
-(add-hook 'perl-mode-hook 'rainbow-delimiters-mode)
