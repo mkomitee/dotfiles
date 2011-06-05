@@ -1,0 +1,243 @@
+;;; Development plans:
+
+;; The design plan for Vimpulse has been to only emulate features that
+;; are in Vim. This is a neat guideline, and Vimpulse should certainly
+;; strive to be neat. But it overlooks the fact that Vim is almost as
+;; extensible an editor as Emacs.
+;;
+;; Extensibility requires transparency. Much of Vimpulse's code is at
+;; present convoluted and difficult to understand. This is partly due
+;; to Vimpulse's inconsistent dependence upon Viper. Disentangling
+;; Vimpulse from Viper would go a long way to improve matters. If
+;; nothing else, a bug in Vimpulse is infinitely preferable to one
+;; outside it -- the former can, after all, be fixed.
+;;
+;; Another priority is for Vimpulse to integrate well with standard
+;; Emacs functionality. This is not always possible, and various
+;; "Vimpulse specifics" get invented as a result. The less Vimpulse
+;; requires, and the less it invents, the better. If there must be
+;; red tape, it should be justified in some way -- preferably by
+;; a tangible, major feature.
+;;
+;; Refactoring is likely to introduce bugs and should happen on a
+;; separate "development" branch. Whenever that branch matures, it
+;; can be merged into the "master" branch, where bugfixes and minor
+;; improvements go in the meantime.
+
+;;; Development goals:
+
+;; - Clean up Visual mode's code. There are some good ideas in there,
+;;   but they are lost in a tangle of "just-so" rules. In particular,
+;;   the concept of a "range" encompasses more than expansion and
+;;   contraction: ranges can be measured (a line range of 2 lines),
+;;   described ("Deleted 2 lines") and recreated another place in the
+;;   buffer (select 2 lines about point). A `vimpulse-define-range'
+;;   macro would let one define all these properties at once, and then
+;;   the three Visual submodes could just point to the relevant range
+;;   type: char -> inclusive, line -> line, block -> block. (The range
+;;   type might even be customizable; for instance, char -> exclusive
+;;   would give Emacs-like character selection.)
+;;
+;; - Remove Vimpulse's dependency on Viper.
+;;
+;;     - Rewrite the motions. Since motions like "j" and "k" have a
+;;       motion type of "line" -- i.e., they behave linewise in
+;;       Operator-Pending mode -- a `vimpulse-define-motion' macro
+;;       should be used. (However, its docstring should stress that
+;;       any movement command is a valid motion, and point to a
+;;       function for changing the motion type.)
+;;
+;;         - Although the standard motions don't need it, more
+;;           facilities for letting a motion control the operator
+;;           calling it could be useful with regard to extensions.
+;;           Presently, a motion may set `vimpulse-inhibit-operator'
+;;           to t to disable the operator altogether. A special
+;;           function call could allow the motion to execute the
+;;           operator code inside itself, Viper-like, so that the
+;;           motion could execute code after the operator code.
+;;
+;;     - Rewrite the copy/paste system. The right way to implement
+;;       line pasting is not to investigate whether the text ends with
+;;       a newline, but to tag it with an appropriate `yank-handler'
+;;       property; similarly for block pasting. (XEmacs does not
+;;       support `yank-handler' natively, but awareness of this could
+;;       be built into the paste commands.) "M-y" (`yank-pop') may
+;;       need to be advised with regard to cursor position.
+;;
+;;     - Rewrite the repeat system. The current system is text-based,
+;;       like Vim's: the text between the entry point and the exit
+;;       point is repeated. A simpler and more straightforward
+;;       implementation would be to remember the actual keystrokes --
+;;       in effect turning every insertion into a keyboard macro.
+;;       (Thus, for example, it is no longer necessary to "measure"
+;;       and "recreate" Visual selections; the keystrokes do the job.)
+;;       However, there are some pitfalls to this approach: certain
+;;       keys, such as "M-/" (`dabbrev-expand'), may behave
+;;       differently in other places in the buffer. Thus, the repeat
+;;       history may need to record some commands as "insertions"
+;;       rather than keystrokes.
+;;
+;;     - Rewrite the state system. This is already halfway done. What
+;;       remains is to define vi (command) state, Insert state and
+;;       Replace state (and Emacs state?) in terms of
+;;       `vimpulse-define-state', and add code for enabling vi state
+;;       in all buffers.
+;;
+;;         - `vimpulse-define-state' should provide an option for
+;;           specifying the cursor. Actually, two options: one for the
+;;           general case and one when running in the terminal. The
+;;           user could then associate different cursor colors with
+;;           different states, since Emacs is unable to change the
+;;           cursor shape in the terminal.
+;;
+;;         - Furthermore, `vimpulse-define-state' could be simplified
+;;           considerably. :diehard-mode? :kbd-map?
+;;           :global-modifier-local-user-map? In no way are all of
+;;           these necessary. Since `vimpulse-define-key' creates
+;;           extra maps as needed, ideally each state needs only
+;;           correspond to one keymap.
+;;
+;;         - Each state should have an entry hook and an exit hook.
+;;           For example, while the `dabbrev-expand' thing that Viper
+;;           does when one hits ESC is horrible in the hardcoded case,
+;;           it could very well go into a hook as a user
+;;           customization.
+;;
+;;     - Rewrite Ex. This is probably the last thing that needs to be
+;;       done, as it is quite independent from the other parts of
+;;       Viper. Vimpulse's Ex should integrate with Emacs: all that
+;;       can be done with "M-x" and "M-:" should be possible with ":".
+;;       For example, one could type ":sort-lines" just as well as
+;;       "M-x sort-lines", or ":(setq foo bar)" instead of
+;;       "M-: (setq foo bar)". This would help unburden the overloaded
+;;       ESC key in terminal mode.
+;;
+;; - Throw away old code. If there is an immediate payoff to
+;;   refactoring, this is it. Most of the stuff in
+;;   vimpulse-compatibility.el can be purged by making such buffers
+;;   come up in a "Vim light" mode. Additional adjustments can be made
+;;   on a per-mode basis with `vimpulse-define-key'.
+
+;;; Undecided development questions:
+
+;; These are mostly outdated.
+;;
+;; - Make sure I have added all stuff in Brad's Viper additions and
+;;   from my collection, then start documenting already. Once there
+;;   are even the simplest of docs (a nice keymap), people will have a
+;;   far easier time using Vimpulse and so I bet more will contribute.
+;;
+;; - Folding. This should be implemented as a separate Lisp library
+;;   usable for even non-Viper users. Which foldmethods to do first?
+;;   I personally only use foldmethod=marker, and even that rarely.
+;;
+;; - i_C-(I forgot the letter) should do (copy-from-above-command 1)
+;;   from misc.el.
+;;
+;; - Add :set spell / :set nospell that uses flyspell-mode.
+;;
+;; - Add support for tabs.el, a tabs mode that works sensibly (get it
+;;   from Emacs Lisp List).
+;;     - Minimum needed: :tabedit, :tabnext, :tabprevious.
+;;     - Since I'm emulating Vim, emulate its tab pages feature. So a
+;;       tab page should be able to hold one or more buffers.
+;;
+;; - Add Customize option to let users stop "C-r" from being Redo?
+;;
+;; - Copy more features from Brad's work in darcs and from vimpact
+;;   into Vimpulse.
+;;
+;; - Doc: look in Google chat log, find description of one-char-off
+;;   bug, see if it applies to this or to the not-yet-released
+;;   viper-x, and if to this, mention under Bugs.
+;;
+;; - Doc: list all new keys (and maybe all differences from Viper) in
+;;   Usage section.
+;;
+;; - Doc: describe all new keys in Usage section; can look at Vim
+;;   manual for ideas.
+;;
+;; - Modify how tramp works so it also automatically handles URLs
+;;   typed in the netrw syntax, e.g., http:// etc. But first ask tramp
+;;   upstream if they could please make those changes themselves.
+;;
+;; - Improve "CTRL-O" for jumping back in the jumplist and "CTRL-I" for
+;;   jumping forwards (for undoing one "CTRL-O"). The global mark ring
+;;   is not what I want. I wonder if Emacs' tags functionality allows
+;;   a jumplist. I wonder if Viper does tags like nvi does.
+;;     - Try code.google.com/p/ejumplist/source/browse/trunk/jumplist.el
+;;
+;; - On my PC (I run Ubuntu), if you start plain Vim and then press
+;;   "CTRL-O" many times, it starts opening recently opened files. Is
+;;   that useful? Should Vimpulse have persistent jump table
+;;   functionality like that, and if so, should it use recentf or
+;;   Vim's .viminfo file or some tag functionality in Emacs? How will
+;;   it interact with the fact that in Emacs, it's not traditional to
+;;   suddenly close files without warning?
+;;
+;; - Make sentence movement work like in Vim. I wonder if this can be
+;;   done by setting Viper options.
+;;     - In Vim, according to :help sentence, end of sentence is:
+;;         - ".", "?", or "!"
+;;         - then (optionally) one or more """, "'", ")", and "]"
+;;           characters
+;;         - then a newline, space, or tab.
+;;         - A paragraph or section boundary is also a sentence
+;;           boundary, but I bet Viper handles that, and if it doesn't,
+;;           it should.
+;;             - A paragraph begins after each truly empty line (no
+;;               whitespace chars on it) or after certain col-1 nroff
+;;               macros. A sentence begins after a form feed (^L), or
+;;               certain nroff macros, in column 1.
+;;             - The characters "{" and "}" sometimes affect paragraph
+;;               definitions. See :help paragraph.
+;;     - In Viper, on the other hand, I bet sentences are like in vi,
+;;       where tabs aren't whitespace, and you need at least two spaces
+;;       after the punctuation mark.
+;;
+;; - E-mail ridip <rdp at inthefaith.net> and ask him for his Vimpulse
+;;   contribs and his DVORAK stuff.
+;;
+;; - E-mail to Tromey for upload into ELPA? We'd have to redo this
+;;   when a new major version comes out. Or maybe we should just
+;;   contribute some auto-ELPA-management code. By the way, should we
+;;   move Vimpulse into CVS somewhere?
+;;
+;; - Maybe merge all feature requests that anyone has ever sent into a
+;;   "Feature requests" section here.
+;;
+;; - In Vimpulse, like in real Vim, "C-r" only does Redo in vi (command)
+;;   mode; in Insert mode it does something else. (In Vimpulse that
+;;   "something else" is reverse isearch.) Should it do reverse
+;;   isearch in Insert mode too?
+;;
+;; - I want to allow buffer-switching without using the "C-x" key, since
+;;   "C-x b RET" an extremely large amount of times per day is
+;;   uncomfortable for my right pinky, which presses RET. There's
+;;   already :b, which seems to just invoke `switch-to-buffer'. Is this
+;;   right? Is it bad if I make Vimpulse emulate set autowrite=on
+;;   then write new multi-buffer code? What should the code's user
+;;   interface be like? I really should switch back to Vim for a day,
+;;   learn more about how it deals with multiple buffers at once (and
+;;   maybe also with tab pages) and emulate whatever of Vim's is most
+;;   convenient. What do you think of all the above?
+;;     - Update: IIRC, :set hidden lets you switch buffers w/o saving
+;;     - Update from Sebastien Rocca Serra: :set wildmenu plus
+;;       tab-completion makes :b very pleasant to use when you have
+;;       50+ buffers open. Wildmenu is almost like iswitchb or ido.
+;;     - I wonder how well that stuff works with just a few buffers open.
+;;
+;; - Simulate Vim's set virtualedit=onemore option to make "C-x C-e"
+;;   possible without first advancing to next line?
+;;
+;; - Would it be bad to edit users' .viminfo files without asking
+;;   permission, or should some variable have to be customized on to do
+;;   such a thing?
+;;
+;; - Is there any need to implement Vim's new
+;;   [count]dk-can-go-past-top-of-file-without-error functionality (to
+;;   me, no need) or any related functionality?
+;;
+;; - What to do about XEmacs? It doesn't ship with woman. I wonder
+;;   if woman is in some XEmacs package?
+
