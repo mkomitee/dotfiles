@@ -13,6 +13,17 @@
 (require 'textmate)
 (textmate-mode)
 
+(require 'python)
+(add-to-list 'load-path "~/.emacs.d/vendor/Pymacs")
+(autoload 'pymacs-apply "pymacs")
+(autoload 'pymacs-call "pymacs")
+(autoload 'pymacs-eval "pymacs" nil t)
+(autoload 'pymacs-exec "pymacs" nil t)
+(autoload 'pymacs-load "pymacs" nil t)
+
+(add-to-list 'load-path "~.emacs.d/vendor/pycomplete-plus")
+(require 'pycomplete+)
+
 ;;; Line numbers, ...
 (setq linum-format "%5.d ")
 (global-linum-mode 1)
