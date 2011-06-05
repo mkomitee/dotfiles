@@ -44,3 +44,4 @@ vim/bundle,git://github.com/vim-scripts/LbdbQuery.vim.git
 emacs-starter-kit/vendor,git://github.com/defunkt/textmate.el.git
 emacs-starter-kit/vendor,git://github.com/pinard/Pymacs.git
 emacs-starter-kit/vendor,git://github.com/emacsmirror/pycomplete-plus.git
+emacs-starter-kit/vendot,git://github.com/emacsmirror/vimpulse.git
