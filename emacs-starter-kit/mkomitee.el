@@ -31,4 +31,8 @@
 (add-hook 'perl-mode-hook 'whitespace-mode)
 (add-hook 'perl-mode-hook 'flymake-mode)
 
+(require 'yasnippet)
+(yas/initialize)
+(yas/load-directory "~/.emacs.d/snippets/")
+
 (server-start)
