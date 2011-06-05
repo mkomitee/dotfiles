@@ -1,6 +1,3 @@
-;;; Make custom libraries available
-(add-to-list 'load-path (concat dotfiles-dir "/custom"))
-
 ;;; Enable viper mode
 (setq viper-custom-file-name (concat dotfiles-dir "viper"))
 (setq viper-mode t)
@@ -26,12 +23,3 @@
 (setq default-tab-width 4)
 (setq tab-width 4)
 (setq c-basic-indent 4)
-
-;; python-mode settings
-(setq auto-mode-alist (cons '("\\.py$" . python-mode) auto-mode-alist))
-(setq interpreter-mode-alist(cons '("python" . python-mode)
-                             interpreter-mode-alist))
-;; path to the python interpreter, e.g.: ~rw/python27/bin/python2.7
-(setq py-python-command "python")
-(autoload 'python-mode "python-mode" "Python editing mode." t)
-
