@@ -1,17 +1,17 @@
-;;; Enable viper mode
-;(setq viper-custom-file-name (concat dotfiles-dir "viper"))
-;(setq viper-mode t)
-;(require 'viper)
-
-;;; And vimpulse mode for good measure
-;(require 'vimpulse)
-
 ;;; Themes, ...
 (require 'color-theme)
-;(require 'color-theme-ir-black)
-;(color-theme-ir-black)
 (require 'color-theme-solarized)
 (color-theme-solarized-light)
+
+;;; Snippets
+(require 'yasnippet)
+(yas/initialize)
+(yas/load-directory "~/.emacs.d/snippets/")
+
+;;; Textmate Mode
+(add-to-list 'load-path "~/.emacs.d/vendor/textmate.el")
+(require 'textmate)
+(textmate-mode)
 
 ;;; Line numbers, ...
 (setq linum-format "%5.d ")
@@ -24,15 +24,16 @@
 (setq tab-width 4)
 (setq c-basic-indent 4)
 
+;;; Ruby Config
 (add-hook 'ruby-mode-hook 'whitespace-mode)
 (add-hook 'ruby-mode-hook 'flymake-mode)
+
+;;; Python Config
 (add-hook 'python-mode-hook 'whitespace-mode)
 (add-hook 'python-mode-hook 'flymake-mode)
+
+;;; Perl Config
 (add-hook 'perl-mode-hook 'whitespace-mode)
 (add-hook 'perl-mode-hook 'flymake-mode)
-
-(require 'yasnippet)
-(yas/initialize)
-(yas/load-directory "~/.emacs.d/snippets/")
 
 (server-start)
