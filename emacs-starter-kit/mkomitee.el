@@ -1,10 +1,10 @@
 ;;; Enable viper mode
-(setq viper-custom-file-name (concat dotfiles-dir "viper"))
-(setq viper-mode t)
-(require 'viper)
+;(setq viper-custom-file-name (concat dotfiles-dir "viper"))
+;(setq viper-mode t)
+;(require 'viper)
 
 ;;; And vimpulse mode for good measure
-(require 'vimpulse)
+;(require 'vimpulse)
 
 ;;; Themes, ...
 (require 'color-theme)
@@ -17,12 +17,18 @@
 (setq linum-format "%5.d ")
 (global-linum-mode 1)
 
-;;; Show white-space
-(require 'blank-mode)
-
 ;;; Setup spaces/tabs
 (setq indent-tabs-mode nil)
 (setq-default indent-tabs-mode nil)
 (setq default-tab-width 4)
 (setq tab-width 4)
 (setq c-basic-indent 4)
+
+(add-hook 'ruby-mode-hook 'whitespace-mode)
+(add-hook 'ruby-mode-hook 'flymake-mode)
+(add-hook 'python-mode-hook 'whitespace-mode)
+(add-hook 'python-mode-hook 'flymake-mode)
+(add-hook 'perl-mode-hook 'whitespace-mode)
+(add-hook 'perl-mode-hook 'flymake-mode)
+
+(server-start)
