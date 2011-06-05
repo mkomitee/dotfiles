@@ -27,13 +27,16 @@
 ;;; Ruby Config
 (add-hook 'ruby-mode-hook 'whitespace-mode)
 (add-hook 'ruby-mode-hook 'flymake-mode)
+(add-hook 'ruby-mode-hook 'rainbow-delimiters-mode)
 
 ;;; Python Config
 (add-hook 'python-mode-hook 'whitespace-mode)
 (add-hook 'python-mode-hook 'flymake-mode)
+(add-hook 'python-mode-hook 'rainbow-delimiters-mode)
 
 ;;; Perl Config
 (add-hook 'perl-mode-hook 'whitespace-mode)
 (add-hook 'perl-mode-hook 'flymake-mode)
+(add-hook 'perl-mode-hook 'rainbow-delimiters-mode)
 
 (server-start)
