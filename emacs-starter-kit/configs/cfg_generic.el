@@ -22,3 +22,5 @@
 (setq viper-custom-file-name "~/.emacs.d/viper")
 (require 'viper)
 (require 'vimpulse)
+
+(vimpulse-vmap ",c" 'comment-dwim)
