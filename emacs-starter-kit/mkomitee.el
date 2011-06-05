@@ -7,8 +7,11 @@
 (require 'vimpulse)
 
 ;;; Themes, ...
-(require 'color-theme-ir-black)
-(color-theme-ir-black)
+(require 'color-theme)
+;(require 'color-theme-ir-black)
+;(color-theme-ir-black)
+(require 'color-theme-solarized)
+(color-theme-solarized-light)
 
 ;;; Line numbers, ...
 (setq linum-format "%5.d ")
