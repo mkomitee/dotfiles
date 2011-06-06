@@ -53,7 +53,6 @@ emacs-starter-kit/vendor,git://github.com/mig/color-theme-merbivore.git
 emacs-starter-kit/vendor,git://github.com/defunkt/gist.el.git
 emacs-starter-kit/vendor,git://gist.github.com/302848.git
 emacs-starter-kit/vendor,git://github.com/ZungBang/emacs-grep-o-matic.git
-emacs-starter-kit/vendor,git://pymacs.progiciels-bpi.ca/pymacs
 emacs-starter-kit/vendor,http://github.com/yoshiki/yaml-mode.git
 emacs-starter-kit/vendor,http://github.com/ieure/scratch-el.git
 emacs-starter-kit/vendor,git://gist.github.com/303273.git
