@@ -19,6 +19,7 @@
   (setq-default
 	indent-tabs-mode nil
 	tab-width 4))
+(setq-default py-indent-offset 4)
 
 ;; (defun electric-pair ()
 ;;   "Insert character pair without sournding spaces"
