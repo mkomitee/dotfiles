@@ -1,5 +1,4 @@
 ;;; For emacsclient
-(server-start)
 
 (defconst emacs-config-dir "~/.emacs.d/configs/")
 (defconst emacs-vendor-dir "~/.emacs.d/vendor/")
@@ -36,5 +35,4 @@
                   "cfg_ruby"
 		  "cfg_elisp"
                   "cfg_snippets"))
-
 

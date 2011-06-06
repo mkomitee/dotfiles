@@ -1,31 +1,47 @@
 ;;; python-mode site-lisp configuration
-(add-hook 'python-mode-hook 'whitespace-mode)
-(add-hook 'python-mode-hook 'flymake-mode)
-(add-hook 'python-mode-hook 'rainbow-delimiters-mode)
-(add-hook 'python-mode-hook (lambda () (local-set-key (kbd "RET") 'newline-and-indent)))
+;; (add-hook 'python-mode-hook 'whitespace-mode)
+;; (add-hook 'python-mode-hook 'flymake-mode)
+;; (add-hook 'python-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'python-mode-hook
-          (let ((original-command (viper-nil)))
+          (lambda ()
+            (local-set-key (kbd "RET") 'newline-and-indent)))
+
+(add-hook 'python-mode-hook
+          (let ((original-command 'python-indent-line))
             `(lambda ()
                (setq yas/fallback-behavior
                      '(apply ,original-command))
-               (local-set-key [tab] 'yas/expand))))
-;(add-hook 'python-mode-hook
-     ;(lambda ()
-      ;(define-key python-mode-map "\"" 'electric-pair)
-      ;(define-key python-mode-map "\'" 'electric-pair)
-      ;(define-key python-mode-map "(" 'electric-pair)
-      ;(define-key python-mode-map "[" 'electric-pair)
-      ;(define-key python-mode-map "{" 'electric-pair)))
+              (local-set-key [tab] 'yas/expand))))
+
+;; (require 'highlight-80+)
+;; (add-hook 'python-mode-hook
+;;           '(lambda () (highlight-80+-mode 1)) t)
+
+;;; Experimental
+
+;; (defun electric-pair ()
+;;       "If at end of line, insert character pair without surrounding spaces.
+;;     Otherwise, just insert the typed character."
+;;       (interactive)
+;;       (if (eolp) (let (parens-require-spaces) (insert-pair)) (self-insert-command 1)))
+
+;; (add-hook 'python-mode-hook
+;;      (lambda ()
+;;       (define-key python-mode-map "\"" 'electric-pair)
+;;       (define-key python-mode-map "\'" 'electric-pair)
+;;       (define-key python-mode-map "(" 'electric-pair)
+;;       (define-key python-mode-map "[" 'electric-pair)
+;;       (define-key python-mode-map "{" 'electric-pair)))
 
 ;;; bind RET to py-newline-and-indent
 ;(add-hook 'python-mode-hook '(lambda () 
      ;(define-key python-mode-map "\C-m" 'newline-and-indent)))
 
-;(add-hook 'python-mode-hook
-  ;(setq-default
-	;indent-tabs-mode nil
-	;tab-width 4))
-;(setq-default py-indent-offset 4)
+;; (add-hook 'python-mode-hook
+;;   (setq-default
+;; 	indent-tabs-mode nil
+;; 	tab-width 4))
+;; (setq-default py-indent-offset 4)
 
 ;; (defun electric-pair ()
 ;;   "Insert character pair without sournding spaces"
@@ -70,7 +86,6 @@
 ;; 			    (file-name-nondirectory buffer-file-name)))))
 
 ;; ;; highlight all characters beyond col #80
-;; (require 'highlight-80+)
 
 ;; (add-hook 'python-mode-hook
 ;;           '(lambda () (eldoc-mode 1)) t)

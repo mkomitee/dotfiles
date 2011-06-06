@@ -45,5 +45,6 @@
   (load-file "~/.emacs.d/init.el")
   (message ".emacs reloaded successfully"))
 
-
-
+;(setq server-socket-dir "~/.tmp/socket")
+;(setq server-use-tcp t)
+(server-start)
