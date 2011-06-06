@@ -3,7 +3,12 @@
 (add-hook 'python-mode-hook 'flymake-mode)
 (add-hook 'python-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'python-mode-hook (lambda () (local-set-key (kbd "RET") 'newline-and-indent)))
-
+(add-hook 'python-mode-hook
+          (let ((original-command (viper-nil)))
+            `(lambda ()
+               (setq yas/fallback-behavior
+                     '(apply ,original-command))
+               (local-set-key [tab] 'yas/expand))))
 ;(add-hook 'python-mode-hook
      ;(lambda ()
       ;(define-key python-mode-map "\"" 'electric-pair)
