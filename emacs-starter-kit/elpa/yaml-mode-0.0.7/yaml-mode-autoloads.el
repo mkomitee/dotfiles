@@ -3,8 +3,9 @@
 ;;; Code:
 
 
-;;;### (autoloads nil nil ("yaml-mode-pkg.el" "yaml-mode.el") (19946
-;;;;;;  23189 538263))
+;;;### (autoloads nil nil ("../../../../.emacs.d/elpa/yaml-mode-0.0.7/yaml-mode-pkg.el"
+;;;;;;  "../../../../.emacs.d/elpa/yaml-mode-0.0.7/yaml-mode.el")
+;;;;;;  (19948 51546 331224))
 
 ;;;***
 

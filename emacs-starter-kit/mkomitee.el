@@ -31,10 +31,10 @@
        (message "Could not load file: %s" filename)))))
 
 (load-cfg-files '("cfg_generic"
-                  "cfg_textmate"
                   "cfg_python"
                   "cfg_perl"
                   "cfg_ruby"
+		  "cfg_elisp"
                   "cfg_snippets"))
 
 

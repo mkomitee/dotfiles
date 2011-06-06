@@ -2,24 +2,25 @@
 (add-hook 'python-mode-hook 'whitespace-mode)
 (add-hook 'python-mode-hook 'flymake-mode)
 (add-hook 'python-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'python-mode-hook (lambda () (local-set-key (kbd "RET") 'newline-and-indent)))
 
-(add-hook 'python-mode-hook
-     (lambda ()
-      (define-key python-mode-map "\"" 'electric-pair)
-      (define-key python-mode-map "\'" 'electric-pair)
-      (define-key python-mode-map "(" 'electric-pair)
-      (define-key python-mode-map "[" 'electric-pair)
-      (define-key python-mode-map "{" 'electric-pair)))
+;(add-hook 'python-mode-hook
+     ;(lambda ()
+      ;(define-key python-mode-map "\"" 'electric-pair)
+      ;(define-key python-mode-map "\'" 'electric-pair)
+      ;(define-key python-mode-map "(" 'electric-pair)
+      ;(define-key python-mode-map "[" 'electric-pair)
+      ;(define-key python-mode-map "{" 'electric-pair)))
 
 ;;; bind RET to py-newline-and-indent
-(add-hook 'python-mode-hook '(lambda () 
-     (define-key python-mode-map "\C-m" 'newline-and-indent)))
+;(add-hook 'python-mode-hook '(lambda () 
+     ;(define-key python-mode-map "\C-m" 'newline-and-indent)))
 
-(add-hook 'python-mode-hook
-  (setq-default
-	indent-tabs-mode nil
-	tab-width 4))
-(setq-default py-indent-offset 4)
+;(add-hook 'python-mode-hook
+  ;(setq-default
+	;indent-tabs-mode nil
+	;tab-width 4))
+;(setq-default py-indent-offset 4)
 
 ;; (defun electric-pair ()
 ;;   "Insert character pair without sournding spaces"

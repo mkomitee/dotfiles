@@ -5,8 +5,9 @@
 
 ;;;### (autoloads (gist-fetch gist-list gist-region-or-buffer-private
 ;;;;;;  gist-region-or-buffer gist-buffer-private gist-buffer gist-region-private
-;;;;;;  gist-region) "gist" "gist.el" (19946 23192))
-;;; Generated autoloads from gist.el
+;;;;;;  gist-region) "gist" "../../../../.emacs.d/elpa/gist-0.5/gist.el"
+;;;;;;  (19948 51558))
+;;; Generated autoloads from ../../../../.emacs.d/elpa/gist-0.5/gist.el
 
 (autoload 'gist-region "gist" "\
 Post the current region as a new paste at gist.github.com
@@ -63,7 +64,9 @@ If the Gist already exists in a buffer, switches to it
 
 ;;;***
 
-;;;### (autoloads nil nil ("gist-pkg.el") (19946 23192 226478))
+;;;### (autoloads nil nil ("../../../../.emacs.d/elpa/gist-0.5/gist-pkg.el"
+;;;;;;  "../../../../.emacs.d/elpa/gist-0.5/gist.el") (19948 51558
+;;;;;;  902512))
 
 ;;;***
 
