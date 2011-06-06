@@ -13,6 +13,7 @@
 (setq tab-width 4)
 (setq c-basic-indent 4)
 
+(setq speedbar-tag-split-minimum-length 100)
 ;;; Only first learning emacs, use viper as a crutch
 (setq viper-mode t)
 (setq viper-custom-file-name "~/.emacs.d/viper")
