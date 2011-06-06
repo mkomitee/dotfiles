@@ -65,7 +65,7 @@
  save-place t ;; enable save-place globally by default
  indent-tabs-mode nil) ;; indent via spaces not tabs
 
-(toggle-debug-on-error t) ;; show traceback on error
+;; (toggle-debug-on-error t) ;; show traceback on error
 (fset 'yes-or-no-p 'y-or-n-p) ;; allows you to type "y" instead of "yes" on exit
 (mouse-avoidance-mode 'cat-and-mouse) ;; mouse jumps away when typing under it
 (if (load "mwheel" t)
