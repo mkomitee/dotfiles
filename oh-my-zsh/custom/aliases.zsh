@@ -50,21 +50,6 @@ alias dirs='dirs -v'
 alias rm='nocorrect rm'
 alias rmdir='nocorrect rmdir'
 alias history='fc -dl 1'
-#GVIM=$(whence gvim)
-#function gvim {
-    #if [ -z "$1" ]; then
-        #$GVIM -g
-    #else
-        #$GVIM -g $*
-    #fi
-#}
-
-#function vim {
-    #if [ -z "$1" ]; then
-        #$GVIM -v
-    #else
-        #$GVIM -v $*
-    #fi
-#}
+alias emacsclient='emacsclient -n'
 
 # vim: ft=sh fdm=marker

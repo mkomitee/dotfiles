@@ -83,8 +83,9 @@ set hlsearch
 
 " Statusline {{{1
 set statusline=   " clear the statusline for when vimrc is reloaded
-set statusline+=%-3.3n\                      " buffer number
-set statusline+=%t\                          " file name
+set statusline+=%#ShowMarksHLl#
+set statusline+=[%n]\                      " buffer number
+set statusline+=%<%.99f\                     " file name
 set statusline+=%h%m%r%w                     " flags
 set statusline+=[%{strlen(&ft)?&ft:'none'},  " filetype
 set statusline+=%{strlen(&fenc)?&fenc:&enc}, " encoding

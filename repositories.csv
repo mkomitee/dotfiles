@@ -40,3 +40,6 @@ vim/bundle,git://github.com/fmeyer/vim-pigraph.git
 vim/bundle,git://github.com/trapd00r/neverland-vim-theme.git
 vim/bundle,git://github.com/majutsushi/tagbar.git
 vim/bundle,git://github.com/vim-scripts/LbdbQuery.vim.git
+,https://github.com/technomancy/emacs-starter-kit.git
+emacs-starter-kit/vendor,git://github.com/emacsmirror/vimpulse.git
+emacs-starter-kit/vendor,git://github.com/burke/color-theme-ir-black.git
