@@ -35,7 +35,6 @@
                   "cfg_python"
                   "cfg_perl"
                   "cfg_ruby"
-                  "cfg_snippets"
-                  "cfg_autocomplete"))
+                  "cfg_snippets"))
 
 
