@@ -68,6 +68,6 @@ function time_indicator() {
 }
 
 # setup right prompt
-RPROMPT='$(vi_mode_prompt_info)'
+# RPROMPT='$(vi_mode_prompt_info)'
 
 # vim: set ft=zsh ts=4 sw=4 et:
