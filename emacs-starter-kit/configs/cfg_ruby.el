@@ -12,7 +12,6 @@
                      '(apply ,original-command))
               (local-set-key [tab] 'yas/expand))))
 
-(require 'highlight-80+)
 (add-hook 'ruby-mode-hook
           '(lambda () (highlight-80+-mode 1)) t)
 

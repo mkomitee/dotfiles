@@ -12,12 +12,11 @@
                      '(apply ,original-command))
               (local-set-key [tab] 'yas/expand))))
 
-(require 'highlight-80+)
 (add-hook 'lisp-mode-hook
           '(lambda () (highlight-80+-mode 1)) t)
 
 (add-hook 'emacs-lisp-mode-hook 'whitespace-mode)
-(add-hook 'emacs-lisp-mode-hook 'flymake-mode)
+;; (add-hook 'emacs-lisp-mode-hook 'flymake-mode)
 (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'emacs-lisp-mode-hook
           (lambda ()
@@ -30,6 +29,5 @@
                      '(apply ,original-command))
               (local-set-key [tab] 'yas/expand))))
 
-(require 'highlight-80+)
 (add-hook 'emacs-lisp-mode-hook
           '(lambda () (highlight-80+-mode 1)) t)

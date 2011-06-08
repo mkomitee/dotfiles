@@ -6,6 +6,9 @@
 (setq linum-format "%5.d ")
 (global-linum-mode 1)
 
+(require 'yasnippet)
+(require 'highlight-80+)
+
 ;; Original idea from
 ;; http://www.opensubscriber.com/message/emacs-devel@gnu.org/10971693.html
 (defun comment-dwim-line (&optional arg)
