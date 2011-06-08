@@ -42,7 +42,8 @@
 ;(vimpulse-vmap ",c" 'comment-dwim)
 
 (setq
-  user-temporary-file-directory "~/.tmp/"
+
+ user-temporary-file-directory "~/.tmp/"
   save-place-file (concat user-temporary-file-directory "saveplace")
   history-length t
   color-theme-is-global t
@@ -66,6 +67,12 @@
   (load-file "~/.emacs.d/init.el")
   (message ".emacs reloaded successfully"))
 
-;(setq server-socket-dir "~/.tmp/socket")
-;(setq server-use-tcp t)
+(setq kill-whole-line t)
+
+(defadvice yank (after indent-region activate)
+  (if (member major-mode '(emacs-lisp-mode scheme-mode lisp-mode
+                                           c-mode c++-mode objc-mode
+                                           LaTeX-mode TeX-mode))
+      (indent-region (region-beginning) (region-end) nil)))
+
 (server-start)

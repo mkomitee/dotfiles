@@ -1,0 +1,13 @@
+Movement:
+                     M-< document
+                     M-v screen
+                     C-p line
+C-a   M-b  C-b       C-l          C-f       M-f  C-e 
+begin word character center       character word end      
+                     C-n line
+                     C-v screen
+                     C-> document
+
+Delete line:    <C-a C-k>
+Paste:          <C-y>
+Copy Selection: <M-w>
