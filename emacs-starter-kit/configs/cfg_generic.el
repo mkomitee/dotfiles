@@ -41,6 +41,10 @@
 ;(require 'vimpulse)
 ;(vimpulse-vmap ",c" 'comment-dwim)
 
+(require 'undo-tree)
+(global-set-key (kbd "C-z") 'undo-tree-undo)
+(global-set-key (kbd "C-S-z") 'undo-tree-redo)
+
 (setq
 
  user-temporary-file-directory "~/.tmp/"
