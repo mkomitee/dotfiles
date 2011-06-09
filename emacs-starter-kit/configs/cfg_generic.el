@@ -8,6 +8,7 @@
 
 (require 'yasnippet)
 (require 'highlight-80+)
+(require 'fic-mode)
 
 ;; Setup super comment mode. It will comment or uncomment selected text, or the
 ;; current line if there is no selection. Original idea from

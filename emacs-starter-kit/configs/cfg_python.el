@@ -3,6 +3,7 @@
 (add-hook 'python-mode-hook
           (lambda ()
             (setq python-indent 4)))
+(add-hook 'python-mode-hook 'turn-on-fic-mode)
 (add-hook 'python-mode-hook
           (lambda ()
             (local-set-key (kbd "RET") 'newline-and-indent)))

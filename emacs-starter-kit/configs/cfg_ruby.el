@@ -3,6 +3,7 @@
 (add-hook 'ruby-mode-hook
           (lambda ()
             (setq ruby-indent-level 4)))
+(add-hook 'ruby-mode-hook 'turn-on-fic-mode)
 (add-hook 'ruby-mode-hook
           (lambda ()
             (local-set-key (kbd "RET") 'newline-and-indent)))

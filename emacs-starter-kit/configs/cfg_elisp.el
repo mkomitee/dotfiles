@@ -4,7 +4,7 @@
 (add-hook 'lisp-mode-hook
           (lambda ()
             (local-set-key (kbd "RET") 'newline-and-indent)))
-
+(add-hook 'lisp-mode-hook 'turn-on-fic-mode)
 (add-hook 'lisp-mode-hook
           (let ((original-command 'lisp-indent-line))
             `(lambda ()
