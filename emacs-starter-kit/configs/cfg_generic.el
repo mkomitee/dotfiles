@@ -2,14 +2,15 @@
 (require 'color-theme-ir-black)
 (color-theme-ir-black)
 
-;;; Line numbers, ...
+;;; Line numbers with a sensible format, ...
 (setq linum-format "%5.d ")
 (global-linum-mode 1)
 
 (require 'yasnippet)
 (require 'highlight-80+)
 
-;; Original idea from
+;; Setup super comment mode. It will comment or uncomment selected text, or the
+;; current line if there is no selection. Original idea from
 ;; http://www.opensubscriber.com/message/emacs-devel@gnu.org/10971693.html
 (defun comment-dwim-line (&optional arg)
   "Replacement for the comment-dwim command.
@@ -26,43 +27,47 @@
 
 (global-set-key (kbd "C-x C-;") 'comment-dwim-line)
 
-;;; Setup spaces/tabs
+;;; Setup spaces/tabs. Apparently this is a lot more complicated than
+;;; I think, so I'll have to do a _LOT_ more to get this working how I want.
 (setq-default indent-tabs-mode nil)
 (setq indent-tabs-mode nil)
 (setq default-tab-width 4)
 (setq tab-width 4)
-(setq c-basic-indent 4)
 
-(setq speedbar-tag-split-minimum-length 100)
-;;; Only first learning emacs, use viper as a crutch
-;(setq viper-mode t)
-;(setq viper-custom-file-name "~/.emacs.d/viper")
-;(require 'viper)
-;(require 'vimpulse)
-;(vimpulse-vmap ",c" 'comment-dwim)
+(setq speedbar-tag-split-minimum-length 100) ; Allow upto 100 tags for
+                                        ; a file in speedbar before it
+                                        ; splits them up
 
+;; Setup undo/redo with C-z C-S-z mappings
 (require 'undo-tree)
 (global-set-key (kbd "C-z") 'undo-tree-undo)
 (global-set-key (kbd "C-S-z") 'undo-tree-redo)
 
-(setq
+(delete-selection-mode 1) ; typing with a highlighted selection
+                          ; replaces the text in that selection
 
+;; Try to avoid littering the filesystem with random types of
+;; tempfiles and save data. This is by no means complete.
+(setq
  user-temporary-file-directory "~/.tmp/"
   save-place-file (concat user-temporary-file-directory "saveplace")
-  history-length t
-  color-theme-is-global t
   auto-save-list-file-prefix (concat
                               user-temporary-file-directory ".auto-saves-")
   auto-save-file-name-transforms `((".*" ,user-temporary-file-directory t))
-  inhibit-startup-message t
   delete-old-versions t)
-
-(make-directory user-temporary-file-directory t)
 
 (defconst use-backup-dir t)
 (setq backup-directory-alist
       `(("." . ,user-temporary-file-directory)
         (,tramp-file-name-regexp nil)))
+
+(make-directory user-temporary-file-directory t)
+
+(setq
+ history-length t
+ color-theme-is-global t
+ inhibit-startup-message t)
+
 
 (defun reload-dot-emacs()
   (interactive)
@@ -71,12 +76,14 @@
   (load-file "~/.emacs.d/init.el")
   (message ".emacs reloaded successfully"))
 
-(setq kill-whole-line t)
+(setq kill-whole-line t) ; When we kill-line, we should also kill the
+                         ; newline that terminates the line.
 
+; After we yank a block of text into existance, we should indent it.
 (defadvice yank (after indent-region activate)
-  (if (member major-mode '(emacs-lisp-mode scheme-mode lisp-mode
-                                           c-mode c++-mode objc-mode
-                                           LaTeX-mode TeX-mode))
+  (if (member major-mode '(emacs-lisp-mode lisp-mode c-mode c++-mode
+                                           ruby-mode cperl-mode
+                                           python-mode))
       (indent-region (region-beginning) (region-end) nil)))
 
 (server-start)

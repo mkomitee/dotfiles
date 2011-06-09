@@ -1,17 +1,19 @@
-;;; python-mode site-lisp configuration
-;; (add-hook 'python-mode-hook 'whitespace-mode)
-;; (add-hook 'python-mode-hook 'flymake-mode)
-;; (add-hook 'python-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'python-mode-hook 'whitespace-mode)
+(add-hook 'python-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'python-mode-hook
+          (lambda ()
+            (setq python-indent 4)))
 (add-hook 'python-mode-hook
           (lambda ()
             (local-set-key (kbd "RET") 'newline-and-indent)))
-
 (add-hook 'python-mode-hook
           (let ((original-command 'python-indent-line))
             `(lambda ()
                (setq yas/fallback-behavior
                      '(apply ,original-command))
               (local-set-key [tab] 'yas/expand))))
+(add-hook 'python-mode-hook
+          '(lambda () (highlight-80+-mode 1)) t)
 
 ;; (require 'highlight-80+)
 ;; (add-hook 'python-mode-hook
