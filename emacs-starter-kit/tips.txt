@@ -11,3 +11,5 @@ begin word character center       character word end
 Delete line:    <C-a C-k>
 Paste:          <C-y>
 Copy Selection: <M-w>
+
+Tutorial: C-h t

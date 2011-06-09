@@ -43,8 +43,14 @@
 (global-set-key (kbd "C-z") 'undo-tree-undo)
 (global-set-key (kbd "C-S-z") 'undo-tree-redo)
 
-(delete-selection-mode 1) ; typing with a highlighted selection
+(global-set-key (kbd "C-x C-f") 'lusty-file-explorer)
+(global-set-key (kbd "C-x b") 'lusty-buffer-explorer)
+
+;; (delete-selection-mode 1) ; typing with a highlighted selection
                           ; replaces the text in that selection
+(require 'autopair)
+(autopair-global-mode 1)
+(setq autopair-autowrap t)
 
 ;; Try to avoid littering the filesystem with random types of
 ;; tempfiles and save data. This is by no means complete.
@@ -86,4 +92,11 @@
                                            python-mode))
       (indent-region (region-beginning) (region-end) nil)))
 
-(server-start)
+;;(server-start)
+
+(defun my-done ()
+  (interactive)
+  (server-edit)
+  (make-frame-invisible nil t))
+(global-set-key (kbd "C-x C-c") 'my-done)
+
