@@ -1,7 +1,7 @@
 (add-hook 'cperl-mode-hook 'whitespace-mode)
 (add-hook 'cperl-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'cperl-mode-hook
-          (leambda ()
+          (lambda ()
             (setq cperl-indent-level 4)))
 (add-hook 'cperl-mode-hook 'turn-on-fic-mode)
 (add-hook 'cperl-mode-hook
