@@ -12,4 +12,7 @@ Delete line:    <C-a C-k>
 Paste:          <C-y>
 Copy Selection: <M-w>
 
+Zap-to-Char (e):          M-z e
+Zap-to-Previous-Char (e): C-- M-z e
+
 Tutorial: C-h t
