@@ -104,7 +104,7 @@
   (make-frame-invisible nil t))
 
 (if (server-running-p)
-    (global-set-key (kbd "C-x C-c") 'my-done))
+    (global-set-key (kbd "C-x h") 'my-done))
 
 (global-set-key "%" 'match-paren)
 

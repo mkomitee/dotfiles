@@ -15,4 +15,8 @@ Copy Selection: <M-w>
 Zap-to-Char (e):          M-z e
 Zap-to-Previous-Char (e): C-- M-z e
 
+Align: M-x align-regexp
+
 Tutorial: C-h t
+
+
