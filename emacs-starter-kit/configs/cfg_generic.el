@@ -96,6 +96,7 @@
 ;;(server-start)
 
 (load "server")
+(setq server-use-tcp t)
 (unless (server-running-p) (server-start))
 
 (defun my-done ()
