@@ -13,9 +13,9 @@
                (setq yas/fallback-behavior
                      '(apply ,original-command))
                (local-set-key [tab] 'yas/expand))))
-(add-hook 'ruby-mode-hook
-          (lambda ()
-            (ruby-electric-mode)))
+;; (add-hook 'ruby-mode-hook
+;;           (lambda ()
+;;             (ruby-electric-mode)))
 (add-hook 'ruby-mode-hook
           '(lambda () (highlight-80+-mode 1)) t)
 
