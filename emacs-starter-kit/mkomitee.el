@@ -33,6 +33,7 @@
                   "cfg_python"
                   "cfg_perl"
                   "cfg_ruby"
-		  "cfg_elisp"
-                  "cfg_snippets"))
+                  "cfg_elisp"
+                  "cfg_snippets"
+                  "cfg_cleanup"))
 
