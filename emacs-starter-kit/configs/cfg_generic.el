@@ -55,26 +55,28 @@
 
 ;; Try to avoid littering the filesystem with random types of
 ;; tempfiles and save data. This is by no means complete.
-(setq
- user-temporary-file-directory "~/.tmp/"
-  save-place-file (concat user-temporary-file-directory "saveplace")
-  auto-save-list-file-prefix (concat
-                              user-temporary-file-directory ".auto-saves-")
-  auto-save-file-name-transforms `((".*" ,user-temporary-file-directory t))
-  delete-old-versions t)
+;; (setq
+;;  user-temporary-file-directory "~/.tmp/"
+;;   save-place-file (concat user-temporary-file-directory "saveplace")
+;;   auto-save-list-file-prefix (concat
+;;                               user-temporary-file-directory ".auto-saves-")
+;;   auto-save-file-name-transforms `((".*" ,user-temporary-file-directory t))
+;;   delete-old-versions t)
 
-(defconst use-backup-dir t)
-(setq backup-directory-alist
-      `(("." . ,user-temporary-file-directory)
-        (,tramp-file-name-regexp nil)))
+;; (defconst use-backup-dir t)
+;; (setq backup-directory-alist
+;;       `(("." . ,user-temporary-file-directory)
+;;         (,tramp-file-name-regexp nil)))
 
-(make-directory user-temporary-file-directory t)
+;; (make-directory user-temporary-file-directory t)
 
 (setq
  history-length t
  color-theme-is-global t
- inhibit-startup-message t)
-
+ inhibit-startup-message t
+ initial-scratch-message nil
+ display-time-day-and-date t
+ require-final-newline nil)
 
 (defun reload-dot-emacs()
   (interactive)
@@ -93,25 +95,59 @@
                                            python-mode))
       (indent-region (region-beginning) (region-end) nil)))
 
-;;(server-start)
-
 (load "server")
-(setq server-use-tcp t)
-(unless (server-running-p) (server-start))
+(unless (string-equal (user-real-login-name) "root")
+  (unless (server-running-p) (server-start)))
 
 (defun my-done ()
   (interactive)
   (server-edit)
   (make-frame-invisible nil t))
-
 (if (server-running-p)
     (global-set-key (kbd "C-x h") 'my-done))
 
-(global-set-key "%" 'match-paren)
-
+;;; % style paren matching w/ C-%
+(global-set-key (kbd "C-%") 'match-paren)
 (defun match-paren (arg)
   "Go to the matching paren if on a paren; otherwise insert %."
   (interactive "p")
   (cond ((looking-at "\\s\(") (forward-list 1) (backward-char 1))
         ((looking-at "\\s\)") (forward-char 1) (backward-list 1))
         (t (self-insert-command (or arg 1)))))
+
+;; make "space" do completion in the minibuffer (behavior changed in
+;; version 22)
+
+(if (boundp 'minibuffer-local-filename-completion-map)
+    (progn
+      (define-key minibuffer-local-filename-completion-map " "
+        'minibuffer-complete-word)
+      (define-key minibuffer-local-must-match-filename-map " "
+        'minibuffer-complete-word)))
+
+;; Emacs sets some odd bindings for xterm; it seems to completely ignore
+;; terminfo in general (see term/xterm.el).  Just turn this off.  It might
+;; cause problems at some point, but it appears to only improve things at
+;; the moment.  :)
+;;
+(let ((term (getenv "TERM")))
+  (if (and term
+           (string-match "^xterm" term))
+      (setq term-file-prefix nil)))
+
+;; In terminal mode, have Emacs interpret the 8th bit as meta, rather than
+;; just passing it through.  This assumes your terminal is set up to
+;; match.
+;;
+(if (fboundp 'set-input-meta-mode)
+    (set-input-meta-mode t))
+
+;; show time, date and line number in mode line
+(display-time-mode 1)
+(line-number-mode 1)
+
+;; blinking cursors. ick.
+;; (if (fboundp 'blink-cursor-mode)
+;;     (blink-cursor-mode nil))
+
+
