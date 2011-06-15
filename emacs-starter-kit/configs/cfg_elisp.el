@@ -22,12 +22,12 @@
           (lambda ()
             (local-set-key (kbd "RET") 'newline-and-indent)))
 
-(add-hook 'emacs-lisp-mode-hook
-          (let ((original-command 'emacs-lisp-indent-line))
-            `(lambda ()
-               (setq yas/fallback-behavior
-                     '(apply ,original-command))
-              (local-set-key [tab] 'yas/expand))))
+;; (add-hook 'emacs-lisp-mode-hook
+;;           (let ((original-command 'emacs-lisp-indent-line))
+;;             `(lambda ()
+;;                (setq yas/fallback-behavior
+;;                      '(apply ,original-command))
+;;               (local-set-key [tab] 'yas/expand))))
 
 (add-hook 'emacs-lisp-mode-hook
           '(lambda () (highlight-80+-mode 1)) t)
