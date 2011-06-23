@@ -1,5 +1,3 @@
-export EDITOR=emacsclient
-export SVNEDITOR=emacsclient
-export VISUAL=emacsclient
-export ALTERNATE_EDITOR=emacs
-alias emacsclient='emacsclient -n'
+export EDITOR="gvim -f"
+export SVNEDITOR="gvim -f"
+export VISUAL="gvim -f"

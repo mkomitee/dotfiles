@@ -1,5 +1,5 @@
-set editing-mode emacs
-set keymap emacs
+set editing-mode vi
+set keymap vi
 
 set expand-tilde on
 set visible-stats on
