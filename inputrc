@@ -4,7 +4,6 @@ set keymap emacs
 set expand-tilde on
 set visible-stats on
 
-set editing-mode vi
 $if mode=vi
     set keymap vi-command
     # these are for vi-command mode

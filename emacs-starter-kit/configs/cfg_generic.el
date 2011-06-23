@@ -1,3 +1,5 @@
+(menu-bar-mode 1)
+
 ;;; Themes, ...
 (require 'color-theme-ir-black)
 (color-theme-ir-black)
