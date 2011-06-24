@@ -84,7 +84,7 @@ def git_status():
 
 def read_subtrees(config_file):
     config = csv.reader(open(config_file), delimiter=',')
-    subtrees = [Subtree(line) for line in config]
+    subtrees = [Subtree(line) for line in config if not line[0].startswith('#')]
     return subtrees
 
 

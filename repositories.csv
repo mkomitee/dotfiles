@@ -16,7 +16,7 @@ vim/bundle,git://github.com/vim-scripts/fugitive.vim.git
 vim/bundle,git://github.com/vim-scripts/vcscommand.vim.git
 vim/bundle,git://github.com/vim-scripts/pyflakes.vim.git
 vim/bundle,git://github.com/vim-scripts/bufexplorer.zip.git
-vim/bundle,git://github.com/vim-scripts/AutoComplPop.git
+#vim/bundle,git://github.com/vim-scripts/AutoComplPop.git
 vim/bundle,git://github.com/vim-scripts/ShowMarks.git
 vim/bundle,git://github.com/vim-scripts/Command-T.git
 vim/bundle,git://github.com/vim-scripts/taglist.vim.git
