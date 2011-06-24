@@ -26,7 +26,7 @@ def main():
         cmdargs.append('-f')
     for arg in args:
         cmdargs.append(arg)
-    pprint.pprint(cmdargs)
+    #pprint.pprint(cmdargs)
     try:
         sys.exit(os.system(' '.join(cmdargs)))
     except KeyboardInterrupt:
