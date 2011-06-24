@@ -45,29 +45,12 @@ local exit_code="%(?,,%{$fg[red]%}[%?]%{$reset_color%})"
 #PROMPT='${exit_code}%{$fg[cyan]%}[${user_host} %{$fg[yellow]%}%c%{$fg[cyan]%}]$(jobs_prompt_info)${shell_level}${prompt_char} '
 PROMPT='${exit_code}%{$fg[cyan]%}[${user_host} %{$fg[yellow]%}%2~%{$fg[cyan]%}]$(jobs_prompt_info)${shell_level}${prompt_char} '
 
-# Setup vi mode indicator
-#MODE_INDICATOR="%{$fg_bold[yellow]%}<CMD>%{$reset_color%}"
-
 # Setup git prompt info
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[yellow]%}(git:"
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[yellow]%}("
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg[yellow]%})%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[yellow]%}%{$fg[red]%}!%{$reset_color%}"
 
-# Setup svn prompt info
-ZSH_THEME_SVN_PROMPT_PREFIX="%{$fg[yellow]%}(svn:"
-ZSH_THEME_SVN_PROMPT_SUFFIX="%{$fg[yellow]%})%{$reset_color%}"
-ZSH_THEME_SVN_PROMPT_DIRTY="%{$fg[red]%}!%{$reset_color%}"
-
-function time_indicator() {
-    hour=(${(f)"$(date +"%H")"})
-    if [ $hour -lt 9 ]; then
-        echo "%{$fg[red]%}%@%{$reset_color%} "
-    elif [ $hour -gt 17 ]; then
-        echo "%{$fg[red]%}%@%{$reset_color%} "
-    fi
-}
-
 # setup right prompt
-# RPROMPT='$(vi_mode_prompt_info)'
+RPROMPT='$(vi_mode_prompt_info)$(git_prompt_info)'
 
 # vim: set ft=zsh ts=4 sw=4 et:
