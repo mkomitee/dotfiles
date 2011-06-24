@@ -61,6 +61,7 @@ set cmdheight=1         " drr
 set shortmess+=filmnrxoOtTI
 set iskeyword+=:
 set listchars=precedes:<,extends:>,eol:$,tab:\|_
+set virtualedit=all
 set nolist
 set wildmenu
 set wildmode=list:longest
