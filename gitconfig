@@ -28,7 +28,7 @@
  
 [core] 
     pager = less -FRSX 
-    editor = gvim -f
+    editor = gvim -f --remote
     whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol 
     excludesfile = ~/dotfiles/gitignore
  
