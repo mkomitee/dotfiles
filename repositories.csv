@@ -43,3 +43,5 @@ vim/bundle,git://github.com/vim-scripts/LbdbQuery.vim.git
 emacs-starter-kit/vendor,git://github.com/emacsmirror/vimpulse.git
 emacs-starter-kit/vendor,git://github.com/burke/color-theme-ir-black.git
 vim/bundle,git://github.com/garbas/vim-snipmate.git
+vim/bundle,git://github.com/tomtom/tlib_vim.git
+vim/bundle,git://github.com/MarcWeber/vim-addon-mw-utils.git
