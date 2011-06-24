@@ -17,7 +17,6 @@ vim/bundle,git://github.com/vim-scripts/vcscommand.vim.git
 vim/bundle,git://github.com/vim-scripts/pyflakes.vim.git
 vim/bundle,git://github.com/vim-scripts/bufexplorer.zip.git
 vim/bundle,git://github.com/vim-scripts/AutoComplPop.git
-vim/bundle,git://github.com/vim-scripts/snipMate.git
 vim/bundle,git://github.com/vim-scripts/ShowMarks.git
 vim/bundle,git://github.com/vim-scripts/Command-T.git
 vim/bundle,git://github.com/vim-scripts/taglist.vim.git
@@ -43,3 +42,4 @@ vim/bundle,git://github.com/vim-scripts/LbdbQuery.vim.git
 ,https://github.com/technomancy/emacs-starter-kit.git
 emacs-starter-kit/vendor,git://github.com/emacsmirror/vimpulse.git
 emacs-starter-kit/vendor,git://github.com/burke/color-theme-ir-black.git
+vim/bundle,git://github.com/garbas/vim-snipmate.git
