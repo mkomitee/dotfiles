@@ -106,6 +106,7 @@ if version >= 700 " Vim 7.x specific colors
   hi ShowMarksHLu   guifg=yellow      guibg=#000000     gui=NONE      ctermfg=yellow      ctermbg=black       cterm=NONE
   hi ShowMarksHLo   guifg=yellow      guibg=#000000     gui=NONE      ctermfg=yellow      ctermbg=black       cterm=NONE
   hi ShowMarksHLm   guifg=yellow      guibg=#000000     gui=NONE      ctermfg=yellow      ctermbg=black       cterm=NONE
+  hi KomiteeStatus  guifg=yellow      guibg=#121212     gui=NONE      ctermfg=yellow      ctermbg=darkgray    cterm=NONE
 endif
 
 " Syntax highlighting

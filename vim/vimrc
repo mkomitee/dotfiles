@@ -81,10 +81,10 @@ endif
 " Also switch on highlighting the last used search pattern.
 syntax on
 set hlsearch
-
+                  "
 " Statusline {{{1
 set statusline=   " clear the statusline for when vimrc is reloaded
-set statusline+=%#ShowMarksHLl#
+set statusline+=%#KomiteeStatus#
 set statusline+=[%n]\                      " buffer number
 set statusline+=%<%.99f\                     " file name
 set statusline+=%h%m%r%w                     " flags
