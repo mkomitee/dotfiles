@@ -49,8 +49,21 @@ PROMPT='${exit_code}%{$fg[cyan]%}[${user_host} %{$fg[yellow]%}%2~%{$fg[cyan]%}]$
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[yellow]%}("
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg[yellow]%})%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[yellow]%}%{$fg[red]%}!%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg[yellow]%}%{$fg[red]%}+%{$reset_color%}"
+
+ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[yellow]%}%{$fg[red]%}u%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_ADDED="%{$fg[yellow]%}%{$fg[red]%}a%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[yellow]%}%{$fg[red]%}m%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg[yellow]%}%{$fg[red]%}r%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[yellow]%}%{$fg[red]%}d%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[yellow]%}%{$fg[red]%}U%{$reset_color%}"
 
 # setup right prompt
+#RPROMPT='$(vi_mode_prompt_info)$(git_prompt_info)'
+function git_prompt_info() {
+  ref=$(git symbolic-ref HEAD 2> /dev/null) || return
+  echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$(parse_git_dirty)$(git_prompt_ahead)$(git_prompt_status)$ZSH_THEME_GIT_PROMPT_SUFFIX"
+}
 RPROMPT='$(vi_mode_prompt_info)$(git_prompt_info)'
 
 # vim: set ft=zsh ts=4 sw=4 et:
