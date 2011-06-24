@@ -45,3 +45,4 @@ emacs-starter-kit/vendor,git://github.com/burke/color-theme-ir-black.git
 vim/bundle,git://github.com/garbas/vim-snipmate.git
 vim/bundle,git://github.com/tomtom/tlib_vim.git
 vim/bundle,git://github.com/MarcWeber/vim-addon-mw-utils.git
+vim/bundle,git://github.com/honza/snipmate-snippets.git
