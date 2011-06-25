@@ -130,7 +130,7 @@ augroup END
 " Autoload changes for vimrc
 au BufWritePost .vimrc source ~/.vimrc
 
-set foldtext=CustomFoldText()
+"set foldtext=CustomFoldText()
 
 " Filetype Specific Configuration {{{1
 " MAN Syntax {{{2
@@ -390,6 +390,11 @@ endf
 :nmap <silent> <leader>wv :call PasteWindow('vsplit')<cr>
 
 " Configure plugins {{{1
+" Lusty {{{2
+noremap <Leader>a :LustyBufferExplorer<CR>
+noremap <Leader>f :LustyFilesystemExplorer<CR>
+noremap <Leader>r :LustyFilesystemExplorerFromHere<CR>
+
 " TaskList {{{2
 map <Leader>l <Plug>TaskList
 let g:tlTokenList = ["FIXME", "TODO", "HERE", "NOTE"]
