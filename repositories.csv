@@ -47,3 +47,4 @@ vim/bundle,git://github.com/tomtom/tlib_vim.git
 vim/bundle,git://github.com/MarcWeber/vim-addon-mw-utils.git
 vim/bundle,git://github.com/honza/snipmate-snippets.git
 vim/bundle,git://github.com/int3/vim-extradite.git
+vim/bundle,git://github.com/vim-scripts/LustyExplorer.git
