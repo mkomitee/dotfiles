@@ -49,3 +49,4 @@ vim/bundle,git://github.com/honza/snipmate-snippets.git
 vim/bundle,git://github.com/int3/vim-extradite.git
 vim/bundle,git://github.com/vim-scripts/LustyExplorer.git
 vim/bundle,git://github.com/JNRowe/vim-cute-python.git
+vim/bundle,git://github.com/fs111/pydoc.vim.git
