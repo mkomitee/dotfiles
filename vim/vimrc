@@ -64,6 +64,8 @@ set listchars=precedes:<,extends:>,eol:$,tab:\|_
 set virtualedit=all
 set nolist
 set wildmenu
+set nowarn
+set autoread
 set wildmode=list:longest
 syntax enable
 set background=dark
