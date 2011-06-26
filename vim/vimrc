@@ -94,9 +94,9 @@ set statusline+=[%{strlen(&ft)?&ft:'none'},  " filetype
 set statusline+=%{strlen(&fenc)?&fenc:&enc}, " encoding
 set statusline+=%{&fileformat}               " file format
 set statusline+=%{HasPaste()}]               " whether we're in paste mode
-if exists('g:loaded_fugitive')
+"if exists('g:loaded_fugitive')
     set statusline+=%{fugitive#statusline()} " git branch
-endif
+"endif
 set statusline+=%=                           " right align
 set statusline+=col:%v\                      " current column
 set statusline+=lin:%l/%L\                   " line
