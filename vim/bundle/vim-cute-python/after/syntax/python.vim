@@ -8,8 +8,8 @@ syntax clear pythonOperator
 
 syntax keyword pythonOperator is
 
-syntax match pyNiceOperator "\<in\>" conceal cchar=∈
 syntax match pyNiceOperator "\<not in\>" conceal cchar=∉
+syntax match pyNiceOperator "\<in\>" conceal cchar=∈
 syntax match pyNiceOperator "\<or\>" conceal cchar=∨
 syntax match pyNiceOperator "\<and\>" conceal cchar=∧
 " include the space after “not” – if present – so that “not a” becomes “¬a”
