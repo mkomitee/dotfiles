@@ -2746,7 +2746,8 @@ function! s:ExecuteCtags(ctags_cmd)
         let shellcmdflag_save = &shellcmdflag
         set shellcmdflag=/s\ /c
     endif
-
+    " HERE MIKE
+    echomsg a:ctags_cmd
     let ctags_output = system(a:ctags_cmd)
 
     if &shell =~ 'cmd\.exe'

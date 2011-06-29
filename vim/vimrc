@@ -187,6 +187,10 @@ au FileType sh,bash,zsh setlocal list
 " Toggles & Switches (Leader commands) {{{1
 let mapleader = ","
 
+" redraw window so search terms are centered
+nnoremap n nzz
+nnoremap N Nzz
+
 " Open the current buffer in a vertically split window with the next page of
 " text on it.
 noremap <silent> <Leader>vs ggzR:<C-u>let @z=&so<CR>:set so=0 noscb<CR>:set columns=178<CR>:bo vs<CR>zRLjzt:setl scb<CR><C-w>p:setl scb<CR>:let &so=@z<CR>
@@ -243,6 +247,37 @@ cmap w!! w !sudo tee % >/dev/null<cr>
 nmap <Leader>p :set paste<CR>"*p;set nopaste<CR>
 
 " Custom commands and functions {{{1
+" view diff between current buffer and original file it was loaded from {{{2
+nnoremap <Leader>df :call DiffOrig()<CR>
+
+function! DiffOrig()
+    if !exists("b:diff_active") && &buftype == "nofile"
+        echoerr "E: Cannot diff a scratch buffer"
+        return -1
+    elseif expand("%") == ""
+        echoerr "E: Buffer doesn't exist on disk"
+        return -1
+    endif
+
+    if !exists("b:diff_active") || b:diff_active == 0
+        let b:diff_active = 1
+        let l:orig_filetype = &l:filetype
+
+        leftabove vnew
+        set buftype=nofile
+        read #
+        0delete_
+        let &l:filetype = l:orig_filetype
+        diffthis
+        wincmd p
+        diffthis
+    else
+        diffoff
+        wincmd p
+        bdelete
+        let b:diff_active = 0
+    endif
+endfunction
 " Backwards compatible colorcolumn {{{2
 function! ColorColumn()
     if exists("+colorcolumn") 
@@ -573,7 +608,6 @@ let g:SuperTabDefaultCompletionType = "context"
 if filereadable(expand("~/.vimrc.post-local"))
   source ~/.vimrc.post-local
 endif
-
 
 " Modelines: {{{1
 " vim: nowrap fdm=marker ft=vim
