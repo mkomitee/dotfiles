@@ -67,4 +67,16 @@ snippet #head
 	# Date:: `system("ruby -e 'puts Time.now'")`
 	#
 	${3}
+snippet #class
+	# Module:: ${1:modulename}
+	# Class: ${2:classname}
+	#
+	# ${3:description}
+	#
+	# Author:: `system("git config user.name")` (<`system("git config user.email")`>)
+	# Date:: `system("ruby -e 'puts Time.now'")`
+	#
+	class $1::$2
+	{
 
+	}
