@@ -245,7 +245,7 @@ cmap wQ wq
 cmap w!! w !sudo tee % >/dev/null<cr>
 
 " Smarter Pasting!
-nmap <Leader>p :set paste<CR>"*p;set nopaste<CR>
+nmap <Leader>P :set paste<CR>"*p;set nopaste<CR>
 
 " Custom commands and functions {{{1
 " view diff between current buffer and original file it was loaded from {{{2
