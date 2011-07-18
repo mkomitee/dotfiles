@@ -432,6 +432,7 @@ endf
 noremap <Leader>a :LustyBufferExplorer<CR>
 noremap <Leader>f :LustyFilesystemExplorer<CR>
 noremap <Leader>r :LustyFilesystemExplorerFromHere<CR>
+noremap <Leader>j :LustyJuggler<CR>
 
 " TaskList {{{2
 map <Leader>l <Plug>TaskList
