@@ -52,3 +52,4 @@ vim/bundle,git://github.com/JNRowe/vim-cute-python.git
 vim/bundle,git://github.com/fs111/pydoc.vim.git
 vim/bundle,git://github.com/altercation/vim-colors-solarized.git
 vim/bundle,git://github.com/sjbach/lusty.git
+vim/bundle,git://github.com/vim-scripts/simplenote.vim.git
