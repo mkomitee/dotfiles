@@ -256,7 +256,7 @@ $(2): $(1)
 ifneq '$(call SHOULD_INSTALL_ASIS_P,$(1))' ''
 	@cp '$(1)' '$(2)'
 else
-	@sed -e 's/0.3.9/$(version)/' '$(1)' >'$(2)'
+	@sed -e 's/0.3.10/$(version)/' '$(1)' >'$(2)'
 endif
 
 endef
