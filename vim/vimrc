@@ -428,6 +428,8 @@ endf
 :nmap <silent> <leader>wv :call PasteWindow('vsplit')<cr>
 
 " Configure plugins {{{1
+source ~/.simplenoterc
+
 " Lusty {{{2
 noremap <Leader>a :LustyBufferExplorer<CR>
 noremap <Leader>f :LustyFilesystemExplorer<CR>

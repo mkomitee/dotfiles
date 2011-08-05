@@ -1,5 +1,5 @@
 # Remove aliases we don't want which are defined in oh-my-zsh/lib and activated plugins {{{1
-unalias x
+#unalias x
 unalias pu
 unalias po
 unalias ...
