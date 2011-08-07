@@ -429,6 +429,7 @@ endf
 
 " Configure plugins {{{1
 source ~/.simplenoterc
+noremap <Leader>n :Simplenote -l<CR>
 
 " Lusty {{{2
 noremap <Leader>a :LustyBufferExplorer<CR>
