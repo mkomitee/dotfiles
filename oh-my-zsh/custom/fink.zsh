@@ -1,1 +1,1 @@
-[ -f /sw/bin/init.sh ] && . /sw/bin/init.sh
+#[ -f /sw/bin/init.sh ] && . /sw/bin/init.sh

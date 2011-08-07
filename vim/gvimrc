@@ -19,18 +19,28 @@ set guifont=Bitstream\ Vera\ Sans\ Mono\ 8
 
 colorscheme ir_black
 
-set guioptions+=c
+"set guioptions+=c
 
-set guioptions-=m
-set guioptions-=T
-set guioptions-=r
-set guioptions-=R
-set guioptions-=l
-set guioptions-=L
-set guioptions-=b
-set guioptions+=p
+"set guioptions-=m
+"set guioptions-=T
+"set guioptions-=r
+"set guioptions-=R
+"set guioptions-=l
+"set guioptions-=L
+"set guioptions-=b
+"set guioptions+=p
 
-map <silent> <F2> :if &guioptions =~# 'T' <Bar>
+set guioptions+=c " Console Dialogs
+set guioptions+=b " Bottom scrollbar
+set guioptions+=m " Menu Bar
+set guioptions+=p " x11 pointer callbacks
+
+
+" egtcp
+" gcp  e t
+" gcpbaemt
+
+map <silent> <F2> :if &guioptions =~# 'T' <Bar>                                        x
             \set guioptions-=T <Bar>
             \set guioptions-=m <bar>
             \else <Bar>
