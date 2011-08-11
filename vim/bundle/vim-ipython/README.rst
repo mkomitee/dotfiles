@@ -4,13 +4,10 @@ vim-ipython
 
 A two-way integration between Vim and IPython 0.11+
 
-author: Paul Ivanov (http://pirsquared.org)
-
-github: http://github.com/ivanov/vim-ipython
-
-demos: http://pirsquared.org/vim-ipython/
-
-blogpost: http://pirsquared.org/blog/2011/07/28/vim-ipython/
+* author: Paul Ivanov (http://pirsquared.org)
+* github: http://github.com/ivanov/vim-ipython
+* demos: http://pirsquared.org/vim-ipython/
+* blogpost: http://pirsquared.org/blog/2011/07/28/vim-ipython/
 
 Using this plugin, you can send lines or whole files for IPython to
 execute, and also get back object introspection and word completions in
@@ -18,7 +15,7 @@ Vim, like what you get with: ``object?<enter>`` and ``object.<tab>`` in
 IPython.
 
 The big change from previous versions of ``ipy.vim`` is that it no longer 
-the old requires the brittle ipy_vimserver.py instantiation, and since 
+the old requires the brittle ``ipy_vimserver.py`` instantiation, and since 
 it uses just vim and python, it is platform independent (i.e. should work
 even on windows, unlike the previous \*nix only solution). The requirements
 are IPython 0.11+ with zeromq capabilities, vim compiled with +python.
@@ -59,8 +56,8 @@ with the input number for the line, like so ``In[1]: import os``.
 unless ``monitor_subchannel`` is set to ``True`` (see `vim-ipython 'shell'`_,
 below)
 
-It also works blockwise in Visual Mode. Strip the leading double quotes and
-send these lines using ``<Ctrl-S>``::
+It also works blockwise in Visual Mode. Select and send these lines using
+``<Ctrl-S>``::
 
   import this,math # secret decoder ring
   a,b,c,d,e,f,g,h,i = range(1,10)
@@ -98,8 +95,7 @@ completion.
 -------------------
 vim-ipython 'shell'
 -------------------
-
-*NEW since IPython 0.11*!
+**NEW since IPython 0.11**!
 
 By monitoring km.sub_channel, we can recreate what messages were sent to
 IPython, and what IPython sends back in response. 
@@ -114,6 +110,7 @@ If at any later time you wish to bring this shell up, including if you've set
 Options
 -------
 You can change these at the top of the ipy.vim::
+
   reselect = False            # reselect lines after sending from Visual mode
   show_execution_count = True # wait to get numbers for In[43]: feedback?
   monitor_subchannel = True   # update vim-ipython 'shell' on every send?
@@ -122,22 +119,34 @@ You can change these at the top of the ipy.vim::
 ---------------
 Current issues:
 ---------------
-For now, vim-ipython only connects to an ipython session in progress.
+- For now, vim-ipython only connects to an ipython session in progress.
+- The ipdb integration is not yet re-implemented.
+- If you're running inside ``screen``, read about the ``<CTRL-S>`` issue `here
+  <http://munkymorgy.blogspot.com/2008/07/screen-ctrl-s-bug.html>`_, and add
+  this line to your ``.bashrc`` to fix it:: 
 
-ipy.vim takes a while to load, I'll eventually move the python code to its
-own file and do a lazy import (only when the IPython command is called)
-
-The ipdb integration is not yet re-implemented.
-
-There were some unicode errors, but they should all be fixed now.
-
-If you're running inside ``screen``, read about the ``<CTRL-S>`` issue here_,
-and add this line to your ``.bashrc`` to fix it:: 
     stty stop undef # to unmap ctrl-s 
 
-_here: http://munkymorgy.blogspot.com/2008/07/screen-ctrl-s-bug.html
+- In vim, if you're getting ``ImportError: No module named
+  IPython.zmq.blockingkernelmanager`` but are able to import it in regular
+  python, **either**
 
+  1. your ``sys.path`` in vim differs from the ``sys.path`` in regular python.
+     Try running these two lines, and comparing their output files::
+  
+      $ vim -c 'py import vim, sys; vim.current.buffer.append(sys.path)' -c ':wq vim_syspath'
+      $ python -c "import sys; f=file('python_syspath','w'); f.write('\n'.join(sys.path)); f.close()"
+  
+  **or**
+
+  2. your vim is compiled against a different python than you are launching (see
+     if there's a difference between ::
+  
+      $ vim -c ':py import os; print os.__file__' -c ':q'
+      $ python -c ':py import os; print os.__file__'
+  
 ------
 Thanks
 ------
-@MinRK for guiding me through the IPython kernel manager protocol.
+* @MinRK for guiding me through the IPython kernel manager protocol.
+* @nakamuray and @tcheneau for reporting and providing a fix for when vim is compiled without a gui
