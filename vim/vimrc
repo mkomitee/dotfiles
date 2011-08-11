@@ -192,6 +192,14 @@ let mapleader = ","
 map n nzz
 map N Nzz
 
+" Make cursor move ask i'd expect with wrapped lines:
+nmap <Down> gj
+nmap <Up> gk
+nmap j gj
+nmap k gk
+imap <Down> <Esc>gji
+imap <Up> <Esc>gki
+
 " Open the current buffer in a vertically split window with the next page of
 " text on it.
 noremap <silent> <Leader>vs ggzR:<C-u>let @z=&so<CR>:set so=0 noscb<CR>:set columns=178<CR>:bo vs<CR>zRLjzt:setl scb<CR><C-w>p:setl scb<CR>:let &so=@z<CR>
