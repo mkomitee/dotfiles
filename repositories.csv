@@ -54,3 +54,4 @@ vim/bundle,git://github.com/altercation/vim-colors-solarized.git
 vim/bundle,git://github.com/sjbach/lusty.git
 vim/bundle,git://github.com/vim-scripts/simplenote.vim.git
 vim/bundle,git://github.com/ivanov/vim-ipython.git
+vim/bundle,git://github.com/vim-scripts/Conque-Shell.git
