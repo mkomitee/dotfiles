@@ -22,7 +22,6 @@ show_execution_count = True # wait to get numbers for In[43]: feedback?
 monitor_subchannel = True   # update vim-ipython 'shell' on every send?
 run_flags= "-i"             # flags to for IPython's run magic when using <F5>
 
-import time
 import vim
 import sys
 
@@ -39,10 +38,6 @@ except AttributeError:
     sys.stdout = WithFlush(sys.stdout)
     sys.stderr = WithFlush(sys.stderr)
 
-from IPython.zmq.blockingkernelmanager import BlockingKernelManager
-
-from IPython.config.loader import KeyValueConfigLoader
-from IPython.zmq.kernelapp import kernel_aliases
 
 
 ip = '127.0.0.1'
@@ -55,7 +50,10 @@ def km_from_string(s):
     """create kernel manager from IPKernelApp string
     such as '--shell=47378 --iopub=39859 --stdin=36778 --hb=52668'
     """
-    global km,send
+    from IPython.zmq.blockingkernelmanager import BlockingKernelManager, Empty
+    from IPython.config.loader import KeyValueConfigLoader
+    from IPython.zmq.kernelapp import kernel_aliases
+    global km,send,Empty
     # vim interface currently only deals with existing kernels
     s = s.replace('--existing','')
     loader = KeyValueConfigLoader(s.split(), aliases=kernel_aliases)
@@ -74,8 +72,6 @@ def km_from_string(s):
     send = km.shell_channel.execute
     return km
 
-
-
 def echo(arg,style="Question"):
     try:
         vim.command("echohl %s" % style)
@@ -93,7 +89,6 @@ def get_doc(word):
     if km is None:
         return ["Not connected to IPython, cannot query \"%s\"" %word]
     msg_id = km.shell_channel.object_info(word)
-    time.sleep(.1)
     doc = get_doc_msg(msg_id)
     # get around unicode problems when interfacing with vim
     encoding=vim.eval('&encoding')
@@ -106,9 +101,13 @@ def strip_color_escapes(s):
     return strip.sub('',s)
     
 def get_doc_msg(msg_id):
-    content = get_child_msgs(msg_id)[0]['content']
     n = 13 # longest field name (empirically)
     b=[]
+    try:
+        content = get_child_msg(msg_id)['content']
+    except Empty:
+        # timeout occurred
+        return ["no reply from IPython kernel"]
 
     if not content['found']:
         return b
@@ -129,7 +128,8 @@ def get_doc_msg(msg_id):
     return b
 
 def get_doc_buffer(level=0):
-    word = vim.eval('expand("<cfile>")')
+    # empty string in case vim.eval return None
+    word = vim.eval('expand("<cfile>")') or ''
     doc = get_doc(word)
     if len(doc) ==0:
         echo(word+" not found","Error")
@@ -140,12 +140,9 @@ def get_doc_buffer(level=0):
     # doc window quick quit keys: 'q' and 'escape'
     vim.command('map <buffer> q :q<CR>')
     vim.command('map <buffer>  :q<CR>')
-    #vim.command('pedit '+docbuf.name)
     b = vim.current.buffer
-    #b.append(doc)
     b[:] = None
     b[:] = doc
-    #b.append(doc)
     vim.command('setlocal nomodified bufhidden=wipe')
     #vim.command('setlocal previewwindow nomodifiable nomodified ro')
     #vim.command('set previewheight=%d'%len(b))# go to previous window
@@ -212,23 +209,29 @@ def update_subchannel_msgs(debug=False):
     vim.command('normal G') # go to the end of the file
     vim.command('silent e #|silent pedit vim-ipython')
     
-def get_child_msgs(msg_id):
+def get_child_msg(msg_id):
     # XXX: message handling should be split into its own process in the future
-    msgs= km.shell_channel.get_msgs()
-    children = [m for m in msgs if m['parent_header']['msg_id'] == msg_id]
-    return children
+    while True:
+        # get_msg will raise with Empty exception if no messages arrive in 1 second
+        m= km.shell_channel.get_msg(timeout=1)
+        if m['parent_header']['msg_id'] == msg_id:
+            break
+        else:
+            #got a message, but not the one we were looking for
+            echo('skipping a message on shell_channel','WarningMsg')
+    return m
             
 def print_prompt(prompt,msg_id=None):
     """Print In[] or In[42] style messages"""
     global show_execution_count
     if show_execution_count and msg_id:
-        time.sleep(.1) # wait to get message back from kernel
-        children = get_child_msgs(msg_id)
-        if len(children):
-            count = children[0]['content']['execution_count']
+        # wait to get message back from kernel
+        try:
+            child = get_child_msg(msg_id)
+            count = child['content']['execution_count']
             echo("In[%d]: %s" %(count,prompt))
-        else:
-            echo("In[]: %s (no reply from kernel)" % prompt)
+        except Empty:
+            echo("In[]: %s (no reply from IPython kernel)" % prompt)
     else:
         echo("In[]: %s" % prompt)
 
@@ -285,7 +288,7 @@ def dedent_run_these_lines():
     
 #def set_this_line():
 #    # not sure if there's a way to do this, since we have multiple clients
-#    send("_ip.IP.rl_next_input= \'%s\'" % vim.current.line.replace("\'","\\\'"))
+#    send("get_ipython().shell.set_next_input(\'%s\')" % vim.current.line.replace("\'","\\\'"))
 #    #print "line \'%s\' set at ipython prompt"% vim.current.line
 #    echo("line \'%s\' set at ipython prompt"% vim.current.line,'Statement')
 
@@ -333,8 +336,8 @@ endfun
 map <silent> <F5> :python run_this_file()<CR>
 map <silent> <S-F5> :python run_this_line()<CR>
 map <silent> <F9> :python run_these_lines()<CR>
-map <leader>d :py get_doc_buffer()<CR>
-map <leader>s :py update_subchannel_msgs()<CR>
+map <silent> <leader>d :py get_doc_buffer()<CR>
+map <silent> <leader>s :py update_subchannel_msgs()<CR>
 map <silent> <S-F9> :python toggle_reselect()<CR>
 "map <silent> <C-F6> :python send('%pdb')<CR>
 "map <silent> <F6> :python set_breakpoint()<CR>
@@ -353,7 +356,7 @@ imap <silent> <C-s> <C-O>:python run_this_line()<CR>
 map <silent> <M-s> :python dedent_run_this_line()<CR>
 vmap <silent> <C-S> :python run_these_lines()<CR>
 vmap <silent> <M-s> :python dedent_run_these_lines()<CR>
-"map <silent> <C-p> :python set_this_line()<CR>
+map <silent> <C-p> :python set_this_line()<CR>
 map <silent> <M-c> I#<ESC>
 vmap <silent> <M-c> I#<ESC>
 map <silent> <M-C> :s/^\([ \t]*\)#/\1/<CR>
@@ -371,8 +374,10 @@ vim.command("let l:doc = %s"% reply)
 endpython
 return l:doc
 endfunction
-set bexpr=IPythonBalloonExpr()
-set ballooneval
+if has('balloon_eval')
+    set bexpr=IPythonBalloonExpr()
+    set ballooneval
+endif
 
 fun! CompleteIPython(findstart, base)
 	  if a:findstart
@@ -391,18 +396,21 @@ fun! CompleteIPython(findstart, base)
 base = vim.eval("a:base")
 findstart = vim.eval("a:findstart")
 msg_id = km.shell_channel.complete(base, vim.current.line, vim.eval("col('.')"))
-time.sleep(.1)
-m = get_child_msgs(msg_id)[0]
-# get rid of unicode (sporadic issue, haven't tracked down when it happens)
-#matches = [str(u) for u in m['content']['matches']]
-# mirk sez do: completion_str = '[' + ', '.join(msg['content']['matches'] ) + ']'
-# because str() won't work for non-ascii characters
-matches = m['content']['matches']
-#end = len(base)
-#completions = [m[end:]+findstart+base for m in matches]
-matches.insert(0,base) # the "no completion" version
-#echo(str(matches))
-completions = matches
+try:
+    m = get_child_msg(msg_id)
+    # get rid of unicode (sporadic issue, haven't tracked down when it happens)
+    #matches = [str(u) for u in m['content']['matches']]
+    # mirk sez do: completion_str = '[' + ', '.join(msg['content']['matches'] ) + ']'
+    # because str() won't work for non-ascii characters
+    matches = m['content']['matches']
+    #end = len(base)
+    #completions = [m[end:]+findstart+base for m in matches]
+    matches.insert(0,base) # the "no completion" version
+    #echo(str(matches))
+    completions = matches
+except Empty:
+    echo("no reply from IPython kernel")
+    completions=['']
 vim.command("let l:completions = %s"% completions)
 endpython
 	    for m in l:completions
