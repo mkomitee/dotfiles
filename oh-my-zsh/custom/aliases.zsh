@@ -52,5 +52,6 @@ alias rmdir='nocorrect rmdir'
 alias history='fc -dl 1'
 # alias emacsclient='emacsclient -a emacs -n'
 # alias emacs='emacsclient -a emacs -n'
+alias sudoenv='sudo -E zsh'
 
 # vim: ft=sh fdm=marker
