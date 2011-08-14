@@ -56,3 +56,4 @@ vim/bundle,git://github.com/vim-scripts/simplenote.vim.git
 vim/bundle,git://github.com/ivanov/vim-ipython.git
 vim/bundle,git://github.com/vim-scripts/Conque-Shell.git
 vim/bundle,git://github.com/ervandew/screen.git
+vim/bundle,git://github.com/tsaleh/vim-tmux.git
