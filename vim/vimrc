@@ -462,6 +462,11 @@ endf
 :nmap <silent> <leader>wv :call PasteWindow('vsplit')<cr>
 
 " Configure plugins {{{1
+"
+" Screen/tmux
+let g:ScreenImpl = 'Tmux'
+"
+" Simplenote {{{2"
 source ~/.simplenoterc
 noremap <Leader>n :Simplenote -l<CR>
 
