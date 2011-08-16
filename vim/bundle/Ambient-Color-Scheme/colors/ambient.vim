@@ -23,6 +23,12 @@ if version >= 700
   hi MatchParen guifg=#e69c0d ctermfg=178 guibg=#3c3c3c ctermbg=237 gui=bold cterm=bold
   hi Pmenu 		guifg=#ffffff ctermfg=15 guibg=#4c4c4c ctermbg=239
   hi PmenuSel 	guifg=#000000 ctermfg=0 guibg=#f07746 ctermbg=209
+  hi SignColumn guifg=#d9c634 ctermfg=185 guibg=#202020 ctermbg=234 gui=none
+  hi FoldColumn guifg=#d9c634 ctermfg=185 guibg=#202020 ctermbg=234 gui=none
+  hi ShowMarksHLl guifg=#d9c634 ctermfg=185
+  hi ShowMarksHLu guifg=#d9c634 ctermfg=185
+  hi ShowMarksHLo guifg=#d9c634 ctermfg=185
+  hi ShowMarksHLm guifg=#d9c634 ctermfg=185
 endif
 
 " General colors
