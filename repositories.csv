@@ -17,7 +17,6 @@ vim/bundle,git://github.com/vim-scripts/FuzzyFinder.git
 vim/bundle,git://github.com/vim-scripts/Gundo.git
 vim/bundle,git://github.com/vim-scripts/Indent-Guides.git
 vim/bundle,git://github.com/vim-scripts/L9.git
-vim/bundle,git://github.com/vim-scripts/LustyExplorer.git
 vim/bundle,git://github.com/vim-scripts/ShowMarks.git
 vim/bundle,git://github.com/vim-scripts/SuperTab.git
 vim/bundle,git://github.com/vim-scripts/Tabular.git
