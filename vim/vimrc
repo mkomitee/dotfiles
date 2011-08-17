@@ -9,14 +9,12 @@
 " Pre-local loading (set variables to influence module loading) {{{1
 " Include user's local vim config
 if filereadable(expand("~/.vimrc.pre-local"))
-  source ~/.vimrc.pre-local
+    source ~/.vimrc.pre-local
 endif
-
 
 " Load Plugins. {{{1
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
-"let g:GetLatestVimScripts_allowautoinstall=1
 
 " Setup directories {{{1
 silent execute '!mkdir -p $HOME/.vimbackup'
@@ -42,7 +40,7 @@ set cursorcolumn        " highlight the column with the cursor
 set tabstop=4           " Tab counts as 4 spaces
 set softtabstop=4       " Soft tabs ARE 4 spaces
 set shiftwidth=4        " Autoindent using 4 spaces
-set textwidth=80
+set textwidth=100
 set expandtab           " Expand tabs to spaces
 set hidden              " buffers not in the foreground are hidden
 set nowrap              " No wrapping
@@ -93,7 +91,7 @@ endif
 " Also switch on highlighting the last used search pattern.
 syntax on
 set hlsearch
-                  "
+"
 " Statusline {{{1
 set statusline=   " clear the statusline for when vimrc is reloaded
 set statusline+=%#KomiteeStatus#
@@ -104,9 +102,7 @@ set statusline+=[%{strlen(&ft)?&ft:'none'},  " filetype
 set statusline+=%{strlen(&fenc)?&fenc:&enc}, " encoding
 set statusline+=%{&fileformat}               " file format
 set statusline+=%{HasPaste()}]               " whether we're in paste mode
-"if exists('g:loaded_fugitive')
-    set statusline+=%{fugitive#statusline()} " git branch
-"endif
+set statusline+=%{fugitive#statusline()}     " git branch
 set statusline+=%=                           " right align
 set statusline+=col:%v\                      " current column
 set statusline+=lin:%l/%L\                   " line
@@ -120,6 +116,9 @@ function! HasPaste()
     endif
 endfunction
 
+" Configure ColorColumn
+hi ColorColumn guibg=#191919 gui=BOLD ctermbg=NONE cterm=BOLD
+
 " If we change focus away from vim, goto normal mode
 au FocusLost,TabLeave * call feedkeys("\<C-\>\<C-n>")
 
@@ -131,9 +130,9 @@ augroup vimmemory
     " Also don't do it when the mark is in the first line, that is the default
     " position when opening a file.
     au BufReadPost *
-       \ if line("'\"") > 1 && line("'\"") <= line("$")  |
-       \   exe "normal! g`\"" |
-       \ endif
+                \ if line("'\"") > 1 && line("'\"") <= line("$")  |
+                \   exe "normal! g`\"" |
+                \ endif
     " use views to restore more state
     au BufWinLeave * silent! mkview
     au BufWinEnter * silent! loadview
@@ -146,52 +145,51 @@ augroup END
 
 " Filetype Specific Configuration {{{1
 " MAN Syntax {{{2
-au Filetype man setlocal nolist
+au Filetype man setlocal nolist colorcolumn=
+
+" Scratch Syntax {{{2
+au Filetype scratch setlocal nobackup nowritebackup noswapfile
+
 " Text Syntax {{{2
-au FileType text setlocal wrap
-" Mail Syntax {{{2
-au FileType mail setlocal wrap
+au FileType text setlocal wrap colorcolumn=
+
+" Help Syntax {{{2
+au FileType Help setlocal colorcolumn=
 
 " Commit Message Syntax {{{2
 au FileType svn,gitcommit au! vimmemory
 au FileType svn,gitcommit setlocal autoindent
 
 " Vim Syntax {{{2
-au FileType vim call ColorColumn()
+au FileType vim setlocal textwidth=100
+au FileType vim setlocal colorcolumn=+1,+2,+3,+4,+5,+6,+7,+8,+9,+10
 au FileType vim setlocal list
 
 " Perl Syntax {{{2
-au FileType perl call ColorColumn()
-if exists('g:loaded_indent_guides')
-    au FileType perl :IndentGuidesEnable
-endif
+au FileType perl setlocal textwidth=100
+au FileType perl setlocal colorcolumn=+1,+2,+3,+4,+5,+6,+7,+8,+9,+10
 au FileType perl setlocal equalprg=perltidy
 au FileType perl setlocal omnifunc=PerlComplete
 au FileType perl setlocal list
 
 " Ruby Syntax {{{2
-au FileType ruby call ColorColumn()
-if exists('g:loaded_indent_guides')
-    au FileType ruby :IndentGuidesEnable
-endif
+au FileType ruby setlocal textwidth=100
+au FileType ruby setlocal colorcolumn=+1,+2,+3,+4,+5,+6,+7,+8,+9,+10
 au FileType ruby setlocal omnifunc=rubycomplete#Complete
 au FileType ruby let g:rubycomplete_buffer_loading=1
 au FileType ruby let g:rubycomplete_classes_in_global=1
 au FileType ruby setlocal list
 
 " Python Syntax {{{2
-au FileType python call ColorColumn()
+au FileType python setlocal textwidth=100
+au FileType python setlocal colorcolumn=+1,+2,+3,+4,+5,+6,+7,+8,+9,+10
 au FileType python setlocal list
-if exists('g:loaded_indent_guides')
-    au FileType python :IndentGuidesEnable
-endif
 au FileType python setlocal omnifunc=pythoncomplete#Complete
 au FileType python setlocal equalprg=PythonTidy
 
-let g:tagbar_ctags_use_tagfiles = 1
-
 " Shell Script Syntax {{{2
-au FileType sh,bash,zsh call ColorColumn()
+au FileType sh,bash,zsh setlocal textwidth=100
+au FileType sh,bash,zsh setlocal colorcolumn=+1,+2,+3,+4,+5,+6,+7,+8,+9,+10
 au FileType sh,bash,zsh setlocal list
 
 " Toggles & Switches (Leader commands) {{{1
@@ -240,8 +238,6 @@ vmap < <gv
 
 " Select the last edited/pasted text
 nmap gv `[v`]
-nmap <Leader>+ <C-W>+
-nmap <Leader>- <C-W>-
 nmap <Leader>= <C-W>=
 nmap <Leader>> <C-W>>
 nmap <Leader>< <C-W><
@@ -312,46 +308,36 @@ function! DiffOrig()
     endif
 endfunction
 
-" Backwards compatible colorcolumn {{{2
-function! ColorColumn()
-    if exists("+colorcolumn") 
-        setlocal textwidth=80
-        setlocal colorcolumn=+1,+2,+3,+4,+5,+6,+7,+8,+9,+10,+11,+12,+13,+14,+15,+16,+17,+18,+19,+20,+21,+22,+23,+24,+25,+26,+27,+28,+29,+30,+31,+32,+33,+34,+35,+36,+37,+38,+39,+40,+41,+42,+43,+44,+45,+46,+47,+48,+49,+50,+51,+52,+53,+54,+55,+56,+57,+58,+59,+60,+61,+62,+63,+64,+65,+66,+67,+68,+69,+70,+71,+72,+73,+74,+75,+76,+77,+78,+79,+80,+81,+82,+83,+84,+85,+86,+87,+88,+89,+90,+91,+92,+93,+94,+95,+96,+97,+98,+99,+100,+101,+102,+103,+104,+105,+106,+107,+108,+109,+110,+111,+112,+113,+114,+115,+116,+117,+118,+119,+120,+121,+122,+123,+124,+125,+126,+127,+128,+129,+130,+131,+132,+133,+134,+135,+136,+137,+138,+139,+140,+141,+142,+143,+144,+145,+146,+147,+148,+149,+150,+151,+152,+153,+154,+155,+156,+157,+158,+159,+160,+161,+162,+163,+164,+165,+166,+167,+168,+169,+170,+171,+172,+173,+174,+175,+176,+177,+178,+179,+180,+181,+182,+183,+184,+185,+186,+187,+188,+189,+190,+191,+192,+193,+194,+195,+196,+197,+198,+199,+200,+201,+202,+203,+204,+205,+206,+207,+208,+209,+210,+211,+212,+213,+214,+215,+216,+217,+218,+219,+220,+221,+222,+223,+224,+225,+226,+227,+228,+229,+230,+231,+232,+233,+234,+235,+236,+237,+238,+239,+240,+241,+242,+243,+244,+245,+246,+247,+248,+249,+250,+251,+252,+253,+254,+255,+256
-    else
-        au BufWinEnter * let w:m1=matchadd('ErrorMsg', '\%80v.', -1)
-    endif
-endfunction
-
 " Toggles for location and quickfix window {{{2
 function! GetBufferList()
-  redir =>buflist
-  silent! ls
-  redir END
-  return buflist
+    redir =>buflist
+    silent! ls
+    redir END
+    return buflist
 endfunction
 
 function! ToggleList(bufname, pfx)
-  let buflist = GetBufferList()
-  for bufnum in map(filter(split(buflist, '\n'), 'v:val =~ "'.a:bufname.'"'), 'str2nr(matchstr(v:val, "\\d\\+"))')
-    if bufwinnr(bufnum) != -1
-      exec(a:pfx.'close')
-      return
+    let buflist = GetBufferList()
+    for bufnum in map(filter(split(buflist, '\n'), 'v:val =~ "'.a:bufname.'"'), 'str2nr(matchstr(v:val, "\\d\\+"))')
+        if bufwinnr(bufnum) != -1
+            exec(a:pfx.'close')
+            return
+        endif
+    endfor
+    if a:pfx == 'l' && len(getloclist(0)) == 0
+        echohl ErrorMsg
+        echo "Location List is Empty."
+        return
     endif
-  endfor
-  if a:pfx == 'l' && len(getloclist(0)) == 0
-      echohl ErrorMsg
-      echo "Location List is Empty."
-      return
-  endif
-  let winnr = winnr()
-  exec(a:pfx.'open')
-  if winnr() != winnr
-    wincmd p
-  endif
+    let winnr = winnr()
+    exec(a:pfx.'open')
+    if winnr() != winnr
+        wincmd p
+    endif
 endfunction
 
-nmap <silent> <leader>lw :call ToggleList("Location List", 'l')<CR>
-nmap <silent> <leader>qw :call ToggleList("Quickfix List", 'c')<CR>
+nmap <silent> <leader>ll :call ToggleList("Location List", 'l')<CR>
+nmap <silent> <leader>qf :call ToggleList("Quickfix List", 'c')<CR>
 
 " Templates {{{1
 autocmd! BufNewFile * silent! 0r ~/.vim/skel/tmpl.%:e
@@ -462,11 +448,11 @@ endf
 :nmap <silent> <leader>wv :call PasteWindow('vsplit')<cr>
 
 " Configure plugins {{{1
-"
-" Screen/tmux
+
+" Screen/tmux {{{2
 let g:ScreenImpl = 'Tmux'
 "
-" Simplenote {{{2"
+" Simplenote {{{2
 source ~/.simplenoterc
 noremap <Leader>n :Simplenote -l<CR>
 
@@ -477,41 +463,42 @@ noremap <Leader>r :LustyFilesystemExplorerFromHere<CR>
 noremap <Leader>j :LustyJuggler<CR>
 
 " TaskList {{{2
-map <Leader>l <Plug>TaskList
+"map <Leader>l <Plug>TaskList
+map <leader>tl :call ToggleTaskList()<CR>
 let g:tlTokenList = ["FIXME", "TODO", "HERE", "NOTE"]
-
-" vim Indent Guides {{{2
-let g:indent_guides_auto_colors = 0
-let g:indent_guides_guide_size = 1
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd guibg=#eee8d5 ctermbg=7
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#eee8d5 ctermbg=7
-
-" vimpager {{{2
-"let vimpager_use_gvim = 1 
+function! ToggleTaskList()
+    if match(expand('%'), "TaskList") > 0
+        close
+    else
+        TaskList
+    endif
+endfunction
 
 " Easy Motion {{{2
 let g:EasyMotion_leader_key='<Leader>m'
+
 " Secure Modelines {{{2
 set nomodeline
 let g:secure_modelines_verbose = 1
 let g:secure_modelines_modelines = 15
 let g:secure_modelines_allowed_items = [
-                \ "textwidth",   "tw",
-                \ "softtabstop", "sts",
-                \ "tabstop",     "ts",
-                \ "shiftwidth",  "sw",
-                \ "expandtab",   "et",   "noexpandtab", "noet",
-                \ "filetype",    "ft",
-                \ "foldmethod",  "fdm",
-                \ "readonly",    "ro",   "noreadonly", "noro",
-                \ "rightleft",   "rl",   "norightleft", "norl",
-                \ "nowrap",
-                \ ]
+            \ "textwidth",   "tw",
+            \ "softtabstop", "sts",
+            \ "tabstop",     "ts",
+            \ "shiftwidth",  "sw",
+            \ "expandtab",   "et",   "noexpandtab", "noet",
+            \ "filetype",    "ft",
+            \ "foldmethod",  "fdm",
+            \ "readonly",    "ro",   "noreadonly", "noro",
+            \ "rightleft",   "rl",   "norightleft", "norl",
+            \ "nowrap",
+            \ ]
 
 " tagbar {{{2
 map <leader>t :TagbarToggle<CR>
 let g:tagbar_expand = 1
 let g:tagbar_sort = 1
+let g:tagbar_ctags_use_tagfiles = 1
 
 " Showmarks {{{2
 let g:showmarks_enable=1
@@ -526,6 +513,9 @@ map <Leader>w<Leader>s <Plug>VimwikiUISelect
 map <Leader>w<Leader>w <Plug>VimwikiMakeDiaryNote
 map <Leader>wt<Leader>w <Plug>VimwikiTabMakeDiaryNote
 map <Leader>wt<Leader>i <Plug>VimwikiTabIndex
+
+" bufkill {{{2
+map <Leader>k :bd<CR>
 
 " Command-T {{{2
 map <Leader>ct :CommandT<CR>
@@ -560,6 +550,9 @@ vmap <Leader>cb :call NERDComment(1, "alignBoth")<CR>gv
 vmap <Leader>cn :call NERDComment(1, "nested")<CR>gv
 vmap <Leader>cu :call NERDComment(1, "uncomment")<CR>gv
 
+
+
+
 " bufexplorer.vim {{{2
 function! ToggleBufferExplorer()
     if expand('%') == "[BufExplorer]"
@@ -582,9 +575,8 @@ function! ToggleBufferExplorerHorizontal()
         BufExplorerHorizontalSplit
     endif
 endfunction
-map <Leader>be :call ToggleBufExplorer()<CR>
-map <Leader>bs :call ToggleBufferExplorerHorizontal()<CR>
-map <Leader>bv :call ToggleBufferExplorerVertical()<CR>
+map <Leader>b :call ToggleBufferExplorerHorizontal()<CR>
+map <Leader>c :close<cr>
 let g:bufExplorerDefaultHelp=0
 let g:bufExokirerFubdActuve=1
 
@@ -602,13 +594,13 @@ autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 " Close all open buffers on entering a window if the only
 " buffer that's left is the NERDTree buffer
 function! s:CloseIfOnlyNerdTreeLeft()
-  if exists("t:NERDTreeBufName")
-    if bufwinnr(t:NERDTreeBufName) != -1
-      if winnr("$") == 1
-        q
-      endif
+    if exists("t:NERDTreeBufName")
+        if bufwinnr(t:NERDTreeBufName) != -1
+            if winnr("$") == 1
+                q
+            endif
+        endif
     endif
-  endif
 endfunction
 
 
@@ -635,22 +627,14 @@ function! ToggleMyScratch()
         endif
     endif
 endfunction
-map <leader>s   :call ToggleMyScratch()<CR>
+map <leader>s :call ToggleMyScratch()<CR>
 
 " Supertab {{{2
 let g:SuperTabDefaultCompletionType = "context"
 
-" Stuff that seems smart but I dont know what its for {{{1
-" CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
-" so that you can undo CTRL-U after inserting a line break.
-"inoremap <C-U> <C-G>u<C-U>
-
-" Stuff thats useful once in a while {{{1
-"nmap <silent> <Leader>'   :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
-
 " Post-local loading (site customizations) {{{1
 if filereadable(expand("~/.vimrc.post-local"))
-  source ~/.vimrc.post-local
+    source ~/.vimrc.post-local
 endif
 
 " Modelines: {{{1
