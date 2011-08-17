@@ -1,4 +1,0 @@
-This is a mirror of http://www.vim.org/scripts/script.php?script_id=388
-
-This script invokes lbdbq to look up the email address. mutt-heads that edit headers with vim might find this one useful. The results are displayed in a split window. The window is closed when the key 'q' is hit. Hit the "+" key to select the email id of interest and insert it into the file.
-
