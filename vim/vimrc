@@ -448,6 +448,11 @@ endf
 :nmap <silent> <leader>wv :call PasteWindow('vsplit')<cr>
 
 " Configure plugins {{{1
+" Bexec {{{2
+nmap <silent> <unique> <F8> :call Bexec()<cr>
+vmap <silent> <unique> <F8> :call BexecVisual()<cr>
+map <silent> <unique> <F9> :call BexecCloseOut()<cr>
+
 
 " Screen/tmux {{{2
 let g:ScreenImpl = 'Tmux'
