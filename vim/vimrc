@@ -186,6 +186,12 @@ au FileType python setlocal colorcolumn=+1,+2,+3,+4,+5,+6,+7,+8,+9,+10
 au FileType python setlocal list
 au FileType python setlocal omnifunc=pythoncomplete#Complete
 au FileType python setlocal equalprg=PythonTidy
+au FileType python setlocal tabstop=4
+au FileType python setlocal softtabstop=4
+au FileType python setlocal shiftwidth=4
+au FileType python setlocal smarttab
+au FileType python setlocal expandtab
+au FileType python setlocal smartindent
 
 " Shell Script Syntax {{{2
 au FileType sh,bash,zsh setlocal textwidth=100
