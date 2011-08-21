@@ -20,15 +20,17 @@ call pathogen#helptags()
 silent execute '!mkdir -p $HOME/.vimbackup'
 silent execute '!mkdir -p $HOME/.vimswap'
 silent execute '!mkdir -p $HOME/.vimviews'
+silent execute '!mkdir -p $HOME/.vimundo'
 
 " Preferences {{{1
 " Use Vim settings, rather then Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
 filetype plugin on
 filetype plugin indent on
+set showfulltag
 set cmdheight=2
 set nocompatible
-set backspace=indent,eol
+set backspace=indent,eol,start
 set history=10000       " keep lots of command line history
 set undolevels=10000    " lots of undoing too
 set showcmd             " display incomplete commands
@@ -44,9 +46,11 @@ set textwidth=100
 set expandtab           " Expand tabs to spaces
 set hidden              " buffers not in the foreground are hidden
 set nowrap              " No wrapping
+set undofile
 set backupdir=$HOME/.vimbackup/ " backup files
 set directory=$HOME/.vimswap/   " swap files
 set viewdir=$HOME/.vimviews/    " view files
+set undodir=$HOME/.vimundo/     " undo files
 set laststatus=2        " always show the status line
 set clipboard+=unnamed  " use the x11 clipboard for yanking
 set scrolloff=5         " keep 5 lines for context while scrolling
@@ -58,9 +62,13 @@ set title               " vim changes xterm window title
 set foldcolumn=2        " add 2 to the gutter to show folds
 set cmdheight=1         " drr
 set shortmess+=filmnrxoOtTI
-set iskeyword-=:
-set iskeyword-=_
-set listchars=precedes:<,extends:>,eol:$,tab:\|_
+"set iskeyword-=:
+"set iskeyword-=_
+set iskeyword+=$
+set iskeyword+=%
+set iskeyword+=@
+set iskeyword+=,
+set listchars=precedes:<,extends:>,tab:\|_
 set virtualedit=block
 set display+=lastline
 set nolist
@@ -70,17 +78,28 @@ set diffopt=filler,iwhite
 set autoread
 set complete=.,w,b,u,U,t,i,d
 set ttyfast
-set fileformat=unix
-set wildmode=list:longest
+set fileformats=unix,mac,dos
+set formatoptions+=n2 " look up formatlistpat
+set updatecount=10
+set wildmode=list:longest,full
 set nostartofline
 syntax enable
 set background=dark
 set shiftround
 set magic
+set gdefault
+set matchpairs+=<:>
 color ir_black
 if &t_Co < 16
     set t_Co=16
 endif
+
+"hi Cursor guifg=white guibg=Red
+"hi iCursor guifg=white guibg=Red
+set guicursor=n-v-c:block-Cursor
+set guicursor+=i:ver20-Cursor-blinkon600-blinkoff600
+set guicursor+=n-v-c:block-Cursor-blinkon600-blinkoff600
+"set guicursor+=n-v-c:blinkon0
 
 " In many terminal emulators the mouse works just fine, thus enable it.
 if has('mouse')
@@ -169,6 +188,7 @@ au FileType vim setlocal list
 au FileType perl setlocal textwidth=100
 au FileType perl setlocal colorcolumn=+1,+2,+3,+4,+5,+6,+7,+8,+9,+10
 au FileType perl setlocal equalprg=perltidy
+au FileType perl setlocal formatprg=perltidy
 au FileType perl setlocal omnifunc=PerlComplete
 au FileType perl setlocal list
 
@@ -185,13 +205,15 @@ au FileType python setlocal textwidth=100
 au FileType python setlocal colorcolumn=+1,+2,+3,+4,+5,+6,+7,+8,+9,+10
 au FileType python setlocal list
 au FileType python setlocal omnifunc=pythoncomplete#Complete
-au FileType python setlocal equalprg=PythonTidy
+au FileType python setlocal equalprg=pytidy
+au FileType python setlocal formatprg=pytidy
 au FileType python setlocal tabstop=4
 au FileType python setlocal softtabstop=4
 au FileType python setlocal shiftwidth=4
 au FileType python setlocal smarttab
 au FileType python setlocal expandtab
 au FileType python setlocal smartindent
+au FileType python setlocal keywordprg=pydoc
 
 " Shell Script Syntax {{{2
 au FileType sh,bash,zsh setlocal textwidth=100
