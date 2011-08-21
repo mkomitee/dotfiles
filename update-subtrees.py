@@ -1,4 +1,6 @@
-#!/usr/bin/env python
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 # Copyright 2011 Michael Komitee. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -26,13 +28,16 @@
 # The views and conclusions contained in the software and documentation are
 # those of the authors and should not be interpreted as representing official
 # policies, either expressed or implied, of Michael Komitee.
+
 import sys
 import os
 import re
 import subprocess
 import csv
 
+
 class Subtree(object):
+
     def __init__(self, data):
         self.prefix = data[0]
         self.repository = data[1]
@@ -44,11 +49,10 @@ class Subtree(object):
             self.path = '%s/%s' % (self.prefix, base)
 
     def __repr__(self):
-        return('''Subtree(path='%s', repository='%s')''' % (self.path,
-                                                            self.repository))
+        return '''Subtree(path='%s', repository='%s')''' % (self.path, self.repository)
 
     def is_deployed(self):
-        return(os.path.exists(self.path))
+        return os.path.exists(self.path)
 
     def deploy(self):
         command = ['git', 'subtree']
@@ -57,19 +61,18 @@ class Subtree(object):
         else:
             command.append('add')
         null = open('/dev/null', 'a')
-        out  = open('/dev/stdout', 'a')
-        err  = open('/dev/stdout', 'a')
-        command += ['--prefix', self.path, '--squash', self.repository,
-                    'master']
-        print(' '.join(command))
+        out = open('/dev/stdout', 'a')
+        err = open('/dev/stdout', 'a')
+        command += ['--prefix', self.path, '--squash', self.repository, 'master']
+        print ' '.join(command)
         try:
-            subprocess.check_call(command, stdin=null, stdout=out,
-                                  stderr=err)
+            subprocess.check_call(command, stdin=null, stdout=out, stderr=err)
         except subprocess.CalledProcessError:
             sys.exit(1)
         out.close()
         err.close()
         null.close()
+
 
 def git_status():
     null = open('/dev/null', 'a')
@@ -77,7 +80,7 @@ def git_status():
     try:
         subprocess.check_call(command, stdin=null, stdout=null, stderr=null)
     except subprocess.CalledProcessError:
-        sys.stderr.write("Problem checking git status\n")
+        sys.stderr.write('Problem checking git status\n')
         sys.exit(1)
     null.close()
 
@@ -90,11 +93,13 @@ def read_subtrees(config_file):
 
 if __name__ == '__main__':
     git_status()
+
     # repositories.csv should be a csv file with two fields per line. The
     # first field is where in your repository (relative path) you want the
     # subtree installed, and the second should be the git repositories url
     # e.g:
     # vim/bundle,git://github.com/vim-scripts/Gist.vim.git
+
     for subtree in read_subtrees('repositories.csv'):
         subtree.deploy()
 
