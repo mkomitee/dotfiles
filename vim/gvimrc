@@ -48,6 +48,15 @@ map <silent> <F2> :if &guioptions =~# 'T' <Bar>                                 
             \set guioptions+=m <Bar>
             \endif<CR>
 
+"hi Cursor guifg=white guibg=Red
+"hi iCursor guifg=white guibg=Red
+set guicursor=n-v-c:block-Cursor
+set guicursor+=i:ver20-Cursor-blinkon600-blinkoff600
+set guicursor+=n-v-c:block-Cursor-blinkon600-blinkoff600
+"set guicursor+=n-v-c:blinkon0
+
+
+
 if filereadable(expand("~/.gvimrc.post-local"))
   source ~/.gvimrc.post-local
 endif
