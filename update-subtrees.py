@@ -60,29 +60,24 @@ class Subtree(object):
             command.append('pull')
         else:
             command.append('add')
-        null = open('/dev/null', 'a')
-        out = open('/dev/stdout', 'a')
-        err = open('/dev/stdout', 'a')
-        command += ['--prefix', self.path, '--squash', self.repository, 'master']
-        print ' '.join(command)
-        try:
-            subprocess.check_call(command, stdin=null, stdout=out, stderr=err)
-        except subprocess.CalledProcessError:
-            sys.exit(1)
-        out.close()
-        err.close()
-        null.close()
+        with open('/dev/null', 'a') as null:
+            with open('/dev/stdout', 'a') as out:
+                command += ['--prefix', self.path, '--squash', self.repository, 'master']
+                print ' '.join(command)
+                try:
+                    subprocess.check_call(command, stdin=null, stdout=out, stderr=out)
+                except subprocess.CalledProcessError:
+                    sys.exit(1)
 
 
 def git_status():
-    null = open('/dev/null', 'a')
-    command = ['git', 'status']
-    try:
-        subprocess.check_call(command, stdin=null, stdout=null, stderr=null)
-    except subprocess.CalledProcessError:
-        sys.stderr.write('Problem checking git status\n')
-        sys.exit(1)
-    null.close()
+    with open('/dev/null', 'a') as null:
+        command = ['git', 'status']
+        try:
+            subprocess.check_call(command, stdin=null, stdout=null, stderr=null)
+        except subprocess.CalledProcessError:
+            sys.stderr.write('Problem checking git status\n')
+            sys.exit(1)
 
 
 def read_subtrees(config_file):
