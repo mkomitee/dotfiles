@@ -41,3 +41,4 @@ vim/bundle,git://github.com/vim-scripts/vim-indent-object.git
 vim/bundle,git://github.com/vim-scripts/vimwiki.git
 vim/bundle,git://github.com/wgibbs/vim-irblack.git
 vim/bundle,git://github.com/vim-scripts/Bexec.git
+vim/bundle,git://github.com/mkomitee/vim-gf-python.git
