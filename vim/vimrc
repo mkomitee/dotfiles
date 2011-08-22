@@ -76,7 +76,7 @@ set wildmenu
 set nowarn
 set diffopt=filler,iwhite
 set autoread
-set complete=.,w,b,u,U,t,i,d
+"set complete=.,w,b,u,U,t,i,d
 set ttyfast
 set fileformats=unix,mac,dos
 set formatoptions+=n2 " look up formatlistpat
