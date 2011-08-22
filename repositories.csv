@@ -19,7 +19,6 @@ vim/bundle,git://github.com/vim-scripts/L9.git
 vim/bundle,git://github.com/vim-scripts/ShowMarks.git
 vim/bundle,git://github.com/vim-scripts/Tabular.git
 vim/bundle,git://github.com/vim-scripts/TaskList.vim.git
-vim/bundle,git://github.com/vim-scripts/The-NERD-Commenter.git,
 vim/bundle,git://github.com/vim-scripts/The-NERD-tree.git
 vim/bundle,git://github.com/vim-scripts/ack.vim.git
 vim/bundle,git://github.com/vim-scripts/bufexplorer.zip.git
@@ -43,3 +42,4 @@ vim/bundle,git://github.com/vim-scripts/Bexec.git
 vim/bundle,git://github.com/mkomitee/vim-gf-python.git
 vim/bundle,git://github.com/vim-scripts/pythoncomplete.git
 vim/bundle,git://github.com/ervandew/supertab.git
+vim/bundle,git://github.com/tpope/vim-commentary.git
