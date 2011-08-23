@@ -60,10 +60,9 @@ set ignorecase          " case insensitive searching, ...
 set smartcase           " unless the search term includes a capital
 set title               " vim changes xterm window title
 set foldcolumn=2        " add 2 to the gutter to show folds
-set cmdheight=1         " drr
 set shortmess+=filmnrxoOtTI
-"set iskeyword-=:
-"set iskeyword-=_
+set iskeyword+=:
+set iskeyword+=_
 set iskeyword+=$
 set iskeyword+=%
 set iskeyword+=@
@@ -94,12 +93,9 @@ if &t_Co < 16
     set t_Co=16
 endif
 
-"hi Cursor guifg=white guibg=Red
-"hi iCursor guifg=white guibg=Red
 set guicursor=n-v-c:block-Cursor
 set guicursor+=i:ver20-Cursor-blinkon600-blinkoff600
 set guicursor+=n-v-c:block-Cursor-blinkon600-blinkoff600
-"set guicursor+=n-v-c:blinkon0
 
 " In many terminal emulators the mouse works just fine, thus enable it.
 if has('mouse')
@@ -163,8 +159,6 @@ augroup END
 "set foldtext=CustomFoldText()
 
 " Filetype Specific Configuration {{{1
-" MAN Syntax {{{2
-au Filetype man setlocal nolist colorcolumn=
 
 " Scratch Syntax {{{2
 au Filetype scratch setlocal nobackup nowritebackup noswapfile
@@ -172,8 +166,8 @@ au Filetype scratch setlocal nobackup nowritebackup noswapfile
 " Text Syntax {{{2
 au FileType text setlocal wrap colorcolumn=
 
-" Help Syntax {{{2
-au FileType Help setlocal colorcolumn=
+" Help/man Syntax {{{2
+au FileType man,Help setlocal nolist colorcolumn=
 
 " Commit Message Syntax {{{2
 au FileType svn,gitcommit au! vimmemory
@@ -191,6 +185,7 @@ au FileType perl setlocal equalprg=perltidy
 au FileType perl setlocal formatprg=perltidy
 au FileType perl setlocal omnifunc=PerlComplete
 au FileType perl setlocal list
+au FileType perl setlocal keywordprg="perldoc -f"
 
 " Ruby Syntax {{{2
 au FileType ruby setlocal textwidth=100
@@ -199,6 +194,7 @@ au FileType ruby setlocal omnifunc=rubycomplete#Complete
 au FileType ruby let g:rubycomplete_buffer_loading=1
 au FileType ruby let g:rubycomplete_classes_in_global=1
 au FileType ruby setlocal list
+au FileType ruby setlocal keywordprg=ri
 
 " Python Syntax {{{2
 au FileType python setlocal textwidth=100
@@ -495,37 +491,9 @@ noremap <Leader>f :LustyFilesystemExplorer<CR>
 noremap <Leader>r :LustyFilesystemExplorerFromHere<CR>
 noremap <Leader>j :LustyJuggler<CR>
 
-" TaskList {{{2
-"map <Leader>l <Plug>TaskList
-map <leader>tl :call ToggleTaskList()<CR>
-let g:tlTokenList = ["FIXME", "TODO", "HERE", "NOTE"]
-function! ToggleTaskList()
-    if match(expand('%'), "TaskList") > 0
-        close
-    else
-        TaskList
-    endif
-endfunction
 
 " Easy Motion {{{2
 let g:EasyMotion_leader_key='<Leader>m'
-
-" Secure Modelines {{{2
-set nomodeline
-let g:secure_modelines_verbose = 1
-let g:secure_modelines_modelines = 15
-let g:secure_modelines_allowed_items = [
-            \ "textwidth",   "tw",
-            \ "softtabstop", "sts",
-            \ "tabstop",     "ts",
-            \ "shiftwidth",  "sw",
-            \ "expandtab",   "et",   "noexpandtab", "noet",
-            \ "filetype",    "ft",
-            \ "foldmethod",  "fdm",
-            \ "readonly",    "ro",   "noreadonly", "noro",
-            \ "rightleft",   "rl",   "norightleft", "norl",
-            \ "nowrap",
-            \ ]
 
 " tagbar {{{2
 map <leader>t :TagbarToggle<CR>
@@ -537,15 +505,6 @@ let g:tagbar_ctags_use_tagfiles = 1
 let g:showmarks_enable=1
 let g:showmarks_include="abcdefghijklmnopqrstuvwxyz"
 let g:showmarks_textlower="\t>"
-
-" Vimwiki {{{2
-let g:vimwiki_list = [{'path': '~/dotfiles/wiki', 'path_html': '~/dotfiles/wiki_html', 'auto_export': 1}]
-let g:vimwiki_folding = 1
-map <Leader>w<Leader>i <Plug>VimwikiIndex
-map <Leader>w<Leader>s <Plug>VimwikiUISelect
-map <Leader>w<Leader>w <Plug>VimwikiMakeDiaryNote
-map <Leader>wt<Leader>w <Plug>VimwikiTabMakeDiaryNote
-map <Leader>wt<Leader>i <Plug>VimwikiTabIndex
 
 " bufkill {{{2
 map <Leader>k :bd<CR>
@@ -559,29 +518,20 @@ map <Leader>ff :FufFile<CR>
 
 " Ack {{{2
 noremap <Leader>g :Ack<space><C-r><C-w><CR>
-let ackprg="~/scripts/ack -H --nocolor --nogroup --column --flush"
-
-" Terminal {{{2
-noremap <Leader>z :ConqueTerm zsh<CR>
-
-" Tabularize {{{2
-nmap <Leader>a= :Tabularize /=<CR>
-vmap <Leader>a= :Tabularize /=<CR>
-nmap <Leader>a: :Tabularize /:\zs<CR>
-vmap <Leader>a: :Tabularize /:\zs<CR>
+let ackprg="~/scripts/ack --nocolor --nogroup --column --flush"
 
 " NERDCommenter {{{2
 " When we comment something with the NERDComment Toggle, reselect
-vmap <Leader>cc :call NERDComment(1, "norm")<CR>gv*/
-vmap <Leader>c<space> :call NERDComment(1, "toggle")<CR>gv
-vmap <Leader>cm :call NERDComment(1, "minimal")<CR>gv
-vmap <Leader>cs :call NERDComment(1, "sexy")<CR>gv
-vmap <Leader>ci :call NERDComment(1, "invert")<CR>gv
-vmap <Leader>cy :call NERDComment(1, "yank")<CR>gv
-vmap <Leader>cl :call NERDComment(1, "alignLeft")<CR>gv
-vmap <Leader>cb :call NERDComment(1, "alignBoth")<CR>gv
-vmap <Leader>cn :call NERDComment(1, "nested")<CR>gv
-vmap <Leader>cu :call NERDComment(1, "uncomment")<CR>gv
+"vmap <Leader>cc :call NERDComment(1, "norm")<CR>gv*/
+"vmap <Leader>c<space> :call NERDComment(1, "toggle")<CR>gv
+"vmap <Leader>cm :call NERDComment(1, "minimal")<CR>gv
+"vmap <Leader>cs :call NERDComment(1, "sexy")<CR>gv
+"vmap <Leader>ci :call NERDComment(1, "invert")<CR>gv
+"vmap <Leader>cy :call NERDComment(1, "yank")<CR>gv
+"vmap <Leader>cl :call NERDComment(1, "alignLeft")<CR>gv
+"vmap <Leader>cb :call NERDComment(1, "alignBoth")<CR>gv
+"vmap <Leader>cn :call NERDComment(1, "nested")<CR>gv
+"vmap <Leader>cu :call NERDComment(1, "uncomment")<CR>gv
 
 
 
