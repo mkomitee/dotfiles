@@ -156,7 +156,7 @@ augroup END
 " Autoload changes for vimrc
 "au BufWritePost .vimrc source ~/.vimrc
 
-"set foldtext=CustomFoldText()
+set foldtext=CustomFoldText()
 
 " Filetype Specific Configuration {{{1
 
@@ -222,6 +222,8 @@ let mapleader = ","
 " redraw window so search terms are centered
 map n nzz
 map N Nzz
+
+map <Leader>c :close<cr>
 
 " <space> switches to the next window (give it a second)
 " <space>n switches to the next window
@@ -491,10 +493,6 @@ noremap <Leader>f :LustyFilesystemExplorer<CR>
 noremap <Leader>r :LustyFilesystemExplorerFromHere<CR>
 noremap <Leader>j :LustyJuggler<CR>
 
-
-" Easy Motion {{{2
-let g:EasyMotion_leader_key='<Leader>m'
-
 " tagbar {{{2
 map <leader>t :TagbarToggle<CR>
 let g:tagbar_expand = 1
@@ -508,6 +506,7 @@ let g:showmarks_textlower="\t>"
 
 " bufkill {{{2
 map <Leader>k :bd<CR>
+map <Leader>k! :bd!<CR>
 
 " Command-T {{{2
 map <Leader>ct :CommandT<CR>
@@ -533,35 +532,6 @@ let ackprg="~/scripts/ack --nocolor --nogroup --column --flush"
 "vmap <Leader>cn :call NERDComment(1, "nested")<CR>gv
 "vmap <Leader>cu :call NERDComment(1, "uncomment")<CR>gv
 
-
-
-
-" bufexplorer.vim {{{2
-function! ToggleBufferExplorer()
-    if expand('%') == "[BufExplorer]"
-        close
-    else
-        BufExplorer
-    endif
-endfunction
-function! ToggleBufferExplorerVertical()
-    if expand('%') == "[BufExplorer]"
-        close
-    else
-        BufExplorerVerticalSplit
-    endif
-endfunction
-function! ToggleBufferExplorerHorizontal()
-    if expand('%') == "[BufExplorer]"
-        close
-    else
-        BufExplorerHorizontalSplit
-    endif
-endfunction
-map <Leader>b :call ToggleBufferExplorerHorizontal()<CR>
-map <Leader>c :close<cr>
-let g:bufExplorerDefaultHelp=0
-let g:bufExokirerFubdActuve=1
 
 " NERDTree.vim {{{2
 let NERDTreeIgnore=['\~$', '\.swp$', '^CVS$', '\.svn$', '^CVSROOT$', '^\.git$', '\.pyc$', '\.pyo$', '\.swp$']
