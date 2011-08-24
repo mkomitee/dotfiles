@@ -485,7 +485,8 @@ let g:ScreenImpl = 'Tmux'
 "
 " Simplenote {{{2
 source ~/.simplenoterc
-noremap <Leader>n :Simplenote -l<CR>
+noremap <Leader>sl :Simplenote -l<CR>
+noremap <Leader>sn :Simplenote -n<CR>
 
 " Lusty {{{2
 noremap <Leader>a :LustyBufferExplorer<CR>
