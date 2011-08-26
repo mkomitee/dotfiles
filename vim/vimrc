@@ -20,7 +20,6 @@ call pathogen#helptags()
 silent execute '!mkdir -p $HOME/.vimbackup'
 silent execute '!mkdir -p $HOME/.vimswap'
 silent execute '!mkdir -p $HOME/.vimviews'
-silent execute '!mkdir -p $HOME/.vimundo'
 
 " Preferences {{{1
 " Use Vim settings, rather then Vi settings (much better!).
@@ -46,11 +45,9 @@ set textwidth=100
 set expandtab           " Expand tabs to spaces
 set hidden              " buffers not in the foreground are hidden
 set nowrap              " No wrapping
-" set undofile
 set backupdir=$HOME/.vimbackup/ " backup files
 set directory=$HOME/.vimswap/   " swap files
 set viewdir=$HOME/.vimviews/    " view files
-" set undodir=$HOME/.vimundo/     " undo files
 set laststatus=2        " always show the status line
 set clipboard+=unnamed  " use the x11 clipboard for yanking
 set scrolloff=5         " keep 5 lines for context while scrolling
