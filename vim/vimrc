@@ -272,13 +272,14 @@ noremap Y y$
 "imap <S-Tab> <C-P>
 
 " Change buffers with tab and shift-tab
+noremap <Leader><tab> :BufExplorer<cr>
 noremap <tab> :bn<cr>
 noremap <s-tab> :bp<cr>
 
 
 " Easily modify vimrc
-nmap <leader>ev :split $MYVIMRC<CR>
-nmap <leader>egv :split $MYGVIMRC<CR>
+nmap <leader>ev :e $MYVIMRC<CR>
+nmap <leader>egv :e$MYGVIMRC<CR>
 
 " Move current line down/up
 map <C-Down> ]e
@@ -469,11 +470,11 @@ fu! PasteWindow(direction)
 endf
 
 "yank/paste buffers
-:nmap <silent> <leader>wy  :let g:yanked_buffer=bufnr('%')<cr>
-:nmap <silent> <leader>wd  :let g:yanked_buffer=bufnr('%')<cr>:q<cr>
-:nmap <silent> <leader>wp :call PasteWindow('edit')<cr>
-:nmap <silent> <leader>ws :call PasteWindow('split')<cr>
-:nmap <silent> <leader>wv :call PasteWindow('vsplit')<cr>
+" :nmap <silent> <leader>wy  :let g:yanked_buffer=bufnr('%')<cr>
+" :nmap <silent> <leader>wd  :let g:yanked_buffer=bufnr('%')<cr>:q<cr>
+" :nmap <silent> <leader>wp :call PasteWindow('edit')<cr>
+" :nmap <silent> <leader>ws :call PasteWindow('split')<cr>
+" :nmap <silent> <leader>wv :call PasteWindow('vsplit')<cr>
 
 " Configure plugins {{{1
 " Bexec {{{2
