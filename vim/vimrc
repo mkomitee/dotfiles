@@ -271,6 +271,11 @@ noremap Y y$
 "imap <Tab> <C-N>
 "imap <S-Tab> <C-P>
 
+" Change buffers with tab and shift-tab
+noremap <tab> :bn<cr>
+noremap <s-tab> :bp<cr>
+
+
 " Easily modify vimrc
 nmap <leader>ev :split $MYVIMRC<CR>
 nmap <leader>egv :split $MYGVIMRC<CR>
