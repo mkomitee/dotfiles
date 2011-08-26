@@ -519,16 +519,15 @@ let ackprg="~/scripts/ack --nocolor --nogroup --column --flush"
 
 " NERDCommenter {{{2
 " When we comment something with the NERDComment Toggle, reselect
-"vmap <Leader>cc :call NERDComment(1, "norm")<CR>gv*/
-"vmap <Leader>c<space> :call NERDComment(1, "toggle")<CR>gv
-"vmap <Leader>cm :call NERDComment(1, "minimal")<CR>gv
-"vmap <Leader>cs :call NERDComment(1, "sexy")<CR>gv
-"vmap <Leader>ci :call NERDComment(1, "invert")<CR>gv
-"vmap <Leader>cy :call NERDComment(1, "yank")<CR>gv
-"vmap <Leader>cl :call NERDComment(1, "alignLeft")<CR>gv
-"vmap <Leader>cb :call NERDComment(1, "alignBoth")<CR>gv
-"vmap <Leader>cn :call NERDComment(1, "nested")<CR>gv
-"vmap <Leader>cu :call NERDComment(1, "uncomment")<CR>gv
+let g:NERDCreateDefaultMappings = 0
+let g:NERDSpaceDelims = 1
+vmap <leader>cc <plug>NERDCommenterToggle<cr>vgv
+nmap <leader>cc <plug>NERDCommenterToggle
+vmap <leader>cb <plug>NERDCommenterSexy<cr>vgv
+nmap <leader>cb <plug>NERDCommenterSexy
+vmap <leader>c<space> <plug>NERDCommenterToggle<cr>vgv
+nmap <leader>c<space> <plug>NERDCommenterToggle
+nmap <leader>c$ <plug>NERDCommenterToEOL
 
 
 " NERDTree.vim {{{2
