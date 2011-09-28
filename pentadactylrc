@@ -1,5 +1,5 @@
 set guioptions+=mTBbrs
-set editor="~/bin/gvim -f"
+set editor="gvim -f"
 
 " 1Password Integration
 map pw :emenu View.Login with 1Password<CR>
