@@ -510,6 +510,9 @@ noremap <Leader>f :LustyFilesystemExplorer<CR>
 noremap <Leader>r :LustyFilesystemExplorerFromHere<CR>
 noremap <Leader>j :LustyJuggler<CR>
 
+" AutoClose
+noremap <Leader>x <Plug>ToggleAutoCloseMappings
+
 " tagbar {{{2
 map <leader>t :TagbarToggle<CR>
 let g:tagbar_expand = 1
