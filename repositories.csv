@@ -11,6 +11,7 @@ vim/bundle,git://github.com/sjbach/lusty.git
 vim/bundle,git://github.com/spiiph/vim-space.git
 vim/bundle,git://github.com/tmatilai/gitolite.vim.git
 vim/bundle,git://github.com/tomtom/tlib_vim.git
+vim/bundle,git://github.com/vim-scripts/AutoClose.git
 vim/bundle,git://github.com/vim-scripts/Bexec.git
 vim/bundle,git://github.com/vim-scripts/Command-T.git
 vim/bundle,git://github.com/vim-scripts/FuzzyFinder.git
