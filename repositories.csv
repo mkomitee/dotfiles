@@ -23,6 +23,7 @@ vim/bundle,git://github.com/vim-scripts/ack.vim.git
 vim/bundle,git://github.com/vim-scripts/bufexplorer.zip.git
 vim/bundle,git://github.com/vim-scripts/endwise.vim.git
 vim/bundle,git://github.com/vim-scripts/fugitive.vim.git
+vim/bundle,git://github.com/vim-scripts/pep8.git
 vim/bundle,git://github.com/vim-scripts/perlomni.vim.git
 vim/bundle,git://github.com/vim-scripts/python_match.vim.git
 vim/bundle,git://github.com/vim-scripts/pythoncomplete.git
