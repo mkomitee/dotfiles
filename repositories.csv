@@ -30,6 +30,7 @@ vim/bundle,git://github.com/vim-scripts/pythoncomplete.git
 vim/bundle,git://github.com/vim-scripts/repeat.vim.git
 vim/bundle,git://github.com/vim-scripts/ruby-matchit.git
 vim/bundle,git://github.com/vim-scripts/simplenote.vim.git
+vim/bundle,git://github.com/vim-scripts/surround.vim.git
 vim/bundle,git://github.com/vim-scripts/textobj-rubyblock.git
 vim/bundle,git://github.com/vim-scripts/textobj-user.git
 vim/bundle,git://github.com/vim-scripts/vim-indent-object.git
