@@ -1,8 +1,8 @@
 " Vim syntax file
 " Language:	gitolite configuration
-" URL:		http://github.com/tmatilai/gitolite.vim
+" URL:		https://github.com/tmatilai/gitolite.vim
 " Maintainer:	Teemu Matilainen <teemu.matilainen@iki.fi>
-" Last Change:	2010-08-26
+" Last Change:	2011-10-05
 
 if exists("b:current_syntax")
   finish
@@ -48,7 +48,7 @@ syn match	gitoliteKeyword		"^\s*config\s\+" nextgroup=gitoliteConfVariable
 syn match	gitoliteConfVariable	"[^=]*" contained
 
 " Include
-syn match	gitoliteInclude		"^\s*include\s"
+syn match	gitoliteInclude		"^\s*\(include\|subconf\)\s"
 
 " String
 syn region	gitoliteString		start=+"+ end=+"+ oneline
