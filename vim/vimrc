@@ -243,6 +243,8 @@ noremap <s-tab> :bp<cr>
 " Easily modify vimrc
 nnoremap <leader>ev :e $MYVIMRC<CR>
 nnoremap <leader>egv :e$MYGVIMRC<CR>
+nnoremap <leader>sv :so $MYVIMRC<CR>
+nnoremap <leader>sgv :so $MYGVIMRC<CR>
 
 " Move current line down/up
 nnoremap <C-Down> ]e
