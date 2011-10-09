@@ -172,13 +172,27 @@ let localleader = '\'
 " dont reach for escape when in insert mode, just jk
 inoremap jk <esc>
 " Force yourself to use jk instead of esc
-inoremap <esc> <nop>
+inoremap <ESC> <nop>
 
 " try to use hjkl instead of arrow keys
 nnoremap <Down> <nop>
 nnoremap <Up> <nop>
 nnoremap <Left> <nop>
 nnoremap <Right> <nop>
+
+"C-{hjkl} to move text or text blocks left down up or right
+nnoremap <C-j> :m+<CR>==
+nnoremap <C-k> :m-2<CR>==
+nnoremap <C-h> <<
+nnoremap <C-l> >>
+inoremap <C-j> <Esc>:m+<CR>==gi
+inoremap <C-k> <Esc>:m-2<CR>==gi
+inoremap <C-h> <Esc><<`]a
+inoremap <C-l> <Esc>>>`]a
+vnoremap <C-j> :m'>+<CR>gv=gv
+vnoremap <C-k> :m-2<CR>gv=gv
+vnoremap <C-h> <gv
+vnoremap <C-l> >gv
 
 " redraw window so search terms are centered
 noremap n nzz
