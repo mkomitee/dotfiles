@@ -36,8 +36,8 @@ set showcmd             " display incomplete commands
 set incsearch           " do incremental searching
 set visualbell t_vb=    " no beep or bell
 set number              " line numbers
-set cursorline          " highlight the line with the cursor
-set cursorcolumn        " highlight the column with the cursor
+"set cursorline          " highlight the line with the cursor
+"set cursorcolumn        " highlight the column with the cursor
 set tabstop=4           " Tab counts as 4 spaces
 set softtabstop=4       " Soft tabs ARE 4 spaces
 set shiftwidth=4        " Autoindent using 4 spaces
@@ -135,6 +135,14 @@ hi ColorColumn guibg=#191919 gui=BOLD ctermbg=NONE cterm=BOLD
 augroup focus
     au!
     au FocusLost,TabLeave * call feedkeys("\<C-\>\<C-n>")
+augroup END
+
+augroup cursor
+    au!
+    au WinEnter,VimEnter,BufNewFile,BufRead * setlocal cursorline
+    au WinLeave,VimLeave * setlocal nocursorline
+    au WinEnter,VimEnter,BufNewFile,BufRead * setlocal cursorcolumn
+    au WinLeave,VimLeave * setlocal nocursorcolumn
 augroup END
 
 augroup vimmemory
