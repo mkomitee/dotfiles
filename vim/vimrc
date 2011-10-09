@@ -132,7 +132,10 @@ endfunction
 hi ColorColumn guibg=#191919 gui=BOLD ctermbg=NONE cterm=BOLD
 
 " If we change focus away from vim, goto normal mode
-au FocusLost,TabLeave * call feedkeys("\<C-\>\<C-n>")
+augroup focus
+    au!
+    au FocusLost,TabLeave * call feedkeys("\<C-\>\<C-n>")
+augroup END
 
 augroup vimmemory
     au!
@@ -150,70 +153,17 @@ augroup vimmemory
     au BufWinEnter * silent! loadview
 augroup END
 
-" Autoload changes for vimrc
-"au BufWritePost .vimrc source ~/.vimrc
+augroup templates
+    au!
+    autocmd! BufNewFile * silent! 0r ~/.vim/skel/tmpl.%:e
+augroup END
+
+augroup nerdtree
+    au!
+    autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
+augroup END
 
 set foldtext=CustomFoldText()
-
-" Filetype Specific Configuration {{{1
-
-" Scratch Syntax {{{2
-au Filetype scratch setlocal nobackup nowritebackup noswapfile
-
-" Text Syntax {{{2
-au FileType text setlocal wrap
-au FileType text call ToggleColorColumn('off')
-
-" Help/man Syntax {{{2
-au FileType man,Help setlocal nolist
-au FileType man,Help call ToggleColorColumn('off')
-
-" Commit Message Syntax {{{2
-" au FileType svn,gitcommit au! vimmemory
-au FileType svn,gitcommit setlocal autoindent
-
-" Vim Syntax {{{2
-au FileType vim setlocal textwidth=100
-au FileType vim call ToggleColorColumn('on')
-au FileType vim setlocal list
-
-" Perl Syntax {{{2
-au FileType perl setlocal textwidth=100
-au FileType perl call ToggleColorColumn('on')
-au FileType perl setlocal equalprg=perltidy
-au FileType perl setlocal formatprg=perltidy
-au FileType perl setlocal omnifunc=PerlComplete
-au FileType perl setlocal list
-au FileType perl setlocal keywordprg="perldoc -f"
-
-" Ruby Syntax {{{2
-au FileType ruby setlocal textwidth=100
-au FileType ruby call ToggleColorColumn('on')
-au FileType ruby setlocal omnifunc=rubycomplete#Complete
-au FileType ruby let g:rubycomplete_buffer_loading=1
-au FileType ruby let g:rubycomplete_classes_in_global=1
-au FileType ruby setlocal list
-au FileType ruby setlocal keywordprg=ri
-
-" Python Syntax {{{2
-au FileType python setlocal textwidth=100
-au FileType python call ToggleColorColumn('on')
-au FileType python setlocal list
-au FileType python setlocal omnifunc=pythoncomplete#Complete
-au FileType python setlocal equalprg=pytidy
-au FileType python setlocal formatprg=pytidy
-au FileType python setlocal tabstop=4
-au FileType python setlocal softtabstop=4
-au FileType python setlocal shiftwidth=4
-au FileType python setlocal smarttab
-au FileType python setlocal expandtab
-au FileType python setlocal smartindent
-au FileType python setlocal keywordprg=pydoc
-
-" Shell Script Syntax {{{2
-au FileType sh,bash,zsh setlocal textwidth=100
-au FileType sh,bash,zsh call ToggleColorColumn('on')
-au FileType sh,bash,zsh setlocal list
 
 " Toggles & Switches (Leader commands) {{{1
 let mapleader = ","
@@ -381,8 +331,6 @@ endfunction
 nmap <silent> <leader>ll :call ToggleList("Location List", 'l')<CR>
 nmap <silent> <leader>qf :call ToggleList("Quickfix List", 'c')<CR>
 
-" Templates {{{1
-autocmd! BufNewFile * silent! 0r ~/.vim/skel/tmpl.%:e
 
 " Diff between buffer and the unwritten file {{{2
 if !exists(":DiffOrig")
@@ -561,7 +509,6 @@ let NERDTreeQuitOnOpen=1
 let NERDTreeHighlightCursorLine=1
 
 
-autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 
 " Close all open buffers on entering a window if the only
 " buffer that's left is the NERDTree buffer
