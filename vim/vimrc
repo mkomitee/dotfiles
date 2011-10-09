@@ -169,10 +169,10 @@ set foldtext=CustomFoldText()
 let mapleader = ","
 
 " redraw window so search terms are centered
-map n nzz
-map N Nzz
+noremap n nzz
+noremap N Nzz
 
-map <Leader>c :close<cr>
+noremap <Leader>c :close<cr>
 
 " <space> switches to the next window (give it a second)
 " <space>n switches to the next window
@@ -180,48 +180,48 @@ map <Leader>c :close<cr>
 " <space>= Equalizes the size of all windows
 " + Increases the size of the current window
 " - Decreases the size of the current window
-map <space> <c-W>w
-map <space>n <c-W>w
-map <space><space> <C-W>w<C-W>_
-map <space>= <c-W>=
+noremap <space> <c-W>w
+noremap <space>n <c-W>w
+noremap <space><space> <C-W>w<C-W>_
+noremap <space>= <c-W>=
 if bufwinnr(1)
-    map + <c-W>+
-    map - <c-W>-
+    noremap + <c-W>+
+    noremap - <c-W>-
 endif
 
 " Make cursor move ask i'd expect with wrapped lines:
-" nmap <Down> gj
-" nmap <Up> gk
-" nmap j gj
-" nmap k gk
-" imap <Down> <Esc>gji
-" imap <Up> <Esc>gki
+" nnoremap <Down> gj
+" nnoremap <Up> gk
+" nnoremap j gj
+" nnoremap k gk
+" inoremap <Down> <Esc>gji
+" inoremap <Up> <Esc>gki
 
 " Open the current buffer in a vertically split window with the next page of
 " text on it.
 noremap <silent> <Leader>vs ggzR:<C-u>let @z=&so<CR>:set so=0 noscb<CR>:set columns=178<CR>:bo vs<CR>zRLjzt:setl scb<CR><C-w>p:setl scb<CR>:let &so=@z<CR>
 
 " Easier navigation between open windows
-map <C-k> <C-W>k
-map <C-j> <C-W>j
-map <C-h> <C-W>h
-map <C-l> <C-W>l
+noremap <C-k> <C-W>k
+noremap <C-j> <C-W>j
+noremap <C-h> <C-W>h
+noremap <C-l> <C-W>l
 
 " Reselect visually selected text after indenting
-vmap > >gv
-vmap < <gv
+vnoremap > >gv
+vnoremap < <gv
 
 " Select the last edited/pasted text
-nmap gv `[v`]
-nmap <Leader>= <C-W>=
-nmap <Leader>> <C-W>>
-nmap <Leader>< <C-W><
+nnoremap gv `[v`]
+nnoremap <Leader>= <C-W>=
+nnoremap <Leader>> <C-W>>
+nnoremap <Leader>< <C-W><
 " make Y consistant with C and D
 noremap Y y$
 
 " Allow tab completion
-"imap <Tab> <C-N>
-"imap <S-Tab> <C-P>
+"inoremap <Tab> <C-N>
+"inoremap <S-Tab> <C-P>
 
 " Change buffers with tab and shift-tab
 noremap <Leader><tab> :BufExplorer<cr>
@@ -230,35 +230,35 @@ noremap <s-tab> :bp<cr>
 
 
 " Easily modify vimrc
-nmap <leader>ev :e $MYVIMRC<CR>
-nmap <leader>egv :e$MYGVIMRC<CR>
+nnoremap <leader>ev :e $MYVIMRC<CR>
+nnoremap <leader>egv :e$MYGVIMRC<CR>
 
 " Move current line down/up
-map <C-Down> ]e
-map <C-Up> [e
+nnoremap <C-Down> ]e
+nnoremap <C-Up> [e
 
 " Move visually selected lines down/up
-vmap <C-Down> ]egv
-vmap <C-Up> [egv
+vnoremap <C-Down> ]egv
+vnoremap <C-Up> [egv
 
 " Move visual selection back/forwards
 set ww+=<,>
-vmap <C-Left> x<Left>P`[v`]
-vmap <C-Right> x<Right>P`[v`]
+vnoremap <C-Left> x<Left>P`[v`]
+vnoremap <C-Right> x<Right>P`[v`]
 
 " My main typos, these arent used in commands so why not?
-cmap WQ wq
-cmap wQ wq
+cnoremap WQ wq
+cnoremap wQ wq
 
 " sudo write-file in case you opened a file you dont have privileges to write
 cmap w!! w !sudo tee % >/dev/null<cr>
 
 " Smarter Pasting!
-nmap <Leader>P :set paste<CR>"*p;set nopaste<CR>
+nnoremap <Leader>P :set paste<CR>"*p;set nopaste<CR>
 
 " Custom commands and functions {{{1
 " view diff between current buffer and original file it was loaded from {{{2
-nnoremap <Leader>df :call DiffOrig()<CR>
+nnoremap <Leader>do :call DiffOrig()<CR>
 
 function! DiffOrig()
     if !exists("b:diff_active") && &buftype == "nofile"
@@ -328,8 +328,8 @@ function! ToggleList(bufname, pfx)
     endif
 endfunction
 
-nmap <silent> <leader>ll :call ToggleList("Location List", 'l')<CR>
-nmap <silent> <leader>qf :call ToggleList("Quickfix List", 'c')<CR>
+nnoremap <silent> <leader>ll :call ToggleList("Location List", 'l')<CR>
+nnoremap <silent> <leader>qf :call ToggleList("Quickfix List", 'c')<CR>
 
 
 " Diff between buffer and the unwritten file {{{2
@@ -374,8 +374,8 @@ function! Preserve(command)
     let @/=_s
     call cursor(l, c)
 endfunction
-nmap _$ :call Preserve("%s/\\s\\+$//e")<CR>
-nmap _= :call Preserve("normal gg=G")<CR>
+nnoremap _$ :call Preserve("%s/\\s\\+$//e")<CR>
+nnoremap _= :call Preserve("normal gg=G")<CR>
 
 " Search for current visual selection with */# {{{2
 " Tip tip from: http://amix.dk/blog/viewEntry/19334
@@ -431,17 +431,17 @@ fu! PasteWindow(direction)
 endf
 
 "yank/paste buffers
-" :nmap <silent> <leader>wy  :let g:yanked_buffer=bufnr('%')<cr>
-" :nmap <silent> <leader>wd  :let g:yanked_buffer=bufnr('%')<cr>:q<cr>
-" :nmap <silent> <leader>wp :call PasteWindow('edit')<cr>
-" :nmap <silent> <leader>ws :call PasteWindow('split')<cr>
-" :nmap <silent> <leader>wv :call PasteWindow('vsplit')<cr>
+" :nnoremap <silent> <leader>wy  :let g:yanked_buffer=bufnr('%')<cr>
+" :nnoremap <silent> <leader>wd  :let g:yanked_buffer=bufnr('%')<cr>:q<cr>
+" :nnoremap <silent> <leader>wp :call PasteWindow('edit')<cr>
+" :nnoremap <silent> <leader>ws :call PasteWindow('split')<cr>
+" :nnoremap <silent> <leader>wv :call PasteWindow('vsplit')<cr>
 
 " Configure plugins {{{1
 " Bexec {{{2
-nmap <silent> <unique> <F8> :call Bexec()<cr>
-vmap <silent> <unique> <F8> :call BexecVisual()<cr>
-map <silent> <unique> <F9> :call BexecCloseOut()<cr>
+nnoremap <silent> <unique> <F8> :call Bexec()<cr>
+vnoremap <silent> <unique> <F8> :call BexecVisual()<cr>
+noremap <silent> <unique> <F9> :call BexecCloseOut()<cr>
 
 
 " Screen/tmux {{{2
@@ -462,7 +462,7 @@ noremap <Leader>j :LustyJuggler<CR>
 noremap <Leader>x <Plug>ToggleAutoCloseMappings
 
 " tagbar {{{2
-map <leader>t :TagbarToggle<CR>
+noremap <leader>t :TagbarToggle<CR>
 let g:tagbar_expand = 1
 let g:tagbar_sort = 1
 let g:tagbar_ctags_use_tagfiles = 1
@@ -473,15 +473,15 @@ let g:showmarks_include="abcdefghijklmnopqrstuvwxyz"
 let g:showmarks_textlower="\t>"
 
 " bufkill {{{2
-map <Leader>k :bd<CR>
-map <Leader>k! :bd!<CR>
+noremap <Leader>k :bd<CR>
+noremap <Leader>k! :bd!<CR>
 
 " Command-T {{{2
-map <Leader>ct :CommandT<CR>
+noremap <Leader>ct :CommandT<CR>
 
 " FuzzyFinder {{{2
-map <Leader>fb :FufBuffer<CR>
-map <Leader>ff :FufFile<CR>
+noremap <Leader>fb :FufBuffer<CR>
+noremap <Leader>ff :FufFile<CR>
 
 " Ack {{{2
 noremap <Leader>g :Ack<space><C-r><C-w><CR>
@@ -491,19 +491,19 @@ let ackprg="~/scripts/ack --nocolor --nogroup --column --flush"
 " When we comment something with the NERDComment Toggle, reselect
 let g:NERDCreateDefaultMappings = 0
 let g:NERDSpaceDelims = 1
-vmap <leader>cc <plug>NERDCommenterToggle<cr>vgv
-nmap <leader>cc <plug>NERDCommenterToggle
-vmap <leader>cb <plug>NERDCommenterSexy<cr>vgv
-nmap <leader>cb <plug>NERDCommenterSexy
-vmap <leader>c<space> <plug>NERDCommenterToggle<cr>vgv
-nmap <leader>c<space> <plug>NERDCommenterToggle
-nmap <leader>c$ <plug>NERDCommenterToEOL
+vnoremap <leader>cc <plug>NERDCommenterToggle<cr>vgv
+nnoremap <leader>cc <plug>NERDCommenterToggle
+vnoremap <leader>cb <plug>NERDCommenterSexy<cr>vgv
+nnoremap <leader>cb <plug>NERDCommenterSexy
+vnoremap <leader>c<space> <plug>NERDCommenterToggle<cr>vgv
+nnoremap <leader>c<space> <plug>NERDCommenterToggle
+nnoremap <leader>c$ <plug>NERDCommenterToEOL
 
 
 " NERDTree.vim {{{2
 let NERDTreeIgnore=['\~$', '\.swp$', '^CVS$', '\.svn$', '^CVSROOT$', '^\.git$', '\.pyc$', '\.pyo$', '\.swp$']
-map <Leader>dd :NERDTreeToggle<CR>
-map <Leader>df :NERDTreeFind<CR>
+noremap <Leader>dd :NERDTreeToggle<CR>
+noremap <Leader>df :NERDTreeFind<CR>
 let NERDTreeShowBookmarks=1
 let NERDTreeQuitOnOpen=1
 let NERDTreeHighlightCursorLine=1
@@ -546,7 +546,7 @@ function! ToggleMyScratch()
         endif
     endif
 endfunction
-map <leader>s :call ToggleMyScratch()<CR>
+noremap <leader>s :call ToggleMyScratch()<CR>
 
 " Supertab {{{2
 let g:SuperTabDefaultCompletionType = "context"
