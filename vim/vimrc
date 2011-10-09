@@ -551,6 +551,11 @@ noremap <leader>s :call ToggleMyScratch()<CR>
 " Supertab {{{2
 let g:SuperTabDefaultCompletionType = "context"
 
+" Load abbreviations
+if filereadable(expand("~/.vim/abbrev"))
+    source ~/.vim/abbrev
+endif
+
 " Post-local loading (site customizations) {{{1
 if filereadable(expand("~/.vimrc.post-local"))
     source ~/.vimrc.post-local
