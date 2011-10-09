@@ -167,6 +167,7 @@ set foldtext=CustomFoldText()
 
 " Toggles & Switches (Leader commands) {{{1
 let mapleader = ","
+let localleader = '\'
 
 " dont reach for escape when in insert mode, just jk
 inoremap jk <esc>
