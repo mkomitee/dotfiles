@@ -168,6 +168,17 @@ set foldtext=CustomFoldText()
 " Toggles & Switches (Leader commands) {{{1
 let mapleader = ","
 
+" dont reach for escape when in insert mode, just jk
+inoremap jk <esc>
+" Force yourself to use jk instead of esc
+inoremap <esc> <nop>
+
+" try to use hjkl instead of arrow keys
+nnoremap <Down> <nop>
+nnoremap <Up> <nop>
+nnoremap <Left> <nop>
+nnoremap <Right> <nop>
+
 " redraw window so search terms are centered
 noremap n nzz
 noremap N Nzz
