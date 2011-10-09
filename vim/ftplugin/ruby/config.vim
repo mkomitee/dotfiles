@@ -1,4 +1,3 @@
-" Ruby Syntax {{{2
 call ToggleColorColumn('on')
 
 setlocal textwidth=100
