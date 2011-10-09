@@ -132,9 +132,13 @@ endfunction
 hi ColorColumn guibg=#191919 gui=BOLD ctermbg=NONE cterm=BOLD
 
 " If we change focus away from vim, goto normal mode
-augroup focus
+" do the same if we're in insert mode for 15 seconds
+augroup exit_insert_mode
     au!
     au FocusLost,TabLeave * call feedkeys("\<C-\>\<C-n>")
+    au CursorHoldI * stopinsert
+    au InsertEnter * let updaterestore=&updatetime | set updatetime=15000
+    au InsertLeave * let &updatetime=updaterestore
 augroup END
 
 augroup cursor
@@ -177,8 +181,9 @@ set foldtext=CustomFoldText()
 let mapleader = ","
 let localleader = '\'
 
-" dont reach for escape when in insert mode, just jk
-inoremap jk <esc>
+" dont reach for escape when in insert mode, just jj
+inoremap jj <esc>
+
 " Force yourself to use jk instead of esc
 inoremap <esc> <nop>
 
@@ -190,6 +195,21 @@ nnoremap <Down> <nop>
 nnoremap <Up> <nop>
 nnoremap <Left> <nop>
 nnoremap <Right> <nop>
+inoremap <Down> <nop>
+inoremap <Up> <nop>
+inoremap <Left> <nop>
+inoremap <Right> <nop>
+
+" j and k will go one line, even if they're wrapped
+nnoremap j gj
+nnoremap k gk
+
+" start / end of line should be easier to reach than ^ and $
+nnoremap H ^
+nnoremap L $
+
+" ; should probably be the start of a command
+nnoremap ; :
 
 "C-{hjkl} to move text or text blocks left down up or right
 nnoremap <C-j> :m+<CR>==
