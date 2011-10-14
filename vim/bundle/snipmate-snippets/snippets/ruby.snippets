@@ -511,16 +511,16 @@ snippet tas
 snippet b
 	{|${1:var}| ${2}}
 snippet begin
-	begin   
-		raise 'A test exception.'   
-	rescue Exception => e   
-		puts e.message   
-		puts e.backtrace.inspect   
+	begin
+		raise 'A test exception.'
+	rescue Exception => e
+		puts e.message
+		puts e.backtrace.inspect
 	else
 		# other exception
 	ensure
-		# always excute
-	end   
+		# always executed
+	end
 
 #migrations
 snippet mac
@@ -553,4 +553,4 @@ snippet aft
 
 #debugging
 snippet debug
-	require 'ruby-debug'; debugger;
+	require 'ruby-debug'; debugger; true;

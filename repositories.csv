@@ -1,4 +1,5 @@
 ,git://github.com/robbyrussell/oh-my-zsh.git
+vim/bundle,git://github.com/Lokaltog/vim-easymotion.git
 vim/bundle,git://github.com/MarcWeber/vim-addon-mw-utils.git
 vim/bundle,git://github.com/ajf/puppet-vim.git
 vim/bundle,git://github.com/ervandew/screen.git
