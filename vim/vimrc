@@ -212,7 +212,7 @@ nnoremap H ^
 nnoremap L $
 
 " ; should probably be the start of a command
-nnoremap ; :
+" nnoremap ; :
 
 "C-{hjkl} to move text or text blocks left down up or right
 " nnoremap <C-j> :m+<CR>==
@@ -323,6 +323,29 @@ cmap w!! w !sudo tee % >/dev/null<cr>
 nnoremap <Leader>P :set paste<CR>"*p;set nopaste<CR>
 
 " Custom commands and functions {{{1
+function! MarkWindowSwap()
+    let g:markedWinNum = winnr()
+endfunction
+
+function! DoWindowSwap()
+    "Mark destination
+    let curNum = winnr()
+    let curBuf = bufnr( "%" )
+    exe g:markedWinNum . "wincmd w"
+    "Switch to source and shuffle dest->source
+    let markedBuf = bufnr( "%" )
+    "Hide and open so that we aren't prompted and keep history
+    exe 'hide buf' curBuf
+    "Switch to dest and shuffle source->dest
+    exe curNum . "wincmd w"
+    "Hide and open so that we aren't prompted and keep history
+    exe 'hide buf' markedBuf 
+endfunction
+
+nnoremap <silent> <leader>mw :call MarkWindowSwap()<CR>
+nnoremap <silent> <leader>pw :call DoWindowSwap()<CR>
+
+
 " view diff between current buffer and original file it was loaded from {{{2
 nnoremap <Leader>do :call DiffOrig()<CR>
 
