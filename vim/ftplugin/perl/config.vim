@@ -6,3 +6,6 @@ setlocal formatprg=perltidy
 setlocal omnifunc=PerlComplete
 setlocal list
 setlocal keywordprg="perldoc -f"
+set iskeyword+=$
+set iskeyword+=%
+set iskeyword+=@

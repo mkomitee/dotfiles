@@ -27,7 +27,7 @@ silent execute '!mkdir -p $HOME/.vimviews'
 filetype plugin on
 filetype plugin indent on
 set showfulltag
-set cmdheight=2
+set cmdheight=1
 set nocompatible
 set backspace=indent,eol,start
 set history=10000       " keep lots of command line history
@@ -37,8 +37,6 @@ set incsearch           " do incremental searching
 set novisualbell 
 set t_vb=    " no beep or bell
 set number              " line numbers
-"set cursorline          " highlight the line with the cursor
-"set cursorcolumn        " highlight the column with the cursor
 set tabstop=4           " Tab counts as 4 spaces
 set softtabstop=4       " Soft tabs ARE 4 spaces
 set shiftwidth=4        " Autoindent using 4 spaces
@@ -61,9 +59,6 @@ set foldcolumn=2        " add 2 to the gutter to show folds
 set shortmess+=filmnrxoOtTI
 set iskeyword+=:
 set iskeyword+=_
-set iskeyword+=$
-set iskeyword+=%
-set iskeyword+=@
 set iskeyword+=,
 set listchars=precedes:<,extends:>,tab:\|_
 set virtualedit=block
