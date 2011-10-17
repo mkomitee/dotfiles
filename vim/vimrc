@@ -183,9 +183,6 @@ inoremap jj <esc>
 " Force yourself to use jk instead of esc
 " inoremap <esc> <nop>
 
-" esc in normal mode clears search highlighting
-nnoremap <silent> <esc> :nohl<cr><esc>
-
 " try to use hjkl instead of arrow keys
 " nnoremap <Down> <nop>
 " nnoremap <Up> <nop>
