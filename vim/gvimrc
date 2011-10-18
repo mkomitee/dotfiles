@@ -58,7 +58,7 @@ set guicursor+=n-v-c:block-Cursor-blinkon600-blinkoff600
 set columns=116
 
 " esc in normal mode clears search highlighting
-nnoremap <silent> <ESC>:nohl<CR><ESC>
+nnoremap <silent> <ESC> :nohl<CR><ESC>
 
 
 if filereadable(expand("~/.gvimrc.post-local"))
