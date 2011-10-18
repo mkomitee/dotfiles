@@ -17,7 +17,8 @@ endif
 
 set guifont=Bitstream\ Vera\ Sans\ Mono\ 8 
 
-colorscheme ir_black
+" colorscheme ir_black
+colorscheme mustang
 
 "set guioptions+=c
 

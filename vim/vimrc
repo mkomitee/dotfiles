@@ -81,7 +81,8 @@ set shiftround
 set magic
 set gdefault
 set matchpairs+=<:>
-color ir_black
+" color ir_black
+color mustang
 if &t_Co < 16
     set t_Co=16
 endif
