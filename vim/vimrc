@@ -60,7 +60,7 @@ set shortmess+=filmnrxoOtTI
 set iskeyword+=:
 set iskeyword+=_
 set iskeyword+=,
-set listchars=precedes:<,extends:>,tab:\|_
+set listchars=precedes:<,extends:>,tab:\|-,trail:·
 set virtualedit=block
 set display+=lastline
 set nolist
@@ -73,7 +73,7 @@ set ttyfast
 set fileformats=unix,mac,dos
 set formatoptions+=n2 " look up formatlistpat
 set updatecount=10
-set wildmode=list:longest,full
+set wildmode=list:longest
 set nostartofline
 syntax enable
 set background=dark
@@ -206,6 +206,13 @@ nnoremap L $
 
 " ; should probably be the start of a command
 " nnoremap ; :
+"
+" when using marks, all by default mark columns as well
+nnoremap ' `
+
+" very magic searching by default
+nnoremap / /\v
+nnoremap ? ?\v
 
 "C-{hjkl} to move text or text blocks left down up or right
 " nnoremap <C-j> :m+<CR>==
