@@ -527,6 +527,9 @@ endf
 " :nnoremap <silent> <leader>wv :call PasteWindow('vsplit')<cr>
 
 " Configure plugins {{{1
+" ctrlp {{{2
+let g:ctrlp_working_path_mode = 2
+
 " Bexec {{{2
 nnoremap <silent> <unique> <F8> :call Bexec()<cr>
 vnoremap <silent> <unique> <F8> :call BexecVisual()<cr>
