@@ -74,6 +74,7 @@ set fileformats=unix,mac,dos
 set formatoptions+=n2 " look up formatlistpat
 set updatecount=10
 set wildmode=list:longest
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*.so,*/CVS/*,*.pyc,*.pyo
 set nostartofline
 syntax enable
 set background=dark
@@ -170,6 +171,11 @@ augroup END
 augroup nerdtree
     au!
     autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
+augroup END
+
+augroup ctrlp
+    au!
+    autocmd BufEnter * cal ctrlp#SetWorkingPath(2)
 augroup END
 
 set foldtext=CustomFoldText()
