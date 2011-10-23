@@ -31,10 +31,29 @@ colorscheme mustang
 "set guioptions-=b
 "set guioptions+=p
 
+set guioptions-=a " autoselect
+set guioptions-=A " autoselect
 set guioptions+=c " Console Dialogs
-set guioptions+=b " Bottom scrollbar
-set guioptions+=m " Menu Bar
+set guioptions-=e " tab stuff
+set guioptions-=f " forking
+set guioptions-=i " icon
+set guioptions-=m " menu bar
+set guioptions-=M " system menu
+set guioptions-=g " grey menu items
+set guioptions-=t " include tearoff menu items
+set guioptions-=T " toolbar
+set guioptions+=r " right scrollbar
+set guioptions-=R " right scrollbar on split
+set guioptions-=l " left scrollbar
+set guioptions-=L " left scrollbar on split
+set guioptions+=b " bottom scrollbar
+set guioptions-=h " limit horizontal scrollbar size
+set guioptions-=v " vertical button layout for dialogs
 set guioptions+=p " x11 pointer callbacks
+set guioptions-=F " motif footer
+
+
+
 
 
 " egtcp
