@@ -50,8 +50,8 @@ urxvt*.colorUL:    #ffffff
 !urxvt*transparent:true
 ! 
 ! Zenburn color-scheme
-urxvt*background:  #3f3f3f
-urxvt*foreground:  #dcdccc
+urxvt*background:  #202020
+urxvt*foreground:  #e2e2e5
 ! black + red
 !urxvt*color0:     #3f3f3f
 urxvt*color0:      #1E2320
@@ -96,8 +96,8 @@ xterm*font:        -xos4-terminus-medium-*-*-*-12-*-*-*-*-*-iso8859-2
 xterm*boldFont:    -xos4-terminus-bold-*-*-*-12-*-*-*-*-*-iso8859-2
 xterm*cursorColor: #DCDCCC
 ! Zenburn
-xterm*background:  #3f3f3f
-xterm*foreground:  #dcdccc
+xterm*background:  #202020
+xterm*foreground:  #e2e2e5
 xterm*color0:      #1E2320
 xterm*color1:      #705050
 xterm*color2:      #60b48a

@@ -20,22 +20,11 @@ set guifont=Bitstream\ Vera\ Sans\ Mono\ 8
 " colorscheme ir_black
 colorscheme mustang
 
-"set guioptions+=c
-
-"set guioptions-=m
-"set guioptions-=T
-"set guioptions-=r
-"set guioptions-=R
-"set guioptions-=l
-"set guioptions-=L
-"set guioptions-=b
-"set guioptions+=p
-
 set guioptions-=a " autoselect
 set guioptions-=A " autoselect
 set guioptions+=c " Console Dialogs
 set guioptions-=e " tab stuff
-set guioptions-=f " forking
+set guioptions+=f " forking
 set guioptions-=i " icon
 set guioptions-=m " menu bar
 set guioptions-=M " system menu
@@ -51,14 +40,6 @@ set guioptions-=h " limit horizontal scrollbar size
 set guioptions-=v " vertical button layout for dialogs
 set guioptions+=p " x11 pointer callbacks
 set guioptions-=F " motif footer
-
-
-
-
-
-" egtcp
-" gcp  e t
-" gcpbaemt
 
 map <silent> <F2> :if &guioptions =~# 'T' <Bar>                                        x
             \set guioptions-=T <Bar>

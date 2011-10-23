@@ -1,6 +1,5 @@
-export EDITOR='\gvim --remote-wait'
-export SVNEDITOR='\gvim --remote-wait'
-export VISUAL='\gvim --remote-wait'
+export EDITOR=vim
+export SVNEDITOR=vim
+export VISUAL=vim
 alias vi=vim
 #alias vim=$HOME/bin/vim
-alias gvim=$HOME/scripts/edit
