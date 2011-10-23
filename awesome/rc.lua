@@ -15,6 +15,7 @@ beautiful.init("/usr/share/awesome/themes/zenburn/theme.lua")
 terminal = "xterm"
 editor = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
+browser = "firefox"
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -51,10 +52,10 @@ layouts =
 tags = {
     names = { 1, 2, 3, 4 }, 
     layout = {
-        layouts[2],
-        layouts[2],
-        layouts[2],
-        layouts[2],
+        layouts[3],
+        layouts[3],
+        layouts[6],
+        layouts[6],
     }
 }
 for s = 1, screen.count() do
@@ -213,6 +214,7 @@ globalkeys = awful.util.table.join(
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
     awful.key({ modkey,           }, "e", function () awful.util.spawn(editor_cmd) end),
+    awful.key({ modkey,           }, "b", function () awful.util.spawn(browser) end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
