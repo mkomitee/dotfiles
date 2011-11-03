@@ -20,7 +20,7 @@ usernames=(komitee mkomitee zim)
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(pathrc vi-mode git)
+plugins=(pathrc vi-mode git history-substring-search python)
 
 source $ZSH/oh-my-zsh.sh
 
