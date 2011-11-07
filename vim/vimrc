@@ -71,10 +71,14 @@ set autoread
 "set complete=.,w,b,u,U,t,i,d
 set ttyfast
 set fileformats=unix,mac,dos
-set formatoptions+=n2 " look up formatlistpat
 set updatecount=10
-set wildmode=list:longest
+set completeopt=longest,menu,menuone
+set wildmode=longest:full,list:full
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*.so,*/CVS/*,*.pyc,*.pyo
+set switchbuf=usetab
+set lazyredraw
+set showcmd
+set showmode
 set nostartofline
 set showtabline=2
 syntax enable
