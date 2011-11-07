@@ -26,6 +26,6 @@ source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 
-export PYTHONPATH="$HOME/dotfiles/lib/python"
+# export PYTHONPATH="$HOME/dotfiles/lib/python"
 
 . ~/.zshrc.local

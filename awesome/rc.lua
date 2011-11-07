@@ -9,10 +9,11 @@ require("naughty")
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
-beautiful.init("/usr/share/awesome/themes/zenburn/theme.lua")
+beautiful.init("/opt/share/awesome/themes/zenburn/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "xterm"
+terminal_cmd = terminal .. " -geometry 100x24"
 editor = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 browser = "firefox"
@@ -22,7 +23,7 @@ browser = "firefox"
 -- If you do not like this or do not have such a key,
 -- I suggest you to remap Mod4 to another key using xmodmap or other tools.
 -- However, you can use another modifier like Mod1, but it may interact with others.
-modkey = "Mod4"
+modkey = "Mod3"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 layouts =
@@ -34,10 +35,7 @@ layouts =
     awful.layout.suit.tile.top,
     awful.layout.suit.fair,
     awful.layout.suit.fair.horizontal,
-    awful.layout.suit.spiral,
-    awful.layout.suit.spiral.dwindle,
     awful.layout.suit.max,
-    awful.layout.suit.max.fullscreen,
     awful.layout.suit.magnifier
 }
 -- }}}
@@ -50,12 +48,16 @@ layouts =
     -- tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, layouts[1])
 -- end
 tags = {
-    names = { 1, 2, 3, 4 }, 
+    names = { 1, 2, 3, 4, 5, 6, 7, 8 },
     layout = {
-        layouts[3],
-        layouts[3],
-        layouts[6],
-        layouts[6],
+        layouts[1],
+        layouts[1],
+        layouts[1],
+        layouts[1],
+        layouts[1],
+        layouts[1],
+        layouts[1],
+        layouts[1],
     }
 }
 for s = 1, screen.count() do
@@ -73,7 +75,7 @@ myawesomemenu = {
 }
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "open terminal", terminal },
+                                    { "open terminal", terminal_cmd },
                                     { "open editor", editor_cmd },
                                     { "open browser", browser }
                                   }
@@ -197,7 +199,7 @@ globalkeys = awful.util.table.join(
             awful.client.focus.byidx(-1)
             if client.focus then client.focus:raise() end
         end),
-    awful.key({ modkey,           }, "w", function () mymainmenu:show({keygrabber=true}) end),
+    -- awful.key({ modkey,           }, "w", function () mymainmenu:show({keygrabber=true}) end),
 
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
@@ -214,7 +216,7 @@ globalkeys = awful.util.table.join(
         end),
 
     -- Standard program
-    awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
+    awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal_cmd) end),
     awful.key({ modkey,           }, "e", function () awful.util.spawn(editor_cmd) end),
     awful.key({ modkey,           }, "b", function () awful.util.spawn(browser) end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
@@ -251,6 +253,14 @@ clientkeys = awful.util.table.join(
     awful.key({ modkey,           }, "o",      awful.client.movetoscreen                        ),
     awful.key({ modkey, "Shift"   }, "r",      function (c) c:redraw()                       end),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end),
+    awful.key({ modkey,           }, "v",
+        function (c)
+            c.maximized_vertical = not c.maximized_vertical 
+        end),
+    awful.key({ modkey,           }, "w",
+        function (c)
+            c.maximized_horizontal = not c.maximized_horizontal
+        end),
     awful.key({ modkey,           }, "n",
         function (c)
             -- The client currently has the input focus, so it cannot be
@@ -338,7 +348,7 @@ awful.rules.rules = {
 -- Signal function to execute when a new client appears.
 client.add_signal("manage", function (c, startup)
     -- Add a titlebar
-    -- awful.titlebar.add(c, { modkey = modkey })
+    awful.titlebar.add(c, { modkey = modkey })
 
     -- Enable sloppy focus
     c:add_signal("mouse::enter", function(c)
@@ -351,7 +361,7 @@ client.add_signal("manage", function (c, startup)
     if not startup then
         -- Set the windows at the slave,
         -- i.e. put it at the end of others instead of setting it master.
-        -- awful.client.setslave(c)
+        awful.client.setslave(c)
 
         -- Put windows in a smart way, only if they does not set an initial position.
         if not c.size_hints.user_position and not c.size_hints.program_position then

@@ -92,8 +92,9 @@ xterm*highlightSelection: true
 ! Appearance
 xterm*utf8:          2
 xterm*eightBitInput: true
-xterm*font:        -xos4-terminus-medium-*-*-*-12-*-*-*-*-*-iso8859-2
-xterm*boldFont:    -xos4-terminus-bold-*-*-*-12-*-*-*-*-*-iso8859-2
+! xterm*font:        -xos4-terminus-medium-*-*-*-12-*-*-*-*-*-iso8859-2
+! xterm*boldFont:    -xos4-terminus-bold-*-*-*-12-*-*-*-*-*-iso8859-2
+*xterm*faceName: DejaVu Sans Mono:pixelsize=12
 xterm*cursorColor: #DCDCCC
 ! Zenburn
 xterm*background:  #202020

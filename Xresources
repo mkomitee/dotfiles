@@ -1,8 +1,7 @@
-*VT100*scrollBar: false
-*VT100*saveLines: 1024
+*VT100*saveLines: 65535
 *VT100*faceName: DejaVu Sans Mono:pixelsize=12
-*VT100*background: black
-*VT100*foreground: white
+xterm*background:  #202020
+xterm*foreground:  #e2e2e5
 *VT100*highlightColor: yellow
 *VT100*color0: #000000
 *VT100*color1: #CD0000
