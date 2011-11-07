@@ -1,4 +1,3 @@
-,git://github.com/robbyrussell/oh-my-zsh.git
 vim/bundle,git://github.com/Lokaltog/vim-easymotion.git
 vim/bundle,git://github.com/MarcWeber/vim-addon-mw-utils.git
 vim/bundle,git://github.com/ajf/puppet-vim.git
@@ -37,3 +36,4 @@ vim/bundle,git://github.com/vim-scripts/textobj-rubyblock.git
 vim/bundle,git://github.com/vim-scripts/textobj-user.git
 vim/bundle,git://github.com/vim-scripts/vim-indent-object.git
 vim/bundle,git://github.com/wgibbs/vim-irblack.git
+,git://github.com/robbyrussell/oh-my-zsh.git
