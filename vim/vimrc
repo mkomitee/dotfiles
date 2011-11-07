@@ -74,7 +74,7 @@ set fileformats=unix,mac,dos
 set updatecount=10
 set completeopt=longest,menu,menuone
 set wildmode=longest:full,list:full
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*.so,*/CVS/*,*.pyc,*.pyo
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*.so,*/CVS/*,*.pyc,*.pyo,.*
 set switchbuf=usetab
 set lazyredraw
 set showcmd
@@ -87,8 +87,8 @@ set shiftround
 set magic
 " set gdefault
 set matchpairs+=<:>
-" color ir_black
-color mustang
+color ir_black
+" color mustang
 if &t_Co < 16
     set t_Co=16
 endif
@@ -188,6 +188,8 @@ set foldtext=CustomFoldText()
 " Toggles & Switches (Leader commands) {{{1
 let mapleader = ","
 let localleader = '\'
+
+nnoremap <F3> :nohl<return>
 
 " dont reach for escape when in insert mode, just jj
 inoremap jj <esc>
