@@ -1,0 +1,123 @@
+*vim-pad*                     for vim 7.3               Last change: 3 nov 2011
+
+vim-pad is a quick notetaking plugin for vim.
+
+It offers a way of managing notes similar to the one in tools like Notational
+Velocity: file management is removed from the notetaking workflow, and creation
+and searching of notes can be done using the same interface.
+
+- |vim-pad-global-commands|
+- |vim-pad-local-commands|
+- |vim-pad-configuration|
+- |vim-pad-design-rationale|
+
+*vim-pad-global-commands*
+
+- *:ListPads* (`<Control><Escape>`, <leader><Escape> for the terminal) lists
+  the notes. You can pass a string to this command if you want to filter the
+  notes.
+
+The list of notes should display a series of lines like:
+
+2 mins ago      | vim-pad is cool.↲ if you let me just say it.
+
+The part before | should show when the note was last modified. For notes less
+than a day old, the timestamp is displayed in a natural format, and after that
+the timestamp follows the %Y-%m-%d %H:%M:%S format.
+
+The first line of the file is taken as a title, and highlighted accordingly.
+If the note only spans one line, the text before a dot or a comma is taken as
+the title instead. Line breaks are displayed as ↲.
+
+`<leader>s` also calls ListPads, but asks for a query to filter the notes before
+presenting the list. Giving an empty query is equivalent to calling `ListPads`
+without arguments.
+
+- *:OpenPad* (`<Shift><Escape>`, <leader>n in the terminal) creates a new note.
+
+*vim-pad-local-commands*
+
+When in the notes list, you can open a note pressing `<Enter>` and delete it
+using `<Del>`. `<Escape>` closes the buffer.
+
+You can start a search among your notes pressing <Shift-F> in the list. This
+will update the buffer in real time. If the query doesn't match any of the
+existing files, pressing `Enter` will create a new note with the query inserted
+in the first line.
+
+When in a note, `<localleader><Del>` will delete it. `<localleader>+m` will ask
+for a filetype and insert a modeline in the file accordingly.
+
+*vim-pad-configuration*
+
+IMPORTANT 1: set the *g:pad_dir* variable in your .vimrc, to indicate where the
+notes will be saved. The default is:
+
+    let g:pad_dir = "~/notes/"
+
+If the path is invalid (is not writeable or doesn't exist), vim-pad will nag
+you to set a valid one.
+
+IMPORTANT 2: Please check the mappings before using the plugin. The default
+mappings are quite ergonomic, but you might want to change them.
+
+The default format for new notes is `markdown`. To change this to another
+format, `pandoc` for example, put
+
+    let *g:pad_format* = "pandoc"
+
+in your `.vimrc`. You can also set the individual format of a note by turning
+the first line in the note into a modeline:
+
+	<!-- vim: set ft=vo_base: -->
+
+at the beggining of a file will tell vim to open the file as a VimOutliner file.
+The modeline won't be shown in the list view.
+
+The height of the split windows this plugin uses can be set with
+`*g:pad_window_height*`.
+
+There is a variant highlighting scheme you can enable by setting
+`*g:pad_highlighting_variant*` to 1 in your vimrc.
+
+vim-pad can search using either `grep` or `ack` (grep is the default). You can
+set this using the *g:pad_search_backend* variable. By default, the search
+ignores case (adjust *g:pad_search_ignore_case* as desired).
+
+When showing the list of notes, vim-pad reads by default 200 chars from the
+files, in order to show a summary of the file. You can adjust how many chars
+you want vim-pad to read by setting the *g:pad_read_nchars_from_files* variable.
+
+*vim-pad-design-rationale*
+
+vim-pad has two goals:
+
+- Abstract file management for notes. You shouldn't have to think about where
+  to put your notes and how to name them.
+
+- Make input and retrieval of notes as fast as possible. Search should be easy.
+
+Or, in a sentence: to make note taking as effortless as possible, trying never
+to disrupt your workflow more than necessary.
+
+vim-pad tries to solve those issues, by enabling a definite workflow for note
+taking.  First, with it you can at any moment (in insert and normal mode):
+
+- list/search in your notes, and then retrieve them.
+- create a new note.
+
+It abstracts file management by:
+
+- keeping your notes in a single place.
+- naming your files after the time you created them. This makes them unique
+  and allows for easy historical sorting. The filenames are updated when
+  changes are made in old files, so the date is always equal to the last time
+  you modified your notes.
+- considering the first line of your document as its title. This is in tune
+  with the way most markup styles work (e.g., markdown)
+
+vim-pad doesn't specify a format for your notes. Instead, it uses a default,
+which you can configure, and allows the use of modelines (modelines aren't
+shown in the list of notes). This means that your notes can be free-form and
+adapt to your needs, and also, that you can use vim-pad as a complement for
+other note taking plugins.
