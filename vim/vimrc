@@ -76,11 +76,12 @@ set updatecount=10
 set wildmode=list:longest
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*.so,*/CVS/*,*.pyc,*.pyo
 set nostartofline
+set showtabline=2
 syntax enable
 set background=dark
 set shiftround
 set magic
-set gdefault
+" set gdefault
 set matchpairs+=<:>
 " color ir_black
 color mustang
@@ -217,8 +218,8 @@ nnoremap L $
 nnoremap ' `
 
 " very magic searching by default
-nnoremap / /\v
-nnoremap ? ?\v
+" nnoremap / /\v
+" nnoremap ? ?\v
 
 "C-{hjkl} to move text or text blocks left down up or right
 " nnoremap <C-j> :m+<CR>==
