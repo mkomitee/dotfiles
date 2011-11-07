@@ -533,6 +533,9 @@ endf
 " :nnoremap <silent> <leader>wv :call PasteWindow('vsplit')<cr>
 
 " Configure plugins {{{1
+" vimpad {{{2
+let g:pad_dir=glob("~/.pad")
+
 " ctrlp {{{2
 let g:ctrlp_working_path_mode = 2
 
