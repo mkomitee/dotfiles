@@ -1374,12 +1374,9 @@ endfunction
 
 " s:OpenWindow() {{{2
 function! s:OpenWindow(autoclose)
-    " If the tagbar window is already open jump to it
+    " If the tagbar window is already open don't do anything
     let tagbarwinnr = bufwinnr('__Tagbar__')
     if tagbarwinnr != -1
-        if winnr() != tagbarwinnr
-            execute tagbarwinnr . 'wincmd w'
-        endif
         return
     endif
 
@@ -1439,6 +1436,7 @@ function! s:InitWindow(autoclose)
     endif
 
     setlocal nofoldenable
+    setlocal foldcolumn=0
     " Reset fold settings in case a plugin set them globally to something
     " expensive. Apparently 'foldexpr' gets executed even if 'foldenable' is
     " off, and then for every appended line (like with :put).

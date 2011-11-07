@@ -1,9 +1,9 @@
-,git://github.com/robbyrussell/oh-my-zsh.git
 vim/bundle,git://github.com/Lokaltog/vim-easymotion.git
 vim/bundle,git://github.com/MarcWeber/vim-addon-mw-utils.git
 vim/bundle,git://github.com/ajf/puppet-vim.git
 vim/bundle,git://github.com/ervandew/screen.git
 vim/bundle,git://github.com/ervandew/supertab.git
+vim/bundle,git://github.com/fmoralesc/vim-pad.git
 vim/bundle,git://github.com/garbas/vim-snipmate.git
 vim/bundle,git://github.com/honza/snipmate-snippets.git
 vim/bundle,git://github.com/kien/ctrlp.vim.git
@@ -36,3 +36,4 @@ vim/bundle,git://github.com/vim-scripts/textobj-rubyblock.git
 vim/bundle,git://github.com/vim-scripts/textobj-user.git
 vim/bundle,git://github.com/vim-scripts/vim-indent-object.git
 vim/bundle,git://github.com/wgibbs/vim-irblack.git
+,git://github.com/robbyrussell/oh-my-zsh.git
