@@ -1,6 +1,7 @@
 vim/bundle,git://github.com/Lokaltog/vim-easymotion.git
 vim/bundle,git://github.com/MarcWeber/vim-addon-mw-utils.git
 vim/bundle,git://github.com/ajf/puppet-vim.git
+vim/bundle,git://github.com/altercation/vim-colors-solarized.git
 vim/bundle,git://github.com/ervandew/screen.git
 vim/bundle,git://github.com/ervandew/supertab.git
 vim/bundle,git://github.com/garbas/vim-snipmate.git
