@@ -75,3 +75,8 @@
 !! white dark/light
 *color7:                S_base2
 *color15:               S_base3
+
+*VT100*saveLines: 65535
+*VT100*faceName: DejaVu Sans Mono:pixelsize=12
+*VT100*scrollBar: true
+*VT100*rightScrollBar: true
