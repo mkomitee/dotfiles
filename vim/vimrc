@@ -57,9 +57,10 @@ set smartcase           " unless the search term includes a capital
 set title               " vim changes xterm window title
 set foldcolumn=2        " add 2 to the gutter to show folds
 set shortmess+=filmnrxoOtTI
-set iskeyword+=:
+set iskeyword-=:
+set iskeyword-=;
+set iskeyword-=,
 set iskeyword+=_
-set iskeyword+=,
 set listchars=precedes:<,extends:>,tab:\|-,trail:·
 set virtualedit=block
 set display+=lastline
