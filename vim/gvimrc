@@ -5,9 +5,9 @@ endif
 set go-=T
 set bg=dark
 
-if &background == "dark"
-    hi normal guibg=black
-endif
+" if &background == "dark"
+    " hi normal guibg=black
+" endif
 
 if &diff
     set columns=178
@@ -18,7 +18,7 @@ endif
 set guifont=Bitstream\ Vera\ Sans\ Mono\ 8 
 
 " colorscheme ir_black
-colorscheme mustang
+" colorscheme mustang
 
 set guioptions-=a " autoselect
 set guioptions-=A " autoselect

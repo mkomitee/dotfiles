@@ -84,11 +84,12 @@ set nostartofline
 set showtabline=2
 syntax enable
 set background=dark
+colorscheme solarized
 set shiftround
 set magic
 " set gdefault
 set matchpairs+=<:>
-color ir_black
+" color ir_black
 " color mustang
 if &t_Co < 16
     set t_Co=16
@@ -149,8 +150,8 @@ augroup cursor
     au!
     au WinEnter,VimEnter,BufNewFile,BufRead * setlocal cursorline
     au WinLeave,VimLeave * setlocal nocursorline
-    au WinEnter,VimEnter,BufNewFile,BufRead * setlocal cursorcolumn
-    au WinLeave,VimLeave * setlocal nocursorcolumn
+    " au WinEnter,VimEnter,BufNewFile,BufRead * setlocal cursorcolumn
+    " au WinLeave,VimLeave * setlocal nocursorcolumn
 augroup END
 
 augroup vimmemory
@@ -621,7 +622,7 @@ noremap <Leader>dd :NERDTreeToggle<CR>
 noremap <Leader>df :NERDTreeFind<CR>
 let NERDTreeShowBookmarks=1
 let NERDTreeQuitOnOpen=1
-let NERDTreeHighlightCursorLine=1
+let NERDTreeHighlightCursorLine=0
 
 
 
