@@ -205,6 +205,11 @@ inoremap jj <esc>
 " inoremap <Left> <nop>
 " inoremap <Right> <nop>
 
+" zT will move the current line to 1/4th from the top of the window
+nnoremap <expr> zT 'zt' . winheight(0)/4 . '<c-y>'
+" zB will move the current line to 1/4th from the bottom of the window
+nnoremap <expr> zB 'zb' . winheight(0)/4 . '<c-e>'
+
 nnoremap <leader>v :vsplit<cr>
 
 " j and k will go one line, even if they're wrapped
