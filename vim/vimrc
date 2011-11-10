@@ -8,7 +8,7 @@
 
 " Pre-local loading (set variables to influence module loading) {{{1
 " Include user's local vim config
-if filereadable(expand("~/.vimrc.pre-local"))
+if filereadable(expand("~") . "/.vimrc.pre-local")
     source ~/.vimrc.pre-local
 endif
 
@@ -673,7 +673,7 @@ if filereadable(expand("~/.vim/abbrev"))
 endif
 
 " Post-local loading (site customizations) {{{1
-if filereadable(expand("~/.vimrc.post-local"))
+if filereadable(expand("~") . "/.vimrc.post-local")
     source ~/.vimrc.post-local
 endif
 

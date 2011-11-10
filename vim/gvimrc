@@ -1,4 +1,4 @@
-if filereadable(expand("~/.gvimrc.pre-local"))
+if filereadable(expand("~") . "/.gvimrc.pre-local")
   source ~/.gvimrc.pre-local
 endif
 
@@ -62,6 +62,6 @@ set columns=116
 nnoremap <silent> <ESC> :nohl<CR><ESC>
 
 
-if filereadable(expand("~/.gvimrc.post-local"))
+if filereadable(expand("~") . "/.gvimrc.post-local")
   source ~/.gvimrc.post-local
 endif
