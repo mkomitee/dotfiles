@@ -185,7 +185,7 @@ augroup END
     " autocmd BufEnter * cal ctrlp#SetWorkingPath(2)
 " augroup END
 
-set foldtext=CustomFoldText()
+" set foldtext=CustomFoldText()
 
 " Toggles & Switches (Leader commands) {{{1
 let mapleader = ","
@@ -448,26 +448,26 @@ if !exists(":DiffOrig")
 endif
 
 " Custom fold text {{{2
-fu! CustomFoldText()
-    "get first non-blank line
-    let fs = v:foldstart
-    while getline(fs) =~ '^\s*$' | let fs = nextnonblank(fs + 1)
-    endwhile
-    if fs > v:foldend
-        let line = getline(v:foldstart)
-    else
-        let line = substitute(getline(fs), '\t', repeat(' ', &tabstop), 'g')
-    endif
+" fu! CustomFoldText()
+    " "get first non-blank line
+    " let fs = v:foldstart
+    " while getline(fs) =~ '^\s*$' | let fs = nextnonblank(fs + 1)
+    " endwhile
+    " if fs > v:foldend
+        " let line = getline(v:foldstart)
+    " else
+        " let line = substitute(getline(fs), '\t', repeat(' ', &tabstop), 'g')
+    " endif
 
-    let w = winwidth(0) - &foldcolumn - (&number ? 8 : 0)
-    let foldSize = 1 + v:foldend - v:foldstart
-    let foldSizeStr = " " . foldSize . " lines "
-    let foldLevelStr = repeat("+--", v:foldlevel)
-    let lineCount = line("$")
-    let foldPercentage = printf("[%.1f", (foldSize*1.0)/lineCount*100) . "%] "
-    let expansionString = repeat(".", w - strwidth(foldSizeStr.line.foldLevelStr.foldPercentage))
-    return line . expansionString . foldSizeStr . foldPercentage . foldLevelStr
-endf
+    " let w = winwidth(0) - &foldcolumn - (&number ? 8 : 0)
+    " let foldSize = 1 + v:foldend - v:foldstart
+    " let foldSizeStr = " " . foldSize . " lines "
+    " let foldLevelStr = repeat("+--", v:foldlevel)
+    " let lineCount = line("$")
+    " let foldPercentage = printf("[%.1f", (foldSize*1.0)/lineCount*100) . "%] "
+    " let expansionString = repeat(".", w - strwidth(foldSizeStr.line.foldLevelStr.foldPercentage))
+    " return line . expansionString . foldSizeStr . foldPercentage . foldLevelStr
+" endf
 
 
 
@@ -611,6 +611,7 @@ let ackprg="~/scripts/ack"
 " When we comment something with the NERDComment Toggle, reselect
 let g:NERDCreateDefaultMappings = 0
 let g:NERDSpaceDelims = 1
+let g:NERDTreeUseExistingWindows = 1
 vmap <leader>cc <plug>NERDCommenterToggle<cr>vgv
 nmap <leader>cc <plug>NERDCommenterToggle
 vmap <leader>cb <plug>NERDCommenterSexy<cr>vgv
