@@ -19,7 +19,6 @@ vim/bundle,git://github.com/vim-scripts/FuzzyFinder.git
 vim/bundle,git://github.com/vim-scripts/L9.git
 vim/bundle,git://github.com/vim-scripts/ShowMarks.git
 vim/bundle,git://github.com/vim-scripts/The-NERD-Commenter.git
-vim/bundle,git://github.com/vim-scripts/The-NERD-tree.git
 vim/bundle,git://github.com/vim-scripts/ack.vim.git
 vim/bundle,git://github.com/vim-scripts/bufexplorer.zip.git
 vim/bundle,git://github.com/vim-scripts/endwise.vim.git
@@ -36,4 +35,5 @@ vim/bundle,git://github.com/vim-scripts/textobj-rubyblock.git
 vim/bundle,git://github.com/vim-scripts/textobj-user.git
 vim/bundle,git://github.com/vim-scripts/vim-indent-object.git
 vim/bundle,git://github.com/wgibbs/vim-irblack.git
+vim/bundle,git@github.com:mkomitee/nerdtree.git
 ,git://github.com/robbyrussell/oh-my-zsh.git
