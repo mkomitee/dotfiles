@@ -123,6 +123,7 @@ call s:initVariable("g:NERDTreeMapOpenInTab", "t")
 call s:initVariable("g:NERDTreeMapOpenInTabSilent", "T")
 call s:initVariable("g:NERDTreeMapOpenRecursively", "O")
 call s:initVariable("g:NERDTreeMapOpenSplit", "i")
+call s:initVariable("g:NERDTreeMapJumpToBuffer", "b")
 call s:initVariable("g:NERDTreeMapOpenVSplit", "s")
 call s:initVariable("g:NERDTreeMapPreview", "g" . NERDTreeMapActivateNode)
 call s:initVariable("g:NERDTreeMapPreviewSplit", "g" . NERDTreeMapOpenSplit)
@@ -3529,6 +3530,7 @@ function! s:bindMappings()
 
     exec "nnoremap <silent> <buffer> ". g:NERDTreeMapActivateNode . " :call <SID>activateNode(0)<cr>"
     exec "nnoremap <silent> <buffer> ". g:NERDTreeMapOpenSplit ." :call <SID>openEntrySplit(0,0)<cr>"
+    exec "nnoremap <silent> <buffer> ". g:NERDTreeMapJumpToBuffer ." :call <SID>jumpToBuffer(1,0)<cr>"
     exec "nnoremap <silent> <buffer> <cr> :call <SID>activateNode(0)<cr>"
 
     exec "nnoremap <silent> <buffer> ". g:NERDTreeMapPreview ." :call <SID>previewNode(0)<cr>"
@@ -3855,6 +3857,34 @@ function! s:openEntrySplit(vertical, forceKeepWindowOpen)
             call treenode.openVSplit()
         else
             call treenode.openSplit()
+        endif
+        if !a:forceKeepWindowOpen
+            call s:closeTreeIfQuitOnOpen()
+        endif
+    else
+        call s:echo("select a node first")
+    endif
+endfunction
+
+" FUNCTION: s:jumpToBuffer(vertical, forceKeepWindowOpen) {{{2
+"Jumps to an existing buffer, or if there is none, 
+"Opens the currently selected file from the explorer in a
+"new window
+"
+"args:
+"forceKeepWindowOpen - dont close the window even if NERDTreeQuitOnOpen is set
+function! s:jumpToBuffer(vertical, forceKeepWindowOpen)
+    let treenode = s:TreeFileNode.GetSelected()
+    if treenode != {}
+        let w = bufwinnr(treenode.path.str())
+        if w != -1
+            exe w . 'winc w' 
+        else
+            if a:vertical
+                call treenode.openVSplit()
+            else
+                call treenode.openSplit()
+            endif
         endif
         if !a:forceKeepWindowOpen
             call s:closeTreeIfQuitOnOpen()
