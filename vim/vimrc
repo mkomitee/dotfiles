@@ -180,10 +180,10 @@ augroup nerdtree
     autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 augroup END
 
-augroup ctrlp
-    au!
-    autocmd BufEnter * cal ctrlp#SetWorkingPath(2)
-augroup END
+" augroup ctrlp
+    " au!
+    " autocmd BufEnter * cal ctrlp#SetWorkingPath(2)
+" augroup END
 
 set foldtext=CustomFoldText()
 
@@ -547,11 +547,15 @@ endf
 " :nnoremap <silent> <leader>wv :call PasteWindow('vsplit')<cr>
 
 " Configure plugins {{{1
-" vimpad {{{2
-let g:pad_dir=glob("~/.pad")
-
 " ctrlp {{{2
-let g:ctrlp_working_path_mode = 2
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_dotfiles = 0
+let g:ctrlp_max_height = 20000
+let g:ctrlp_use_caching=1
+let g:ctrlp_max_files = 20000
+
+map <C-B> <ESC>:CtrlPBuffer<CR>
+map <C-M> <ESC>:CtrlPMRUFiles<CR>
 
 " Bexec {{{2
 nnoremap <silent> <unique> <F8> :call Bexec()<cr>
@@ -621,10 +625,9 @@ let NERDTreeIgnore=['\~$', '\.swp$', '^CVS$', '\.svn$', '^CVSROOT$', '^\.git$', 
 noremap <Leader>dd :NERDTreeToggle<CR>
 noremap <Leader>df :NERDTreeFind<CR>
 let NERDTreeShowBookmarks=1
-let NERDTreeQuitOnOpen=1
+let NERDTreeQuitOnOpen=0
 let NERDTreeHighlightCursorLine=0
-
-
+let NERDTreeHijackNetrw=1
 
 " Close all open buffers on entering a window if the only
 " buffer that's left is the NERDTree buffer
@@ -637,7 +640,6 @@ function! s:CloseIfOnlyNerdTreeLeft()
         endif
     endif
 endfunction
-
 
 " notes.vim {{{2
 let g:notes_location=glob("~/Docs/Notes")
