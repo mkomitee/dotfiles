@@ -6,20 +6,15 @@
 " zj    move down to start of next fold
 " zk    move up to end of previous fold
 
-" Pre-local loading (set variables to influence module loading) {{{1
-" Include user's local vim config
-if filereadable(expand("~") . "/.vimrc.pre-local")
-    source ~/.vimrc.pre-local
-endif
-
 " Load Plugins. {{{1
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
 " Setup directories {{{1
-silent execute '!mkdir -p $HOME/.vimbackup'
-silent execute '!mkdir -p $HOME/.vimswap'
-silent execute '!mkdir -p $HOME/.vimviews'
+silent execute '!mkdir -p $HOME/.vimdata/vimbackup'
+silent execute '!mkdir -p $HOME/.vimdata/vimswap'
+silent execute '!mkdir -p $HOME/.vimdata/vimviews'
+silent execute '!mkdir -p $HOME/.vimdata/fufdata'
 
 " Preferences {{{1
 " Use Vim settings, rather then Vi settings (much better!).
@@ -44,9 +39,9 @@ set textwidth=100
 set expandtab           " Expand tabs to spaces
 set hidden              " buffers not in the foreground are hidden
 set nowrap              " No wrapping
-set backupdir=$HOME/.vimbackup/ " backup files
-set directory=$HOME/.vimswap/   " swap files
-set viewdir=$HOME/.vimviews/    " view files
+set backupdir=$HOME/.vimdata/vimbackup/ " backup files
+set directory=$HOME/.vimdata/vimswap/   " swap files
+set viewdir=$HOME/.vimdata/vimviews/    " view files
 set laststatus=2        " always show the status line
 set clipboard+=unnamed  " use the x11 clipboard for yanking
 set scrolloff=5         " keep 5 lines for context while scrolling
@@ -87,14 +82,16 @@ set background=dark
 colorscheme solarized
 set shiftround
 set magic
-" set gdefault
 set matchpairs+=<:>
-" color ir_black
-" color mustang
 if &t_Co < 16
     set t_Co=16
 endif
+set viminfo='100,<50,s10,h,n~/.vimdata/viminfo
+" n is the viminfo filename
+" Configure ColorColumn
+hi ColorColumn guibg=#191919 gui=BOLD ctermbg=NONE cterm=BOLD
 
+" Configure Cursor Blinking
 set guicursor=n-v-c:block-Cursor
 set guicursor+=i:ver20-Cursor-blinkon600-blinkoff600
 set guicursor+=n-v-c:block-Cursor-blinkon600-blinkoff600
@@ -108,7 +105,7 @@ endif
 " Also switch on highlighting the last used search pattern.
 syntax on
 set hlsearch
-"
+
 " Statusline {{{1
 set statusline=   " clear the statusline for when vimrc is reloaded
 set statusline+=%#KomiteeStatus#
@@ -133,8 +130,8 @@ function! HasPaste()
     endif
 endfunction
 
-" Configure ColorColumn
-hi ColorColumn guibg=#191919 gui=BOLD ctermbg=NONE cterm=BOLD
+
+" AutoCommands {{{1
 
 " If we change focus away from vim, goto normal mode
 " do the same if we're in insert mode for 15 seconds
@@ -179,13 +176,6 @@ augroup nerdtree
     au!
     autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 augroup END
-
-" augroup ctrlp
-    " au!
-    " autocmd BufEnter * cal ctrlp#SetWorkingPath(2)
-" augroup END
-
-" set foldtext=CustomFoldText()
 
 " Toggles & Switches (Leader commands) {{{1
 let mapleader = ","
@@ -554,7 +544,6 @@ let g:ctrlp_max_height = 20000
 let g:ctrlp_use_caching=1
 let g:ctrlp_max_files = 20000
 
-nnoremap <leader>p :CtrlP<cr>
 nnoremap <leader>b :CtrlPBuffer<cr>
 nnoremap <leader>m :CtrlPMRUFiles<cr>
 
@@ -601,6 +590,7 @@ noremap <Leader>ct :CommandT<CR>
 
 " FuzzyFinder {{{2
 let g:fuf_modesDisable = []
+let g:fuf_dataDir = '~/.vimdata/fufdata'
 noremap <Leader>fb :FufBuffer<CR>
 noremap <Leader>ff :FufFile<CR>
 noremap <Leader>fm :FufMruFile<CR>
@@ -676,11 +666,6 @@ let g:SuperTabDefaultCompletionType = "context"
 " Load abbreviations
 if filereadable(expand("~/.vim/abbrev"))
     source ~/.vim/abbrev
-endif
-
-" Post-local loading (site customizations) {{{1
-if filereadable(expand("~") . "/.vimrc.post-local")
-    source ~/.vimrc.post-local
 endif
 
 " Modelines: {{{1
