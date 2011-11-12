@@ -554,8 +554,9 @@ let g:ctrlp_max_height = 20000
 let g:ctrlp_use_caching=1
 let g:ctrlp_max_files = 20000
 
-map <C-B> <ESC>:CtrlPBuffer<CR>
-map <C-M> <ESC>:CtrlPMRUFiles<CR>
+nnoremap <leader>p :CtrlP<cr>
+nnoremap <leader>b :CtrlPBuffer<cr>
+nnoremap <leader>m :CtrlPMRUFiles<cr>
 
 " Bexec {{{2
 nnoremap <silent> <unique> <F8> :call Bexec()<cr>
@@ -599,8 +600,10 @@ noremap <Leader>k! :bd!<CR>
 noremap <Leader>ct :CommandT<CR>
 
 " FuzzyFinder {{{2
+let g:fuf_modesDisable = []
 noremap <Leader>fb :FufBuffer<CR>
 noremap <Leader>ff :FufFile<CR>
+noremap <Leader>fm :FufMruFile<CR>
 
 " Ack {{{2
 noremap <Leader>g :Ack<space><C-r><C-w><CR>
@@ -611,7 +614,6 @@ let ackprg="~/scripts/ack"
 " When we comment something with the NERDComment Toggle, reselect
 let g:NERDCreateDefaultMappings = 0
 let g:NERDSpaceDelims = 1
-let g:NERDTreeUseExistingWindows = 1
 vmap <leader>cc <plug>NERDCommenterToggle<cr>vgv
 nmap <leader>cc <plug>NERDCommenterToggle
 vmap <leader>cb <plug>NERDCommenterSexy<cr>vgv
@@ -622,6 +624,7 @@ nmap <leader>c$ <plug>NERDCommenterToEOL
 
 
 " NERDTree.vim {{{2
+let g:NERDTreeUseExistingWindows = 1
 let NERDTreeIgnore=['\~$', '\.swp$', '^CVS$', '\.svn$', '^CVSROOT$', '^\.git$', '\.pyc$', '\.pyo$', '\.swp$']
 noremap <Leader>dd :NERDTreeToggle<CR>
 noremap <Leader>df :NERDTreeFind<CR>
