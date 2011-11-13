@@ -111,6 +111,9 @@ set statusline=   " clear the statusline for when vimrc is reloaded
 set statusline+=%#KomiteeStatus#
 set statusline+=[%n]\                      " buffer number
 set statusline+=%<%.99f\                     " file name
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 set statusline+=%h%m%r%w                     " flags
 set statusline+=[%{strlen(&ft)?&ft:'none'},  " filetype
 set statusline+=%{strlen(&fenc)?&fenc:&enc}, " encoding
@@ -541,6 +544,12 @@ endf
 " Configure plugins {{{1
 " Align {{{2
 vnoremap <leader>a=> :Align => =<cr>
+
+" Syntastic {{{2
+let g:syntastic_enable_signs   = 1
+let g:syntastic_auto_jump      = 1
+let g:syntastic_auto_loc_list  = 2
+" let g:syntastic_quiet_warnings = 1
 
 " ctrlp {{{2
 let g:ctrlp_working_path_mode = 0

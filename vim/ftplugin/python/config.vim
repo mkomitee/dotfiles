@@ -12,3 +12,5 @@ setlocal smarttab
 setlocal expandtab
 setlocal smartindent
 setlocal keywordprg=pydoc
+SyntasticEnable python
+let makeprg = 'pyflakes %'
