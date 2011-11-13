@@ -214,6 +214,8 @@ nnoremap k gk
 nnoremap H ^
 nnoremap L $
 
+
+
 " ; should probably be the start of a command
 " nnoremap ; :
 "
@@ -537,6 +539,9 @@ endf
 " :nnoremap <silent> <leader>wv :call PasteWindow('vsplit')<cr>
 
 " Configure plugins {{{1
+" Align {{{2
+vnoremap <leader>a=> :Align => =<cr>
+
 " ctrlp {{{2
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_dotfiles = 0
@@ -544,8 +549,8 @@ let g:ctrlp_max_height = 20000
 let g:ctrlp_use_caching=1
 let g:ctrlp_max_files = 20000
 
-nnoremap <leader>b :CtrlPBuffer<cr>
-nnoremap <leader>m :CtrlPMRUFiles<cr>
+" nnoremap <leader>b :CtrlPBuffer<cr>
+" nnoremap <leader>m :CtrlPMRUFiles<cr>
 
 " Bexec {{{2
 nnoremap <silent> <unique> <F8> :call Bexec()<cr>
@@ -562,7 +567,7 @@ noremap <Leader>sl :Simplenote -l<CR>
 noremap <Leader>sn :Simplenote -n<CR>
 
 " Lusty {{{2
-noremap <Leader>a :LustyBufferExplorer<CR>
+noremap <Leader>b :LustyBufferExplorer<CR>
 noremap <Leader>f :LustyFilesystemExplorer<CR>
 noremap <Leader>r :LustyFilesystemExplorerFromHere<CR>
 noremap <Leader>j :LustyJuggler<CR>
