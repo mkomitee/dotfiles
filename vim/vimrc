@@ -6,20 +6,15 @@
 " zj    move down to start of next fold
 " zk    move up to end of previous fold
 
-" Pre-local loading (set variables to influence module loading) {{{1
-" Include user's local vim config
-if filereadable(expand("~") . "/.vimrc.pre-local")
-    source ~/.vimrc.pre-local
-endif
-
 " Load Plugins. {{{1
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
 " Setup directories {{{1
-silent execute '!mkdir -p $HOME/.vimbackup'
-silent execute '!mkdir -p $HOME/.vimswap'
-silent execute '!mkdir -p $HOME/.vimviews'
+silent execute '!mkdir -p $HOME/.vimdata/vimbackup'
+silent execute '!mkdir -p $HOME/.vimdata/vimswap'
+silent execute '!mkdir -p $HOME/.vimdata/vimviews'
+silent execute '!mkdir -p $HOME/.vimdata/fufdata'
 
 " Preferences {{{1
 " Use Vim settings, rather then Vi settings (much better!).
@@ -44,11 +39,11 @@ set textwidth=100
 set expandtab           " Expand tabs to spaces
 set hidden              " buffers not in the foreground are hidden
 set nowrap              " No wrapping
-set backupdir=$HOME/.vimbackup/ " backup files
-set directory=$HOME/.vimswap/   " swap files
-set viewdir=$HOME/.vimviews/    " view files
+set backupdir=$HOME/.vimdata/vimbackup/ " backup files
+set directory=$HOME/.vimdata/vimswap/   " swap files
+set viewdir=$HOME/.vimdata/vimviews/    " view files
 set laststatus=2        " always show the status line
-set clipboard+=unnamed  " use the x11 clipboard for yanking
+set clipboard=unnamedplus,unnamed,autoselect
 set scrolloff=5         " keep 5 lines for context while scrolling
 set sidescrolloff=5     " same for left-right
 set splitbelow          " drr
@@ -81,20 +76,22 @@ set lazyredraw
 set showcmd
 set showmode
 set nostartofline
-set showtabline=2
+" set showtabline=2
 syntax enable
 set background=dark
 colorscheme solarized
 set shiftround
 set magic
-" set gdefault
 set matchpairs+=<:>
-" color ir_black
-" color mustang
 if &t_Co < 16
     set t_Co=16
 endif
+set viminfo='100,<50,s10,h,n~/.vimdata/viminfo
+" n is the viminfo filename
+" Configure ColorColumn
+hi ColorColumn guibg=#191919 gui=BOLD ctermbg=NONE cterm=BOLD
 
+" Configure Cursor Blinking
 set guicursor=n-v-c:block-Cursor
 set guicursor+=i:ver20-Cursor-blinkon600-blinkoff600
 set guicursor+=n-v-c:block-Cursor-blinkon600-blinkoff600
@@ -108,22 +105,22 @@ endif
 " Also switch on highlighting the last used search pattern.
 syntax on
 set hlsearch
-"
+
 " Statusline {{{1
 set statusline=   " clear the statusline for when vimrc is reloaded
-set statusline+=%#KomiteeStatus#
-set statusline+=[%n]\                      " buffer number
-set statusline+=%<%.99f\                     " file name
-set statusline+=%h%m%r%w                     " flags
-set statusline+=[%{strlen(&ft)?&ft:'none'},  " filetype
-set statusline+=%{strlen(&fenc)?&fenc:&enc}, " encoding
-set statusline+=%{&fileformat}               " file format
-set statusline+=%{HasPaste()}]               " whether we're in paste mode
-set statusline+=%{fugitive#statusline()}     " git branch
-set statusline+=%=                           " right align
-set statusline+=col:%v\                      " current column
-set statusline+=lin:%l/%L\                   " line
-set statusline+=%p%%                         " percentage through file
+
+set statusline+=[%n]\                         " buffer number
+set statusline+=%<%.99f\                      " file name
+set statusline+=%h%m%r%w                      " flags
+set statusline+=[%{strlen(&ft)?&ft:'none'}]\  " filetype
+set statusline+=%{fugitive#statusline()}\     " git branch
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+set statusline+=%=                            " right align, left comes from bufstat
+set statusline+=col:%v\                       " current column
+set statusline+=lin:%l/%L\                    " line
+set statusline+=%p%%                          " percentage through file
 
 function! HasPaste()
     if &paste
@@ -133,8 +130,8 @@ function! HasPaste()
     endif
 endfunction
 
-" Configure ColorColumn
-hi ColorColumn guibg=#191919 gui=BOLD ctermbg=NONE cterm=BOLD
+
+" AutoCommands {{{1
 
 " If we change focus away from vim, goto normal mode
 " do the same if we're in insert mode for 15 seconds
@@ -180,13 +177,6 @@ augroup nerdtree
     autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 augroup END
 
-" augroup ctrlp
-    " au!
-    " autocmd BufEnter * cal ctrlp#SetWorkingPath(2)
-" augroup END
-
-" set foldtext=CustomFoldText()
-
 " Toggles & Switches (Leader commands) {{{1
 let mapleader = ","
 let localleader = '\'
@@ -223,6 +213,8 @@ nnoremap k gk
 " start / end of line should be easier to reach than ^ and $
 nnoremap H ^
 nnoremap L $
+
+
 
 " ; should probably be the start of a command
 " nnoremap ; :
@@ -447,30 +439,6 @@ if !exists(":DiffOrig")
                 \ | wincmd p | diffthis
 endif
 
-" Custom fold text {{{2
-" fu! CustomFoldText()
-    " "get first non-blank line
-    " let fs = v:foldstart
-    " while getline(fs) =~ '^\s*$' | let fs = nextnonblank(fs + 1)
-    " endwhile
-    " if fs > v:foldend
-        " let line = getline(v:foldstart)
-    " else
-        " let line = substitute(getline(fs), '\t', repeat(' ', &tabstop), 'g')
-    " endif
-
-    " let w = winwidth(0) - &foldcolumn - (&number ? 8 : 0)
-    " let foldSize = 1 + v:foldend - v:foldstart
-    " let foldSizeStr = " " . foldSize . " lines "
-    " let foldLevelStr = repeat("+--", v:foldlevel)
-    " let lineCount = line("$")
-    " let foldPercentage = printf("[%.1f", (foldSize*1.0)/lineCount*100) . "%] "
-    " let expansionString = repeat(".", w - strwidth(foldSizeStr.line.foldLevelStr.foldPercentage))
-    " return line . expansionString . foldSizeStr . foldPercentage . foldLevelStr
-" endf
-
-
-
 " Strip trailing whitespaces  {{{2
 function! Preserve(command)
     " Preparation: save last search, and cursor position.
@@ -547,15 +515,21 @@ endf
 " :nnoremap <silent> <leader>wv :call PasteWindow('vsplit')<cr>
 
 " Configure plugins {{{1
+" Align {{{2
+vnoremap <leader>a=> :Align => =<cr>
+
+" Syntastic {{{2
+let g:syntastic_enable_signs   = 1
+let g:syntastic_auto_jump      = 1
+let g:syntastic_auto_loc_list  = 2
+" let g:syntastic_quiet_warnings = 1
+
 " ctrlp {{{2
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_dotfiles = 0
 let g:ctrlp_max_height = 20000
 let g:ctrlp_use_caching=1
 let g:ctrlp_max_files = 20000
-
-map <C-B> <ESC>:CtrlPBuffer<CR>
-map <C-M> <ESC>:CtrlPMRUFiles<CR>
 
 " Bexec {{{2
 nnoremap <silent> <unique> <F8> :call Bexec()<cr>
@@ -572,9 +546,9 @@ noremap <Leader>sl :Simplenote -l<CR>
 noremap <Leader>sn :Simplenote -n<CR>
 
 " Lusty {{{2
-noremap <Leader>a :LustyBufferExplorer<CR>
-noremap <Leader>f :LustyFilesystemExplorer<CR>
-noremap <Leader>r :LustyFilesystemExplorerFromHere<CR>
+noremap <Leader>be :LustyBufferExplorer<CR>
+noremap <Leader>fe :LustyFilesystemExplorer<CR>
+noremap <Leader>re :LustyFilesystemExplorerFromHere<CR>
 noremap <Leader>j :LustyJuggler<CR>
 
 " AutoClose
@@ -599,8 +573,11 @@ noremap <Leader>k! :bd!<CR>
 noremap <Leader>ct :CommandT<CR>
 
 " FuzzyFinder {{{2
+let g:fuf_modesDisable = []
+let g:fuf_dataDir = '~/.vimdata/fufdata'
 noremap <Leader>fb :FufBuffer<CR>
 noremap <Leader>ff :FufFile<CR>
+noremap <Leader>fm :FufMruFile<CR>
 
 " Ack {{{2
 noremap <Leader>g :Ack<space><C-r><C-w><CR>
@@ -611,7 +588,6 @@ let ackprg="~/scripts/ack"
 " When we comment something with the NERDComment Toggle, reselect
 let g:NERDCreateDefaultMappings = 0
 let g:NERDSpaceDelims = 1
-let g:NERDTreeUseExistingWindows = 1
 vmap <leader>cc <plug>NERDCommenterToggle<cr>vgv
 nmap <leader>cc <plug>NERDCommenterToggle
 vmap <leader>cb <plug>NERDCommenterSexy<cr>vgv
@@ -622,6 +598,7 @@ nmap <leader>c$ <plug>NERDCommenterToEOL
 
 
 " NERDTree.vim {{{2
+let g:NERDTreeUseExistingWindows = 1
 let NERDTreeIgnore=['\~$', '\.swp$', '^CVS$', '\.svn$', '^CVSROOT$', '^\.git$', '\.pyc$', '\.pyo$', '\.swp$']
 noremap <Leader>dd :NERDTreeToggle<CR>
 noremap <Leader>df :NERDTreeFind<CR>
@@ -673,11 +650,6 @@ let g:SuperTabDefaultCompletionType = "context"
 " Load abbreviations
 if filereadable(expand("~/.vim/abbrev"))
     source ~/.vim/abbrev
-endif
-
-" Post-local loading (site customizations) {{{1
-if filereadable(expand("~") . "/.vimrc.post-local")
-    source ~/.vimrc.post-local
 endif
 
 " Modelines: {{{1
