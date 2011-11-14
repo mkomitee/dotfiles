@@ -35,7 +35,6 @@ import re
 import subprocess
 import csv
 
-
 class Subtree(object):
 
     def __init__(self, data):
@@ -84,7 +83,6 @@ def read_subtrees(config_file):
     config = csv.reader(open(config_file), delimiter=',')
     subtrees = [Subtree(line) for line in config if not line[0].startswith('#')]
     return subtrees
-
 
 if __name__ == '__main__':
     git_status()

@@ -10,7 +10,6 @@ vim/bundle,git://github.com/honza/snipmate-snippets.git
 vim/bundle,git://github.com/kien/ctrlp.vim.git
 vim/bundle,git://github.com/majutsushi/tagbar.git
 vim/bundle,git://github.com/mkomitee/vim-gf-python.git
-vim/bundle,git://github.com/rson/vim-bufstat.git
 vim/bundle,git://github.com/scrooloose/syntastic.git
 vim/bundle,git://github.com/sjbach/lusty.git
 vim/bundle,git://github.com/spiiph/vim-space.git
@@ -24,7 +23,6 @@ vim/bundle,git://github.com/vim-scripts/L9.git
 vim/bundle,git://github.com/vim-scripts/ShowMarks.git
 vim/bundle,git://github.com/vim-scripts/The-NERD-Commenter.git
 vim/bundle,git://github.com/vim-scripts/ack.vim.git
-vim/bundle,git://github.com/vim-scripts/bufexplorer.zip.git
 vim/bundle,git://github.com/vim-scripts/endwise.vim.git
 vim/bundle,git://github.com/vim-scripts/fugitive.vim.git
 vim/bundle,git://github.com/vim-scripts/pep8.git

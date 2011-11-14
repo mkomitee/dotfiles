@@ -108,22 +108,19 @@ set hlsearch
 
 " Statusline {{{1
 set statusline=   " clear the statusline for when vimrc is reloaded
-set statusline+=%#KomiteeStatus#
-set statusline+=[%n]\                      " buffer number
-set statusline+=%<%.99f\                     " file name
+
+set statusline+=[%n]\                         " buffer number
+set statusline+=%<%.99f\                      " file name
+set statusline+=%h%m%r%w                      " flags
+set statusline+=[%{strlen(&ft)?&ft:'none'}]\  " filetype
+set statusline+=%{fugitive#statusline()}\     " git branch
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-set statusline+=%h%m%r%w                     " flags
-set statusline+=[%{strlen(&ft)?&ft:'none'},  " filetype
-set statusline+=%{strlen(&fenc)?&fenc:&enc}, " encoding
-set statusline+=%{&fileformat}               " file format
-set statusline+=%{HasPaste()}]               " whether we're in paste mode
-set statusline+=%{fugitive#statusline()}     " git branch
-set statusline+=%=                           " right align
-set statusline+=col:%v\                      " current column
-set statusline+=lin:%l/%L\                   " line
-set statusline+=%p%%                         " percentage through file
+set statusline+=%=                            " right align, left comes from bufstat
+set statusline+=col:%v\                       " current column
+set statusline+=lin:%l/%L\                    " line
+set statusline+=%p%%                          " percentage through file
 
 function! HasPaste()
     if &paste
@@ -442,30 +439,6 @@ if !exists(":DiffOrig")
                 \ | wincmd p | diffthis
 endif
 
-" Custom fold text {{{2
-" fu! CustomFoldText()
-    " "get first non-blank line
-    " let fs = v:foldstart
-    " while getline(fs) =~ '^\s*$' | let fs = nextnonblank(fs + 1)
-    " endwhile
-    " if fs > v:foldend
-        " let line = getline(v:foldstart)
-    " else
-        " let line = substitute(getline(fs), '\t', repeat(' ', &tabstop), 'g')
-    " endif
-
-    " let w = winwidth(0) - &foldcolumn - (&number ? 8 : 0)
-    " let foldSize = 1 + v:foldend - v:foldstart
-    " let foldSizeStr = " " . foldSize . " lines "
-    " let foldLevelStr = repeat("+--", v:foldlevel)
-    " let lineCount = line("$")
-    " let foldPercentage = printf("[%.1f", (foldSize*1.0)/lineCount*100) . "%] "
-    " let expansionString = repeat(".", w - strwidth(foldSizeStr.line.foldLevelStr.foldPercentage))
-    " return line . expansionString . foldSizeStr . foldPercentage . foldLevelStr
-" endf
-
-
-
 " Strip trailing whitespaces  {{{2
 function! Preserve(command)
     " Preparation: save last search, and cursor position.
@@ -558,9 +531,6 @@ let g:ctrlp_max_height = 20000
 let g:ctrlp_use_caching=1
 let g:ctrlp_max_files = 20000
 
-" nnoremap <leader>b :CtrlPBuffer<cr>
-" nnoremap <leader>m :CtrlPMRUFiles<cr>
-
 " Bexec {{{2
 nnoremap <silent> <unique> <F8> :call Bexec()<cr>
 vnoremap <silent> <unique> <F8> :call BexecVisual()<cr>
@@ -576,9 +546,9 @@ noremap <Leader>sl :Simplenote -l<CR>
 noremap <Leader>sn :Simplenote -n<CR>
 
 " Lusty {{{2
-noremap <Leader>b :LustyBufferExplorer<CR>
-noremap <Leader>f :LustyFilesystemExplorer<CR>
-noremap <Leader>r :LustyFilesystemExplorerFromHere<CR>
+noremap <Leader>be :LustyBufferExplorer<CR>
+noremap <Leader>fe :LustyFilesystemExplorer<CR>
+noremap <Leader>re :LustyFilesystemExplorerFromHere<CR>
 noremap <Leader>j :LustyJuggler<CR>
 
 " AutoClose
