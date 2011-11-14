@@ -76,7 +76,7 @@ set lazyredraw
 set showcmd
 set showmode
 set nostartofline
-set showtabline=2
+" set showtabline=2
 syntax enable
 set background=dark
 colorscheme solarized
