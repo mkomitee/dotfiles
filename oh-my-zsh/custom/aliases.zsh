@@ -50,9 +50,9 @@ alias dirs='dirs -v'
 alias rm='nocorrect rm'
 alias rmdir='nocorrect rmdir'
 alias history='fc -dl 1'
-# alias emacsclient='emacsclient -a emacs -n'
-# alias emacs='emacsclient -a emacs -n'
 alias sudoenv='sudo -E zsh'
+alias tasks='t --task-dir=~/.tasks --list=tasks'
+alias task='t --task-dir=~/.tasks --list=tasks'
 alias t='t --task-dir=~/.tasks --list=tasks'
 
 # vim: ft=sh fdm=marker
