@@ -43,7 +43,7 @@ set backupdir=$HOME/.vimdata/vimbackup/ " backup files
 set directory=$HOME/.vimdata/vimswap/   " swap files
 set viewdir=$HOME/.vimdata/vimviews/    " view files
 set laststatus=2        " always show the status line
-set clipboard=unnamedplus,unnamed,autoselect
+" set clipboard=unnamedplus,unnamed,autoselect
 set scrolloff=5         " keep 5 lines for context while scrolling
 set sidescrolloff=5     " same for left-right
 set splitbelow          " drr
