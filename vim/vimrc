@@ -1,112 +1,167 @@
 
-" Folding cheet sheet
-" zR    open all folds
-" zM    close all folds
-" za    toggle fold at cursor position
-" zj    move down to start of next fold
-" zk    move up to end of previous fold
+" Preamble     ------------------------------------------------------------- {{{
 
-" Load Plugins. {{{1
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
-
-" Setup directories {{{1
 silent execute '!mkdir -p $HOME/.vimdata/vimbackup'
 silent execute '!mkdir -p $HOME/.vimdata/vimswap'
 silent execute '!mkdir -p $HOME/.vimdata/vimviews'
+silent execute '!mkdir -p $HOME/.vimdata/vimundo'
 silent execute '!mkdir -p $HOME/.vimdata/fufdata'
-
-" Preferences {{{1
-" Use Vim settings, rather then Vi settings (much better!).
-" This must be first, because it changes other options as a side effect.
 filetype plugin on
 filetype plugin indent on
-set showfulltag
-set cmdheight=1
+syntax enable
 set nocompatible
+for file in split(glob("$HOME/.vim/functions/*.vim"))
+    exe "source " . file
+endfor
+
+" }}}
+" Preferences -------------------------------------------------------------- {{{
+set encoding=utf-8
+set fileformats=unix,mac,dos
+set autoindent
+set showmode
+set showcmd
+set hidden
+set visualbell t_vb=  " No bells; No flashing!
+set ttyfast
 set backspace=indent,eol,start
-set history=10000       " keep lots of command line history
-set undolevels=10000    " lots of undoing too
-set showcmd             " display incomplete commands
-set incsearch           " do incremental searching
-set novisualbell 
-set t_vb=    " no beep or bell
-set number              " line numbers
-set tabstop=4           " Tab counts as 4 spaces
-set softtabstop=4       " Soft tabs ARE 4 spaces
-set shiftwidth=4        " Autoindent using 4 spaces
-set textwidth=100
-set expandtab           " Expand tabs to spaces
-set hidden              " buffers not in the foreground are hidden
-set nowrap              " No wrapping
-set backupdir=$HOME/.vimdata/vimbackup/ " backup files
-set directory=$HOME/.vimdata/vimswap/   " swap files
-set viewdir=$HOME/.vimdata/vimviews/    " view files
-set laststatus=2        " always show the status line
-" set clipboard=unnamedplus,unnamed,autoselect
-set scrolloff=5         " keep 5 lines for context while scrolling
-set sidescrolloff=5     " same for left-right
-set splitbelow          " drr
-set ignorecase          " case insensitive searching, ...
-set smartcase           " unless the search term includes a capital
-set title               " vim changes xterm window title
-set foldcolumn=2        " add 2 to the gutter to show folds
+set number
+set laststatus=2
+set history=10000
+set undofile
+set undoreload=10000
+set undolevels=10000
+set list
+set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮,trail:·
+set lazyredraw
+set matchtime=3
+set showbreak=↪
+set splitbelow
+set splitright
+set fillchars=diff:⣿
+set ttimeout
+set notimeout
+set nottimeout
+set autowrite
+set shiftround
+set autoread
+set title
+set dictionary=$HOME/.vimdata/words
+set showfulltag
 set shortmess+=filmnrxoOtTI
+set foldcolumn=2
 set iskeyword-=:
 set iskeyword-=;
 set iskeyword-=,
 set iskeyword+=_
-set listchars=precedes:<,extends:>,tab:\|-,trail:·
-set virtualedit=block
 set display+=lastline
-set nolist
-set wildmenu
-set nowarn
 set diffopt=filler,iwhite
-set autoread
-"set complete=.,w,b,u,U,t,i,d
-set ttyfast
-set fileformats=unix,mac,dos
 set updatecount=10
 set completeopt=longest,menu,menuone
-set wildmode=longest:full,list:full
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*.so,*/CVS/*,*.pyc,*.pyo,.*
 set switchbuf=usetab
-set lazyredraw
-set showcmd
-set showmode
 set nostartofline
-" set showtabline=2
-syntax enable
-set background=dark
-colorscheme solarized
-set shiftround
-set magic
-set matchpairs+=<:>
-if &t_Co < 16
-    set t_Co=16
-endif
 set viminfo='100,<50,s10,h,n~/.vimdata/viminfo
-" n is the viminfo filename
-" Configure ColorColumn
-hi ColorColumn guibg=#191919 gui=BOLD ctermbg=NONE cterm=BOLD
 
-" Configure Cursor Blinking
-set guicursor=n-v-c:block-Cursor
-set guicursor+=i:ver20-Cursor-blinkon600-blinkoff600
-set guicursor+=n-v-c:block-Cursor-blinkon600-blinkoff600
-
-" In many terminal emulators the mouse works just fine, thus enable it.
 if has('mouse')
     set mouse=a
 endif
-
-" Switch syntax highlighting on, when the terminal has colors
-" Also switch on highlighting the last used search pattern.
-syntax on
+" }}}
+" Searching & Movement ----------------------------------------------------- {{{
+set incsearch
+set ignorecase
+set smartcase
 set hlsearch
+set gdefault
+set showmatch
+set matchpairs+=<:>
+set magic
 
-" Statusline {{{1
+noremap <leader><space> :nohl<cr>:call clearmatches()<cr>
+
+" Open a Quickfix window for the last search.
+nnoremap <silent> <leader>/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
+
+set scrolloff=5
+set sidescroll=1
+set sidescrolloff=10
+
+set virtualedit+=block
+
+" Keep search matches in the middle of the window and pulse the line when moving
+" to them.
+nnoremap n nzzzv:call PulseCursorLine()<cr>
+nnoremap N Nzzzv:call PulseCursorLine()<cr>
+nnoremap g; g;zzzv:call PulseCursorLine()<cr>
+nnoremap g, g,zzzv:call PulseCursorLine()<cr>
+
+" j and k will go one line, even if they're wrapped
+nnoremap j gj
+nnoremap k gk
+
+" start / end of line should be easier to reach than ^ and $
+nnoremap H ^
+nnoremap L g_
+
+" when using marks, all by default mark columns as well
+nnoremap ' `
+
+" }}}
+" Disable annoying maps ---------------------------------------------------- {{{
+noremap <F1> <nop>
+noremap <K> <nop>
+"
+" }}}
+" Defaults for tabs, spaces, & wrapping ------------------------------------ {{{
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set expandtab
+set wrap
+set textwidth=80
+set formatoptions=croqln
+call ToggleColorColumn('on')
+" }}}
+" Backups & State ---------------------------------------------------------- {{{
+set backupdir=$HOME/.vimdata/vimbackup/
+set directory=$HOME/.vimdata/vimswap/
+set viewdir=$HOME/.vimdata/vimviews/
+set undodir=$HOME/.vimdata/vimundo/
+" }}}
+" Wildmode ----------------------------------------------------------------- {{{
+set wildmenu
+set wildmode=longest:full,list:full
+
+set wildignore+=.git,.hg,.svn,CVS
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg
+set wildignore+=*.o,*.so
+set wildignore+=*.sw?
+set wildignore+=*.DS_Store
+set wildignore+=*.pyc,*.pyo
+" }}}
+" Colorscheme -------------------------------------------------------------- {{{
+set background=dark
+colorscheme solarized
+
+if &t_Co < 16
+    set t_Co=16
+endif
+
+hi ColorColumn guibg=#191919 gui=BOLD ctermbg=NONE cterm=BOLD
+
+" Highlight VCS conflict markers
+match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
+
+set guicursor=n-v-c:block-Cursor
+set guicursor+=i:ver20-Cursor-blinkon600-blinkoff600
+set guicursor+=n-v-c:block-Cursor-blinkon600-blinkoff600
+" }}}
+" Leaders ------------------------------------------------------------------ {{{
+let mapleader = ","
+let localleader = '\\'
+" }}}
+" Statusline --------------------------------------------------------------- {{{
 set statusline=   " clear the statusline for when vimrc is reloaded
 
 set statusline+=[%n]\                         " buffer number
@@ -122,15 +177,7 @@ set statusline+=col:%v\                       " current column
 set statusline+=lin:%l/%L\                    " line
 set statusline+=%p%%                          " percentage through file
 
-function! HasPaste()
-    if &paste
-        return ',paste'
-    else
-        return ''
-    endif
-endfunction
-
-
+" }}}
 " AutoCommands {{{1
 
 " If we change focus away from vim, goto normal mode
@@ -141,6 +188,19 @@ augroup exit_insert_mode
     au CursorHoldI * stopinsert
     au InsertEnter * let updaterestore=&updatetime | set updatetime=15000
     au InsertLeave * let &updatetime=updaterestore
+augroup END
+
+" feedback on the statusline that we're in insert mode
+augroup statuslinecolor
+    au!
+    au InsertEnter * hi StatusLine ctermfg=196 guifg=#FF3145
+    au InsertLeave * hi StatusLine ctermfg=14 ctermbg=0 guifg=#93a1a1 guibg=#073642
+
+augroup END
+
+augroup resize
+    au!
+    au VimResized * exe "normal! \<c-w>="
 augroup END
 
 augroup cursor
@@ -178,26 +238,6 @@ augroup nerdtree
 augroup END
 
 " Toggles & Switches (Leader commands) {{{1
-let mapleader = ","
-let localleader = '\'
-
-nnoremap <F3> :nohl<return>
-
-" dont reach for escape when in insert mode, just jj
-inoremap jj <esc>
-
-" Force yourself to use jk instead of esc
-" inoremap <esc> <nop>
-
-" try to use hjkl instead of arrow keys
-" nnoremap <Down> <nop>
-" nnoremap <Up> <nop>
-" nnoremap <Left> <nop>
-" nnoremap <Right> <nop>
-" inoremap <Down> <nop>
-" inoremap <Up> <nop>
-" inoremap <Left> <nop>
-" inoremap <Right> <nop>
 
 " zT will move the current line to 1/4th from the top of the window
 nnoremap <expr> zT 'zt' . winheight(0)/4 . '<c-y>'
@@ -205,32 +245,9 @@ nnoremap <expr> zT 'zt' . winheight(0)/4 . '<c-y>'
 nnoremap <expr> zB 'zb' . winheight(0)/4 . '<c-e>'
 
 nnoremap <leader>v :vsplit<cr>
-
-" j and k will go one line, even if they're wrapped
-nnoremap j gj
-nnoremap k gk
-
-" start / end of line should be easier to reach than ^ and $
-nnoremap H ^
-nnoremap L $
-
-
-
-" ; should probably be the start of a command
-" nnoremap ; :
-"
-" when using marks, all by default mark columns as well
-nnoremap ' `
-
-" very magic searching by default
-" nnoremap / /\v
-" nnoremap ? ?\v
+nnoremap <leader>h :split<cr>
 
 "C-{hjkl} to move text or text blocks left down up or right
-" nnoremap <C-j> :m+<CR>==
-" nnoremap <C-k> :m-2<CR>==
-" nnoremap <C-h> <<
-" nnoremap <C-l> >>
 inoremap <C-j> <Esc>:m+<CR>==gi
 inoremap <C-k> <Esc>:m-2<CR>==gi
 inoremap <C-h> <Esc><<`]a
@@ -239,10 +256,6 @@ vnoremap <C-j> :m'>+<CR>gv=gv
 vnoremap <C-k> :m-2<CR>gv=gv
 vnoremap <C-h> <gv
 vnoremap <C-l> >gv
-
-" redraw window so search terms are centered
-noremap n nzz
-noremap N Nzz
 
 noremap <Leader>c :close<cr>
 
@@ -260,18 +273,6 @@ if bufwinnr(1)
     noremap + <c-W>+
     noremap - <c-W>-
 endif
-
-" Make cursor move ask i'd expect with wrapped lines:
-" nnoremap <Down> gj
-" nnoremap <Up> gk
-" nnoremap j gj
-" nnoremap k gk
-" inoremap <Down> <Esc>gji
-" inoremap <Up> <Esc>gki
-
-" Open the current buffer in a vertically split window with the next page of
-" text on it.
-noremap <silent> <Leader>vs ggzR:<C-u>let @z=&so<CR>:set so=0 noscb<CR>:set columns=178<CR>:bo vs<CR>zRLjzt:setl scb<CR><C-w>p:setl scb<CR>:let &so=@z<CR>
 
 " Easier navigation between open windows
 nnoremap <C-k> <C-W>k
@@ -390,16 +391,6 @@ function! DiffOrig()
     endif
 endfunction
 
-function! ToggleColorColumn(toggle)
-    if exists('+colorcolumn')
-        if a:toggle == 'on'
-            setlocal colorcolumn=+1,+2,+3,+4,+5,+6,+7,+8,+9,+10
-        else
-            setlocal colorcolumn=
-        endif
-    else
-    endif
-endfunction
 
 " Toggles for location and quickfix window {{{2
 function! GetBufferList()
