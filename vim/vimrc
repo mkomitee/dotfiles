@@ -182,22 +182,18 @@ set statusline+=%p%%                          " percentage through file
 
 " If we change focus away from vim, goto normal mode
 " do the same if we're in insert mode for 15 seconds
+" feedback on the statusline that we're in insert mode
 augroup exit_insert_mode
     au!
     au FocusLost,TabLeave * call feedkeys("\<C-\>\<C-n>")
     au CursorHoldI * stopinsert
     au InsertEnter * let updaterestore=&updatetime | set updatetime=15000
     au InsertLeave * let &updatetime=updaterestore
-augroup END
-
-" feedback on the statusline that we're in insert mode
-augroup statuslinecolor
-    au!
     au InsertEnter * hi StatusLine ctermfg=196 guifg=#FF3145
     au InsertLeave * hi StatusLine ctermfg=14 ctermbg=0 guifg=#93a1a1 guibg=#073642
-
 augroup END
 
+" Equal all folds on resize
 augroup resize
     au!
     au VimResized * exe "normal! \<c-w>="
@@ -265,24 +261,24 @@ noremap <Leader>c :close<cr>
 " <space>= Equalizes the size of all windows
 " + Increases the size of the current window
 " - Decreases the size of the current window
-noremap <space> <c-W>w
-noremap <space>n <c-W>w
-noremap <space><space> <C-W>w<C-W>_
-noremap <space>= <c-W>=
+noremap <space> <c-W>wzz:call PulseCursorLine()<cr>
+noremap <space>n <c-W>wzz:call PulseCursorLine()<cr>
+noremap <space><space> <C-W>w<C-W>_zz:call PulseCursorLine()<cr>
+noremap <space>= <c-W>=zz:call PulseCursorLine()<cr>
 if bufwinnr(1)
     noremap + <c-W>+
     noremap - <c-W>-
 endif
 
 " Easier navigation between open windows
-nnoremap <C-k> <C-W>k
-nnoremap <C-j> <C-W>j
-nnoremap <C-h> <C-W>h
-nnoremap <C-l> <C-W>l
-nnoremap <C-Right> <C-W>lzz
-nnoremap <C-Left> <C-W>hzz
-nnoremap <C-Up> <C-W>kzz
-nnoremap <C-Down> <C-W>jzz
+nnoremap <C-k> <C-W>kzz:call PulseCursorLine()<cr>
+nnoremap <C-j> <C-W>jzz:call PulseCursorLine()<cr>
+nnoremap <C-h> <C-W>hzz:call PulseCursorLine()<cr>
+nnoremap <C-l> <C-W>lzz:call PulseCursorLine()<cr>
+nnoremap <C-Right> <C-W>lzz:call PulseCursorLine()<cr>
+nnoremap <C-Left> <C-W>hzz:call PulseCursorLine()<cr>
+nnoremap <C-Up> <C-W>kzz:call PulseCursorLine()<cr>
+nnoremap <C-Down> <C-W>jzz:call PulseCursorLine()<cr>
 
 " Reselect visually selected text after indenting
 vnoremap > >gv
@@ -296,25 +292,15 @@ nnoremap <Leader>< <C-W><
 " make Y consistant with C and D
 noremap Y y$
 
-" Allow tab completion
-"inoremap <Tab> <C-N>
-"inoremap <S-Tab> <C-P>
-
 " Change buffers with tab and shift-tab
-noremap <Leader><tab> :BufExplorer<cr>
 noremap <tab> :bn<cr>
 noremap <s-tab> :bp<cr>
-
 
 " Easily modify vimrc
 nnoremap <leader>ev :e $MYVIMRC<CR>
 nnoremap <leader>egv :e$MYGVIMRC<CR>
 nnoremap <leader>sv :so $MYVIMRC<CR>
 nnoremap <leader>sgv :so $MYGVIMRC<CR>
-
-" Move current line down/up
-" nnoremap <C-Down> ]e
-" nnoremap <C-Up> [e
 
 " Move visually selected lines down/up
 vnoremap <C-Down> ]egv
