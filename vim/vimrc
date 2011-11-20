@@ -322,93 +322,16 @@ cmap w!! w !sudo tee % >/dev/null<cr>
 nnoremap <Leader>P :set paste<CR>"*p;set nopaste<CR>
 
 " Custom commands and functions {{{1
-function! MarkWindowSwap()
-    let g:markedWinNum = winnr()
-endfunction
-
-function! DoWindowSwap()
-    "Mark destination
-    let curNum = winnr()
-    let curBuf = bufnr( "%" )
-    exe g:markedWinNum . "wincmd w"
-    "Switch to source and shuffle dest->source
-    let markedBuf = bufnr( "%" )
-    "Hide and open so that we aren't prompted and keep history
-    exe 'hide buf' curBuf
-    "Switch to dest and shuffle source->dest
-    exe curNum . "wincmd w"
-    "Hide and open so that we aren't prompted and keep history
-    exe 'hide buf' markedBuf 
-endfunction
-
 nnoremap <silent> <leader>mw :call MarkWindowSwap()<CR>
 nnoremap <silent> <leader>pw :call DoWindowSwap()<CR>
 
 
-" view diff between current buffer and original file it was loaded from {{{2
+" Diff against whats on disk
 nnoremap <Leader>do :call DiffOrig()<CR>
 
-function! DiffOrig()
-    if !exists("b:diff_active") && &buftype == "nofile"
-        echoerr "E: Cannot diff a scratch buffer"
-        return -1
-    elseif expand("%") == ""
-        echoerr "E: Buffer doesn't exist on disk"
-        return -1
-    endif
-
-    if !exists("b:diff_active") || b:diff_active == 0
-        let b:diff_active = 1
-        let l:orig_filetype = &l:filetype
-
-        leftabove vnew
-        set buftype=nofile
-        read #
-        0delete_
-        let &l:filetype = l:orig_filetype
-        diffthis
-        wincmd p
-        diffthis
-    else
-        diffoff
-        wincmd p
-        bdelete
-        let b:diff_active = 0
-    endif
-endfunction
-
-
 " Toggles for location and quickfix window {{{2
-function! GetBufferList()
-    redir =>buflist
-    silent! ls
-    redir END
-    return buflist
-endfunction
-
-function! ToggleList(bufname, pfx)
-    let buflist = GetBufferList()
-    for bufnum in map(filter(split(buflist, '\n'), 'v:val =~ "'.a:bufname.'"'), 'str2nr(matchstr(v:val, "\\d\\+"))')
-        if bufwinnr(bufnum) != -1
-            exec(a:pfx.'close')
-            return
-        endif
-    endfor
-    if a:pfx == 'l' && len(getloclist(0)) == 0
-        echohl ErrorMsg
-        echomsg "Location List is Empty."
-        return
-    endif
-    let winnr = winnr()
-    exec(a:pfx.'open')
-    if winnr() != winnr
-        wincmd p
-    endif
-endfunction
-
 nnoremap <silent> <leader>ll :call ToggleList("Location List", 'l')<CR>
 nnoremap <silent> <leader>qf :call ToggleList("Quickfix List", 'c')<CR>
-
 
 " Diff between buffer and the unwritten file {{{2
 if !exists(":DiffOrig")
@@ -492,6 +415,8 @@ endf
 " :nnoremap <silent> <leader>wv :call PasteWindow('vsplit')<cr>
 
 " Configure plugins {{{1
+" Yankring {{{2
+nnoremap <leader>y :YRShow<cr>
 " Align {{{2
 vnoremap <leader>a=> :Align => =<cr>
 
@@ -600,25 +525,6 @@ endfunction
 let g:notes_location=glob("~/Docs/Notes")
 
 " Scratch {{{2
-function! ToggleMyScratch()
-    let file_name     = '~/.scratch'
-    let buffer_number = bufnr(file_name)
-    let window_number = bufwinnr(buffer_number)
-    if buffer_number == -1
-        exe 'split' . file_name
-    else
-        if window_number != -1
-            if winnr() != window_number
-                exe window_number . "wincmd w"
-            else
-                write
-                quit
-            endif
-        else
-            exe 'split' . file_name
-        endif
-    endif
-endfunction
 noremap <leader>s :call ToggleMyScratch()<CR>
 
 " Supertab {{{2
