@@ -1248,7 +1248,14 @@ function! s:TreeFileNode.openInNewTab(options)
         call s:closeTreeIfQuitOnOpen()
     endif
 
-    exec "tabedit " . self.path.str({'format': 'Edit'})
+    let tab = s:findWindow()
+    if tab > -1 && g:NERDTreeUseExistingWindows ==# '1'
+        exec "normal!" . tab . 'gt'
+        let w = bufwinnr(self.path.str())
+        exec w . 'winc w'
+    else
+        exec "tabedit " . self.path.str({'format': 'Edit'})
+    end
 
     if has_key(a:options, 'stayInCurrentTab') && a:options['stayInCurrentTab']
         exec "tabnext " . currentTab
@@ -3567,6 +3574,21 @@ function! s:toggle(dir)
 endfunction
 "SECTION: Interface bindings {{{1
 "============================================================
+"FUNCTION: s:findNodeWindow() {{{2
+"If the selected node is a file, and it is open in a window on any tab, 
+"return the tab number, otherwise return -1
+function! s:findWindow()
+    let treenode = s:TreeFileNode.GetSelected()
+    for t in range(tabpagenr('$'))
+        for b in tabpagebuflist(t+1)
+            if treenode.path.str() == expand('#' . b . ':p')
+                return t+1
+            endif
+        endfor
+    endfor
+    return -1
+endfunction
+"
 "FUNCTION: s:activateNode(forceKeepWindowOpen) {{{2
 "If the current node is a file, open it in the previous window (or a new one
 "if the previous is modified). If it is a directory then it is opened.
@@ -3580,9 +3602,11 @@ function! s:activateNode(forceKeepWindowOpen)
 
     let treenode = s:TreeFileNode.GetSelected()
     if treenode != {}
-        let w = bufwinnr(treenode.path.str())
-        if w > -1 && g:NERDTreeUseExistingWindows ==# '1'
-            exe w . 'winc w'
+        let tab = s:findWindow()
+        if tab > -1 && g:NERDTreeUseExistingWindows ==# '1'
+            exec "normal!" . tab . 'gt'
+            let w = bufwinnr(treenode.path.str())
+            exec w . 'winc w'
         else
             call treenode.activate(a:forceKeepWindowOpen)
         endif
@@ -3923,9 +3947,11 @@ endfunction
 function! s:openEntrySplit(vertical, forceKeepWindowOpen)
     let treenode = s:TreeFileNode.GetSelected()
     if treenode != {}
-        let w = bufwinnr(treenode.path.str())
-        if w > -1 && g:NERDTreeUseExistingWindows ==# '1'
-            exe w . 'winc w'
+        let tab = s:findWindow()
+        if tab > -1 && g:NERDTreeUseExistingWindows ==# '1'
+            exec "normal!" . tab . 'gt'
+            let w = bufwinnr(treenode.path.str())
+            exec w . 'winc w'
         else
             if a:vertical
                 call treenode.openVSplit()
