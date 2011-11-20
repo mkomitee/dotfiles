@@ -39,9 +39,8 @@ fu! s:opts()
 		\ : exists('+hi') ? &hi : 20
 	unl! g:ctrlp_max_history
 	" Note: wildignore is ignored when using **
-	let s:glob      = s:dotfiles ? '.*\|*' : '*'
-	let s:cache_dir = exists('g:ctrlp_cache_dir') ? g:ctrlp_cache_dir : $HOME
-	let s:maxdepth  = min([s:maxdepth, 100])
+	let s:glob = s:dotfiles ? '.*\|*' : '*'
+	let s:maxdepth = min([s:maxdepth, 100])
 	let g:ctrlp_builtins = 2
 	if !empty(s:extensions) | for each in s:extensions
 		exe 'ru autoload/ctrlp/'.each.'.vim'
@@ -676,6 +675,7 @@ fu! s:CreateNewFile() "{{{
 		let optyp = fname
 	en
 	if exists('optyp')
+		let filpath = getcwd().s:lash.optyp
 		cal s:insertcache(str)
 		cal s:PrtExit()
 		if s:newfop == 1
@@ -688,7 +688,7 @@ fu! s:CreateNewFile() "{{{
 		el
 			let cmd = s:normcmd('e')
 		en
-		cal s:openfile(cmd, getcwd().s:lash.optyp)
+		cal s:openfile(cmd, filpath)
 	en
 endf "}}}
 " * OpenMulti() {{{
@@ -743,13 +743,13 @@ fu! s:OpenMulti()
 	if ntab | tabnew | en
 	let [ic, wnr] = [1, exists('wnr') ? wnr : 1]
 	let cmds = { 'v': 'vne', 'h': 'new', 't': 'tabe' }
-	let spt = len(s:opmul) > 1 ? cmds[s:opmul[1]] : 'vne'
+	let spt = len(s:opmul) > 1 ? cmds[matchstr(s:opmul, '\w$')] : 'vne'
+	let nr = matchstr(s:opmul, '^\d\+')
 	exe wnr.'winc w'
 	for key in keys(mkd)
 		let cmd = ic == 1 ? 'e' : spt
 		cal s:openfile(cmd, mkd[key])
-		if s:opmul[0] > 1 && s:opmul[0] < ic | clo!
-		el | let ic += 1 | en
+		if nr > 1 && nr < ic | clo! | el | let ic += 1 | en
 	endfo
 endf
 "}}}
@@ -779,6 +779,18 @@ fu! s:comptime(s1, s2)
 	" By last modified time
 	let [time1, time2] = [getftime(a:s1), getftime(a:s2)]
 	retu time1 == time2 ? 0 : time1 < time2 ? 1 : -1
+endf
+
+fu! s:comparent(s1, s2)
+	" By same parent dir
+	if match(s:crfpath, escape(getcwd(), '.^$*\')) >= 0
+		let [as1, as2] = [getcwd().s:lash.a:s1, getcwd().s:lash.a:s2]
+		let [loc1, loc2] = [s:getparent(as1), s:getparent(as2)]
+		if loc1 == s:crfpath && loc2 != s:crfpath | retu -1 | en
+		if loc2 == s:crfpath && loc1 != s:crfpath | retu 1  | en
+		retu 0
+	en
+	retu 0
 endf
 
 fu! s:matchlens(str, pat, ...)
@@ -811,9 +823,13 @@ endf
 
 fu! s:mixedsort(s1, s2)
 	let [cml, cln] = [s:compmatlen(a:s1, a:s2), s:complen(a:s1, a:s2)]
-	if s:itemtype =~ '0\|1\|2' && s:height < 21
-		let [ctm, wrd] = [s:comptime(a:s1, a:s2), s:compword(a:s1, a:s2)]
-		retu 6 * cml + 3 * ctm + 2 * cln + wrd
+	if s:itemtype < 3 && s:height < 51
+		let par = s:comparent(a:s1, a:s2)
+		if s:height < 21
+			let [ctm, wrd] = [s:comptime(a:s1, a:s2), s:compword(a:s1, a:s2)]
+			retu 12 * cml + 6 * par + 3 * ctm + 2 * cln + wrd
+		en
+		retu 3 * cml + 2 * par + cln
 	en
 	retu 2 * cml + cln
 endf
@@ -864,8 +880,16 @@ fu! s:dirfilter(val)
 endf
 
 fu! s:parentdir(curr)
-	let parent = substitute(a:curr, '[\/]\zs[^\/]\+[\/]\?$', '', '')
+	let parent = s:getparent(a:curr)
 	if parent != a:curr | cal s:setdir(parent) | en
+endf
+
+fu! s:getparent(item)
+	retu split(a:item, '[\/]\ze[^\/]\+[\/:]\?$')[0]
+endf
+
+fu! s:getgrand(item)
+	retu split(a:item, '[\/]\ze[^\/]\+[\/][^\/]\+[\/:]\?$')[0]
 endf
 
 fu! s:createparentdirs(arr)
@@ -877,7 +901,7 @@ fu! s:createparentdirs(arr)
 endf
 
 fu! s:listdirs(path, parent)
-	let [str, dirs] = [split(s:glbpath(a:path, '*', 1), "\n"), '']
+	let [str, dirs] = ['', split(s:glbpath(a:path, '*', 1), "\n")]
 	for entry in filter(dirs, 'isdirectory(v:val)')
 		let str .= a:parent . split(entry, '[\/]')[-1] . "\n"
 	endfo
@@ -902,7 +926,7 @@ fu! s:findroot(curr, mark, depth, type)
 			let s:foundroot = 1
 		en
 	el
-		let parent = substitute(a:curr, '[\/]\zs[^\/]\+[\/:]\?$', '', '')
+		let parent = s:getparent(a:curr)
 		if parent != a:curr | cal s:findroot(parent, a:mark, depth, a:type) | en
 	en
 endf
