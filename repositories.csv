@@ -21,6 +21,7 @@ vim/bundle,git://github.com/vim-scripts/FuzzyFinder.git
 vim/bundle,git://github.com/vim-scripts/L9.git
 vim/bundle,git://github.com/vim-scripts/ShowMarks.git
 vim/bundle,git://github.com/vim-scripts/The-NERD-Commenter.git
+vim/bundle,git://github.com/vim-scripts/YankRing.vim.git
 vim/bundle,git://github.com/vim-scripts/ack.vim.git
 vim/bundle,git://github.com/vim-scripts/endwise.vim.git
 vim/bundle,git://github.com/vim-scripts/fugitive.vim.git
