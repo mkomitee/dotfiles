@@ -13,3 +13,5 @@ setlocal expandtab
 setlocal smartindent
 setlocal keywordprg=pydoc
 SyntasticDisable
+
+iabbrev s self
