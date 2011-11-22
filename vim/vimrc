@@ -30,8 +30,10 @@ set backspace=indent,eol,start
 set number
 set laststatus=2
 set history=10000
-set undofile
-set undoreload=10000
+if exists('&undofile')
+    set undofile
+    set undoreload=10000
+endif
 set undolevels=10000
 set list
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮,trail:·
@@ -127,7 +129,9 @@ call ToggleColorColumn('on')
 set backupdir=$HOME/.vimdata/vimbackup/
 set directory=$HOME/.vimdata/vimswap/
 set viewdir=$HOME/.vimdata/vimviews/
-set undodir=$HOME/.vimdata/vimundo/
+if exists('&undofile')
+    set undodir=$HOME/.vimdata/vimundo/
+endif
 " }}}
 " Wildmode ----------------------------------------------------------------- {{{
 set wildmenu
@@ -416,6 +420,7 @@ endf
 
 " Configure plugins {{{1
 " Yankring {{{2
+let g:yankring_history_dir="$HOME/.vimdata"
 nnoremap <leader>y :YRShow<cr>
 " Align {{{2
 vnoremap <leader>a=> :Align => =<cr>
