@@ -422,6 +422,7 @@ endf
 " Configure plugins {{{1
 " Yankring {{{2
 let g:yankring_history_dir="$HOME/.vimdata"
+let g:yankring_replace_n_pkey = '<M-P>'
 nnoremap <leader>y :YRShow<cr>
 " Align {{{2
 vnoremap <leader>a=> :Align => =<cr>
