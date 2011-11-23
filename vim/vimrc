@@ -8,6 +8,7 @@ silent execute '!mkdir -p $HOME/.vimdata/vimswap'
 silent execute '!mkdir -p $HOME/.vimdata/vimviews'
 silent execute '!mkdir -p $HOME/.vimdata/vimundo'
 silent execute '!mkdir -p $HOME/.vimdata/fufdata'
+silent execute '!mkdir -p $HOME/.vimdata/ctrlp'
 filetype plugin on
 filetype plugin indent on
 syntax enable
@@ -434,9 +435,10 @@ let g:syntastic_auto_loc_list  = 2
 " ctrlp {{{2
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_dotfiles = 0
-let g:ctrlp_max_height = 20000
+let g:ctrlp_max_height = 20
 let g:ctrlp_use_caching=1
 let g:ctrlp_max_files = 20000
+let g:ctrlp_cache_dir = $HOME.'/.vimdata/ctrlp'
 
 " Bexec {{{2
 nnoremap <silent> <unique> <F8> :call Bexec()<cr>
