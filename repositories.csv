@@ -8,7 +8,6 @@ vim/bundle,git://github.com/ervandew/supertab.git
 vim/bundle,git://github.com/garbas/vim-snipmate.git
 vim/bundle,git://github.com/honza/snipmate-snippets.git
 vim/bundle,git://github.com/kevinw/pyflakes-vim.git
-vim/bundle,git://github.com/kien/ctrlp.vim.git
 vim/bundle,git://github.com/majutsushi/tagbar.git
 vim/bundle,git://github.com/mkomitee/vim-gf-python.git
 vim/bundle,git://github.com/scrooloose/syntastic.git
@@ -39,3 +38,4 @@ vim/bundle,git://github.com/vim-scripts/textobj-user.git
 vim/bundle,git://github.com/vim-scripts/vim-indent-object.git
 vim/bundle,git://github.com/wgibbs/vim-irblack.git
 vim/bundle,git@github.com:mkomitee/nerdtree.git
+vim/bundle,git@github.com:mkomitee/ctrlp.vim.git
