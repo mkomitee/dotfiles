@@ -442,15 +442,6 @@ let g:ctrlp_use_caching=1
 let g:ctrlp_max_files = 2000
 let g:ctrlp_cache_dir = $HOME.'/.vimdata/ctrlp'
 
-" Bexec {{{2
-nnoremap <silent> <unique> <F8> :call Bexec()<cr>
-vnoremap <silent> <unique> <F8> :call BexecVisual()<cr>
-noremap <silent> <unique> <F9> :call BexecCloseOut()<cr>
-
-
-" Screen/tmux {{{2
-let g:ScreenImpl = 'Tmux'
-"
 " Simplenote {{{2
 source ~/.simplenoterc
 noremap <Leader>sl :Simplenote -l<CR>
@@ -465,12 +456,6 @@ noremap <Leader>j :LustyJuggler<CR>
 " AutoClose
 noremap <Leader>x <Plug>ToggleAutoCloseMappings
 
-" tagbar {{{2
-noremap <leader>t :TagbarToggle<CR>
-let g:tagbar_expand = 1
-let g:tagbar_sort = 1
-let g:tagbar_ctags_use_tagfiles = 1
-
 " Showmarks {{{2
 let g:showmarks_enable=1
 let g:showmarks_include="abcdefghijklmnopqrstuvwxyz"
@@ -479,9 +464,6 @@ let g:showmarks_textlower="\t>"
 " bufkill {{{2
 noremap <Leader>k :bd<CR>
 noremap <Leader>k! :bd!<CR>
-
-" Command-T {{{2
-noremap <Leader>ct :CommandT<CR>
 
 " FuzzyFinder {{{2
 let g:fuf_modesDisable = []
@@ -539,7 +521,7 @@ noremap <leader>s :call ToggleMyScratch()<CR>
 " Supertab {{{2
 let g:SuperTabDefaultCompletionType = "context"
 
-" Load abbreviations
+" Load abbreviations {{{1
 if filereadable(expand("~/.vim/abbrev"))
     source ~/.vim/abbrev
 endif
