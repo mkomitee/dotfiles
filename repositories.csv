@@ -5,7 +5,6 @@ vim/bundle,git://github.com/altercation/vim-colors-solarized.git
 vim/bundle,git://github.com/ervandew/supertab.git
 vim/bundle,git://github.com/garbas/vim-snipmate.git
 vim/bundle,git://github.com/honza/snipmate-snippets.git
-vim/bundle,git://github.com/kevinw/pyflakes-vim.git
 vim/bundle,git://github.com/scrooloose/syntastic.git
 vim/bundle,git://github.com/sjbach/lusty.git
 vim/bundle,git://github.com/tmatilai/gitolite.vim.git
