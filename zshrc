@@ -1,6 +1,6 @@
 # Path to your oh-my-zsh configuration.
 
-export ZSH=$HOME/dotfiles/oh-my-zsh
+export ZSH=$HOME/.dotfiles/oh-my-zsh
 
 # Set to the name theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -25,7 +25,5 @@ plugins=(pathrc vi-mode git history-substring-search python)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-
-# export PYTHONPATH="$HOME/dotfiles/lib/python"
 
 . ~/.zshrc.local

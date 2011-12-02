@@ -2,7 +2,6 @@
 *VT100*faceName: DejaVu Sans Mono:pixelsize=12
 xterm*background:  #202020
 xterm*foreground:  #e2e2e5
-*VT100*highlightColor: yellow
 *VT100*color0: #000000
 *VT100*color1: #CD0000
 *VT100*color2: #00CD00

@@ -147,7 +147,7 @@ set wildignore+=*.pyc,*.pyo
 " }}}
 " Colorscheme -------------------------------------------------------------- {{{
 set background=dark
-colorscheme solarized
+colorscheme mustang
 
 if &t_Co < 16
     set t_Co=16
