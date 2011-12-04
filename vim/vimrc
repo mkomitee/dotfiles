@@ -1,18 +1,20 @@
 
 " Preamble     ------------------------------------------------------------- {{{
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/vundle
+call vundle#rc()
+filetype plugin on
+filetype plugin indent on
+syntax enable
 
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
 silent execute '!mkdir -p $HOME/.vimdata/vimbackup'
 silent execute '!mkdir -p $HOME/.vimdata/vimswap'
 silent execute '!mkdir -p $HOME/.vimdata/vimviews'
 silent execute '!mkdir -p $HOME/.vimdata/vimundo'
 silent execute '!mkdir -p $HOME/.vimdata/fufdata'
 silent execute '!mkdir -p $HOME/.vimdata/ctrlp'
-filetype plugin on
-filetype plugin indent on
-syntax enable
-set nocompatible
+
 for file in split(glob("$HOME/.vim/functions/*.vim"))
     exe "source " . file
 endfor
@@ -419,6 +421,39 @@ endf
 " :nnoremap <silent> <leader>ws :call PasteWindow('split')<cr>
 " :nnoremap <silent> <leader>wv :call PasteWindow('vsplit')<cr>
 
+" Install Plugins {{{1
+Bundle 'FuzzyFinder'
+Bundle 'L9'
+Bundle 'MarcWeber/vim-addon-mw-utils'
+Bundle 'Rainbow-Parenthsis-Bundle'
+Bundle 'ShowMarks'
+Bundle 'The-NERD-Commenter'
+Bundle 'YankRing.vim'
+Bundle 'ack.vim'
+Bundle 'ajf/puppet-vim'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'endwise.vim'
+Bundle 'ervandew/supertab'
+Bundle 'fugitive.vim'
+Bundle 'garbas/vim-snipmate'
+Bundle 'honza/snipmate-snippets'
+Bundle 'mkomitee/ctrlp.vim'
+Bundle 'mkomitee/nerdtree'
+Bundle 'pep8'
+Bundle 'python_match.vim'
+Bundle 'pythoncomplete'
+Bundle 'repeat.vim'
+Bundle 'ruby-matchit'
+Bundle 'scrooloose/syntastic'
+Bundle 'simplenote.vim'
+Bundle 'sjbach/lusty'
+Bundle 'surround.vim'
+Bundle 'textobj-rubyblock'
+Bundle 'textobj-user'
+Bundle 'tmatilai/gitolite.vim'
+Bundle 'tomtom/tlib_vim'
+Bundle 'vim-indent-object'
+Bundle 'wgibbs/vim-irblack'
 " Configure plugins {{{1
 " Yankring {{{2
 let g:yankring_history_dir="$HOME/.vimdata"
