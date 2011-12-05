@@ -19,6 +19,8 @@ if version >= 700
   hi MatchParen guifg=#d0ffc0 guibg=#2f2f2f gui=bold ctermfg=157 ctermbg=237 cterm=bold
   hi Pmenu 		guifg=#ffffff guibg=#444444 ctermfg=255 ctermbg=238
   hi PmenuSel 	guifg=#000000 guibg=#b1d631 ctermfg=0 ctermbg=148
+  hi FoldColumn guifg=#808080 guibg=#000000 gui=none ctermfg=244 ctermbg=232
+  hi SignColumn guifg=#808080 guibg=#000000 gui=none ctermfg=244 ctermbg=232
 endif
 
 " General colors
