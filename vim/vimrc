@@ -176,7 +176,6 @@ set statusline+=%h%m%r%w                      " flags
 set statusline+=[%{strlen(&ft)?&ft:'none'}]\  " filetype
 set statusline+=%{fugitive#statusline()}\     " git branch
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 set statusline+=%=                            " right align, left comes from bufstat
 set statusline+=col:%v\                       " current column
@@ -444,7 +443,6 @@ Bundle 'python_match.vim'
 Bundle 'pythoncomplete'
 Bundle 'repeat.vim'
 Bundle 'ruby-matchit'
-Bundle 'scrooloose/syntastic'
 Bundle 'simplenote.vim'
 Bundle 'sjbach/lusty'
 Bundle 'surround.vim'
@@ -463,11 +461,6 @@ nnoremap <leader>y :YRShow<cr>
 " Align {{{2
 vnoremap <leader>a=> :Align => =<cr>
 
-" Syntastic {{{2
-let g:syntastic_enable_signs   = 1
-let g:syntastic_auto_jump      = 0
-let g:syntastic_auto_loc_list  = 2
-" let g:syntastic_quiet_warnings = 1
 
 " ctrlp {{{2
 let g:ctrlp_working_path_mode = 0

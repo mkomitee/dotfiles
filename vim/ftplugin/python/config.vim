@@ -11,6 +11,5 @@ setlocal shiftwidth=4
 setlocal smarttab
 setlocal expandtab
 setlocal keywordprg=pydoc
-SyntasticDisable
 
 iabbrev s self

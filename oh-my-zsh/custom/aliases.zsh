@@ -41,7 +41,7 @@ unfunction mcd
 alias WINCH='kill -WINCH $$'
 alias bash='env XTERM_LEVEL=$((XTERM_LEVEL+1)) bash'
 alias bc='bc -l'
-alias grep='nocorrect grep --color'
+alias grep='nocorrect egrep --color'
 alias s=sudo
 alias svnkeywords="svn propset svn:keywords 'Author HeadURL Id Revision URL Date'"
 alias today='date +%Y/%m/%d'
