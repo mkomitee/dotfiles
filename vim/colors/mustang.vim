@@ -41,7 +41,7 @@ hi Comment 		guifg=#808080 gui=italic ctermfg=244
 hi Todo 		guifg=#8f8f8f gui=italic ctermfg=245
 hi Boolean      guifg=#b1d631 gui=none ctermfg=148
 hi String 		guifg=#b1d631 gui=italic ctermfg=148
-hi Identifier 	guifg=#b1d631 gui=none ctermfg=148
+hi Identifier 	guifg=#faf4c6 gui=none ctermfg=230
 hi Function 	guifg=#ffffff gui=bold ctermfg=255
 hi Type 		guifg=#7e8aa2 gui=none ctermfg=103
 hi Statement 	guifg=#7e8aa2 gui=none ctermfg=103
