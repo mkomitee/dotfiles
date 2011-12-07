@@ -421,6 +421,7 @@ endf
 " :nnoremap <silent> <leader>wv :call PasteWindow('vsplit')<cr>
 
 " Install Plugins {{{1
+Bundle 'vundle'
 Bundle 'FuzzyFinder'
 Bundle 'L9'
 Bundle 'MarcWeber/vim-addon-mw-utils'
@@ -453,6 +454,7 @@ Bundle 'tmatilai/gitolite.vim'
 Bundle 'tomtom/tlib_vim'
 Bundle 'vim-indent-object'
 Bundle 'wgibbs/vim-irblack'
+Bundle 'ervandew/screen'
 " Configure plugins {{{1
 " Yankring {{{2
 let g:yankring_history_dir="$HOME/.vimdata"
