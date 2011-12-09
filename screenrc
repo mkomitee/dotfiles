@@ -16,6 +16,10 @@ caption always "%{= KW}%-w%{= yk}%n %t%{-}%+w %-="
 # Allow scrollbars to work
 termcapinfo xterm ti@:te@
 termcapinfo xterm*|rxvt*|kterm*|Eterm* 'hs:ts=\E]0;:fs=\007:ds=\E]0;\007'
+
+attrcolor b ".I"
+defbce "on"
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
 term screen-256color
 defhstatus "screen (^E) ^Et"
 hardstatus off
