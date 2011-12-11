@@ -1,0 +1,23 @@
+[general]
+ui = Curses.Blinkenlights
+accounts = Gmail
+pythonfile=~/.dotfiles/mutt/offlineimap.py
+
+[Account Gmail]
+localrepository = Gmail_Local
+remoterepository = Gmail_Remote
+autorefresh = 5
+quick = 10
+
+[Repository Gmail_Local]
+type = Maildir
+localfolders = ~/.mail/mkomitee-gmail.com
+
+[Repository Gmail_Remote]
+type = Gmail
+realdelete=no
+nametrans = lambda folder: re.sub('.*Spam$', 'Spam', re.sub('.*Drafts$', 'Drafts', re.sub('.*Sent Mail$', 'Sent', re.sub('.*Starred$', 'Starred', re.sub('.*Trash$', 'Trash', re.sub('.*All Mail$', 'Archive', re.sub('.*Important$', 'Important', re.sub('.*Mailing\ Lists$', 'Lists', folder))))))))
+remotehost = imap.gmail.com
+remoteuser = mkomitee@gmail.com
+remotepasseval = get_keychain_pass(account="mkomitee@gmail.com", server="imap.gmail.com")
+idlefolders = ['INBOX']
