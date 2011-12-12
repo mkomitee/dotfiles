@@ -114,7 +114,12 @@ nnoremap ' `
 " Disable annoying maps ---------------------------------------------------- {{{
 noremap <F1> <nop>
 noremap <K> <nop>
-"
+" }}}
+" Disable Arrow Keys {{{
+nnoremap <Left> <Nop>
+nnoremap <Right> <Nop>
+nnoremap <Up> <Nop>
+nnoremap <Down> <Nop>
 " }}}
 " Defaults for tabs, spaces, & wrapping ------------------------------------ {{{
 set tabstop=4
@@ -542,6 +547,7 @@ noremap <leader>s :call ToggleMyScratch()<CR>
 " Supertab {{{2
 let g:SuperTabDefaultCompletionType = "context"
 
+" }}}1
 " Load abbreviations {{{1
 if filereadable(expand("~/.vim/abbrev"))
     source ~/.vim/abbrev
