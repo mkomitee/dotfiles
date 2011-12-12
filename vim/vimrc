@@ -1,4 +1,4 @@
-" Preamble     ------------------------------------------------------------- {{{
+" Preamble ----------------------------------------------------------------- {{{
 set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/vundle
@@ -70,6 +70,7 @@ set viminfo='100,<50,s10,h,n~/.vimdata/viminfo
 if has('mouse')
     set mouse=a
 endif
+
 " }}}
 " Searching & Movement ----------------------------------------------------- {{{
 set incsearch
@@ -114,12 +115,14 @@ nnoremap ' `
 " Disable annoying maps ---------------------------------------------------- {{{
 noremap <F1> <nop>
 noremap <K> <nop>
+
 " }}}
-" Disable Arrow Keys {{{
+" Disable Arrow Keys ------------------------------------------------------- {{{
 nnoremap <Left> <Nop>
 nnoremap <Right> <Nop>
 nnoremap <Up> <Nop>
 nnoremap <Down> <Nop>
+
 " }}}
 " Defaults for tabs, spaces, & wrapping ------------------------------------ {{{
 set tabstop=4
@@ -130,6 +133,7 @@ set wrap
 set textwidth=80
 set formatoptions=croqln
 call ToggleColorColumn('on')
+
 " }}}
 " Backups & State ---------------------------------------------------------- {{{
 set backupdir=$HOME/.vimdata/vimbackup/
@@ -138,6 +142,7 @@ set viewdir=$HOME/.vimdata/vimviews/
 if exists('&undofile')
     set undodir=$HOME/.vimdata/vimundo/
 endif
+
 " }}}
 " Wildmode ----------------------------------------------------------------- {{{
 set wildmenu
@@ -149,6 +154,7 @@ set wildignore+=*.o,*.so
 set wildignore+=*.sw?
 set wildignore+=*.DS_Store
 set wildignore+=*.pyc,*.pyo
+
 " }}}
 " Colorscheme -------------------------------------------------------------- {{{
 set background=dark
@@ -166,10 +172,12 @@ match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 set guicursor=n-v-c:block-Cursor
 set guicursor+=i:ver20-Cursor-blinkon600-blinkoff600
 set guicursor+=n-v-c:block-Cursor-blinkon600-blinkoff600
+
 " }}}
 " Leaders ------------------------------------------------------------------ {{{
 let mapleader = ","
 let localleader = '\\'
+
 " }}}
 " Statusline --------------------------------------------------------------- {{{
 set statusline=   " clear the statusline for when vimrc is reloaded
@@ -187,7 +195,7 @@ set statusline+=lin:%l/%L\                    " line
 set statusline+=%p%%                          " percentage through file
 
 " }}}
-" AutoCommands {{{1
+" AutoCommands ------------------------------------------------------------- {{{
 
 " If we change focus away from vim, goto normal mode
 " do the same if we're in insert mode for 15 seconds
@@ -242,7 +250,8 @@ augroup nerdtree
     autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 augroup END
 
-" Toggles & Switches (Leader commands) {{{1
+" }}}
+" Toggles & Switches (Leader commands) ------------------------------------- {{{
 
 " zT will move the current line to 1/4th from the top of the window
 nnoremap <expr> zT 'zt' . winheight(0)/4 . '<c-y>'
@@ -330,25 +339,27 @@ cmap w!! w !sudo tee % >/dev/null<cr>
 " Smarter Pasting!
 nnoremap <Leader>P :set paste<CR>"*p;set nopaste<CR>
 
-" Custom commands and functions {{{1
+" }}}
+" Custom commands and functions -------------------------------------------- {{{
+" Window Snapping {{{
 nnoremap <silent> <leader>mw :call MarkWindowSwap()<CR>
 nnoremap <silent> <leader>pw :call DoWindowSwap()<CR>
 
-
-" Diff against whats on disk
+" }}}
+" Diff against whats on disk {{{
 nnoremap <Leader>do :call DiffOrig()<CR>
-
-" Toggles for location and quickfix window {{{2
-nnoremap <silent> <leader>ll :call ToggleList("Location List", 'l')<CR>
-nnoremap <silent> <leader>qf :call ToggleList("Quickfix List", 'c')<CR>
-
-" Diff between buffer and the unwritten file {{{2
 if !exists(":DiffOrig")
     command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
                 \ | wincmd p | diffthis
 endif
 
-" Strip trailing whitespaces  {{{2
+" }}}
+" Toggles for location and quickfix window {{{
+nnoremap <silent> <leader>ll :call ToggleList("Location List", 'l')<CR>
+nnoremap <silent> <leader>qf :call ToggleList("Quickfix List", 'c')<CR>
+
+" }}}
+" Strip trailing whitespaces  {{{
 function! Preserve(command)
     " Preparation: save last search, and cursor position.
     let _s=@/
@@ -363,14 +374,9 @@ endfunction
 nnoremap _$ :call Preserve("%s/\\s\\+$//e")<CR>
 nnoremap _= :call Preserve("normal gg=G")<CR>
 
-" Search for current visual selection with */# {{{2
+" }}}
+" Search for current visual selection with */# {{{
 " Tip tip from: http://amix.dk/blog/viewEntry/19334
-function! CmdLine(str)
-    exe "menu Foo.Bar :" . a:str
-    emenu Foo.Bar
-    unmenu Foo
-endfunction
-
 function! VisualSearch(direction) range
     let l:saved_reg = @"
     execute "normal! vgvy"
@@ -390,7 +396,8 @@ function! VisualSearch(direction) range
     let @" = l:saved_reg
 endfunction
 
-" Generate a color pallette {{{2
+" }}}
+" Generate a color pallette {{{
 function! Colorize()
     let num = 255
     while num >= 0
@@ -401,7 +408,8 @@ function! Colorize()
     endwhile
 endfunction
 
-" Pasting Buffers {{{2
+" }}}
+" Pasting Buffers {{{
 fu! PasteWindow(direction)
     if exists("g:yanked_buffer")
         if a:direction == 'edit'
@@ -423,7 +431,10 @@ endf
 " :nnoremap <silent> <leader>ws :call PasteWindow('split')<cr>
 " :nnoremap <silent> <leader>wv :call PasteWindow('vsplit')<cr>
 
-" Install Plugins {{{1
+" }}}
+"
+" }}}
+" Install Plugins ---------------------------------------------------------- {{{
 Bundle 'vundle'
 Bundle 'FuzzyFinder'
 Bundle 'L9'
@@ -456,34 +467,39 @@ Bundle 'tmatilai/gitolite.vim'
 Bundle 'tomtom/tlib_vim'
 Bundle 'vim-indent-object'
 Bundle 'wgibbs/vim-irblack'
-" Configure plugins {{{1
-" Yankring {{{2
+" Configure plugins  ------------------------------------------------------- {{{
+" Yankring {{{
 let g:yankring_history_dir="$HOME/.vimdata"
 let g:yankring_replace_n_pkey = '<M-P>'
 nnoremap <leader>y :YRShow<cr>
-" Align {{{2
+
+" }}}
+" Align {{{
 vnoremap <leader>a=> :Align => =<cr>
 
-
-" Simplenote {{{2
+" }}}
+" Simplenote {{{
 source ~/.simplenoterc
 noremap <Leader>sl :Simplenote -l<CR>
 noremap <Leader>sn :Simplenote -n<CR>
 
-
-" AutoClose
+" }}}
+" AutoClose {{{
 noremap <Leader>x <Plug>ToggleAutoCloseMappings
 
-" Showmarks {{{2
+" }}}
+" Showmarks {{{
 let g:showmarks_enable=1
 let g:showmarks_include="abcdefghijklmnopqrstuvwxyz"
 let g:showmarks_textlower="\t>"
 
-" bufkill {{{2
+" }}}
+" bufkill {{{
 noremap <Leader>k :bd<CR>
 noremap <Leader>k! :bd!<CR>
 
-" FuzzyFinder {{{2
+" }}}
+" FuzzyFinder {{{
 let g:fuf_modesDisable = []
 let g:fuf_dataDir = '~/.vimdata/fufdata'
 noremap <silent> <Leader>f :FufCoverageFile<CR>
@@ -500,12 +516,14 @@ noremap <silent> <Leader>fl :FufLine<CR>
 noremap <silent> <Leader>ft :FufTag<CR>
 noremap <silent> <Leader>f? :help fuf<CR>
 
-" Ack {{{2
+" }}}
+" Ack {{{
 noremap <Leader>g :Ack<space><C-r><C-w><CR>
 let ackprg="~/scripts/ack"
 "let ackprg="~/scripts/ack --nocolor --nogroup --column --flush"
 
-" NERDCommenter {{{2
+" }}}
+" NERDCommenter {{{
 " When we comment something with the NERDComment Toggle, reselect
 let g:NERDCreateDefaultMappings = 0
 let g:NERDSpaceDelims = 1
@@ -517,8 +535,8 @@ vmap <leader>c<space> <plug>NERDCommenterToggle<cr>vgv
 nmap <leader>c<space> <plug>NERDCommenterToggle
 nmap <leader>c$ <plug>NERDCommenterToEOL
 
-
-" NERDTree.vim {{{2
+" }}}
+" NERDTree.vim {{{
 let g:NERDTreeUseExistingWindows = 1
 let NERDTreeIgnore=['\~$', '\.swp$', '^CVS$', '\.svn$', '^CVSROOT$', '^\.git$', '\.pyc$', '\.pyo$', '\.swp$']
 noremap <Leader>dd :NERDTreeToggle<CR>
@@ -540,19 +558,24 @@ function! s:CloseIfOnlyNerdTreeLeft()
     endif
 endfunction
 
-
-" Scratch {{{2
+" }}}
+" Scratch {{{
 noremap <leader>s :call ToggleMyScratch()<CR>
 
-" Supertab {{{2
+" }}}
+" Supertab {{{
 let g:SuperTabDefaultCompletionType = "context"
 
-" }}}1
-" Load abbreviations {{{1
+" }}}
+"
+" }}}
+" Load abbreviations ------------------------------------------------------- {{{
 if filereadable(expand("~/.vim/abbrev"))
     source ~/.vim/abbrev
 endif
 
-" Modelines: {{{1
+" }}}
+" Modelines: --------------------------------------------------------------- {{{
 " vim: nowrap fdm=marker ft=vim
+"
 " }}}
