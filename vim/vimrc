@@ -12,7 +12,6 @@ silent execute '!mkdir -p $HOME/.vimdata/vimswap'
 silent execute '!mkdir -p $HOME/.vimdata/vimviews'
 silent execute '!mkdir -p $HOME/.vimdata/vimundo'
 silent execute '!mkdir -p $HOME/.vimdata/fufdata'
-silent execute '!mkdir -p $HOME/.vimdata/ctrlp'
 
 for file in split(glob("$HOME/.vim/functions/*.vim"))
     exe "source " . file
@@ -438,7 +437,6 @@ Bundle 'fugitive.vim'
 Bundle 'garbas/vim-snipmate'
 Bundle 'honza/snipmate-snippets'
 Bundle 'mkomitee/Color-Sampler-Pack'
-Bundle 'mkomitee/ctrlp.vim'
 Bundle 'mkomitee/nerdtree'
 Bundle 'pep8'
 Bundle 'python_match.vim'
@@ -446,7 +444,6 @@ Bundle 'pythoncomplete'
 Bundle 'repeat.vim'
 Bundle 'ruby-matchit'
 Bundle 'simplenote.vim'
-Bundle 'sjbach/lusty'
 Bundle 'surround.vim'
 Bundle 'textobj-rubyblock'
 Bundle 'textobj-user'
@@ -463,25 +460,11 @@ nnoremap <leader>y :YRShow<cr>
 vnoremap <leader>a=> :Align => =<cr>
 
 
-" ctrlp {{{2
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_dotfiles = 0
-let g:ctrlp_max_height = 20
-let g:ctrlp_max_results = 200
-let g:ctrlp_use_caching=1
-let g:ctrlp_max_files = 2000
-let g:ctrlp_cache_dir = $HOME.'/.vimdata/ctrlp'
-
 " Simplenote {{{2
 source ~/.simplenoterc
 noremap <Leader>sl :Simplenote -l<CR>
 noremap <Leader>sn :Simplenote -n<CR>
 
-" Lusty {{{2
-noremap <Leader>be :LustyBufferExplorer<CR>
-noremap <Leader>fe :LustyFilesystemExplorer<CR>
-noremap <Leader>re :LustyFilesystemExplorerFromHere<CR>
-noremap <Leader>j :LustyJuggler<CR>
 
 " AutoClose
 noremap <Leader>x <Plug>ToggleAutoCloseMappings
@@ -498,9 +481,16 @@ noremap <Leader>k! :bd!<CR>
 " FuzzyFinder {{{2
 let g:fuf_modesDisable = []
 let g:fuf_dataDir = '~/.vimdata/fufdata'
-noremap <Leader>fb :FufBuffer<CR>
-noremap <Leader>ff :FufFile<CR>
-noremap <Leader>fm :FufMruFile<CR>
+noremap <silent> <Leader>fb :FufBuffer<CR>
+noremap <silent> <Leader>ff :FufCoverageFile<CR>
+noremap <silent> <Leader>fm :FufMruFileInCwd<CR>
+noremap <silent> <Leader>fc :FufMruCmd<CR>
+noremap <silent> <Leader>fj :FufJumpList<CR>
+noremap <silent> <Leader>fh :FufHelp<CR>
+noremap <silent> <Leader>fq :FufQuickfix<CR>
+noremap <silent> <Leader>fl :FufLine<CR>
+noremap <silent> <Leader>ft :FufTag<CR>
+noremap <silent> <Leader>f? :help fuf<CR>
 
 " Ack {{{2
 noremap <Leader>g :Ack<space><C-r><C-w><CR>
@@ -542,8 +532,6 @@ function! s:CloseIfOnlyNerdTreeLeft()
     endif
 endfunction
 
-" notes.vim {{{2
-let g:notes_location=glob("~/Docs/Notes")
 
 " Scratch {{{2
 noremap <leader>s :call ToggleMyScratch()<CR>
