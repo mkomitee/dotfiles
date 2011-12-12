@@ -481,6 +481,9 @@ noremap <Leader>k! :bd!<CR>
 " FuzzyFinder {{{2
 let g:fuf_modesDisable = []
 let g:fuf_dataDir = '~/.vimdata/fufdata'
+noremap <silent> <Leader>f :FufCoverageFile<CR>
+noremap <silent> <Leader>F :FufFileWithCurrentBufferDir **/*<CR>
+noremap <silent> <Leader>b :FufBuffer<CR>
 noremap <silent> <Leader>fb :FufBuffer<CR>
 noremap <silent> <Leader>ff :FufCoverageFile<CR>
 noremap <silent> <Leader>fm :FufMruFileInCwd<CR>
