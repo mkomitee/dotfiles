@@ -27,7 +27,7 @@ image/gif; ~/.dotfiles/mutt/view_attachment.sh %s gif
 application/pdf; ~/.dotfiles/mutt/view_attachment.sh %s pdf
 
 # HTML
-text/html; ~/.dotfiles/mutt/view_attachment.sh %s html
+text/html; ~/.dotfiles/mutt/view_attachment.sh %s html; copiousoutput
 
 # Unidentified.
 application/octet-stream; ~/.dotfiles/mutt/view_attachment.sh %s "-" 

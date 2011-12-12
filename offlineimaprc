@@ -1,5 +1,6 @@
 [general]
-ui = Curses.Blinkenlights
+ui = ttyui
+# ui = blinkenlights
 accounts = Gmail
 pythonfile=~/.dotfiles/mutt/offlineimap.py
 
