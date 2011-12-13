@@ -1,9 +1,7 @@
 " Preamble ----------------------------------------------------------------- {{{
 set nocompatible
-filetype off
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
-filetype plugin on
 filetype plugin indent on
 syntax enable
 
@@ -250,6 +248,10 @@ augroup nerdtree
     autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 augroup END
 
+augroup detection
+    au!
+    autocmd BufReadPost,BufWritePost * filetype detect
+augroup END
 " }}}
 " Toggles & Switches (Leader commands) ------------------------------------- {{{
 
