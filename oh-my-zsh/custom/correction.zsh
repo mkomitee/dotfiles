@@ -1,1 +1,0 @@
-setopt nocorrect_all

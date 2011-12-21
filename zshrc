@@ -32,3 +32,71 @@ plugins=(pathrc git vi-mode)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
+# Unset options we don't want which were set in lib/plugins {{{1
+unsetopt auto_cd
+unsetopt cdablevarS
+unsetopt complete_in_word
+unsetopt share_history
+unsetopt SHARE_HISTORY
+
+# Set options we do want {{{1
+setopt nocorrect_all
+
+# Remove aliases we don't want which are defined in oh-my-zsh/lib and activated plugins {{{1
+unalias pu
+unalias po
+unalias ...
+unalias -- -
+unalias _
+unalias lsa
+unalias l
+unalias ll
+unalias sl
+unalias heroku
+unalias ebuild
+unalias hpodder
+unalias ..
+unalias 1
+unalias 2
+unalias 3
+unalias 4
+unalias 5
+unalias 6
+unalias 7
+unalias 8
+unalias 9
+unalias cd..
+unalias cd...
+unalias cd....
+unalias cd.....
+unalias cd/
+unalias gist
+unalias md
+unalias mysql
+unalias rd
+unalias run-help
+
+# Also remove defined functions we dont want {{{1
+unfunction cd
+unfunction mcd
+
+# Add our own aliases {{{1
+alias WINCH='kill -WINCH $$'
+alias bash='env XTERM_LEVEL=$((XTERM_LEVEL+1)) bash'
+alias bc='bc -l'
+alias grep='nocorrect egrep --color'
+alias s=sudo
+alias svnkeywords="svn propset svn:keywords 'Author HeadURL Id Revision URL Date'"
+alias today='date +%Y/%m/%d'
+alias afind='ack -il'
+alias dirs='dirs -v'
+alias rm='nocorrect rm'
+alias rmdir='nocorrect rmdir'
+alias history='fc -dl 1'
+alias sudoenv='sudo -E zsh'
+alias tasks='t --task-dir=~/.tasks --list=tasks'
+alias task='t --task-dir=~/.tasks --list=tasks'
+alias t='t --task-dir=~/.tasks --list=tasks'
+
+# Tweak environment variables {{{1
+LSCOLORS="Exfxcxdxbxegedabagacad"
