@@ -5,16 +5,13 @@ ZSH=$HOME/.dotfiles/oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="komitee"
+ZSH_THEME="komitee-arrow"
 
 # Set to this to use case-sensitive completion
 CASE_SENSITIVE="true"
 
 # Comment this out to disable weekly auto-update checks
 DISABLE_AUTO_UPDATE="true"
-
-# List of my usernames (needed for my prompt)
-usernames=(komitee mkomitee zim)
 
 # Uncomment following line if you want to disable colors in ls
 # DISABLE_LS_COLORS="true"
@@ -99,4 +96,4 @@ alias task='t --task-dir=~/.tasks --list=tasks'
 alias t='t --task-dir=~/.tasks --list=tasks'
 
 # Tweak environment variables {{{1
-LSCOLORS="Exfxcxdxbxegedabagacad"
+# LSCOLORS="Exfxcxdxbxegedabagacad"
