@@ -1,11 +1,18 @@
-if [ $UID -eq 0 ]; then NCOLOR="red"; else NCOLOR="yellow"; fi
+if [ $UID -eq 0 ]; then NCOLOR="red"; SYMBOL='#'; else NCOLOR="yellow"; SYMBOL='$' fi
 
-PROMPT='%{$fg[$NCOLOR]%}$ %c $(git_prompt_info)➤ %{$reset_color%}'
+PROMPT='%{$fg[$NCOLOR]%}$(shorthost) %c $(git_prompt_info)$SYMBOL %{$reset_color%}'
 
 ZSH_THEME_GIT_PROMPT_PREFIX="("
 ZSH_THEME_GIT_PROMPT_SUFFIX=") "
-ZSH_THEME_GIT_PROMPT_DIRTY="✗"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
+ZSH_THEME_GIT_PROMPT_DIRTY="✗"
+ZSH_THEME_GIT_PROMPT_AHEAD="+"
+ZSH_THEME_GIT_PROMPT_UNTRACKED="u"
+ZSH_THEME_GIT_PROMPT_ADDED="a"
+ZSH_THEME_GIT_PROMPT_MODIFIED="m"
+ZSH_THEME_GIT_PROMPT_RENAMED="r"
+ZSH_THEME_GIT_PROMPT_DELETED="d"
+ZSH_THEME_GIT_PROMPT_UNMERGED="U"
 
 # See http://geoff.greer.fm/lscolors/
 export LSCOLORS="exfxcxdxbxbxbxbxbxbxbx"
