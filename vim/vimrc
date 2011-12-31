@@ -438,6 +438,7 @@ endf
 " }}}
 " Install Plugins ---------------------------------------------------------- {{{
 Bundle 'vundle'
+Bundle 'Lokaltog/vim-easymotion'
 Bundle 'FuzzyFinder'
 Bundle 'L9'
 Bundle 'MarcWeber/vim-addon-mw-utils'
