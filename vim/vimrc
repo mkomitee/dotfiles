@@ -14,6 +14,41 @@ silent execute '!mkdir -p $HOME/.vimdata/fufdata'
 for file in split(glob("$HOME/.vim/functions/*.vim"))
     exe "source " . file
 endfor
+" Install Plugins ---------------------------------------------------------- {{{
+Bundle 'vundle'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'gmarik/ingretu'
+Bundle 'FuzzyFinder'
+Bundle 'L9'
+Bundle 'MarcWeber/vim-addon-mw-utils'
+Bundle 'Rainbow-Parenthsis-Bundle'
+Bundle 'ShowMarks'
+Bundle 'The-NERD-Commenter'
+Bundle 'YankRing.vim'
+Bundle 'ack.vim'
+Bundle 'ajf/puppet-vim'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'endwise.vim'
+Bundle 'ervandew/screen'
+Bundle 'ervandew/supertab'
+Bundle 'fugitive.vim'
+Bundle 'garbas/vim-snipmate'
+Bundle 'honza/snipmate-snippets'
+Bundle 'mkomitee/Color-Sampler-Pack'
+Bundle 'mkomitee/nerdtree'
+Bundle 'pep8'
+Bundle 'python_match.vim'
+Bundle 'pythoncomplete'
+Bundle 'repeat.vim'
+Bundle 'ruby-matchit'
+Bundle 'simplenote.vim'
+Bundle 'surround.vim'
+Bundle 'textobj-rubyblock'
+Bundle 'textobj-user'
+Bundle 'tmatilai/gitolite.vim'
+Bundle 'tomtom/tlib_vim'
+Bundle 'vim-indent-object'
+Bundle 'wgibbs/vim-irblack'
 
 " }}}
 " Preferences -------------------------------------------------------------- {{{
@@ -156,7 +191,8 @@ set wildignore+=*.pyc,*.pyo
 " }}}
 " Colorscheme -------------------------------------------------------------- {{{
 set background=dark
-colorscheme mustang
+" colorscheme mustang
+colorscheme ingretu
 
 if &t_Co < 16
     set t_Co=16
@@ -436,40 +472,6 @@ endf
 " }}}
 "
 " }}}
-" Install Plugins ---------------------------------------------------------- {{{
-Bundle 'vundle'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'FuzzyFinder'
-Bundle 'L9'
-Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'Rainbow-Parenthsis-Bundle'
-Bundle 'ShowMarks'
-Bundle 'The-NERD-Commenter'
-Bundle 'YankRing.vim'
-Bundle 'ack.vim'
-Bundle 'ajf/puppet-vim'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'endwise.vim'
-Bundle 'ervandew/screen'
-Bundle 'ervandew/supertab'
-Bundle 'fugitive.vim'
-Bundle 'garbas/vim-snipmate'
-Bundle 'honza/snipmate-snippets'
-Bundle 'mkomitee/Color-Sampler-Pack'
-Bundle 'mkomitee/nerdtree'
-Bundle 'pep8'
-Bundle 'python_match.vim'
-Bundle 'pythoncomplete'
-Bundle 'repeat.vim'
-Bundle 'ruby-matchit'
-Bundle 'simplenote.vim'
-Bundle 'surround.vim'
-Bundle 'textobj-rubyblock'
-Bundle 'textobj-user'
-Bundle 'tmatilai/gitolite.vim'
-Bundle 'tomtom/tlib_vim'
-Bundle 'vim-indent-object'
-Bundle 'wgibbs/vim-irblack'
 " Configure plugins  ------------------------------------------------------- {{{
 " Yankring {{{
 let g:yankring_history_dir="$HOME/.vimdata"
