@@ -17,6 +17,7 @@ endfor
 " Install Plugins ---------------------------------------------------------- {{{
 Bundle 'vundle'
 Bundle 'Lokaltog/vim-easymotion'
+Bundle 'Buffergator'
 Bundle 'gmarik/ingretu'
 Bundle 'FuzzyFinder'
 Bundle 'L9'
@@ -36,6 +37,7 @@ Bundle 'garbas/vim-snipmate'
 Bundle 'honza/snipmate-snippets'
 Bundle 'mkomitee/Color-Sampler-Pack'
 Bundle 'mkomitee/nerdtree'
+Bundle 'michaeljsmith/vim-indent-object'
 Bundle 'pep8'
 Bundle 'python_match.vim'
 Bundle 'pythoncomplete'
@@ -473,6 +475,13 @@ endf
 "
 " }}}
 " Configure plugins  ------------------------------------------------------- {{{
+" BufferGator {{{ ---------------------------------------------------------- {{{
+let g:buffergator_autoexpand_on_split = 0
+let g:buffergator_suppress_keymaps = 1
+noremap <silent> <Leader>bg :BuffergatorOpen<CR>
+noremap <silent> <Leader>tg :BuffergatorTabsOpen<CR>
+
+" }}}
 " Yankring {{{
 let g:yankring_history_dir="$HOME/.vimdata"
 let g:yankring_replace_n_pkey = '<M-P>'
