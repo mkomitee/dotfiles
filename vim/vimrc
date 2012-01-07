@@ -234,8 +234,6 @@ augroup exit_insert_mode
     au CursorHoldI * stopinsert
     au InsertEnter * let updaterestore=&updatetime | set updatetime=15000
     au InsertLeave * let &updatetime=updaterestore
-    " au InsertEnter * hi StatusLine ctermfg=196 guifg=#FF3145
-    " au InsertLeave * hi StatusLine ctermfg=14 ctermbg=0 guifg=#93a1a1 guibg=#073642
 augroup END
 
 " Equal all folds on resize
@@ -248,8 +246,6 @@ augroup cursor
     au!
     au WinEnter,VimEnter,BufNewFile,BufRead * setlocal cursorline
     au WinLeave,VimLeave * setlocal nocursorline
-    " au WinEnter,VimEnter,BufNewFile,BufRead * setlocal cursorcolumn
-    " au WinLeave,VimLeave * setlocal nocursorcolumn
 augroup END
 
 augroup vimmemory
