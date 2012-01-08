@@ -94,6 +94,7 @@ alias sudoenv='sudo -E zsh'
 alias tasks='t --task-dir=~/.tasks --list=tasks'
 alias task='t --task-dir=~/.tasks --list=tasks'
 alias t='t --task-dir=~/.tasks --list=tasks'
+alias tmux='tmux -u'
 
 # Tweak environment variables {{{1
 # LSCOLORS="Exfxcxdxbxegedabagacad"

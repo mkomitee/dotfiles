@@ -75,11 +75,7 @@ if exists('&undofile')
 endif
 set undolevels=10000
 set list
-if has('+gui')
-    set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮,trail:·
-else
-    set listchars=tab:▸\ ,extends:❯,precedes:❮,trail:·
-endif
+set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮,trail:·
 set lazyredraw
 set matchtime=3
 set showbreak=↪
