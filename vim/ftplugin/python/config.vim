@@ -11,5 +11,3 @@ setlocal shiftwidth=4
 setlocal smarttab
 setlocal expandtab
 setlocal keywordprg=pydoc
-
-iabbrev s self
