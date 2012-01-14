@@ -19,6 +19,7 @@ endfor
 " Install Plugins ---------------------------------------------------------- {{{
 Bundle 'vundle'
 Bundle 'Buffergator'
+Bundle 'ChrisKempson/Vim-Tomorrow-Theme'
 Bundle 'FuzzyFinder'
 Bundle 'L9'
 Bundle 'Lokaltog/vim-easymotion'
@@ -196,15 +197,8 @@ set wildignore+=*.pyc,*.pyo
 
 " }}}
 " Colorscheme -------------------------------------------------------------- {{{
-colorscheme wombat256
-highlight SignColumn   ctermfg=white ctermbg=black
-highlight FoldColumn   ctermfg=yellow ctermbg=black guibg=#303030 guifg=#EDEA61
-highlight ColorColumn  guibg=#191919 gui=BOLD ctermbg=NONE cterm=BOLD
-highlight ShowMarksHLl ctermfg=darkyellow ctermbg=black guibg=black
-highlight ShowMarksHLm ctermfg=darkyellow ctermbg=black guibg=black
-highlight ShowMarksHLo ctermfg=darkyellow ctermbg=black guibg=black
-highlight ShowMarksHLu ctermfg=darkyellow ctermbg=black guibg=black
-highlight SignColumn   ctermfg=white      ctermbg=black guibg=black
+" colorscheme wombat256
+colorscheme Tomorrow-Night
 
 if &t_Co < 16
     set t_Co=16
