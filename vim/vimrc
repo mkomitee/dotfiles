@@ -18,11 +18,11 @@ endfor
 " }}}
 " Install Plugins ---------------------------------------------------------- {{{
 Bundle 'vundle'
-Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Buffergator'
-Bundle 'gmarik/ingretu'
 Bundle 'FuzzyFinder'
 Bundle 'L9'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'Lokaltog/vim-powerline'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'Rainbow-Parenthsis-Bundle'
 Bundle 'ShowMarks'
@@ -36,15 +36,17 @@ Bundle 'ervandew/screen'
 Bundle 'ervandew/supertab'
 Bundle 'fugitive.vim'
 Bundle 'garbas/vim-snipmate'
+Bundle 'gmarik/ingretu'
 Bundle 'honza/snipmate-snippets'
-Bundle 'mkomitee/Color-Sampler-Pack'
-Bundle 'mkomitee/nerdtree'
+Bundle 'majutsushi/tagbar'
 Bundle 'michaeljsmith/vim-indent-object'
+Bundle 'mkomitee/Color-Sampler-Pack'
 Bundle 'pep8'
 Bundle 'python_match.vim'
 Bundle 'pythoncomplete'
 Bundle 'repeat.vim'
 Bundle 'ruby-matchit'
+Bundle 'scrooloose/nerdtree'
 Bundle 'simplenote.vim'
 Bundle 'surround.vim'
 Bundle 'textobj-rubyblock'
@@ -53,7 +55,6 @@ Bundle 'tmatilai/gitolite.vim'
 Bundle 'tomtom/tlib_vim'
 Bundle 'vim-indent-object'
 Bundle 'wgibbs/vim-irblack'
-Bundle 'Lokaltog/vim-powerline'
 
 " }}}
 " Preferences -------------------------------------------------------------- {{{
@@ -466,6 +467,9 @@ endf
 "
 " }}}
 " Configure plugins  ------------------------------------------------------- {{{
+" TagList ------------------------------------------------------------------ {{{
+noremap <leader>t :TagbarToggle<CR>
+" }}}
 " BufferGator -------------------------------------------------------------- {{{
 let g:buffergator_autoexpand_on_split = 0
 let g:buffergator_suppress_keymaps = 1
