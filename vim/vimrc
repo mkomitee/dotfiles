@@ -38,6 +38,7 @@ Bundle 'fugitive.vim'
 Bundle 'garbas/vim-snipmate'
 Bundle 'gmarik/ingretu'
 Bundle 'honza/snipmate-snippets'
+Bundle 'kien/ctrlp.vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'michaeljsmith/vim-indent-object'
 Bundle 'mkomitee/Color-Sampler-Pack'
@@ -467,6 +468,9 @@ endf
 "
 " }}}
 " Configure plugins  ------------------------------------------------------- {{{
+" Ctrl+P ------------------------------------------------------------------- {{{
+let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir']
+" }}}
 " TagList ------------------------------------------------------------------ {{{
 noremap <leader>t :TagbarToggle<CR>
 " }}}
