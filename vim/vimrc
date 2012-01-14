@@ -235,6 +235,16 @@ augroup exit_insert_mode
     au InsertLeave * let &updatetime=updaterestore
 augroup END
 
+" This may cause a lot of processing, but we can disable it if it causes problems
+augroup showmarks
+    au!
+    au BufWinEnter * execute 'ShowMarksOn'
+    au BufEnter    * execute 'ShowMarksOn'
+    au CursorMoved * execute 'ShowMarksOn'
+    au InsertEnter * execute 'ShowMarksOn'
+    au InsertLeave * execute 'ShowMarksOn'
+augroup END
+
 " Equal all folds on resize
 augroup resize
     au!
@@ -501,8 +511,11 @@ noremap <Leader>x <Plug>ToggleAutoCloseMappings
 " }}}
 " Showmarks {{{
 let g:showmarks_enable=1
-let g:showmarks_include="abcdefghijklmnopqrstuvwxyz"
-let g:showmarks_textlower="\t>"
+let g:showmarks_include="'`\"^<>.abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789[](){}"
+let g:showmarks_ignore_type=''
+let g:showmarks_textlower="\t"
+let g:showmarks_textupper="\t"
+let g:showmarks_textother="\t"
 
 " }}}
 " bufkill {{{
