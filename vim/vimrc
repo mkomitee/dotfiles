@@ -19,7 +19,7 @@ endfor
 " }}}
 " Install Plugins ---------------------------------------------------------- {{{
 Bundle 'vundle'
-" Plugins, ...
+" Plugins, ... {{{
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'Rainbow-Parenthsis-Bundle'
@@ -42,7 +42,8 @@ Bundle 'simplenote.vim'
 Bundle 'surround.vim'
 Bundle 'tmatilai/gitolite.vim'
 Bundle 'vim-indent-object'
-" Filetype Plugins
+" }}}
+" Filetype Plugins, ... {{{
 Bundle 'ajf/puppet-vim'
 Bundle 'endwise.vim'
 Bundle 'pep8'
@@ -50,17 +51,19 @@ Bundle 'python_match.vim'
 Bundle 'pythoncomplete'
 Bundle 'ruby-matchit'
 Bundle 'textobj-rubyblock'
-" Colors
+" }}}
+" Colors, ... {{{
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'gmarik/ingretu'
 Bundle 'mkomitee/Color-Sampler-Pack'
 Bundle 'mkomitee/Vim-Tomorrow-Theme'
 Bundle 'wgibbs/vim-irblack'
-" Dependencies, ...
+" }}}
+" Dependencies, ... {{{
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'textobj-user'
 Bundle 'tomtom/tlib_vim'
-
+" }}}
 " }}}
 " Preferences -------------------------------------------------------------- {{{
 set encoding=utf-8
