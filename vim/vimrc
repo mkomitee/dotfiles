@@ -378,6 +378,12 @@ cmap w!! w !sudo tee % >/dev/null<cr>
 " Smarter Pasting!
 nnoremap <Leader>P :set paste<CR>"*p;set nopaste<CR>
 
+if has('mac')
+    nnoremap <leader>o :silent !open <c-r>=escape("<c-r><c-f>", "#?&;\|%")<cr><cr>
+else
+    nnoremap <leader>o :silent !xdg-open <c-r>=escape("<c-r><c-f>", "#?&;\|%")<cr><cr>
+endif
+
 " }}}
 " Custom commands and functions -------------------------------------------- {{{
 " Window Snapping {{{
@@ -480,7 +486,7 @@ let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_cache_dir = $HOME.'/.vimdata/ctrlp'
 let g:ctrlp_max_depth = 10
 nnoremap <c-b> :CtrlPBuffer<CR>
-nnoremap <c-l> :CtrlPMRU<CR>
+nnoremap <c-r> :CtrlPMRU<CR>
 nnoremap <c-t> :CtrlPBufTagAll<CR>
 nnoremap <c-q> :CtrlPQuickfix<CR>
 " }}}
