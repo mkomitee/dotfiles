@@ -506,8 +506,10 @@ let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir']
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_cache_dir = $HOME.'/.vimdata/ctrlp'
 let g:ctrlp_max_depth = 10
+let g:ctrlp_mruf_relative = 1
 nnoremap <c-b> :CtrlPBuffer<CR>
-nnoremap <c-r> :CtrlPMRU<CR>
+nnoremap <leader>b :CtrlPBuffer<CR>
+nnoremap <leader>r :CtrlPMRU<CR>
 nnoremap <c-t> :CtrlPBufTagAll<CR>
 nnoremap <c-q> :CtrlPQuickfix<CR>
 " }}}
