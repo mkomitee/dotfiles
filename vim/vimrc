@@ -109,6 +109,15 @@ set completeopt=longest,menu,menuone
 set switchbuf=usetab
 set nostartofline
 set viminfo='100,<50,s10,h,n~/.vimdata/viminfo
+set preserveindent
+set pumheight=10
+set report=0
+set switchbuf=useopen,usetab
+if has('unnamedplus')
+    set clipboard=unnamed,unnamedplus,autoselect
+else
+    set clipboard=unnamed,autoselect
+endif
 
 if has('mouse')
     set mouse=a
