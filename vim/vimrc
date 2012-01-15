@@ -10,6 +10,7 @@ silent execute '!mkdir -p $HOME/.vimdata/vimswap'
 silent execute '!mkdir -p $HOME/.vimdata/vimviews'
 silent execute '!mkdir -p $HOME/.vimdata/vimundo'
 silent execute '!mkdir -p $HOME/.vimdata/fufdata'
+silent execute '!mkdir -p $HOME/.vimdata/ctrlp'
 
 for file in split(glob("$HOME/.vim/functions/*.vim"))
     exe "source " . file
@@ -474,8 +475,15 @@ endf
 " Configure plugins  ------------------------------------------------------- {{{
 " Ctrl+P ------------------------------------------------------------------- {{{
 let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir']
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_cache_dir = $HOME.'/.vimdata/ctrlp'
+let g:ctrlp_max_depth = 10
+nnoremap <c-b> :CtrlPBuffer<CR>
+nnoremap <c-m> :CtrlPMRU<CR>
+nnoremap <c-t> :CtrlPBufTagAll<CR>
+nnoremap <c-q> :CtrlPQuickfix<CR>
 " }}}
-" TagList ------------------------------------------------------------------ {{{
+" TagList ----------------------------------------------------------------- {{{
 noremap <leader>t :TagbarToggle<CR>
 " }}}
 " BufferGator -------------------------------------------------------------- {{{
