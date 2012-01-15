@@ -44,6 +44,7 @@ Bundle 'tmatilai/gitolite.vim'
 Bundle 'vim-indent-object'
 " }}}
 " Filetype Plugins, ... {{{
+Bundle 'Lokaltog/python-syntax'
 Bundle 'ajf/puppet-vim'
 Bundle 'endwise.vim'
 Bundle 'pep8'
@@ -491,6 +492,15 @@ endf
 "
 " }}}
 " Configure plugins  ------------------------------------------------------- {{{
+" Python ---- {{{
+let g:python_highlight_all = 1
+let g:python_show_sync = 1
+let g:python_print_as_function = 1
+
+let g:pyindent_open_paren = '&sw'
+let g:pyindent_continue = '&sw'
+"
+" }}}
 " Ctrl+P ------------------------------------------------------------------ {{{
 let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir']
 let g:ctrlp_cmd = 'CtrlP'
@@ -501,8 +511,12 @@ nnoremap <c-r> :CtrlPMRU<CR>
 nnoremap <c-t> :CtrlPBufTagAll<CR>
 nnoremap <c-q> :CtrlPQuickfix<CR>
 " }}}
-" TagList ----------------------------------------------------------------- {{{
+" Tagbar ------------------------------------------------------------------ {{{
 noremap <leader>t :TagbarToggle<CR>
+let g:tagbar_autoclose = 1
+let g:tagbar_autofocus = 1
+let g:tagbar_compact   = 1
+
 " }}}
 " Powerlines -------------------------------------------------------------- {{{
 let g:Powerline_cache_file = expand('~') . "/.vimdata/powerline.cache"
