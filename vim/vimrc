@@ -471,7 +471,7 @@ endf
 "
 " }}}
 " Configure plugins  ------------------------------------------------------- {{{
-" Ctrl+P ------------------------------------------------------------------- {{{
+" Ctrl+P ------------------------------------------------------------------ {{{
 let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir']
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_cache_dir = $HOME.'/.vimdata/ctrlp'
@@ -488,13 +488,13 @@ noremap <leader>t :TagbarToggle<CR>
 let g:Powerline_cache_file = expand('~') . "/.vimdata/powerline.cache"
 
 " }}}
-" Yankring {{{
+" Yankring ---------------------------------------------------------------- {{{
 let g:yankring_history_dir="$HOME/.vimdata"
 let g:yankring_replace_n_pkey = '<M-P>'
 nnoremap <leader>y :YRShow<cr>
 
 " }}}
-" Align {{{
+" Align ------------------------------------------------------------------- {{{
 vnoremap <leader>a=> :Align => =<cr>
 
 " }}}
