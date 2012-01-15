@@ -31,6 +31,7 @@ Bundle 'ervandew/screen'
 Bundle 'ervandew/supertab'
 Bundle 'fugitive.vim'
 Bundle 'garbas/vim-snipmate'
+Bundle 'godlygeek/tabular'
 Bundle 'honza/snipmate-snippets'
 Bundle 'kien/ctrlp.vim'
 Bundle 'majutsushi/tagbar'
@@ -505,8 +506,11 @@ nnoremap <leader>y :YRShow<cr>
 nnoremap <c-y> :YRShow<CR>
 
 " }}}
-" Align ------------------------------------------------------------------- {{{
-vnoremap <leader>a=> :Align => =<cr>
+" Tabularize  ------------------------------------------------------------- {{{
+vnoremap <silent> <Leader>a=> :Tabularize /=>/l1l1<CR>
+vnoremap <silent> <Leader>a= :Tabularize /=/l1l1<CR>
+vnoremap <silent> <Leader>a, :Tabularize /,/l0l1<CR>
+vnoremap <silent> <Leader>a: :Tabularize /:/l0l1<CR>
 
 " }}}
 " Simplenote -------------------------------------------------------------- {{{
