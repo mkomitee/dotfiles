@@ -492,6 +492,7 @@ let g:Powerline_cache_file = expand('~') . "/.vimdata/powerline.cache"
 let g:yankring_history_dir="$HOME/.vimdata"
 let g:yankring_replace_n_pkey = '<M-P>'
 nnoremap <leader>y :YRShow<cr>
+nnoremap <c-y> :YRShow<CR>
 
 " }}}
 " Align ------------------------------------------------------------------- {{{
