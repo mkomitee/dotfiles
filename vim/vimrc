@@ -19,8 +19,6 @@ endfor
 " }}}
 " Install Plugins ---------------------------------------------------------- {{{
 Bundle 'vundle'
-Bundle 'Buffergator'
-Bundle 'FuzzyFinder'
 Bundle 'L9'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Lokaltog/vim-powerline'
@@ -486,14 +484,7 @@ nnoremap <c-q> :CtrlPQuickfix<CR>
 " TagList ----------------------------------------------------------------- {{{
 noremap <leader>t :TagbarToggle<CR>
 " }}}
-" BufferGator -------------------------------------------------------------- {{{
-let g:buffergator_autoexpand_on_split = 0
-let g:buffergator_suppress_keymaps = 1
-noremap <silent> <Leader>bg :BuffergatorOpen<CR>
-noremap <silent> <Leader>tg :BuffergatorTabsOpen<CR>
-
-" }}}
-" Powerlines --------------------------------------------------------------- {{{
+" Powerlines -------------------------------------------------------------- {{{
 let g:Powerline_cache_file = expand('~') . "/.vimdata/powerline.cache"
 
 " }}}
@@ -529,24 +520,6 @@ let g:showmarks_textother="\t"
 " bufkill {{{
 noremap <Leader>k :bd<CR>
 noremap <Leader>k! :bd!<CR>
-
-" }}}
-" FuzzyFinder {{{
-let g:fuf_modesDisable = []
-let g:fuf_dataDir = '~/.vimdata/fufdata'
-noremap <silent> <Leader>f :FufCoverageFile<CR>
-noremap <silent> <Leader>F :FufFileWithCurrentBufferDir **/*<CR>
-noremap <silent> <Leader>b :FufBuffer<CR>
-noremap <silent> <Leader>fb :FufBuffer<CR>
-noremap <silent> <Leader>ff :FufCoverageFile<CR>
-noremap <silent> <Leader>fm :FufMruFileInCwd<CR>
-noremap <silent> <Leader>fc :FufMruCmd<CR>
-noremap <silent> <Leader>fj :FufJumpList<CR>
-noremap <silent> <Leader>fh :FufHelp<CR>
-noremap <silent> <Leader>fq :FufQuickfix<CR>
-noremap <silent> <Leader>fl :FufLine<CR>
-noremap <silent> <Leader>ft :FufTag<CR>
-noremap <silent> <Leader>f? :help fuf<CR>
 
 " }}}
 " Ack {{{
