@@ -505,10 +505,6 @@ noremap <Leader>sl :Simplenote -l<CR>
 noremap <Leader>sn :Simplenote -n<CR>
 
 " }}}
-" AutoClose {{{
-noremap <Leader>x <Plug>ToggleAutoCloseMappings
-
-" }}}
 " Showmarks {{{
 let g:showmarks_enable=1
 let g:showmarks_include="'`\"^<>.abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789[](){}"
