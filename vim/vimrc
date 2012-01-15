@@ -333,16 +333,6 @@ vnoremap <C-l> >gv
 
 noremap <Leader>c :close<cr>
 
-" <space> switches to the next window (give it a second)
-" <space>n switches to the next window
-" <space><space> switches to the next window and maximizes it
-" <space>= Equalizes the size of all windows
-" + Increases the size of the current window
-" - Decreases the size of the current window
-noremap <space> <c-W>wzz:call PulseCursorLine()<cr>
-noremap <space>n <c-W>wzz:call PulseCursorLine()<cr>
-noremap <space><space> <C-W>w<C-W>_zz:call PulseCursorLine()<cr>
-noremap <space>= <c-W>=zz:call PulseCursorLine()<cr>
 if bufwinnr(1)
     noremap + <c-W>+
     noremap - <c-W>-
