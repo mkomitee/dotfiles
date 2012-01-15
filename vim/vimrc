@@ -19,43 +19,46 @@ endfor
 " }}}
 " Install Plugins ---------------------------------------------------------- {{{
 Bundle 'vundle'
-Bundle 'L9'
+" Plugins, ...
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Lokaltog/vim-powerline'
-Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'Rainbow-Parenthsis-Bundle'
 Bundle 'ShowMarks'
 Bundle 'The-NERD-Commenter'
 Bundle 'YankRing.vim'
 Bundle 'ack.vim'
-Bundle 'ajf/puppet-vim'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'endwise.vim'
 Bundle 'ervandew/screen'
 Bundle 'ervandew/supertab'
 Bundle 'fugitive.vim'
 Bundle 'garbas/vim-snipmate'
-Bundle 'gmarik/ingretu'
 Bundle 'honza/snipmate-snippets'
 Bundle 'kien/ctrlp.vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'michaeljsmith/vim-indent-object'
-Bundle 'mkomitee/Color-Sampler-Pack'
-Bundle 'mkomitee/Vim-Tomorrow-Theme'
-Bundle 'pep8'
-Bundle 'python_match.vim'
-Bundle 'pythoncomplete'
 Bundle 'repeat.vim'
-Bundle 'ruby-matchit'
 Bundle 'scrooloose/nerdtree'
 Bundle 'simplenote.vim'
 Bundle 'surround.vim'
-Bundle 'textobj-rubyblock'
-Bundle 'textobj-user'
 Bundle 'tmatilai/gitolite.vim'
-Bundle 'tomtom/tlib_vim'
 Bundle 'vim-indent-object'
+" Filetype Plugins
+Bundle 'ajf/puppet-vim'
+Bundle 'endwise.vim'
+Bundle 'pep8'
+Bundle 'python_match.vim'
+Bundle 'pythoncomplete'
+Bundle 'ruby-matchit'
+Bundle 'textobj-rubyblock'
+" Colors
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'gmarik/ingretu'
+Bundle 'mkomitee/Color-Sampler-Pack'
+Bundle 'mkomitee/Vim-Tomorrow-Theme'
 Bundle 'wgibbs/vim-irblack'
+" Dependencies, ...
+Bundle 'MarcWeber/vim-addon-mw-utils'
+Bundle 'textobj-user'
+Bundle 'tomtom/tlib_vim'
 
 " }}}
 " Preferences -------------------------------------------------------------- {{{
@@ -499,13 +502,13 @@ nnoremap <c-y> :YRShow<CR>
 vnoremap <leader>a=> :Align => =<cr>
 
 " }}}
-" Simplenote {{{
+" Simplenote -------------------------------------------------------------- {{{
 source ~/.simplenoterc
 noremap <Leader>sl :Simplenote -l<CR>
 noremap <Leader>sn :Simplenote -n<CR>
 
 " }}}
-" Showmarks {{{
+" Showmarks --------------------------------------------------------------- {{{
 let g:showmarks_enable=1
 let g:showmarks_include="'`\"^<>.abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789[](){}"
 let g:showmarks_ignore_type=''
@@ -514,18 +517,18 @@ let g:showmarks_textupper="\t"
 let g:showmarks_textother="\t"
 
 " }}}
-" bufkill {{{
+" bufkill ----------------------------------------------------------------- {{{
 noremap <Leader>k :bd<CR>
 noremap <Leader>k! :bd!<CR>
 
 " }}}
-" Ack {{{
+" Ack --------------------------------------------------------------------- {{{
 noremap <Leader>g :Ack<space><C-r><C-w><CR>
 let ackprg="~/scripts/ack"
 "let ackprg="~/scripts/ack --nocolor --nogroup --column --flush"
 
 " }}}
-" NERDCommenter {{{
+" NERDCommenter ----------------------------------------------------------- {{{
 " When we comment something with the NERDComment Toggle, reselect
 let g:NERDCreateDefaultMappings = 0
 let g:NERDSpaceDelims = 1
@@ -538,7 +541,7 @@ nmap <leader>c<space> <plug>NERDCommenterToggle
 nmap <leader>c$ <plug>NERDCommenterToEOL
 
 " }}}
-" NERDTree.vim {{{
+" NERDTree.vim ------------------------------------------------------------ {{{
 let g:NERDTreeUseExistingWindows = 1
 let NERDTreeIgnore=['\~$', '\.swp$', '^CVS$', '\.svn$', '^CVSROOT$', '^\.git$', '\.pyc$', '\.pyo$', '\.swp$']
 noremap <Leader>dd :NERDTreeToggle<CR>
@@ -561,11 +564,11 @@ function! s:CloseIfOnlyNerdTreeLeft()
 endfunction
 
 " }}}
-" Scratch {{{
+" Scratch ----------------------------------------------------------------- {{{
 noremap <leader>s :call ToggleMyScratch()<CR>
 
 " }}}
-" Supertab {{{
+" Supertab ----------------------------------------------------------------{{{
 let g:SuperTabDefaultCompletionType = "context"
 
 " }}}
