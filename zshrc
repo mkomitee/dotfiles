@@ -24,7 +24,7 @@ DISABLE_AUTO_UPDATE="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(pathrc git vi-mode terminalapp)
+plugins=(pathrc git vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -91,10 +91,10 @@ alias rm='nocorrect rm'
 alias rmdir='nocorrect rmdir'
 alias history='fc -dl 1'
 alias sudoenv='sudo -E zsh'
-alias tasks='t --task-dir=~/.tasks --list=tasks'
-alias task='t --task-dir=~/.tasks --list=tasks'
-alias t='t --task-dir=~/.tasks --list=tasks'
 alias tmux='tmux -u'
+if [ -f /usr/bin/vimx ]; then
+    alias vim=vimx
+fi
 
 # Tweak environment variables {{{1
 # LSCOLORS="Exfxcxdxbxegedabagacad"
