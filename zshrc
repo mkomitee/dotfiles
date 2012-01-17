@@ -92,6 +92,7 @@ alias rmdir='nocorrect rmdir'
 alias history='fc -dl 1'
 alias sudoenv='sudo -E zsh'
 alias tmux='tmux -u'
+alias t='tasks list -v'
 if [ -f /usr/bin/vimx ]; then
     alias vim=vimx
 fi
