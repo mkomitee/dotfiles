@@ -52,6 +52,7 @@ Bundle 'python_match.vim'
 Bundle 'pythoncomplete'
 Bundle 'ruby-matchit'
 Bundle 'textobj-rubyblock'
+Bundle 'ehamberg/vim-cute-python'
 " }}}
 " Colors, ... {{{
 Bundle 'altercation/vim-colors-solarized'
@@ -521,13 +522,13 @@ let g:tagbar_compact   = 1
 
 " }}}
 " Powerlines -------------------------------------------------------------- {{{
-if has('gui') && has('mac')
-    let g:Powerline_cache_file = expand('~') . "/.vimdata/powerline.cache.macvim"
+if has('mac')
+    let g:Powerline_cache_file = expand('~') . "/.vimdata/powerline.cache.mac"
     let g:Powerline_symbols = 'fancy'
 else
     let g:Powerline_cache_file = expand('~') . "/.vimdata/powerline.cache"
     let g:Powerline_symbols = 'unicode'
-endif
+end
 
 " }}}
 " Yankring ---------------------------------------------------------------- {{{
