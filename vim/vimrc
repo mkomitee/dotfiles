@@ -323,6 +323,8 @@ nnoremap <expr> zB 'zb' . winheight(0)/4 . '<c-e>'
 nnoremap <leader>v :vsplit<cr>
 nnoremap <leader>h :split<cr>
 
+nnoremap <cr> zvzz
+
 "C-{hjkl} to move text or text blocks left down up or right
 inoremap <C-j> <Esc>:m+<CR>==gi
 inoremap <C-k> <Esc>:m-2<CR>==gi
