@@ -53,6 +53,7 @@ Bundle 'pythoncomplete'
 Bundle 'ruby-matchit'
 Bundle 'textobj-rubyblock'
 Bundle 'ehamberg/vim-cute-python'
+Bundle 'mfontani/vim-cute-perl'
 " }}}
 " Colors, ... {{{
 Bundle 'altercation/vim-colors-solarized'
