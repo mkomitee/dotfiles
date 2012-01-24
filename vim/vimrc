@@ -44,7 +44,6 @@ Bundle 'tmatilai/gitolite.vim'
 Bundle 'vim-indent-object'
 " }}}
 " Filetype Plugins, ... {{{
-Bundle 'Lokaltog/python-syntax'
 Bundle 'ajf/puppet-vim'
 Bundle 'endwise.vim'
 Bundle 'pep8'
