@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+
 '''
 Simple script to maintain git subtrees.
 
@@ -38,7 +39,9 @@ import re
 import subprocess
 import csv
 
+
 class Subtree(object):
+
     '''
     Models a git subtree
     '''
@@ -60,12 +63,14 @@ class Subtree(object):
         '''
         Returns True|False if the subtree appears to be deployed
         '''
+
         return os.path.exists(self.path)
 
     def deploy(self):
         '''
         Attempts to deploy the subtree
         '''
+
         command = ['git', 'subtree']
         if self.is_deployed():
             command.append('pull')
@@ -85,6 +90,7 @@ def git_status():
     '''
     Bails if the git repository is not clean
     '''
+
     with open('/dev/null', 'a') as null:
         command = ['git', 'status']
         try:
@@ -99,9 +105,11 @@ def read_subtrees(config_file):
     Reads a configuration file and returns a list of subtree objects as defined by the configuration
     file.
     '''
+
     config = csv.reader(open(config_file), delimiter=',')
     subtrees = [Subtree(line) for line in config if not line[0].startswith('#')]
     return subtrees
+
 
 if __name__ == '__main__':
     git_status()
@@ -114,7 +122,5 @@ if __name__ == '__main__':
 
     for subtree in read_subtrees('repositories.csv'):
         subtree.deploy()
-
-
 
 # vim: set ft=python ts=4 sw=4 et:
