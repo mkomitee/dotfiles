@@ -25,10 +25,8 @@ Bundle 'Lokaltog/vim-powerline'
 Bundle 'Rainbow-Parenthsis-Bundle'
 Bundle 'ShowMarks'
 Bundle 'The-NERD-Commenter'
-Bundle 'YankRing.vim'
 Bundle 'ack.vim'
 Bundle 'ervandew/screen'
-Bundle 'ervandew/supertab'
 Bundle 'fugitive.vim'
 Bundle 'garbas/vim-snipmate'
 Bundle 'godlygeek/tabular'
@@ -44,12 +42,9 @@ Bundle 'tmatilai/gitolite.vim'
 Bundle 'vim-indent-object'
 " }}}
 " Filetype Plugins, ... {{{
-Bundle 'Lokaltog/python-syntax'
+Bundle 'klen/python-mode'
 Bundle 'ajf/puppet-vim'
 Bundle 'endwise.vim'
-Bundle 'pep8'
-Bundle 'python_match.vim'
-Bundle 'pythoncomplete'
 Bundle 'ruby-matchit'
 Bundle 'textobj-rubyblock'
 Bundle 'ehamberg/vim-cute-python'
@@ -324,7 +319,7 @@ nnoremap <expr> zB 'zb' . winheight(0)/4 . '<c-e>'
 nnoremap <leader>v :vsplit<cr>
 nnoremap <leader>h :split<cr>
 
-nnoremap <cr> zvzz
+" nnoremap <cr> zvzz
 
 "C-{hjkl} to move text or text blocks left down up or right
 inoremap <C-j> <Esc>:m+<CR>==gi
@@ -364,10 +359,6 @@ nnoremap <Leader>> <C-W>>
 nnoremap <Leader>< <C-W><
 " make Y consistant with C and D
 noremap Y y$
-
-" Change buffers with tab and shift-tab
-noremap <tab> :bn<cr>
-noremap <s-tab> :bp<cr>
 
 " Easily modify vimrc
 nnoremap <leader>ev :e $MYVIMRC<CR>
@@ -470,41 +461,20 @@ function! Colorize()
 endfunction
 
 " }}}
-" Pasting Buffers {{{
-fu! PasteWindow(direction)
-    if exists("g:yanked_buffer")
-        if a:direction == 'edit'
-            let temp_buffer = bufnr('%')
-        endif
-
-        exec a:direction . " +buffer" . g:yanked_buffer
-
-        if a:direction == 'edit'
-            let g:yanked_buffer = temp_buffer
-        endif
-    endif
-endf
-
-"yank/paste buffers
-" :nnoremap <silent> <leader>wy  :let g:yanked_buffer=bufnr('%')<cr>
-" :nnoremap <silent> <leader>wd  :let g:yanked_buffer=bufnr('%')<cr>:q<cr>
-" :nnoremap <silent> <leader>wp :call PasteWindow('edit')<cr>
-" :nnoremap <silent> <leader>ws :call PasteWindow('split')<cr>
-" :nnoremap <silent> <leader>wv :call PasteWindow('vsplit')<cr>
-
+" Typos {{{
+command! -bang E e<bang>
+command! -bang Q q<bang>
+command! -bang W w<bang>
+command! -bang QA qa<bang>
+command! -bang Qa qa<bang>
+command! -bang Wa wa<bang>
+command! -bang WA wa<bang>
+command! -bang Wq wq<bang>
+command! -bang WQ wq<bang>
 " }}}
 "
 " }}}
 " Configure plugins  ------------------------------------------------------- {{{
-" Python ---- {{{
-let g:python_highlight_all = 1
-let g:python_show_sync = 1
-let g:python_print_as_function = 1
-
-let g:pyindent_open_paren = '&sw'
-let g:pyindent_continue = '&sw'
-"
-" }}}
 " Ctrl+P ------------------------------------------------------------------ {{{
 let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir']
 let g:ctrlp_cmd = 'CtrlP'
@@ -532,13 +502,6 @@ else
     let g:Powerline_cache_file = expand('~') . "/.vimdata/powerline.cache"
     let g:Powerline_symbols = 'unicode'
 end
-
-" }}}
-" Yankring ---------------------------------------------------------------- {{{
-let g:yankring_history_dir="$HOME/.vimdata"
-let g:yankring_replace_n_pkey = '<M-P>'
-nnoremap <leader>y :YRShow<cr>
-nnoremap <c-y> :YRShow<CR>
 
 " }}}
 " Tabularize  ------------------------------------------------------------- {{{
@@ -612,10 +575,6 @@ endfunction
 " }}}
 " Scratch ----------------------------------------------------------------- {{{
 noremap <leader>s :call ToggleMyScratch()<CR>
-
-" }}}
-" Supertab ----------------------------------------------------------------{{{
-let g:SuperTabDefaultCompletionType = "context"
 
 " }}}
 " }}}
