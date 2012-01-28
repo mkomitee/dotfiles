@@ -1,33 +1,36 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+'''
+Simple script to maintain git subtrees.
 
-# Copyright 2011 Michael Komitee. All rights reserved.
-#
-# Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions are met:
-#
-# 1. Redistributions of source code must retain the above copyright notice,
-# this list of conditions and the following disclaimer.
-#
-# 2. Redistributions in binary form must reproduce the above copyright
-# notice, this list of conditions and the following disclaimer in the
-# documentation and/or other materials provided with the distribution.
-#
-# THIS SOFTWARE IS PROVIDED BY MICHAEL KOMITEE ``AS IS'' AND ANY EXPRESS OR
-# IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-# OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN
-# NO EVENT SHALL MICHAEl KOMITEE OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
-# INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
-# (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-# SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
-# LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
-# OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
-# DAMAGE.
-#
-# The views and conclusions contained in the software and documentation are
-# those of the authors and should not be interpreted as representing official
-# policies, either expressed or implied, of Michael Komitee.
+Copyright 2011 Michael Komitee. All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice,
+this list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright
+notice, this list of conditions and the following disclaimer in the
+documentation and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY MICHAEL KOMITEE ``AS IS'' AND ANY EXPRESS OR
+IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN
+NO EVENT SHALL MICHAEl KOMITEE OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
+DAMAGE.
+
+The views and conclusions contained in the software and documentation are
+those of the authors and should not be interpreted as representing official
+policies, either expressed or implied, of Michael Komitee.
+'''
 
 import sys
 import os
@@ -36,12 +39,15 @@ import subprocess
 import csv
 
 class Subtree(object):
+    '''
+    Models a git subtree
+    '''
 
     def __init__(self, data):
         self.prefix = data[0]
         self.repository = data[1]
-        m = re.search('/([^/]*)$', self.repository)
-        base = re.sub('.git$', '', m.group(1))
+        match = re.search('/([^/]*)$', self.repository)
+        base = re.sub('.git$', '', match.group(1))
         if self.prefix == '':
             self.path = base
         else:
@@ -51,9 +57,15 @@ class Subtree(object):
         return '''Subtree(path='%s', repository='%s')''' % (self.path, self.repository)
 
     def is_deployed(self):
+        '''
+        Returns True|False if the subtree appears to be deployed
+        '''
         return os.path.exists(self.path)
 
     def deploy(self):
+        '''
+        Attempts to deploy the subtree
+        '''
         command = ['git', 'subtree']
         if self.is_deployed():
             command.append('pull')
@@ -70,6 +82,9 @@ class Subtree(object):
 
 
 def git_status():
+    '''
+    Bails if the git repository is not clean
+    '''
     with open('/dev/null', 'a') as null:
         command = ['git', 'status']
         try:
@@ -80,6 +95,10 @@ def git_status():
 
 
 def read_subtrees(config_file):
+    '''
+    Reads a configuration file and returns a list of subtree objects as defined by the configuration
+    file.
+    '''
     config = csv.reader(open(config_file), delimiter=',')
     subtrees = [Subtree(line) for line in config if not line[0].startswith('#')]
     return subtrees
