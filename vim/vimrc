@@ -20,14 +20,11 @@ endfor
 " Install Plugins ---------------------------------------------------------- {{{
 Bundle 'vundle'
 " Plugins, ... {{{
-Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'Rainbow-Parenthsis-Bundle'
 Bundle 'ShowMarks'
 Bundle 'The-NERD-Commenter'
 Bundle 'ack.vim'
-Bundle 'ervandew/screen'
-Bundle 'fugitive.vim'
 Bundle 'garbas/vim-snipmate'
 Bundle 'godlygeek/tabular'
 Bundle 'honza/snipmate-snippets'
@@ -36,9 +33,7 @@ Bundle 'majutsushi/tagbar'
 Bundle 'michaeljsmith/vim-indent-object'
 Bundle 'repeat.vim'
 Bundle 'scrooloose/nerdtree'
-Bundle 'simplenote.vim'
 Bundle 'surround.vim'
-Bundle 'tmatilai/gitolite.vim'
 Bundle 'vim-indent-object'
 " }}}
 " Filetype Plugins, ... {{{
@@ -49,6 +44,7 @@ Bundle 'ruby-matchit'
 Bundle 'textobj-rubyblock'
 Bundle 'ehamberg/vim-cute-python'
 Bundle 'mfontani/vim-cute-perl'
+Bundle 'tmatilai/gitolite.vim'
 " }}}
 " Colors, ... {{{
 Bundle 'altercation/vim-colors-solarized'
@@ -61,6 +57,7 @@ Bundle 'wgibbs/vim-irblack'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'textobj-user'
 Bundle 'tomtom/tlib_vim'
+Bundle 'fugitive.vim'
 " }}}
 " }}}
 " Preferences -------------------------------------------------------------- {{{
@@ -70,7 +67,8 @@ set autoindent
 set showmode
 set showcmd
 set hidden
-set visualbell t_vb=  " No bells; No flashing!
+set noerrorbells
+set novisualbell
 set ttyfast
 set backspace=indent,eol,start
 set number
@@ -83,15 +81,11 @@ endif
 set undolevels=10000
 set list
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮,trail:♦
-set lazyredraw
 set matchtime=3
 set showbreak=↪
 set splitbelow
 set splitright
 set fillchars=diff:⣿
-set ttimeout
-set notimeout
-set nottimeout
 set autowrite
 set shiftround
 set autoread
@@ -107,13 +101,15 @@ set display+=lastline
 set diffopt=filler,iwhite
 set updatecount=10
 set completeopt=longest,menu,menuone
-set switchbuf=usetab
 set nostartofline
 set viminfo='100,<50,s10,h,n~/.vimdata/viminfo
-set preserveindent
 set pumheight=10
 set report=0
 set switchbuf=useopen,usetab
+set scrolloff=5
+set sidescroll=1
+set sidescrolloff=10
+set virtualedit+=block
 if has('unnamedplus')
     set clipboard=unnamed,unnamedplus,autoselect
 elseif &term !~ "screen"
@@ -137,21 +133,12 @@ set magic
 
 noremap <leader><space> :nohl<cr>:call clearmatches()<cr>
 
-" Open a Quickfix window for the last search.
-nnoremap <silent> <leader>/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
-
-set scrolloff=5
-set sidescroll=1
-set sidescrolloff=10
-
-set virtualedit+=block
-
 " Keep search matches in the middle of the window and pulse the line when moving
 " to them.
-nnoremap n nzzzv:call PulseCursorLine()<cr>
-nnoremap N Nzzzv:call PulseCursorLine()<cr>
-nnoremap g; g;zzzv:call PulseCursorLine()<cr>
-nnoremap g, g,zzzv:call PulseCursorLine()<cr>
+nnoremap n n:call PulseCursorLine()<cr>
+nnoremap N N:call PulseCursorLine()<cr>
+nnoremap g; g;:call PulseCursorLine()<cr>
+nnoremap g, g,:call PulseCursorLine()<cr>
 
 " j and k will go one line, even if they're wrapped
 nnoremap j gj
@@ -167,7 +154,6 @@ nnoremap ' `
 " }}}
 " Disable annoying maps ---------------------------------------------------- {{{
 noremap <F1> <nop>
-noremap <K> <nop>
 
 " }}}
 " Disable Arrow Keys ------------------------------------------------------- {{{
@@ -193,7 +179,6 @@ set expandtab
 set wrap
 set textwidth=80
 set formatoptions=croqln
-call ToggleColorColumn('on')
 
 " }}}
 " Backups & State ---------------------------------------------------------- {{{
@@ -217,8 +202,19 @@ set wildignore+=*.DS_Store
 set wildignore+=*.pyc,*.pyo
 
 " }}}
+" Typos -------------------------------------------------------------------- {{{
+command! -bang E e<bang>
+command! -bang Q q<bang>
+command! -bang W w<bang>
+command! -bang QA qa<bang>
+command! -bang Qa qa<bang>
+command! -bang Wa wa<bang>
+command! -bang WA wa<bang>
+command! -bang Wq wq<bang>
+command! -bang WQ wq<bang>
+
+" }}}
 " Colorscheme -------------------------------------------------------------- {{{
-" colorscheme wombat256
 colorscheme Tomorrow-Night
 
 if &t_Co < 16
@@ -266,7 +262,7 @@ augroup showmarks
     au InsertLeave * execute 'ShowMarksOn'
 augroup END
 
-" Equal all folds on resize
+" Equal all windows on resize
 augroup resize
     au!
     au VimResized * exe "normal! \<c-w>="
@@ -311,15 +307,8 @@ augroup END
 " }}}
 " Toggles & Switches (Leader commands) ------------------------------------- {{{
 
-" zT will move the current line to 1/4th from the top of the window
-nnoremap <expr> zT 'zt' . winheight(0)/4 . '<c-y>'
-" zB will move the current line to 1/4th from the bottom of the window
-nnoremap <expr> zB 'zb' . winheight(0)/4 . '<c-e>'
-
-nnoremap <leader>v :vsplit<cr>
-nnoremap <leader>h :split<cr>
-
-" nnoremap <cr> zvzz
+" Remap jj in insert mode to escape
+inoremap jj <esc>
 
 "C-{hjkl} to move text or text blocks left down up or right
 inoremap <C-j> <Esc>:m+<CR>==gi
@@ -331,22 +320,20 @@ vnoremap <C-k> :m-2<CR>gv=gv
 vnoremap <C-h> <gv
 vnoremap <C-l> >gv
 
-noremap <Leader>c :close<cr>
-
 if bufwinnr(1)
     noremap + <c-W>+
     noremap - <c-W>-
 endif
 
 " Easier navigation between open windows
-nnoremap <C-k> <C-W>kzz:call PulseCursorLine()<cr>
-nnoremap <C-j> <C-W>jzz:call PulseCursorLine()<cr>
-nnoremap <C-h> <C-W>hzz:call PulseCursorLine()<cr>
-nnoremap <C-l> <C-W>lzz:call PulseCursorLine()<cr>
-nnoremap <C-Right> <C-W>lzz:call PulseCursorLine()<cr>
-nnoremap <C-Left> <C-W>hzz:call PulseCursorLine()<cr>
-nnoremap <C-Up> <C-W>kzz:call PulseCursorLine()<cr>
-nnoremap <C-Down> <C-W>jzz:call PulseCursorLine()<cr>
+nnoremap <C-k> <C-W>k
+nnoremap <C-j> <C-W>j
+nnoremap <C-h> <C-W>h
+nnoremap <C-l> <C-W>l
+nnoremap <C-Right> <C-W>l
+nnoremap <C-Left> <C-W>h
+nnoremap <C-Up> <C-W>k
+nnoremap <C-Down> <C-W>j
 
 " Reselect visually selected text after indenting
 vnoremap > >gv
@@ -375,10 +362,6 @@ set ww+=<,>
 vnoremap <C-Left> x<Left>P`[v`]
 vnoremap <C-Right> x<Right>P`[v`]
 
-" My main typos, these arent used in commands so why not?
-cnoremap WQ wq
-cnoremap wQ wq
-
 " sudo write-file in case you opened a file you dont have privileges to write
 cmap w!! w !sudo tee % >/dev/null<cr>
 
@@ -393,11 +376,6 @@ endif
 
 " }}}
 " Custom commands and functions -------------------------------------------- {{{
-" Window Snapping {{{
-nnoremap <silent> <leader>mw :call MarkWindowSwap()<CR>
-nnoremap <silent> <leader>pw :call DoWindowSwap()<CR>
-
-" }}}
 " Diff against whats on disk {{{
 nnoremap <Leader>do :call DiffOrig()<CR>
 if !exists(":DiffOrig")
@@ -411,44 +389,6 @@ nnoremap <silent> <leader>ll :call ToggleList("Location List", 'l')<CR>
 nnoremap <silent> <leader>qf :call ToggleList("Quickfix List", 'c')<CR>
 
 " }}}
-" Strip trailing whitespaces  {{{
-function! Preserve(command)
-    " Preparation: save last search, and cursor position.
-    let _s=@/
-    let l = line(".")
-    let c = col(".")
-    " Do the business:
-    execute a:command
-    " Clean up: restore previous search history, and cursor position
-    let @/=_s
-    call cursor(l, c)
-endfunction
-nnoremap _$ :call Preserve("%s/\\s\\+$//e")<CR>
-nnoremap _= :call Preserve("normal gg=G")<CR>
-
-" }}}
-" Search for current visual selection with */# {{{
-" Tip tip from: http://amix.dk/blog/viewEntry/19334
-function! VisualSearch(direction) range
-    let l:saved_reg = @"
-    execute "normal! vgvy"
-
-    let l:pattern = escape(@", '\\/.*$^~[]')
-    let l:pattern = substitute(l:pattern, "\n$", "", "")
-
-    if a:direction == 'b'
-        execute "normal ?" . l:pattern . "^M"
-    elseif a:direction == 'gv'
-        call CmdLine("vimgrep " . '/'. l:pattern . '/' . ' **/*.')
-    elseif a:direction == 'f'
-        execute "normal /" . l:pattern . "^M"
-    endif
-
-    let @/ = l:pattern
-    let @" = l:saved_reg
-endfunction
-
-" }}}
 " Generate a color pallette {{{
 function! Colorize()
     let num = 255
@@ -460,17 +400,6 @@ function! Colorize()
     endwhile
 endfunction
 
-" }}}
-" Typos {{{
-command! -bang E e<bang>
-command! -bang Q q<bang>
-command! -bang W w<bang>
-command! -bang QA qa<bang>
-command! -bang Qa qa<bang>
-command! -bang Wa wa<bang>
-command! -bang WA wa<bang>
-command! -bang Wq wq<bang>
-command! -bang WQ wq<bang>
 " }}}
 "
 " }}}
@@ -509,12 +438,6 @@ vnoremap <silent> <Leader>a=> :Tabularize /=>/l1l1<CR>
 vnoremap <silent> <Leader>a= :Tabularize /=/l1l1<CR>
 vnoremap <silent> <Leader>a, :Tabularize /,/l0l1<CR>
 vnoremap <silent> <Leader>a: :Tabularize /:/l0l1<CR>
-
-" }}}
-" Simplenote -------------------------------------------------------------- {{{
-source ~/.simplenoterc
-noremap <Leader>sl :Simplenote -l<CR>
-noremap <Leader>sn :Simplenote -n<CR>
 
 " }}}
 " Showmarks --------------------------------------------------------------- {{{
