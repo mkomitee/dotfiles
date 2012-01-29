@@ -26,8 +26,8 @@ Bundle 'ShowMarks'
 Bundle 'The-NERD-Commenter'
 Bundle 'ack.vim'
 Bundle 'garbas/vim-snipmate'
-Bundle 'godlygeek/tabular'
 Bundle 'honza/snipmate-snippets'
+Bundle 'godlygeek/tabular'
 Bundle 'kien/ctrlp.vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'michaeljsmith/vim-indent-object'
@@ -176,6 +176,7 @@ set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 set expandtab
+set smarttab
 set wrap
 set textwidth=80
 set formatoptions=croqln

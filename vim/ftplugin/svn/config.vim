@@ -1,2 +1,1 @@
-setlocal autoindent
 au! vimmemory
