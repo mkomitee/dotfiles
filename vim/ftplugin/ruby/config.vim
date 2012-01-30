@@ -1,8 +1,5 @@
-call ToggleColorColumn('on')
-
 setlocal textwidth=100
 setlocal omnifunc=rubycomplete#Complete
-setlocal list
 setlocal keywordprg=ri
 setlocal tabstop=2
 setlocal shiftwidth=2
