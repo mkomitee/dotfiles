@@ -42,9 +42,6 @@ nnoremap k 3k
 nnoremap J :tn<CR>
 nnoremap K :tp<CR>
 
-" YES YES YES REMOVE THE IDIOCY
-nnoremap <bs> <nop>
-
 " Clear search highlighting and normal highlighting.
 nnoremap <Leader><space> <esc>:noh<CR>
 nnoremap <esc> <esc>:noh<cr><esc>
