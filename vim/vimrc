@@ -9,7 +9,6 @@ silent execute '!mkdir -p $HOME/.vimdata/vimbackup'
 silent execute '!mkdir -p $HOME/.vimdata/vimswap'
 silent execute '!mkdir -p $HOME/.vimdata/vimviews'
 silent execute '!mkdir -p $HOME/.vimdata/vimundo'
-silent execute '!mkdir -p $HOME/.vimdata/fufdata'
 silent execute '!mkdir -p $HOME/.vimdata/ctrlp'
 
 for file in split(glob("$HOME/.vim/functions/*.vim"))

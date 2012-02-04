@@ -9,6 +9,7 @@ source $ZSH/completion.zsh
 source $ZSH/history.zsh
 source $ZSH/aliases.zsh
 source $ZSH/key-bindings.zsh
+source $ZSH/functions.zsh
 source $ZSH/prompt.zsh
 
 # GREP CONFIG
