@@ -1,3 +1,6 @@
 [submodule "vim/bundle/vundle"]
 	path = vim/bundle/vundle
 	url = http://github.com/gmarik/vundle.git
+[submodule "scratch/badwolf"]
+	path = scratch/badwolf
+	url = git@gist.github.com:2d11040b6b8afee0a2b8.git
