@@ -31,8 +31,9 @@
     editor = vim
     whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol 
     excludesfile = ~/.dotfiles/gitignore
- 
+
 [alias] 
+    vimdiff = difftool
     head = log -1
     stat = status
     st = status
@@ -45,3 +46,5 @@
     wc = whatchanged
     commit = commit -v
 
+[difftool "vimdiff"]
+    cmd = vimdiff  \"$LOCAL\" \"$REMOTE\"
