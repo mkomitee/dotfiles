@@ -5,3 +5,7 @@ function vim-clear-cache() {
     done
     find ~/.vimdata/ -name 'powerline.cache*' -type f -delete
 }
+
+function psg() {
+    ps auxww | grep --color=always $* | grep -v grep
+}

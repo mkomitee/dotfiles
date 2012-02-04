@@ -1,3 +1,7 @@
+if [ $TERM = 'screen' ]; then
+    export TERM=screen-256color
+fi
+
 case "$TERM" in
     xterm*|rxvt*)
         preexec () {

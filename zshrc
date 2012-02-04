@@ -3,8 +3,12 @@
 ZSH=$HOME/.dotfiles/zsh
 fpath=($ZSH $fpath)
 
+export PYTHONPATH=$HOME/lib/python:$HOME/.dotfiles/lib/python:$PYTHONPATH
+
 source $ZSH/pathrc.zsh
+source $ZSH/rvm.zsh
 source $ZSH/termsupport.zsh
+source $ZSH/lang.zsh
 source $ZSH/completion.zsh
 source $ZSH/history.zsh
 source $ZSH/aliases.zsh
@@ -22,6 +26,9 @@ ls --color -d . &>/dev/null 2>&1 && alias ls='ls --color=tty' || alias ls='ls -G
 export LSCOLORS="Gxfxcxdxbxegedabagacad"
 
 export PAGER=less
+export EDITOR=vim
+export SVNEDITOR=vim
+export VISUAL=vim
 
 # Source local config
 if [ -f $HOME/.zshrc.local ]; then
