@@ -17,6 +17,7 @@ source $ZSH/globbing.zsh
 source $ZSH/functions.zsh
 source $ZSH/jobs.zsh
 source $ZSH/cdr.zsh
+source $ZSH/virtualenv.zsh
 source $ZSH/prompt.zsh
 
 # GREP CONFIG

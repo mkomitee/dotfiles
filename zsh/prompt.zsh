@@ -8,7 +8,7 @@ if [ $UID -eq 0 ]; then NCOLOR="red"; SYMBOL='#'; else NCOLOR="yellow"; SYMBOL='
 
 MODE_INDICATOR="%{$fg_bold[red]%}<%{$fg[red]%}<<%{$reset_color%}"
 
-ZSH_THEME_GIT_PROMPT_PREFIX="("
+ZSH_THEME_GIT_PROMPT_PREFIX="(git:"
 ZSH_THEME_GIT_PROMPT_SUFFIX=") "
 ZSH_THEME_GIT_PROMPT_CLEAN=""
 ZSH_THEME_GIT_PROMPT_DIRTY="✗"
@@ -116,11 +116,20 @@ jobs_prompt_info() {
     fi
 }
 
+# Disable default virtualenv prompt info so we can
+# do our own
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+function virtualenv_prompt_info() {
+    if [ "$VIRTUAL_ENV" != "" ]; then
+        echo '['`basename $VIRTUAL_ENV`'] '
+    fi
+}
+
 # Helps display previous commands exit code
 local exit_code="%(?,,%{$fg[red]%}[%?] %{$reset_color%})"
 
 # PROMPT='${exit_code}%{$fg[$NCOLOR]%}$(shorthost) %c $(git_prompt_info)$(jobs_prompt_info)$SYMBOL %{$reset_color%}'
 PROMPT='${exit_code}%{$fg[$NCOLOR]%}$(shorthost) %c $(jobs_prompt_info)$SYMBOL %{$reset_color%}'
 
-RPS1='%{$fg[$NCOLOR]%}$(git_prompt_info)%{$reset_color%}$(vi_mode_prompt_info)'
+RPS1='%{$fg[$NCOLOR]%}$(git_prompt_info)$(virtualenv_prompt_info)%{$reset_color%}$(vi_mode_prompt_info)'
 
