@@ -37,6 +37,8 @@ map -modes=n,v,c,i,t <F3> <Nop>
 " FASTER PLEASE
 nnoremap j 3j
 nnoremap k 3k
+nnoremap <Down> 3j
+nnoremap <Up> 3k
 
 " Switch tabs with J and K
 nnoremap J :tn<CR>
