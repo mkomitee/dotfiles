@@ -2,11 +2,18 @@
 autoload -U compinit
 compinit -i -u -d "${HOME}/.zcompdumps/${HOST%%.*}-${EUID}-$ZSH_VERSION"
 
-unsetopt menu_complete   # do not autoselect the first completion entry
-unsetopt flowcontrol
-setopt auto_menu         # show completion menu on succesive tab press
+unsetopt correct
+unsetopt correct_all
+unsetopt menu_complete
+unsetopt auto_remove_slash
+setopt auto_menu
 setopt complete_in_word
 setopt always_to_end
+setopt auto_list
+setopt auto_param_slash
+setopt glob_complete
+setopt list_packed
+setopt list_types
 
 WORDCHARS=''
 

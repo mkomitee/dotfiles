@@ -13,7 +13,9 @@ source $ZSH/completion.zsh
 source $ZSH/history.zsh
 source $ZSH/aliases.zsh
 source $ZSH/key-bindings.zsh
+source $ZSH/globbing.zsh
 source $ZSH/functions.zsh
+source $ZSH/jobs.zsh
 source $ZSH/prompt.zsh
 
 # GREP CONFIG
@@ -29,6 +31,15 @@ export PAGER=less
 export EDITOR=vim
 export SVNEDITOR=vim
 export VISUAL=vim
+
+unsetopt flowcontrol
+unsetopt beep
+setopt auto_cd
+setopt auto_pushd
+setopt pushd_ignore_dups
+setopt interactive_comments
+setopt rc_quotes
+setopt short_loops
 
 # Source local config
 if [ -f $HOME/.zshrc.local ]; then

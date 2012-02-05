@@ -1,6 +1,7 @@
 #!/bin/zsh
 autoload colors; colors;
 setopt prompt_subst
+setopt transient_rprompt
 
 
 if [ $UID -eq 0 ]; then NCOLOR="red"; SYMBOL='#'; else NCOLOR="yellow"; SYMBOL='$' fi
@@ -118,7 +119,8 @@ jobs_prompt_info() {
 # Helps display previous commands exit code
 local exit_code="%(?,,%{$fg[red]%}[%?] %{$reset_color%})"
 
-PROMPT='${exit_code}%{$fg[$NCOLOR]%}$(shorthost) %c $(git_prompt_info)$(jobs_prompt_info)$SYMBOL %{$reset_color%}'
+# PROMPT='${exit_code}%{$fg[$NCOLOR]%}$(shorthost) %c $(git_prompt_info)$(jobs_prompt_info)$SYMBOL %{$reset_color%}'
+PROMPT='${exit_code}%{$fg[$NCOLOR]%}$(shorthost) %c $(jobs_prompt_info)$SYMBOL %{$reset_color%}'
 
-RPS1='$(vi_mode_prompt_info)'
+RPS1='%{$fg[$NCOLOR]%}$(git_prompt_info)%{$reset_color%}$(vi_mode_prompt_info)'
 
