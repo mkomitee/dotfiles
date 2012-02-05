@@ -16,6 +16,7 @@ source $ZSH/key-bindings.zsh
 source $ZSH/globbing.zsh
 source $ZSH/functions.zsh
 source $ZSH/jobs.zsh
+source $ZSH/cdr.zsh
 source $ZSH/prompt.zsh
 
 # GREP CONFIG
