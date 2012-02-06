@@ -409,6 +409,10 @@ endfunction
 "
 " }}}
 " Configure plugins  ------------------------------------------------------- {{{
+" Python-Mode ------------------------------------------------------------- {{{
+let g:pymode_lint_write = 0
+
+" }}}
 " Ctrl+P ------------------------------------------------------------------ {{{
 let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir']
 let g:ctrlp_cmd = 'CtrlP'
