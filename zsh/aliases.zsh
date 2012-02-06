@@ -14,7 +14,6 @@ alias history='fc -il 1'
 alias sudoenv='sudo -E zsh'
 alias tmux='tmux -u2'
 alias t='tasks list -v'
-alias dirs='cdr -l'
 
 if [ -f /usr/bin/vimx ]; then
     alias vim=vimx
