@@ -36,6 +36,7 @@ Bundle 'surround.vim'
 Bundle 'vim-indent-object'
 " }}}
 " Filetype Plugins, ... {{{
+Bundle 'jmcantrell/vim-virtualenv'
 Bundle 'klen/python-mode'
 Bundle 'ajf/puppet-vim'
 Bundle 'endwise.vim'
