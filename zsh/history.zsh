@@ -16,12 +16,14 @@ setopt hist_reduce_blanks
 
 zmodload zsh/datetime
 zshaddhistory() {
-    CMD=${1%%$'\n'}
-    if [ ${CMD:0:1} != ' ' ]; then
-        grep -Ev "^: [[:digit:]]+:[[:digit:]]+;$CMD$" $ZSH_UNIFIED_HISTORY > $ZSH_UNIFIED_HISTORY.$$ 2> /dev/null
-        echo ": $EPOCHSECONDS:0;$CMD" >> $ZSH_UNIFIED_HISTORY.$$
-        tail -n $HISTSIZE $ZSH_UNIFIED_HISTORY.$$ > $ZSH_UNIFIED_HISTORY
-        rm $ZSH_UNIFIED_HISTORY.$$
+    if [ $1 ]; then
+        local CMD=${1%%$'\n'}
+        if [ "$CMD[0,1]" != ' ' ]; then
+            grep -Ev "^: [[:digit:]]+:[[:digit:]]+;$CMD$" $ZSH_UNIFIED_HISTORY > $ZSH_UNIFIED_HISTORY.$$ 2> /dev/null
+            echo ": $EPOCHSECONDS:0;$CMD" >> $ZSH_UNIFIED_HISTORY.$$
+            tail -n $HISTSIZE $ZSH_UNIFIED_HISTORY.$$ > $ZSH_UNIFIED_HISTORY
+            rm $ZSH_UNIFIED_HISTORY.$$
+        fi
     fi
 }
 
@@ -48,7 +50,7 @@ function unified-history-search() {
         fc -ilm "$*"
     fi
 }
-alias unified-history-search='noglob history-search'
+alias unified-history-search='noglob unified-history-search'
 
 function history-search() {
     if [ "$*" != "" ]; then
