@@ -1,1 +1,1 @@
-/Users/mkomitee/.dotfiles/scratch/badwolf/badwolf.vim
+../../scratch/badwolf/badwolf.vim
