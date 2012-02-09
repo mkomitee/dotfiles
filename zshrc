@@ -1,5 +1,7 @@
 #!/bin/zsh
-#
+
+ZSH_MINOR_VERSION=$ZSH_VERSION[(ws:.:)-1]
+
 ZSH=$HOME/.dotfiles/zsh
 fpath=($ZSH $fpath)
 
