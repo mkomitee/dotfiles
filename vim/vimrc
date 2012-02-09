@@ -216,11 +216,7 @@ command! -bang WQ wq<bang>
 
 " }}}
 " Colorscheme -------------------------------------------------------------- {{{
-if has('gui_running')
-    colorscheme badwolf
-else
-    colorscheme Tomorrow-Night
-endif
+colorscheme badwolf
 
 if &t_Co < 16
     set t_Co=16
