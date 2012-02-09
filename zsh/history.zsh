@@ -41,3 +41,18 @@ function history() {
         fc $*
     fi
 }
+
+function unified-history-search() {
+    fc -ap $ZSH_UNIFIED_HISTORY
+    if [ "$*" != "" ]; then
+        fc -ilm "$*"
+    fi
+}
+alias unified-history-search='noglob history-search'
+
+function history-search() {
+    if [ "$*" != "" ]; then
+        fc -ilm "$*"
+    fi
+}
+alias history-search='noglob history-search'
