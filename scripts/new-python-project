@@ -5,13 +5,13 @@
 $ new-python-project project-name
 
 Will create a project skeleton:
+    project-name/.gitignore
+    project-name/setup.py
+    project-name/REQUIREMENTS.txt
     project-name/project-name
     project-name/project-name/__init__.py
     project-name/tests
     project-name/tests/__init__.py
-    project-name/.gitignore
-    project-name/setup.py
-    project-name/REQUIREMENTS.txt
 
 If there exists an environment variable $VENV_ROOT, will create a python
 virtual environment named project-name within that directory and activate it.
@@ -33,27 +33,33 @@ import logging
 import subprocess
 import datetime
 
-import pprint
-
 __description__ = 'Simple script to create a new python project'
-__version__ = '1.0' # 2012-02-11
+__version__ = '1.0'
+
 
 class FailureException(Exception):
+    '''Indicates an unrecoverable failure'''
     pass
 
+
 def camelize(value):
+    '''Converts an underscore_string to a camelcaseString'''
     def camelcase():
+        '''Helper which yields appropriate functions for camelizing'''
         yield str.lower
         while True:
             yield str.capitalize
-    c = camelcase()
-    return "".join(c.next()(x) if x else '_' for x in value.split('_'))
+    c_func = camelcase()
+    return "".join(c_func.next()(x) if x else '_' for x in value.split('_'))
+
 
 def parse_arguments():
+    '''parse commandline arguments'''
     parser = argparse.ArgumentParser(description=__description__)
     parser.add_argument('project', help='project name')
     parser.add_argument('--vroot', metavar='ROOT', help='virtualenv root')
-    parser.add_argument('--python', metavar='BINARY', help='virtualenv python interpreter')
+    parser.add_argument('--python', metavar='BINARY',
+                        help='virtualenv python interpreter')
     parser.add_argument('--debug', action='store_true', help='debug',
                         default=False)
     options = parser.parse_args()
@@ -64,7 +70,9 @@ def parse_arguments():
             options.vroot = os.path.join(os.environ['HOME'], '.virtualenvs')
     return options
 
+
 def git_config(key):
+    '''queries git config for information'''
     if not find_binary('git'):
         return None
 
@@ -72,9 +80,10 @@ def git_config(key):
 
     logging.debug("executing {0!r}".format(command))
     try:
-        proc = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        proc = subprocess.Popen(command, stdout=subprocess.PIPE,
+                                stderr=subprocess.PIPE)
         stdout, stderr = proc.communicate()
-    except OSError as exc:
+    except OSError:
         return None
     for line in stdout.rstrip().split("\n"):
         logging.debug("git config stdout: %s", line)
@@ -84,7 +93,9 @@ def git_config(key):
         return None
     return stdout.strip()
 
+
 def generate_skeleton(project):
+    '''generates a skeleton python project'''
     if os.path.exists(project):
         raise FailureException("{0} already exists".format(project))
 
@@ -134,7 +145,8 @@ __packages__ = ['{0}']
 '''.format(project, author, datetime.datetime.now().year, email))
 
     # Build test init file
-    with open(os.path.join(project, 'tests', '{0}_tests.py'.format(project)), 'w') as fhandle:
+    with open(os.path.join(project, 'tests', '{0}_tests.py'.format(project)),
+              'w') as fhandle:
         fhandle.write('''#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 \'\'\'test {0} module \'\'\'
@@ -190,9 +202,12 @@ config = {{
 setup(**config)
 '''.format(project))
 
-    return ['pip install --quiet -r REQUIREMENTS.txt', 'rehash', '{0} {1}/__init__.py'.format(editor, project)]
+    return ['pip install --quiet -r REQUIREMENTS.txt', 'rehash',
+            '{0} {1}/__init__.py'.format(editor, project)]
+
 
 def find_binary(binary):
+    '''returns true/false if a binary is available in the path'''
     for part in os.environ['PATH'].split(':'):
         logging.debug("checking %s for %s", part, binary)
         if os.access(os.path.join(part, binary), os.X_OK):
@@ -202,6 +217,7 @@ def find_binary(binary):
 
 
 def create_virtualenv(project, root, python):
+    '''creates a virtual environment for a project'''
     virtualenv = os.path.join(root, project)
 
     # Ensure the virtualenv doesnt already exist
@@ -233,10 +249,12 @@ def create_virtualenv(project, root, python):
     # Run virtualenv
     logging.debug("executing {0!r}".format(command))
     try:
-        proc = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        proc = subprocess.Popen(command, stdout=subprocess.PIPE,
+                                stderr=subprocess.PIPE)
         stdout, stderr = proc.communicate()
     except OSError as exc:
-        raise FailureException("failure running virtualenv: {0}".format(exc.strerror))
+        raise FailureException("failure running virtualenv: {0}".format(
+            exc.strerror))
     for line in stdout.rstrip().split("\n"):
         logging.debug("virtualenv stdout: %s", line)
     for line in stderr.rstrip().split("\n"):
@@ -262,15 +280,21 @@ def create_virtualenv(project, root, python):
 
     return commands
 
+
 def setup_repository(project):
+    '''creates a git repository in the given directory'''
     if not find_binary('git'):
         return False
 
-    for command in [['git', 'init'], ['git', 'add', '-A'], ['git', 'commit', '-m"import"']]:
+    for command in [
+        ['git', 'init'],
+        ['git', 'add', '-A'],
+        ['git', 'commit', '-m"import"']]:
         try:
-            proc = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=project)
+            proc = subprocess.Popen(command, stdout=subprocess.PIPE,
+                                    stderr=subprocess.PIPE, cwd=project)
             stdout, stderr = proc.communicate()
-        except OSError as exc:
+        except OSError:
             return False
         for line in stdout.rstrip().split("\n"):
             logging.debug("%s stdout: %s", ' '.join(command), line)
@@ -283,19 +307,22 @@ def setup_repository(project):
 
 
 def main():
+    '''main program logic'''
     options = parse_arguments()
     if options.debug:
         logging.getLogger().setLevel(logging.DEBUG)
-        logging.debug("args: %r", options)# repr(options))
+        logging.debug("args: %r", options)
     try:
         skel = generate_skeleton(options.project)
-        activate = create_virtualenv(options.project, options.vroot, options.python)
+        activate = create_virtualenv(options.project, options.vroot,
+                                     options.python)
         setup_repository(options.project)
     except FailureException as exc:
         print >> sys.stderr, exc
         return 1
     else:
-        print "To start working on your project run the following:\ncd {0}".format(options.project)
+        print "To start working on your project run the following:"
+        print "cd {0}".format(options.project)
         for cmd in activate:
             print cmd
         for cmd in skel:
@@ -303,6 +330,6 @@ def main():
         return 0
 
 if __name__ == '__main__':
-    FORMAT='%(asctime)-15s %(levelname)s %(funcName)s:%(lineno)d %(message)s'
+    FORMAT = '%(asctime)-15s %(levelname)s %(funcName)s:%(lineno)d %(message)s'
     logging.basicConfig(format=FORMAT)
     sys.exit(main())
