@@ -1,0 +1,304 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+'''Simple script to create a new python project
+
+$ new-python-project project-name
+
+Will create a project skeleton:
+    project-name/project-name
+    project-name/project-name/__init__.py
+    project-name/tests
+    project-name/tests/__init__.py
+    project-name/.gitignore
+    project-name/setup.py
+    project-name/REQUIREMENTS.txt
+
+If there exists an environment variable $VENV_ROOT, will create a python
+virtual environment named project-name within that directory and activate it.
+If no $VENV_ROOT exists, it will create the virtual environment in
+$HOME/.virtualenvs/.
+
+The metadata encoded in the projects setup.py (and main __init__.py) will be
+pulled out of your git config if you have one.
+
+Will also setup a git repository.
+'''
+
+###############################################################################
+
+import argparse
+import sys
+import os
+import logging
+import subprocess
+import datetime
+
+import pprint
+
+__description__ = 'Simple script to create a new python project'
+__version__ = '1.0' # 2012-02-11
+
+class FailureException(Exception):
+    pass
+
+def camelize(value):
+    def camelcase():
+        yield str.lower
+        while True:
+            yield str.capitalize
+    c = camelcase()
+    return "".join(c.next()(x) if x else '_' for x in value.split('_'))
+
+def parse_arguments():
+    parser = argparse.ArgumentParser(description=__description__)
+    parser.add_argument('project', help='project name')
+    parser.add_argument('--vroot', metavar='ROOT', help='virtualenv root')
+    parser.add_argument('--python', metavar='BINARY', help='virtualenv python interpreter')
+    parser.add_argument('--debug', action='store_true', help='debug',
+                        default=False)
+    options = parser.parse_args()
+    if options.vroot is None:
+        if 'VENV_ROOT' in os.environ:
+            options.vroot = os.environ['VENV_ROOT']
+        else:
+            options.vroot = os.path.join(os.environ['HOME'], '.virtualenvs')
+    return options
+
+def git_config(key):
+    if not find_binary('git'):
+        return None
+
+    command = ['git', 'config', key]
+
+    logging.debug("executing {0!r}".format(command))
+    try:
+        proc = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        stdout, stderr = proc.communicate()
+    except OSError as exc:
+        return None
+    for line in stdout.rstrip().split("\n"):
+        logging.debug("git config stdout: %s", line)
+    for line in stderr.rstrip().split("\n"):
+        logging.debug("git config stderr: %s", line)
+    if proc.returncode != 0:
+        return None
+    return stdout.strip()
+
+def generate_skeleton(project):
+    if os.path.exists(project):
+        raise FailureException("{0} already exists".format(project))
+
+    # Make directory structure
+    os.makedirs(os.path.join(project, project))
+    os.makedirs(os.path.join(project, 'tests'))
+    os.makedirs(os.path.join(project, 'doc'))
+
+    # Create ignore file
+    with open(os.path.join(project, '.gitignore'), 'w') as fhandle:
+        fhandle.write('*.pyc\n*.pyo')
+
+    # Create requirements file
+    with open(os.path.join(project, 'REQUIREMENTS.txt'), 'w') as fhandle:
+        pass
+
+    # Determine editor
+    if 'EDITOR' in os.environ:
+        editor = os.environ['EDITOR']
+    elif 'VISUAL' in os.environ:
+        editor = os.environ['VISUAL']
+    else:
+        editor = 'vi'
+
+    # Build project init file
+    email = git_config('user.email')
+    author = git_config('user.name')
+    if email is None:
+        email = 'REPLACE WITH YOUR EMAIL'
+    if author is None:
+        author = 'REPLACE WITH YOUR NAME'
+    with open(os.path.join(project, project, '__init__.py'), 'w') as fhandle:
+        fhandle.write('''\'\'\'REPLACE WITH PROJECT DESCRIPTION\'\'\'
+
+__author__ = '{1}'
+__copyright__ = 'Copyright {2}, {1}'
+__credits__ = ['{1}']
+__license__ = 'REPLACE WITH YOUR LICENSE OF CHOICE'
+__version__ = '1.0.0'
+__maintainer__ = '{1}'
+__email__ = '{3}'
+__status__ = 'Development'
+__url__ = 'REPLACE WITH PROJECT URL'
+__download_url__ = 'REPLACE WITH DOWNLOAD URL'
+__packages__ = ['{0}']
+'''.format(project, author, datetime.datetime.now().year, email))
+
+    # Build test init file
+    with open(os.path.join(project, 'tests', '{0}_tests.py'.format(project)), 'w') as fhandle:
+        fhandle.write('''#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+\'\'\'test {0} module \'\'\'
+from nose.tools import *
+try:
+    import unittest2 as unittest
+except ImportError:
+    import unittest
+
+import {0}
+
+class {1}(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        pass
+    @classmethod
+    def tearDownClass(cls):
+        pass
+    def test_example(self):
+        self.assertTrue(True)'''.format(project, camelize('test_{0}'.format(project))))
+
+    # Build setup.py
+    with open(os.path.join(project, 'setup.py'), 'w') as fhandle:
+        fhandle.write('''#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+try:
+    from setuptools import setup
+except ImportError:
+    from distutils.core import setup
+
+import {0}
+config = {{
+    'description': {0}.__doc__,
+    'name': {0}.__name__,
+    'author': {0}.__author__,
+    'copyright': {0}.__copyright__,
+    'credits': {0}.__credits__,
+    'license': {0}.__license__,
+    'version': {0}.__version__,
+    'maintainer': {0}.__maintainer__,
+    'author_email': {0}.__email__,
+    'url': {0}.__url__,
+    'download_url': {0}.__download_url__,
+    'install_requires': ['nose'],
+    'packages': {0}.__packages__,
+    'scripts': [],
+}}
+
+setup(**config)
+
+'''.format(project))
+
+    return ['{0} {1}/__init__.py'.format(editor, project)]
+
+def find_binary(binary):
+    for part in os.environ['PATH'].split(':'):
+        logging.debug("checking %s for %s", part, binary)
+        if os.access(os.path.join(part, binary), os.X_OK):
+            logging.debug("found %s in %s", binary, part)
+            return True
+    return False
+
+
+def create_virtualenv(project, root, python):
+    virtualenv = os.path.join(root, project)
+
+    # Ensure the virtualenv doesnt already exist
+    if os.path.exists(virtualenv):
+        raise FailureException("virtualenv {0} already exists".format(project))
+
+    # Make sure that there's a place to put the virtualenv
+    try:
+        logging.debug("creating %s", root)
+        os.makedirs(root)
+    except OSError as exc:
+        if exc.errno != 17:
+            raise FailureException("cannot make virtualenv {0}: {1}".format(
+                project,
+                exc.strerror))
+
+    # Verify virtualenv is in our path
+    if not find_binary('virtualenv'):
+        raise FailureException("executable virtualenv not in current path")
+
+    # Generate virtualenv command
+    command = ['virtualenv']
+    if python:
+        command += ['-p', python]
+        if not os.access(python, os.X_OK):
+            raise FailureException("{0} is not executable".format(python))
+    command.append(virtualenv)
+
+    # Run virtualenv
+    logging.debug("executing {0!r}".format(command))
+    try:
+        proc = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        stdout, stderr = proc.communicate()
+    except OSError as exc:
+        raise FailureException("failure running virtualenv: {0}".format(exc.strerror))
+    for line in stdout.rstrip().split("\n"):
+        logging.debug("virtualenv stdout: %s", line)
+    for line in stderr.rstrip().split("\n"):
+        logging.debug("virtualenv stderr: %s", line)
+    if proc.returncode != 0:
+        raise FailureException("virtualenv exited {0}".format(proc.returncode))
+
+    activate = os.path.join(virtualenv, 'bin', 'activate')
+    if 'SHELL' in os.environ:
+        shell = os.path.basename(os.environ['SHELL'])
+        if shell.endswith('csh'):
+            activate = os.path.join(virtualenv, 'bin', 'activate.csh')
+        elif shell == 'fish':
+            activate = os.path.join(virtualenv, 'bin', 'activate.fish')
+    commands = ['source {0}'.format(activate)]
+
+    packages = ['pylint', 'pep8', 'nose', 'nosexcover', 'ipython']
+    if sys.version_info.major < 3 and sys.version_info.minor < 7:
+        packages.append("unittest2")
+
+    for package in packages:
+        commands.append('pip install --quiet {0}'.format(package))
+
+    return commands
+
+def setup_repository(project):
+    if not find_binary('git'):
+        return False
+
+    for command in [['git', 'init'], ['git', 'add', '-A'], ['git', 'commit', '-m"import"']]:
+        try:
+            proc = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=project)
+            stdout, stderr = proc.communicate()
+        except OSError as exc:
+            return False
+        for line in stdout.rstrip().split("\n"):
+            logging.debug("%s stdout: %s", ' '.join(command), line)
+        for line in stderr.rstrip().split("\n"):
+            logging.debug("%s stderr: %s", ' '.join(command), line)
+        if proc.returncode != 0:
+            return False
+
+    return True
+
+
+def main():
+    options = parse_arguments()
+    if options.debug:
+        logging.getLogger().setLevel(logging.DEBUG)
+        logging.debug("args: %r", options)# repr(options))
+    try:
+        skel = generate_skeleton(options.project)
+        activate = create_virtualenv(options.project, options.vroot, options.python)
+        setup_repository(options.project)
+    except FailureException as exc:
+        print >> sys.stderr, exc
+        return 1
+    else:
+        print "To start working on your project run the following:\ncd {0}".format(options.project)
+        for cmd in activate:
+            print cmd
+        for cmd in skel:
+            print cmd
+        return 0
+
+if __name__ == '__main__':
+    FORMAT='%(asctime)-15s %(levelname)s %(funcName)s:%(lineno)d %(message)s'
+    logging.basicConfig(format=FORMAT)
+    sys.exit(main())

@@ -20,6 +20,7 @@ endfor
 Bundle 'vundle'
 " Plugins, ... {{{
 Bundle 'Lokaltog/vim-powerline'
+Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Rainbow-Parenthsis-Bundle'
 Bundle 'ShowMarks'
 Bundle 'The-NERD-Commenter'
@@ -143,10 +144,6 @@ nnoremap g, g,:call PulseCursorLine()<cr>
 " j and k will go one line, even if they're wrapped
 nnoremap j gj
 nnoremap k gk
-
-" start / end of line should be easier to reach than ^ and $
-nnoremap H ^
-nnoremap L g_
 
 " when using marks, all by default mark columns as well
 nnoremap ' `
