@@ -98,8 +98,9 @@ def generate_skeleton(project):
         fhandle.write('*.pyc\n*.pyo')
 
     # Create requirements file
+    requirements = ['nose', 'pylint', 'pep8']
     with open(os.path.join(project, 'REQUIREMENTS.txt'), 'w') as fhandle:
-        pass
+        fhandle.write("\n".join(requirements))
 
     # Determine editor
     if 'EDITOR' in os.environ:
@@ -145,15 +146,19 @@ except ImportError:
 
 import {0}
 
+
 class {1}(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         pass
+
     @classmethod
     def tearDownClass(cls):
         pass
+
     def test_example(self):
-        self.assertTrue(True)'''.format(project, camelize('test_{0}'.format(project))))
+        self.assertTrue(True)
+'''.format(project, camelize('test_{0}'.format(project))))
 
     # Build setup.py
     with open(os.path.join(project, 'setup.py'), 'w') as fhandle:
@@ -177,16 +182,15 @@ config = {{
     'author_email': {0}.__email__,
     'url': {0}.__url__,
     'download_url': {0}.__download_url__,
-    'install_requires': ['nose'],
+    'install_requires': open('REQUIREMENTS.txt').read().split("\n"),
     'packages': {0}.__packages__,
     'scripts': [],
 }}
 
 setup(**config)
-
 '''.format(project))
 
-    return ['{0} {1}/__init__.py'.format(editor, project)]
+    return ['pip install --quiet -r REQUIREMENTS.txt', 'rehash', '{0} {1}/__init__.py'.format(editor, project)]
 
 def find_binary(binary):
     for part in os.environ['PATH'].split(':'):
@@ -249,7 +253,7 @@ def create_virtualenv(project, root, python):
             activate = os.path.join(virtualenv, 'bin', 'activate.fish')
     commands = ['source {0}'.format(activate)]
 
-    packages = ['pylint', 'pep8', 'nose', 'nosexcover', 'ipython']
+    packages = ['ipython']
     if sys.version_info.major < 3 and sys.version_info.minor < 7:
         packages.append("unittest2")
 
