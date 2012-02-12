@@ -47,14 +47,15 @@ function history() {
 function unified-history-search() {
     fc -ap $ZSH_UNIFIED_HISTORY
     if [ "$*" != "" ]; then
-        fc -ilm "$*"
+        fc -ilm "$*" 1
     fi
 }
 alias unified-history-search='noglob unified-history-search'
+alias history-unified-search='noglob unified-history-search'
 
 function history-search() {
     if [ "$*" != "" ]; then
-        fc -ilm "$*"
+        fc -ilm "$*" 1
     fi
 }
 alias history-search='noglob history-search'
