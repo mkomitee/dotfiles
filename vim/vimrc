@@ -112,11 +112,11 @@ set scrolloff=5
 set sidescroll=1
 set sidescrolloff=10
 set virtualedit+=block
-if has('unnamedplus')
-    set clipboard=unnamed,unnamedplus,autoselect
-elseif &term !~ "screen"
-    set clipboard=unnamed,autoselect
-endif
+" if has('unnamedplus')
+    " set clipboard=unnamed,unnamedplus,autoselect
+" elseif &term !~ "screen"
+    " set clipboard=unnamed,autoselect
+" endif
 
 if has('mouse')
     set mouse=a
