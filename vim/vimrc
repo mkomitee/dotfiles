@@ -19,6 +19,7 @@ endfor
 " Install Plugins ---------------------------------------------------------- {{{
 Bundle 'vundle'
 " Plugins, ... {{{
+Bundle 'AfterColors.vim'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Rainbow-Parenthsis-Bundle'
