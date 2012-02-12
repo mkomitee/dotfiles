@@ -49,6 +49,7 @@ Bundle 'mfontani/vim-cute-perl'
 Bundle 'tmatilai/gitolite.vim'
 " }}}
 " Colors {{{
+Bundle 'sjl/badwolf'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'gmarik/ingretu'
 Bundle 'mkomitee/Color-Sampler-Pack'
