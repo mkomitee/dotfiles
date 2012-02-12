@@ -1,4 +1,4 @@
-" Preamble ----------------------------------------------------------------- {{{
+" Preamble {{{
 set nocompatible
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
@@ -16,9 +16,9 @@ for file in split(glob("$HOME/.vim/functions/*.vim"))
 endfor
 
 " }}}
-" Install Plugins ---------------------------------------------------------- {{{
+" Install Plugins {{{
 Bundle 'vundle'
-" Plugins, ... {{{
+" Plugins {{{
 Bundle 'AfterColors.vim'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'Lokaltog/vim-easymotion'
@@ -37,7 +37,7 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'surround.vim'
 Bundle 'vim-indent-object'
 " }}}
-" Filetype Plugins, ... {{{
+" Filetype Plugins {{{
 Bundle 'jmcantrell/vim-virtualenv'
 Bundle 'klen/python-mode'
 Bundle 'ajf/puppet-vim'
@@ -48,21 +48,21 @@ Bundle 'ehamberg/vim-cute-python'
 Bundle 'mfontani/vim-cute-perl'
 Bundle 'tmatilai/gitolite.vim'
 " }}}
-" Colors, ... {{{
+" Colors {{{
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'gmarik/ingretu'
 Bundle 'mkomitee/Color-Sampler-Pack'
 Bundle 'mkomitee/Vim-Tomorrow-Theme'
 Bundle 'wgibbs/vim-irblack'
 " }}}
-" Dependencies, ... {{{
+" Dependencies {{{
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'textobj-user'
 Bundle 'tomtom/tlib_vim'
 Bundle 'fugitive.vim'
 " }}}
 " }}}
-" Preferences -------------------------------------------------------------- {{{
+" Preferences {{{
 set encoding=utf-8
 set fileformats=unix,mac,dos
 set autoindent
@@ -82,12 +82,12 @@ if exists('&undofile')
 endif
 set undolevels=10000
 set list
-set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮,trail:♦
+set listchars=tab:▸\ ,eol:¶,extends:❯,precedes:❮,trail:♦
 set matchtime=3
 set showbreak=↪
 set splitbelow
 set splitright
-set fillchars=diff:⣿
+set fillchars+=diff:⣿,vert:❚
 set autowrite
 set shiftround
 set autoread
@@ -123,7 +123,7 @@ if has('mouse')
 endif
 
 " }}}
-" Searching & Movement ----------------------------------------------------- {{{
+" Searching & Movement {{{
 set incsearch
 set ignorecase
 set smartcase
@@ -150,11 +150,11 @@ nnoremap k gk
 nnoremap ' `
 
 " }}}
-" Disable annoying maps ---------------------------------------------------- {{{
+" Disable annoying maps {{{
 noremap <F1> <nop>
 
 " }}}
-" Disable Arrow Keys ------------------------------------------------------- {{{
+" Disable Arrow Keys {{{
 nnoremap <Left> <Nop>
 nnoremap <Right> <Nop>
 nnoremap <Up> <Nop>
@@ -169,7 +169,7 @@ vnoremap <Up> <Nop>
 vnoremap <Down> <Nop>
 
 " }}}
-" Defaults for tabs, spaces, & wrapping ------------------------------------ {{{
+" Defaults for tabs, spaces, & wrapping {{{
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
@@ -180,7 +180,7 @@ set textwidth=80
 set formatoptions=croqln
 
 " }}}
-" Backups & State ---------------------------------------------------------- {{{
+" Backups & State {{{
 set backupdir=$HOME/.vimdata/vimbackup/
 set directory=$HOME/.vimdata/vimswap/
 set viewdir=$HOME/.vimdata/vimviews/
@@ -189,7 +189,7 @@ if exists('&undofile')
 endif
 
 " }}}
-" Wildmode ----------------------------------------------------------------- {{{
+" Wildmode {{{
 set wildmenu
 set wildmode=longest:full,list:full
 
@@ -201,7 +201,7 @@ set wildignore+=*.DS_Store
 set wildignore+=*.pyc,*.pyo
 
 " }}}
-" Typos -------------------------------------------------------------------- {{{
+" Typos {{{
 command! -bang E e<bang>
 command! -bang Q q<bang>
 command! -bang W w<bang>
@@ -213,7 +213,7 @@ command! -bang Wq wq<bang>
 command! -bang WQ wq<bang>
 
 " }}}
-" Colorscheme -------------------------------------------------------------- {{{
+" Colorscheme {{{
 colorscheme badwolf
 
 if &t_Co < 16
@@ -233,12 +233,12 @@ set guicursor+=i:ver20-Cursor-blinkon600-blinkoff600
 set guicursor+=n-v-c:block-Cursor-blinkon600-blinkoff600
 
 " }}}
-" Leaders ------------------------------------------------------------------ {{{
+" Leaders {{{
 let mapleader = ","
 let localleader = '\\'
 
 " }}}
-" AutoCommands ------------------------------------------------------------- {{{
+" AutoCommands {{{
 
 " If we change focus away from vim, goto normal mode
 " do the same if we're in insert mode for 15 seconds
@@ -304,7 +304,7 @@ augroup detection
     autocmd BufReadPost,BufWritePost * filetype detect
 augroup END
 " }}}
-" Toggles & Switches (Leader commands) ------------------------------------- {{{
+" Toggles & Switches (Leader commands) {{{
 
 " Remap jj in insert mode to escape
 inoremap jj <esc>
@@ -374,7 +374,7 @@ else
 endif
 
 " }}}
-" Custom commands and functions -------------------------------------------- {{{
+" Custom commands and functions {{{
 " Diff against whats on disk {{{
 nnoremap <Leader>do :call DiffOrig()<CR>
 if !exists(":DiffOrig")
@@ -402,12 +402,12 @@ endfunction
 " }}}
 "
 " }}}
-" Configure plugins  ------------------------------------------------------- {{{
-" Python-Mode ------------------------------------------------------------- {{{
+" Configure plugins  {{{
+" Python-Mode {{{
 let g:pymode_lint_write = 0
 
 " }}}
-" Ctrl+P ------------------------------------------------------------------ {{{
+" Ctrl+P {{{
 let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir']
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_cache_dir = $HOME.'/.vimdata/ctrlp'
@@ -419,14 +419,14 @@ nnoremap <leader>r :CtrlPMRU<CR>
 nnoremap <c-t> :CtrlPBufTagAll<CR>
 nnoremap <c-q> :CtrlPQuickfix<CR>
 " }}}
-" Tagbar ------------------------------------------------------------------ {{{
+" Tagbar {{{
 noremap <leader>t :TagbarToggle<CR>
 let g:tagbar_autoclose = 1
 let g:tagbar_autofocus = 1
 let g:tagbar_compact   = 1
 
 " }}}
-" Powerlines -------------------------------------------------------------- {{{
+" Powerlines {{{
 if has('mac')
     let g:Powerline_cache_file = expand('~') . "/.vimdata/powerline.cache.mac"
     let g:Powerline_symbols = 'fancy'
@@ -436,14 +436,14 @@ else
 end
 
 " }}}
-" Tabularize  ------------------------------------------------------------- {{{
+" Tabularize  {{{
 vnoremap <silent> <Leader>a=> :Tabularize /=>/l1l1<CR>
 vnoremap <silent> <Leader>a= :Tabularize /=/l1l1<CR>
 vnoremap <silent> <Leader>a, :Tabularize /,/l0l1<CR>
 vnoremap <silent> <Leader>a: :Tabularize /:/l0l1<CR>
 
 " }}}
-" Showmarks --------------------------------------------------------------- {{{
+" Showmarks {{{
 let g:showmarks_enable=1
 let g:showmarks_include="'`\"^<>.abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789[](){}"
 let g:showmarks_ignore_type=''
@@ -452,18 +452,18 @@ let g:showmarks_textupper="\t"
 let g:showmarks_textother="\t"
 
 " }}}
-" bufkill ----------------------------------------------------------------- {{{
+" bufkill {{{
 noremap <Leader>k :bd<CR>
 noremap <Leader>k! :bd!<CR>
 
 " }}}
-" Ack --------------------------------------------------------------------- {{{
+" Ack {{{
 noremap <Leader>g :Ack<space><C-r><C-w><CR>
 let ackprg="~/scripts/ack"
 "let ackprg="~/scripts/ack --nocolor --nogroup --column --flush"
 
 " }}}
-" NERDCommenter ----------------------------------------------------------- {{{
+" NERDCommenter {{{
 " When we comment something with the NERDComment Toggle, reselect
 let g:NERDCreateDefaultMappings = 0
 let g:NERDSpaceDelims = 1
@@ -476,7 +476,7 @@ nmap <leader>c<space> <plug>NERDCommenterToggle
 nmap <leader>c$ <plug>NERDCommenterToEOL
 
 " }}}
-" NERDTree.vim ------------------------------------------------------------ {{{
+" NERDTree.vim {{{
 let g:NERDTreeUseExistingWindows = 1
 let NERDTreeIgnore=['\~$', '\.swp$', '^CVS$', '\.svn$', '^CVSROOT$', '^\.git$', '\.pyc$', '\.pyo$', '\.swp$']
 noremap <Leader>dd :NERDTreeToggle<CR>
@@ -499,18 +499,18 @@ function! s:CloseIfOnlyNerdTreeLeft()
 endfunction
 
 " }}}
-" Scratch ----------------------------------------------------------------- {{{
+" Scratch {{{
 noremap <leader>s :call ToggleMyScratch()<CR>
 
 " }}}
 " }}}
-" Load abbreviations ------------------------------------------------------- {{{
+" Load abbreviations {{{
 if filereadable(expand("~/.vim/abbrev"))
     source ~/.vim/abbrev
 endif
 
 " }}}
-" Modelines: --------------------------------------------------------------- {{{
+" Modelines: {{{
 " vim: nowrap fdm=marker ft=vim
 "
 " }}}
