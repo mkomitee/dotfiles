@@ -3,4 +3,4 @@
 	url = http://github.com/gmarik/vundle.git
 [submodule "scratch/badwolf"]
 	path = scratch/badwolf
-	url = git@gist.github.com:21044d6a2b27fbb574ee.git
+	url = git@gist.github.com:2d11040b6b8afee0a2b8.git 
