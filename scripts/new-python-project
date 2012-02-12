@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 '''Simple script to create a new python project
 
 $ new-python-project project-name
@@ -7,7 +6,7 @@ $ new-python-project project-name
 Will create a project skeleton:
     project-name/.gitignore
     project-name/setup.py
-    project-name/REQUIREMENTS.txt
+    project-name/REQUIREMENTS
     project-name/project-name
     project-name/project-name/__init__.py
     project-name/tests
@@ -110,8 +109,14 @@ def generate_skeleton(project):
 
     # Create requirements file
     requirements = ['nose', 'pylint', 'pep8']
-    with open(os.path.join(project, 'REQUIREMENTS.txt'), 'w') as fhandle:
+    with open(os.path.join(project, 'REQUIREMENTS'), 'w') as fhandle:
         fhandle.write("\n".join(requirements))
+
+    with open(os.path.join(project, 'tests', '__init__.py'), 'w') as fhandle:
+        pass
+
+    with open(os.path.join(project, 'README'), 'w') as fhandle:
+        fhandle.write('''Please type a descriptive readme''')
 
     # Determine editor
     if 'EDITOR' in os.environ:
@@ -129,81 +134,114 @@ def generate_skeleton(project):
     if author is None:
         author = 'REPLACE WITH YOUR NAME'
     with open(os.path.join(project, project, '__init__.py'), 'w') as fhandle:
-        fhandle.write('''\'\'\'REPLACE WITH PROJECT DESCRIPTION\'\'\'
+        fhandle.write('''\'\'\'short one line description\'\'\'
 
-__author__ = '{1}'
-__copyright__ = 'Copyright {2}, {1}'
-__credits__ = ['{1}']
-__license__ = 'REPLACE WITH YOUR LICENSE OF CHOICE'
-__version__ = '1.0.0'
-__maintainer__ = '{1}'
-__email__ = '{3}'
-__status__ = 'Development'
-__url__ = 'REPLACE WITH PROJECT URL'
-__download_url__ = 'REPLACE WITH DOWNLOAD URL'
+__author__ = '{1}'      # you
+__email__ = '{3}'       # your email address
+__keywords__ = ['{0}']  # keywords to help find this library
+__license__ = 'BSD'     # check http://pypi.python.org/pypi?%3Aaction=list_classifiers
+                        # for valid licenses
+__status__ = 'Planning' # Planning, Pre-Alpha, Alpha, Beta, Production/Stable, Mature, & Inactive
+                        # are all valid statuses
+__url__ = ''            # modules website
 __packages__ = ['{0}']
+__version__ = '1.0.0'
 '''.format(project, author, datetime.datetime.now().year, email))
 
     # Build test init file
     with open(os.path.join(project, 'tests', '{0}_tests.py'.format(project)),
               'w') as fhandle:
         fhandle.write('''#!/usr/bin/env python
-# -*- coding: utf-8 -*-
 \'\'\'test {0} module \'\'\'
-from nose.tools import *
-try:
-    import unittest2 as unittest
-except ImportError:
-    import unittest
 
+from nose.tools import *
 import {0}
 
+def setup():
+    pass
 
-class {1}(unittest.TestCase):
-    @classmethod
-    def setUpClass(cls):
-        pass
+def teardown():
+    pass
 
-    @classmethod
-    def tearDownClass(cls):
-        pass
+def test_example():
+    assert_true(True)
+'''.format(project))
 
-    def test_example(self):
-        self.assertTrue(True)
-'''.format(project, camelize('test_{0}'.format(project))))
-
-    # Build setup.py
+    # # Build setup.py
     with open(os.path.join(project, 'setup.py'), 'w') as fhandle:
         fhandle.write('''#!/usr/bin/env python
-# -*- coding: utf-8 -*-
 try:
     from setuptools import setup
 except ImportError:
     from distutils.core import setup
 
+import os
+
 import {0}
+
+_status_map = {{
+    'Planning':          'Development Status :: 1 - Planning',
+    'Pre-Alpha':         'Development Status :: 2 - Pre-Alpha',
+    'Alpha':             'Development Status :: 3 - Alpha',
+    'Beta':              'Development Status :: 4 - Beta',
+    'Production/Stable': 'Development Status :: 5 - Production/Stable',
+    'Mature':            'Development Status :: 6 - Mature',
+    'Inactive':          'Development Status :: 7 - Inactive'
+}}
+
+_license_map = {{
+    'AFL':               'License :: OSI Approved :: Academic Free License (AFL)',
+    'Apache':            'License :: OSI Approved :: Apache Software License',
+    'BSD':               'License :: OSI Approved :: BSD License',
+    'Common Public':     'License :: OSI Approved :: Common Public License',
+    'EUPL':              'License :: OSI Approved :: European Union Public Licence 1.0 (EUPL 1.0)',
+    'EUPL 1.1':          'License :: OSI Approved :: European Union Public Licence 1.1 (EUPL 1.1)',
+    'FDL':               'License :: OSI Approved :: GNU Free Documentation License (FDL)',
+    'GPL':               'License :: OSI Approved :: GNU General Public License (GPL)',
+    'LGPL':              'License :: OSI Approved :: GNU Library or Lesser General Public License (LGPL)',
+    'ISC':               'License :: OSI Approved :: ISC License (ISCL)',
+    'MIT':               'License :: OSI Approved :: MIT License',
+    'MPL':               'License :: OSI Approved :: Mozilla Public License 1.0 (MPL)',
+    'MPL 1.1':           'License :: OSI Approved :: Mozilla Public License 1.1 (MPL 1.1)',
+    'MPL 2.0':           'License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)',
+    'Python':            'License :: OSI Approved :: Python Software Foundation License',
+    'W3C':               'License :: OSI Approved :: W3C License',
+    'Other/Proprietary': 'License :: Other/Proprietary License',
+    'Public Domain':     'License :: Public Domain',
+}}
+
+# Utility function to read the README & REQUIREMENTS files.
+def read(fname):
+    return open(os.path.join(os.path.dirname(__file__), fname)).read().strip()
+
 config = {{
-    'description': {0}.__doc__,
     'name': {0}.__name__,
-    'author': {0}.__author__,
-    'copyright': {0}.__copyright__,
-    'credits': {0}.__credits__,
-    'license': {0}.__license__,
     'version': {0}.__version__,
-    'maintainer': {0}.__maintainer__,
+    'author': {0}.__author__,
     'author_email': {0}.__email__,
+    'description': {0}.__doc__,
+    'license': {0}.__license__,
+    'keywords': {0}.__keywords__,
     'url': {0}.__url__,
-    'download_url': {0}.__download_url__,
-    'install_requires': open('REQUIREMENTS.txt').read().split("\n"),
     'packages': {0}.__packages__,
+    'long_description': read('README'),
+    'install_requires': read('REQUIREMENTS').split("\\n"),
     'scripts': [],
+
+    # Please see http://pypi.python.org/pypi?%3Aaction=list_classifiers
+    # for additional classifiers like topic and intended audience
+    'classifiers': [
+        _status_map[{0}.__status__],
+        _license_map[{0}.__license__],
+        'Programming Language :: Python',
+    ]
 }}
 
 setup(**config)
 '''.format(project))
 
-    return ['pip install --quiet -r REQUIREMENTS.txt', 'rehash',
-            '{0} {1}/__init__.py'.format(editor, project)]
+    return ['pip install --quiet -r REQUIREMENTS', 'rehash',
+            '{0} {1}/__init__.py setup.py README'.format(editor, project)]
 
 
 def find_binary(binary):
