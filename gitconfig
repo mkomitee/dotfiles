@@ -44,7 +44,16 @@
     aa = add --all
     sm = submodule
     wc = whatchanged
+    aa = add -A
     commit = commit -v
 
 [difftool "vimdiff"]
     cmd = vimdiff  \"$LOCAL\" \"$REMOTE\"
+
+[format]
+	pretty = oneline
+
+[diff]
+	tool = vimdiff
+	guitool = gvimdiff
+
