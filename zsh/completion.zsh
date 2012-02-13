@@ -20,7 +20,8 @@ WORDCHARS=''
 zmodload -i zsh/complist
 
 # Match case sensitively
-zstyle ':completion:*' matcher-list 'r:|[._-]=* r:|=*' 
+# zstyle ':completion:*' matcher-list 'r:|[._-]=* r:|=*' 
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
 zstyle ':completion:*' list-colors ''
 
