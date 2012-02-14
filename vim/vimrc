@@ -136,13 +136,6 @@ set magic
 
 noremap <leader><space> :nohl<cr>:call clearmatches()<cr>
 
-" Keep search matches in the middle of the window and pulse the line when moving
-" to them.
-nnoremap n n:call PulseCursorLine()<cr>
-nnoremap N N:call PulseCursorLine()<cr>
-nnoremap g; g;:call PulseCursorLine()<cr>
-nnoremap g, g,:call PulseCursorLine()<cr>
-
 " j and k will go one line, even if they're wrapped
 nnoremap j gj
 nnoremap k gk
@@ -306,6 +299,9 @@ augroup detection
 augroup END
 " }}}
 " Toggles & Switches (Leader commands) {{{
+
+nnoremap / /\v
+nnoremap // :nohl<cr>
 
 " Remap jj in insert mode to escape
 inoremap jj <esc>
