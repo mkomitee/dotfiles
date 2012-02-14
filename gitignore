@@ -1,9 +1,107 @@
-*~
+# Mac
 .DS_Store
+
+# ctags/etags
+TAGS
 tags
-*.pyc
-*.pyo
-*.swp
-*.swo
+
+# Python
+*.py[co]
+*.egg
+*.egg-info
+eggs
+develop-eggs
+.installed.cfg
+pip-log.txt
+.coverage
+.tox
+
+# Logs
 *.log
+
+# Vim
 .netrwhist
+.*.sw[a-z]
+*.un~
+Session.vim
+
+# Ruby
+**.orig
+*.gem
+*.rbc
+*.sassc
+.bundle
+.config
+.rspec
+.sass-cache
+/.bundle
+/coverage/
+/db/*.sqlite3
+/log/*
+/spec/tmp/*
+/tmp/*
+/vendor/bundle
+capybara-*.html
+coverage
+lib/bundler/man
+pickle-email-*.html
+rdoc
+spec/reports
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+
+# Haskell
+*.o
+*.hi
+*.chi
+*.chs.h
+
+# Archives
+*.7z
+*.jar
+*.rar
+*.zip
+*.gz
+*.bzip
+*.xz
+*.lzma
+*.iso
+*.tar
+*.dmg
+*.xpi
+*.gem
+*.egg
+*.deb
+*.rpm
+
+# CVS
+/CVS/*
+*/CVS/*
+.cvsignore
+*/.cvsignore
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+.elc
+auto-save-list
+tramp
+.\#*
+
+# Generic hidden files, with an exception for gitignores
+!.gitignore
+.*
+
+# Mercurial
+/.hg/*
+*/.hg/*
+.hgignore
+
+# Subversion
+.svn/
