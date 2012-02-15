@@ -410,6 +410,11 @@ let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_cache_dir = $HOME.'/.vimdata/ctrlp'
 let g:ctrlp_max_depth = 10
 let g:ctrlp_mruf_relative = 1
+let g:ctrlp_jump_to_buffer = 0
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_open_new_file = 'r'
+let g:ctrlp_open_multi = '1vr'
+let g:ctrlp_dont_split = 'netrw\|help'
 nnoremap <c-b> :CtrlPBuffer<CR>
 nnoremap <leader>b :CtrlPBuffer<CR>
 nnoremap <leader>r :CtrlPMRU<CR>
