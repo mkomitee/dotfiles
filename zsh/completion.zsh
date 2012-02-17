@@ -6,8 +6,8 @@ unsetopt correct
 unsetopt correct_all
 unsetopt menu_complete
 unsetopt auto_remove_slash
+unsetopt complete_in_word
 setopt auto_menu
-setopt complete_in_word
 setopt always_to_end
 setopt auto_list
 setopt auto_param_slash
