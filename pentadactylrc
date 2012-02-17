@@ -44,6 +44,11 @@ nnoremap <Up> 3k
 nnoremap J :tn<CR>
 nnoremap K :tp<CR>
 
+" Marks!
+nnoremap m M
+nnoremap "'" go
+nnoremap '`' gn
+
 " Clear search highlighting and normal highlighting.
 nnoremap <Leader><space> <esc>:noh<CR>
 nnoremap <esc> <esc>:noh<cr><esc>
