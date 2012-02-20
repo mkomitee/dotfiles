@@ -6,6 +6,7 @@ fpath=($ZSH $fpath)
 export PYTHONPATH=$HOME/lib/python:$HOME/.dotfiles/lib/python:$PYTHONPATH
 
 source $ZSH/pathrc.zsh
+source $ZSH/cdr.zsh
 source $ZSH/rvm.zsh
 source $ZSH/termsupport.zsh
 source $ZSH/lang.zsh
@@ -16,7 +17,6 @@ source $ZSH/key-bindings.zsh
 source $ZSH/globbing.zsh
 source $ZSH/functions.zsh
 source $ZSH/jobs.zsh
-source $ZSH/cdr.zsh
 source $ZSH/virtualenv.zsh
 source $ZSH/prompt.zsh
 
