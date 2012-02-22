@@ -121,7 +121,7 @@ set virtualedit+=block
 " endif
 
 if has('mouse')
-    set mouse=nv
+    set mouse=a
 endif
 
 " }}}
