@@ -301,11 +301,7 @@ augroup END
 " }}}
 " Toggles & Switches (Leader commands) {{{
 
-nnoremap / /\v
 nnoremap // :nohl<cr>
-
-" Remap jj in insert mode to escape
-inoremap jj <esc>
 
 "C-{hjkl} to move text or text blocks left down up or right
 inoremap <C-j> <Esc>:m+<CR>==gi
