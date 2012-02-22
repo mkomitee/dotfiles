@@ -121,7 +121,7 @@ set virtualedit+=block
 " endif
 
 if has('mouse')
-    set mouse=a
+    set mouse=nv
 endif
 
 " }}}
@@ -294,10 +294,10 @@ augroup nerdtree
     autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 augroup END
 
-augroup detection
-    au!
-    autocmd BufReadPost,BufWritePost * filetype detect
-augroup END
+" augroup detection
+    " au!
+    " autocmd BufReadPost,BufWritePost * filetype detect
+" augroup END
 " }}}
 " Toggles & Switches (Leader commands) {{{
 
@@ -399,6 +399,7 @@ endfunction
 " Configure plugins  {{{
 " Python-Mode {{{
 let g:pymode_lint_write = 0
+let g:pymode_utils_whitespaces = 0
 
 " }}}
 " Ctrl+P {{{

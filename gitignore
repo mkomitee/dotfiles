@@ -65,7 +65,7 @@ spec/reports
 *.jar
 *.rar
 *.zip
-*.gz
+# *.gz
 *.bzip
 *.xz
 *.lzma
