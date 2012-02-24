@@ -19,6 +19,7 @@ source $ZSH/functions.zsh
 source $ZSH/jobs.zsh
 source $ZSH/virtualenv.zsh
 source $ZSH/prompt.zsh
+source $ZSH/colours.zsh
 
 # GREP CONFIG
 export GREP_OPTIONS='--color=auto'
