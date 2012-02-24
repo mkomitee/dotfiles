@@ -150,10 +150,12 @@ noremap <F1> <nop>
 
 " }}}
 " Disable Arrow Keys {{{
-nnoremap <Left> <Nop>
-nnoremap <Right> <Nop>
-nnoremap <Up> <Nop>
-nnoremap <Down> <Nop>
+
+nnoremap <Left> 8<C-w><
+nnoremap <Right> 8<C-w>>
+nnoremap <Up> 8<C-w>+
+nnoremap <Down> 8<C-w>-
+
 inoremap <Left> <Nop>
 inoremap <Right> <Nop>
 inoremap <Up> <Nop>
