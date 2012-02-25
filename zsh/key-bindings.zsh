@@ -36,3 +36,8 @@ bindkey -M viins "^A" beginning-of-line
 bindkey -M viins "^E" end-of-line
 
 bindkey "^O" expand-cmd-path
+
+bindkey -M viins "\e[A" history-search-backward
+bindkey -M viins "\e[B" history-search-forward
+bindkey -M vicmd "\e[A" history-search-backward
+bindkey -M vicmd "\e[B" history-search-forward
