@@ -1,6 +1,8 @@
 #!/bin/zsh
 
 ZSH=$HOME/.dotfiles/zsh
+LIB=$HOME/.dotfiles/lib
+
 fpath=($ZSH $fpath)
 
 export PYTHONPATH=$HOME/lib/python:$HOME/.dotfiles/lib/python:$PYTHONPATH
@@ -17,9 +19,11 @@ source $ZSH/key-bindings.zsh
 source $ZSH/globbing.zsh
 source $ZSH/functions.zsh
 source $ZSH/jobs.zsh
-source $ZSH/virtualenv.zsh
 source $ZSH/prompt.zsh
 source $ZSH/colours.zsh
+
+source $LIB/autoenv.sh
+source $LIB/virtualenvwrapper.sh
 
 # GREP CONFIG
 export GREP_OPTIONS='--color=auto'
