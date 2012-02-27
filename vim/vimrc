@@ -22,6 +22,7 @@ Bundle 'gmarik/vundle'
 Bundle 'mileszs/ack.vim'
 Bundle 'pyflakes'
 " Try out nvie/vim-flake8 instead
+" Try out kana/vim-fakeclip for possible tmux clipboard integration
 Bundle 'AfterColors.vim'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'Lokaltog/vim-easymotion'
