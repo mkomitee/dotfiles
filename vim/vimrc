@@ -19,6 +19,7 @@ endfor
 " Install Plugins {{{
 Bundle 'vundle'
 " Plugins {{{
+Bundle 'mileszs/ack.vim'
 Bundle 'pyflakes'
 Bundle 'AfterColors.vim'
 Bundle 'Lokaltog/vim-powerline'
@@ -26,7 +27,6 @@ Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Rainbow-Parenthsis-Bundle'
 Bundle 'ShowMarks'
 Bundle 'The-NERD-Commenter'
-Bundle 'ack.vim'
 Bundle 'garbas/vim-snipmate'
 Bundle 'honza/snipmate-snippets'
 Bundle 'godlygeek/tabular'
@@ -461,7 +461,7 @@ noremap <Leader>k! :bd!<CR>
 " }}}
 " Ack {{{
 noremap <Leader>g :Ack<space><C-r><C-w><CR>
-let ackprg="~/scripts/ack"
+" let ackprg="~/scripts/ack"
 "let ackprg="~/scripts/ack --nocolor --nogroup --column --flush"
 
 " }}}
