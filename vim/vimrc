@@ -17,34 +17,35 @@ endfor
 
 " }}}
 " Install Plugins {{{
-Bundle 'vundle'
+Bundle 'gmarik/vundle'
 " Plugins {{{
 Bundle 'mileszs/ack.vim'
 Bundle 'pyflakes'
+" Try out nvie/vim-flake8 instead
 Bundle 'AfterColors.vim'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Rainbow-Parenthsis-Bundle'
-Bundle 'ShowMarks'
-Bundle 'The-NERD-Commenter'
+Bundle 'garbas/vim-showmarks'
+Bundle 'scrooloose/nerdcommenter'
 Bundle 'garbas/vim-snipmate'
 Bundle 'honza/snipmate-snippets'
 Bundle 'godlygeek/tabular'
 Bundle 'kien/ctrlp.vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'michaeljsmith/vim-indent-object'
-Bundle 'repeat.vim'
+Bundle 'tpope/vim-repeat'
 Bundle 'scrooloose/nerdtree'
-Bundle 'surround.vim'
+Bundle 'tpope/vim-surround'
 Bundle 'vim-indent-object'
 " }}}
 " Filetype Plugins {{{
 Bundle 'jmcantrell/vim-virtualenv'
 Bundle 'klen/python-mode'
 Bundle 'ajf/puppet-vim'
-Bundle 'endwise.vim'
+Bundle 'tpope/vim-endwise'
 Bundle 'ruby-matchit'
-Bundle 'textobj-rubyblock'
+Bundle 'nelstrom/vim-textobj-rubyblock'
 Bundle 'ehamberg/vim-cute-python'
 Bundle 'mfontani/vim-cute-perl'
 Bundle 'tmatilai/gitolite.vim'
@@ -59,9 +60,9 @@ Bundle 'wgibbs/vim-irblack'
 " }}}
 " Dependencies {{{
 Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'textobj-user'
+Bundle 'kana/vim-textobj-user'
 Bundle 'tomtom/tlib_vim'
-Bundle 'fugitive.vim'
+Bundle 'tpope/vim-fugitive'
 " }}}
 " }}}
 " Preferences {{{
