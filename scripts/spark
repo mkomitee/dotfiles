@@ -1,0 +1,11 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+_points = [u'▁', u'▂', u'▃', u'▄', u'▅', u'▆', u'▇']
+
+def point(i):
+    return _points[int(float(i)/100.0 * (len(_points)-1))].encode('utf-8')
+
+if __name__ == '__main__':
+    import sys
+    print ''.join([point(arg) for arg in sys.argv[1:]])
