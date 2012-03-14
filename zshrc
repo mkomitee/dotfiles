@@ -23,7 +23,7 @@ source $ZSH/prompt.zsh
 source $ZSH/colours.zsh
 
 source $LIB/autoenv.sh
-source $LIB/virtualenvwrapper.sh
+#source $LIB/virtualenvwrapper.sh
 
 # GREP CONFIG
 export GREP_OPTIONS='--color=auto'

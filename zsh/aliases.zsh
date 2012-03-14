@@ -7,6 +7,9 @@ alias mv='nocorrect mv'
 alias mkdir='nocorrect mkdir'
 
 alias git=hub
+alias gp='git pull'
+alias gaa='git add -A'
+
 alias mutt='ulimit -n 10240;mutt'
 alias bc='bc -l'
 alias s=sudo
