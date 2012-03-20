@@ -21,6 +21,7 @@ source $ZSH/functions.zsh
 source $ZSH/jobs.zsh
 source $ZSH/prompt.zsh
 source $ZSH/colours.zsh
+source $ZSH/funny.zsh
 
 source $LIB/autoenv.sh
 #source $LIB/virtualenvwrapper.sh
