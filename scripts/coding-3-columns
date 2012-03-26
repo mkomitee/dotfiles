@@ -7,4 +7,7 @@ tmux split-window -h -l $(($WIDTH-81))
 tmux split-window -d -v -l 10
 for id in $(tmux list-panes | cut -d':' -f1); do
     tmux send-keys -t $id "cd $DIR" C-m
+    if [ -n "$*" ]; then
+        tmux send-keys -t $id "$*" C-m
+    fi
 done
