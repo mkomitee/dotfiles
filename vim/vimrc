@@ -19,51 +19,21 @@ endfor
 " Install Plugins {{{
 Bundle 'gmarik/vundle'
 " Plugins {{{
-Bundle 'mileszs/ack.vim'
-Bundle 'pyflakes'
-" Try out nvie/vim-flake8 instead
-" Try out kana/vim-fakeclip for possible tmux clipboard integration
-Bundle 'AfterColors.vim'
 Bundle 'Lokaltog/vim-powerline'
-Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Rainbow-Parenthsis-Bundle'
 Bundle 'garbas/vim-showmarks'
 Bundle 'scrooloose/nerdcommenter'
-Bundle 'garbas/vim-snipmate'
-Bundle 'honza/snipmate-snippets'
 Bundle 'godlygeek/tabular'
 Bundle 'kien/ctrlp.vim'
-Bundle 'majutsushi/tagbar'
-Bundle 'michaeljsmith/vim-indent-object'
-Bundle 'tpope/vim-repeat'
 Bundle 'scrooloose/nerdtree'
 Bundle 'tpope/vim-surround'
-Bundle 'vim-indent-object'
 " }}}
 " Filetype Plugins {{{
-Bundle 'jmcantrell/vim-virtualenv'
-Bundle 'klen/python-mode'
 Bundle 'ajf/puppet-vim'
-Bundle 'tpope/vim-endwise'
-Bundle 'ruby-matchit'
-Bundle 'nelstrom/vim-textobj-rubyblock'
-Bundle 'ehamberg/vim-cute-python'
-Bundle 'mfontani/vim-cute-perl'
 Bundle 'tmatilai/gitolite.vim'
 " }}}
 " Colors {{{
 Bundle 'sjl/badwolf'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'gmarik/ingretu'
-Bundle 'mkomitee/Color-Sampler-Pack'
-Bundle 'mkomitee/Vim-Tomorrow-Theme'
-Bundle 'wgibbs/vim-irblack'
-" }}}
-" Dependencies {{{
-Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'kana/vim-textobj-user'
-Bundle 'tomtom/tlib_vim'
-Bundle 'tpope/vim-fugitive'
 " }}}
 " }}}
 " Preferences {{{
@@ -92,10 +62,8 @@ set showbreak=↪
 set splitbelow
 set splitright
 set fillchars+=diff:⣿,vert:❚
-set autowrite
 set shiftround
 set autoread
-set title
 set dictionary=$HOME/.vimdata/words
 set showfulltag
 set shortmess+=filmnrxoOtTI
@@ -116,11 +84,6 @@ set scrolloff=5
 set sidescroll=1
 set sidescrolloff=10
 set virtualedit+=block
-" if has('unnamedplus')
-    " set clipboard=unnamed,unnamedplus,autoselect
-" elseif &term !~ "screen"
-    " set clipboard=unnamed,autoselect
-" endif
 
 if has('mouse')
     set mouse=a
@@ -219,11 +182,6 @@ if &t_Co < 16
     set t_Co=16
 endif
 
-" Useful when debugging colors. It identifies highlight groups
-" map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-            " \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-            " \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
-
 " Highlight VCS conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
@@ -238,38 +196,17 @@ let localleader = '\\'
 
 " }}}
 " AutoCommands {{{
-
-" If we change focus away from vim, goto normal mode
-" do the same if we're in insert mode for 15 seconds
-" feedback on the statusline that we're in insert mode
-augroup exit_insert_mode
-    au!
-    au FocusLost,TabLeave * call feedkeys("\<C-\>\<C-n>")
-    au CursorHoldI * stopinsert
-    au InsertEnter * let updaterestore=&updatetime | set updatetime=15000
-    au InsertLeave * let &updatetime=updaterestore
-augroup END
-
 " This may cause a lot of processing, but we can disable it if it causes problems
 augroup showmarks
     au!
     au BufWinEnter * execute 'ShowMarksOn'
     au BufEnter    * execute 'ShowMarksOn'
     au CursorMoved * execute 'ShowMarksOn'
-    au InsertEnter * execute 'ShowMarksOn'
-    au InsertLeave * execute 'ShowMarksOn'
 augroup END
 
-" Equal all windows on resize
-augroup resize
+augroup nerdtree
     au!
-    au VimResized * exe "normal! \<c-w>="
-augroup END
-
-augroup cursor
-    au!
-    au WinEnter,VimEnter,BufNewFile,BufRead * setlocal cursorline
-    au WinLeave,VimLeave * setlocal nocursorline
+    autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 augroup END
 
 augroup vimmemory
@@ -288,20 +225,7 @@ augroup vimmemory
     au BufWinEnter * silent! loadview
 augroup END
 
-augroup templates
-    au!
-    autocmd! BufNewFile * silent! 0r ~/.vim/skel/tmpl.%:e
-augroup END
 
-augroup nerdtree
-    au!
-    autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
-augroup END
-
-" augroup detection
-    " au!
-    " autocmd BufReadPost,BufWritePost * filetype detect
-" augroup END
 " }}}
 " Toggles & Switches (Leader commands) {{{
 
@@ -339,8 +263,7 @@ vnoremap < <gv
 " Select the last edited/pasted text
 nnoremap gv `[v`]
 nnoremap <Leader>= <C-W>=
-nnoremap <Leader>> <C-W>>
-nnoremap <Leader>< <C-W><
+
 " make Y consistant with C and D
 noremap Y y$
 
@@ -349,10 +272,6 @@ nnoremap <leader>ev :e $MYVIMRC<CR>
 nnoremap <leader>egv :e$MYGVIMRC<CR>
 nnoremap <leader>sv :so $MYVIMRC<CR>
 nnoremap <leader>sgv :so $MYGVIMRC<CR>
-
-" Move visually selected lines down/up
-vnoremap <C-Down> ]egv
-vnoremap <C-Up> [egv
 
 " Move visual selection back/forwards
 set ww+=<,>
@@ -365,11 +284,6 @@ cmap w!! w !sudo tee % >/dev/null<cr>
 " Smarter Pasting!
 nnoremap <Leader>P :set paste<CR>"*p;set nopaste<CR>
 
-if has('mac')
-    nnoremap <leader>o :silent !open <c-r>=escape("<c-r><c-f>", "#?&;\|%")<cr><cr>
-else
-    nnoremap <leader>o :silent !xdg-open <c-r>=escape("<c-r><c-f>", "#?&;\|%")<cr><cr>
-endif
 
 " }}}
 " Custom commands and functions {{{
@@ -381,29 +295,12 @@ if !exists(":DiffOrig")
 endif
 
 " }}}
-" Toggles for location and quickfix window {{{
-nnoremap <silent> <leader>ll :call ToggleList("Location List", 'l')<CR>
-nnoremap <silent> <leader>qf :call ToggleList("Quickfix List", 'c')<CR>
-
-" }}}
-" Generate a color pallette {{{
-function! Colorize()
-    let num = 255
-    while num >= 0
-        exec 'hi col_'.num.' ctermbg='.num.' ctermfg=white'
-        exec 'syn match col_'.num.' "ctermbg='.num.':...." containedIn=All'
-        call append(0, 'ctermbg='.num.':....')
-        let num = num - 1
-    endwhile
-endfunction
-
-" }}}
 "
 " }}}
 " Configure plugins  {{{
 " Python-Mode {{{
-let g:pymode_lint_write = 0
-let g:pymode_utils_whitespaces = 0
+" let g:pymode_lint_write = 0
+" let g:pymode_utils_whitespaces = 0
 
 " }}}
 " Ctrl+P {{{
@@ -422,13 +319,6 @@ nnoremap <leader>b :CtrlPBuffer<CR>
 nnoremap <leader>r :CtrlPMRU<CR>
 nnoremap <c-t> :CtrlPBufTagAll<CR>
 nnoremap <c-q> :CtrlPQuickfix<CR>
-" }}}
-" Tagbar {{{
-noremap <leader>t :TagbarToggle<CR>
-let g:tagbar_autoclose = 1
-let g:tagbar_autofocus = 1
-let g:tagbar_compact   = 1
-
 " }}}
 " Powerlines {{{
 if has('mac')
@@ -454,17 +344,6 @@ let g:showmarks_ignore_type=''
 let g:showmarks_textlower="\t"
 let g:showmarks_textupper="\t"
 let g:showmarks_textother="\t"
-
-" }}}
-" bufkill {{{
-noremap <Leader>k :bd<CR>
-noremap <Leader>k! :bd!<CR>
-
-" }}}
-" Ack {{{
-noremap <Leader>g :Ack<space><C-r><C-w><CR>
-" let ackprg="~/scripts/ack"
-"let ackprg="~/scripts/ack --nocolor --nogroup --column --flush"
 
 " }}}
 " NERDCommenter {{{
@@ -501,10 +380,6 @@ function! s:CloseIfOnlyNerdTreeLeft()
         endif
     endif
 endfunction
-
-" }}}
-" Scratch {{{
-noremap <leader>s :call ToggleMyScratch()<CR>
 
 " }}}
 " }}}

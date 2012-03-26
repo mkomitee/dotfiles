@@ -17,7 +17,4 @@ alias sudoenv='sudo -E zsh'
 alias tmux='tmux -u2'
 alias t='tasks list -v'
 
-if [ -f /usr/bin/vimx ]; then
-    alias vim=vimx
-fi
 alias vi=vim
