@@ -1,0 +1,12 @@
+#!/bin/sh
+DIR=$(pwd)
+tmux select-pane -t 0
+WIDTH=$(stty size | cut -d' ' -f2)
+tmux split-window -h -l $(($WIDTH-81))
+tmux split-window -v -l 10
+tmux select-pane -t 0
+tmux split-window -d -v -p 33
+tmux split-window -d -v -p 50
+for id in $(tmux list-panes | cut -d':' -f1); do
+    tmux send-keys -t $id "cd $DIR" C-m
+done

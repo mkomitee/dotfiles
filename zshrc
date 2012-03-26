@@ -5,7 +5,7 @@ LIB=$HOME/.dotfiles/lib
 
 fpath=($ZSH $fpath)
 
-export PYTHONPATH=$HOME/lib/python:$HOME/.dotfiles/lib/python:$PYTHONPATH
+export PYTHONPATH=$HOME/lib/python:$HOME/lib/python2.6/site-packages:$HOME/.dotfiles/lib/python:$PYTHONPATH
 
 source $ZSH/pathrc.zsh
 source $ZSH/cdr.zsh
