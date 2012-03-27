@@ -36,12 +36,12 @@ zstyle ':completion::complete:*' use-cache 1
 
 # Tweak completion for kill command
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
-# We're interested in all processes, not just mine. I'm an SA
+
 ps -ww >/dev/null 2>&1
 if [ $? ]; then
-    zstyle ':completion:*:*:*:*:processes' command "ps -e -o pid,user,comm"
+    zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm"
 else
-    zstyle ':completion:*:*:*:*:processes' command "ps -e -o pid,user,comm -w -w"
+    zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
 fi
 
 # On macs, there are lots of users we dont care about
