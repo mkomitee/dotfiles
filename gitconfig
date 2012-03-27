@@ -67,8 +67,9 @@
     wc = whatchanged
     aa = add -A
     commit = commit -v
-    ammend = commit --amend
-    amend = commit --amend
+    ammend = commit --amend -v
+    amend = commit --amend -v
+    tags = tag -ln1
 
 [pager]
     status = yes
