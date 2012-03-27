@@ -50,6 +50,7 @@
     ll = log --date=local -g --pretty=name
     graph = log -w --graph --full-history --all --pretty=graph --decorate=short
     rl = reflog
+    branches = branch -av
     d = diff --stat --summary
     ds = diff --staged
     ref = show-ref
