@@ -35,18 +35,20 @@
 
 [interactive]
     single = yes
+
 [log]
     date=short
 
 [pretty]
-        name = "%C(yellow)%h %C(white)%ad %C(yellow)%aN %C(white)%s"
-        noname = "%C(yellow)%h %C(white)%ad %C(yellow)%s"
+    name = "%C(yellow)%h %C(white)%ad %C(yellow)%aN %C(white)%s"
+    noname = "%C(yellow)%h %C(white)%ad %C(yellow)%s"
+    graph = "%C(yellow)%h %C(white)%ad %C(magenta)%d %C(yellow)%s"
 
 [alias] 
     ld = log --date=local --pretty=name
     lr = log --date=relative --pretty=name
     ll = log --date=local -g --pretty=name
-    graph = log -w --graph --full-history --all
+    graph = log -w --graph --full-history --all --pretty=graph --decorate=short
     rl = reflog
     d = diff --stat --summary
     ds = diff --staged
