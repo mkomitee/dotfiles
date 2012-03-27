@@ -1,38 +1,56 @@
 [user]
     name = Michael Komitee
-    email = mkomitee@gmail.com
+    email = komitee@deshaw.com
 
 [color]
-    diff = auto
-    status = auto
-    branch = auto
-    interactive = auto
-    ui = true
-    pager = true
+    ui = auto
 
-[color "branch"] 
-    current = yellow reverse 
-    local = yellow 
-    remote = green 
- 
-[color "diff"] 
+[color "branch"]
+    current = yellow reverse
+    local = yellow
+    remote = green
+
+[color "diff"]
     meta = yellow
     frag = magenta
     old = red
     new = blue
- 
-[color "status"] 
-    added = yellow 
-    changed = green 
-    untracked = cyan 
- 
+
+[color "status"]
+    added = yellow
+    changed = green
+    untracked = cyan
+
 [core] 
     pager = less -FRSX 
+    abbrev=8
     editor = vim
     whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol 
     excludesfile = ~/.dotfiles/gitignore
 
+[log]
+    abbrevcommit = yes
+    decorate = short
+    showroot = false
+
+[interactive]
+    single = yes
+[log]
+    date=short
+
+[pretty]
+        name = "%C(yellow)%h %C(white)%ad %C(yellow)%aN %C(white)%s"
+        noname = "%C(yellow)%h %C(white)%ad %C(yellow)%s"
+
 [alias] 
+    ld = log --date=local --pretty=name
+    lr = log --date=relative --pretty=name
+    ll = log --date=local -g --pretty=name
+    graph = log -w --graph --full-history --all
+    rl = reflog
+    d = diff --stat --summary
+    ds = diff --staged
+    ref = show-ref
     vimdiff = difftool
     head = log -1
     stat = status
@@ -46,14 +64,29 @@
     wc = whatchanged
     aa = add -A
     commit = commit -v
+    ammend = commit --amend
+    amend = commit --amend
+
+[pager]
+    status = yes
+    show-branch = yes
+
+[clean]
+    requireForce = no
+
+[url "gitserve"]
+    insteadOf = gs
 
 [difftool "vimdiff"]
     cmd = vimdiff  \"$LOCAL\" \"$REMOTE\"
 
 [format]
-	pretty = oneline
+    pretty = noname
 
 [diff]
 	tool = vimdiff
 	guitool = gvimdiff
+
+[branch]
+	autosetuprebase = always
 
