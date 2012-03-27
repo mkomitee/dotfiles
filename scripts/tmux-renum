@@ -1,0 +1,8 @@
+#!/bin/sh
+next_id=1
+for id in $(tmux list-windows | cut -d: -f1 | sort -n); do
+    if [ $id -ne $next_id ]; then
+        tmux movew -s $id -t $next_id
+    fi
+    next_id=$(($next_id+1))
+done
