@@ -27,6 +27,7 @@ Bundle 'godlygeek/tabular'
 Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/nerdtree'
 Bundle 'tpope/vim-surround'
+Bundle 'Shougo/neocomplcache'
 " }}}
 " Filetype Plugins {{{
 Bundle 'ajf/puppet-vim'
@@ -380,6 +381,18 @@ function! s:CloseIfOnlyNerdTreeLeft()
         endif
     endif
 endfunction
+
+" }}}
+" neocomplcache {{{
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_camel_case_completion = 1
+let g:neocomplcache_enable_underbar_completion = 1
+let g:neocomplcache_temporary_dir = '~/.vimdata/neocomplcache'
+let g:neocomplcache_enable_ignore_case = 0
+inoremap <expr><CR>  neocomplcache#close_popup() . "\<CR>"
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
 
 " }}}
 " }}}
