@@ -32,12 +32,10 @@
     abbrevcommit = yes
     decorate = short
     showroot = false
+    date=short
 
 [interactive]
     single = yes
-
-[log]
-    date=short
 
 [pretty]
     name = "%C(yellow)%h %C(white)%ad %C(yellow)%aN %C(white)%s"
@@ -70,6 +68,7 @@
     ammend = commit --amend -v
     amend = commit --amend -v
     tags = tag -ln1
+    remotes = remote -v
 
 [pager]
     status = yes
