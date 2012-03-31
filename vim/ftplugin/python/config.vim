@@ -1,6 +1,3 @@
-setlocal textwidth=80
-nnoremap <localleader>l :PyLint<cr>
-nnoremap <buffer> <Leader>p :call Pyflakes()<CR>
 au BufWritePre,FileWritePre <buffer> silent! %:s/\s\+$//
 
 if exists('+colorcolumn')

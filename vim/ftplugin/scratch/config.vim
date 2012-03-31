@@ -1,3 +1,0 @@
-setlocal nobackup
-setlocal nowritebackup
-setlocal noswapfile
