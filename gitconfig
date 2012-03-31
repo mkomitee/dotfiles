@@ -40,14 +40,15 @@
 [pretty]
     name = "%C(yellow)%h %C(white)%ad %C(yellow)%aN %C(white)%s"
     noname = "%C(yellow)%h %C(white)%ad %C(yellow)%s"
-    graph = "%C(yellow)%h %C(white)%ad %C(magenta)%d %C(yellow)%s"
 
 [alias] 
     ld = log --date=local --pretty=name
     lr = log --date=relative --pretty=name
     ll = log --date=local -g --pretty=name
     lc = log ORIG_HEAD.. --stat --no-merges
-    graph = log -w --graph --full-history --all --pretty=graph --decorate=short
+    graph = log -w --graph --full-history --all --pretty=oneline --decorate=short
+    track = checkout -t
+    ls = ls-files
     rl = reflog
     branches = branch -av
     d = diff --stat --summary
@@ -94,3 +95,5 @@
 [branch]
 	autosetuprebase = always
 
+[github]
+    user = mkomitee
