@@ -45,7 +45,7 @@
     ld = log --date=local --pretty=name
     lr = log --date=relative --pretty=name
     ll = log --date=local -g --pretty=name
-    lc = log ORIG_HEAD.. --stat --no-merges
+    lc = !git log origin/$(branch)^..$(branch) --decorate=short --pretty=oneline
     graph = log -w --graph --full-history --all --pretty=oneline --decorate=short
     track = checkout -t
     ls = ls-files
