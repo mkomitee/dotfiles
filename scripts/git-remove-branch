@@ -1,31 +1,6 @@
 #!/bin/sh
 
-if [ $# -ne 1 ]; then
-   echo 1>&2 Usage: $0 branch_name
-   exit 127
-fi
-
-branch_name=$1
-
-git branch -r | grep "origin/${branch_name}$" > /dev/null 2>&1
-if [ $? != 0 ]; then
-   echo 1>&2 Remote branch \`${branch_name}\` doesn\'t exist
-   exit 127
-fi
-
-git push origin :heads/${branch_name}
-if [ $? != 0 ]; then
-    echo 1>&2 Unable to remove remote branch \`${branch_name}\`
-fi
-
-git branch -D ${branch_name}
-if [ $? != 0 ]; then
-    echo 1>&2 Unable to remove \`${branch_name}\`
-    exit 127
-fi
-
-git remote prune origin
-if [ $? != 0 ]; then
-    echo 1>&2 Unable to prune remote branches
-    exit 127
-fi
+branch=$1
+test -z $branch && echo "branch required." 1>&2 && exit 1
+git branch -D $branch
+git branch -d -r origin/$branch && git push origin :$branch
