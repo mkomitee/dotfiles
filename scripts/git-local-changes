@@ -1,0 +1,6 @@
+#!/usr/local/bin/zsh
+
+ref=$(git symbolic-ref HEAD)
+branch=${ref#refs/heads/}
+
+git log origin/${branch}..${branch} $*
