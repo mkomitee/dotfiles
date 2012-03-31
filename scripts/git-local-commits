@@ -1,4 +1,4 @@
-#!/usr/local/bin/zsh
+#!/bin/sh
 
 ref=$(git symbolic-ref HEAD)
 branch=${ref#refs/heads/}
