@@ -6,7 +6,6 @@ alias rmdir='nocorrect rmdir'
 alias mv='nocorrect mv'
 alias mkdir='nocorrect mkdir'
 
-alias git=hub
 alias gp='git pull'
 alias gaa='git add -A'
 
