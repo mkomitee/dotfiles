@@ -50,7 +50,7 @@
     lnr = log --date=relative --pretty=namedate --graph
     ld = log --date=local --pretty=nonamedate --graph
     lr = log --date=relative --pretty=nonamedate --graph
-    lc = local-changes --decorate=short --pretty=oneline
+    lc = local-commits --decorate=short --pretty=oneline
     graph = log -w --graph --full-history --all --pretty=oneline --decorate=short
     track = checkout -t
     ls = ls-files
