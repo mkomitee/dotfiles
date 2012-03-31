@@ -46,6 +46,7 @@
     ld = log --date=local --pretty=name
     lr = log --date=relative --pretty=name
     ll = log --date=local -g --pretty=name
+    lc = log ORIG_HEAD.. --stat --no-merges
     graph = log -w --graph --full-history --all --pretty=graph --decorate=short
     rl = reflog
     branches = branch -av
