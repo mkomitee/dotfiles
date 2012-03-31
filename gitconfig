@@ -38,13 +38,18 @@
     single = yes
 
 [pretty]
-    name = "%C(yellow)%h %C(white)%ad %C(yellow)%aN %C(white)%s"
-    noname = "%C(yellow)%h %C(white)%ad %C(yellow)%s"
+    namedate = "%C(yellow)%h %C(white)%ad %C(yellow)%aN %C(white)%s"
+    nonamedate = "%C(yellow)%h %C(white)%ad %C(yellow)%s"
+    name = "%C(yellow)%h %C(white)%aN %C(yellow)%s"
+    noname = "%C(yellow)%h %C(white)%s"
 
 [alias] 
-    ld = log --date=local --pretty=name
-    lr = log --date=relative --pretty=name
-    ll = log --date=local -g --pretty=name
+    l = log --pretty=noname --graph
+    ln = log --pretty=name --graph
+    lnd = log --date=local --pretty=namedate --graph
+    lnr = log --date=relative --pretty=namedate --graph
+    ld = log --date=local --pretty=nonamedate --graph
+    lr = log --date=relative --pretty=nonamedate --graph
     lc = local-changes --decorate=short --pretty=oneline
     graph = log -w --graph --full-history --all --pretty=oneline --decorate=short
     track = checkout -t
@@ -97,3 +102,8 @@
 
 [github]
     user = mkomitee
+
+[url "git@github.com:"]
+    insteadOf = "gh:"
+    pushInsteadOf = "github:"
+    pushInsteadOf = "git://github.com/"
