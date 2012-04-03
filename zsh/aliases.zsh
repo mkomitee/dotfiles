@@ -14,6 +14,7 @@ alias bc='bc -l'
 alias s=sudo
 alias sudoenv='sudo -E zsh'
 alias tmux='tmux -u2'
-alias t='tasks list -v'
+alias task='noglob task'
+alias t='noglob task'
 
 alias vi=vim

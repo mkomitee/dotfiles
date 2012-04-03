@@ -5,21 +5,10 @@ fi
 case "$TERM" in
     xterm*|rxvt*)
         preexec () {
-            if [ -z "$CONSOLE_TASK" ]; then
-                print -Pn "\e]0;%n@%m: $1\a"  # xterm
-            else
-                print -Pn "\e]0;%n@%m: $1 - $CONSOLE_TASK -\a"  # xterm
-            fi
+            print -Pn "\e]0;%n@%m: $1\a"  # xterm
         }
         precmd () {
-            if [ -z "$CONSOLE_TASK" ]; then
-                print -Pn "\e]0;%n@%m: %~\a"  # xterm
-            else
-                print -Pn "\e]0;%n@%m: %~ - $CONSOLE_TASK -\a"  # xterm
-            fi
+            print -Pn "\e]0;%n@%m: %~\a"  # xterm
         }
         ;;
 esac
-function task() {
-    CONSOLE_TASK="$*"
-} 
