@@ -358,6 +358,9 @@ let g:showmarks_textother="\t"
 " NERDCommenter {{{
 " When we comment something with the NERDComment Toggle, reselect
 let g:NERDCreateDefaultMappings = 0
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeDirArrows = 1
+
 let g:NERDSpaceDelims = 1
 vmap <leader>cc <plug>NERDCommenterToggle<cr>vgv
 nmap <leader>cc <plug>NERDCommenterToggle
