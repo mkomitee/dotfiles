@@ -35,6 +35,7 @@ Bundle 'tmatilai/gitolite.vim'
 " }}}
 " Colors {{{
 Bundle 'sjl/badwolf'
+Bundle 'altercation/vim-colors-solarized'
 " }}}
 " }}}
 " Preferences {{{
@@ -177,7 +178,14 @@ command! -bang WQ wq<bang>
 
 " }}}
 " Colorscheme {{{
-colorscheme badwolf
+" colorscheme badwolf
+set background=dark
+colorscheme solarized
+hi SignColumn    ctermfg=10 ctermbg=0
+hi ShowMarksHLl  ctermfg=1 ctermbg=0
+hi ShowMarksHLu  ctermfg=1 ctermbg=0
+hi ShowMarksHLo  ctermfg=1 ctermbg=0
+hi ShowMarksHLm  ctermfg=1 ctermbg=0
 
 if &t_Co < 16
     set t_Co=16
