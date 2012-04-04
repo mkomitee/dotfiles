@@ -28,6 +28,9 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/nerdtree'
 Bundle 'tpope/vim-surround'
 Bundle 'kana/vim-smartinput'
+Bundle 'UltiSnips'
+Bundle 'sjl/clam.vim'
+Bundle 'tpope/vim-fugitive'
 " }}}
 " Filetype Plugins {{{
 Bundle 'ajf/puppet-vim'
@@ -193,11 +196,6 @@ match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 set guicursor=n-v-c:block-Cursor
 set guicursor+=i:ver20-Cursor-blinkon600-blinkoff600
 set guicursor+=n-v-c:block-Cursor-blinkon600-blinkoff600
-
-" }}}
-" Leaders {{{
-let mapleader = ","
-let localleader = '\\'
 
 " }}}
 " AutoCommands {{{
