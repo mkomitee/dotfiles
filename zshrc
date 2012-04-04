@@ -32,8 +32,16 @@ export GREP_COLOR='1;32'
 
 # LS CONFIG
 # Find the option for using colors in ls, depending on the version: Linux or BSD
-ls --color -d . &>/dev/null 2>&1 && alias ls='ls --color=tty' || alias ls='ls -G'
-export LSCOLORS="Gxfxcxdxbxegedabagacad"
+ls --color -d . &>/dev/null 2>&1 && alias ls='ls --color=tty -F' || alias ls='ls -FG'
+if which dircolors >/dev/null 2>&1; then
+    unset LSCOLORS
+    eval `dircolors $HOME/.dotfles/dircolors`
+elif which gdircolors >/dev/null 2>&1; then
+    unset LSCOLORS
+    eval `gdircolors $HOME/.dotfiles/dircolors`
+fi
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+
 
 export PAGER=less
 export EDITOR=vim

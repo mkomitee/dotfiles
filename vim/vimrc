@@ -181,15 +181,11 @@ command! -bang WQ wq<bang>
 " colorscheme badwolf
 set background=dark
 colorscheme solarized
-hi SignColumn    ctermfg=10 ctermbg=0
-hi ShowMarksHLl  ctermfg=1 ctermbg=0
-hi ShowMarksHLu  ctermfg=1 ctermbg=0
-hi ShowMarksHLo  ctermfg=1 ctermbg=0
-hi ShowMarksHLm  ctermfg=1 ctermbg=0
-
-if &t_Co < 16
-    set t_Co=16
-endif
+hi SignColumn    ctermfg=10 ctermbg=0 guifg=#586e75 guibg=#073642"
+hi ShowMarksHLl  ctermfg=1 ctermbg=0 guifg=#586e75 guibg=#073642"
+hi ShowMarksHLu  ctermfg=9 ctermbg=0 guifg=#cb4b16 guibg=#073642"
+hi ShowMarksHLo  ctermfg=5 ctermbg=0 guifg=#d33682 guibg=#073642"
+hi ShowMarksHLm  ctermfg=6 ctermbg=0 guifg=#2aa198 guibg=#073642"
 
 " Highlight VCS conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'

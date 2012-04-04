@@ -1,5 +1,4 @@
 set go-=T
-set bg=dark
 
 if &diff
     set columns=178
@@ -46,3 +45,11 @@ set columns=116
 
 " esc in normal mode clears search highlighting
 nnoremap <silent> <ESC> :nohl<CR><ESC>
+
+set background=dark
+colorscheme solarized
+hi SignColumn    ctermfg=10 ctermbg=0 guifg=#586e75 guibg=#073642"
+hi ShowMarksHLl  ctermfg=1 ctermbg=0 guifg=#586e75 guibg=#073642"
+hi ShowMarksHLu  ctermfg=9 ctermbg=0 guifg=#cb4b16 guibg=#073642"
+hi ShowMarksHLo  ctermfg=5 ctermbg=0 guifg=#d33682 guibg=#073642"
+hi ShowMarksHLm  ctermfg=6 ctermbg=0 guifg=#2aa198 guibg=#073642"
