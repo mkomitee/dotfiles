@@ -107,3 +107,9 @@
     insteadOf = "gh:"
     pushInsteadOf = "github:"
     pushInsteadOf = "git://github.com/"
+
+[tig]
+    show-author = no
+    show-date = no
+    show-line-numbers = yes
+    show-rev-graph = yes
