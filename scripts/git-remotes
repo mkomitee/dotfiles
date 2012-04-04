@@ -1,0 +1,27 @@
+#!/bin/sh
+
+VERBOSE=0
+while getopts v OPT; do
+    case "$OPT" in
+        v)
+            VERBOSE=1
+            ;;
+    esac
+done
+
+shift $(($OPTIND - 1))
+
+# with verbose, we show the remotes
+# without it, we just do a git remote -v
+if [ "$VERBOSE" = "1" ]; then
+    if [ $# -eq 0 ]; then
+        REMOTES=$(git remote)
+    else
+        REMOTES=$*
+    fi
+    for remote in $REMOTES; do
+        git remote show $remote
+    done
+else
+    git remote -v
+fi

@@ -75,7 +75,6 @@
     ammend = commit --amend -v
     amend = commit --amend -v
     tags = tag -ln1
-    remotes = remote -v
 
 [pager]
     status = yes
