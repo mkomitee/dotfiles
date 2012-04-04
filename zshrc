@@ -35,7 +35,7 @@ export GREP_COLOR='1;32'
 ls --color -d . &>/dev/null 2>&1 && alias ls='ls --color=tty -F' || alias ls='ls -FG'
 if which dircolors >/dev/null 2>&1; then
     unset LSCOLORS
-    eval `dircolors $HOME/.dotfles/dircolors`
+    eval `dircolors $HOME/.dotfiles/dircolors`
 elif which gdircolors >/dev/null 2>&1; then
     unset LSCOLORS
     eval `gdircolors $HOME/.dotfiles/dircolors`
