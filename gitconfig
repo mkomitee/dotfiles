@@ -28,6 +28,9 @@
     whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol 
     excludesfile = ~/.dotfiles/gitignore
 
+[pager]
+    diff =
+
 [log]
     abbrevcommit = yes
     decorate = short
@@ -93,11 +96,12 @@
     pretty = noname
 
 [diff]
-	tool = vimdiff
-	guitool = gvimdiff
+    external = git_diff_wrapper
+    tool = vimdiff
+    guitool = gvimdiff
 
 [branch]
-	autosetuprebase = always
+    autosetuprebase = always
 
 [github]
     user = mkomitee
@@ -112,12 +116,16 @@
     show-date = no
     show-line-numbers = yes
     show-rev-graph = yes
+
 [mergetool "vmt"]
-	cmd = vim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+    cmd = vim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+
 [mergetool "gvmt"]
-	cmd = gvim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+    cmd = gvim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+
 [mergetool "threesome"]
     cmd = "vim -f $BASE $LOCAL $REMOTE $MERGED -c 'ThreesomeInit'"
     trustExitCode = true
+
 [merge]
     tool = threesome
