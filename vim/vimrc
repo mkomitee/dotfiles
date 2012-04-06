@@ -33,6 +33,7 @@ Bundle 'tpope/vim-fugitive'
 " Filetype Plugins {{{
 Bundle 'ajf/puppet-vim'
 Bundle 'tmatilai/gitolite.vim'
+Bundle 'tpope/vim-markdown'
 " }}}
 " Colors {{{
 Bundle 'sjl/badwolf'
