@@ -20,6 +20,7 @@ Bundle 'tpope/vim-surround'
 Bundle 'sjl/clam.vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'int3/vim-extradite'
+Bundle 'sjl/threesome.vim'
 " }}}
 " Filetype Plugins {{{
 Bundle 'ajf/puppet-vim'
