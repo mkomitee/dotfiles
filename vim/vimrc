@@ -202,6 +202,11 @@ set guicursor+=i:ver20-Cursor-blinkon600-blinkoff600
 set guicursor+=n-v-c:block-Cursor-blinkon600-blinkoff600
 
 " }}}
+" Leaders {{{
+let mapleader = ","
+let localleader = '\\'
+
+" }}}
 " AutoCommands {{{
 " This may cause a lot of processing, but we can disable it if it causes problems
 augroup showmarks
