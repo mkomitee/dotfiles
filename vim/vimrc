@@ -2,18 +2,8 @@
 set nocompatible
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
-filetype plugin indent on
-syntax enable
+filetype off
 
-silent execute '!mkdir -p $HOME/.vimdata/vimbackup'
-silent execute '!mkdir -p $HOME/.vimdata/vimswap'
-silent execute '!mkdir -p $HOME/.vimdata/vimviews'
-silent execute '!mkdir -p $HOME/.vimdata/vimundo'
-silent execute '!mkdir -p $HOME/.vimdata/ctrlp'
-
-for file in split(glob("$HOME/.vim/functions/*.vim"))
-    exe "source " . file
-endfor
 
 " }}}
 " Install Plugins {{{
@@ -39,6 +29,19 @@ Bundle 'tpope/vim-markdown'
 Bundle 'sjl/badwolf'
 Bundle 'altercation/vim-colors-solarized'
 " }}}
+
+filetype plugin indent on
+syntax enable
+
+silent execute '!mkdir -p $HOME/.vimdata/vimbackup'
+silent execute '!mkdir -p $HOME/.vimdata/vimswap'
+silent execute '!mkdir -p $HOME/.vimdata/vimviews'
+silent execute '!mkdir -p $HOME/.vimdata/vimundo'
+silent execute '!mkdir -p $HOME/.vimdata/ctrlp'
+
+for file in split(glob("$HOME/.vim/functions/*.vim"))
+    exe "source " . file
+endfor
 " }}}
 " Preferences {{{
 set encoding=utf-8
