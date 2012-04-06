@@ -112,3 +112,10 @@
     show-date = no
     show-line-numbers = yes
     show-rev-graph = yes
+
+[mergetool "gvimdiff3"]
+	cmd = gvim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+[mergetool "vimdiff3"]
+	cmd = vim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+[merge]
+	tool = vimdiff3
