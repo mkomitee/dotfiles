@@ -7,7 +7,7 @@ filetype off
 " }}}
 " Install Plugins {{{
 Bundle 'gmarik/vundle'
-" Plugins {{{
+Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'Rainbow-Parenthsis-Bundle'
 Bundle 'mkomitee/ShowMarks'
