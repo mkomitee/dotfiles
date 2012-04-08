@@ -1,82 +1,116 @@
 " Preamble {{{
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
+
+" We disable filetype stuff here to load bundles, otherwise vundle doesnt seem
+" to properly load ftdetect plugins.
 filetype off
-
-
 " }}}
 " Install Plugins {{{
 Bundle 'gmarik/vundle'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'Rainbow-Parenthsis-Bundle'
+Bundle 'ajf/puppet-vim'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'godlygeek/tabular'
+Bundle 'int3/vim-extradite'
+Bundle 'jmcantrell/vim-virtualenv'
+Bundle 'kien/ctrlp.vim'
 Bundle 'mkomitee/ShowMarks'
 Bundle 'scrooloose/nerdcommenter'
-Bundle 'godlygeek/tabular'
-Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/nerdtree'
-Bundle 'tpope/vim-surround'
+Bundle 'sjl/badwolf'
 Bundle 'sjl/clam.vim'
-Bundle 'tpope/vim-fugitive'
-Bundle 'int3/vim-extradite'
 Bundle 'sjl/threesome.vim'
-Bundle 'jmcantrell/vim-virtualenv'
+Bundle 'tmatilai/gitolite.vim'
+Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-markdown'
+Bundle 'tpope/vim-surround'
 Bundle 'tyru/current-func-info.vim'
 " }}}
-" Filetype Plugins {{{
-Bundle 'ajf/puppet-vim'
-Bundle 'tmatilai/gitolite.vim'
-Bundle 'tpope/vim-markdown'
-" }}}
-" Colors {{{
-Bundle 'sjl/badwolf'
-Bundle 'altercation/vim-colors-solarized'
-" }}}
 
+" Reenable filetype plugins now that our bundles are loaded.
 filetype plugin indent on
 syntax enable
 
+" Prepare our vim cache directories
 silent execute '!mkdir -p $HOME/.vimdata/vimbackup'
 silent execute '!mkdir -p $HOME/.vimdata/vimswap'
 silent execute '!mkdir -p $HOME/.vimdata/vimviews'
 silent execute '!mkdir -p $HOME/.vimdata/vimundo'
 silent execute '!mkdir -p $HOME/.vimdata/ctrlp'
 
-for file in split(glob("$HOME/.vim/functions/*.vim"))
-    exe "source " . file
-endfor
 " }}}
 " Preferences {{{
-set encoding=utf-8
-set fileformats=unix,mac,dos
-set autoindent
-set showmode
-set showcmd
-set hidden
-set noerrorbells
-set novisualbell
-set ttyfast
-set backspace=indent,eol,start
-set number
-set laststatus=2
-set history=10000
-if exists('&undofile')
-    set undofile
-    set undoreload=10000
+set encoding=utf-8               " Prefer utf-8 character encoding
+set fileformats=unix,mac,dos     " Prefer unix style EOL's
+set autoindent                   " Try to line up code intelligently
+set showmode                     " Inform me as to what mode im in
+set showcmd                      " Show partial commands
+set hidden                       " Allow for hidden buffers
+set noerrorbells                 " shutup
+set novisualbell                 " shutup
+set ttyfast                      " it's 2012. Send more characters, faster
+set backspace=indent,eol,start   " Nothing is too sacred to be <BS>
+set laststatus=2                 " Every window always gets a statusline
+set history=10000                " Keep a lot of ex commands in history
+set undoreload=10000             " Save the whole buffer for undo when reloading
+set undolevels=10000             " Save lots of data for undo
+set list                         " show invisibles
+set listchars=                   " reset listchars
+set listchars+=tab:▸\            " display tabs
+set listchars+=eol:¶             " display eol
+set listchars+=extends:❯         " hint that theres more to the right, ...
+set listchars+=precedes:❮        " hint that theres more to the left, ...
+set listchars+=trail:♦           " and indicate trailing whitespace
+set showbreak=↪                  " indicate a line is the continuation of a
+                                 " wrapped line
+set matchtime=3                  " show matching parenthesis for 3/10 of a second
+set showmatch                    " show matching parenthesis
+set splitbelow                   " new horizontal splits to below
+set splitright                   " new vertical splits goto the right
+set fillchars=                   " reset fillchars
+set fillchars+=fold:-            " fill foldtext with dashes
+set fillchars+=diff:⣿            " indicate deleted lines in diffs with ⣿
+set fillchars+=vert:❚            " indicate vertical splits with ❚
+set shiftround                   " round indent to multiples of shiftwidth
+set autoread                     " reread files which changes on disk if they
+                                 " havnt changed in the buffer
+set showfulltag                  " when completing a word from a tags file,
+                                 " include extra info about the tag in the
+                                 " completion menu
+set shortmess=                   " reset shortmess
+set shortmess+=f                 " '(3 of 5)' instead of '(file 3 of 5)'
+set shortmess+=i                 " '[noeol] instead of '[Incompelte last line]'
+set shortmess+=l                 " '999L, 888C' instead of '999 lines, 888 characters'
+set shortmess+=m                 " '[+]' instead of '[Modified]'
+set shortmess+=n                 " '[New]' instead of '[New File]'
+set shortmess+=r                 " '[RO]' instead of '[readonly]'
+set shortmess+=w                 " '[w]' instead of 'written'
+                                 "  '[a]' instead of 'appended'
+set shortmess+=x                 " '[dos]' instead of '[dos format]',
+                                 "  '[unix]' instead of '[unix format]',
+                                 "  '[mac]' instead of '[mac format]'
+
+set shortmess+=o 
+set shortmess+=O
+set shortmess+=t
+set shortmess+=T
+set shortmess+=I
+
+" If we support it, use relative line numbers, otherwise use regular line
+" numbers.
+if has('&relativenumber')
+    set relativenumber
+else
+    set number
 endif
-set undolevels=10000
-set list
-set listchars=tab:▸\ ,eol:¶,extends:❯,precedes:❮,trail:♦
-set matchtime=3
-set showbreak=↪
-set splitbelow
-set splitright
-set fillchars+=diff:⣿,vert:❚
-set shiftround
-set autoread
-set dictionary=$HOME/.vimdata/words
-set showfulltag
-set shortmess+=filmnrxoOtTI
+
+if exists('&undofile')
+    set undofile         " Save undo history to a file for persistence
+endif
+
 set iskeyword-=:
 set iskeyword-=;
 set iskeyword-=,
@@ -106,7 +140,6 @@ set ignorecase
 set smartcase
 set hlsearch
 set gdefault
-set showmatch
 set matchpairs+=<:>
 set magic
 
