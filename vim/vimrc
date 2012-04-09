@@ -200,7 +200,7 @@ set wildmode=longest:full,list:full
 
 set wildignore+=.git,.hg,.svn,CVS
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg
-set wildignore+=*.o,*.so
+set wildignore+=*.o,*.so,*.out
 set wildignore+=*.sw?
 set wildignore+=*.DS_Store
 set wildignore+=*.pyc,*.pyo
