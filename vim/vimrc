@@ -233,6 +233,14 @@ let g:Powerline_theme="mkomitee"
 " Highlight VCS conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
+" Use a bar-shaped cursor for insert mode, even through tmux.
+if exists('$TMUX')
+    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
 set guicursor=n-v-c:block-Cursor
 set guicursor+=i:ver20-Cursor-blinkon600-blinkoff600
 set guicursor+=n-v-c:block-Cursor-blinkon600-blinkoff600
