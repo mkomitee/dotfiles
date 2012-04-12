@@ -1,2 +1,2 @@
 #!/bin/sh
-exec vimdiff "$1" "$2"
+exec vim -d -f "$1" "$2"
