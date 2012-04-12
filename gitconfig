@@ -96,7 +96,7 @@
     pretty = noname
 
 [diff]
-    external = git_diff_wrapper
+    ;external = git_diff_wrapper
     tool = vimdiff
     guitool = gvimdiff
 
