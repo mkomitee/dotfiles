@@ -57,8 +57,6 @@ set ttyfast                      " it's 2012. Send more characters, faster
 set backspace=indent,eol,start   " Nothing is too sacred to be <BS>
 set laststatus=2                 " Every window always gets a statusline
 set history=10000                " Keep a lot of ex commands in history
-set undoreload=10000             " Save the whole buffer for undo when reloading
-set undolevels=10000             " Save lots of data for undo
 set list                         " show invisibles
 set listchars=                   " reset listchars
 set listchars+=tab:▸\            " display tabs
@@ -111,6 +109,8 @@ endif
 
 if exists('&undofile')
     set undofile         " Save undo history to a file for persistence
+    set undoreload=10000 " Save the whole buffer for undo when reloading
+    set undolevels=10000 " Save lots of data for undo
 endif
 
 set iskeyword-=:
