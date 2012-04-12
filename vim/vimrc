@@ -14,6 +14,7 @@ Bundle 'Rainbow-Parenthsis-Bundle'
 Bundle 'ajf/puppet-vim'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'benmills/vimux'
+Bundle 'fholgado/minibufexpl.vim'
 Bundle 'godlygeek/tabular'
 Bundle 'int3/vim-extradite'
 Bundle 'jmcantrell/vim-virtualenv'
@@ -354,6 +355,11 @@ endif
 "
 " }}}
 " Configure plugins  {{{
+" minibufexplorer {{{
+let g:miniBufExplSplitBelow = 0
+let g:miniBufExplMapCTabSwitchBufs = 1
+
+" }}}
 " Python-Mode {{{
 " let g:pymode_lint_write = 0
 " let g:pymode_utils_whitespaces = 0
