@@ -92,12 +92,16 @@ set shortmess+=w                 " '[w]' instead of 'written'
 set shortmess+=x                 " '[dos]' instead of '[dos format]',
                                  "  '[unix]' instead of '[unix format]',
                                  "  '[mac]' instead of '[mac format]'
-
 set shortmess+=o 
 set shortmess+=O
 set shortmess+=t
 set shortmess+=T
 set shortmess+=I
+set foldlevelstart=99            " Start with all folds open
+set nojoinspaces                 " Don't be fancy with join
+set dictionary=/usr/share/dict/words
+set spellfile=~/.dotfiles/vim/en.utf-8.add
+set spelllang=en_us
 
 " If we support it, use relative line numbers, otherwise use regular line
 " numbers.
