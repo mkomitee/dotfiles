@@ -1,0 +1,1 @@
+../bundle/gitolite.vim/ftdetect/gitolite.vim

@@ -2,10 +2,11 @@
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 
-" We disable filetype stuff here to load bundles, otherwise vundle doesnt seem
-" to properly load ftdetect plugins.
-filetype off
-" }}}
+filetype on
+filetype plugin on
+filetype indent on
+syntax enable
+
 " Install Plugins {{{
 Bundle 'gmarik/vundle'
 Bundle 'Lokaltog/vim-easymotion'
@@ -32,9 +33,6 @@ Bundle 'tpope/vim-surround'
 Bundle 'tyru/current-func-info.vim'
 " }}}
 
-" Reenable filetype plugins now that our bundles are loaded.
-filetype plugin indent on
-syntax enable
 
 " Prepare our vim cache directories
 silent execute '!mkdir -p $HOME/.vimdata/vimbackup'
