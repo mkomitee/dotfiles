@@ -78,6 +78,7 @@
     ammend = commit --amend -v
     amend = commit --amend -v
     tags = tag -ln1
+    remotes = remote -v
 
 [pager]
     status = yes
@@ -96,7 +97,6 @@
     pretty = noname
 
 [diff]
-    ;external = git_diff_wrapper
     tool = vimdiff
     guitool = gvimdiff
 
