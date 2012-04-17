@@ -93,7 +93,7 @@
     cmd = vimdiff  \"$LOCAL\" \"$REMOTE\"
 
 [format]
-    pretty = noname
+    pretty = oneline
 
 [diff]
     ;external = git_diff_wrapper
