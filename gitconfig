@@ -96,7 +96,7 @@
     cmd = vimdiff  \"$LOCAL\" \"$REMOTE\"
 
 [format]
-    pretty = noname
+    pretty = oneline
 
 [diff]
     tool = vimdiff
