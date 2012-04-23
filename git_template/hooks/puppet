@@ -1,0 +1,57 @@
+#!/usr/local/bin/python
+import sys
+import git
+import os
+import re
+from subprocess import PIPE
+from subprocess import Popen
+import tempfile
+
+class ParseError(Exception):
+    def __init__(self, path, message):
+        self.path = path
+        self.message = message
+
+    def __str__(self):
+        return self.message
+
+def validate_puppet(path, tfile):
+    args = ['puppet', '--color=false', '--noop', '--vardir=/tmp',
+            '--confdir=/tmp', '--ignoreimport', tfile]
+    cmd = Popen(args, stderr=PIPE, stdout=PIPE)
+    (stdout, stderr) = cmd.communicate()
+    if cmd.returncode:
+
+        out = ''
+        if stdout.strip() != '':
+            out = out + stdout.strip()
+        if stderr.strip() != '':
+            out = out + stderr.strip()
+
+        out = re.sub("at {0}:".format(tfile), "at {0}:".format(path), out)
+
+        raise ParseError(path, out)
+
+def main(args):
+    repo = git.Repo('.')
+    errors = 0
+    for entry in repo.git.ls_files(z=True, stage=True).split("\0"):
+        if entry == '':
+            continue
+        mode, sha, id, path = re.split("\s+", entry)
+        if path.endswith('.pp'):
+            tfile = tempfile.NamedTemporaryFile(delete=False)
+            try:
+                tfile.write(repo.git.cat_file(sha, p=True))
+                tfile.flush()
+                try:
+                    validate_puppet(path, tfile.name)
+                except ParseError as exc:
+                    print exc
+                    errors += 1
+            finally:
+                os.unlink(tfile.name)
+    return errors
+
+if __name__ == '__main__':
+    sys.exit(main(sys.argv[1:4]))
