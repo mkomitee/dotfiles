@@ -81,6 +81,7 @@
     amend = commit --amend -v
     tags = tag -ln1
     remotes = remote -v
+    ctags = !.git/hooks/ctags
 
 [pager]
     status = yes
@@ -131,3 +132,6 @@
 
 [merge]
     tool = splice
+
+[init]
+    templatedir = ~/.dotfiles/git_template
