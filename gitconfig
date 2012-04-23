@@ -82,6 +82,7 @@
     tags = tag -ln1
     remotes = remote -v
     ctags = !.git/hooks/ctags
+    reinit = !.git/hooks/reinit
 
 [pager]
     status = yes
