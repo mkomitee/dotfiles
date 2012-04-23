@@ -20,6 +20,7 @@ Bundle 'godlygeek/tabular'
 Bundle 'int3/vim-extradite'
 Bundle 'jmcantrell/vim-virtualenv'
 Bundle 'kien/ctrlp.vim'
+Bundle 'majutsushi/tagbar'
 Bundle 'mkomitee/ShowMarks'
 Bundle 'mkomitee/puppet-eyes'
 Bundle 'scrooloose/nerdcommenter'
@@ -384,7 +385,7 @@ let g:ctrlp_dont_split = 'netrw\|help'
 nnoremap <c-b> :CtrlPBuffer<CR>
 nnoremap <leader>b :CtrlPBuffer<CR>
 nnoremap <leader>r :CtrlPMRU<CR>
-nnoremap <c-t> :CtrlPBufTagAll<CR>
+" nnoremap <c-t> :CtrlPBufTagAll<CR>
 nnoremap <c-q> :CtrlPQuickfix<CR>
 " }}}
 " Powerlines {{{
