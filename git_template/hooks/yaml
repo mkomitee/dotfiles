@@ -1,0 +1,45 @@
+#!/usr/local/bin/python
+import sys
+import git
+import os
+import re
+import yaml
+import tempfile
+
+class ParseError(Exception):
+    def __init__(self, path, message):
+        self.path = path
+        self.message = message
+
+    def __str__(self):
+        return "Error parsing {0.path}:\n{0.message}".format(self)
+
+def validate_yaml(path, tfile):
+    try:
+        yaml.load(open(tfile))
+    except yaml.error.YAMLError as exc:
+        raise ParseError(path, str(exc))
+
+def main(args):
+    repo = git.Repo('.')
+    errors = 0
+    for entry in repo.git.ls_files(z=True, stage=True).split("\0"):
+        if entry == '':
+            continue
+        mode, sha, id, path = re.split("\s+", entry)
+        if path.endswith('.yaml') or path.endswith('.yml'):
+            tfile = tempfile.NamedTemporaryFile(delete=False)
+            try:
+                tfile.write(repo.git.cat_file(sha, p=True))
+                tfile.flush()
+                try:
+                    validate_yaml(path, tfile.name)
+                except ParseError as exc:
+                    print exc
+                    errors += 1
+            finally:
+                os.unlink(tfile.name)
+    return errors
+
+if __name__ == '__main__':
+    sys.exit(main(sys.argv[1:4]))
