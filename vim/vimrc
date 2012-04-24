@@ -10,7 +10,6 @@ syntax enable
 " Install Plugins {{{
 Bundle 'gmarik/vundle'
 Bundle 'Lokaltog/vim-easymotion'
-Bundle 'Lokaltog/vim-powerline'
 Bundle 'Rainbow-Parenthsis-Bundle'
 Bundle 'ajf/puppet-vim'
 Bundle 'altercation/vim-colors-solarized'
@@ -150,6 +149,7 @@ set gdefault
 set matchpairs+=<:>
 set magic
 
+
 noremap <leader><space> :nohl<cr>:call clearmatches()<cr>
 
 " j and k will go one line, even if they're wrapped
@@ -235,8 +235,17 @@ hi ShowMarksHLl  ctermfg=1 ctermbg=0 guifg=#586e75 guibg=#073642"
 hi ShowMarksHLu  ctermfg=9 ctermbg=0 guifg=#cb4b16 guibg=#073642"
 hi ShowMarksHLo  ctermfg=5 ctermbg=0 guifg=#d33682 guibg=#073642"
 hi ShowMarksHLm  ctermfg=6 ctermbg=0 guifg=#2aa198 guibg=#073642"
-let g:Powerline_colorscheme="skwp"
-let g:Powerline_theme="mkomitee"
+
+hi StatusLine   ctermbg=3 ctermfg=0
+hi StatusLineNC ctermbg=3 ctermfg=8
+set statusline=          " clear statusline
+set statusline+=%F\      " full filename
+set statusline+=%m%r%w   " flags
+set statusline+=%y\      " filetype
+set statusline+=%=       " seperator
+set statusline+=c:%c\    " column
+set statusline+=l:%l/%L\ " line
+set statusline+=(%p%%)   " percentage thru file
 
 " Highlight VCS conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
@@ -388,16 +397,6 @@ nnoremap <leader>b :CtrlPBuffer<CR>
 nnoremap <leader>r :CtrlPMRU<CR>
 " nnoremap <c-t> :CtrlPBufTagAll<CR>
 nnoremap <c-q> :CtrlPQuickfix<CR>
-" }}}
-" Powerlines {{{
-if has('mac')
-    let g:Powerline_cache_file = expand('~') . "/.vimdata/powerline.cache.mac"
-    let g:Powerline_symbols = 'fancy'
-else
-    let g:Powerline_cache_file = expand('~') . "/.vimdata/powerline.cache"
-    let g:Powerline_symbols = 'unicode'
-end
-
 " }}}
 " Tabularize  {{{
 vnoremap <silent> <Leader>a=> :Tabularize /=>/l1l1<CR>
