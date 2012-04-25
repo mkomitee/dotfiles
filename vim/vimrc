@@ -13,26 +13,18 @@ Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Rainbow-Parenthsis-Bundle'
 Bundle 'ajf/puppet-vim'
 Bundle 'altercation/vim-colors-solarized'
-Bundle 'benmills/vimux'
-Bundle 'fholgado/minibufexpl.vim'
 Bundle 'godlygeek/tabular'
-Bundle 'gregsexton/gitv'
-Bundle 'int3/vim-extradite'
-Bundle 'jmcantrell/vim-virtualenv'
 Bundle 'kien/ctrlp.vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'mkomitee/ShowMarks'
 Bundle 'mkomitee/puppet-eyes'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
-Bundle 'sjl/badwolf'
-Bundle 'sjl/clam.vim'
 Bundle 'sjl/splice.vim'
 Bundle 'tmatilai/gitolite.vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-surround'
-Bundle 'tyru/current-func-info.vim'
 " }}}
 
 
@@ -53,7 +45,7 @@ set showcmd                      " Show partial commands
 set hidden                       " Allow for hidden buffers
 set noerrorbells                 " shutup
 set novisualbell                 " shutup
-set ttyfast                      " it's 2012. Send more characters, faster
+" set ttyfast                      " it's 2012. Send more characters, faster
 set backspace=indent,eol,start   " Nothing is too sacred to be <BS>
 set laststatus=2                 " Every window always gets a statusline
 set history=10000                " Keep a lot of ex commands in history
@@ -149,8 +141,6 @@ set gdefault
 set matchpairs+=<:>
 set magic
 
-
-noremap <leader><space> :nohl<cr>:call clearmatches()<cr>
 
 " j and k will go one line, even if they're wrapped
 nnoremap j gj
@@ -304,16 +294,6 @@ augroup END
 
 nnoremap // :nohl<cr>
 
-"C-{hjkl} to move text or text blocks left down up or right
-inoremap <C-j> <Esc>:m+<CR>==gi
-inoremap <C-k> <Esc>:m-2<CR>==gi
-inoremap <C-h> <Esc><<`]a
-inoremap <C-l> <Esc>>>`]a
-vnoremap <C-j> :m'>+<CR>gv=gv
-vnoremap <C-k> :m-2<CR>gv=gv
-vnoremap <C-h> <gv
-vnoremap <C-l> >gv
-
 if bufwinnr(1)
     noremap + <c-W>+
     noremap - <c-W>-
@@ -324,10 +304,6 @@ nnoremap <C-k> <C-W>k
 nnoremap <C-j> <C-W>j
 nnoremap <C-h> <C-W>h
 nnoremap <C-l> <C-W>l
-nnoremap <C-Right> <C-W>l
-nnoremap <C-Left> <C-W>h
-nnoremap <C-Up> <C-W>k
-nnoremap <C-Down> <C-W>j
 
 " Reselect visually selected text after indenting
 vnoremap > >gv
@@ -346,10 +322,7 @@ nnoremap <leader>egv :e$MYGVIMRC<CR>
 nnoremap <leader>sv :so $MYVIMRC<CR>
 nnoremap <leader>sgv :so $MYGVIMRC<CR>
 
-" Move visual selection back/forwards
 set ww+=<,>
-vnoremap <C-Left> x<Left>P`[v`]
-vnoremap <C-Right> x<Right>P`[v`]
 
 " sudo write-file in case you opened a file you dont have privileges to write
 cmap w!! w !sudo tee % >/dev/null<cr>
@@ -357,11 +330,9 @@ cmap w!! w !sudo tee % >/dev/null<cr>
 " Smarter Pasting!
 nnoremap <Leader>P :set paste<CR>"*p;set nopaste<CR>
 
-
 " }}}
 " Custom commands and functions {{{
 " Diff against whats on disk {{{
-nnoremap <Leader>do :call DiffOrig()<CR>
 if !exists(":DiffOrig")
     command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
                 \ | wincmd p | diffthis
@@ -371,16 +342,6 @@ endif
 "
 " }}}
 " Configure plugins  {{{
-" minibufexplorer {{{
-let g:miniBufExplSplitBelow = 0
-let g:miniBufExplMapCTabSwitchBufs = 1
-
-" }}}
-" Python-Mode {{{
-" let g:pymode_lint_write = 0
-" let g:pymode_utils_whitespaces = 0
-
-" }}}
 " Ctrl+P {{{
 let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir']
 let g:ctrlp_cmd = 'CtrlP'
@@ -395,8 +356,9 @@ let g:ctrlp_dont_split = 'netrw\|help'
 nnoremap <c-b> :CtrlPBuffer<CR>
 nnoremap <leader>b :CtrlPBuffer<CR>
 nnoremap <leader>r :CtrlPMRU<CR>
-" nnoremap <c-t> :CtrlPBufTagAll<CR>
-nnoremap <c-q> :CtrlPQuickfix<CR>
+nnoremap <leader>q :CtrlPQuickfix<CR>
+nnoremap <leader>t :CtrlPTag<CR>
+nnoremap <leader>l :CtrlPTag<CR>
 " }}}
 " Tabularize  {{{
 vnoremap <silent> <Leader>a=> :Tabularize /=>/l1l1<CR>
@@ -425,7 +387,6 @@ vmap <leader>cc <plug>NERDCommenterToggle<cr>vgv
 nmap <leader>cc <plug>NERDCommenterToggle
 vmap <leader>cb <plug>NERDCommenterSexy<cr>vgv
 nmap <leader>cb <plug>NERDCommenterSexy
-vmap <leader>c<space> <plug>NERDCommenterToggle<cr>vgv
 nmap <leader>c<space> <plug>NERDCommenterToggle
 nmap <leader>c$ <plug>NERDCommenterToEOL
 
