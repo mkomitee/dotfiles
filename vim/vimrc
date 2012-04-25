@@ -216,18 +216,32 @@ command! -bang WQ wq<bang>
 
 " }}}
 " Colorscheme {{{
-set background=dark
-let g:solarized_termtrans = 1
-colorscheme solarized
-call togglebg#map("<F5>")
-hi SignColumn    ctermfg=10 ctermbg=0 guifg=#586e75 guibg=#073642"
-hi ShowMarksHLl  ctermfg=1 ctermbg=0 guifg=#586e75 guibg=#073642"
-hi ShowMarksHLu  ctermfg=9 ctermbg=0 guifg=#cb4b16 guibg=#073642"
-hi ShowMarksHLo  ctermfg=5 ctermbg=0 guifg=#d33682 guibg=#073642"
-hi ShowMarksHLm  ctermfg=6 ctermbg=0 guifg=#2aa198 guibg=#073642"
+if has('mac')
+    set background=light
+    let g:solarized_termtrans = 1
+    colorscheme solarized
+    call togglebg#map("<F5>")
+    hi SignColumn    ctermfg=10 ctermbg=15
+    hi ShowMarksHLl  ctermfg=1  ctermbg=15
+    hi ShowMarksHLu  ctermfg=9  ctermbg=15
+    hi ShowMarksHLo  ctermfg=5  ctermbg=15
+    hi ShowMarksHLm  ctermfg=6  ctermbg=15
+    hi StatusLine    ctermbg=3  ctermfg=7
+    hi StatusLineNC  ctermbg=2  ctermfg=7
+else
+    set background=dark
+    let g:solarized_termtrans = 1
+    colorscheme solarized
+    call togglebg#map("<F5>")
+    hi SignColumn    ctermfg=10 ctermbg=0
+    hi ShowMarksHLl  ctermfg=1  ctermbg=0
+    hi ShowMarksHLu  ctermfg=9  ctermbg=0
+    hi ShowMarksHLo  ctermfg=5  ctermbg=0
+    hi ShowMarksHLm  ctermfg=6  ctermbg=0
+    hi StatusLine    ctermbg=3  ctermfg=0
+    hi StatusLineNC  ctermbg=3  ctermfg=8
+endif
 
-hi StatusLine   ctermbg=3 ctermfg=0
-hi StatusLineNC ctermbg=3 ctermfg=8
 set statusline=          " clear statusline
 set statusline+=%F\      " full filename
 set statusline+=%m%r%w   " flags
