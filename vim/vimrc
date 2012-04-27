@@ -1,13 +1,12 @@
-" Preamble {{{
+" Configure Bundler
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
-
 filetype on
 filetype plugin on
 filetype indent on
 syntax enable
 
-" Install Plugins {{{
+" Load Plugins 
 Bundle 'gmarik/vundle'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Rainbow-Parenthsis-Bundle'
@@ -25,8 +24,6 @@ Bundle 'tmatilai/gitolite.vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-surround'
-" }}}
-
 
 " Prepare our vim cache directories
 silent execute '!mkdir -p $HOME/.vimdata/vimbackup'
@@ -35,8 +32,7 @@ silent execute '!mkdir -p $HOME/.vimdata/vimviews'
 silent execute '!mkdir -p $HOME/.vimdata/vimundo'
 silent execute '!mkdir -p $HOME/.vimdata/ctrlp'
 
-" }}}
-" Preferences {{{
+" Preferences 
 set encoding=utf-8               " Prefer utf-8 character encoding
 set fileformats=unix,mac,dos     " Prefer unix style EOL's
 set autoindent                   " Try to line up code intelligently
@@ -45,7 +41,7 @@ set showcmd                      " Show partial commands
 set hidden                       " Allow for hidden buffers
 set noerrorbells                 " shutup
 set novisualbell                 " shutup
-" set ttyfast                      " it's 2012. Send more characters, faster
+set ttyfast                      " it's 2012. Send more characters, faster
 set backspace=indent,eol,start   " Nothing is too sacred to be <BS>
 set laststatus=2                 " Every window always gets a statusline
 set history=10000                " Keep a lot of ex commands in history
@@ -84,31 +80,24 @@ set shortmess+=w                 " '[w]' instead of 'written'
 set shortmess+=x                 " '[dos]' instead of '[dos format]',
                                  "  '[unix]' instead of '[unix format]',
                                  "  '[mac]' instead of '[mac format]'
-set shortmess+=o 
-set shortmess+=O
-set shortmess+=t
-set shortmess+=T
-set shortmess+=I
+set shortmess+=o                 " overwrite message for writing a file with subsequent 
+                                 "  message for reading a file (useful for ":wn" or when 
+                                 "  'autowrite' on)
+set shortmess+=O                 " message for reading a file overwrites any previous 
+                                 "  message. Also for quickfix message (e.g., ":cn").
+set shortmess+=t                 " truncate file message at the start if it is too long 
+                                 "  to fit on the command-line, "<" will appear in the 
+                                 "  left most column. Ignored in Ex mode.
+set shortmess+=T                 " truncate other messages in the middle if they are too 
+                                 "  long to fit on the command line.  "..." will appear 
+                                 "  in the middle. Ignored in Ex mode.
+set shortmess+=I                 " don't give the intro message when starting Vim |:intro|.
 set foldlevelstart=99            " Start with all folds open
 set nojoinspaces                 " Don't be fancy with join
-set dictionary=/usr/share/dict/words
-set spellfile=~/.dotfiles/vim/en.utf-8.add
-set spelllang=en_us
-
-" If we support it, use relative line numbers, otherwise use regular line
-" numbers.
-if has('&relativenumber')
-    set relativenumber
-else
-    set number
-endif
-
-if exists('&undofile')
-    set undofile         " Save undo history to a file for persistence
-    set undoreload=10000 " Save the whole buffer for undo when reloading
-    set undolevels=10000 " Save lots of data for undo
-endif
-
+set dictionary=/usr/share/dict/words        " for spell checking
+set spellfile=~/.dotfiles/vim/en.utf-8.add  " to add words
+set spelllang=en_us                         " yes, i do speak it
+set number                      " line numbers
 set iskeyword-=:
 set iskeyword-=;
 set iskeyword-=,
@@ -126,13 +115,6 @@ set scrolloff=5
 set sidescroll=1
 set sidescrolloff=10
 set virtualedit+=block
-
-if has('mouse')
-    set mouse=a
-endif
-
-" }}}
-" Searching & Movement {{{
 set incsearch
 set ignorecase
 set smartcase
@@ -140,38 +122,6 @@ set hlsearch
 set gdefault
 set matchpairs+=<:>
 set magic
-
-
-" j and k will go one line, even if they're wrapped
-nnoremap j gj
-nnoremap k gk
-
-" when using marks, all by default mark columns as well
-nnoremap ' `
-
-" }}}
-" Disable annoying maps {{{
-noremap <F1> <nop>
-
-" }}}
-" Disable Arrow Keys {{{
-
-nnoremap <Left> 8<C-w><
-nnoremap <Right> 8<C-w>>
-nnoremap <Up> 8<C-w>+
-nnoremap <Down> 8<C-w>-
-
-inoremap <Left> <Nop>
-inoremap <Right> <Nop>
-inoremap <Up> <Nop>
-inoremap <Down> <Nop>
-vnoremap <Left> <Nop>
-vnoremap <Right> <Nop>
-vnoremap <Up> <Nop>
-vnoremap <Down> <Nop>
-
-" }}}
-" Defaults for tabs, spaces, & wrapping {{{
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
@@ -180,18 +130,9 @@ set smarttab
 set wrap
 set textwidth=80
 set formatoptions=croqln
-
-" }}}
-" Backups & State {{{
 set backupdir=$HOME/.vimdata/vimbackup/
 set directory=$HOME/.vimdata/vimswap/
 set viewdir=$HOME/.vimdata/vimviews/
-if exists('&undofile')
-    set undodir=$HOME/.vimdata/vimundo/
-endif
-
-" }}}
-" Wildmode {{{
 set wildmenu
 set wildmode=longest:full,list:full
 
@@ -202,8 +143,51 @@ set wildignore+=*.sw?
 set wildignore+=*.DS_Store
 set wildignore+=*.pyc,*.pyo
 
-" }}}
-" Typos {{{
+if has('mouse')
+    set mouse=a
+endif
+
+if exists('&undofile')
+    set undofile         " Save undo history to a file for persistence
+    set undoreload=10000 " Save the whole buffer for undo when reloading
+    set undolevels=10000 " Save lots of data for undo
+    set undodir=$HOME/.vimdata/vimundo/
+endif
+
+
+
+" j and k will go one line, even if they're wrapped
+nnoremap j gj
+nnoremap k gk
+
+" when using marks, all by default mark columns as well
+nnoremap ' `
+
+" Disable annoying maps 
+noremap <F1> <nop>
+
+
+nnoremap <Left> 8<C-w><
+nnoremap <Right> 8<C-w>>
+nnoremap <Up> 8<C-w>+
+nnoremap <Down> 8<C-w>-
+
+" Disable Arrow Keys 
+inoremap <Left> <Nop>
+inoremap <Right> <Nop>
+inoremap <Up> <Nop>
+inoremap <Down> <Nop>
+vnoremap <Left> <Nop>
+vnoremap <Right> <Nop>
+vnoremap <Up> <Nop>
+vnoremap <Down> <Nop>
+
+
+" Backups & State 
+
+" Wildmode 
+
+" Typos 
 command! -bang E e<bang>
 command! -bang Q q<bang>
 command! -bang W w<bang>
@@ -214,8 +198,7 @@ command! -bang WA wa<bang>
 command! -bang Wq wq<bang>
 command! -bang WQ wq<bang>
 
-" }}}
-" Colorscheme {{{
+" Colorscheme 
 if has('mac')
     set background=light
     let g:solarized_termtrans = 1
@@ -265,14 +248,13 @@ endif
 set guicursor=n-v-c:block-Cursor
 set guicursor+=i:ver20-Cursor-blinkon600-blinkoff600
 set guicursor+=n-v-c:block-Cursor-blinkon600-blinkoff600
+set ww+=<,>
 
-" }}}
-" Leaders {{{
+" Leaders 
 let mapleader = ","
 let localleader = '\\'
 
-" }}}
-" AutoCommands {{{
+" AutoCommands 
 " This may cause a lot of processing, but we can disable it if it causes problems
 augroup showmarks
     au!
@@ -303,8 +285,7 @@ augroup vimmemory
 augroup END
 
 
-" }}}
-" Toggles & Switches (Leader commands) {{{
+" Toggles & Switches (Leader commands) 
 
 nnoremap // :nohl<cr>
 
@@ -336,7 +317,6 @@ nnoremap <leader>egv :e$MYGVIMRC<CR>
 nnoremap <leader>sv :so $MYVIMRC<CR>
 nnoremap <leader>sgv :so $MYGVIMRC<CR>
 
-set ww+=<,>
 
 " sudo write-file in case you opened a file you dont have privileges to write
 cmap w!! w !sudo tee % >/dev/null<cr>
@@ -344,19 +324,16 @@ cmap w!! w !sudo tee % >/dev/null<cr>
 " Smarter Pasting!
 nnoremap <Leader>P :set paste<CR>"*p;set nopaste<CR>
 
-" }}}
-" Custom commands and functions {{{
-" Diff against whats on disk {{{
+" Custom commands and functions 
+" Diff against whats on disk 
 if !exists(":DiffOrig")
     command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
                 \ | wincmd p | diffthis
 endif
 
-" }}}
 "
-" }}}
-" Configure plugins  {{{
-" Ctrl+P {{{
+" Configure plugins  
+" Ctrl+P 
 let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir']
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_cache_dir = $HOME.'/.vimdata/ctrlp'
@@ -373,15 +350,13 @@ nnoremap <leader>r :CtrlPMRU<CR>
 nnoremap <leader>q :CtrlPQuickfix<CR>
 nnoremap <leader>t :CtrlPTag<CR>
 nnoremap <leader>l :CtrlPTag<CR>
-" }}}
-" Tabularize  {{{
+" Tabularize  
 vnoremap <silent> <Leader>a=> :Tabularize /=>/l1l1<CR>
 vnoremap <silent> <Leader>a= :Tabularize /=/l1l1<CR>
 vnoremap <silent> <Leader>a, :Tabularize /,/l0l1<CR>
 vnoremap <silent> <Leader>a: :Tabularize /:/l0l1<CR>
 
-" }}}
-" Showmarks {{{
+" Showmarks 
 let g:showmarks_enable=1
 let g:showmarks_include="'`\"^<>.abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789[](){}"
 let g:showmarks_ignore_type=''
@@ -389,8 +364,7 @@ let g:showmarks_textlower="\t"
 let g:showmarks_textupper="\t"
 let g:showmarks_textother="\t"
 
-" }}}
-" NERDCommenter {{{
+" NERDCommenter 
 " When we comment something with the NERDComment Toggle, reselect
 let g:NERDCreateDefaultMappings = 0
 let g:NERDTreeMinimalUI = 1
@@ -402,10 +376,10 @@ nmap <leader>cc <plug>NERDCommenterToggle
 vmap <leader>cb <plug>NERDCommenterSexy<cr>vgv
 nmap <leader>cb <plug>NERDCommenterSexy
 nmap <leader>c<space> <plug>NERDCommenterToggle
+vmap <leader>c<space> <plug>NERDCommenterToggle<cr>vgv
 nmap <leader>c$ <plug>NERDCommenterToEOL
 
-" }}}
-" NERDTree.vim {{{
+" NERDTree.vim 
 let g:NERDTreeUseExistingWindows = 1
 let NERDTreeIgnore=['\~$', '\.swp$', '^CVS$', '\.svn$', '^CVSROOT$', '^\.git$', '\.pyc$', '\.pyo$', '\.swp$']
 noremap <Leader>dd :NERDTreeToggle<CR>
@@ -427,15 +401,11 @@ function! s:CloseIfOnlyNerdTreeLeft()
     endif
 endfunction
 
-" }}}
-" }}}
-" Load abbreviations {{{
+" Load abbreviations 
 if filereadable(expand("~/.vim/abbrev"))
     source ~/.vim/abbrev
 endif
 
-" }}}
-" Modelines: {{{
+" Modelines: 
 " vim: nowrap fdm=marker ft=vim
 "
-" }}}
