@@ -38,26 +38,17 @@ silent execute '!mkdir -p $HOME/.vimdata/vimundo'
 silent execute '!mkdir -p $HOME/.vimdata/ctrlp'
 
 " Preferences
-set encoding=utf-8             " Prefer utf-8 character encoding
-set fileformats=unix,mac,dos   " Prefer unix style EOL's
 set autoindent                 " Try to line up code intelligently
-set showmode                   " Inform me as to what mode im in
-set showcmd                    " Show partial commands
 set hidden                     " Allow for hidden buffers
-set noerrorbells               " shutup
-set novisualbell               " shutup
-set ttyfast                    " it's 2012. Send more characters, faster
 set backspace=indent,eol,start " Nothing is too sacred to be <BS>
 set laststatus=2               " Every window always gets a statusline
 set history=10000              " Keep a lot of ex commands in history
 set list                       " show invisibles
 set showbreak=↪                " indicate a line is the continuation of a
                                "  wrapped line
-set matchtime=3                " show matching parenthesis for 3/10 of a second
 set showmatch                  " show matching parenthesis
 set splitbelow                 " new horizontal splits to below
 set splitright                 " new vertical splits goto the right
-set shiftround                 " round indent to multiples of shiftwidth
 set autoread                   " reread files which changes on disk if they
                                "  havnt changed in the buffer
 set showfulltag                " when completing a word from a tags file,
@@ -73,7 +64,6 @@ set updatecount=10             " update swap files every 10 chars
 set nostartofline              " don't move the cursor to the start of the
                                " line when we move vertically in the buffer
 set pumheight=10               " show no more than 10 entries in completion menus
-set report=0                   " always show how many lines are changed
 set scrolloff=5                " keep at least 5 lines of context when scrolling
 set sidescrolloff=10           " keep at least 10 characters of context when scrolling
 set sidescroll=1               " scroll horizontally by 1
@@ -87,7 +77,6 @@ set shiftwidth=4               " indentation uses 4 spaces as well e.g. >>
 set expandtab                  " uses spaces, not tabs
 set softtabstop=2              " use 2 spaces when tabbing because, ...
 set smarttab                   " use softtabstop when tabbing when not at start of line
-set wrap                       " wrap long lines in the window (not the file)
 set textwidth=80               " break long lines after 80 chars
 set backupdir=$HOME/.vimdata/vimbackup/ " save backups in alternate location
 set directory=$HOME/.vimdata/vimswap/   " save swap files here
@@ -114,8 +103,6 @@ endif
 
 if exists('&undofile')
     set undofile         " Save undo history to a file for persistence
-    set undoreload=10000 " Save the whole buffer for undo when reloading
-    set undolevels=10000 " Save lots of data for undo
     set undodir=$HOME/.vimdata/vimundo/ " Save undo data here
 endif
 
@@ -167,11 +154,6 @@ set completeopt+=longest " insert the longest match
 set completeopt+=menu    " show the menu when there are matches
 set completeopt+=menuone " even if there's only one
 
-set viminfo=                     " reset viminfo settings
-set viminfo+='100                " remember marks from last 100 files
-set viminfo+=<50                 " remember up to 50 register contents
-set viminfo+=s10                 " forget registers > 10kB
-set viminfo+=h                   " don't restore hlsearch
 set viminfo+=n~/.vimdata/viminfo " move the viminfo file into ~/.vimdata
 
 set switchbuf=                   " reset switchbuf
@@ -209,9 +191,7 @@ set statusline+=c:%c\    " column
 set statusline+=l:%l/%L\ " line
 set statusline+=(%p%%)   " percentage thru file
 
-set whichwrap=     "reset whichwrap
 set whichwrap+=<,> " <Left> and <Right> can move to the previous/next line
-set whichwrap+=b,s " <backspace> and <space> can as well
 
 
 " j and k will go one line, even if they're wrapped
@@ -240,7 +220,6 @@ let g:solarized_termtrans = 1
 
 " Highlight VCS conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
-
 
 " Leaders
 let mapleader = ","     " this may change soon, I keep wanting to have the
@@ -303,12 +282,6 @@ cmap w!! w !sudo tee % >/dev/null<cr>
 nnoremap <Leader>P :set paste<CR>"*p;set nopaste<CR>
 
 " Custom commands and functions
-" Diff against whats on disk
-if !exists(":DiffOrig")
-    command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
-                \ | wincmd p | diffthis
-endif
-
 "
 " Ctrl+P
 let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir']
@@ -344,31 +317,20 @@ let g:showmarks_textother="\t"
 
 " NERDCommenter
 let g:NERDCreateDefaultMappings = 0
-let g:NERDTreeMinimalUI = 1
-let g:NERDTreeDirArrows = 1
 let g:NERDSpaceDelims = 1
 vmap <leader>cc <plug>NERDCommenterToggle<cr>vgv
-vmap <leader>c<space> <plug>NERDCommenterToggle<cr>vgv
-vmap <leader>cb <plug>NERDCommenterSexy<cr>vgv
 nmap <leader>cc <plug>NERDCommenterToggle
-nmap <leader>c<space> <plug>NERDCommenterToggle
-nmap <leader>cb <plug>NERDCommenterSexy
 nmap <leader>c$ <plug>NERDCommenterToEOL
 
 " NERDTree.vim
-let g:NERDTreeUseExistingWindows = 1
-let NERDTreeIgnore=['\~$', '\.swp$', '^CVS$', '\.svn$', '^CVSROOT$', '^\.git$', '\.pyc$', '\.pyo$', '\.swp$']
+let g:NERDTreeDirArrows = 1
+let g:NERDTreeMinimalUI = 1
+let NERDTreeIgnore=['\~$', '\.swp$', '^CVS$', '\.svn$', '^CVSROOT$', '^\.git$', '\.pyc$', '\.pyo$']
 noremap <Leader>dd :NERDTreeToggle<CR>
 noremap <Leader>df :NERDTreeFind<CR>
-let NERDTreeShowBookmarks=0
-let NERDTreeQuitOnOpen=0
-let NERDTreeHighlightCursorLine=0
-let NERDTreeHijackNetrw=1
 
 " Load abbreviations
-if filereadable(expand("~/.vim/abbrev"))
-    source ~/.vim/abbrev
-endif
+source ~/.vim/abbrev
 
 " Modelines:
 " vim: nowrap fdm=marker ft=vim
