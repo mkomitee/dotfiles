@@ -5,8 +5,6 @@ LIB=$HOME/.dotfiles/lib
 
 fpath=($ZSH $fpath)
 
-export PYTHONPATH=$HOME/lib/python:$HOME/lib/python2.6/site-packages:$HOME/.dotfiles/lib/python:$PYTHONPATH
-
 source $ZSH/pathrc.zsh
 source $ZSH/cdr.zsh
 source $ZSH/rvm.zsh
@@ -22,9 +20,6 @@ source $ZSH/jobs.zsh
 source $ZSH/prompt.zsh
 source $ZSH/colours.zsh
 source $ZSH/funny.zsh
-
-source $LIB/autoenv.sh
-#source $LIB/virtualenvwrapper.sh
 
 # GREP CONFIG
 export GREP_OPTIONS='--color=auto'
