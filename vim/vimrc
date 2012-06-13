@@ -38,6 +38,7 @@ silent execute '!mkdir -p $HOME/.vimdata/vimundo'
 silent execute '!mkdir -p $HOME/.vimdata/ctrlp'
 
 " Preferences
+set encoding=utf-8             " Prefer utf-8 character encoding
 set autoindent                 " Try to line up code intelligently
 set hidden                     " Allow for hidden buffers
 set backspace=indent,eol,start " Nothing is too sacred to be <BS>
