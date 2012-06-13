@@ -250,6 +250,12 @@ augroup vimmemory
     au BufWinEnter * silent! loadview
 augroup END
 
+augroup encryption
+    au!
+    au BufRead,BufNewFile *.crypt set noswapfile
+    au BufRead,BufNewFile *.crypt set bufhidden=wipe
+augroup END
+
 " Simple map to disable highlighting
 nnoremap // :nohl<cr>
 
@@ -282,8 +288,6 @@ cmap w!! w !sudo tee % >/dev/null<cr>
 " Smarter Pasting!
 nnoremap <Leader>P :set paste<CR>"*p;set nopaste<CR>
 
-" Custom commands and functions
-"
 " Ctrl+P
 let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir']
 let g:ctrlp_cmd = 'CtrlP'
@@ -310,7 +314,7 @@ vnoremap <silent> <Leader>a: :Tabularize /:/l0l1<CR>
 
 " Showmarks
 let g:showmarks_enable=1
-let g:showmarks_include="'`\"^<>.abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789[](){}"
+let g:showmarks_include="'`^<>.abcdefghijklmnopqrstuvwxyz()[]{}"
 let g:showmarks_ignore_type=''
 let g:showmarks_textlower="\t"
 let g:showmarks_textupper="\t"
