@@ -24,11 +24,14 @@ Bundle 'mkomitee/puppet-eyes'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
 Bundle 'sjl/splice.vim'
+Bundle 'sjl/badwolf'
 Bundle 'tmatilai/gitolite.vim'
 Bundle 'tomtom/tlib_vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-endwise'
+Bundle 'ruby-matchit'
 
 " Prepare our vim cache directories
 silent execute '!mkdir -p $HOME/.vimdata/vimbackup'
@@ -213,11 +216,8 @@ command! -bang WA wa<bang>
 command! -bang Wq wq<bang>
 command! -bang WQ wq<bang>
 
-" Setup my colorscheme, ... " I use solarized with a few tweaks depending on
-" whether I'm using light or dark background.
-colorscheme solarized
-call togglebg#map("<F5>")
-let g:solarized_termtrans = 1
+" Setup my colorscheme, ... 
+colorscheme badwolf
 
 " Highlight VCS conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
