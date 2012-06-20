@@ -29,9 +29,6 @@
     autocrlf = input
     safecrlf = true
 
-[pager]
-    diff =
-
 [log]
     abbrevcommit = yes
     decorate = short
@@ -42,12 +39,14 @@
     single = yes
 
 [pretty]
+    lg = "%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset"
     namedate = "%C(yellow)%h %C(white)%ad %C(yellow)%aN %C(magenta)%d %C(white)%s"
     nonamedate = "%C(yellow)%h %C(white)%ad %C(yellow)%s"
     name = "%C(yellow)%h %C(white)%aN %C(yellow)%s"
     noname = "%C(yellow)%h %C(white)%s"
 
 [alias] 
+    lg = log --graph --pretty=lg --abbrev-commit 
     l = log --pretty=noname --graph
     ln = log --pretty=name --graph
     lnd = log --date=local --pretty=namedate --graph
@@ -65,8 +64,8 @@
     ref = show-ref
     vimdiff = difftool
     head = log -1
-    stat = status
-    st = status
+    stat = status -sb
+    st = status -sb
     ci = commit
     co = checkout 
     di = diff
@@ -97,7 +96,7 @@
     cmd = vimdiff  \"$LOCAL\" \"$REMOTE\"
 
 [format]
-    pretty = oneline
+    pretty = lg
 
 [diff]
     tool = vimdiff
