@@ -21,6 +21,7 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'mkomitee/ShowMarks'
 Bundle 'mkomitee/puppet-eyes'
+Bundle 'python_match.vim'
 Bundle 'ruby-matchit'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
@@ -334,6 +335,9 @@ let g:NERDTreeMinimalUI = 1
 let NERDTreeIgnore=['\~$', '\.swp$', '^CVS$', '\.svn$', '^CVSROOT$', '^\.git$', '\.pyc$', '\.pyo$']
 noremap <Leader>dd :NERDTreeToggle<CR>
 noremap <Leader>df :NERDTreeFind<CR>
+
+" Load additional functions
+source ~/.vim/functions.vim
 
 " Load abbreviations
 source ~/.vim/abbrev
