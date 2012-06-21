@@ -1,1 +1,1 @@
-au BufWritePre,FileWritePre <buffer> silent! %:s/\s\+$//
+au BufWritePre,FileWritePre <buffer> call RemoveTrailingWhiteSpace()

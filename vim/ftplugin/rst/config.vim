@@ -1,1 +1,1 @@
-set textwidth=0
+au BufWritePre,FileWritePre <buffer> call RemoveTrailingWhiteSpace()
