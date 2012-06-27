@@ -40,21 +40,11 @@
 
 [pretty]
     lg = "%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset"
-    namedate = "%C(yellow)%h %C(white)%ad %C(yellow)%aN %C(magenta)%d %C(white)%s"
-    nonamedate = "%C(yellow)%h %C(white)%ad %C(yellow)%s"
-    name = "%C(yellow)%h %C(white)%aN %C(yellow)%s"
-    noname = "%C(yellow)%h %C(white)%s"
 
 [alias] 
     lg = log --graph --pretty=lg --abbrev-commit 
-    l = log --pretty=noname --graph
-    ln = log --pretty=name --graph
-    lnd = log --date=local --pretty=namedate --graph
-    lnr = log --date=relative --pretty=namedate --graph
-    ld = log --date=local --pretty=nonamedate --graph
-    lr = log --date=relative --pretty=nonamedate --graph
-    lc = local-commits --decorate=short --pretty=oneline
-    graph = log -w --graph --full-history --all --pretty=oneline --decorate=short
+    lc = local-commits --decorate=short --pretty=lg
+    graph = log -w --graph --full-history --all --pretty=lg --decorate=short
     track = checkout -t
     ls = ls-files
     rl = reflog
