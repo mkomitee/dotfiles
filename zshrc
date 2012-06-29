@@ -27,7 +27,11 @@ export GREP_COLOR='1;32'
 
 # LS CONFIG
 # Find the option for using colors in ls, depending on the version: Linux or BSD
-ls --color -d . &>/dev/null 2>&1 && alias ls='ls --color=tty -F' || alias ls='ls -FG'
+if ls --color -d . &>/dev/null; then
+    alias ls='ls -F --color=tty --group-directories-first'
+else
+    alias ls='ls -FG'
+fi
 if which dircolors >/dev/null 2>&1; then
     unset LSCOLORS
     eval `dircolors $HOME/.dotfiles/dircolors`
