@@ -1,0 +1,207 @@
+#!/usr/bin/env python
+"""Usage:
+    pom [-v | --verbose] work <comment>
+    pom [-v | --verbose] break
+    pom [-v | --verbose] rest
+    pom [-v | --verbose] end
+    pom [-v | --verbose] pause
+    pom [-v | --verbose] continue
+    pom [-v | --verbose] status
+    pom [-v | --verbose] report
+    pom --version
+    pom [-h | --help]
+
+Arguments:
+    <comment>  Description of work to be done.
+
+Options:
+    -v, --verbose  Print verbose information
+    --version      Print version and exit
+    -h, --help     Print help and exit"""
+
+
+from docopt import docopt
+from docopt import DocoptExit
+from os.path import expanduser
+import datetime
+
+# format: type   ACTION TIMESTAMP
+# start:    <type> S      TIMESTAMP
+# end:      <type> E      TIMESTAMP
+# pause:    <type> P      TIMESTAMP
+# continue: <type> C      TIMESTAMP
+
+_POM = expanduser("~/.pom")
+
+# TYPES
+WORK = 'work'
+BREAK = 'break'
+REST = 'rest'
+
+# ACTIONS
+START = 'start'
+PAUSE = 'pause'
+CONTINUE = 'continue'
+STATUS = 'status'
+END = 'end'
+REPORT = 'report'
+
+# STATES
+ACTIVE = 'active'
+PAUSED = 'paused'
+COMPLETED = 'completed'
+
+
+def parse_time(dt_s):
+    return datetime.datetime.fromtimestamp(int(dt_s))
+
+def format_time(dt):
+    return dt.strftime('%s')
+
+def update(pom_type, action, dt, comment=None):
+    with open(_POM, 'a') as fh:
+        print >> fh, "%s__%s__%s__%s" % (pom_type, action, format_time(dt), comment)
+
+def status():
+    # type, state, time
+    # -----------------------
+    # work, active, timedelta
+    # work, paused, timedelta
+    # work, completed, timedelta
+    # When active or paused, the timedelta returned is the time spent in the pom
+    # When completed, the timedelta returned is the time since completion
+    history = []
+    pom_type = None
+    state = None
+    last_start = None
+    last_pause = None
+    last_end = None
+    last_continue = None
+    last_comment = None
+    pause_time = datetime.timedelta(0)
+    now = datetime.datetime.now()
+    try:
+        with open(_POM) as fh:
+            for line in fh.read().strip().split("\n"):
+                pom_type, action, timestamp, comment = line.split('__')
+                dt = parse_time(timestamp)
+                history.append((pom_type, action, dt))
+                if action == START:
+                    state = ACTIVE
+                    last_start = dt
+                    last_comment = comment
+                    pause_time = datetime.timedelta(0)
+                elif action == CONTINUE:
+                    state = ACTIVE
+                    last_continue = dt
+                    pause_time = pause_time + (dt - last_pause)
+                elif action == PAUSE:
+                    state = PAUSED
+                    last_pause = dt
+                elif action == END:
+                    state = COMPLETED
+                    last_end = dt
+                    pause_time = datetime.timedelta(0)
+    except IOError:
+        return None, None, None, None
+    if state == PAUSED:
+        pause_time = pause_time + (now - last_pause)
+    if state in [PAUSED, ACTIVE]:
+        return pom_type, state, (now - last_start - pause_time), last_comment
+    else:
+        return pom_type, state, (now - last_end), last_comment
+
+
+def report(date):
+    history = []
+    activity = None
+    try:
+        with open(_POM) as fh:
+            for line in fh.read().strip().split("\n"):
+                pom_type, action, timestamp, comment = line.split('__')
+                dt = parse_time(timestamp)
+                if dt.year != date.year:
+                    continue
+                if dt.month != date.month:
+                    continue
+                if dt.day != date.day:
+                    continue
+                if pom_type != WORK:
+                    continue
+                if action == START:
+                    state = ACTIVE
+                    last_start = dt
+                    last_comment = comment
+                    pause_time = datetime.timedelta(0)
+                elif action == CONTINUE:
+                    state = ACTIVE
+                    last_continue = dt
+                    pause_time = pause_time + (dt - last_pause)
+                elif action == PAUSE:
+                    state = PAUSED
+                    last_pause = dt
+                elif action == END:
+                    state = COMPLETED
+                    last_end = dt
+                    history.append([last_comment, (last_end - last_start - pause_time)])
+                    pause_time = datetime.timedelta(0)
+    except IOError:
+        return None, None, None, None
+    for comment, elapsed in history:
+        print "%s: %s" % (elapsed, comment)
+
+def main():
+    opts = docopt(__doc__, version='1.0.0')
+    pom_type, state, time, comment = status()
+    if opts[WORK]:
+        if state in [COMPLETED, None]:
+            update(WORK, START, datetime.datetime.now(), opts['<comment>'])
+            pom_type, state, time, comment = status()
+            print "%s %s %s %s" % (pom_type, state, time, comment)
+        else:
+            raise DocoptExit("Cannot start work")
+    elif opts[BREAK]:
+        if state in [COMPLETED, None]:
+            update(BREAK, START, datetime.datetime.now(), opts['<comment>'])
+            pom_type, state, time, comment = status()
+            print "%s %s %s %s" % (pom_type, state, time, comment)
+        else:
+            raise DocoptExit("Cannot start break")
+    elif opts[REST]:
+        if state in [COMPLETED, None]:
+            update(REST, START, datetime.datetime.now(), opts['<comment>'])
+            pom_type, state, time, comment = status()
+            print "%s %s %s %s" % (pom_type, state, time, comment)
+        else:
+            raise DocoptExit("Cannot start rest")
+    elif opts[END]:
+        if state in [ACTIVE]:
+            update(pom_type, END, datetime.datetime.now())
+            pom_type, state, time, comment = status()
+            print "%s %s %s %s" % (pom_type, state, time, comment)
+        else:
+            raise DocoptExit("Cannot end")
+    elif opts[PAUSE]:
+        if state in [ACTIVE]:
+            update(pom_type, PAUSE, datetime.datetime.now())
+            pom_type, state, time, comment = status()
+            print "%s %s %s %s" % (pom_type, state, time, comment)
+        else:
+            raise DocoptExit("Cannot pause")
+    elif opts[CONTINUE]:
+        if state in [PAUSED]:
+            update(pom_type, CONTINUE, datetime.datetime.now())
+            pom_type, state, time, comment = status()
+            print "%s %s %s %s" % (pom_type, state, time, comment)
+        else:
+            raise DocoptExit("Cannot continue")
+    elif opts[STATUS]:
+        print "%s %s %s %s" % (pom_type, state, time, comment)
+    elif opts[REPORT]:
+        report(datetime.date.today())
+
+
+
+if __name__ == '__main__':
+    main()
+
