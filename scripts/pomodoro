@@ -7,7 +7,7 @@
     pomodoro [-v | --verbose] end
     pomodoro [-v | --verbose] pause
     pomodoro [-v | --verbose] continue
-    pomodoro [-v | --verbose] status
+    pomodoro [-v | --verbose] [--short] status
     pomodoro [-v | --verbose] report
     pomodoro --version
     pomodoro [-h | --help]
@@ -205,11 +205,26 @@ def main():
     elif opts[REPORT]:
         report(datetime.date.today())
     else:
-        status()
+        if opts['--short']:
+            status(short=True)
+        else:
+            status()
 
-def status():
+def status(short=False):
     pom_type, state, time, comment = get_status()
-    if comment is not None:
+    if short is not None:
+        if time is not None:
+            minutes = time.seconds / 60
+            seconds = time.seconds % 60
+            buffer = ["%s:" % pom_type]
+            if minutes > 0:
+                buffer.append("%dm" % minutes)
+            if seconds > 0:
+                buffer.append("%ds" % seconds)
+            print "".join(buffer)
+        else:
+            print "COMPLETE" % pom_type
+    elif comment is not None:
         if time is not None:
             minutes = time.seconds / 60
             seconds = time.seconds % 60
