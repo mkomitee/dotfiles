@@ -9,6 +9,7 @@ syntax enable
 " Load Plugins
 Bundle 'gmarik/vundle'
 Bundle 'AfterColors.vim'
+Bundle 'AndrewRadev/linediff.vim.git'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'Rainbow-Parenthsis-Bundle'
