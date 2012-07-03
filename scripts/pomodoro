@@ -116,7 +116,7 @@ def get_status():
     elif pom_type == WORK:
         remaining = (1500 - (now - last_start - pause_time))
     elif pom_type == BREAK:
-        remaining = (600 - (now - last_start - pause_time))
+        remaining = (300 - (now - last_start - pause_time))
     elif pom_type == REST:
         remaining = (900 - (now - last_start - pause_time))
 
@@ -226,8 +226,8 @@ def status(short=False):
                 buffer.append("%dm" % minutes)
             if seconds > 0:
                 buffer.append("%ds" % seconds)
-            short_format = "%s: %s" % (pom_type, ''.join(buffer))
-            long_format = "%s for another %s" % (pom_type, ' '.join(buffer))
+            short_format = "%s: %s" % (pom_type, ', '.join(buffer))
+            long_format = "%s for another %s" % (pom_type, ', '.join(buffer))
     else:
         short_format = "%s: COMPLETE" % pom_type
         long_format = "%s is complete" % pom_type

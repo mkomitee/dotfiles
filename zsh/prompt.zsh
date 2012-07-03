@@ -52,6 +52,7 @@ function git_prompt_long_sha() {
   SHA=$(git rev-parse HEAD 2> /dev/null) && echo "$ZSH_THEME_GIT_PROMPT_SHA_BEFORE$SHA$ZSH_THEME_GIT_PROMPT_SHA_AFTER"
 }
 
+
 # Get the status of the working tree
 git_prompt_status() {
   INDEX=$(git status --porcelain 2> /dev/null)
@@ -117,6 +118,15 @@ jobs_prompt_info() {
     fi
 }
 
+function prompt_pomodoro() {
+  p_status=$(pomodoro status --short)
+  if [ $? != 0 ]; then
+      echo "%{$fg[red]%}($p_status)%{$reset_color%}"
+  else
+      echo "%{$fg[green]%}($p_status)%{$reset_color%}"
+  fi
+}
+
 # Disable default virtualenv prompt info so we can
 # do our own
 export VIRTUAL_ENV_DISABLE_PROMPT=1
@@ -131,5 +141,5 @@ local exit_code="%(?,,%{$fg[red]%}[%?] %{$reset_color%})"
 
 PROMPT='${exit_code}%{$fg[$NCOLOR]%}$(shorthost) %c $(jobs_prompt_info)$SYMBOL %{$reset_color%}'
 
-RPS1='%{$fg[$NCOLOR]%}$(git_prompt_info)$(virtualenv_prompt_info)%{$reset_color%}$(vi_mode_prompt_info)'
+RPS1='$(prompt_pomodoro)%{$fg[$NCOLOR]%}$(git_prompt_info)$(virtualenv_prompt_info)%{$reset_color%}$(vi_mode_prompt_info)'
 
