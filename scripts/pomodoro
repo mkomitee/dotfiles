@@ -79,22 +79,21 @@ def get_status():
     last_end = None
     last_continue = None
     last_comment = None
-    pause_time = datetime.timedelta(0)
-    now = datetime.datetime.now()
-    duration = None
+    pause_time = 0
+    now = int(datetime.datetime.now().strftime("%s"))
     try:
         with open(_POM) as fh:
             for line in fh.read().strip().split("\n"):
                 pom_type, action, timestamp, comment = line.split('__')
                 if comment == 'None':
                     comment = None
-                dt = parse_time(timestamp)
+                dt = int(timestamp)
                 history.append((pom_type, action, dt))
                 if action == START:
                     state = ACTIVE
                     last_start = dt
                     last_comment = comment
-                    pause_time = datetime.timedelta(0)
+                    pause_time = 0
                 elif action == CONTINUE:
                     state = ACTIVE
                     last_continue = dt
@@ -105,24 +104,23 @@ def get_status():
                 elif action == END:
                     state = COMPLETED
                     last_end = dt
-                    pause_time = datetime.timedelta(0)
+                    pause_time = 0
     except IOError:
         return None, None, None, None
+
     if state == PAUSED:
         pause_time = pause_time + (now - last_pause)
-    if state == COMPLETED:
-        duration = None
-    elif pom_type == WORK:
-        duration = datetime.timedelta(minutes=25)
-    elif pom_type == BREAK:
-        duration = datetime.timedelta(minutes=5)
-    elif pom_type == REST:
-        duration = datetime.timedelta(minutes=15)
 
-    if state in [PAUSED, ACTIVE]:
-        return pom_type, state, duration - (now - last_start - pause_time), last_comment
-    else:
-        return pom_type, state, duration, last_comment
+    if state == COMPLETED:
+        remaining = None
+    elif pom_type == WORK:
+        remaining = (1500 - (now - last_start - pause_time))
+    elif pom_type == BREAK:
+        remaining = (600 - (now - last_start - pause_time))
+    elif pom_type == REST:
+        remaining = (900 - (now - last_start - pause_time))
+
+    return pom_type, state, remaining, last_comment
 
 def report(date):
     history = []
@@ -206,48 +204,40 @@ def main():
         report(datetime.date.today())
     else:
         if opts['--short']:
-            status(short=True)
+            exit(status(short=True))
         else:
-            status()
+            exit(status())
 
 def status(short=False):
     pom_type, state, time, comment = get_status()
-    if short is not None:
-        if time is not None:
-            minutes = time.seconds / 60
-            seconds = time.seconds % 60
-            buffer = ["%s:" % pom_type]
+    short_format = None
+    long_format = None
+    return_code = 0
+    if time:
+        if time < 0:
+            short_format = "%s: OVERDUE" % pom_type
+            long_format = "%s is overdue" % pom_type
+            return_code = 1
+        else:
+            minutes = time / 60
+            seconds = time % 60
+            buffer = []
             if minutes > 0:
                 buffer.append("%dm" % minutes)
             if seconds > 0:
                 buffer.append("%ds" % seconds)
-            print "".join(buffer)
-        else:
-            print "COMPLETE" % pom_type
-    elif comment is not None:
-        if time is not None:
-            minutes = time.seconds / 60
-            seconds = time.seconds % 60
-            buffer = [comment, "for another"]
-            if minutes > 0:
-                buffer.append("%dm" % minutes)
-            if seconds > 0:
-                buffer.append("%ds" % seconds)
-            print " ".join(buffer)
-        else:
-            print "%s is complete" % pom_type
-    elif time is not None:
-        minutes = time.seconds / 60
-        seconds = time.seconds % 60
-        buffer = [pom_type, "for another"]
-        if minutes > 0:
-            buffer.append("%dm" % minutes)
-        if seconds > 0:
-            buffer.append("%ds" % seconds)
-        print " ".join(buffer)
+            short_format = "%s: %s" % (pom_type, ''.join(buffer))
+            long_format = "%s for another %s" % (pom_type, ' '.join(buffer))
     else:
-        print "%s is complete" % pom_type
+        short_format = "%s: COMPLETE" % pom_type
+        long_format = "%s is complete" % pom_type
 
+    if short:
+        print short_format
+    else:
+        print long_format
+
+    return return_code
 
 if __name__ == '__main__':
     main()
