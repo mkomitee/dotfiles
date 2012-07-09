@@ -83,7 +83,7 @@ set shiftwidth=4               " indentation uses 4 spaces as well e.g. >>
 set expandtab                  " uses spaces, not tabs
 set softtabstop=2              " use 2 spaces when tabbing because, ...
 set smarttab                   " use softtabstop when tabbing when not at start of line
-set textwidth=80               " break long lines after 80 chars
+set textwidth=79               " break long lines after 80 chars
 set backupdir=$HOME/.vimdata/vimbackup/ " save backups in alternate location
 set directory=$HOME/.vimdata/vimswap/   " save swap files here
 set viewdir=$HOME/.vimdata/vimviews/    " save views here
