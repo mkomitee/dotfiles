@@ -15,9 +15,8 @@ Bundle 'Rainbow-Parenthsis-Bundle'
 Bundle 'ShowMarks'
 Bundle 'ajf/puppet-vim'
 Bundle 'altercation/vim-colors-solarized'
-Bundle 'garbas/vim-snipmate'
+Bundle 'ervandew/supertab.git'
 Bundle 'godlygeek/tabular'
-Bundle 'honza/snipmate-snippets'
 Bundle 'kien/ctrlp.vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'mricon/puppet-eyes'
@@ -159,6 +158,7 @@ set completeopt=         " reset completeopt
 set completeopt+=longest " insert the longest match
 set completeopt+=menu    " show the menu when there are matches
 set completeopt+=menuone " even if there's only one
+set completeopt+=preview
 
 set viminfo+=n~/.vimdata/viminfo " move the viminfo file into ~/.vimdata
 
@@ -337,6 +337,9 @@ let g:NERDTreeMinimalUI = 1
 let NERDTreeIgnore=['\~$', '\.swp$', '^CVS$', '\.svn$', '^CVSROOT$', '^\.git$', '\.pyc$', '\.pyo$']
 noremap <Leader>dd :NERDTreeToggle<CR>
 noremap <Leader>df :NERDTreeFind<CR>
+
+" Supertab
+let g:SuperTabDefaultCompletionType = "context"
 
 " Load additional functions
 source ~/.vim/functions.vim
