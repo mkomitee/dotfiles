@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 """Usage:
     pomodoro [-v | --verbose]
-    pomodoro [-v | --verbose] work <comment>...
-    pomodoro [-v | --verbose] [--long] break
+    pomodoro [-v | --verbose] [-l | --loop] work <comment>...
+    pomodoro [-v | --verbose] [-l | --loop] [--long] break
     pomodoro [-v | --verbose] end
     pomodoro [-v | --verbose] pause
     pomodoro [-v | --verbose] continue
-    pomodoro [-v | --verbose] [--short] status
+    pomodoro [-v | --verbose] [-l | --loop] [--short] status
     pomodoro [-v | --verbose] report
     pomodoro --version
     pomodoro [-h | --help]
@@ -15,6 +15,7 @@ Arguments:
     <comment>  Description of work to be done.
 
 Options:
+    -l, --loop     Loop and repeat status
     -v, --verbose  Print verbose information
     --version      Print version and exit
     -h, --help     Print help and exit"""
@@ -23,6 +24,8 @@ Options:
 from docopt import docopt
 from docopt import DocoptExit
 from os.path import expanduser
+from time import sleep
+from sys import stdout
 import datetime
 
 # format: type   ACTION TIMESTAMP
@@ -45,6 +48,9 @@ CONTINUE = 'continue'
 STATUS = 'status'
 END = 'end'
 REPORT = 'report'
+
+SHORT = '--short'
+LOOP = '--loop'
 
 # STATES
 ACTIVE = 'active'
@@ -159,6 +165,9 @@ def report(date):
     for comment, elapsed in history:
         print "%s: %s" % (elapsed, comment)
 
+def loop():
+    pass
+
 def main():
     opts = docopt(__doc__, version='1.0.0')
     opts['<comment>'] = ' '.join(opts['<comment>'])
@@ -199,10 +208,27 @@ def main():
     elif opts[REPORT]:
         report(datetime.date.today())
     else:
-        if opts['--short']:
+        if opts[SHORT] and opts[LOOP]:
+            status(short=True)
+        elif opts[LOOP]:
+            status()
+        elif opts[SHORT]:
             exit(status(short=True))
         else:
             exit(status())
+    if opts[LOOP]:
+        while True:
+            pom_type, state, time, comment = get_status()
+            if time >= 0:
+                minutes = time / 60
+                seconds = time % 60
+                stdout.write("\r\x1b[K%2d:%.2d" % (minutes, seconds))
+                stdout.flush()
+                sleep(1)
+            else:
+                break
+
+
 
 def status(short=False):
     pom_type, state, time, comment = get_status()
