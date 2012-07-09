@@ -17,4 +17,6 @@ alias tmux='tmux -u2'
 alias task='noglob task'
 alias t='noglob task'
 
+alias pomodoro='pomodoro.py'
+
 alias vi=vim

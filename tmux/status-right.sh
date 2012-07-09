@@ -1,6 +1,6 @@
 #!/bin/sh
 DATE=$(date "+%m/%d %I:%m %p")
-POM=$(pomodoro status)
+POM=$(pomodoro.py status)
 if [ $? = 0 ]; then
     color=green
 else
