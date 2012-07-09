@@ -121,11 +121,11 @@ jobs_prompt_info() {
 function prompt_pomodoro() {
   os=$(uname)
   if [ $os != "SunOS" ]; then
-      p_status=$(pomodoro status --short)
+      p_status=$(pomodoro status)
       if [ $? != 0 ]; then
-          echo "%{$fg[red]%}($p_status)%{$reset_color%}"
+          echo "%{$fg[red]%}($p_status)%{$reset_color%} "
       else
-          echo "%{$fg[green]%}($p_status)%{$reset_color%}"
+          echo "%{$fg[green]%}($p_status)%{$reset_color%} "
       fi
   fi
 }
