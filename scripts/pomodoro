@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 """Usage:
     pomodoro [-v | --verbose]
-    pomodoro [-v | --verbose] [-l | --loop] work <comment>...
-    pomodoro [-v | --verbose] [-l | --loop] [--long] break
+    pomodoro [-v | --verbose] work <comment>...
+    pomodoro [-v | --verbose] [--long] break
     pomodoro [-v | --verbose] end
     pomodoro [-v | --verbose] pause
     pomodoro [-v | --verbose] continue
-    pomodoro [-v | --verbose] [-l | --loop] [--short] status
+    pomodoro [-v | --verbose] [-l | --loop] status
     pomodoro [-v | --verbose] report
     pomodoro --version
     pomodoro [-h | --help]
@@ -49,7 +49,6 @@ STATUS = 'status'
 END = 'end'
 REPORT = 'report'
 
-SHORT = '--short'
 LOOP = '--loop'
 
 # STATES
@@ -207,61 +206,46 @@ def main():
             raise DocoptExit("Cannot continue")
     elif opts[REPORT]:
         report(datetime.date.today())
-    else:
-        if opts[SHORT] and opts[LOOP]:
-            status(short=True)
-        elif opts[LOOP]:
-            status()
-        elif opts[SHORT]:
-            exit(status(short=True))
+    elif opts[STATUS]:
+        if opts[LOOP]:
+            while True:
+                pom_type, state, time, comment = get_status()
+                if time >= 0:
+                    minutes = time / 60
+                    seconds = time % 60
+                    stdout.write("\r\x1b[K%.2d:%.2d" % (minutes, seconds))
+                    stdout.flush()
+                    sleep(1)
+                else:
+                    minutes = 0
+                    seconds = 0
+                    stdout.write("\r\x1b[K%.2d:%.2d" % (minutes, seconds))
+                    stdout.flush()
+                    sleep(1)
         else:
             exit(status())
-    if opts[LOOP]:
-        while True:
-            pom_type, state, time, comment = get_status()
-            if time >= 0:
-                minutes = time / 60
-                seconds = time % 60
-                stdout.write("\r\x1b[K%2d:%.2d" % (minutes, seconds))
-                stdout.flush()
-                sleep(1)
-            else:
-                break
 
-
-
-def status(short=False):
+def status():
     pom_type, state, time, comment = get_status()
-    short_format = None
-    long_format = None
     return_code = 0
     if time:
-        minutes = abs(time) / 60
-        seconds = abs(time) % 60
-        _time = []
-        if minutes > 0:
-            _time.append("%dm" % minutes)
-        if seconds > 0:
-            _time.append("%ds" % seconds)
-        _time = ', '.join(_time)
-        if time < 0:
-            short_format = "%s: OVERDUE" % pom_type
-            long_format = "%s is overdue by %s" % (pom_type, _time)
-            return_code = 1
+        if time > 0:
+            minutes = time / 60
+            seconds = time % 60
+            stdout.write("%.2d:%.2d" % (minutes, seconds))
+            stdout.flush()
         else:
-            short_format = "%s: %s" % (pom_type, _time)
-            long_format = "%s for another %s" % (pom_type, _time)
+            return_code = 1
+            stdout.write("%.2d:%.2d" % (0, 0))
+            stdout.flush()
     else:
-        short_format = "%s: COMPLETE" % pom_type
-        long_format = "%s is complete" % pom_type
-
-    if short:
-        print short_format
-    else:
-        print long_format
-
+        stdout.write("--:--")
+        stdout.flush()
     return return_code
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        exit(1)
 
