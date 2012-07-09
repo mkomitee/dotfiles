@@ -341,6 +341,9 @@ noremap <Leader>df :NERDTreeFind<CR>
 " Supertab
 let g:SuperTabDefaultCompletionType = "context"
 
+" Load experimental library
+source ~/.vim/experimental.vim
+
 " Load additional functions
 source ~/.vim/functions.vim
 
