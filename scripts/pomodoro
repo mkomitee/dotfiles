@@ -2,8 +2,7 @@
 """Usage:
     pomodoro [-v | --verbose]
     pomodoro [-v | --verbose] work <comment>...
-    pomodoro [-v | --verbose] break
-    pomodoro [-v | --verbose] rest
+    pomodoro [-v | --verbose] [--long] break
     pomodoro [-v | --verbose] end
     pomodoro [-v | --verbose] pause
     pomodoro [-v | --verbose] continue
@@ -37,7 +36,7 @@ _POM = expanduser("~/.pom")
 # TYPES
 WORK = 'work'
 BREAK = 'break'
-REST = 'rest'
+LONGBREAK = 'longbreak'
 
 # ACTIONS
 START = 'start'
@@ -117,7 +116,7 @@ def get_status():
         remaining = (1500 - (now - last_start - pause_time))
     elif pom_type == BREAK:
         remaining = (300 - (now - last_start - pause_time))
-    elif pom_type == REST:
+    elif pom_type == LONGBREAK:
         remaining = (900 - (now - last_start - pause_time))
 
     return pom_type, state, remaining, last_comment
@@ -172,16 +171,13 @@ def main():
             raise DocoptExit("Cannot start work")
     elif opts[BREAK]:
         if state in [COMPLETED, None]:
-            update(BREAK, START, datetime.datetime.now())
+            if opts['--long']:
+                update(LONGBREAK, START, datetime.datetime.now())
+            else:
+                update(BREAK, START, datetime.datetime.now())
             status()
         else:
             raise DocoptExit("Cannot start break")
-    elif opts[REST]:
-        if state in [COMPLETED, None]:
-            update(REST, START, datetime.datetime.now())
-            status()
-        else:
-            raise DocoptExit("Cannot start rest")
     elif opts[END]:
         if state in [ACTIVE]:
             update(pom_type, END, datetime.datetime.now())
@@ -214,20 +210,21 @@ def status(short=False):
     long_format = None
     return_code = 0
     if time:
+        minutes = abs(time) / 60
+        seconds = abs(time) % 60
+        _time = []
+        if minutes > 0:
+            _time.append("%dm" % minutes)
+        if seconds > 0:
+            _time.append("%ds" % seconds)
+        _time = ', '.join(_time)
         if time < 0:
             short_format = "%s: OVERDUE" % pom_type
-            long_format = "%s is overdue" % pom_type
+            long_format = "%s is overdue by %s" % (pom_type, _time)
             return_code = 1
         else:
-            minutes = time / 60
-            seconds = time % 60
-            buffer = []
-            if minutes > 0:
-                buffer.append("%dm" % minutes)
-            if seconds > 0:
-                buffer.append("%ds" % seconds)
-            short_format = "%s: %s" % (pom_type, ', '.join(buffer))
-            long_format = "%s for another %s" % (pom_type, ', '.join(buffer))
+            short_format = "%s: %s" % (pom_type, _time)
+            long_format = "%s for another %s" % (pom_type, _time)
     else:
         short_format = "%s: COMPLETE" % pom_type
         long_format = "%s is complete" % pom_type
