@@ -13,6 +13,7 @@ Bundle 'AndrewRadev/linediff.vim.git'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'Rainbow-Parenthsis-Bundle'
 Bundle 'ShowMarks'
+Bundle 'Tasklist.vim'
 Bundle 'ajf/puppet-vim'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'ervandew/supertab.git'
@@ -305,7 +306,6 @@ nnoremap <c-b> :CtrlPBuffer<CR>
 nnoremap <leader>b :CtrlPBuffer<CR>
 nnoremap <leader>r :CtrlPMRU<CR>
 nnoremap <leader>q :CtrlPQuickfix<CR>
-nnoremap <leader>t :CtrlPTag<CR>
 nnoremap <leader>l :CtrlPTag<CR>
 
 " Tabularize
