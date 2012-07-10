@@ -1,47 +1,65 @@
 #!/usr/bin/env python
 """Usage:
-    pomodoro start
+    pomodoro [-f | --force] start
     pomodoro cancel
-    pomodoro status
+    pomodoro [-l | --long ] status
     pomodoro [--date <date>] report
     pomodoro --version
     pomodoro [-h | --help]
 
 Options:
+    -l, --long     Long output format
+    -f, --force    Force start
     --date <date>  Date to report
-    -v, --verbose  Print verbose information
     --version      Print version and exit
-    -h, --help     Print help and exit"""
+    -h, --help     Print help and exit
 
+Formats:
+    <date>  MM/DD"""
 
-import docopt
 import os
 import sys
 import dateutil.parser
 import datetime
 import pickle
 
-POMODORO_FILE = os.path.expanduser("~/.pomodoro")
+try:
+    import docopt
+except ImportError:
+    sys.stdout.write('--:--')
+    sys.stdout.flush()
+    sys.exit(2)
+
 
 START = 'start'
 CANCEL = 'cancel'
 STATUS = 'status'
 REPORT = 'report'
 DATE = '--date'
+FORCE = '--force'
+LONG = '--long'
 
-POMODORO = datetime.timedelta(minutes=25)
-BREAK = datetime.timedelta(minutes=5)
-EXTENDEDBREAK = datetime.timedelta(minutes=20)
+def _env_get(name, default):
+    return os.environ.get('POMODORO_%s' % name, default)
+
+FILE = os.path.expanduser(_env_get('FILE', "~/.pomodoro"))
+
+POMODORO = datetime.timedelta(minutes=int(_env_get('POMODORO', 25)))
+BREAK = datetime.timedelta(minutes=int(_env_get('BREAK', 5)))
+EXTENDEDBREAK = datetime.timedelta(minutes=int(_env_get('EXTENDED_BREAK', 20)))
 
 def total_seconds(td):
-    return (td.microseconds + (td.seconds + td.days * 24 * 3600) * 10**6) / float(10**6)
+    return td.seconds + td.days * 24 * 3600
 
 class History(object):
     def __init__(self):
         self.members = []
 
+    def __iter__(self):
+        return iter(self.members)
+
     def serialize(self):
-        pickle.dump(self, open(POMODORO_FILE, 'w'))
+        pickle.dump(self, open(FILE, 'w'))
 
     @property
     def next_duration(self):
@@ -63,11 +81,15 @@ class History(object):
     @staticmethod
     def deserialize():
         try:
-            return pickle.load(open(POMODORO_FILE))
+            return pickle.load(open(FILE))
         except IOError:
             history = History()
             history.serialize()
             return history
+        except Exception:
+            sys.stdout.write('--:--')
+            sys.stdout.flush()
+            sys.exit(2)
 
     def append(self, pomodoro):
         self.members.append(pomodoro)
@@ -77,6 +99,9 @@ class History(object):
         if len(self.members) > 0 and not self.last.finished:
             self.members.pop()
             self.serialize()
+            return 0
+        else:
+            return 1
 
     @property
     def last(self):
@@ -95,11 +120,29 @@ class Pomodoro(object):
     def __repr__(self):
         return "Pomodoro(%s, %s)" % (repr(self.duration), repr(self.start_time))
 
+    @property
+    def type(self):
+        if self.duration == POMODORO:
+            return 'pomodoro'
+        elif self.duration == BREAK:
+            return 'break'
+        else:
+            return 'extended break'
+
     def __str__(self):
         total = total_seconds(self.remaining_time)
         minutes = total / 60
         seconds = total % 60
         return "%.2d:%.2d" % (minutes, seconds)
+
+    @property
+    def report(self):
+        start = self.start_time.strftime("%H:%M")
+        end = self.end_time.strftime("%H:%M")
+        total = total_seconds(self.duration)
+        _type = self.type
+        minutes = total / 60
+        return "%s-%s (%2d) %s" % (start, end, minutes, _type)
 
     @property
     def remaining_time(self):
@@ -114,10 +157,10 @@ class Pomodoro(object):
         return self.remaining_time == datetime.timedelta(0)
 
 
-def start():
+def start(force=False):
     history = History.deserialize()
     last = history.last
-    if last is None or last.finished:
+    if force or last is None or last.finished:
         pom = Pomodoro(history.next_duration, datetime.datetime.now())
         history.append(pom)
         return 0
@@ -127,14 +170,18 @@ def start():
 
 def cancel():
     history = History.deserialize()
-    history.cancel()
+    return history.cancel()
 
 
-def status():
+def status(long=False):
     history = History.deserialize()
     last = history.last
     if last:
-        sys.stdout.write(str(history.last))
+        if long:
+            output = "%s %s" % (history.last, history.last.type)
+        else:
+            output = str(history.last)
+        sys.stdout.write(output)
         sys.stdout.flush()
         if history.last.finished:
             return 1
@@ -153,28 +200,27 @@ def report(date):
             continue
         if date.day not in (pom.start_time.day, pom.end_time.day):
             continue
-        start = pom.start_time.strftime("%H:%M")
-        end = pom.end_time.strftime("%H:%M")
-        total = total_seconds(pom.duration)
-        minutes = total / 60
-        seconds = total % 60
         if pom is history.last and not pom.finished:
-            print "%s-%s (%.2d:%.2d)*" % (start, end, minutes, seconds)
+            print "%s %s" % (pom.report, history.last)
         else:
-            print "%s-%s (%.2d:%.2d)" % (start, end, minutes, seconds)
+            print pom.report
 
 
 def main():
     opts = docopt.docopt(__doc__, version='1.0.0')
     if opts[START]:
-        return start()
+        return start(opts[FORCE])
     elif opts[CANCEL]:
         return cancel()
     elif opts[STATUS]:
-        return status()
+        return status(opts[LONG])
     elif opts[REPORT]:
         if opts[DATE]:
-            opts[DATE] = dateutil.parser.parse(opts[DATE])
+            try:
+                opts[DATE] = dateutil.parser.parse(opts[DATE])
+            except (ValueError):
+                print >> sys.stderr, "invalid date format"
+                return 2
         else:
             opts[DATE] = datetime.date.today()
         return report(opts[DATE])
@@ -184,5 +230,5 @@ if __name__ == '__main__':
     try:
         exit(main())
     except KeyboardInterrupt:
-        exit(1)
+        exit(2)
 
