@@ -194,6 +194,7 @@ set statusline+=%F\      " full filename
 set statusline+=%m%r%w   " flags
 set statusline+=%y\      " filetype
 set statusline+=%=       " seperator
+set statusline+=%{Pomodoro()}\ 
 set statusline+=c:%c\    " column
 set statusline+=l:%l/%L\ " line
 set statusline+=(%p%%)   " percentage thru file
