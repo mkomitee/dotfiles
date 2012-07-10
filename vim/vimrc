@@ -294,7 +294,7 @@ nnoremap <Leader>P :set paste<CR>"*p;set nopaste<CR>
 
 " Ctrl+P
 let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir']
-let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_cache_dir = $HOME.'/.vimdata/ctrlp'
 let g:ctrlp_max_depth = 10
 let g:ctrlp_mruf_relative = 1
@@ -304,10 +304,14 @@ let g:ctrlp_open_new_file = 'r'
 let g:ctrlp_open_multi = '1vr'
 let g:ctrlp_dont_split = 'netrw\|help'
 nnoremap <c-b> :CtrlPBuffer<CR>
+nnoremap <c-u> :CtrlPUndo<CR>
+nnoremap <leader>p :CtrlP<CR>
+nnoremap <leader>u :CtrlPUndo<CR>
 nnoremap <leader>b :CtrlPBuffer<CR>
 nnoremap <leader>r :CtrlPMRU<CR>
+nnoremap <leader>r :CtrlPMRU<CR>
 nnoremap <leader>q :CtrlPQuickfix<CR>
-nnoremap <leader>l :CtrlPTag<CR>
+nnoremap <leader>l :CtrlPLine<CR>
 
 " Tabularize
 vnoremap <silent> <Leader>a=> :Tabularize /=>/l1l1<CR>
