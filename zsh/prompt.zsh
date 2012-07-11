@@ -1,4 +1,5 @@
 #!/bin/zsh
+
 autoload colors; colors;
 setopt prompt_subst
 setopt transient_rprompt
@@ -139,10 +140,24 @@ function virtualenv_prompt_info() {
     fi
 }
 
-# Helps display previous commands exit code
-local exit_code="%(?,,%{$fg[red]%}[%?] %{$reset_color%})"
 
-PROMPT='${exit_code}%{$fg[$NCOLOR]%}$(shorthost) %c $(jobs_prompt_info)$SYMBOL %{$reset_color%}'
+function enable_prompt() {
+    # Helps display previous commands exit code
+    local exit_code="%(?,,%{$fg[red]%}[%?] %{$reset_color%})"
+    PROMPT='${exit_code}%{$fg[$NCOLOR]%}$(shorthost) %c $(jobs_prompt_info)$SYMBOL %{$reset_color%}'
+    RPS1='$(prompt_pomodoro)%{$fg[$NCOLOR]%}$(git_prompt_info)$(virtualenv_prompt_info)%{$reset_color%}$(vi_mode_prompt_info)'
+}
 
-RPS1='$(prompt_pomodoro)%{$fg[$NCOLOR]%}$(git_prompt_info)$(virtualenv_prompt_info)%{$reset_color%}$(vi_mode_prompt_info)'
+function disable_prompt() {
+    unset RPS1
+    PROMPT='$SYMBOL '
+}
 
+function toggle_prompt() {
+    if [ -z "$RPS1" ]; then
+        enable_prompt
+    else
+        disable_prompt
+    fi
+}
+enable_prompt
