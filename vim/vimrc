@@ -227,7 +227,7 @@ colorscheme badwolf
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
 " Leaders
-let mapleader = ","     " this may change soon, I keep wanting to have the
+let mapleader = " "     " this may change soon, I keep wanting to have the
                         " default behavior work for ,.
 let localleader = '\\'
 
