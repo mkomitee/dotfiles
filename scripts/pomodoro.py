@@ -34,14 +34,14 @@ POMODORO_FILE environment variable.
 
 import os
 import sys
-import dateutil.parser
 import datetime
 import pickle
 
 try:
+    import dateutil.parser
     import docopt
 except ImportError:
-    sys.stdout.write('--:--')
+    sys.stdout.write('??:??')
     sys.stdout.flush()
     sys.exit(2)
 

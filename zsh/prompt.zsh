@@ -136,7 +136,10 @@ function prompt_pomodoro() {
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 function virtualenv_prompt_info() {
     if [ "$VIRTUAL_ENV" != "" ]; then
-        echo '['`basename $VIRTUAL_ENV`'] '
+        VENV=$(basename $VIRTUAL_ENV)
+        if [ "$VENV" != "$(uname).$(arch)" ]; then
+            echo '['`basename $VIRTUAL_ENV`'] '
+        fi
     fi
 }
 
