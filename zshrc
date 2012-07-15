@@ -60,3 +60,8 @@ setopt short_loops
 if [ -f $HOME/.zshrc.local ]; then
     source $HOME/.zshrc.local
 fi
+
+ACTIVATE="$HOME/.venv/$(uname).$(arch)/bin/activate"
+if [ -f $ACTIVATE ]; then
+    . $ACTIVATE
+fi
