@@ -28,7 +28,7 @@ export GREP_COLOR='1;32'
 # LS CONFIG
 # Find the option for using colors in ls, depending on the version: Linux or BSD
 if ls --color -d . &>/dev/null; then
-    alias ls='ls -F --color=tty --group-directories-first'
+    alias ls='ls -F --color=tty'
 else
     alias ls='ls -FG'
 fi
