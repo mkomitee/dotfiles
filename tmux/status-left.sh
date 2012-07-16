@@ -1,3 +1,8 @@
 #!/bin/sh
-INFO=$(tmux list-panes -F "#S.#I.#P #{pane_active}" | grep "1$"  | cut -d' ' -f1)
-printf "#[fg=colour110]$INFO#[default]"
+POM=$(pomodoro.py status)
+if [ $? = 0 ]; then
+    color=green
+else
+    color=red
+fi
+printf "(#[fg=$color,bold]$POM#[default])"
