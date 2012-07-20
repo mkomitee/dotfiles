@@ -8,6 +8,7 @@ syntax enable
 
 " Load Plugins
 Bundle 'gmarik/vundle'
+Bundle 'mileszs/ack.vim'
 Bundle 'AfterColors.vim'
 Bundle 'AndrewRadev/linediff.vim.git'
 Bundle 'MarcWeber/vim-addon-mw-utils'
@@ -195,7 +196,6 @@ set statusline+=%F\      " full filename
 set statusline+=%m%r%w   " flags
 set statusline+=%y\      " filetype
 set statusline+=%=       " seperator
-set statusline+=%{Pomodoro()}\ 
 set statusline+=c:%c\    " column
 set statusline+=l:%l/%L\ " line
 set statusline+=(%p%%)   " percentage thru file
@@ -295,7 +295,7 @@ nnoremap <Leader>P :set paste<CR>"*p;set nopaste<CR>
 
 " Ctrl+P
 let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir']
-let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_cache_dir = $HOME.'/.vimdata/ctrlp'
 let g:ctrlp_max_depth = 10
 let g:ctrlp_mruf_relative = 1
