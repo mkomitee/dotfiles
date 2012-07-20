@@ -18,5 +18,7 @@ alias task='noglob task'
 alias t='noglob task'
 
 alias pomodoro='pomodoro.py'
+alias code-notes='ack "TODO|FIXME"'
+alias dot='cd ~dot'
 
 alias vi=vim
