@@ -7,8 +7,6 @@ filetype indent on
 syntax enable
 
 " Load Plugins
-Bundle 'gmarik/vundle'
-Bundle 'mileszs/ack.vim'
 Bundle 'AfterColors.vim'
 Bundle 'AndrewRadev/linediff.vim.git'
 Bundle 'MarcWeber/vim-addon-mw-utils'
@@ -19,9 +17,12 @@ Bundle 'ajf/puppet-vim'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'coderifous/textobj-word-column.vim'
 Bundle 'ervandew/supertab.git'
+Bundle 'git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex'
+Bundle 'gmarik/vundle'
 Bundle 'godlygeek/tabular'
 Bundle 'kien/ctrlp.vim'
 Bundle 'majutsushi/tagbar'
+Bundle 'mileszs/ack.vim'
 Bundle 'mricon/puppet-eyes'
 Bundle 'python_match.vim'
 Bundle 'ruby-matchit'

@@ -20,6 +20,7 @@ source $ZSH/jobs.zsh
 source $ZSH/prompt.zsh
 source $ZSH/colours.zsh
 source $ZSH/funny.zsh
+source $ZSH/latex.zsh
 
 # GREP CONFIG
 export GREP_OPTIONS='--color=auto'
