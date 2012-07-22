@@ -1,5 +1,5 @@
 # directories and commands
-set alias_file       = ~/.mutt/alias         # alias file
+set alias_file       = ~/.mutt-aliases       # alias file
 set header_cache     = ~/.mutt/cache/headers # where to store headers
 set message_cachedir = ~/.mutt/cache/bodies  # where to store bodies
 set certificate_file = ~/.mutt/certificates  # where to store certs
@@ -63,7 +63,7 @@ auto_view text/html                                   # view html automatically
 alternative_order text/plain text/enriched text/html  # but prefer non-html
 
 # formats
-set date_format   = "%m/%d"
+set date_format   = "%m/%d at %I:%M %P"
 set index_format  = "[%Z]  %D  %-20.20F  %s"
 set status_format = "-%r- %v ---[ Folder: %f, Msgs: %m%?n? New: %n?%?d? Del: %d?%?t? Tag: %t?%?l? %l? ]%?p?---- .: %p waiting to send :. ?--%>- (%P) ---"
 set alias_format  = "%4n %t %-20a  %r"
@@ -94,6 +94,7 @@ hdr_order from: to: cc: date: subject:  # and in this order
 # always sourced
 source ~/.vim/bundle/badwolf/contrib/badwolf.muttrc  # colorscheme
 source ~/.mutt/sidebar.muttrc                        # sidebar
+source ~/.mutt-aliases
 
 # unbind problematic keys
 bind index,pager \# noop
