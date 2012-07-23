@@ -128,6 +128,7 @@ macro pager \Cu "|urlview<enter>" "call urlview to open links"
 
 # Open message in MacVim
 macro index,pager M "|mvim -c 'setlocal ft=mail' -c 'setlocal buftype=nofile' - >/dev/null<enter>"  "open in macvim"
+macro index,pager * "C=[Gmail]/Starred<enter>" "Star message"
 
 # quickly change date formats
 macro index <esc>f ":set date_format = \"%m/%d\"<enter>"             "short date format"
