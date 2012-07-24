@@ -276,6 +276,10 @@ nnoremap <C-j> <C-W>j
 nnoremap <C-h> <C-W>h
 nnoremap <C-l> <C-W>l
 
+" Splits
+nnoremap _ :sp<cr>
+nnoremap \| :vsp<cr>
+
 " Reselect visually selected text after indenting
 vnoremap > >gv
 vnoremap < <gv
