@@ -297,9 +297,11 @@ nnoremap <leader>sgv :so $MYGVIMRC<CR>
 cmap w!! w !sudo tee % >/dev/null<cr>
 
 " Smarter Pasting!
-noremap <Leader>P :set paste<CR>"*p;set nopaste<CR>
-noremap <leader>y "*y
-noremap <leader>Y "*Y
+nnoremap <Leader>P :set paste<CR>"*p;set nopaste<CR>
+nnoremap <leader>y "*y
+nnoremap <leader>Y "*Y
+
+nnoremap <c-c> :close<cr>
 
 " Ctrl+P
 let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir']
