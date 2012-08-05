@@ -38,6 +38,7 @@ Bundle 'tpope/vim-git'
 Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired'
+Bundle 'vim-scripts/IndexedSearch'
 
 " Prepare our vim cache directories
 silent execute '!mkdir -p $HOME/.vimdata/vimbackup'
@@ -370,6 +371,10 @@ let g:gundo_preview_height  = 15 " vertical height
 let g:gundo_help            = 1  " show the help in gundo window
 let g:gundo_close_on_revert = 0  " don't close gundo after a version is selected
 let g:gundo_right           = 0  " display gundo on the left site
+
+" IndexedSearch
+let g:indexed_search_colors=1
+let g:indexed_search_shortmess=1
 
 " Tagbar 
 let g:tagbar_compact = 1 " don't show the help in the tagbar
