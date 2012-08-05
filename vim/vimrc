@@ -311,11 +311,6 @@ nnoremap <leader>sgv :so $MYGVIMRC<CR>
 " sudo write-file in case you opened a file you dont have privileges to write
 cmap w!! w !sudo tee % >/dev/null<cr>
 
-" Smarter Pasting!
-nnoremap <Leader>P :set paste<CR>"*p;set nopaste<CR>
-nnoremap <leader>y "*y
-nnoremap <leader>Y "*Y
-
 nnoremap <c-c> :close<cr>
 
 " Ctrl+P
