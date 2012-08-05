@@ -7,16 +7,16 @@ filetype indent on
 syntax enable
 
 " Load Plugins
+Bundle 'gmarik/vundle'
 Bundle 'AfterColors.vim'
 Bundle 'AndrewRadev/linediff.vim.git'
+Bundle 'LaTeX-Box'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'Rainbow-Parenthsis-Bundle'
 Bundle 'ShowMarks'
 Bundle 'TaskList.vim'
 Bundle 'ajf/puppet-vim'
 Bundle 'ervandew/supertab.git'
-Bundle 'LaTeX-Box'
-Bundle 'gmarik/vundle'
 Bundle 'godlygeek/tabular'
 Bundle 'jpalardy/vim-slime'
 Bundle 'kien/ctrlp.vim'
