@@ -8,9 +8,15 @@ command! WhatGroup :call WhatGroup()
 
 
 function! RemoveTrailingWhiteSpace()
-    silent! normal! mw
-    silent! %:s/\s\+$//
-    silent! normal! `w
-    silent! delm w
+    " Preparation: save last search, and cursor position.
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " Do the business:
+    %s/\s\+$//e
+    " Clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
 endfun
+
 command! RemoveTrailingWhiteSpace :call RemoveTrailingWhiteSpace()
