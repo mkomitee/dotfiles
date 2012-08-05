@@ -39,6 +39,7 @@ Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired'
 Bundle 'vim-scripts/IndexedSearch'
+Bundle 'vim-scripts/YankRing.vim'
 
 " Prepare our vim cache directories
 silent execute '!mkdir -p $HOME/.vimdata/vimbackup'
@@ -393,6 +394,11 @@ let g:showmarks_textother="\t"
 " delimit visual mode selection
 let g:slime_target = "tmux"
 let g:slime_no_mappings = 1
+
+" YankRing
+let g:yankring_max_history = 1000 " save the last 1000 elements
+noremap <leader>y :YRShow<CR>
+noremap <leader>x :YRClear<CR>
 
 " NERDCommenter
 let g:NERDCreateDefaultMappings = 0
