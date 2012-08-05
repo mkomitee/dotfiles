@@ -221,7 +221,6 @@ set statusline+=(%p%%)   " percentage thru file
 
 set whichwrap+=<,> " <Left> and <Right> can move to the previous/next line
 
-
 " j and k will go one line, even if they're wrapped
 nnoremap j gj
 nnoremap k gk
@@ -274,6 +273,7 @@ augroup vimmemory
     au BufWinEnter * silent! loadview
 augroup END
 
+" Poor mans security
 augroup encryption
     au!
     au BufRead,BufNewFile *.crypt set noswapfile
@@ -293,7 +293,7 @@ nnoremap <C-j> <C-W>j
 nnoremap <C-h> <C-W>h
 nnoremap <C-l> <C-W>l
 
-" Splits
+" Simple splits, inspired by my tmux configuration
 nnoremap _ :sp<cr>
 nnoremap \| :vsp<cr>
 
@@ -301,7 +301,7 @@ nnoremap \| :vsp<cr>
 vnoremap > >gv
 vnoremap < <gv
 
-" make Y consistant with C and D
+" make Y consistant with C and D. Yank to end of line
 noremap Y y$
 
 " Easily modify ~/.{g,}vimrc
