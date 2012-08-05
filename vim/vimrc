@@ -69,6 +69,7 @@ set nojoinspaces               " Don't be fancy with join
 set dictionary=/usr/share/dict/words        " for spell checking
 set spellfile=~/.dotfiles/vim/en.utf-8.add  " to add words
 set spelllang=en_us            " yes, i do speak it
+set spellsuggest=best,10       " only display the 10 best suggestions
 set number                     " line numbers
 set updatecount=10             " update swap files every 10 chars
 set nostartofline              " don't move the cursor to the start of the
