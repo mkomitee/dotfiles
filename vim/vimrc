@@ -326,6 +326,13 @@ nnoremap <c-b> :CtrlPBuffer<CR>
 "  <C-v> → will open the finding match in a vertical split
 "  <C-h> → will open the finding match in a horizontal split
 
+"  Ack.vim
+"  :o → open the selected file in the current window
+"  :go → open preview but will stay in the quickfix preview window
+"  :t → open the selected file in a new tab
+"  :v → vertical split
+"  :q → quit the Ack window
+
 " Tabularize
 vnoremap <silent> <Leader>a=> :Tabularize /=>/l1l1<CR>
 vnoremap <silent> <Leader>a= :Tabularize /=/l1l1<CR>
