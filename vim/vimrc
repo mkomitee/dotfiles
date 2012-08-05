@@ -339,6 +339,28 @@ vnoremap <silent> <Leader>a= :Tabularize /=/l1l1<CR>
 vnoremap <silent> <Leader>a, :Tabularize /,/l0l1<CR>
 vnoremap <silent> <Leader>a: :Tabularize /:/l0l1<CR>
 
+" Fugitive
+" :Gstatus → git status → Ctrl→n → go to the next file → Ctrl→p → go to the preview file
+" :Gwrite → git add
+" :Gcommit → git commit (press wq for send)
+" :Gblame → git blame
+" :Gmove → git mv
+" :Gremove → git rm
+" :Glog → git log
+" :Gdiff → split the window and display the changes
+" :Ggrep → does a grep in the tree
+" :Gbrowse → opens the actual file in the browser (normally its on github)
+" :Git → after this you can perform every other normal git command you want
+nnoremap <leader>gd :Gdiff<CR>
+nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gw :Gwrite<CR>
+nnoremap <leader>ga :Gadd<CR>
+nnoremap <leader>gb :Gblame<CR>
+nnoremap <leader>gl :Glog<CR>
+nnoremap <leader>gc :Gcommit<CR>
+nnoremap <leader>gm :Gmove<CR>
+nnoremap <leader>gr :Gremove<CR>
+nnoremap <leader>gp :! git push<CR>
 " Showmarks
 let g:showmarks_enable=1
 let g:showmarks_include="'`^<>.abcdefghijklmnopqrstuvwxyz()[]{}"
