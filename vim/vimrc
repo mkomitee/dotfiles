@@ -27,6 +27,7 @@ Bundle 'ruby-matchit'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
 Bundle 'sjl/badwolf'
+Bundle 'sjl/gundo.vim'
 Bundle 'sjl/splice.vim'
 Bundle 'tmatilai/gitolite.vim'
 Bundle 'tomtom/tlib_vim'
@@ -361,6 +362,14 @@ nnoremap <leader>gc :Gcommit<CR>
 nnoremap <leader>gm :Gmove<CR>
 nnoremap <leader>gr :Gremove<CR>
 nnoremap <leader>gp :! git push<CR>
+
+" Gundo 
+let g:gundo_width           = 45 " horizontal width
+let g:gundo_preview_height  = 15 " vertical height
+let g:gundo_help            = 1  " show the help in gundo window
+let g:gundo_close_on_revert = 0  " don't close gundo after a version is selected
+let g:gundo_right           = 0  " display gundo on the left site
+
 " Tagbar 
 let g:tagbar_compact = 1 " don't show the help in the tagbar
 
