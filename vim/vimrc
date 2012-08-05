@@ -18,6 +18,7 @@ Bundle 'ervandew/supertab.git'
 Bundle 'LaTeX-Box'
 Bundle 'gmarik/vundle'
 Bundle 'godlygeek/tabular'
+Bundle 'jpalardy/vim-slime'
 Bundle 'kien/ctrlp.vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'mileszs/ack.vim'
@@ -380,6 +381,13 @@ let g:showmarks_ignore_type=''
 let g:showmarks_textlower="\t"
 let g:showmarks_textupper="\t"
 let g:showmarks_textother="\t"
+
+" slime
+" :SlimeConfig - configure which tmux pane to send text
+" :SlimeSend - send text, can use a range, or marks including the marks used to
+" delimit visual mode selection
+let g:slime_target = "tmux"
+let g:slime_no_mappings = 1
 
 " NERDCommenter
 let g:NERDCreateDefaultMappings = 0
