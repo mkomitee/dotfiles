@@ -137,7 +137,13 @@ set listchars+=tab:▸\     " display tabs
 set listchars+=eol:¶      " display eol
 set listchars+=extends:❯  " hint that theres more to the right, ...
 set listchars+=precedes:❮ " hint that theres more to the left, ...
-set listchars+=trail:♦    " and indicate trailing whitespace
+
+" only show trailing whitespace when not in insert mode
+augroup trailing
+    au!
+    au InsertEnter * :set listchars-=trail:⌴
+    au InsertLeave * :set listchars+=trail:⌴
+augroup END
 
 set shortmess=   " reset shortmess
 set shortmess+=f " '(3 of 5)' instead of '(file 3 of 5)'
