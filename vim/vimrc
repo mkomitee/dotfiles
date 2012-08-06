@@ -133,11 +133,11 @@ endif
 set fillchars=        " reset fillchars
 set fillchars+=fold:- " fill foldtext with dashes
 set fillchars+=diff:⣿ " indicate deleted lines in diffs with ⣿
-set fillchars+=vert:❚ " indicate vertical splits with ❚
+set fillchars+=vert:│ " indicate vertical splits with │
 
 set listchars=            " reset listchars
 set listchars+=tab:▸\     " display tabs
-set listchars+=eol:¶      " display eol
+set listchars+=eol:¬      " display eol
 set listchars+=extends:❯  " hint that theres more to the right, ...
 set listchars+=precedes:❮ " hint that theres more to the left, ...
 
