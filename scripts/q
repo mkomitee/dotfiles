@@ -1,3 +1,0 @@
-#!/bin/sh
-echo "I'm a shell, not a text editor!"
-exit 1

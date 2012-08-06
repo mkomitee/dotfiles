@@ -14,8 +14,6 @@ alias bc='bc -l'
 alias s=sudo
 alias sudoenv='sudo -E zsh'
 alias tmux='tmux -u2'
-alias task='noglob task'
-alias t='noglob task'
 
 alias pomodoro='pomodoro.py'
 alias code-notes='ack "TODO|FIXME"'
