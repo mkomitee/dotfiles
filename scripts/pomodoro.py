@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """Usage: pomodoro [-f | --force] start
-       pomodoro [-l | --long ] status
+       pomodoro [-v | --verbose ] status
        pomodoro [--date <date>] report
        pomodoro cancel
        pomodoro --version
@@ -13,7 +13,7 @@ Commands:
     cancel  cancel a running block of time
 
 Options:
-    -l, --long     Long output format
+    -v, --verbose  Verbose output format
     -f, --force    Force start
     --date <date>  Date to report
     --version      Print version and exit
@@ -53,10 +53,11 @@ STATUS = 'status'
 REPORT = 'report'
 DATE = '--date'
 FORCE = '--force'
-LONG = '--long'
+VERBOSE = '--verbose'
 
 
 def _env_get(name, default):
+    """Returns pomodoro specific environment variables"""
     return os.environ.get('POMODORO_%s' % name, default)
 
 FILE = os.path.expanduser(_env_get('FILE', "~/.pomodoro"))
@@ -66,10 +67,10 @@ BREAK = datetime.timedelta(minutes=int(_env_get('BREAK', 5)))
 EXTENDEDBREAK = datetime.timedelta(minutes=int(_env_get('EXTENDED_BREAK', 20)))
 
 
-def total_seconds(td):
+def total_seconds(tdelta):
     """Takes a datetime.timedelta, returns total number of seconds, ignoring
     microseconds"""
-    return td.seconds + td.days * 24 * 3600
+    return tdelta.seconds + tdelta.days * 24 * 3600
 
 
 class History(object):
@@ -167,12 +168,12 @@ class Pomodoro(object):
     @property
     def report(self):
         """A rich description of this block of time"""
-        start = self.start_time.strftime("%H:%M")
+        _start = self.start_time.strftime("%H:%M")
         end = self.end_time.strftime("%H:%M")
         total = total_seconds(self.duration)
         _type = self.type
         minutes = total / 60
-        return "%s-%s (%2d) %s" % (start, end, minutes, _type)
+        return "%s-%s (%2d) %s" % (_start, end, minutes, _type)
 
     @property
     def remaining_time(self):
@@ -207,12 +208,12 @@ def cancel():
     return history.cancel()
 
 
-def status(long=False):
+def status(verbose=False):
     """Report on the status of the current block of time"""
     history = History.deserialize()
     last = history.last
     if last:
-        if long:
+        if verbose:
             output = "%s %s" % (history.last, history.last.type)
         else:
             output = str(history.last)
@@ -251,7 +252,7 @@ def main():
         elif opts[CANCEL]:
             exit(cancel())
         elif opts[STATUS]:
-            exit(status(opts[LONG]))
+            exit(status(opts[VERBOSE]))
         elif opts[REPORT]:
             if opts[DATE]:
                 try:
