@@ -319,11 +319,13 @@ nmap <leader>T <Plug>TaskList
 let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'undo', 'line'. 'changes']
 let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_cache_dir = $HOME.'/.vimdata/ctrlp'
-let g:ctrlp_map = '<C-t>' 
+let g:ctrlp_map = '<leader>p' 
 let g:ctrlp_mruf_relative = 1
 let g:ctrlp_reuse_window = 'netrw\|help'
 let g:ctrlp_dotfiles              = 0 
-nnoremap <c-b> :CtrlPBuffer<CR>
+nnoremap <leader>b :CtrlPBuffer<CR>
+nnoremap <leader>t :CtrlPTag<CR>
+nnoremap <leader>m :CtrlPMRU<CR>
 "  <C-t> → will open the finding match in a tab
 "  <C-v> → will open the finding match in a vertical split
 "  <C-h> → will open the finding match in a horizontal split
