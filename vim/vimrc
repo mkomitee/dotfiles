@@ -312,6 +312,9 @@ cmap w!! w !sudo tee % >/dev/null<cr>
 
 nnoremap <c-c> :close<cr>
 
+" TaskList
+nmap <leader>T <Plug>TaskList
+
 " Ctrl+P
 let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'undo', 'line'. 'changes']
 let g:ctrlp_cmd = 'CtrlPMixed'
