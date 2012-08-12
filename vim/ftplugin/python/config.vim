@@ -16,3 +16,7 @@ if os.environ.get('VIRTUAL_ENV', None):
     activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
     execfile(activate_this, dict(__file__=activate_this))
 EOF
+
+if exists('+colorcolumn')
+    set colorcolumn=+1
+endif

@@ -8,3 +8,7 @@ let g:rubycomplete_buffer_loading=1
 let g:rubycomplete_classes_in_global=1
 
 au BufWritePre,FileWritePre <buffer> call RemoveTrailingWhiteSpace()
+
+if exists('+colorcolumn')
+    set colorcolumn=+1
+endif
