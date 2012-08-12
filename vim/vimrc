@@ -31,6 +31,7 @@ Bundle 'python_match.vim'
 Bundle 'ruby-matchit'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/syntastic'
 Bundle 'sjl/badwolf'
 Bundle 'sjl/gundo.vim'
 Bundle 'sjl/splice.vim'
@@ -426,6 +427,19 @@ let g:NERDTreeMinimalUI = 1
 let NERDTreeIgnore=['\~$', '\.swp$', '^CVS$', '\.svn$', '^CVSROOT$', '^\.git$', '\.pyc$', '\.pyo$']
 noremap <Leader>dd :NERDTreeToggle<CR>
 noremap <Leader>df :NERDTreeFind<CR>
+
+" Syntastic
+let g:syntastic_auto_loc_list=1
+let g:syntastic_check_on_open=1
+let g:syntastic_enable_signs=1
+let g:syntastic_auto_jump=0
+let g:syntastic_loc_list_height=2
+
+" This may cause a lot of processing, but we can disable it if it causes problems
+" augroup syntastic
+    " au!
+    " au CursorMoved * execute 'SyntasticCheck'
+" augroup END
 
 " Supertab
 let g:SuperTabDefaultCompletionType = "context"
