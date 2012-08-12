@@ -353,6 +353,7 @@ let g:easytags_auto_update = 0    " don't update the text, when stop working
 let g:easytags_auto_highlight = 0 " don't highlight the text, when stop working
 let g:easytags_resolve_links = 1  " resolve symbolic links with pathnames
 let g:easytags_python_enabled = 1 " use Python script for dynamic syntax highlighting (is faster)
+let g:easytags_file = '~/.vimdata/vimtags'
 
 " Fugitive
 " :Gstatus → git status → Ctrl→n → go to the next file → Ctrl→p → go to the preview file
