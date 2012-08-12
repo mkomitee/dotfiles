@@ -254,13 +254,6 @@ let mapleader = " "     " this may change soon, I keep wanting to have the
                         " default behavior work for ,.
 let localleader = '\\'
 
-" This may cause a lot of processing, but we can disable it if it causes problems
-augroup showmarks
-    au!
-    " This is because of some magical marks like )  and (
-    au CursorMoved * execute 'ShowMarksOn'
-augroup END
-
 augroup vimmemory
     au!
     " When editing a file, always jump to the last known cursor position.
@@ -394,7 +387,7 @@ let g:tagbar_compact = 1 " don't show the help in the tagbar
 
 " Showmarks
 let g:showmarks_enable=1
-let g:showmarks_include="'`^<>.abcdefghijklmnopqrstuvwxyz()[]{}"
+let g:showmarks_include="'`^<>.abcdefghijklmnopqrstuvwxyz"
 let g:showmarks_ignore_type=''
 let g:showmarks_textlower="\t"
 let g:showmarks_textupper="\t"
