@@ -13,6 +13,7 @@ Bundle 'AndrewRadev/linediff.vim.git'
 Bundle 'IndexedSearch'
 Bundle 'LaTeX-Box'
 Bundle 'MarcWeber/vim-addon-mw-utils'
+Bundle 'Raimondi/delimitMate'
 Bundle 'Rainbow-Parenthsis-Bundle'
 Bundle 'ShowMarks'
 Bundle 'TaskList.vim'
@@ -428,6 +429,13 @@ noremap <Leader>df :NERDTreeFind<CR>
 
 " Supertab
 let g:SuperTabDefaultCompletionType = "context"
+
+" Delimitmate
+let g:delimitMate_expand_cr = 1
+let g:delimitMate_expand_space = 1
+let g:delimitMate_smart_quotes = 1
+let g:delimitMate_balance_matchpairs = 1
+let g:delimitMate_excluded_ft = "txt,markdown"
 
 " Load experimental library
 source ~/.vim/experimental.vim
