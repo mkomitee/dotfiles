@@ -17,7 +17,6 @@ Bundle 'Raimondi/delimitMate'
 Bundle 'Rainbow-Parenthsis-Bundle'
 Bundle 'ShowMarks'
 Bundle 'TaskList.vim'
-Bundle 'YankRing.vim'
 Bundle 'ajf/puppet-vim'
 Bundle 'ervandew/supertab.git'
 Bundle 'godlygeek/tabular'
@@ -406,11 +405,6 @@ let g:showmarks_textother="\t"
 " delimit visual mode selection
 let g:slime_target = "tmux"
 let g:slime_no_mappings = 1
-
-" YankRing
-let g:yankring_max_history = 1000 " save the last 1000 elements
-noremap <leader>y :YRShow<CR>
-noremap <leader>x :YRClear<CR>
 
 " NERDCommenter
 let g:NERDCreateDefaultMappings = 0
