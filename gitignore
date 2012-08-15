@@ -59,3 +59,5 @@ tags
 
 *.rbc
 
+### emacs
+*#
