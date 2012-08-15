@@ -33,3 +33,17 @@
 (require 'color-theme)
 (color-theme-molokai)
 
+;; Enable flymake/pylint, note this only works when epylint is in my
+;; path, which isn't the case at home when started with spotlight. It
+;; has to be started from the commandline.
+(when (load "flymake" t)
+  (defun flymake-pylint-init ()
+    (let* ((temp-file (flymake-init-create-temp-buffer-copy
+                       'flymake-create-temp-inplace))
+           (local-file (file-relative-name
+                        temp-file
+                        (file-name-directory buffer-file-name))))
+      (list "epylint" (list local-file))))
+  
+  (add-to-list 'flymake-allowed-file-name-masks
+               '("\\.py\\'" flymake-pylint-init)))
