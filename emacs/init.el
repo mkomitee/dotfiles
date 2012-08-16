@@ -13,6 +13,8 @@
                       starter-kit-lisp
                       starter-kit-bindings
                       evil
+                      evil-leader
+                      textmate
                       color-theme
                       color-theme-molokai)
   "A list of packages to ensure are installed at launch.")
@@ -25,6 +27,7 @@
 ;; This enables vim compatible bindings, ...
 (require 'evil)
 (evil-mode 1)
+(require 'evil-leader)
 
 ;; Enable line numbers
 (global-linum-mode t)
@@ -64,5 +67,13 @@
        (call-interactively (function ,orig-function))))))
 
 (allow-line-as-region-for-function comment-or-uncomment-region)
+
+(require 'textmate)
+(textmate-mode)
+
+(evil-leader/set-leader "SPC")
+(evil-leader/set-key "SPC" 'comment-or-uncomment-region-or-line)
+(evil-leader/set-key "d" 'speedbar)
+(evil-leader/set-key "p" 'textmate-goto-file)
 
 (server-start)
