@@ -74,6 +74,7 @@
 (evil-leader/set-leader "SPC")
 (evil-leader/set-key "SPC" 'comment-or-uncomment-region-or-line)
 (evil-leader/set-key "d" 'speedbar)
+(evil-leader/set-key "b" 'ido-display-buffer)
 (evil-leader/set-key "p" 'textmate-goto-file)
 
 (server-start)
