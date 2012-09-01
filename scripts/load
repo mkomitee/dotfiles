@@ -1,15 +1,19 @@
-#!/bin/sh
+#!/bin/bash
 
 function cores() {
-    n=0
-    exec 0</proc/cpuinfo
-    while read line; do
-        i=$(echo $line | grep cores | cut -d: -f2)
-        if [ ! -z $i ]; then
-            n=$(($n+$i))
-        fi
-    done
-    echo $n
+    if [ $(uname) == 'Linux' ]; then
+        n=0
+        exec 0</proc/cpuinfo
+        while read line; do
+            i=$(echo $line | grep cores | cut -d: -f2)
+            if [ ! -z $i ]; then
+                n=$(($n+$i))
+            fi
+        done
+        echo $n
+    else
+        psrinfo | wc -l
+    fi
 }
 
 uname -nr
@@ -18,12 +22,14 @@ uptime | sed 's/^\s*//'
 echo
 echo "Cores: $(cores)"
 echo
-cat <<EOF
+if [ $(uname) == 'Linux' ]; then
+    cat <<EOS
 Legend:
   Displayed:
    D    Uninterruptible sleep (usually IO)
    R    Running or runnable (on run queue)
    X    dead (should never be seen)
+   Z    Defunct ("zombie") process, terminated but not reaped by its parent.
  ----------------------------------
    <    high-priority (not nice to other users)
    N    low-priority (nice to other users)
@@ -31,7 +37,19 @@ Legend:
    s    is a session leader
    l    is multi-threaded (using CLONE_THREAD, like NPTL pthreads do)
    +    is in the foreground process group
-EOF
-echo
-ps -NTo stat,pcpu,pmem,pid,ppid,user,args | grep -vE "^[WSTZ][ NLsl+<]" || echo "N/A"
-
+EOS
+    echo
+    ps -o stat,pcpu,pmem,pid,ppid,user,args | grep -vE "^[WST][ NLsl+<]" || echo "N/A"
+else
+    cat <<EOS
+Legend:
+  Displayed:
+   O    Process is running on a processor.
+   R    Runnable: process is on run queue.
+   W    Waiting: process is waiting for CPU usage to drop to the CPU-caps 
+        enforced limits.
+   Z    Zombie state: process terminated and parent not waiting.
+EOS
+    echo
+    ps -Lo s,pcpu,pmem,pid,ppid,user,args | egrep -vE "^[ST]\s+[0-9]" || echo "N/A"
+fi
