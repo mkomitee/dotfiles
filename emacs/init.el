@@ -16,7 +16,9 @@
                       evil-leader
                       textmate
                       color-theme
-                      color-theme-molokai)
+                      fill-column-indicator
+                      color-theme-molokai
+                      )
   "A list of packages to ensure are installed at launch.")
 
 ;; This ensures they're installed
@@ -24,13 +26,18 @@
   (when (not (package-installed-p p))
     (package-install p)))
 
-;; This enables vim compatible bindings, ...
-(require 'evil)
-(evil-mode 1)
-(require 'evil-leader)
-
 ;; Enable line numbers
 (global-linum-mode t)
+
+;; Color-column
+(require 'fill-column-indicator)
+(setq fci-rule-width 1)
+(setq fci-rule-color "darkred")
+(add-hook 'after-change-major-mode-hook 'fci-mode)
+(add-hook 'after-change-major-mode-hook 'whitespace-mode)
+
+(require 'textmate)
+(textmate-mode)
 
 ;; No idea what a good emacs theme is so using molokai which is decent
 (require 'color-theme)
@@ -47,7 +54,7 @@
                         temp-file
                         (file-name-directory buffer-file-name))))
       (list "epylint" (list local-file))))
-  
+
   (add-to-list 'flymake-allowed-file-name-masks
                '("\\.py\\'" flymake-pylint-init)))
 
@@ -60,7 +67,6 @@
    (if mark-active
        (call-interactively (function ,orig-function))
      (save-excursion
-       ;; define a region (temporarily) -- so any C-u prefixes etc. are preserved.
        (beginning-of-line)
        (set-mark (point))
        (end-of-line)
@@ -68,13 +74,24 @@
 
 (allow-line-as-region-for-function comment-or-uncomment-region)
 
-(require 'textmate)
-(textmate-mode)
+;; This enables vim compatible bindings, ...
+(require 'evil)
+(evil-mode 1)
+(require 'evil-leader)
+(setq evil-default-state 'normal)
 
 (evil-leader/set-leader "SPC")
 (evil-leader/set-key "SPC" 'comment-or-uncomment-region-or-line)
 (evil-leader/set-key "d" 'speedbar)
 (evil-leader/set-key "b" 'ido-display-buffer)
 (evil-leader/set-key "p" 'textmate-goto-file)
+
+(define-key evil-normal-state-map "\C-j" 'evil-window-down)
+(define-key evil-normal-state-map "\C-k" 'evil-window-up)
+(define-key evil-normal-state-map "\C-h" 'evil-window-left)
+(define-key evil-normal-state-map "\C-l" 'evil-window-right)
+(define-key evil-normal-state-map "\C-c" 'delete-window)
+(define-key evil-normal-state-map "|" 'split-window-horizontally)
+(define-key evil-normal-state-map "_" 'split-window-vertically)
 
 (server-start)
