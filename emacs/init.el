@@ -13,9 +13,9 @@
                       starter-kit-lisp
                       starter-kit-bindings
                       evil
-                      evil-leader
                       textmate
                       color-theme
+                      ack-and-a-half
                       fill-column-indicator
                       color-theme-molokai
                       )
@@ -42,6 +42,12 @@
 ;; No idea what a good emacs theme is so using molokai which is decent
 (require 'color-theme)
 (color-theme-molokai)
+
+;; create some aliases for ack
+(defalias 'ack 'ack-and-a-half)
+(defalias 'ack-same 'ack-and-a-half-same)
+(defalias 'ack-find-file 'ack-and-a-half-find-file)
+(defalias 'ack-find-file-same 'ack-and-a-half-find-file-same)
 
 ;; Enable flymake/pylint, note this only works when epylint is in my
 ;; path, which isn't the case at home when started with spotlight. It
@@ -79,12 +85,13 @@
 (evil-mode 1)
 (require 'evil-leader)
 (setq evil-default-state 'normal)
+(setq evil-want-C-u-scroll 1)
 
-(evil-leader/set-leader "SPC")
-(evil-leader/set-key "SPC" 'comment-or-uncomment-region-or-line)
-(evil-leader/set-key "d" 'speedbar)
-(evil-leader/set-key "b" 'ido-display-buffer)
-(evil-leader/set-key "p" 'textmate-goto-file)
+(define-key minibuffer-local-map [escape] 'keyboard-escape-quit)
+(define-key minibuffer-local-ns-map [escape] 'keyboard-escape-quit)
+(define-key minibuffer-local-completion-map [escape] 'keyboard-escape-quit)
+(define-key minibuffer-local-must-match-map [escape] 'keyboard-escape-quit)
+(define-key minibuffer-local-isearch-map [escape] 'keyboard-escape-quit)
 
 (define-key evil-normal-state-map "\C-j" 'evil-window-down)
 (define-key evil-normal-state-map "\C-k" 'evil-window-up)
@@ -93,5 +100,28 @@
 (define-key evil-normal-state-map "\C-c" 'delete-window)
 (define-key evil-normal-state-map "|" 'split-window-horizontally)
 (define-key evil-normal-state-map "_" 'split-window-vertically)
+(define-key evil-normal-state-map " d" 'speedbar)
+(define-key evil-normal-state-map " b" 'ido-display-buffer)
+(define-key evil-normal-state-map " p" 'textmate-goto-file)
+
+;; would be really nice to make this reselect afterwards
+(define-key evil-normal-state-map "  " 'comment-or-uncomment-region-or-line)
+(define-key evil-visual-state-map "  " 'comment-or-uncomment-region-or-line)
+
+;; would be really nice to make > and < reselect afterwards
+(evil-define-operator shift-right-reselect (beg end)
+  (evil-shift-right beg end)
+  (evil-visual-make-selection beg end))
+
+;; TODO: this has a problem in that it selects the next line as well afterwards
+(evil-define-operator shift-left-reselect (beg end)
+  (evil-shift-left beg end)
+  (evil-visual-make-selection beg end))
+
+(define-key evil-visual-state-map ">" 'shift-right-reselect)
+(define-key evil-visual-state-map "<" 'shift-left-reselect)
+
+;; Here's how to define a new ex command
+(defun evil-ex-define-cmd "ack" 'ack)
 
 (server-start)
