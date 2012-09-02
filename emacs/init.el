@@ -83,7 +83,6 @@
 ;; This enables vim compatible bindings, ...
 (require 'evil)
 (evil-mode 1)
-(require 'evil-leader)
 (setq evil-default-state 'normal)
 (setq evil-want-C-u-scroll 1)
 
