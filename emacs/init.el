@@ -26,6 +26,9 @@
   (when (not (package-installed-p p))
     (package-install p)))
 
+;; add our additional libraries to our  load path
+(add-to-list 'load-path "~/.dotfiles/emacs/lib")
+
 ;; Enable line numbers
 (global-linum-mode t)
 
@@ -85,6 +88,10 @@
 (setq evil-want-C-u-scroll t)
 (require 'evil)
 (evil-mode 1)
+
+;; emulates surround.vim
+(require 'surround)
+(global-surround-mode 1)
 
 (define-key minibuffer-local-map [escape] 'keyboard-escape-quit)
 (define-key minibuffer-local-ns-map [escape] 'keyboard-escape-quit)
