@@ -81,10 +81,10 @@
 (allow-line-as-region-for-function comment-or-uncomment-region)
 
 ;; This enables vim compatible bindings, ...
+(setq evil-default-state 'normal)
+(setq evil-want-C-u-scroll t)
 (require 'evil)
 (evil-mode 1)
-(setq evil-default-state 'normal)
-(setq evil-want-C-u-scroll 1)
 
 (define-key minibuffer-local-map [escape] 'keyboard-escape-quit)
 (define-key minibuffer-local-ns-map [escape] 'keyboard-escape-quit)
