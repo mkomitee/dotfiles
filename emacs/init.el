@@ -106,18 +106,14 @@
 (define-key evil-normal-state-map "  " 'comment-or-uncomment-region-or-line)
 (define-key evil-visual-state-map "  " 'comment-or-uncomment-region-or-line)
 
-;; would be really nice to make > and < reselect afterwards
-(evil-define-operator shift-right-reselect (beg end)
-  (evil-shift-right beg end)
-  (evil-visual-make-selection beg end))
-
-;; TODO: this has a problem in that it selects the next line as well afterwards
-(evil-define-operator shift-left-reselect (beg end)
-  (evil-shift-left beg end)
-  (evil-visual-make-selection beg end))
-
-(define-key evil-visual-state-map ">" 'shift-right-reselect)
-(define-key evil-visual-state-map "<" 'shift-left-reselect)
+;; Since there's no 'noremap' functionality available, I have to first
+;; define a sequence of characters to perform the shift, and THEN
+;; remap > and < to call that other sequence and then gv, this works
+;; but it makes me sad.
+(define-key evil-visual-state-map "g>" 'evil-shift-right)
+(define-key evil-visual-state-map "g<" 'evil-shift-left)
+(define-key evil-visual-state-map ">" (kbd "g>gv"))
+(define-key evil-visual-state-map "<" (kbd "g<gv"))
 
 ;; Here's how to define a new ex command
 (defun evil-ex-define-cmd "ack" 'ack)
