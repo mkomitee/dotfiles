@@ -115,6 +115,10 @@
 (define-key evil-visual-state-map ">" (kbd "g>gv"))
 (define-key evil-visual-state-map "<" (kbd "g<gv"))
 
+;; I switch ' and ` in vim, so I do so here as well
+(define-key evil-motion-state-map "'" 'evil-goto-mark)
+(define-key evil-motion-state-map "`" 'evil-goto-mark-line)
+
 ;; Here's how to define a new ex command
 (defun evil-ex-define-cmd "ack" 'ack)
 
