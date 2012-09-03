@@ -102,8 +102,7 @@
 (define-key evil-normal-state-map " d" 'speedbar)
 (define-key evil-normal-state-map " b" 'ido-display-buffer)
 (define-key evil-normal-state-map " p" 'textmate-goto-file)
-
-;; would be really nice to make this reselect afterwards
+(define-key evil-normal-state-map " ev" (kbd ":e ~/.dotfiles/emacs/init.el"))
 (define-key evil-normal-state-map "  " 'comment-or-uncomment-region-or-line)
 (define-key evil-visual-state-map "  " 'comment-or-uncomment-region-or-line)
 
