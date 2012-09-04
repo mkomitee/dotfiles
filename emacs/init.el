@@ -12,6 +12,7 @@
 (defvar my-packages '(starter-kit
                       starter-kit-lisp
                       starter-kit-bindings
+                      starter-kit-eshell
                       evil
                       textmate
                       color-theme
@@ -128,5 +129,6 @@
 
 ;; Here's how to define a new ex command
 (defun evil-ex-define-cmd "ack" 'ack)
+(defun evil-ex-define-cmd "eshell" 'eshell)
 
 (server-start)
