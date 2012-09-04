@@ -18,7 +18,9 @@
                       color-theme
                       ack-and-a-half
                       fill-column-indicator
+                      markdown-mode
                       color-theme-molokai
+                      puppet-mode
                       )
   "A list of packages to ensure are installed at launch.")
 
