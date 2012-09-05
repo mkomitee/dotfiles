@@ -39,7 +39,7 @@ Legend:
    +    is in the foreground process group
 EOS
     echo
-    ps -o stat,pcpu,pmem,pid,ppid,user,args | grep -vE "^[WST][ NLsl+<]" || echo "N/A"
+    ps -eo stat,pcpu,pmem,pid,ppid,user,args | grep -vE "^[WST][ NLsl+<]" || echo "N/A"
 else
     cat <<EOS
 Legend:
@@ -51,5 +51,5 @@ Legend:
    Z    Zombie state: process terminated and parent not waiting.
 EOS
     echo
-    ps -Lo s,pcpu,pmem,pid,ppid,user,args | egrep -vE "^[ST]\s+[0-9]" || echo "N/A"
+    ps -eLo s,pcpu,pmem,pid,ppid,user,args | egrep -vE "^[ST]\s+[0-9]" || echo "N/A"
 fi
