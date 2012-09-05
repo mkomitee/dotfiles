@@ -21,6 +21,7 @@
                       markdown-mode
                       color-theme-molokai
                       puppet-mode
+                      python-mode
                       )
   "A list of packages to ensure are installed at launch.")
 
@@ -41,6 +42,9 @@
 (setq fci-rule-color "darkred")
 (add-hook 'after-change-major-mode-hook 'fci-mode)
 (add-hook 'after-change-major-mode-hook 'whitespace-mode)
+(add-hook 'python-mode-hook
+          (lambda ()
+            (setq fci-rule-column 80)))
 
 (require 'textmate)
 (textmate-mode)
@@ -107,8 +111,8 @@
 (define-key evil-normal-state-map "\C-h" 'evil-window-left)
 (define-key evil-normal-state-map "\C-l" 'evil-window-right)
 (define-key evil-normal-state-map "\C-c" 'delete-window)
-(define-key evil-normal-state-map "|" 'split-window-horizontally)
-(define-key evil-normal-state-map "_" 'split-window-vertically)
+(define-key evil-normal-state-map "|" (kbd ":vsplit C-m C-l"))
+(define-key evil-normal-state-map "_" (kbd ":split C-m C-j"))
 (define-key evil-normal-state-map " d" 'speedbar)
 (define-key evil-normal-state-map " b" 'ido-display-buffer)
 (define-key evil-normal-state-map " p" 'textmate-goto-file)
@@ -132,5 +136,24 @@
 ;; Here's how to define a new ex command
 (defun evil-ex-define-cmd "ack" 'ack)
 (defun evil-ex-define-cmd "eshell" 'eshell)
+;; TODO: get something like this working
+;; (defun evil-ex-define-cmd "sort" 'sort-lines)
+
+;; We prefer normal mode in several places
+(defvar my-normal-modes'(
+                         package-menu-mode
+                         )
+  "List of modes to put in normal mode by default, despite evil defaults")
+
+;; This ensures they're installed
+(dolist (p my-normal-modes)
+  (delete p 'evil-emacs-state-modes)
+  (add-to-list 'evil-normal-state-modes p))
+
+;; Don't litter auto-save turds all over the file system
+(setq backup-directory-alist
+     `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms
+     `((".*" ,temporary-file-directory t)))
 
 (server-start)
