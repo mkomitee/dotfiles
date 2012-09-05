@@ -156,4 +156,11 @@
 (setq auto-save-file-name-transforms
      `((".*" ,temporary-file-directory t)))
 
+(eval-after-load "dired"
+  '(require 'dired-x))
+
+(add-hook 'dired-mode-hook
+          (lambda ()
+            (dired-omit-mode 1)))
+
 (server-start)
