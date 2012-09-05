@@ -338,10 +338,12 @@ nnoremap <leader>m :CtrlPMRU<CR>
 "  :q → quit the Ack window
 
 " Tabularize
-vnoremap <silent> <Leader>a=> :Tabularize /=>/l1l1<CR>
-vnoremap <silent> <Leader>a= :Tabularize /=/l1l1<CR>
-vnoremap <silent> <Leader>a, :Tabularize /,/l0l1<CR>
-vnoremap <silent> <Leader>a: :Tabularize /:/l0l1<CR>
+vnoremap <silent> <Leader>a=> :Tabularize /=><CR>
+vnoremap <silent> <Leader>a= :Tabularize /=<CR>
+vnoremap <silent> <Leader>a, :Tabularize /,\zs<CR>
+nnoremap <silent> <Leader>a, :Tabularize /,\zs<CR>
+vnoremap <silent> <Leader>a: :Tabularize /:\zs<CR>
+nnoremap <silent> <Leader>a: :Tabularize /:\zs<CR>
 
 " Easytags
 set tags=./tags;                  " name of the tags files which is relative to the project
@@ -392,7 +394,7 @@ let g:tagbar_compact = 1 " don't show the help in the tagbar
 
 " Showmarks
 let g:showmarks_enable=1
-let g:showmarks_include="'`^<>.abcdefghijklmnopqrstuvwxyz"
+let g:showmarks_include="abcdefghijklmnopqrstuvwxyz"
 let g:showmarks_ignore_type=''
 let g:showmarks_textlower="\t"
 let g:showmarks_textupper="\t"
