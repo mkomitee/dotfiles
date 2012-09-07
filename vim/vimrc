@@ -12,6 +12,7 @@ Bundle 'AfterColors.vim'
 Bundle 'AndrewRadev/linediff.vim.git'
 Bundle 'IndexedSearch'
 Bundle 'LaTeX-Box'
+Bundle 'Lokaltog/vim-distinguished'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'Rainbow-Parenthsis-Bundle'
 Bundle 'ShowMarks'
@@ -244,7 +245,8 @@ command! -bang Wq wq<bang>
 command! -bang WQ wq<bang>
 
 " Setup my colorscheme, ... 
-colorscheme badwolf
+" colorscheme badwolf
+colorscheme distinguished
 
 " Highlight VCS conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
