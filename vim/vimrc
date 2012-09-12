@@ -99,16 +99,6 @@ set directory=$HOME/.vimdata/vimswap/   " save swap files here
 set viewdir=$HOME/.vimdata/vimviews/    " save views here
 set wildmenu                   " commandline completion is nice
 
-
-" Only show cursorline in the current window and in normal mode.
-augroup cline
-    au!
-    au WinLeave * set nocursorline
-    au WinEnter * set cursorline
-    au InsertEnter * set nocursorline
-    au InsertLeave * set cursorline
-augroup END
-
 " Try desparately to tweak the cursor
 set guicursor=n-v-c:block-Cursor
 set guicursor+=i:ver20-Cursor-blinkon600-blinkoff600
@@ -247,6 +237,10 @@ command! -bang WQ wq<bang>
 " Setup my colorscheme, ... 
 " colorscheme badwolf
 colorscheme distinguished
+" Override some of distinguished's defaults
+hi CursorLine ctermfg=NONE ctermbg=234 guifg=NONE
+hi CursorColumn ctermfg=NONE ctermbg=234 guifg=NONE
+hi CtrlPLinePre ctermfg=88 ctermbg=NONE
 
 " Highlight VCS conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
