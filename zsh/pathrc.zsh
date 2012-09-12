@@ -24,4 +24,5 @@ if [ -f $MANPATHRC ]; then
     for dir in $(<$MANPATHRC); do
         manpath+=($dir)
     done 
+    export MANPATH
 fi
