@@ -26,6 +26,13 @@ source $ZSH/latex.zsh
 export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='1;32'
 
+# ACK CONFIG
+export ACK_COLOR_MATCH='red'
+export ACKRC=~/.dotfiles/ackrc
+
+# LESS CONFIG
+export LESS="-r"
+
 # LS CONFIG
 # Find the option for using colors in ls, depending on the version: Linux or BSD
 if ls --color -d . &>/dev/null; then

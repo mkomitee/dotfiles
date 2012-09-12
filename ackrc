@@ -1,0 +1,3 @@
+--sort-files
+--type-set=markdown=md,markdown
+--pager=less
