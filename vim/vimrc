@@ -10,6 +10,7 @@ syntax enable
 Bundle 'gmarik/vundle'
 Bundle 'AfterColors.vim'
 Bundle 'AndrewRadev/linediff.vim.git'
+Bundle 'AndrewRadev/switch.vim'
 Bundle 'IndexedSearch'
 Bundle 'LaTeX-Box'
 Bundle 'Lokaltog/vim-distinguished'
@@ -310,6 +311,9 @@ nnoremap <c-c> :close<cr>
 
 " TaskList
 nmap <leader>T <Plug>TaskList
+
+" Switch
+nnoremap <leader>s :Switch<cr>
 
 " Ctrl+P
 let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'undo', 'line'. 'changes']
