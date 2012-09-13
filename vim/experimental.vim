@@ -28,3 +28,11 @@ nnoremap <right> <C-W>>
 
 " . returns to starting place
 nnoremap . .`[
+
+" Simple way to find out where the hell my cursor is
+function WhereAmI()
+    set invcursorline
+    set invcursorcolumn
+endfunction
+
+nnoremap <leader>? :call WhereAmI()<cr>
