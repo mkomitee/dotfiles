@@ -7,4 +7,4 @@ if [ -r TODO.md ]; then
     echo "TODO.md:"
     cat -n TODO.md
 fi
-ack "TODO|FIXME"
+ack "TODO|FIXME|REVIEW|XXX"
