@@ -23,7 +23,7 @@ source $ZSH/funny.zsh
 source $ZSH/latex.zsh
 
 # GREP CONFIG
-export GREP_OPTIONS='--color=auto'
+export GREP_OPTIONS='--color=auto --exclude-dir=.git --exclude-dir=.svn --exclude-dir=CVS --binary-files=without-match'
 export GREP_COLOR='1;32'
 
 # ACK CONFIG
