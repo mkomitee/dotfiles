@@ -5,7 +5,7 @@ setopt prompt_subst
 setopt transient_rprompt
 
 
-if [ $UID -eq 0 ]; then NCOLOR="red"; SYMBOL='#'; else NCOLOR="yellow"; SYMBOL='$' fi
+if [ $UID -eq 0 ]; then NCOLOR="red"; else NCOLOR="yellow"; fi
 
 MODE_INDICATOR="%{$fg_bold[red]%}<%{$fg[red]%}<<%{$reset_color%}"
 
@@ -89,7 +89,7 @@ git_prompt_status() {
 
 function shorthost() {
     # echo the first two parts of the host's fqdn
-    uname -n | sed 's/\([^\.]*\.[^\.]*\)\..*/\1/'
+    uname -n | sed -e 's/\([^\.]*\.[^\.]*\)\..*/\1/' -e 's/\.nyc$//'
 }
 
 jobs_prompt_info() {
@@ -149,14 +149,13 @@ function exit_code() {
 
 function enable_prompt() {
     # Helps display previous commands exit code
-    PROMPT='$(exit_code)%{$fg[$NCOLOR]%}$(shorthost) %c $(jobs_prompt_info)$SYMBOL %{$reset_color%}'
-    # RPS1='$(prompt_pomodoro)%{$fg[$NCOLOR]%}$(git_prompt_info)$(virtualenv_prompt_info)%{$reset_color%}$(vi_mode_prompt_info)'
+    PROMPT='$(exit_code)%{$fg[$NCOLOR]%}$(shorthost) %2~ $(jobs_prompt_info)%# %{$reset_color%}'
     RPS1='%{$fg[$NCOLOR]%}$(git_prompt_info)$(virtualenv_prompt_info)%{$reset_color%}$(vi_mode_prompt_info)'
 }
 
 function disable_prompt() {
     unset RPS1
-    PROMPT='$SYMBOL '
+    PROMPT='%# '
 }
 
 function toggle_prompt() {
