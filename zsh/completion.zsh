@@ -1,41 +1,35 @@
-
-autoload -U compinit
-compinit -i -u -d "${HOME}/.zcompdumps/${HOST%%.*}-${EUID}-$ZSH_VERSION"
-
+unsetopt complete_in_word
 unsetopt correct
 unsetopt correct_all
+unsetopt glob_complete
 unsetopt menu_complete
-unsetopt auto_remove_slash
-unsetopt complete_in_word
-setopt auto_menu
 setopt always_to_end
 setopt auto_list
+setopt auto_menu
 setopt auto_param_slash
-setopt glob_complete
+setopt auto_remove_slash
 setopt list_packed
 setopt list_types
+setopt rec_exact
 
-WORDCHARS=''
-
+autoload -U compinit
 zmodload -i zsh/complist
-
-# Match case sensitively
-# zstyle ':completion:*' matcher-list 'r:|[._-]=* r:|=*' 
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+compinit -i -u -d "${HOME}/.zcompdumps/${HOST%%.*}-${EUID}-$ZSH_VERSION"
 
 zstyle ':completion:*' list-colors ''
+zstyle ':completion:*' verbose on
+zstyle ':completion:*' auto-description on
 
-zstyle ':completion:*:*:*:*:*' menu select
+# Start menu completion if there are 2 ambiguous choices
+zstyle ':completion:*' menu select=2 
 
-# disable named-directories autocompletion
-zstyle ':completion:*:cd:*' tag-order local-directories directory-stack path-directories
-cdpath=(.)
+# Each completion type gets a label, ...
+# zstyle ':completion:*:descriptions' format 'Completing %d'
+# zstyle ':completion:*' group-name ''
 
-# Use caching so that commands like apt and dpkg complete are useable
-zstyle ':completion::complete:*' use-cache 1
-
-# Tweak completion for kill command
-zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
+# Add some color to process/job lists in kill-completion
+zstyle ':completion:*:*:kill:*:processes' list-colors  '=(#b) #([0-9]#)*=0=01;31'
+zstyle ':completion:*:*:kill:*:jobs' list-colors  '=(#b) #(%[0-9]#)*=0=01;31'
 
 ps -ww >/dev/null 2>&1
 if [ $? ]; then
@@ -44,30 +38,10 @@ else
     zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
 fi
 
-# On macs, there are lots of users we dont care about
-# they all start with _
-zstyle ':completion:*:*:*:users' ignored-patterns \
-        $(awk -F: '/^_/ { print $1 }' /etc/passwd)
+# Ignore certain files in completion
+zstyle ':completion:*:(all-|)files' ignored-patterns '*?.o' '*?~' '*?.pyc' '*?.pyo'
 
-# On macs, there are lots of groups we dont care about
-# they all start with _
-zstyle ':completion:*:*:*:groups' ignored-patterns \
-        $(awk -F: '/^_/ { print $1 }' /etc/group)
 
-# In addition to the default /etc/hosts, ~/.ssh/known_hosts, we parse
-# ~/.ssh/config and a magic file ~/.host-completion file for additional hosts
-# to complete
-[ -f ~/.ssh/config ] && : ${(A)ssh_config_hosts:=${${${${(@M)${(f)"$(<$HOME/.ssh/config)"}:#Host *}#Host }:#*\**}:#*\?*}}
-[ -r ~/.ssh/known_hosts ] && _ssh_hosts=(${${${${(f)"$(<$HOME/.ssh/known_hosts)"}:#[\|]*}%%\ *}%%,*}) || _ssh_hosts=()
-[ -r ~/.host-completion ] && : ${(A)_host_completion:=${(s: :)${(ps:\t:)${${(f)~~"$(<$HOME/.host-completion)"}%%\#*}##[:blank:]#[^[:blank:]]#}}} || _host_completion=()
-[ -r /etc/hosts ] && : ${(A)_etc_hosts:=${(s: :)${(ps:\t:)${${(f)~~"$(</etc/hosts)"}%%\#*}##[:blank:]#[^[:blank:]]#}}} || _etc_hosts=()
-hosts=(
-  "$_ssh_config_hosts[@]"
-  "$_ssh_hosts[@]"
-  "$_etc_hosts[@]"
-  "$_host_completion[@]"
-  `hostname`
-  localhost
-)
+bindkey '^i' complete-word
 
-zstyle ':completion:*:hosts' hosts $hosts
+
