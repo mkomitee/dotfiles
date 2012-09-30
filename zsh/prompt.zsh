@@ -147,10 +147,14 @@ function exit_code() {
     echo "%(?,,%{$fg[red]%}[%?] %{$reset_color%})"
 }
 
+function history_prompt_info() {
+    echo "%{$fg[green]%}!%!%{$reset_color%}"
+}
+
 function enable_prompt() {
     # Helps display previous commands exit code
     PROMPT='$(exit_code)%{$fg[$NCOLOR]%}$(shorthost) %2~ $(jobs_prompt_info)%# %{$reset_color%}'
-    RPS1='%{$fg[$NCOLOR]%}$(git_prompt_info)$(virtualenv_prompt_info)%{$reset_color%}$(vi_mode_prompt_info)'
+    RPS1='%{$fg[$NCOLOR]%}$(git_prompt_info)$(virtualenv_prompt_info)%{$reset_color%}$(vi_mode_prompt_info)$(history_prompt_info)'
 }
 
 function disable_prompt() {
