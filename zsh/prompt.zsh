@@ -5,18 +5,20 @@ setopt prompt_subst
 setopt transient_rprompt
 
 
-if [ $UID -eq 0 ]; then NCOLOR="red"; else NCOLOR="yellow"; fi
-
-MODE_INDICATOR="%{$fg_bold[red]%}<%{$fg[red]%}<<%{$reset_color%}"
-
 ZSH_THEME_GIT_PROMPT_PREFIX="("
-ZSH_THEME_GIT_PROMPT_SUFFIX=") "
+ZSH_THEME_GIT_PROMPT_SUFFIX=")"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
 ZSH_THEME_GIT_PROMPT_DIRTY="✗"
 ZSH_THEME_GIT_PROMPT_AHEAD="+"
 
+RMODE_INDICATOR="%{$fg[red]%}<%{$fg[red]%}<< %{$reset_color%}"
+function vi_mode_rprompt_info() {
+  echo "${${KEYMAP/vicmd/$RMODE_INDICATOR}/(main|viins)/}"
+}
+
+MODE_INDICATOR="%{$fg[red]%}"
 function vi_mode_prompt_info() {
-  echo "${${KEYMAP/vicmd/$MODE_INDICATOR}/(main|viins)/}"
+    echo "${${KEYMAP/vicmd/$MODE_INDICATOR}/(main|viins)/}"
 }
 
 # Functions for git info in my prompt
@@ -152,9 +154,8 @@ function history_prompt_info() {
 }
 
 function enable_prompt() {
-    # Helps display previous commands exit code
-    PROMPT='$(exit_code)%{$fg[$NCOLOR]%}$(shorthost) %2~ $(jobs_prompt_info)%# %{$reset_color%}'
-    RPS1='%{$fg[$NCOLOR]%}$(git_prompt_info)$(virtualenv_prompt_info)%{$reset_color%}$(vi_mode_prompt_info)$(history_prompt_info)'
+    PROMPT='%{$fg[yellow]%}$(vi_mode_prompt_info)%# %{$reset_color%}'
+    RPS1='$(vi_mode_rprompt_info)$(jobs_prompt_info)$(exit_code)%{$fg[yellow]%}$(shorthost):%2~$(git_prompt_info) $(virtualenv_prompt_info)$(history_prompt_info)%{$reset_color%}'
 }
 
 function disable_prompt() {
