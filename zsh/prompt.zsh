@@ -11,14 +11,9 @@ ZSH_THEME_GIT_PROMPT_CLEAN=""
 ZSH_THEME_GIT_PROMPT_DIRTY="✗"
 ZSH_THEME_GIT_PROMPT_AHEAD="+"
 
-RMODE_INDICATOR="%{$fg[red]%}<%{$fg[red]%}<< %{$reset_color%}"
-function vi_mode_rprompt_info() {
-  echo "${${KEYMAP/vicmd/$RMODE_INDICATOR}/(main|viins)/}"
-}
-
 MODE_INDICATOR="%{$fg[red]%}"
 function vi_mode_prompt_info() {
-    echo "${${KEYMAP/vicmd/$MODE_INDICATOR}/(main|viins)/}"
+  echo "${${KEYMAP/vicmd/$MODE_INDICATOR}/(main|viins)/}"
 }
 
 # Functions for git info in my prompt
@@ -150,12 +145,12 @@ function exit_code() {
 }
 
 function history_prompt_info() {
-    echo "%{$fg[green]%}!%!%{$reset_color%}"
+    echo "!%!"
 }
 
 function enable_prompt() {
     PROMPT='%{$fg[yellow]%}$(vi_mode_prompt_info)%# %{$reset_color%}'
-    RPS1='$(vi_mode_rprompt_info)$(jobs_prompt_info)$(exit_code)%{$fg[yellow]%}$(shorthost):%2~$(git_prompt_info) $(virtualenv_prompt_info)$(history_prompt_info)%{$reset_color%}'
+    RPS1="$(jobs_prompt_info)$(exit_code)%{$fg_bold[black]%}$(shorthost):%3~$(git_prompt_info) $(virtualenv_prompt_info)$(history_prompt_info)%{$reset_color%}"
 }
 
 function disable_prompt() {
