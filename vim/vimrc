@@ -11,7 +11,6 @@ Bundle 'gmarik/vundle'
 Bundle 'AfterColors.vim'
 Bundle 'AndrewRadev/linediff.vim.git'
 Bundle 'AndrewRadev/switch.vim'
-Bundle 'IndexedSearch'
 Bundle 'LaTeX-Box'
 Bundle 'Lokaltog/vim-distinguished'
 Bundle 'MarcWeber/vim-addon-mw-utils'
@@ -216,6 +215,14 @@ set statusline+=l:%l/%L\ " line
 set statusline+=(%p%%)   " percentage thru file
 
 set whichwrap+=<,> " <Left> and <Right> can move to the previous/next line
+
+" Lets try this again. Center view when searching
+nnoremap n nzz
+nnoremap N Nzz
+
+" Same for the jumplist
+nnoremap <C-o> <C-o>zz
+nnoremap <C-i> <C-i>zz
 
 " j and k will go one line, even if they're wrapped
 nnoremap j gj
