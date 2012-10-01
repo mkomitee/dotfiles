@@ -1,10 +1,4 @@
 #!/bin/zsh
-alias sudo='nocorrect sudo'
-alias rm='nocorrect rm'
-alias rmdir='nocorrect rmdir'
-alias mv='nocorrect mv'
-alias mkdir='nocorrect mkdir'
-
 alias gp='git pull'
 alias gaa='git add -A'
 
