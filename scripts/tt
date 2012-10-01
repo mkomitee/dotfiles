@@ -1,0 +1,25 @@
+#!/bin/sh
+
+lflag=1
+args='--dirsfirst -CA --noreport'
+# set -- $(getopt 123456789 "$@")
+set -- $(getopt -l nolinks -l inodes -l device -l filelimit 123456789RadfghilnopqrstuvxACDFNSL:H:T:o:P:I: "$@")
+while [ $# -gt 0 ]
+do
+    case "$1" in
+        (-1) lflag=1;;
+        (-2) lflag=2;;
+        (-3) lflag=3;;
+        (-4) lflag=4;;
+        (-5) lflag=5;;
+        (-6) lflag=6;;
+        (-7) lflag=7;;
+        (-8) lflag=8;;
+        (-9) lflag=9;;
+        (--) shift; args="$args $1";;
+        (*) args="$args $1";;
+    esac
+    shift
+done
+args="tree $args -L $lflag"
+exec $args

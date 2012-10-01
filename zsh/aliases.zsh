@@ -16,4 +16,3 @@ alias dot='cd ~dot'
 alias vi=vim
 
 alias ack='noglob ack'
-alias tt='tree --dirsfirst -CA --noreport -L 1'
