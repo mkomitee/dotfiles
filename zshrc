@@ -3,7 +3,7 @@
 ZSH=$HOME/.dotfiles/zsh
 LIB=$HOME/.dotfiles/lib
 
-fpath=($ZSH $fpath)
+fpath=($ZSH $ZSH/lib $fpath)
 
 source $ZSH/pathrc.zsh
 source $ZSH/cdr.zsh
@@ -21,6 +21,7 @@ source $ZSH/prompt.zsh
 source $ZSH/colours.zsh
 source $ZSH/funny.zsh
 source $ZSH/latex.zsh
+source $ZSH/extract.zsh
 
 # GREP CONFIG
 export GREP_OPTIONS='--color=auto --exclude-dir=.git --exclude-dir=.svn --exclude-dir=CVS --binary-files=without-match'
