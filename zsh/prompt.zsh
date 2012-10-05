@@ -149,7 +149,7 @@ function history_prompt_info() {
 }
 
 function enable_prompt() {
-    PROMPT='%{$fg[yellow]%}$(vi_mode_prompt_info)%# %{$reset_color%}'
+    PROMPT='%{$fg[yellow]%}$(vi_mode_prompt_info)$(shorthost) %# %{$reset_color%}'
     RPS1="$(jobs_prompt_info)$(exit_code)%{$fg_bold[black]%}$(shorthost):%3~$(git_prompt_info) $(virtualenv_prompt_info)$(history_prompt_info)%{$reset_color%}"
 }
 
