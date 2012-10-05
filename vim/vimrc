@@ -316,6 +316,21 @@ cmap w!! w !sudo tee % >/dev/null<cr>
 
 nnoremap <c-c> :close<cr>
 
+" custom text objects around and in character pairs
+let pairs = { ':' : ':',
+            \ '.' : '.',
+            \ '<bar>' : '<bar>' }
+for [start, end] in items(pairs)
+    exe "nnoremap ci".start." T".start."ct".end
+    exe "nnoremap ca".start." F".start."cf".end
+    exe "nnoremap yi".start." T".start."yt".end
+    exe "nnoremap ya".start." F".start."yf".end
+    exe "nnoremap vi".start." T".start."vt".end
+    exe "nnoremap va".start." F".start."vf".end
+    exe "nnoremap di".start." T".start."dt".end
+    exe "nnoremap da".start." F".start."df".end
+endfor
+
 " TaskList
 nmap <leader>T <Plug>TaskList
 
