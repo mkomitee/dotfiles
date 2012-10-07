@@ -32,7 +32,7 @@ export ACK_COLOR_MATCH='red'
 export ACKRC=~/.dotfiles/ackrc
 
 # LESS CONFIG
-export LESS="-r"
+export LESS="-RMQ"
 
 # LS CONFIG
 # Find the option for using colors in ls, depending on the version: Linux or BSD
@@ -74,3 +74,12 @@ ACTIVATE="$HOME/.venv/$(uname).$(arch)/bin/activate"
 if [ -f $ACTIVATE ]; then
     . $ACTIVATE
 fi
+
+typeset -A abbreviations
+abbreviations=(
+"HEAD^"     "HEAD\\^"
+"HEAD^^"    "HEAD\\^\\^"
+"HEAD^^^"   "HEAD\\^\\^\\^"
+"HEAD^^^^"  "HEAD\\^\\^\\^\\^\\^"
+"HEAD^^^^^" "HEAD\\^\\^\\^\\^\\^"
+)
