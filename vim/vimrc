@@ -69,7 +69,7 @@ filetype plugin indent on
 if neobundle#exists_not_installed_bundles()
     echomsg 'Not installed bundles : ' . string(neobundle#get_not_installed_bundle_names())
     echomsg 'Please execute ":NeoBundleInstall" command.'
-endif 
+endif
 
 " Prepare our vim cache directories
 silent execute '!mkdir -p $HOME/.vimdata/vimbackup'
@@ -220,6 +220,7 @@ set formatoptions+=r " insert comment after hitting enter in a comment
 set formatoptions+=o " insert comment after 'o' or 'O' in normal mode
 set formatoptions+=q " format comments with gq
 set formatoptions+=n " recognize numbered lists
+set formatoptions+=1 " don't break a line after a 1 letter word
 
 set wildmode=              " reset wildmode
 set wildmode+=longest:full " complete til longest string, use wildmenu
@@ -269,7 +270,7 @@ command! -bang WA wa<bang>
 command! -bang Wq wq<bang>
 command! -bang WQ wq<bang>
 
-" Setup my colorscheme, ... 
+" Setup my colorscheme, ...
 " colorscheme badwolf
 colorscheme distinguished
 " Override some of distinguished's defaults
@@ -341,6 +342,16 @@ nnoremap <leader>egv :e$MYGVIMRC<CR>
 " Help in a vert split by default
 cnoremap help vert help
 
+" Use sane regexes
+nnoremap / /\v
+vnoremap / /\v
+
+" Tab between surrounding brackets
+nnoremap <tab> %
+vnoremap <tab> %
+
+" Strip whitespace
+nnoremap <leader>W :RemoveTrailingWhiteSpace<cr>
 
 " sudo write-file in case you opened a file you dont have privileges to write
 cmap w!! w !sudo tee % >/dev/null<cr>
@@ -372,10 +383,10 @@ nnoremap <leader>s :Switch<cr>
 let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'undo', 'line'. 'changes']
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_cache_dir = $HOME.'/.vimdata/ctrlp'
-let g:ctrlp_map = '<leader>p' 
+let g:ctrlp_map = '<leader>p'
 let g:ctrlp_mruf_relative = 1
 let g:ctrlp_reuse_window = 'netrw\|help'
-let g:ctrlp_dotfiles              = 0 
+let g:ctrlp_dotfiles              = 0
 nnoremap <leader>b :CtrlPBuffer<CR>
 nnoremap <leader>t :CtrlPTag<CR>
 nnoremap <leader>m :CtrlPMRU<CR>
@@ -431,7 +442,7 @@ nnoremap <leader>gm :Gmove<CR>
 nnoremap <leader>gr :Gremove<CR>
 nnoremap <leader>gp :! git push<CR>
 
-" Gundo 
+" Gundo
 let g:gundo_width           = 45 " horizontal width
 let g:gundo_preview_height  = 15 " vertical height
 let g:gundo_help            = 1  " show the help in gundo window
@@ -443,7 +454,7 @@ let g:gundo_preview_bottom  = 1  " previews below main window, not the tree
 let g:indexed_search_colors=1
 let g:indexed_search_shortmess=1
 
-" Tagbar 
+" Tagbar
 let g:tagbar_compact = 1 " don't show the help in the tagbar
 
 " Showmarks
@@ -501,7 +512,7 @@ let g:syntastic_quiet_warnings=0
 "
 " Neocomplcache
 let g:neocomplcache_enable_at_startup=1
-let g:neocomplcache_temporary_dir='~/.vimdata/neocomplcache' 
+let g:neocomplcache_temporary_dir='~/.vimdata/neocomplcache'
 
 "Gundo
 
