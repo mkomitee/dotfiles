@@ -1,50 +1,64 @@
-" Configure Bundler
-set rtp+=~/.vim/bundle/vundle
-call vundle#rc()
+" Configure NeoBundle
+"
+set nocompatible               " Be iMproved
+filetype off                   " Required!
+
+if has('vim_starting')
+    set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
+
+call neobundle#rc(expand('~/.vim/bundle/'))
+
 filetype on
 filetype plugin on
 filetype indent on
 syntax enable
 
 " Load Plugins
-Bundle 'gmarik/vundle'
-Bundle 'AfterColors.vim'
-Bundle 'AndrewRadev/linediff.vim.git'
-Bundle 'AndrewRadev/switch.vim'
-Bundle 'LaTeX-Box'
-Bundle 'Lokaltog/vim-distinguished'
-Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'Rainbow-Parenthsis-Bundle'
-Bundle 'ShowMarks'
-Bundle 'TaskList.vim'
-Bundle 'ajf/puppet-vim'
-" Bundle 'ervandew/supertab.git'
-Bundle 'godlygeek/tabular'
-Bundle 'jpalardy/vim-slime'
-Bundle 'kien/ctrlp.vim'
-Bundle 'majutsushi/tagbar'
-Bundle 'mileszs/ack.vim'
-Bundle 'mkomitee/vim-gf-python'
-Bundle 'mricon/puppet-eyes'
-Bundle 'msanders/snipmate.vim'
-Bundle 'python_match.vim'
-Bundle 'ruby-matchit'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/snipmate-snippets'
-" Bundle 'scrooloose/syntastic'
-Bundle 'sjl/badwolf'
-Bundle 'sjl/gundo.vim'
-Bundle 'sjl/splice.vim'
-Bundle 'tmatilai/gitolite.vim'
-Bundle 'tomtom/tlib_vim'
-Bundle 'tpope/vim-endwise'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-git'
-Bundle 'tpope/vim-markdown'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-unimpaired'
-Bundle 'xolox/vim-easytags'
+NeoBundle 'AfterColors.vim'
+NeoBundle 'AndrewRadev/linediff.vim.git'
+NeoBundle 'AndrewRadev/switch.vim'
+NeoBundle 'LaTeX-Box'
+NeoBundle 'Lokaltog/vim-distinguished'
+NeoBundle 'Rainbow-Parenthsis-Bundle'
+NeoBundle 'MarcWeber/vim-addon-mw-utils'
+" NeoBundle 'ervandew/supertab.git'
+" NeoBundle 'scrooloose/syntastic'
+NeoBundle 'ShowMarks'
+NeoBundle 'TaskList.vim'
+NeoBundle 'ajf/puppet-vim'
+NeoBundle 'godlygeek/tabular'
+NeoBundle 'jpalardy/vim-slime'
+NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'majutsushi/tagbar'
+NeoBundle 'mileszs/ack.vim'
+NeoBundle 'mkomitee/vim-gf-python'
+NeoBundle 'mricon/puppet-eyes'
+NeoBundle 'msanders/snipmate.vim'
+NeoBundle 'python_match.vim'
+NeoBundle 'ruby-matchit'
+NeoBundle 'scrooloose/nerdcommenter'
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'scrooloose/snipmate-snippets'
+NeoBundle 'sjl/badwolf'
+NeoBundle 'sjl/gundo.vim'
+NeoBundle 'sjl/splice.vim'
+NeoBundle 'tmatilai/gitolite.vim'
+NeoBundle 'tomtom/tlib_vim'
+NeoBundle 'tpope/vim-endwise'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'tpope/vim-git'
+NeoBundle 'tpope/vim-markdown'
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'tpope/vim-unimpaired'
+NeoBundle 'xolox/vim-easytags'
+
+filetype plugin indent on
+
+if neobundle#exists_not_installed_bundles()
+    echomsg 'Not installed bundles : ' . string(neobundle#get_not_installed_bundle_names())
+    echomsg 'Please execute ":NeoBundleInstall" command.'
+endif 
 
 " Prepare our vim cache directories
 silent execute '!mkdir -p $HOME/.vimdata/vimbackup'
