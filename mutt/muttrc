@@ -1,80 +1,127 @@
-# directories and commands
-set alias_file       = ~/.mutt-aliases       # alias file
+# Paths ----------------------------------------------
+set folder           = ~/.mail               # mailbox location
+set alias_file       = ~/.mutt/alias         # where to store aliases
 set header_cache     = ~/.mutt/cache/headers # where to store headers
 set message_cachedir = ~/.mutt/cache/bodies  # where to store bodies
 set certificate_file = ~/.mutt/certificates  # where to store certs
-set mailcap_path     = ~/.mutt/mailcap       # entrys for filetypes
-set signature        = ~/.mutt/sig           # my signature file
+set mailcap_path     = ~/.mutt/mailcap       # entries for filetypes
 set tmpdir           = ~/.mutt/temp          # where to keep temp files
-set print_command    = /usr/bin/enscript     # print with enscript
+set signature        = ~/.mutt/sig           # my signature file
 
-# Use Vim to compose email, with a few default options.
-set editor = "vim +/^$ +:s/^$/\\\\r\\\\r/ +:noh -c 'normal! k' -c 'set nolist' -c 'redraw'"
+# Basic Options --------------------------------------
+set wait_key = no        # shut up, mutt
+set mbox_type = Maildir  # mailbox type
+set timeout = 3          # idle time before scanning
+set mail_check = 0       # minimum time between scans
+unset move               # gmail does that
+set delete               # don't ask, just do
+unset confirmappend      # don't ask, just do!
+set quit                 # don't ask, just do!!
+unset mark_old           # read/new is good enough for me
+set beep_new             # bell on new mails
+set pipe_decode          # strip headers and eval mimes when piping
+set thorough_search      # strip headers and eval mimes before searching
 
-# Use the OS X address book
-# set query_command = "lbdbq '%s' | sed -e 's/(null)//g'"
-# set query_command = "contacts -Sf '%eTOKEN%n' '%s' | sed -e 's/TOKEN/\t/g'"
-bind editor <Tab> complete-query
-bind editor ^T    complete
-bind editor <space> noop 
+# Sidebar Patch --------------------------------------
+set sidebar_delim   = '  │'
+set sidebar_visible = yes
+set sidebar_width   = 24
+color sidebar_new color221 color233
 
-# main options
-set spoolfile = "+INBOX"
-set imap_check_subscribed
-set hostname = gmail.com
-set imap_keepalive = 300
-set postponed = "+[Gmail]/Drafts"
-set record = "+[Gmail]/Sent Mail"
-set spoolfile = "+INBOX"
-set postponed = "+[Gmail]/Drafts"
-set record = "+[Gmail]/Sent Mail"
-set wait_key = no
-set timeout = 3           # idle time before scanning
-set mail_check = 120      # minimum time between scans
-set sort_alias = alias    # sort alias file by alias
-set reverse_alias         # show names from alias file in index
-unset move                # gmail does that
-set delete                # don't ask, just do
-unset confirmappend       # don't ask, just do!
-set quit                  # don't ask, just do!!
-unset mark_old            # read/new is good enough for me
-set beep_new              # bell on new mails
-set pipe_decode           # strip headers and eval mimes when piping
-set thorough_search       # strip headers and eval mimes before searching
+# Status Bar -----------------------------------------
+set status_chars  = " *%A"
+set status_format = "───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───"
 
-# index options
+# Header Options -------------------------------------
+ignore *                                # ignore all headers
+unignore from: to: cc: date: subject:   # show only these
+hdr_order from: to: cc: date: subject:  # and in this order
+
+# Account Settings -----------------------------------
+
+# Default inbox.
+set spoolfile = "+mkomitee-gmail.com/INBOX"
+
+# Alternate email addresses.
+# alternates 
+
+# Mailboxes to show in the sidebar.
+mailboxes +mkomitee-gmail.com/INBOX \
+          +mkomitee-gmail.com/archive \
+          +mkomitee-gmail.com/sent \
+          +mkomitee-gmail.com/drafts \
+          +mkomitee-gmail.com/notes \
+          +temporary/search
+
+
+# Other special folders.
+set mbox      = "+mkomitee-gmail.com/archive"
+set postponed = "+mkomitee-gmail.com/drafts"
+
+# Index View Options ---------------------------------
+set date_format = "%m/%d"
+set index_format = "[%Z]  %D  %-20.20F  %s"
 set sort = threads                         # like gmail
 set sort_aux = reverse-last-date-received  # like gmail
 set uncollapse_jump                        # don't collapse on an unread message
 set sort_re                                # thread based on regex
 set reply_regexp = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
 
-# pager options
+# Index Key Bindings ---------------------------------
+bind index gg       first-entry
+bind index G        last-entry
+
+bind index R        group-reply
+bind index <tab>    sync-mailbox
+bind index <space>  collapse-thread
+
+# Ctrl-R to mark all as read
+macro index \Cr "T~U<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" "mark all messages as read"
+
+# Sync email
+macro index O "<shell-escape>offlineimap<enter>"           "run offlineimap to sync all mail"
+macro index o "<shell-escape>offlineimap -qf INBOX<enter>" "run offlineimap to sync inbox"
+
+# Saner copy/move dialogs
+macro index C "<copy-message>?<toggle-mailboxes>" "copy a message to a mailbox"
+macro index M "<save-message>?<toggle-mailboxes>" "move a message to a mailbox"
+
+# Sidebar Navigation ---------------------------------
+bind index,pager <down>   sidebar-next
+bind index,pager <up>     sidebar-prev
+bind index,pager <right>  sidebar-open
+
+# Pager View Options ---------------------------------
 set pager_index_lines = 10 # number of index lines to show
-set pager_context = 5      # number of context lines to show
+set pager_context = 3      # number of context lines to show
 set pager_stop             # don't go to next message automatically
 set menu_scroll            # scroll in menus
-set smart_wrap             # don't split words
 set tilde                  # show tildes like in vim
 unset markers              # no ugly plus signs
+
 set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
+alternative_order text/plain text/enriched text/html
 
-auto_view text/html                                   # view html automatically
-alternative_order text/plain text/enriched text/html  # but prefer non-html
+# Pager Key Bindings ---------------------------------
+bind pager k  previous-line
+bind pager j  next-line
+bind pager gg top
+bind pager G  bottom
 
-# formats
-set date_format   = "%m/%d at %I:%M %P"
-set index_format  = "[%Z]  %D  %-20.20F  %s"
-set status_format = "-%r- %v ---[ Folder: %f, Msgs: %m%?n? New: %n?%?d? Del: %d?%?t? Tag: %t?%?l? %l? ]%?p?---- .: %p waiting to send :. ?--%>- (%P) ---"
-set alias_format  = "%4n %t %-20a  %r"
+bind pager R  group-reply
 
-# composing mail
+# View attachments properly.
+bind attach <return> view-mailcap
+
+# urlview --------------------------------------------
+macro pager \Cu "|urlview<enter>" "call urlview to open links"
+
+# Compose View Options -------------------------------
 set realname = "Michael Komitee"     # who am i?
 set envelope_from                    # which from?
 set sig_dashes                       # dashes before sig
 set edit_headers                     # show headers when composing
 set fast_reply                       # skip to compose when replying
-set sendmail_wait = 0                # wait for sending to successfully finish, because email is important
 set askcc                            # ask for CC:
 set fcc_attach                       # save attachments with the body
 unset mime_forward                   # forward attachments as part of body
@@ -85,62 +132,25 @@ set reply_to                         # reply to Reply to: field
 set reverse_name                     # reply as whomever it was to
 set include                          # include message in replies
 set forward_quote                    # include message in forwards
+set editor = "vim"                   # Use terminal Vim to compose email.
 
-# headers to show
-ignore *                                # ignore all headers
-unignore from: to: cc: date: subject:   # show only these
-hdr_order from: to: cc: date: subject:  # and in this order
+set from     = "mkomitee@gmail.com"
+set sendmail = "/usr/local/bin/msmtp -a gmail"
+set sendmail_wait = 0
+unset record
 
-# always sourced
-source ~/.vim/bundle/badwolf/contrib/badwolf.muttrc  # colorscheme
-source ~/.mutt/sidebar.muttrc                        # sidebar
-source ~/.mutt-aliases
+bind compose p postpone-message
+bind index p recall-message
 
-# unbind problematic keys
-bind index,pager \# noop
-bind index i        noop
-bind index w        noop
+set query_command = "contacts -Sf '%eTOKEN%n' '%s' | sed -e 's/TOKEN/\t/g'"
+bind editor <Tab> complete-query
+bind editor ^T    complete
 
-# basic bindings
-bind pager i        exit
-bind pager /        search
-bind pager k        previous-line
-bind pager j        next-line
-bind pager gg       top
-bind pager G        bottom
-bind index,pager R  group-reply
-bind index <tab>    sync-mailbox
-bind index k        previous-entry
-bind index j        next-entry
-bind index gg       first-entry
-bind index G        last-entry
-bind index \Cp      recall-message
-bind index <space>  collapse-thread
+bind index N search-opposite
+bind pager N search-opposite
 
-# Searching bodies
-macro index B "<limit>~b " "search message bodies"
+macro index a "<limit>all\n" "show all messages (undo limit)"
 
-# Opening links in mail
-macro pager \Cu "|urlview<enter>" "call urlview to open links"
+macro index S "<enter-command>unset wait_key<enter><shell-escape>mutt-notmuch-py ~/.mail/temporary/search<enter><change-folder-readonly>+temporary/search<enter>" "search mail (using notmuch)"
 
-# Mark all as read
-# macro index \Cr "T~U<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" "mark all messages as read"
-
-# Open message in MacVim
-macro index,pager M "|mvim -c 'setlocal ft=mail' -c 'setlocal buftype=nofile' - >/dev/null<enter>"  "open in macvim"
-macro index,pager * "C=[Gmail]/Starred<enter>" "Star message"
-
-# quickly change date formats
-macro index <esc>f ":set date_format = \"%m/%d\"<enter>"             "short date format"
-macro index <esc>F ":set date_format = \"%m/%d at %I:%M %P\"<enter>" "long date format"
-
-# Gmail-style keyboard shortcuts
-macro index,pager y "<enter-command>unset trash\n <delete-message>" "Gmail archive message"
-macro index,pager d "<enter-command>set trash=\"+[Gmail]/Trash\"\n <delete-message>" "Gmail delete message"
-macro index,pager gi "<change-folder>=INBOX<enter>" "Go to inbox"
-macro index,pager ga "<change-folder>=[Gmail]/All Mail<enter>" "Go to all mail"
-macro index,pager gs "<change-folder>=[Gmail]/Starred<enter>" "Go to starred messages"
-macro index,pager gd "<change-folder>=[Gmail]/Drafts<enter>" "Go to drafts"
-
-# save a decoded copy in ~
-macro index,pager P   "<pipe-message>cat > ~/Desktop/"  "save message as"
+source ~/.vim/bundle/badwolf/contrib/badwolf.muttrc
