@@ -273,10 +273,6 @@ command! -bang WQ wq<bang>
 " Setup my colorscheme, ...
 " colorscheme badwolf
 colorscheme distinguished
-" Override some of distinguished's defaults
-hi CursorLine ctermfg=NONE ctermbg=234 guifg=NONE
-hi CursorColumn ctermfg=NONE ctermbg=234 guifg=NONE
-hi CtrlPLinePre ctermfg=88 ctermbg=NONE
 
 " Highlight VCS conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
