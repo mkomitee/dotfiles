@@ -31,6 +31,7 @@ source $ZSH/latex.zsh
 source $ZSH/extract.zsh
 
 if [ -d $CONTRIB/zsh-users/zsh-syntax-highlighting ]; then
+    ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
     source $CONTRIB/zsh-users/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
