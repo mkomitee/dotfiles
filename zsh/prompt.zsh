@@ -42,17 +42,17 @@ function virtualenv_prompt() {
     if [ "$VIRTUAL_ENV" != "" ]; then
         VENV=$(basename $VIRTUAL_ENV)
         if [ "$VENV" != "$(uname).$(arch)" ]; then
-            echo '['`basename $VIRTUAL_ENV`'] '
+            echo "[$VENV] "
         fi
     fi
 }
 
 function exit_code() {
-    echo "%(?,,%{$fg[red]%}[%?] %{$reset_color%})"
+    echo "%(?,,%{$fg[red]%}[%?]%{$reset_color%})"
 }
 
 function history_prompt() {
-    echo "!%!"
+    echo "%{$fg_bold[black]%}!%!%{$reset_color%}"
 }
 
 function enable_prompt() {
@@ -62,7 +62,7 @@ function enable_prompt() {
 function setup_prompt() {
     if [ "$PROMPT_DISABLED" != "1" ]; then
         PROMPT='$(vi_prompt)$(shorthost) %{$fg[yellow]%}%# %{$reset_color%}'
-        RPROMPT="$(vi_rprompt)$(jobs_prompt)$(exit_code)%{$fg_bold[black]%}%3~$(git_prompt) $(virtualenv_prompt)$(history_prompt)%{$reset_color%}"
+        RPROMPT="%{$fg_bold[black]%}%3~ $(jobs_prompt)$(exit_code) $(history_prompt)%{$reset_color%}"
     fi
 }
 
