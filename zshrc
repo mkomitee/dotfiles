@@ -1,9 +1,12 @@
 #!/bin/zsh
 
-ZSH=$HOME/.dotfiles/zsh
-LIB=$HOME/.dotfiles/lib
 
-fpath=($ZSH $ZSH/lib $fpath)
+DOT=$HOME/.dotfiles
+ZSH=$DOT/zsh
+LIB=$DOT/lib
+CONTRIB=$DOT/contrib
+
+fpath=($ZSH $CONTRIB/zsh-users/zsh-completions/src $fpath)
 
 source $ZSH/pathrc.zsh
 source $ZSH/cdr.zsh
