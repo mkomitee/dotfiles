@@ -21,16 +21,6 @@ NeoBundle 'AndrewRadev/switch.vim'
 NeoBundle 'LaTeX-Box'
 NeoBundle 'Lokaltog/vim-distinguished'
 NeoBundle 'Rainbow-Parenthsis-Bundle'
-NeoBundle 'Shougo/neocomplcache'
-NeoBundle 'Shougo/neocomplcache',
-      \ { 'depends' : 'Shougo/neocomplcache-snippets-complete' }
-NeoBundle 'Shougo/neocomplcache-snippets-complete'
-NeoBundle 'Shougo/vimproc', {
-      \ 'build' : {
-      \     'mac' : 'make -f make_mac.mak',
-      \     'unix' : 'make -f make_unix.mak',
-      \    },
-      \ }
 NeoBundle 'ShowMarks'
 NeoBundle 'TaskList.vim'
 NeoBundle 'ajf/puppet-vim'
@@ -506,10 +496,6 @@ let g:syntastic_quiet_warnings=0
     " au CursorMoved * execute 'SyntasticCheck'
 " augroup END
 "
-" Neocomplcache
-let g:neocomplcache_enable_at_startup=1
-let g:neocomplcache_temporary_dir='~/.vimdata/neocomplcache'
-
 "Gundo
 
 
