@@ -95,3 +95,5 @@ abbreviations=(
 "HEAD^^^^"  "HEAD\\^\\^\\^\\^\\^"
 "HEAD^^^^^" "HEAD\\^\\^\\^\\^\\^"
 )
+
+KEYTIMEOUT=1
