@@ -8,6 +8,10 @@ CONTRIB=$DOT/contrib
 
 fpath=($ZSH $CONTRIB/zsh-users/zsh-completions/src $fpath)
 
+if [ -d $CONTRIB/zsh-users/zsh-completions/src ] ; then
+    fpath=($fpath $CONTRIB/zsh-users/zsh-completions/src)
+fi
+
 source $ZSH/pathrc.zsh
 source $ZSH/cdr.zsh
 source $ZSH/rvm.zsh
@@ -25,6 +29,10 @@ source $ZSH/colours.zsh
 source $ZSH/funny.zsh
 source $ZSH/latex.zsh
 source $ZSH/extract.zsh
+
+if [ -d $CONTRIB/zsh-users/zsh-syntax-highlighting ]; then
+    source $CONTRIB/zsh-users/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
 
 # GREP CONFIG
 export GREP_OPTIONS='--color=auto --exclude-dir=.git --exclude-dir=.svn --exclude-dir=CVS --binary-files=without-match'
