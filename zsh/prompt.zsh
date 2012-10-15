@@ -80,4 +80,5 @@ function toggle_prompt() {
     fi
 }
 
+autoload -U add-zsh-hook
 add-zsh-hook precmd setup_prompt
