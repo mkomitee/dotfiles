@@ -1,5 +1,5 @@
 set nocompatible
-filetype off
+" filetype off
 
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
@@ -8,34 +8,22 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 Bundle 'AfterColors.vim'
 Bundle 'Lokaltog/vim-distinguished'
-Bundle 'Rainbow-Parenthsis-Bundle'
 Bundle 'ShowMarks'
-Bundle 'TaskList.vim'
 Bundle 'ajf/puppet-vim'
 Bundle 'godlygeek/tabular'
 Bundle 'jpalardy/vim-slime'
 Bundle 'kien/ctrlp.vim'
 Bundle 'majutsushi/tagbar'
-Bundle 'mileszs/ack.vim'
-Bundle 'mricon/puppet-eyes'
 Bundle 'msanders/snipmate.vim'
 Bundle 'python_match.vim'
 Bundle 'scrooloose/nerdcommenter'
-Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/snipmate-snippets'
-Bundle 'sjl/badwolf'
-Bundle 'sjl/gundo.vim'
 Bundle 'tmatilai/gitolite.vim'
-Bundle 'tomtom/tlib_vim'
-Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-git'
 Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-unimpaired'
 Bundle 'xolox/vim-easytags'
-Bundle 'ZoomWin'
-Bundle 'kana/vim-scratch'
 
 syntax on
 filetype plugin indent on
@@ -242,29 +230,6 @@ let mapleader = " "     " this may change soon, I keep wanting to have the
                         " default behavior work for ,.
 let localleader = '\\'
 
-augroup vimmemory
-    au!
-    " When editing a file, always jump to the last known cursor position.
-    " Don't do it when the position is invalid or when inside an event handler
-    " (happens when dropping a file on gvim).
-    " Also don't do it when the mark is in the first line, that is the default
-    " position when opening a file.
-    au BufReadPost *
-                \ if line("'\"") > 1 && line("'\"") <= line("$")  |
-                \   exe "normal! g`\"" |
-                \ endif
-    " use views to restore more state
-    au BufWinLeave * silent! mkview
-    au BufWinEnter * silent! loadview
-augroup END
-
-" Poor mans security
-augroup encryption
-    au!
-    au BufRead,BufNewFile *.crypt set noswapfile
-    au BufRead,BufNewFile *.crypt set bufhidden=wipe
-augroup END
-
 " Simple map to disable highlighting
 nnoremap // :nohl<cr>
 
@@ -289,14 +254,9 @@ vnoremap < <gv
 " make Y consistant with C and D. Yank to end of line
 noremap Y y$
 
-nnoremap <Leader>z :ZoomWin<cr>
-
 " Easily modify ~/.{g,}vimrc
 nnoremap <leader>ev :e $MYVIMRC<CR>
 nnoremap <leader>egv :e$MYGVIMRC<CR>
-
-" Help in a vert split by default
-cnoremap help vert help
 
 " Use sane regexes
 nnoremap / /\v
@@ -329,8 +289,53 @@ for [start, end] in items(pairs)
     exe "nnoremap da".start." F".start."df".end
 endfor
 
-" TaskList
-nmap <leader>T <Plug>TaskList
+" Remove F1 Help
+inoremap <F1> <nop>
+nnoremap <F1> <nop>
+vnoremap <F1> <nop>
+
+" Show git diff when commiting
+autocmd FileType gitcommit DiffGitCached | wincmd p
+
+" Easy window resizing
+noremap <up> <C-W>+
+noremap <down> <C-W>-
+nnoremap <left> <C-W><
+nnoremap <right> <C-W>>
+
+" . returns to starting place
+nnoremap . .`[
+
+" Simple way to find out where the hell my cursor is
+function WhereAmI()
+    set invcursorline
+    set invcursorcolumn
+endfunction
+
+nnoremap <leader>? :call WhereAmI()<cr>
+
+function! WhatGroup()
+    if !exists("*synstack")
+        return
+    endif
+    echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
+command! WhatGroup :call WhatGroup()
+
+
+function! RemoveTrailingWhiteSpace()
+    " Preparation: save last search, and cursor position.
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " Do the business:
+    %s/\s\+$//e
+    " Clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
+endfun
+
+command! RemoveTrailingWhiteSpace :call RemoveTrailingWhiteSpace()
 
 " Ctrl+P
 let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'undo', 'line'. 'changes']
@@ -346,13 +351,6 @@ nnoremap <leader>m :CtrlPMRU<CR>
 "  <C-t> → will open the finding match in a tab
 "  <C-v> → will open the finding match in a vertical split
 "  <C-h> → will open the finding match in a horizontal split
-
-"  Ack.vim
-"  :o → open the selected file in the current window
-"  :go → open preview but will stay in the quickfix preview window
-"  :t → open the selected file in a new tab
-"  :v → vertical split
-"  :q → quit the Ack window
 
 " Tabularize
 vnoremap <silent> <Leader>a=> :Tabularize /=><CR>
@@ -392,14 +390,6 @@ nnoremap <leader>gm :Gmove<CR>
 nnoremap <leader>gr :Gremove<CR>
 nnoremap <leader>gp :! git push<CR>
 
-" Gundo
-let g:gundo_width           = 45 " horizontal width
-let g:gundo_preview_height  = 15 " vertical height
-let g:gundo_help            = 1  " show the help in gundo window
-let g:gundo_close_on_revert = 0  " don't close gundo after a version is selected
-let g:gundo_right           = 1  " display gundo on the left site
-let g:gundo_preview_bottom  = 1  " previews below main window, not the tree
-
 " Tagbar
 let g:tagbar_compact = 1 " don't show the help in the tagbar
 
@@ -427,21 +417,10 @@ nmap <leader>cc <plug>NERDCommenterToggle
 nmap <leader><leader> <plug>NERDCommenterToggle
 nmap <leader>c$ <plug>NERDCommenterToEOL
 
-" NERDTree.vim
-let g:NERDTreeDirArrows = 1
-let g:NERDTreeMinimalUI = 1
-let NERDTreeIgnore=['\~$', '\.swp$', '^CVS$', '\.svn$', '^CVSROOT$', '^\.git$', '\.pyc$', '\.pyo$']
-noremap <Leader>dd :NERDTreeToggle<CR>
-noremap <Leader>df :NERDTreeFind<CR>
-
-" Load experimental library
-source ~/.vim/experimental.vim
-
-" Load additional functions
-source ~/.vim/functions.vim
+" NetRW
+let g:netrw_liststyle = 3
+let g:netrw_menu = 0
+let g:netrw_list_hide="^.git$,^CVS$,^.svn$,\.py[co]$,\.swp$,^CVSROOT$,\\~$"
 
 " Load abbreviations
 source ~/.vim/abbrev
-
-" Modelines:
-" vim: nowrap fdm=marker ft=vim
