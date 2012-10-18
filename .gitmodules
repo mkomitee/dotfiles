@@ -1,9 +1,9 @@
-[submodule "vim/bundle/neobundle.vim"]
-	path = vim/bundle/neobundle.vim
-	url = git://github.com/Shougo/neobundle.vim
 [submodule "contrib/zsh-users/zsh-completions"]
 	path = contrib/zsh-users/zsh-completions
 	url = https://github.com/zsh-users/zsh-completions
 [submodule "contrib/zsh-users/zsh-syntax-highlighting"]
 	path = contrib/zsh-users/zsh-syntax-highlighting
 	url = git://github.com/zsh-users/zsh-syntax-highlighting.git
+[submodule "vim/bundle/vundle"]
+	path = vim/bundle/vundle
+	url = https://github.com/gmarik/vundle.git

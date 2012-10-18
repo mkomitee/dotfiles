@@ -1,65 +1,44 @@
-" Configure NeoBundle
-"
-set nocompatible               " Be iMproved
-filetype off                   " Required!
+set nocompatible
+filetype off
 
-if has('vim_starting')
-    set runtimepath+=~/.vim/bundle/neobundle.vim/
-endif
-
-call neobundle#rc(expand('~/.vim/bundle/'))
-
-filetype on
-filetype plugin on
-filetype indent on
-syntax enable
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
 
 " Load Plugins
-NeoBundle 'AfterColors.vim'
-NeoBundle 'AndrewRadev/linediff.vim.git'
-NeoBundle 'AndrewRadev/switch.vim'
-NeoBundle 'LaTeX-Box'
-NeoBundle 'Lokaltog/vim-distinguished'
-NeoBundle 'Rainbow-Parenthsis-Bundle'
-NeoBundle 'ShowMarks'
-NeoBundle 'TaskList.vim'
-NeoBundle 'ajf/puppet-vim'
-NeoBundle 'godlygeek/tabular'
-NeoBundle 'jpalardy/vim-slime'
-NeoBundle 'kien/ctrlp.vim'
-NeoBundle 'majutsushi/tagbar'
-NeoBundle 'mileszs/ack.vim'
-NeoBundle 'mkomitee/vim-gf-python'
-NeoBundle 'mricon/puppet-eyes'
-NeoBundle 'msanders/snipmate.vim'
-NeoBundle 'python_match.vim'
-NeoBundle 'ruby-matchit'
-NeoBundle 'scrooloose/nerdcommenter'
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'scrooloose/snipmate-snippets'
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'sjl/badwolf'
-NeoBundle 'sjl/gundo.vim'
-NeoBundle 'sjl/splice.vim'
-NeoBundle 'tmatilai/gitolite.vim'
-NeoBundle 'tomtom/tlib_vim'
-NeoBundle 'tpope/vim-endwise'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'tpope/vim-git'
-NeoBundle 'tpope/vim-markdown'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'tpope/vim-unimpaired'
-NeoBundle 'xolox/vim-easytags'
-NeoBundle 'gregsexton/gitv'
-NeoBundle 'ZoomWin'
-NeoBundle 'kana/vim-scratch'
+Bundle 'gmarik/vundle'
+Bundle 'AfterColors.vim'
+Bundle 'Lokaltog/vim-distinguished'
+Bundle 'Rainbow-Parenthsis-Bundle'
+Bundle 'ShowMarks'
+Bundle 'TaskList.vim'
+Bundle 'ajf/puppet-vim'
+Bundle 'godlygeek/tabular'
+Bundle 'jpalardy/vim-slime'
+Bundle 'kien/ctrlp.vim'
+Bundle 'majutsushi/tagbar'
+Bundle 'mileszs/ack.vim'
+Bundle 'mricon/puppet-eyes'
+Bundle 'msanders/snipmate.vim'
+Bundle 'python_match.vim'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/snipmate-snippets'
+Bundle 'sjl/badwolf'
+Bundle 'sjl/gundo.vim'
+Bundle 'tmatilai/gitolite.vim'
+Bundle 'tomtom/tlib_vim'
+Bundle 'tpope/vim-endwise'
+Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-git'
+Bundle 'tpope/vim-markdown'
+Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-unimpaired'
+Bundle 'xolox/vim-easytags'
+Bundle 'ZoomWin'
+Bundle 'kana/vim-scratch'
 
+syntax on
 filetype plugin indent on
-
-if neobundle#exists_not_installed_bundles()
-    echomsg 'Not installed bundles : ' . string(neobundle#get_not_installed_bundle_names())
-    echomsg 'Please execute ":NeoBundleInstall" command.'
-endif
 
 " Prepare our vim cache directories
 silent execute '!mkdir -p $HOME/.vimdata/vimbackup'
@@ -116,11 +95,6 @@ set directory=$HOME/.vimdata/vimswap/   " save swap files here
 set viewdir=$HOME/.vimdata/vimviews/    " save views here
 set wildmenu                   " commandline completion is nice
 
-" Try desparately to tweak the cursor
-set guicursor=n-v-c:block-Cursor
-set guicursor+=i:ver20-Cursor-blinkon600-blinkoff600
-set guicursor+=n-v-c:block-Cursor-blinkon600-blinkoff600
-
 " Use a bar-shaped cursor for insert mode, even through tmux.
 if exists('$TMUX')
     let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
@@ -128,10 +102,6 @@ if exists('$TMUX')
 else
     let &t_SI = "\<Esc>]50;CursorShape=1\x7"
     let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-endif
-
-if has('mouse')
-    set mouse=a " If a mouse is available, use it in all modes
 endif
 
 if exists('&undofile')
@@ -362,9 +332,6 @@ endfor
 " TaskList
 nmap <leader>T <Plug>TaskList
 
-" Switch
-nnoremap <leader>s :Switch<cr>
-
 " Ctrl+P
 let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'undo', 'line'. 'changes']
 let g:ctrlp_cmd = 'CtrlP'
@@ -436,10 +403,6 @@ let g:gundo_close_on_revert = 0  " don't close gundo after a version is selected
 let g:gundo_right           = 1  " display gundo on the left site
 let g:gundo_preview_bottom  = 1  " previews below main window, not the tree
 
-" IndexedSearch
-let g:indexed_search_colors=1
-let g:indexed_search_shortmess=1
-
 " Tagbar
 let g:tagbar_compact = 1 " don't show the help in the tagbar
 
@@ -473,34 +436,6 @@ let g:NERDTreeMinimalUI = 1
 let NERDTreeIgnore=['\~$', '\.swp$', '^CVS$', '\.svn$', '^CVSROOT$', '^\.git$', '\.pyc$', '\.pyo$']
 noremap <Leader>dd :NERDTreeToggle<CR>
 noremap <Leader>df :NERDTreeFind<CR>
-
-" Syntastic
-let g:syntastic_check_on_open=1
-let g:syntastic_echo_current_error=1
-let g:syntastic_enable_signs=1
-let g:syntastic_error_symbol='✗'
-let g:syntastic_warning_symbol='⚠'
-let g:syntastic_enable_balloons = 0
-let g:syntastic_enable_highlighting = 1
-let g:syntastic_auto_jump=0
-let g:syntastic_auto_loc_list=2
-let g:syntastic_loc_list_height=2
-let g:syntastic_mode_map = { 'mode': 'active',
-                           \ 'active_filetypes': ['python', 'perl'],
-                           \ 'passive_filetypes': [] }
-let g:syntastic_quiet_warnings=0
-
-" This may cause a lot of processing, but we can disable it if it causes problems
-" augroup syntastic
-    " au!
-    " au CursorMoved * execute 'SyntasticCheck'
-" augroup END
-"
-"Gundo
-
-
-" Supertab
-" let g:SuperTabDefaultCompletionType = "context"
 
 " Load experimental library
 source ~/.vim/experimental.vim
