@@ -208,7 +208,7 @@ nnoremap N Nzz
 
 " Same for the jumplist
 nnoremap <C-o> <C-o>zz
-nnoremap <C-i> <C-i>zz
+nnoremap <C-i> <C-i>zz   " FIXME - this doesnt work?
 
 " j and k will go one line, even if they're wrapped
 nnoremap j gj
@@ -304,8 +304,8 @@ inoremap <F1> <nop>
 nnoremap <F1> <nop>
 vnoremap <F1> <nop>
 
-" Show git diff when commiting
-autocmd FileType gitcommit DiffGitCached | wincmd p
+" Show git diff when commiting  FIXME this conflicts with fugitive
+" autocmd FileType gitcommit DiffGitCached | wincmd p
 
 " Easy window resizing
 noremap <up> <C-W>+
