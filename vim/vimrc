@@ -181,14 +181,24 @@ set wildignore+=*.sw?                          " ignore swap files
 set wildignore+=*.DS_Store                     " ignore mac crap
 set wildignore+=*.pyc,*.pyo                    " ignore pyton compiled objects
 
-set statusline=          " clear statusline
-set statusline+=%F\      " full filename
-set statusline+=%m%r%w   " flags
-set statusline+=%y\      " filetype
-set statusline+=%=       " seperator
-set statusline+=c:%c\    " column
-set statusline+=l:%l/%L\ " line
-set statusline+=(%p%%)   " percentage thru file
+function! GitStatusLine()
+    let git_info = fugitive#head(8)
+    if git_info != ''
+        return "Git(".git_info.")"
+    else
+        return ''
+    endif
+endfunction
+
+set statusline=                            " clear statusline
+set statusline+=%F\                        " full filename
+set statusline+=%m%r%w                     " flags
+set statusline+=%y\                        " filetype
+set statusline+=%=                         " seperator
+set statusline+=%{GitStatusLine()}\  " Git branch info
+set statusline+=c:%c\                      " column
+set statusline+=l:%l/%L\                   " line
+set statusline+=(%p%%)                     " percentage thru file
 
 set whichwrap+=<,> " <Left> and <Right> can move to the previous/next line
 
