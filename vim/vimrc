@@ -313,7 +313,7 @@ nnoremap <right> <C-W>>
 nnoremap . .`[
 
 " Simple way to find out where the hell my cursor is
-function WhereAmI()
+function! WhereAmI()
     set invcursorline
     set invcursorcolumn
 endfunction
