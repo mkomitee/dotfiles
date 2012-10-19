@@ -243,10 +243,6 @@ let localleader = '\\'
 " Simple map to disable highlighting
 nnoremap // :nohl<cr>
 
-" Simple resizing of windows
-noremap + <c-W>+
-noremap - <c-W>-
-
 " Easier navigation between open windows
 nnoremap <C-k> <C-W>k
 nnoremap <C-j> <C-W>j
