@@ -283,6 +283,7 @@ nnoremap <c-c> :close<cr>
 " custom text objects around and in character pairs
 let pairs = { ':' : ':',
             \ '.' : '.',
+            \ ',' : ',',
             \ '/' : '/',
             \ '<bar>' : '<bar>' }
 for [start, end] in items(pairs)
