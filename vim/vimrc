@@ -229,7 +229,6 @@ command! -bang Wq wq<bang>
 command! -bang WQ wq<bang>
 
 " Setup my colorscheme, ...
-" colorscheme badwolf
 colorscheme distinguished
 
 " Highlight VCS conflict markers
@@ -304,6 +303,14 @@ vnoremap <F1> <nop>
 
 " Show git diff when commiting  FIXME this conflicts with fugitive
 " autocmd FileType gitcommit DiffGitCached | wincmd p
+
+autocmd FileType Help setlocal nonumber nolist
+autocmd FileType man setlocal nonumber nolist
+autocmd FileType gitcommit setlocal spell
+autocmd FileType markdown setlocal spell tabstop=2 shiftwidth=2 softtabstop=2
+autocmd FileType perl setlocal iskeyword+=$,%,@ tabstop=4 shiftwidth=4 softtabstop=4
+autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
+autocmd FileType ruby setlocal tabstop=2 shiftwidth=2 softtabstop=2
 
 " Easy window resizing
 noremap <up> <C-W>+
