@@ -10,6 +10,7 @@ Bundle 'AfterColors.vim'
 Bundle 'Lokaltog/vim-distinguished'
 Bundle 'ShowMarks'
 Bundle 'ajf/puppet-vim'
+Bundle 'ervandew/supertab.git'
 Bundle 'godlygeek/tabular'
 Bundle 'jpalardy/vim-slime'
 Bundle 'kien/ctrlp.vim'
@@ -440,6 +441,10 @@ nmap <leader>c$ <plug>NERDCommenterToEOL
 let g:netrw_liststyle = 3
 let g:netrw_menu = 0
 let g:netrw_list_hide="^\.git/$,^\.svn/$,^CVS/$,^CVSROOT/$,\.py[co]$,\.swp$,\\~$,^#"
+
+" Supertab
+let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabClosePreviewOnPopupClose = 1
 
 " Load abbreviations
 source ~/.vim/abbrev
