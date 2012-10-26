@@ -264,8 +264,8 @@ nnoremap <leader>ev :e $MYVIMRC<CR>
 nnoremap <leader>egv :e$MYGVIMRC<CR>
 
 " Use sane regexes
-nnoremap / /\v
-vnoremap / /\v
+" nnoremap / /\v
+" vnoremap / /\v
 
 " Tab between surrounding brackets
 nnoremap <tab> %
