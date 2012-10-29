@@ -8,7 +8,6 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 Bundle 'AfterColors.vim'
 Bundle 'Lokaltog/vim-distinguished'
-Bundle 'ShowMarks'
 Bundle 'ajf/puppet-vim'
 Bundle 'ervandew/supertab.git'
 Bundle 'godlygeek/tabular'
@@ -17,6 +16,7 @@ Bundle 'kana/vim-smartinput.git'
 Bundle 'kana/vim-textobj-indent.git'
 Bundle 'kana/vim-textobj-user.git'
 Bundle 'kien/ctrlp.vim'
+Bundle 'kshenoy/vim-signature'
 Bundle 'majutsushi/tagbar'
 Bundle 'mkomitee/snipmate.vim'
 Bundle 'python_match.vim'
@@ -415,14 +415,6 @@ nnoremap <leader>gp :! git push<CR>
 
 " Tagbar
 let g:tagbar_compact = 1 " don't show the help in the tagbar
-
-" Showmarks
-let g:showmarks_enable=1
-let g:showmarks_include="abcdefghijklmnopqrstuvwxyz"
-let g:showmarks_ignore_type=''
-let g:showmarks_textlower="\t"
-let g:showmarks_textupper="\t"
-let g:showmarks_textother="\t"
 
 " slime
 " :SlimeConfig - configure which tmux pane to send text
