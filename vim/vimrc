@@ -39,6 +39,7 @@ silent execute '!mkdir -p $HOME/.vimdata/vimswap'
 silent execute '!mkdir -p $HOME/.vimdata/vimviews'
 silent execute '!mkdir -p $HOME/.vimdata/vimundo'
 silent execute '!mkdir -p $HOME/.vimdata/ctrlp'
+silent execute '!mkdir -p $HOME/.vimdata/tags'
 
 " Preferences
 set encoding=utf-8             " Prefer utf-8 character encoding
@@ -388,7 +389,7 @@ set tags=./tags;                  " name of the tags files which is relative to 
 let g:easytags_dynamic_files = 1  " write first existing seen tag file by Vim (refer to echo &tags)
 let g:easytags_resolve_links = 1  " resolve symbolic links with pathnames
 let g:easytags_include_members = 1
-let g:easytags_file = '~/.vimdata/vimtags'
+let g:easytags_by_filetype = '~/.vimdata/tags'
 
 " Fugitive
 " :Gstatus → git status → Ctrl→n → go to the next file → Ctrl→p → go to the preview file
