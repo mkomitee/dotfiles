@@ -3,7 +3,6 @@ setopt auto_list
 setopt auto_menu
 setopt auto_param_slash
 setopt auto_remove_slash
-setopt complete_in_word
 setopt list_packed
 setopt list_types
 setopt rec_exact
@@ -11,6 +10,7 @@ unsetopt correct
 unsetopt correct_all
 unsetopt glob_complete
 unsetopt menu_complete
+unsetopt complete_in_word
 
 autoload -U compinit
 zmodload -i zsh/complist
