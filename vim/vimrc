@@ -27,7 +27,11 @@ Bundle 'tpope/vim-git'
 Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
-Bundle 'xolox/vim-easytags'
+
+" This is causing an occasional segfault
+if system("uname") !=# "SunOS\n"
+    Bundle 'xolox/vim-easytags'
+endif
 
 syntax on
 filetype plugin indent on
