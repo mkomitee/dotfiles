@@ -16,3 +16,5 @@ alias dot='cd ~dot'
 alias vi=vim
 
 alias ack='noglob ack'
+
+alias a='tmux -u2 attach'
