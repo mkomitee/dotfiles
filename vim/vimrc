@@ -193,6 +193,14 @@ function! GitStatusLine()
     endif
 endfunction
 
+function! SoftTabs()
+    setl expandtab
+    setl shiftwidth=4
+    setl smarttab
+    setl softtabstop=4
+    setl tabstop=4
+endfunction
+
 set statusline=                            " clear statusline
 set statusline+=%F\                        " full filename
 set statusline+=%m%r%w                     " flags
