@@ -104,5 +104,5 @@
 [merge]
     tool = splice
 
-[init]
-    templatedir = ~/.dotfiles/git_template
+[push]
+    default = upstream
