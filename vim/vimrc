@@ -81,12 +81,6 @@ set ignorecase                 " ignore case when searching, ...
 set smartcase                  " unless I search for uppercase
 set hlsearch                   " and highlight searches
 set gdefault                   " replace all occurrances on the line by default
-set tabstop=4                  " 4 space tabs
-set shiftwidth=4               " indentation uses 4 spaces as well e.g. >>
-set expandtab                  " uses spaces, not tabs
-set softtabstop=2              " use 2 spaces when tabbing because, ...
-set smarttab                   " use softtabstop when tabbing when not at start of line
-set textwidth=79               " break long lines after 80 chars
 set backupdir=$HOME/.vimdata/vimbackup/ " save backups in alternate location
 set directory=$HOME/.vimdata/vimswap/   " save swap files here
 set viewdir=$HOME/.vimdata/vimviews/    " save views here
@@ -113,7 +107,6 @@ set fillchars+=vert:│ " indicate vertical splits with │
 
 set listchars=            " reset listchars
 set listchars+=tab:▸\     " display tabs
-set listchars+=eol:¬      " display eol
 set listchars+=extends:❯  " hint that theres more to the right, ...
 set listchars+=precedes:❮ " hint that theres more to the left, ...
 
@@ -313,14 +306,6 @@ vnoremap <F1> <nop>
 " Show git diff when commiting  FIXME this conflicts with fugitive
 " autocmd FileType gitcommit DiffGitCached | wincmd p
 
-autocmd FileType Help setlocal nonumber nolist
-autocmd FileType man setlocal nonumber nolist
-autocmd FileType gitcommit setlocal spell
-autocmd FileType markdown setlocal spell tabstop=2 shiftwidth=2 softtabstop=2
-autocmd FileType perl setlocal iskeyword+=$,%,@ tabstop=4 shiftwidth=4 softtabstop=4
-autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
-autocmd FileType ruby setlocal tabstop=2 shiftwidth=2 softtabstop=2
-
 " Easy window resizing
 noremap <up> <C-W>+
 noremap <down> <C-W>-
@@ -444,6 +429,52 @@ let g:netrw_list_hide="^\.git/$,^\.svn/$,^CVS/$,^CVSROOT/$,\.py[co]$,\.swp$,\\~$
 " Supertab
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabClosePreviewOnPopupClose = 1
+
+" Filetype configurations
+au FileType help setl nolist
+au FileType help setl nonumber
+
+au FileType man setl nolist
+au FileType man setl nonumber
+
+au FileType markdown au BufWritePre <buffer> RemoveTrailingWhiteSpace
+au FileType markdown setl shiftwidth=2
+au FileType markdown setl softtabstop=2
+au FileType markdown setl spell
+au FileType markdown setl tabstop=2
+
+au FileType python au BufWritePre <buffer> RemoveTrailingWhiteSpace
+au FileType python setl expandtab
+au FileType python setl shiftwidth=4
+au FileType python setl smarttab
+au FileType python setl softtabstop=4
+au FileType python setl tabstop=4
+au FileType python setl textwidth=79
+
+au FileType ruby au BufWritePre <buffer> RemoveTrailingWhiteSpace
+au FileType ruby setl expandtab
+au FileType ruby setl shiftwidth=4
+au FileType ruby setl smarttab
+au FileType ruby setl softtabstop=4
+au FileType ruby setl tabstop=4
+au FileType ruby setl textwidth=79
+
+au FileType perl au BufWritePre <buffer> RemoveTrailingWhiteSpace
+au FileType perl setl expandtab
+au FileType perl setl iskeyword+=$,%,@
+au FileType perl setl shiftwidth=4
+au FileType perl setl smarttab
+au FileType perl setl softtabstop=4
+au FileType perl setl tabstop=4
+au FileType perl setl textwidth=79
+
+au FileType vim au BufWritePre <buffer> RemoveTrailingWhiteSpace
+au FileType vim setl expandtab
+au FileType vim setl shiftwidth=4
+au FileType vim setl smarttab
+au FileType vim setl softtabstop=4
+au FileType vim setl tabstop=4
+au FileType vim setl textwidth=79
 
 " Load abbreviations
 source ~/.vim/abbrev
