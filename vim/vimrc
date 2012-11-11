@@ -466,7 +466,7 @@ au FileType ruby setl shiftwidth=4
 au FileType ruby setl smarttab
 au FileType ruby setl softtabstop=4
 au FileType ruby setl tabstop=4
-au FileType ruby setl textwidth=79
+au FileType ruby setl textwidth=80
 
 au FileType perl au BufWritePre <buffer> RemoveTrailingWhiteSpace
 au FileType perl setl expandtab
@@ -475,7 +475,7 @@ au FileType perl setl shiftwidth=4
 au FileType perl setl smarttab
 au FileType perl setl softtabstop=4
 au FileType perl setl tabstop=4
-au FileType perl setl textwidth=79
+au FileType perl setl textwidth=80
 
 au FileType vim au BufWritePre <buffer> RemoveTrailingWhiteSpace
 au FileType vim setl expandtab
@@ -483,7 +483,7 @@ au FileType vim setl shiftwidth=4
 au FileType vim setl smarttab
 au FileType vim setl softtabstop=4
 au FileType vim setl tabstop=4
-au FileType vim setl textwidth=79
+au FileType vim setl textwidth=80
 
 " Load abbreviations
 source ~/.vim/abbrev
