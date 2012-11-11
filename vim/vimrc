@@ -445,10 +445,12 @@ au FileType man setl nolist
 au FileType man setl nonumber
 
 au FileType markdown au BufWritePre <buffer> RemoveTrailingWhiteSpace
+au FileType markdown setl expandtab
 au FileType markdown setl shiftwidth=2
 au FileType markdown setl softtabstop=2
 au FileType markdown setl spell
 au FileType markdown setl tabstop=2
+au FileType markdown setl textwidth=80
 
 au FileType python au BufWritePre <buffer> RemoveTrailingWhiteSpace
 au FileType python setl expandtab
