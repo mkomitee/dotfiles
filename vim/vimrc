@@ -192,13 +192,6 @@ function! GitStatusLine()
     endif
 endfunction
 
-function! SoftTabs()
-    setl expandtab
-    setl shiftwidth=4
-    setl smarttab
-    setl softtabstop=4
-    setl tabstop=4
-endfunction
 
 set statusline=                            " clear statusline
 set statusline+=%F\                        " full filename
@@ -332,7 +325,7 @@ function! WhereAmI()
     set invcursorline
     set invcursorcolumn
 endfunction
-
+command! WhereAmI :call WhereAmI()
 nnoremap <leader>? :call WhereAmI()<cr>
 
 function! WhatGroup()
@@ -354,8 +347,16 @@ function! RemoveTrailingWhiteSpace()
     let @/=_s
     call cursor(l, c)
 endfun
-
 command! RemoveTrailingWhiteSpace :call RemoveTrailingWhiteSpace()
+
+function! SoftTabs()
+    setl expandtab
+    setl shiftwidth=4
+    setl smarttab
+    setl softtabstop=4
+    setl tabstop=4
+endfunction
+command! SoftTabs :call SoftTabs()
 
 " Ctrl+P
 let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'undo', 'line'. 'changes']
