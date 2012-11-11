@@ -266,10 +266,6 @@ noremap Y y$
 nnoremap <leader>ev :e $MYVIMRC<CR>
 nnoremap <leader>egv :e$MYGVIMRC<CR>
 
-" Use sane regexes
-" nnoremap / /\v
-" vnoremap / /\v
-
 " Tab between surrounding brackets
 nnoremap <tab> %
 vnoremap <tab> %
@@ -315,10 +311,6 @@ nnoremap <right> <C-W>>
 
 " . returns to starting place
 nnoremap . .`[
-
-" Omni-complete with shift-tab
-inoremap <s-tab> <c-x><c-o>
-inoremap <S-TAB> <c-x><c-o>
 
 " Simple way to find out where the hell my cursor is
 function! WhereAmI()
