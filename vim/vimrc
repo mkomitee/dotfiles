@@ -152,7 +152,6 @@ set diffopt+=iwhite " ignore white space in diff
 set completeopt=         " reset completeopt
 set completeopt+=longest " insert the longest match
 set completeopt+=menu    " show the menu when there are matches
-set completeopt+=menuone " even if there's only one
 set completeopt+=preview
 
 set viminfo+=n~/.vimdata/viminfo " move the viminfo file into ~/.vimdata
