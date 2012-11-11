@@ -432,6 +432,7 @@ let g:netrw_list_hide="^\.git/$,^\.svn/$,^CVS/$,^CVSROOT/$,\.py[co]$,\.swp$,\\~$
 " Supertab
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabClosePreviewOnPopupClose = 1
+let g:SuperTabLongestEnhanced = 1
 
 " Filetype detection
 au BufNewFile,BufRead gitconfig setf gitconfig
