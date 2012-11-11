@@ -435,6 +435,7 @@ let g:SuperTabClosePreviewOnPopupClose = 1
 
 " Filetype detection
 au BufNewFile,BufRead gitconfig setf gitconfig
+au BufNewFile,BufRead /private/tmp/crontab.* setl backupcopy=yes
 
 " Filetype configurations
 au FileType help setl nolist
