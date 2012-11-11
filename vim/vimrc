@@ -487,5 +487,11 @@ au FileType vim setl softtabstop=4
 au FileType vim setl tabstop=4
 au FileType vim setl textwidth=80
 
+au FileType make au BufWritePre <buffer> RemoveTrailingWhiteSpace
+au FileType make setl noexpandtab
+au FileType make setl shiftwidth=4
+au FileType make setl nosmarttab
+au FileType make setl softtabstop=0
+au FileType make setl tabstop=4
 " Load abbreviations
 source ~/.vim/abbrev
