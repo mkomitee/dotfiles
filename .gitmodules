@@ -7,3 +7,12 @@
 [submodule "vim/bundle/vundle"]
 	path = vim/bundle/vundle
 	url = https://github.com/gmarik/vundle.git
+[submodule "contrib/sigurdga/ls-colors-solarized"]
+	path = contrib/sigurdga/ls-colors-solarized
+	url = https://github.com/sigurdga/ls-colors-solarized.git
+[submodule "contrib/seebi/dircolors-solarized"]
+	path = contrib/seebi/dircolors-solarized
+	url = https://github.com/seebi/dircolors-solarized.git
+[submodule "contrib/altercation/solarized"]
+	path = contrib/altercation/solarized
+	url = https://github.com/altercation/solarized.git
