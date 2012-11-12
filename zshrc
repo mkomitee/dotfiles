@@ -53,12 +53,19 @@ if ls --color -d . &>/dev/null; then
 else
     alias ls='ls -FG'
 fi
+
+if [ -f $HOME/.dircolors ]; then
+    DIRCOLORSFILE=$HOME/.dircolors
+else
+    DIRCOLORSFILE=$HOME/.dotfiles/dircolors
+fi
+
 if which dircolors >/dev/null 2>&1; then
     unset LSCOLORS
-    eval `dircolors $HOME/.dotfiles/dircolors`
+    eval `dircolors $DIRCOLORSFILE`
 elif which gdircolors >/dev/null 2>&1; then
     unset LSCOLORS
-    eval `gdircolors $HOME/.dotfiles/dircolors`
+    eval `gdircolors $DIRCOLORSFILE`
 fi
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 
