@@ -501,5 +501,13 @@ au FileType puppet setl smarttab
 au FileType puppet setl softtabstop=4
 au FileType puppet setl tabstop=4
 au FileType puppet setl textwidth=80
+
+au FileType sh,zsh au BufWritePre <buffer> RemoveTrailingWhiteSpace
+au FileType sh,zsh setl expandtab
+au FileType sh,zsh setl shiftwidth=4
+au FileType sh,zsh setl smarttab
+au FileType sh,zsh setl softtabstop=4
+au FileType sh,zsh setl tabstop=4
+au FileType sh,zsh setl textwidth=80
 " Load abbreviations
 source ~/.vim/abbrev
