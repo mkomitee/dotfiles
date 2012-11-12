@@ -17,4 +17,4 @@ alias vi=vim
 
 alias ack='noglob ack'
 
-alias a='tmux -u2 attach'
+alias a='tmux -u2 attach || tmux -u2'
