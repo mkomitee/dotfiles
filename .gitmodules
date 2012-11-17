@@ -19,3 +19,6 @@
 [submodule "contrib/trapd00r/ls--"]
 	path = contrib/trapd00r/ls--
 	url = https://github.com/trapd00r/ls--.git
+[submodule "contrib/trapd00r/Term-ExtendedColor"]
+	path = contrib/trapd00r/Term-ExtendedColor
+	url = https://github.com/trapd00r/Term-ExtendedColor.git
