@@ -86,7 +86,13 @@ set backupdir=$HOME/.vimdata/vimbackup/ " save backups in alternate location
 set directory=$HOME/.vimdata/vimswap/   " save swap files here
 set viewdir=$HOME/.vimdata/vimviews/    " save views here
 set wildmenu                   " commandline completion is nice
-set tabstop=4
+set expandtab                  " by default, use spaces & no tabs
+set shiftwidth=4               " shift width (>> & autoindent)
+set smarttab                   " shiftwidth at start of line, tabstop elsewhere
+set softtabstop=4              " 1 tab = 4 spaces
+set tabstop=4                  " 1 tab = 4 spaces
+set textwidth=80               " wrap at 80 columns
+set nospell                    " spell checking is off
 
 " Use a bar-shaped cursor for insert mode, even through tmux.
 if exists('$TMUX')
@@ -447,67 +453,30 @@ au FileType man setl nolist
 au FileType man setl nonumber
 
 au FileType markdown au BufWritePre <buffer> RemoveTrailingWhiteSpace
-au FileType markdown setl expandtab
 au FileType markdown setl shiftwidth=2
 au FileType markdown setl softtabstop=2
 au FileType markdown setl spell
 au FileType markdown setl tabstop=2
-au FileType markdown setl textwidth=80
 
 au FileType python au BufWritePre <buffer> RemoveTrailingWhiteSpace
-au FileType python setl expandtab
-au FileType python setl shiftwidth=4
-au FileType python setl smarttab
-au FileType python setl softtabstop=4
-au FileType python setl tabstop=4
 au FileType python setl textwidth=79
+au FileType python setl foldmethod=indent
 
 au FileType ruby au BufWritePre <buffer> RemoveTrailingWhiteSpace
-au FileType ruby setl expandtab
-au FileType ruby setl shiftwidth=4
-au FileType ruby setl smarttab
-au FileType ruby setl softtabstop=4
-au FileType ruby setl tabstop=4
-au FileType ruby setl textwidth=80
 
 au FileType perl au BufWritePre <buffer> RemoveTrailingWhiteSpace
-au FileType perl setl expandtab
 au FileType perl setl iskeyword+=$,%,@
-au FileType perl setl shiftwidth=4
-au FileType perl setl smarttab
-au FileType perl setl softtabstop=4
-au FileType perl setl tabstop=4
-au FileType perl setl textwidth=80
 
 au FileType vim au BufWritePre <buffer> RemoveTrailingWhiteSpace
-au FileType vim setl expandtab
-au FileType vim setl shiftwidth=4
-au FileType vim setl smarttab
-au FileType vim setl softtabstop=4
-au FileType vim setl tabstop=4
-au FileType vim setl textwidth=80
 
 au FileType make au BufWritePre <buffer> RemoveTrailingWhiteSpace
 au FileType make setl noexpandtab
-au FileType make setl shiftwidth=4
 au FileType make setl nosmarttab
 au FileType make setl softtabstop=0
-au FileType make setl tabstop=4
 
 au FileType puppet au BufWritePre <buffer> RemoveTrailingWhiteSpace
-au FileType puppet setl expandtab
-au FileType puppet setl shiftwidth=4
-au FileType puppet setl smarttab
-au FileType puppet setl softtabstop=4
-au FileType puppet setl tabstop=4
-au FileType puppet setl textwidth=80
 
 au FileType sh,zsh au BufWritePre <buffer> RemoveTrailingWhiteSpace
-au FileType sh,zsh setl expandtab
-au FileType sh,zsh setl shiftwidth=4
-au FileType sh,zsh setl smarttab
-au FileType sh,zsh setl softtabstop=4
-au FileType sh,zsh setl tabstop=4
-au FileType sh,zsh setl textwidth=80
+
 " Load abbreviations
 source ~/.vim/abbrev
