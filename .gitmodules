@@ -16,3 +16,6 @@
 [submodule "contrib/altercation/solarized"]
 	path = contrib/altercation/solarized
 	url = https://github.com/altercation/solarized.git
+[submodule "contrib/trapd00r/ls--"]
+	path = contrib/trapd00r/ls--
+	url = https://github.com/trapd00r/ls--.git
