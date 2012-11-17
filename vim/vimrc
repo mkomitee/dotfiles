@@ -335,16 +335,22 @@ function! WhatGroup()
 endfunc
 command! WhatGroup :call WhatGroup()
 
+" Allow a buffer local variable twsok (trailing whitespace ok) to permit
+" trailing whitspace -- sometimes I need to do this if im editing someone elses
+" code and don't want to own the entire file in vcs. Enable it with
+" let twsok=1, disable it with unlet twsok
 function! RemoveTrailingWhiteSpace()
-    " Preparation: save last search, and cursor position.
-    let _s=@/
-    let l = line(".")
-    let c = col(".")
-    " Do the business:
-    %s/\s\+$//e
-    " Clean up: restore previous search history, and cursor position
-    let @/=_s
-    call cursor(l, c)
+    if !exists("b:twsok")
+        " Preparation: save last search, and cursor position.
+        let _s=@/
+        let l = line(".")
+        let c = col(".")
+        " Do the business:
+        %s/\s\+$//e
+        " Clean up: restore previous search history, and cursor position
+        let @/=_s
+        call cursor(l, c)
+    endif
 endfun
 command! RemoveTrailingWhiteSpace :call RemoveTrailingWhiteSpace()
 
