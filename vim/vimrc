@@ -357,6 +357,21 @@ function! SoftTabs()
 endfunction
 command! SoftTabs :call SoftTabs()
 
+
+" Restore cursor position to the last time you were in the file, this uses marks
+" so it's dependent on viminfo
+function! RestoreCursorPosition()
+  if line("'\"") <= line("$")
+    normal! g`"
+    return 1
+  endif
+endfunction
+
+augroup restoreCursorPosition
+  autocmd!
+  autocmd BufReadPost * call RestoreCursorPosition()
+augroup END
+
 " Ctrl+P
 let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'undo', 'line'. 'changes']
 let g:ctrlp_cmd = 'CtrlP'
