@@ -18,6 +18,9 @@ $if mode=vi
    "OD": backward-char
    "OC": forward-char
     set keymap vi-insert
+    "jj": vi-movement-mode
+    "\C-w": backward-kill-word
+    "\C-p": history-search-backward
     # these are for vi-insert mode
     "\C-p": history-search-backward
     "\C-n": history-search-forward

@@ -302,6 +302,9 @@ for [start, end] in items(pairs)
     exe "nnoremap da".start." F".start."df".end
 endfor
 
+" jj = Esc
+inoremap jj <Esc>
+
 " Remove F1 Help
 inoremap <F1> <nop>
 nnoremap <F1> <nop>

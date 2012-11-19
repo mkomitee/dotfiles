@@ -103,4 +103,4 @@ abbreviations=(
 "HEAD^^^^^" "HEAD\\^\\^\\^\\^\\^"
 )
 
-KEYTIMEOUT=1
+KEYTIMEOUT=20

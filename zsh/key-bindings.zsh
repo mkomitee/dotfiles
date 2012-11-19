@@ -19,7 +19,7 @@ bindkey -M viins "^F" vi-find-next-char
 bindkey -M viins "^P" vi-find-prev-char
 
 bindkey -M vicmd "gg" beginning-of-history
-bindkey -M vicmd "G" end-of-history 
+bindkey -M vicmd "G" end-of-history
 
 bindkey -M vicmd "k" history-search-backward
 bindkey -M vicmd "j" history-search-forward
@@ -41,3 +41,5 @@ bindkey -M viins "\e[A" history-search-backward
 bindkey -M viins "\e[B" history-search-forward
 bindkey -M vicmd "\e[A" history-search-backward
 bindkey -M vicmd "\e[B" history-search-forward
+
+bindkey -M viins 'jj' vi-cmd-mode
