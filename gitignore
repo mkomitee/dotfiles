@@ -15,6 +15,7 @@
 .*.sw[a-z]
 *.un~
 Session.vim
+.netrwhist
 
 
 ### ~/.gitignore-boilerplates/Global/tags.gitignore
