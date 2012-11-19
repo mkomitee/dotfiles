@@ -1,16 +1,17 @@
+unsetopt auto_remove_slash
+unsetopt complete_in_word
+unsetopt correct
+unsetopt correct_all
+unsetopt menu_complete
+unsetopt rec_exact
 setopt always_to_end
 setopt auto_list
 setopt auto_menu
 setopt auto_param_slash
-setopt auto_remove_slash
+setopt glob_complete
 setopt list_packed
 setopt list_types
-setopt rec_exact
-unsetopt correct
-unsetopt correct_all
-unsetopt glob_complete
-unsetopt menu_complete
-unsetopt complete_in_word
+setopt case_glob
 
 autoload -U compinit
 zmodload -i zsh/complist
@@ -24,7 +25,7 @@ zstyle ':completion:*' auto-description on
 zstyle ':completion:*' matcher-list 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
 # Start menu completion if there are 2 ambiguous choices
-zstyle ':completion:*' menu select=2 
+zstyle ':completion:*' menu select=2
 
 # Each completion type gets a label, ...
 # zstyle ':completion:*:descriptions' format 'Completing %d'
