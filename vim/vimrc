@@ -1,10 +1,8 @@
-set nocompatible
-" filetype off
-
+" Load Plugins ------------------------------------------------------------- {{{
+" Initialize vundle -------------------------------------------------------- {{{
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
-
-" Load Plugins
+" }}}
 Bundle 'gmarik/vundle'
 Bundle 'AfterColors.vim'
 Bundle 'Lokaltog/vim-distinguished'
@@ -18,6 +16,7 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'kshenoy/vim-signature'
 Bundle 'majutsushi/tagbar'
 Bundle 'mkomitee/snipmate.vim'
+Bundle 'nelstrom/vim-markdown-folding'
 Bundle 'python_match.vim'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/snipmate-snippets'
@@ -28,24 +27,16 @@ Bundle 'tpope/vim-git'
 Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
-
-" This is causing an occasional segfault
+" This is causing an occasional segfault on Solaris, ...
 if system("uname") !=# "SunOS\n"
     Bundle 'xolox/vim-easytags'
 endif
-
+" Turn on all the features ... --------------------------------------------- {{{
 syntax on
 filetype plugin indent on
-
-" Prepare our vim cache directories
-silent execute '!mkdir -p $HOME/.vimdata/vimbackup'
-silent execute '!mkdir -p $HOME/.vimdata/vimswap'
-silent execute '!mkdir -p $HOME/.vimdata/vimviews'
-silent execute '!mkdir -p $HOME/.vimdata/vimundo'
-silent execute '!mkdir -p $HOME/.vimdata/ctrlp'
-silent execute '!mkdir -p $HOME/.vimdata/tags'
-
-" Preferences
+" }}}
+" }}}
+" Preferences -------------------------------------------------------------- {{{
 set encoding=utf-8             " Prefer utf-8 character encoding
 set autoindent                 " Try to line up code intelligently
 set hidden                     " Allow for hidden buffers
@@ -63,7 +54,7 @@ set autoread                   " reread files which changes on disk if they
 set showfulltag                " when completing a word from a tags file,
                                " include extra info about the tag in the
                                " completion menu
-set foldlevelstart=99          " Start with all folds open
+set foldlevelstart=0           " Start with all folds open
 set nojoinspaces               " Don't be fancy with join
 set dictionary=/usr/share/dict/words        " for spell checking
 set spellfile=~/.dotfiles/vim/en.utf-8.add  " to add words
@@ -93,38 +84,26 @@ set softtabstop=4              " 1 tab = 4 spaces
 set tabstop=4                  " 1 tab = 4 spaces
 set textwidth=80               " wrap at 80 columns
 set nospell                    " spell checking is off
-
-" Use a bar-shaped cursor for insert mode, even through tmux.
-if exists('$TMUX')
-    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-else
-    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-endif
-
+set tags=./tags;               " name of the tags files which is relative to the project
+" undofile ----------------------------------------------------------------- {{{
 if exists('&undofile')
     set undofile         " Save undo history to a file for persistence
     set undodir=$HOME/.vimdata/vimundo/ " Save undo data here
 endif
-
+" }}}
+" fillchars ---------------------------------------------------------------- {{{
 set fillchars=        " reset fillchars
 set fillchars+=fold:- " fill foldtext with dashes
 set fillchars+=diff:⣿ " indicate deleted lines in diffs with ⣿
 set fillchars+=vert:│ " indicate vertical splits with │
-
+" }}}
+" listchars ---------------------------------------------------------------- {{{
 set listchars=            " reset listchars
 set listchars+=tab:▸\     " display tabs
 set listchars+=extends:❯  " hint that theres more to the right, ...
 set listchars+=precedes:❮ " hint that theres more to the left, ...
-
-" only show trailing whitespace when not in insert mode
-augroup trailing
-    au!
-    au InsertEnter * :set listchars-=trail:⌴
-    au InsertLeave * :set listchars+=trail:⌴
-augroup END
-
+" }}}
+" shortmess ---------------------------------------------------------------- {{{
 set shortmess=   " reset shortmess
 set shortmess+=f " '(3 of 5)' instead of '(file 3 of 5)'
 set shortmess+=i " '[noeol] instead of '[Incompelte last line]'
@@ -146,31 +125,38 @@ set shortmess+=T " truncate other messages in the middle if they are too long to
                  "  fit on the command line.  "..." will appear  in the middle.
                  "  Ignored in Ex mode.
 set shortmess+=I " don't give the intro message when starting Vim |:intro|.
-
+" }}}
+" iskeyword ---------------------------------------------------------------- {{{
 set iskeyword-=: " treat : as a keyword
 set iskeyword-=; " treat ; as a keyword
 set iskeyword-=, " treat , as a keyword
 set iskeyword+=_ " treat _ as a keyword
-
+" }}}
+" diffopt ------------------------------------------------------------------ {{{
 set diffopt=        " reset diffopt
 set diffopt+=filler " add filler to diff to keep text synchronized
 set diffopt+=iwhite " ignore white space in diff
-
+" }}}
+" completeopt -------------------------------------------------------------- {{{
 set completeopt=         " reset completeopt
 set completeopt+=longest " insert the longest match
 set completeopt+=menu    " show the menu when there are matches
 set completeopt+=preview
-
+"}}}
+" viminfo ------------------------------------------------------------------ {{{
 set viminfo+=n~/.vimdata/viminfo " move the viminfo file into ~/.vimdata
-
+" }}}
+" switchbuf ---------------------------------------------------------------- {{{
 set switchbuf=                   " reset switchbuf
 set switchbuf+=useopen " switch to a window with the file on open instead of opening it in a second window
 set switchbuf+=usetab  " switch to another tab with the file open instead of opening it in a second window
-
+" }}}
+" virtualedit -------------------------------------------------------------- {{{
 set virtualedit=        " reset virtualedit
 set virtualedit+=block  " can move past the end of the line in visual block mode
 set virtualedit+=insert " can move past the end of the line in insert mode
-
+" }}}
+" formatoptions ------------------------------------------------------------ {{{
 set formatoptions=   " reset formatoptions
 set formatoptions+=c " autowrap comments using textwidth
 set formatoptions+=r " insert comment after hitting enter in a comment
@@ -178,28 +164,22 @@ set formatoptions+=o " insert comment after 'o' or 'O' in normal mode
 set formatoptions+=q " format comments with gq
 set formatoptions+=n " recognize numbered lists
 set formatoptions+=1 " don't break a line after a 1 letter word
-
+" }}}
+" wildmode ----------------------------------------------------------------- {{{
 set wildmode=              " reset wildmode
 set wildmode+=longest:full " complete til longest string, use wildmenu
 set wildmode+=list:full    " when more than one matchm list all and complete the
                                  " first
+" }}}
+" wildignore --------------------------------------------------------------- {{{
 set wildignore+=.git,.hg,.svn,CVS              " ignore vcs directories
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg " ignore images
 set wildignore+=*.o,*.so,*.out                 " ignore compiled objects
 set wildignore+=*.sw?                          " ignore swap files
 set wildignore+=*.DS_Store                     " ignore mac crap
 set wildignore+=*.pyc,*.pyo                    " ignore pyton compiled objects
-
-function! GitStatusLine()
-    let git_info = fugitive#head(8)
-    if git_info != ''
-        return "Git(".git_info.")"
-    else
-        return ''
-    endif
-endfunction
-
-
+" }}}
+" statusline --------------------------------------------------------------- {{{
 set statusline=                            " clear statusline
 set statusline+=%F\                        " full filename
 set statusline+=%m%r%w                     " flags
@@ -209,83 +189,162 @@ set statusline+=%{GitStatusLine()}\  " Git branch info
 set statusline+=c:%c\                      " column
 set statusline+=l:%l/%L\                   " line
 set statusline+=(%p%%)                     " percentage thru file
-
+" }}}
+" whichwrap ---------------------------------------------------------------- {{{
 set whichwrap+=<,> " <Left> and <Right> can move to the previous/next line
-
-" Lets try this again. Center view when searching
-nnoremap n nzz
-nnoremap N Nzz
-
-" Same for the jumplist
-nnoremap <C-o> <C-o>zz
-nnoremap <C-i> <C-i>zz   " FIXME - this doesnt work?
-
-" j and k will go one line, even if they're wrapped
-nnoremap j gj
-nnoremap k gk
-
-" when using marks, all by default mark columns as well
-nnoremap ' `
-
-" Sometimes I don't release shift fast enough, so let's be forgiving.
-command! -bang E e<bang>
-command! -bang Q q<bang>
-command! -bang W w<bang>
-command! -bang QA qa<bang>
-command! -bang Qa qa<bang>
-command! -bang Wa wa<bang>
-command! -bang WA wa<bang>
-command! -bang Wq wq<bang>
-command! -bang WQ wq<bang>
-
-" Setup my colorscheme, ...
-colorscheme distinguished
-
-" Highlight VCS conflict markers
-match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
-
-" Leaders
+" }}}
+" }}}
+" Custom functions --------------------------------------------------------- {{{
+function! GitStatusLine() " ------------------------------------------------ {{{
+    let git_info = fugitive#head(8)
+    if git_info != ''
+        return "Git(".git_info.")"
+    else
+        return ''
+    endif
+endfunction
+"}}}
+function! WhereAmI() " ----------------------------------------------------- {{{
+    set invcursorline
+    set invcursorcolumn
+endfunction " }}}
+function! WhatGroup() " ---------------------------------------------------- {{{
+    if !exists("*synstack")
+        return
+    endif
+    echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc " }}}
+function! RemoveTrailingWhiteSpace() " ------------------------------------- {{{
+    " Allow a buffer local variable twsok (trailing whitespace ok) to permit
+    " trailing whitspace -- sometimes I need to do this if im editing someone elses
+    " code and don't want to own the entire file in vcs. Enable it with
+    " let twsok=1, disable it with unlet twsok
+    if !exists("b:twsok")
+        " Preparation: save last search, and cursor position.
+        let _s=@/
+        let l = line(".")
+        let c = col(".")
+        " Do the business:
+        %s/\s\+$//e
+        " Clean up: restore previous search history, and cursor position
+        let @/=_s
+        call cursor(l, c)
+    endif
+endfun " }}}
+function! SoftTabs() " ----------------------------------------------------- {{{
+    setl expandtab
+    setl shiftwidth=4
+    setl smarttab
+    setl softtabstop=4
+    setl tabstop=4
+endfunction " }}}
+function! RestoreCursorPosition() " ---------------------------------------- {{{
+    " Restore cursor position to the last time you were in the file, this uses marks
+    " so it's dependent on viminfo
+  if line("'\"") <= line("$")
+    normal! g`"
+    normal! zv
+    return 1
+  endif
+endfunction " }}}
+function! ToggleVExplorer() " ---------------------------------------------- {{{
+  if exists("t:expl_buf_num")
+      let expl_win_num = bufwinnr(t:expl_buf_num)
+      if expl_win_num != -1
+          let cur_win_nr = winnr()
+          exec expl_win_num . 'wincmd w'
+          close
+          exec cur_win_nr . 'wincmd w'
+          unlet t:expl_buf_num
+      else
+          unlet t:expl_buf_num
+      endif
+  else
+      exec '1wincmd w'
+      Vexplore
+      let t:expl_buf_num = bufnr("%")
+  endif
+endfunction " }}}
+" }}}
+" Leaders ------------------------------------------------------------------ {{{
 let mapleader = " "     " this may change soon, I keep wanting to have the
                         " default behavior work for ,.
 let localleader = '\\'
-
-" Simple map to disable highlighting
+" }}}
+" Custom maps -------------------------------------------------------------- {{{
+" Center view when searching ----------------------------------------------- {{{
+nnoremap n nzz
+nnoremap N Nzz
+" }}}
+" Center view after traversing the jumplist -------------------------------- {{{
+nnoremap <C-o> <C-o>zz
+nnoremap <C-i> <C-i>zz   " FIXME - this doesnt work?
+" }}}
+" j and k will go one line, even if they're wrapped ------------------------ {{{
+nnoremap j gj
+nnoremap k gk
+" }}}
+" When using marks, all by default mark columns as well -------------------- {{{
+nnoremap ' `
+" }}}
+" Simple map to disable highlighting --------------------------------------- {{{
 nnoremap // :nohl<cr>
-
-" Easier navigation between open windows
+" }}}
+" Easier navigation between open windows ----------------------------------- {{{
 nnoremap <C-k> <C-W>k
 nnoremap <C-j> <C-W>j
 nnoremap <C-h> <C-W>h
 nnoremap <C-l> <C-W>l
-
-" Simple splits, inspired by my tmux configuration
+" }}}
+" Simple splits, inspired by my tmux configuration ------------------------- {{{
 nnoremap _ :sp<cr>
 nnoremap \| :vsp<cr>
-
-" Reselect visually selected text after indenting
+" }}}
+" Reselect visually selected text after indenting -------------------------- {{{
 vnoremap > >gv
 vnoremap < <gv
-
-" make Y consistant with C and D. Yank to end of line
+" }}}
+" make Y consistant with C and D. Yank to end of line ---------------------- {{{
 noremap Y y$
-
-" Easily modify ~/.{g,}vimrc
+" }}}
+" Easily modify ~/.{g,}vimrc ----------------------------------------------- {{{
 nnoremap <leader>ev :e $MYVIMRC<CR>
 nnoremap <leader>egv :e$MYGVIMRC<CR>
-
-" Tab between surrounding brackets
+" }}}
+" Tab between surrounding brackets ----------------------------------------- {{{
 nnoremap <tab> %
 vnoremap <tab> %
-
-" Strip whitespace
+" }}}
+" Strip whitespace --------------------------------------------------------- {{{
 nnoremap <leader>W :RemoveTrailingWhiteSpace<cr>
-
-" sudo write-file in case you opened a file you dont have privileges to write
+" }}}
+" sudo write-file in case you're in a file you dont have privileges to write {{{
 cmap w!! w !sudo tee % >/dev/null<cr>
-
+" }}}
+" ctrl+c to close window --------------------------------------------------- {{{
 nnoremap <c-c> :close<cr>
-
-" custom text objects around and in character pairs
+" }}}
+" jj = Esc ----------------------------------------------------------------- {{{
+inoremap jj <Esc>
+" }}}
+" Remove F1 Help ----------------------------------------------------------- {{{
+inoremap <F1> <nop>
+nnoremap <F1> <nop>
+vnoremap <F1> <nop>
+" }}}
+" Easy window resizing ----------------------------------------------------- {{{
+noremap <up> <C-W>+
+noremap <down> <C-W>-
+nnoremap <left> <C-W><
+nnoremap <right> <C-W>>
+" }}}
+" . returns to starting place after repeat --------------------------------- {{{
+nnoremap . .`[
+" }}}
+" Simple way to find out where the hell my cursor is ----------------------- {{{
+nnoremap <leader>? :call WhereAmI()<cr>
+" }}}
+" Custom text objects around and in character pairs ------------------------ {{{
 let pairs = { ':' : ':',
             \ '.' : '.',
             \ ',' : ',',
@@ -301,88 +360,32 @@ for [start, end] in items(pairs)
     exe "nnoremap di".start." T".start."dt".end
     exe "nnoremap da".start." F".start."df".end
 endfor
-
-" jj = Esc
-inoremap jj <Esc>
-
-" Remove F1 Help
-inoremap <F1> <nop>
-nnoremap <F1> <nop>
-vnoremap <F1> <nop>
-
-" Show git diff when commiting  FIXME this conflicts with fugitive
-" autocmd FileType gitcommit DiffGitCached | wincmd p
-
-" Easy window resizing
-noremap <up> <C-W>+
-noremap <down> <C-W>-
-nnoremap <left> <C-W><
-nnoremap <right> <C-W>>
-
-" . returns to starting place
-nnoremap . .`[
-
-" Simple way to find out where the hell my cursor is
-function! WhereAmI()
-    set invcursorline
-    set invcursorcolumn
-endfunction
+" }}}
+" }}}
+" Custom commands ---------------------------------------------------------- {{{
+" Allow common typos in commands ------------------------------------------- {{{
+command! -bang E e<bang>
+command! -bang Q q<bang>
+command! -bang W w<bang>
+command! -bang QA qa<bang>
+command! -bang Qa qa<bang>
+command! -bang Wa wa<bang>
+command! -bang WA wa<bang>
+command! -bang Wq wq<bang>
+command! -bang WQ wq<bang>
+" }}}
 command! WhereAmI :call WhereAmI()
-nnoremap <leader>? :call WhereAmI()<cr>
-
-function! WhatGroup()
-    if !exists("*synstack")
-        return
-    endif
-    echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
-endfunc
 command! WhatGroup :call WhatGroup()
-
-" Allow a buffer local variable twsok (trailing whitespace ok) to permit
-" trailing whitspace -- sometimes I need to do this if im editing someone elses
-" code and don't want to own the entire file in vcs. Enable it with
-" let twsok=1, disable it with unlet twsok
-function! RemoveTrailingWhiteSpace()
-    if !exists("b:twsok")
-        " Preparation: save last search, and cursor position.
-        let _s=@/
-        let l = line(".")
-        let c = col(".")
-        " Do the business:
-        %s/\s\+$//e
-        " Clean up: restore previous search history, and cursor position
-        let @/=_s
-        call cursor(l, c)
-    endif
-endfun
 command! RemoveTrailingWhiteSpace :call RemoveTrailingWhiteSpace()
-
-function! SoftTabs()
-    setl expandtab
-    setl shiftwidth=4
-    setl smarttab
-    setl softtabstop=4
-    setl tabstop=4
-endfunction
 command! SoftTabs :call SoftTabs()
-
-
-" Restore cursor position to the last time you were in the file, this uses marks
-" so it's dependent on viminfo
-function! RestoreCursorPosition()
-  if line("'\"") <= line("$")
-    normal! g`"
-    return 1
-  endif
-endfunction
-
-augroup restoreCursorPosition
-  autocmd!
-  autocmd BufReadPost * call RestoreCursorPosition()
-augroup END
-
-" Ctrl+P
+" }}}
+" Colorscheme  ------------------------------------------------------------- {{{
+colorscheme distinguished
+" }}}
+" Plugin Configurations ---------------------------------------------------- {{{
+" Ctrl+P ------------------------------------------------------------------- {{{
 let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'undo', 'line'. 'changes']
+
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_cache_dir = $HOME.'/.vimdata/ctrlp'
 let g:ctrlp_map = '<leader>p'
@@ -395,23 +398,22 @@ nnoremap <leader>m :CtrlPMRU<CR>
 "  <C-t> → will open the finding match in a tab
 "  <C-v> → will open the finding match in a vertical split
 "  <C-h> → will open the finding match in a horizontal split
-
-" Tabularize
+" }}}
+" Tabularize --------------------------------------------------------------- {{{
 vnoremap <silent> <Leader>a=> :Tabularize /=><CR>
 vnoremap <silent> <Leader>a= :Tabularize /=<CR>
 vnoremap <silent> <Leader>a, :Tabularize /,\zs<CR>
 nnoremap <silent> <Leader>a, :Tabularize /,\zs<CR>
 vnoremap <silent> <Leader>a: :Tabularize /:\zs<CR>
 nnoremap <silent> <Leader>a: :Tabularize /:\zs<CR>
-
-" Easytags
-set tags=./tags;                  " name of the tags files which is relative to the project
+" }}}
+" Easytags ----------------------------------------------------------------- {{{
 let g:easytags_dynamic_files = 1  " write first existing seen tag file by Vim (refer to echo &tags)
 let g:easytags_resolve_links = 1  " resolve symbolic links with pathnames
 let g:easytags_include_members = 1
 let g:easytags_by_filetype = '~/.vimdata/tags'
-
-" Fugitive
+" }}}
+" Fugitive ----------------------------------------------------------------- {{{
 " :Gstatus → git status → Ctrl→n → go to the next file → Ctrl→p → go to the preview file
 " :Gwrite → git add
 " :Gcommit → git commit (press wq for send)
@@ -435,18 +437,18 @@ nnoremap <leader>gr :Gremove<CR>
 nnoremap <leader>gp :! git push<CR>
 nnoremap <leader>dg :diffget<CR>
 nnoremap <leader>dp :diffput<CR>
-
-" Tagbar
+" }}}
+" Tagbar ------------------------------------------------------------------- {{{
 let g:tagbar_compact = 1 " don't show the help in the tagbar
-
-" slime
+" }}}
+" slime -------------------------------------------------------------------- {{{
 " :SlimeConfig - configure which tmux pane to send text
 " :SlimeSend - send text, can use a range, or marks including the marks used to
 " delimit visual mode selection
 let g:slime_target = "tmux"
 let g:slime_no_mappings = 1
-
-" NERDCommenter
+" }}}
+" NERDCommenter ------------------------------------------------------------ {{{
 let g:NERDCreateDefaultMappings = 0
 let g:NERDSpaceDelims = 1
 vmap <leader>cc <plug>NERDCommenterToggle<cr>vgv
@@ -454,79 +456,141 @@ vmap <leader><leader> <plug>NERDCommenterToggle<cr>vgv
 nmap <leader>cc <plug>NERDCommenterToggle
 nmap <leader><leader> <plug>NERDCommenterToggle
 nmap <leader>c$ <plug>NERDCommenterToEOL
-
-" NetRW
+" }}}
+" NetRW -------------------------------------------------------------------- {{{
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 let g:netrw_menu = 0
 let g:netrw_winsize=15
 let g:netrw_list_hide="^\.git/$,^\.svn/$,^CVS/$,^CVSROOT/$,\.py[co]$,\.swp$,\\~$,^#"
-function! ToggleVExplorer()
-  if exists("t:expl_buf_num")
-      let expl_win_num = bufwinnr(t:expl_buf_num)
-      if expl_win_num != -1
-          let cur_win_nr = winnr()
-          exec expl_win_num . 'wincmd w'
-          close
-          exec cur_win_nr . 'wincmd w'
-          unlet t:expl_buf_num
-      else
-          unlet t:expl_buf_num
-      endif
-  else
-      exec '1wincmd w'
-      Vexplore
-      let t:expl_buf_num = bufnr("%")
-  endif
-endfunction
 map <silent> <leader>d :call ToggleVExplorer()<CR>
 map <silent> <leader>dd :call ToggleVExplorer()<CR>
-
-
-" Supertab
+" }}}
+" Supertab ----------------------------------------------------------------- {{{
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabClosePreviewOnPopupClose = 1
 let g:SuperTabLongestEnhanced = 1
-
-" Gundo
+" }}}
+" Gundo -------------------------------------------------------------------- {{{
 nnoremap <leader>g :GundoToggle<cr>
-
-" Filetype detection
+" }}}
+" }}}
+" Filetype detection ------------------------------------------------------- {{{
 au BufNewFile,BufRead gitconfig setf gitconfig
 au BufNewFile,BufRead /private/tmp/crontab.* setl backupcopy=yes
-
-" Filetype configurations
+" }}}
+" Filetype configurations -------------------------------------------------- {{{
+" help --------------------------------------------------------------------- {{{
 au FileType help setl nolist
 au FileType help setl nonumber
-
+" }}}
+" man ---------------------------------------------------------------------- {{{
 au FileType man setl nolist
 au FileType man setl nonumber
-
+" }}}
+" markdown ----------------------------------------------------------------- {{{
 au FileType markdown au BufWritePre <buffer> RemoveTrailingWhiteSpace
 au FileType markdown setl shiftwidth=2
 au FileType markdown setl softtabstop=2
 au FileType markdown setl spell
 au FileType markdown setl tabstop=2
-
+" }}}
+" python ------------------------------------------------------------------- {{{
 au FileType python au BufWritePre <buffer> RemoveTrailingWhiteSpace
 au FileType python setl textwidth=79
 au FileType python setl foldmethod=indent
-
+" }}}
+" ruby --------------------------------------------------------------------- {{{
 au FileType ruby au BufWritePre <buffer> RemoveTrailingWhiteSpace
-
+" }}}
+" perl --------------------------------------------------------------------- {{{
 au FileType perl au BufWritePre <buffer> RemoveTrailingWhiteSpace
 au FileType perl setl iskeyword+=$,%,@
-
+" }}}
+" vim ---------------------------------------------------------------------- {{{
 au FileType vim au BufWritePre <buffer> RemoveTrailingWhiteSpace
-
+au FileType vim setl foldmethod=marker
+" }}}
+" make --------------------------------------------------------------------- {{{
 au FileType make au BufWritePre <buffer> RemoveTrailingWhiteSpace
 au FileType make setl noexpandtab
 au FileType make setl nosmarttab
 au FileType make setl softtabstop=0
-
+" }}}
+" puppet ------------------------------------------------------------------- {{{
 au FileType puppet au BufWritePre <buffer> RemoveTrailingWhiteSpace
-
+" }}}
+" shell -------------------------------------------------------------------- {{{
 au FileType sh,zsh au BufWritePre <buffer> RemoveTrailingWhiteSpace
+" }}}
+" }}}
+" Folding ------------------------------------------------------------------ {{{
+function! MyFoldText() " --------------------------------------------------- {{{
+    let line = getline(v:foldstart)
 
-" Load abbreviations
+    let nucolwidth = &fdc + &number * &numberwidth
+    let windowwidth = winwidth(0) - nucolwidth - 3
+    let foldedlinecount = v:foldend - v:foldstart
+
+    " expand tabs into spaces
+    let onetab = strpart('          ', 0, &tabstop)
+    let line = substitute(line, '\t', onetab, 'g')
+
+    let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
+    let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
+    return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
+endfunction " }}}
+function! AddFoldMark() " -------------------------------------------------- {{{
+    let _s=@/
+    let c0 = virtcol(".")
+    let l0 = line(".")
+    .,.s/\s\+$//e
+    normal $
+    let c1 = col(".")
+    let filler = repeat("-", 80 - 5 - c1) . " {{{" " }}}
+    call append(l0, filler)
+    let @/=_s
+    normal J
+    call cursor(l0, c0)
+endfunction " }}}
+set foldtext=MyFoldText()
+nnoremap <leader>f :call AddFoldMark()<cr>
+" }}}
+" Miscellaneous  ----------------------------------------------------------- {{{
+" Prepare our vim cache directories ---------------------------------------- {{{
+silent execute '!mkdir -p $HOME/.vimdata/vimbackup'
+silent execute '!mkdir -p $HOME/.vimdata/vimswap'
+silent execute '!mkdir -p $HOME/.vimdata/vimviews'
+silent execute '!mkdir -p $HOME/.vimdata/vimundo'
+silent execute '!mkdir -p $HOME/.vimdata/ctrlp'
+silent execute '!mkdir -p $HOME/.vimdata/tags'
+" }}}
+" Use a bar-shaped cursor for insert mode, even through tmux. -------------- {{{
+if exists('$TMUX')
+    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
+" }}}
+" Toggle listchars as we enter and exit insert mode ------------------------ {{{
+augroup trailing
+    au!
+    au InsertEnter * :set listchars-=trail:⌴
+    au InsertLeave * :set listchars+=trail:⌴
+augroup END
+" }}}
+" Highlight VCS conflict markers ------------------------------------------- {{{
+match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
+" }}}
+" Restore cursor position -------------------------------------------------- {{{
+augroup restoreCursorPosition
+  autocmd!
+  autocmd BufReadPost * call RestoreCursorPosition()
+augroup END
+" }}}
+" Load abbreviations ------------------------------------------------------- {{{
 source ~/.vim/abbrev
+" }}}
+" }}}
