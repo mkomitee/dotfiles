@@ -13,6 +13,7 @@ Bundle 'jpalardy/vim-slime'
 Bundle 'kana/vim-textobj-indent.git'
 Bundle 'kana/vim-textobj-user.git'
 Bundle 'kien/ctrlp.vim'
+Bundle 'klen/python-mode'
 Bundle 'kshenoy/vim-signature'
 Bundle 'majutsushi/tagbar'
 Bundle 'mkomitee/snipmate.vim'
@@ -85,6 +86,9 @@ set tabstop=4                  " 1 tab = 4 spaces
 set textwidth=80               " wrap at 80 columns
 set nospell                    " spell checking is off
 set tags=./tags;               " name of the tags files which is relative to the project
+set notimeout
+set ttimeout
+set ttimeoutlen=10
 " undofile ----------------------------------------------------------------- {{{
 if exists('&undofile')
     set undofile         " Save undo history to a file for persistence
@@ -399,6 +403,23 @@ nnoremap <leader>m :CtrlPMRU<CR>
 "  <C-v> → will open the finding match in a vertical split
 "  <C-h> → will open the finding match in a horizontal split
 " }}}
+" Python-Mode -------------------------------------------------------------- {{{
+let g:pymode_syntax = 1
+let g:pymode_doc = 1
+let g:pymode_doc_key = '<localleader>?'
+let g:pydoc = 'pydoc'
+let g:pymode_run = 0
+let g:pymode_lint = 0
+let g:pymode_breakpoint = 0
+let g:pymode_utils_whitespaces = 0
+let g:pymode_virtualenv = 0
+let g:pymode_folding = 0
+let g:pymode_options_indent = 0
+let g:pymode_options_fold = 0
+let g:pymode_options_other = 0
+
+let g:pymode_rope = 0
+" }}}
 " Tabularize --------------------------------------------------------------- {{{
 vnoremap <silent> <Leader>a=> :Tabularize /=><CR>
 vnoremap <silent> <Leader>a= :Tabularize /=<CR>
@@ -472,6 +493,10 @@ let g:SuperTabClosePreviewOnPopupClose = 1
 let g:SuperTabLongestEnhanced = 1
 " }}}
 " Gundo -------------------------------------------------------------------- {{{
+let g:gundo_debug = 1
+let g:gundo_preview_bottom = 1
+let g:gundo_tree_statusline = "Gundo"
+let g:gundo_preview_statusline = "Gundo Preview"
 nnoremap <leader>g :GundoToggle<cr>
 " }}}
 " }}}
@@ -480,9 +505,11 @@ au BufNewFile,BufRead gitconfig setf gitconfig
 au BufNewFile,BufRead /private/tmp/crontab.* setl backupcopy=yes
 " }}}
 " Filetype configurations -------------------------------------------------- {{{
-" help --------------------------------------------------------------------- {{{
-au FileType help setl nolist
-au FileType help setl nonumber
+" make --------------------------------------------------------------------- {{{
+au FileType make au BufWritePre <buffer> RemoveTrailingWhiteSpace
+au FileType make setl noexpandtab
+au FileType make setl nosmarttab
+au FileType make setl softtabstop=0
 " }}}
 " man ---------------------------------------------------------------------- {{{
 au FileType man setl nolist
@@ -494,34 +521,40 @@ au FileType markdown setl shiftwidth=2
 au FileType markdown setl softtabstop=2
 au FileType markdown setl spell
 au FileType markdown setl tabstop=2
+au Filetype markdown nnoremap <buffer> <leader>1 yypVr=:redraw<cr>
+au Filetype markdown nnoremap <buffer> <leader>2 yypVr-:redraw<cr>
+au Filetype markdown nnoremap <buffer> <leader>3 mzI###<space><ESC>`zlll <ESC>
+" }}}
+" perl --------------------------------------------------------------------- {{{
+au FileType perl au BufWritePre <buffer> RemoveTrailingWhiteSpace
+au FileType perl setl iskeyword+=$,%,@
+" }}}
+" puppet ------------------------------------------------------------------- {{{
+au FileType puppet au BufWritePre <buffer> RemoveTrailingWhiteSpace
 " }}}
 " python ------------------------------------------------------------------- {{{
 au FileType python au BufWritePre <buffer> RemoveTrailingWhiteSpace
 au FileType python setl textwidth=79
 au FileType python setl foldmethod=indent
 " }}}
+" rst ---------------------------------------------------------------------- {{{
+au Filetype rst nnoremap <buffer> <leader>1 yypVr=:redraw<cr>
+au Filetype rst nnoremap <buffer> <leader>2 yypVr-:redraw<cr>
+au Filetype rst nnoremap <buffer> <leader>3 yypVr~:redraw<cr>
+au Filetype rst nnoremap <buffer> <leader>4 yypVr`:redraw<cr>
+" }}}
 " ruby --------------------------------------------------------------------- {{{
 au FileType ruby au BufWritePre <buffer> RemoveTrailingWhiteSpace
 " }}}
-" perl --------------------------------------------------------------------- {{{
-au FileType perl au BufWritePre <buffer> RemoveTrailingWhiteSpace
-au FileType perl setl iskeyword+=$,%,@
+" shell -------------------------------------------------------------------- {{{
+au FileType sh,zsh au BufWritePre <buffer> RemoveTrailingWhiteSpace
 " }}}
 " vim ---------------------------------------------------------------------- {{{
 au FileType vim au BufWritePre <buffer> RemoveTrailingWhiteSpace
 au FileType vim setl foldmethod=marker
-" }}}
-" make --------------------------------------------------------------------- {{{
-au FileType make au BufWritePre <buffer> RemoveTrailingWhiteSpace
-au FileType make setl noexpandtab
-au FileType make setl nosmarttab
-au FileType make setl softtabstop=0
-" }}}
-" puppet ------------------------------------------------------------------- {{{
-au FileType puppet au BufWritePre <buffer> RemoveTrailingWhiteSpace
-" }}}
-" shell -------------------------------------------------------------------- {{{
-au FileType sh,zsh au BufWritePre <buffer> RemoveTrailingWhiteSpace
+au FileType help setl nolist
+au FileType help setl nonumber
+au BufWinEnter *.txt if &ft == 'help' | wincmd L | endif
 " }}}
 " }}}
 " Folding ------------------------------------------------------------------ {{{
