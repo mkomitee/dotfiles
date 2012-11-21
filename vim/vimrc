@@ -28,10 +28,6 @@ Bundle 'tpope/vim-git'
 Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
-" This is causing an occasional segfault on Solaris, ...
-if system("uname") !=# "SunOS\n"
-    Bundle 'xolox/vim-easytags'
-endif
 " Turn on all the features ... --------------------------------------------- {{{
 syntax on
 filetype plugin indent on
@@ -400,6 +396,9 @@ endfor
 " Focus Fold --------------------------------------------------------------- {{{
 nnoremap zf mzzMzv`zmzzz:call Pulse(9)<cr>
 " }}}
+" Simple visual sorting ---------------------------------------------------- {{{
+vnoremap <leader>s :sort<cr>gv
+" }}}
 " }}}
 " Custom commands ---------------------------------------------------------- {{{
 " Allow common typos in commands ------------------------------------------- {{{
@@ -447,13 +446,11 @@ let g:pydoc = 'pydoc'
 let g:pymode_run = 0
 let g:pymode_lint = 0
 let g:pymode_breakpoint = 0
+let g:pymode_folding = 1
+let g:pymode_motion = 1
 let g:pymode_utils_whitespaces = 0
 let g:pymode_virtualenv = 0
-let g:pymode_folding = 0
-let g:pymode_options_indent = 0
-let g:pymode_options_fold = 0
-let g:pymode_options_other = 0
-
+let g:pymode_indent = 0
 let g:pymode_rope = 0
 " }}}
 " Tabularize --------------------------------------------------------------- {{{
@@ -571,7 +568,6 @@ au FileType puppet au BufWritePre <buffer> RemoveTrailingWhiteSpace
 " python ------------------------------------------------------------------- {{{
 au FileType python au BufWritePre <buffer> RemoveTrailingWhiteSpace
 au FileType python setl textwidth=79
-au FileType python setl foldmethod=indent
 " }}}
 " rst ---------------------------------------------------------------------- {{{
 au Filetype rst nnoremap <buffer> <leader>1 yypVr=:redraw<cr>
