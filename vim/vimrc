@@ -236,13 +236,6 @@ function! RemoveTrailingWhiteSpace() " ------------------------------------- {{{
         call cursor(l, c)
     endif
 endfun " }}}
-function! SoftTabs() " ----------------------------------------------------- {{{
-    setl expandtab
-    setl shiftwidth=4
-    setl smarttab
-    setl softtabstop=4
-    setl tabstop=4
-endfunction " }}}
 function! RestoreCursorPosition() " ---------------------------------------- {{{
     " Restore cursor position to the last time you were in the file, this uses marks
     " so it's dependent on viminfo
