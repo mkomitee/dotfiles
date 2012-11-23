@@ -241,7 +241,7 @@ function! RestoreCursorPosition() " ---------------------------------------- {{{
     " so it's dependent on viminfo
   if line("'\"") <= line("$")
     normal! g`"
-    normal! zv
+    call FocusFold()
     return 1
   endif
 endfunction " }}}
@@ -294,6 +294,16 @@ function! Pulse(n) " ------------------------------------------------------- {{{
 
     execute 'hi ' . old_hi
     setlocal nocursorline
+endfunction " }}}
+function! FocusFold() " -------------------------------------------------- {{{
+    let c = virtcol(".")
+    let l = line(".")
+    normal! zM
+    normal! zv
+    normal! zz
+    call cursor(l, c)
+    call Pulse(9)
+    return 1
 endfunction " }}}
 " }}}
 " Custom maps -------------------------------------------------------------- {{{
@@ -384,7 +394,7 @@ for [start, end] in items(pairs)
 endfor
 " }}}
 " Focus Fold --------------------------------------------------------------- {{{
-nnoremap zf mzzMzv`zmzzz:call Pulse(9)<cr>
+nnoremap zf :call FocusFold()<cr>
 " }}}
 " Simple visual sorting ---------------------------------------------------- {{{
 vnoremap <leader>s :sort<cr>gv
