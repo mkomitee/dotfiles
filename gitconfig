@@ -22,6 +22,7 @@
 
 [pretty]
     lg = "%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset"
+    lg2 = "%C(yellow)%h%Cred%d %Creset%s%Cblue [%cn]"
 
 [alias] 
     lg = log --graph --pretty=lg --abbrev-commit 
@@ -68,7 +69,7 @@
     cmd = vimdiff  \"$LOCAL\" \"$REMOTE\"
 
 [format]
-    pretty = lg
+    pretty = lg2
 
 [diff]
     tool = vimdiff
