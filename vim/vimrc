@@ -432,7 +432,6 @@ let g:ctrlp_mruf_relative = 1
 let g:ctrlp_reuse_window = 'netrw\|help'
 let g:ctrlp_dotfiles              = 0
 nnoremap <leader>b :CtrlPBuffer<CR>
-nnoremap <leader>t :CtrlPTag<CR>
 nnoremap <leader>m :CtrlPMRU<CR>
 "  <C-t> → will open the finding match in a tab
 "  <C-v> → will open the finding match in a vertical split
@@ -660,6 +659,9 @@ augroup restoreCursorPosition
   autocmd!
   autocmd BufReadPost * call RestoreCursorPosition()
 augroup END
+" }}}
+" My tasks, ... ------------------------------------------------------------ {{{
+nnoremap <leader>t :e $HOME/.tasks.md<cr>
 " }}}
 " Load abbreviations ------------------------------------------------------- {{{
 source ~/.vim/abbrev
