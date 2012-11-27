@@ -53,6 +53,8 @@
     remotes = remote -v
     ctags = !.git/hooks/ctags
     reinit = !.git/hooks/reinit
+    list = stash list --pretty=rl --abbrev-commit --decorate=short
+    save = stash save -u
 
 [pager]
     status = yes
