@@ -46,6 +46,7 @@
     sm = submodule
     wc = whatchanged
     aa = add -A
+    ap = add --patch
     commit = commit -v
     ammend = commit --amend -v
     amend = commit --amend -v
