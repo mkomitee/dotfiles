@@ -21,16 +21,15 @@
     single = yes
 
 [pretty]
-    lg = "%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset"
-    lg2 = "%C(yellow)%h%Cred%d %Creset%s%Cblue [%cn]"
+    lg = "%C(yellow)%h %C(blue)%cd%Cred%d%Creset %s%Cblue [%cn]"
+    rl = "%C(yellow)%h %C(red)%gd %C(blue)%cd%Cred%d%Creset %gs%Cblue [%cn]"
 
 [alias] 
-    lg = log --graph --pretty=lg --abbrev-commit 
+    l = log --graph --full-history --all --pretty=lg --abbrev-commit --decorate=short
     lc = local-commits --decorate=short --pretty=lg
-    graph = log -w --graph --full-history --all --pretty=lg --decorate=short
     track = checkout -t
     ls = ls-files
-    rl = reflog
+    rl = reflog --full-history --all --pretty=rl --abbrev-commit --decorate=short
     branches = branch -av
     d = diff --stat --summary
     ds = diff --staged
@@ -69,7 +68,7 @@
     cmd = vimdiff  \"$LOCAL\" \"$REMOTE\"
 
 [format]
-    pretty = lg2
+    pretty = lg
 
 [diff]
     tool = vimdiff
