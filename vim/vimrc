@@ -291,8 +291,8 @@ nnoremap n nzz:call Pulse(5)<cr>
 nnoremap N Nzz:call Pulse(5)<cr>
 " }}}
 " Center view after traversing the jumplist -------------------------------- {{{
-nnoremap <C-o> <C-o>zz
-nnoremap <C-i> <C-i>zz   " FIXME - this doesnt work?
+nnoremap <silent> <C-o> <C-o>zz
+nnoremap <silent> <C-i> <C-i>zz
 " }}}
 " j and k will go one line, even if they're wrapped ------------------------ {{{
 nnoremap j gj
@@ -324,10 +324,6 @@ noremap Y y$
 " Easily modify ~/.{g,}vimrc ----------------------------------------------- {{{
 nnoremap <leader>ev :e $MYVIMRC<CR>
 nnoremap <leader>egv :e$MYGVIMRC<CR>
-" }}}
-" Tab between surrounding brackets ----------------------------------------- {{{
-nnoremap <tab> %
-vnoremap <tab> %
 " }}}
 " Strip whitespace --------------------------------------------------------- {{{
 nnoremap <leader>W :RemoveTrailingWhiteSpace<cr>
