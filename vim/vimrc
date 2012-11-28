@@ -287,52 +287,52 @@ endfunction " }}}
 " }}}
 " Custom maps -------------------------------------------------------------- {{{
 " Center view and focus when searching ------------------------------------- {{{
-nnoremap n nzz:call Pulse(5)<cr>
-nnoremap N Nzz:call Pulse(5)<cr>
+nnoremap <silent> n nzz:call Pulse(5)<cr>
+nnoremap <silent> N Nzz:call Pulse(5)<cr>
 " }}}
 " Center view after traversing the jumplist -------------------------------- {{{
 nnoremap <silent> <C-o> <C-o>zz
 nnoremap <silent> <C-i> <C-i>zz
 " }}}
 " j and k will go one line, even if they're wrapped ------------------------ {{{
-nnoremap j gj
-nnoremap k gk
+nnoremap <silent> j gj
+nnoremap <silent> k gk
 " }}}
 " When using marks, all by default mark columns as well -------------------- {{{
-nnoremap ' `
+nnoremap <silent> ' `
 " }}}
 " Simple map to disable highlighting --------------------------------------- {{{
-nnoremap // :nohl<cr>
+nnoremap <silent> // :nohl<cr>
 " }}}
 " Easier navigation between open windows ----------------------------------- {{{
-nnoremap <C-k> <C-W>k
-nnoremap <C-j> <C-W>j
-nnoremap <C-h> <C-W>h
-nnoremap <C-l> <C-W>l
+nnoremap <silent> <C-k> <C-W>k
+nnoremap <silent> <C-j> <C-W>j
+nnoremap <silent> <C-h> <C-W>h
+nnoremap <silent> <C-l> <C-W>l
 " }}}
 " Simple splits, inspired by my tmux configuration ------------------------- {{{
-nnoremap _ :sp<cr>
-nnoremap \| :vsp<cr>
+nnoremap <silent> _ :sp<cr>
+nnoremap <silent> \| :vsp<cr>
 " }}}
 " Reselect visually selected text after indenting -------------------------- {{{
-vnoremap > >gv
-vnoremap < <gv
+vnoremap <silent> > >gv
+vnoremap <silent> < <gv
 " }}}
 " make Y consistant with C and D. Yank to end of line ---------------------- {{{
-noremap Y y$
+noremap <silent> Y y$
 " }}}
 " Easily modify ~/.{g,}vimrc ----------------------------------------------- {{{
-nnoremap <leader>ev :e $MYVIMRC<CR>
-nnoremap <leader>egv :e$MYGVIMRC<CR>
+nnoremap <silent> <leader>ev :e $MYVIMRC<CR>
+nnoremap <silent> <leader>egv :e$MYGVIMRC<CR>
 " }}}
 " Strip whitespace --------------------------------------------------------- {{{
-nnoremap <leader>W :RemoveTrailingWhiteSpace<cr>
+nnoremap <silent> <leader>W :RemoveTrailingWhiteSpace<cr>
 " }}}
 " sudo write-file in case you're in a file you dont have privileges to write {{{
-cmap w!! w !sudo tee % >/dev/null<cr>
+cmap <silent> w!! w !sudo tee % >/dev/null<cr>
 " }}}
 " jj = Esc ----------------------------------------------------------------- {{{
-inoremap jj <Esc>
+inoremap <silent> jj <Esc>
 " }}}
 " Remove F1 Help ----------------------------------------------------------- {{{
 inoremap <F1> <nop>
@@ -340,13 +340,13 @@ nnoremap <F1> <nop>
 vnoremap <F1> <nop>
 " }}}
 " Easy window resizing ----------------------------------------------------- {{{
-noremap <up> <C-W>+
-noremap <down> <C-W>-
-nnoremap <left> <C-W><
-nnoremap <right> <C-W>>
+noremap <silent> <up> <C-W>+
+noremap <silent> <down> <C-W>-
+nnoremap <silent> <left> <C-W><
+nnoremap <silent> <right> <C-W>>
 " }}}
 " . returns to starting place after repeat --------------------------------- {{{
-nnoremap . .`[
+nnoremap <silent> . .`[
 " }}}
 " Simple way to find out where the hell my cursor is ----------------------- {{{
 nnoremap <silent> <leader>? :call Pulse(9)<cr>
@@ -358,21 +358,21 @@ let pairs = { ':' : ':',
             \ '/' : '/',
             \ '<bar>' : '<bar>' }
 for [start, end] in items(pairs)
-    exe "nnoremap ci".start." T".start."ct".end
-    exe "nnoremap ca".start." F".start."cf".end
-    exe "nnoremap yi".start." T".start."yt".end
-    exe "nnoremap ya".start." F".start."yf".end
-    exe "nnoremap vi".start." T".start."vt".end
-    exe "nnoremap va".start." F".start."vf".end
-    exe "nnoremap di".start." T".start."dt".end
-    exe "nnoremap da".start." F".start."df".end
+    exe "nnoremap <silent> ci".start." T".start."ct".end
+    exe "nnoremap <silent> ca".start." F".start."cf".end
+    exe "nnoremap <silent> yi".start." T".start."yt".end
+    exe "nnoremap <silent> ya".start." F".start."yf".end
+    exe "nnoremap <silent> vi".start." T".start."vt".end
+    exe "nnoremap <silent> va".start." F".start."vf".end
+    exe "nnoremap <silent> di".start." T".start."dt".end
+    exe "nnoremap <silent> da".start." F".start."df".end
 endfor
 " }}}
 " Focus Fold --------------------------------------------------------------- {{{
-nnoremap zf :call FocusFold()<cr>
+nnoremap <silent> zf :call FocusFold()<cr>
 " }}}
 " Simple visual sorting ---------------------------------------------------- {{{
-vnoremap <leader>s :sort<cr>gv
+vnoremap <silent> <leader>s :sort<cr>gv
 " }}}
 " }}}
 " Custom commands ---------------------------------------------------------- {{{
@@ -405,8 +405,8 @@ let g:ctrlp_map = '<leader>p'
 let g:ctrlp_mruf_relative = 1
 let g:ctrlp_reuse_window = 'netrw\|help'
 let g:ctrlp_dotfiles              = 0
-nnoremap <leader>b :CtrlPBuffer<CR>
-nnoremap <leader>m :CtrlPMRU<CR>
+nnoremap <silent> <leader>b :CtrlPBuffer<CR>
+nnoremap <silent> <leader>m :CtrlPMRU<CR>
 "  <C-t> → will open the finding match in a tab
 "  <C-v> → will open the finding match in a vertical split
 "  <C-h> → will open the finding match in a horizontal split
@@ -452,18 +452,18 @@ let g:easytags_by_filetype = '~/.vimdata/tags'
 " :Ggrep → does a grep in the tree
 " :Gbrowse → opens the actual file in the browser (normally its on github)
 " :Git → after this you can perform every other normal git command you want
-nnoremap <leader>gd :Gdiff<CR>
-nnoremap <leader>gs :Gstatus<CR>
-nnoremap <leader>gw :Gwrite<CR>
-nnoremap <leader>ga :Gadd<CR>
-nnoremap <leader>gb :Gblame<CR>
-nnoremap <leader>gl :Glog<CR>
-nnoremap <leader>gc :Gcommit<CR>
-nnoremap <leader>gm :Gmove<CR>
-nnoremap <leader>gr :Gremove<CR>
-nnoremap <leader>gp :! git push<CR>
-nnoremap <leader>dg :diffget<CR>
-nnoremap <leader>dp :diffput<CR>
+nnoremap <silent> <leader>gd :Gdiff<CR>
+nnoremap <silent> <leader>gs :Gstatus<CR>
+nnoremap <silent> <leader>gw :Gwrite<CR>
+nnoremap <silent> <leader>ga :Gadd<CR>
+nnoremap <silent> <leader>gb :Gblame<CR>
+nnoremap <silent> <leader>gl :Glog<CR>
+nnoremap <silent> <leader>gc :Gcommit<CR>
+nnoremap <silent> <leader>gm :Gmove<CR>
+nnoremap <silent> <leader>gr :Gremove<CR>
+nnoremap <silent> <leader>gp :! git push<CR>
+nnoremap <silent> <leader>dg :diffget<CR>
+nnoremap <silent> <leader>dp :diffput<CR>
 " }}}
 " Tagbar ------------------------------------------------------------------- {{{
 let g:tagbar_compact = 1 " don't show the help in the tagbar
@@ -484,11 +484,11 @@ au FileType python let g:slime_python_ipython = 1
 " NERDCommenter ------------------------------------------------------------ {{{
 let g:NERDCreateDefaultMappings = 0
 let g:NERDSpaceDelims = 1
-vmap <leader>cc <plug>NERDCommenterToggle<cr>vgv
-vmap <leader><leader> <plug>NERDCommenterToggle<cr>vgv
-nmap <leader>cc <plug>NERDCommenterToggle
-nmap <leader><leader> <plug>NERDCommenterToggle
-nmap <leader>c$ <plug>NERDCommenterToEOL
+vmap <silent> <leader>cc <plug>NERDCommenterToggle<cr>vgv
+vmap <silent> <leader><leader> <plug>NERDCommenterToggle<cr>vgv
+nmap <silent> <leader>cc <plug>NERDCommenterToggle
+nmap <silent> <leader><leader> <plug>NERDCommenterToggle
+nmap <silent> <leader>c$ <plug>NERDCommenterToEOL
 " }}}
 " NERDTree ----------------------------------------------------------------- {{{
 nnoremap <silent> <leader>d :NERDTreeToggle<CR>
@@ -504,7 +504,7 @@ let g:gundo_debug = 1
 let g:gundo_preview_bottom = 1
 let g:gundo_tree_statusline = "Gundo"
 let g:gundo_preview_statusline = "Gundo Preview"
-nnoremap <leader>g :GundoToggle<cr>
+nnoremap <silent> <leader>g :GundoToggle<cr>
 " }}}
 " }}}
 " Filetype detection ------------------------------------------------------- {{{
@@ -528,9 +528,9 @@ au FileType markdown setl shiftwidth=2
 au FileType markdown setl softtabstop=2
 au FileType markdown setl spell
 au FileType markdown setl tabstop=2
-au Filetype markdown nnoremap <buffer> <leader>1 yypVr=:redraw<cr>
-au Filetype markdown nnoremap <buffer> <leader>2 yypVr-:redraw<cr>
-au Filetype markdown nnoremap <buffer> <leader>3 mzI###<space><ESC>`zlll <ESC>
+au Filetype markdown nnoremap <silent> <buffer> <leader>1 yypVr=:redraw<cr>
+au Filetype markdown nnoremap <silent> <buffer> <leader>2 yypVr-:redraw<cr>
+au Filetype markdown nnoremap <silent> <buffer> <leader>3 mzI###<space><ESC>`zlll <ESC>
 " }}}
 " perl --------------------------------------------------------------------- {{{
 au FileType perl au BufWritePre <buffer> RemoveTrailingWhiteSpace
@@ -544,10 +544,10 @@ au FileType python au BufWritePre <buffer> RemoveTrailingWhiteSpace
 au FileType python setl textwidth=79
 " }}}
 " rst ---------------------------------------------------------------------- {{{
-au Filetype rst nnoremap <buffer> <leader>1 yypVr=:redraw<cr>
-au Filetype rst nnoremap <buffer> <leader>2 yypVr-:redraw<cr>
-au Filetype rst nnoremap <buffer> <leader>3 yypVr~:redraw<cr>
-au Filetype rst nnoremap <buffer> <leader>4 yypVr`:redraw<cr>
+au Filetype rst nnoremap <silent> <buffer> <leader>1 yypVr=:redraw<cr>
+au Filetype rst nnoremap <silent> <buffer> <leader>2 yypVr-:redraw<cr>
+au Filetype rst nnoremap <silent> <buffer> <leader>3 yypVr~:redraw<cr>
+au Filetype rst nnoremap <silent> <buffer> <leader>4 yypVr`:redraw<cr>
 " }}}
 " ruby --------------------------------------------------------------------- {{{
 au FileType ruby au BufWritePre <buffer> RemoveTrailingWhiteSpace
@@ -593,7 +593,7 @@ function! AddFoldMark() " -------------------------------------------------- {{{
     call cursor(l0, c0)
 endfunction " }}}
 set foldtext=MyFoldText()
-nnoremap <leader>f :call AddFoldMark()<cr>
+nnoremap <silent> <leader>f :call AddFoldMark()<cr>
 " }}}
 " Miscellaneous ------------------------------------------------------------ {{{
 " Prepare our vim cache directories ---------------------------------------- {{{
@@ -630,7 +630,7 @@ augroup restoreCursorPosition
 augroup END
 " }}}
 " My tasks, ... ------------------------------------------------------------ {{{
-nnoremap <leader>t :e $HOME/.tasks.md<cr>
+nnoremap <silent> <leader>t :e $HOME/.tasks.md<cr>
 " }}}
 " Load abbreviations ------------------------------------------------------- {{{
 source ~/.vim/abbrev
@@ -663,15 +663,15 @@ source ~/.vim/abbrev
 "                                                      print "hello ", name
 "                                                             VVVVVV
 
-onoremap an :<c-u>call <SID>NextTextObject('a', 'f')<cr>
-xnoremap an :<c-u>call <SID>NextTextObject('a', 'f')<cr>
-onoremap in :<c-u>call <SID>NextTextObject('i', 'f')<cr>
-xnoremap in :<c-u>call <SID>NextTextObject('i', 'f')<cr>
+onoremap <silent> an :<c-u>call <SID>NextTextObject('a', 'f')<cr>
+xnoremap <silent> an :<c-u>call <SID>NextTextObject('a', 'f')<cr>
+onoremap <silent> in :<c-u>call <SID>NextTextObject('i', 'f')<cr>
+xnoremap <silent> in :<c-u>call <SID>NextTextObject('i', 'f')<cr>
 
-onoremap al :<c-u>call <SID>NextTextObject('a', 'F')<cr>
-xnoremap al :<c-u>call <SID>NextTextObject('a', 'F')<cr>
-onoremap il :<c-u>call <SID>NextTextObject('i', 'F')<cr>
-xnoremap il :<c-u>call <SID>NextTextObject('i', 'F')<cr>
+onoremap <silent> al :<c-u>call <SID>NextTextObject('a', 'F')<cr>
+xnoremap <silent> al :<c-u>call <SID>NextTextObject('a', 'F')<cr>
+onoremap <silent> il :<c-u>call <SID>NextTextObject('i', 'F')<cr>
+xnoremap <silent> il :<c-u>call <SID>NextTextObject('i', 'F')<cr>
 function! s:NextTextObject(motion, dir) " ------------------------------------ {{{
   let c = nr2char(getchar())
 
