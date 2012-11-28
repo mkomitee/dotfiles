@@ -210,10 +210,6 @@ function! GitStatusLine() " ------------------------------------------------ {{{
     endif
 endfunction
 "}}}
-function! WhereAmI() " ----------------------------------------------------- {{{
-    set invcursorline
-    set invcursorcolumn
-endfunction " }}}
 function! WhatGroup() " ---------------------------------------------------- {{{
     if !exists("*synstack")
         return
@@ -357,7 +353,7 @@ nnoremap <right> <C-W>>
 nnoremap . .`[
 " }}}
 " Simple way to find out where the hell my cursor is ----------------------- {{{
-nnoremap <leader>? :call WhereAmI()<cr>
+nnoremap <silent> <leader>? :call Pulse(9)<cr>
 " }}}
 " Custom text objects around and in character pairs ------------------------ {{{
 let pairs = { ':' : ':',
@@ -395,7 +391,6 @@ command! -bang WA wa<bang>
 command! -bang Wq wq<bang>
 command! -bang WQ wq<bang>
 " }}}
-command! WhereAmI :call WhereAmI()
 command! WhatGroup :call WhatGroup()
 command! RemoveTrailingWhiteSpace :call RemoveTrailingWhiteSpace()
 command! SoftTabs :call SoftTabs()
