@@ -20,6 +20,7 @@ Bundle 'mkomitee/snipmate.vim'
 Bundle 'nelstrom/vim-markdown-folding'
 Bundle 'python_match.vim'
 Bundle 'scrooloose/nerdcommenter'
+Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/snipmate-snippets'
 Bundle 'sjl/gundo.vim'
 Bundle 'tmatilai/gitolite.vim'
@@ -243,24 +244,6 @@ function! RestoreCursorPosition() " ---------------------------------------- {{{
     normal! g`"
     call FocusFold()
     return 1
-  endif
-endfunction " }}}
-function! ToggleVExplorer() " ---------------------------------------------- {{{
-  if exists("t:expl_buf_num")
-      let expl_win_num = bufwinnr(t:expl_buf_num)
-      if expl_win_num != -1
-          let cur_win_nr = winnr()
-          exec expl_win_num . 'wincmd w'
-          close
-          exec cur_win_nr . 'wincmd w'
-          unlet t:expl_buf_num
-      else
-          unlet t:expl_buf_num
-      endif
-  else
-      exec '1wincmd w'
-      Vexplore
-      let t:expl_buf_num = bufnr("%")
   endif
 endfunction " }}}
 function! Pulse(n) " ------------------------------------------------------- {{{
@@ -516,14 +499,9 @@ nmap <leader>cc <plug>NERDCommenterToggle
 nmap <leader><leader> <plug>NERDCommenterToggle
 nmap <leader>c$ <plug>NERDCommenterToEOL
 " }}}
-" NetRW -------------------------------------------------------------------- {{{
-let g:netrw_banner = 0
-let g:netrw_liststyle = 3
-let g:netrw_menu = 0
-let g:netrw_winsize=15
-let g:netrw_list_hide="^\.git/$,^\.svn/$,^CVS/$,^CVSROOT/$,\.py[co]$,\.swp$,\\~$,^#"
-map <silent> <leader>d :call ToggleVExplorer()<CR>
-map <silent> <leader>dd :call ToggleVExplorer()<CR>
+" NERDTree ----------------------------------------------------------------- {{{
+nnoremap <silent> <leader>d :NERDTreeToggle<CR>
+nnoremap <silent> <leader>dd :NERDTreeToggle<CR>
 " }}}
 " Supertab ----------------------------------------------------------------- {{{
 let g:SuperTabDefaultCompletionType = "context"
