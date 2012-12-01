@@ -548,6 +548,7 @@ au FileType markdown setl tabstop=2
 au Filetype markdown nnoremap <silent> <buffer> <leader>1 yypVr=:redraw<cr>
 au Filetype markdown nnoremap <silent> <buffer> <leader>2 yypVr-:redraw<cr>
 au Filetype markdown nnoremap <silent> <buffer> <leader>3 mzI###<space><ESC>`zlll <ESC>
+au BufNewFile,BufRead $HOME/.tasks.md setl nospell
 " }}}
 " perl --------------------------------------------------------------------- {{{
 au FileType perl au BufWritePre <buffer> RemoveTrailingWhiteSpace

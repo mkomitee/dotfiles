@@ -31,8 +31,8 @@
     ls = ls-files
     rl = reflog --full-history --all --pretty=rl --abbrev-commit --decorate=short
     branches = branch -av
-    d = diff --stat --summary
-    ds = diff --staged
+    d = diff --word-diff
+    ds = diff --staged --word-diff
     ref = show-ref
     vimdiff = difftool
     head = log -1
