@@ -287,6 +287,22 @@ function! FocusFold() " -------------------------------------------------- {{{
 endfunction " }}}
 " }}}
 " Custom maps -------------------------------------------------------------- {{{
+" Swap default ':', '/' and '?' with cmdline-window equivalent. ------------ {{{
+nnoremap : q:i
+xnoremap : q:i
+nnoremap / q/i
+xnoremap / q/i
+nnoremap ? q?i
+xnoremap ? q?i
+nnoremap q: :
+xnoremap q: :
+nnoremap q/ /
+xnoremap q/ /
+nnoremap q? ?
+xnoremap q? ?
+" Have <esc> leave cmdline-window
+autocmd CmdwinEnter * nnoremap <buffer> <esc> :q<cr>
+" }}}
 " Center view and focus when searching ------------------------------------- {{{
 nnoremap <silent> n nzz:call Pulse(5)<cr>
 nnoremap <silent> N Nzz:call Pulse(5)<cr>
