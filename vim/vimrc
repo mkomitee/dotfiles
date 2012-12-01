@@ -288,12 +288,12 @@ endfunction " }}}
 " }}}
 " Custom maps -------------------------------------------------------------- {{{
 " Swap default ':', '/' and '?' with cmdline-window equivalent. ------------ {{{
-nnoremap : q:i
-xnoremap : q:i
-nnoremap / q/i
-xnoremap / q/i
-nnoremap ? q?i
-xnoremap ? q?i
+nnoremap : q:1<c-w>_i
+xnoremap : q:1<c-w>_i
+nnoremap / q/1<c-w>_i
+xnoremap / q/1<c-w>_i
+nnoremap ? q?1<c-w>_i
+xnoremap ? q?1<c-w>_i
 nnoremap q: :
 xnoremap q: :
 nnoremap q/ /
