@@ -19,9 +19,16 @@ function vi_rprompt() {
 }
 
 function git_prompt() {
-    local ref=$(git symbolic-ref HEAD 2> /dev/null)
+    local ref
+    local clean
+    ref=$(git symbolic-ref HEAD 2> /dev/null)
     if [ "$ref" != "" ]; then
-        echo "(${ref#refs/heads/})"
+        clean=$(git diff --shortstat 2> /dev/null)
+        if [  "$clean" != "" ]; then
+            echo "%{$fg_bold[red]%}+%{$fg_bold[black]%}(${ref#refs/heads/})"
+        else
+            echo "%{$fg_bold[black]%}(${ref#refs/heads/})"
+        fi
     fi
 }
 
@@ -62,7 +69,7 @@ function enable_prompt() {
 function setup_prompt() {
     if [ "$PROMPT_DISABLED" != "1" ]; then
         PROMPT='$(vi_prompt)$(shorthost) %{$fg[yellow]%}%# %{$reset_color%}'
-        RPROMPT="%{$fg_bold[black]%}%3~ $(jobs_prompt)$(exit_code) $(history_prompt)%{$reset_color%}"
+        RPROMPT="$(git_prompt) %{$fg_bold[black]%}%3~ $(jobs_prompt)$(exit_code) $(history_prompt)%{$reset_color%}"
     fi
 }
 
