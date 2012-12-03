@@ -50,9 +50,6 @@ set splitbelow                 " new horizontal splits to below
 set splitright                 " new vertical splits goto the right
 set autoread                   " reread files which changes on disk if they
                                "  havnt changed in the buffer
-set showfulltag                " when completing a word from a tags file,
-                               " include extra info about the tag in the
-                               " completion menu
 set foldlevelstart=0           " Start with all folds open
 set nojoinspaces               " Don't be fancy with join
 set dictionary=/usr/share/dict/words        " for spell checking
@@ -142,7 +139,7 @@ set diffopt+=iwhite " ignore white space in diff
 " completeopt -------------------------------------------------------------- {{{
 set completeopt=         " reset completeopt
 set completeopt+=longest " insert the longest match
-set completeopt+=menu    " show the menu when there are matches
+set completeopt+=menuone " show the menu when there are matches
 set completeopt+=preview
 "}}}
 " viminfo ------------------------------------------------------------------ {{{
