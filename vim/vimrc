@@ -5,9 +5,7 @@ call vundle#rc()
 " }}}
 Bundle 'gmarik/vundle'
 Bundle 'AfterColors.vim'
-Bundle 'AutoComplPop'
 Bundle 'Lokaltog/vim-distinguished'
-Bundle 'OnSyntaxChange'
 Bundle 'ajf/puppet-vim'
 Bundle 'ervandew/supertab.git'
 Bundle 'godlygeek/tabular'
@@ -17,7 +15,6 @@ Bundle 'kana/vim-textobj-user.git'
 Bundle 'kien/ctrlp.vim'
 Bundle 'klen/python-mode'
 Bundle 'kshenoy/vim-signature'
-Bundle 'majutsushi/tagbar'
 Bundle 'mkomitee/snipmate.vim'
 Bundle 'nelstrom/vim-markdown-folding'
 Bundle 'python_match.vim'
@@ -286,18 +283,6 @@ function! FocusFold() " -------------------------------------------------- {{{
 endfunction " }}}
 " }}}
 " Custom maps -------------------------------------------------------------- {{{
-" Swap default ':', '/' and '?' with cmdline-window equivalent. ------------ {{{
-nnoremap : q:i
-xnoremap : q:i
-nnoremap / q/i
-nnoremap ? q?i
-nnoremap q: :
-xnoremap q: :
-nnoremap q/ /
-nnoremap q? ?
-" Have <esc> leave cmdline-window
-autocmd CmdwinEnter * nnoremap <buffer> <esc> :q<cr>
-" }}}
 " Center view and focus when searching ------------------------------------- {{{
 nnoremap <silent> n nzz:call Pulse(5)<cr>
 nnoremap <silent> N Nzz:call Pulse(5)<cr>
@@ -423,16 +408,6 @@ nnoremap <silent> <leader>m :CtrlPMRU<CR>
 "  <C-v> → will open the finding match in a vertical split
 "  <C-h> → will open the finding match in a horizontal split
 " }}}
-" AutoComplPop ------------------------------------------------------------- {{{
-let g:acp_behaviorKeywordLength = 5
-" No completion in comments
-call OnSyntaxChange#Install('Comment', '^Comment$', 0, 'i')
-autocmd User SyntaxCommentEnterI silent! AcpLock
-autocmd User SyntaxCommentLeaveI silent! AcpUnlock
-" No completion in the command window
-autocmd CmdwinEnter * AcpLock
-autocmd CmdwinLeave * AcpUnlock
-" }}}
 " Python-Mode -------------------------------------------------------------- {{{
 let g:pymode_syntax = 1
 let g:pymode_doc = 1
@@ -455,12 +430,6 @@ vnoremap <silent> <Leader>a, :Tabularize /,\zs<CR>
 nnoremap <silent> <Leader>a, :Tabularize /,\zs<CR>
 vnoremap <silent> <Leader>a: :Tabularize /:\zs<CR>
 nnoremap <silent> <Leader>a: :Tabularize /:\zs<CR>
-" }}}
-" Easytags ----------------------------------------------------------------- {{{
-let g:easytags_dynamic_files = 1  " write first existing seen tag file by Vim (refer to echo &tags)
-let g:easytags_resolve_links = 1  " resolve symbolic links with pathnames
-let g:easytags_include_members = 1
-let g:easytags_by_filetype = '~/.vimdata/tags'
 " }}}
 " Fugitive ----------------------------------------------------------------- {{{
 " :Gstatus → git status → Ctrl→n → go to the next file → Ctrl→p → go to the preview file
@@ -486,9 +455,6 @@ nnoremap <silent> <leader>gr :Gremove<CR>
 nnoremap <silent> <leader>gp :! git push<CR>
 nnoremap <silent> <leader>dg :diffget<CR>
 nnoremap <silent> <leader>dp :diffput<CR>
-" }}}
-" Tagbar ------------------------------------------------------------------- {{{
-let g:tagbar_compact = 1 " don't show the help in the tagbar
 " }}}
 " slime -------------------------------------------------------------------- {{{
 " :SlimeConfig - configure which tmux pane to send text
