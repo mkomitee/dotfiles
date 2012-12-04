@@ -449,7 +449,7 @@ nnoremap <silent> <leader>gw :Gwrite<CR>
 nnoremap <silent> <leader>ga :Gadd<CR>
 nnoremap <silent> <leader>gb :Gblame<CR>
 nnoremap <silent> <leader>gl :Glog<CR>
-nnoremap <silent> <leader>gc :Gcommit<CR>
+nnoremap <silent> <leader>gc :Gcommit -v<CR>
 nnoremap <silent> <leader>gm :Gmove<CR>
 nnoremap <silent> <leader>gr :Gremove<CR>
 nnoremap <silent> <leader>gp :! git push<CR>
