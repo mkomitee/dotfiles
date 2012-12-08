@@ -21,15 +21,8 @@ zstyle ':completion:*' list-colors ''
 zstyle ':completion:*' verbose on
 zstyle ':completion:*' auto-description on
 
-# Case sensitive completion
-zstyle ':completion:*' matcher-list 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-
 # Start menu completion if there are 2 ambiguous choices
 zstyle ':completion:*' menu select=2
-
-# Each completion type gets a label, ...
-# zstyle ':completion:*:descriptions' format 'Completing %d'
-# zstyle ':completion:*' group-name ''
 
 # Add some color to process/job lists in kill-completion
 zstyle ':completion:*:*:kill:*:processes' list-colors  '=(#b) #([0-9]#)*=0=01;31'
