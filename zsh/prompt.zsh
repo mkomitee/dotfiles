@@ -4,42 +4,56 @@ autoload colors; colors;
 setopt prompt_subst
 setopt transient_rprompt
 
-function vi_prompt() {
-    if [ "$KEYMAP" = 'vicmd' ]; then
-        echo "%{$fg[red]%}n %{$reset_color%}"
-    else
-        echo "%{$fg[green]%}i %{$reset_color%}"
-    fi
-}
-
-function vi_rprompt() {
-    if [ "$KEYMAP" = 'vicmd' ]; then
-        echo "%{$fg[red]%}<<<%{$reset_color%} "
-    fi
-}
-
 function git_prompt() {
     local ref
-    local clean
     ref=$(git symbolic-ref HEAD 2> /dev/null)
+    ref="${ref#refs/heads/}"
     if [ "$ref" != "" ]; then
+        local clean
+        local cached
+        local echoed
         clean=$(git diff --shortstat 2> /dev/null)
-        if [  "$clean" != "" ]; then
-            echo "%{$fg_bold[red]%}+%{$fg_bold[black]%}(${ref#refs/heads/})"
-        else
-            echo "%{$fg_bold[black]%}(${ref#refs/heads/})"
+        cached=$(git diff --cached --shortstat 2> /dev/null)
+        if [ "$clean" != "" ]; then
+            echo -n "%{$fg_bold[red]%}+%{$reset_color%}"
+            echoed=1
+        elif [ "$cached" != "" ]; then
+            echo -n "%{$fg_bold[yellow]%}+%{$reset_color%}"
+            echoed=1
+        fi
+        if [ "$ref" != "master" ]; then
+            echo -n "%{$fg_bold[black]%}($ref)%{$reset_color%}"
+            echoed=1
+        fi
+        if [ -n $echoed ]; then
+            echo -n ' '
         fi
     fi
 }
 
 function shorthost() {
-    echo "%(!.%{$fg[red]%}.%{$fg[yellow]%})%2m%{$reset_color%}"
+    if [ "$KEYMAP" = 'vicmd' ]; then
+        echo "%{$fg[blue]%}%2m%{$reset_color%}"
+    elif [ "$USER" = 'root' ]; then
+        echo "%{$fg[red]%}%2m%{$reset_color%}"
+    else
+        echo "%{$fg[yellow]%}%2m%{$reset_color%}"
+    fi
 }
 
-jobs_prompt() {
+function prompt() {
+    if [ "$USER" = 'root' ]; then
+        echo "%{$fg[red]%}%#%{$reset_color%}"
+    else
+        echo "%{$fg[yellow]%}%#%{$reset_color%}"
+    fi
+}
+
+
+function jobs_prompt() {
     local JOBS=$(jobs | wc -l | sed 's/ //g')
     if [ "$JOBS" != "0" ]; then
-        echo "%{$fg[yellow]%}{$JOBS}%{$reset_color%} "
+        echo "%{$fg_bold[black]%}($JOBS)%{$reset_color%} "
     fi
 }
 
@@ -55,7 +69,7 @@ function virtualenv_prompt() {
 }
 
 function exit_code() {
-    echo "%(?,,%{$fg[red]%}[%?]%{$reset_color%})"
+    echo "%(?,,%{$fg[red]%}[%?]%{$reset_color%} )"
 }
 
 function history_prompt() {
@@ -66,10 +80,14 @@ function enable_prompt() {
     unset PROMPT_DISABLED
 }
 
+function current_dir() {
+    echo "%{$fg_bold[black]%}%3~%{$reset_color%}"
+}
+
 function setup_prompt() {
     if [ "$PROMPT_DISABLED" != "1" ]; then
-        PROMPT='$(vi_prompt)$(shorthost) %{$fg[yellow]%}%# %{$reset_color%}'
-        RPROMPT="$(git_prompt) %{$fg_bold[black]%}%3~ $(jobs_prompt)$(exit_code) $(history_prompt)%{$reset_color%}"
+        PROMPT='$(exit_code)$(shorthost) $(git_prompt)$(current_dir) $(jobs_prompt)$(prompt) '
+        RPROMPT="$(history_prompt)"
     fi
 }
 
