@@ -11,21 +11,26 @@ function git_prompt() {
     if [ "$ref" != "" ]; then
         local clean
         local cached
+        local ahead
+        local behind
         local echoed
+
         clean=$(git diff --shortstat 2> /dev/null)
         cached=$(git diff --cached --shortstat 2> /dev/null)
-        if [ "$clean" != "" ]; then
+        remote=${$(git rev-parse --verify ${hook_com[branch]}@{upstream} --symbolic-full-name 2>/dev/null)/refs\/remotes\/}
+        if [ -n "$remote" ]; then
+            ahead=$(git rev-list ${hook_com[branch]}@{upstream}..HEAD 2>/dev/null | wc -l)
+            behind=$(git rev-list HEAD..${hook_com[branch]}@{upstream} 2>/dev/null | wc -l)
+        fi
+        if [ "$clean$cached$ahead$behind" != "00" ]; then
             echo -n "%{$fg_bold[red]%}+%{$reset_color%}"
-            echoed=1
-        elif [ "$cached" != "" ]; then
-            echo -n "%{$fg_bold[yellow]%}+%{$reset_color%}"
             echoed=1
         fi
         if [ "$ref" != "master" ]; then
             echo -n "%{$fg_bold[black]%}($ref)%{$reset_color%}"
             echoed=1
         fi
-        if [ -n $echoed ]; then
+        if [ -n "$echoed" ]; then
             echo -n ' '
         fi
     fi
