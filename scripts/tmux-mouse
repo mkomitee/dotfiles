@@ -1,0 +1,15 @@
+#!/bin/sh
+status=$(tmux show-window-options -g mode-mouse | cut -d' ' -f2)
+if [ "$status" = "off" ]; then
+    tmux set -g mode-mouse on > /dev/null 2>&1
+    tmux set -g mouse-resize-pane on > /dev/null 2>&1
+    tmux set -g mouse-select-pane on > /dev/null 2>&1
+    tmux set -g mouse-select-window on > /dev/null 2>&1
+    tmux display 'Mouse: ON'
+else
+    tmux set -g mode-mouse off > /dev/null 2>&1
+    tmux set -g mouse-resize-pane off > /dev/null 2>&1
+    tmux set -g mouse-select-pane off > /dev/null 2>&1
+    tmux set -g mouse-select-window off > /dev/null 2>&1
+    tmux display 'Mouse: OFF'
+fi
