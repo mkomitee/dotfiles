@@ -39,11 +39,10 @@ function git_prompt() {
 function shorthost() {
     if [ "$KEYMAP" = 'vicmd' ]; then
         echo "%{$fg[blue]%}%2m%{$reset_color%}"
-    elif [ "$USER" = 'root' ]; then
-        echo "%{$fg[red]%}%2m%{$reset_color%}"
     else
-        echo "%{$fg[yellow]%}%2m%{$reset_color%}"
+        echo "%(!.%{$fg[red]%}.%{$fg[yellow]%})%2m%{$reset_color%}"
     fi
+
 }
 
 function prompt() {
