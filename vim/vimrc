@@ -516,7 +516,6 @@ au FileType man setl nonumber
 au FileType markdown au BufWritePre <buffer> RemoveTrailingWhiteSpace
 au FileType markdown setl shiftwidth=2
 au FileType markdown setl softtabstop=2
-au FileType markdown setl spell
 au FileType markdown setl tabstop=2
 au Filetype markdown nnoremap <silent> <buffer> <leader>1 yypVr=:redraw<cr>
 au Filetype markdown nnoremap <silent> <buffer> <leader>2 yypVr-:redraw<cr>
