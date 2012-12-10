@@ -92,7 +92,7 @@ function current_dir() {
 function setup_prompt() {
     if [ "$PROMPT_DISABLED" != "1" ]; then
         PROMPT='$(exit_code)$(shorthost) $(git_prompt)$(current_dir) $(jobs_prompt)$(prompt) '
-        RPROMPT="$(history_prompt)"
+        # RPROMPT="$(history_prompt)"
     fi
 }
 
