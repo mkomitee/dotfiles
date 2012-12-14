@@ -6,7 +6,7 @@
 
 [core] 
     pager = less -FRXMQ
-    abbrev=8
+    abbrev = 8
     editor = vim
     whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol 
     excludesfile = ~/.dotfiles/gitignore
@@ -21,8 +21,8 @@
     single = yes
 
 [pretty]
-    lg = "%C(yellow)%h %C(blue)%cd%Cred%d%Creset %s%Cblue [%cn]"
-    rl = "%C(yellow)%h %C(red)%gd %C(blue)%cd%Cred%d%Creset %gs%Cblue [%cn]"
+    lg = "%C(yellow)%h %C(blue)%cd%Cred%d%Creset %s%Cblue [%aN]"
+    rl = "%C(yellow)%h %C(red)%gd %C(blue)%cd%Cred%d%Creset %gs%Cblue [%aN]"
 
 [alias] 
     l = log --graph --full-history --all --pretty=lg --abbrev-commit --decorate=short
