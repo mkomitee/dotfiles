@@ -25,3 +25,6 @@
 [submodule "contrib/mkomitee/ls--"]
 	path = contrib/mkomitee/ls--
 	url = https://github.com/mkomitee/ls--.git
+[submodule "contrib/rupa/z"]
+	path = contrib/rupa/z
+	url = git://github.com/rupa/z.git

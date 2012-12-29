@@ -104,3 +104,8 @@ abbreviations=(
 )
 
 KEYTIMEOUT=20
+
+
+if [ -f $CONTRIB/rupa/z/z.sh ] ; then
+    source $CONTRIB/rupa/z/z.sh
+fi
