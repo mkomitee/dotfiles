@@ -8,7 +8,6 @@ Bundle 'AfterColors.vim'
 Bundle 'Lokaltog/vim-distinguished'
 Bundle 'ajf/puppet-vim'
 Bundle 'chrisbra/Recover.vim.git'
-Bundle 'davidhalter/jedi-vim'
 Bundle 'ervandew/supertab.git'
 Bundle 'godlygeek/tabular'
 Bundle 'jpalardy/vim-slime'
@@ -30,6 +29,8 @@ Bundle 'tpope/vim-git'
 Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
+Bundle 'Jinja'
+Bundle 'mako.vim'
 " Turn on all the features ... --------------------------------------------- {{{
 syntax on
 filetype plugin indent on
