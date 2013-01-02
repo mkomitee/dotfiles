@@ -86,6 +86,7 @@ set tags=./tags;               " name of the tags files which is relative to the
 set notimeout
 set ttimeout
 set ttimeoutlen=10
+set nomodeline
 " undofile ----------------------------------------------------------------- {{{
 if exists('&undofile')
     set undofile         " Save undo history to a file for persistence
@@ -514,6 +515,12 @@ au FileType make setl softtabstop=0
 " man ---------------------------------------------------------------------- {{{
 au FileType man setl nolist
 au FileType man setl nonumber
+au FileType man setl tabstop=8
+au FileType man setl nomodified
+au FileType man setl nomodifiable
+au FileType man setl foldmethod=indent
+au FileType man setl foldlevel=99
+au FileType man nnoremap <buffer> q :q<cr>
 " }}}
 " markdown ----------------------------------------------------------------- {{{
 au FileType markdown au BufWritePre <buffer> RemoveTrailingWhiteSpace
