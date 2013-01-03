@@ -5,6 +5,7 @@ call vundle#rc()
 " }}}
 Bundle 'gmarik/vundle'
 Bundle 'AfterColors.vim'
+Bundle 'Jinja'
 Bundle 'Lokaltog/vim-distinguished'
 Bundle 'ajf/puppet-vim'
 Bundle 'chrisbra/Recover.vim.git'
@@ -16,6 +17,7 @@ Bundle 'kana/vim-textobj-user.git'
 Bundle 'kien/ctrlp.vim'
 Bundle 'klen/python-mode'
 Bundle 'kshenoy/vim-signature'
+Bundle 'mako.vim'
 Bundle 'mkomitee/snipmate.vim'
 Bundle 'nelstrom/vim-markdown-folding'
 Bundle 'python_match.vim'
@@ -29,8 +31,6 @@ Bundle 'tpope/vim-git'
 Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
-Bundle 'Jinja'
-Bundle 'mako.vim'
 " Turn on all the features ... --------------------------------------------- {{{
 syntax on
 filetype plugin indent on
