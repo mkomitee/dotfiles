@@ -91,21 +91,20 @@ function current_dir() {
 function setup_prompt() {
     if [ "$PROMPT_DISABLED" != "1" ]; then
         PROMPT='$(exit_code)$(shorthost) $(git_prompt)$(current_dir) $(jobs_prompt)$(prompt) '
-        # RPROMPT="$(history_prompt)"
+    else
+        PROMPT='$(exit_code)$(shorthost) $(current_dir) $(jobs_prompt)$(prompt) '
     fi
 }
 
 function disable_prompt() {
     PROMPT_DISABLED=1
-    unset RPROMPT
-    PROMPT='%# '
 }
 
 function toggle_prompt() {
-    if [ -z "$RPROMPT" ]; then
-        enable_prompt
-    else
+    if [ -z "$PROMPT_DISABLED" ]; then
         disable_prompt
+    else
+        enable_prompt
     fi
 }
 
