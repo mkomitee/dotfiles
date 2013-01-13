@@ -153,4 +153,4 @@ macro index a "<limit>all\n" "show all messages (undo limit)"
 
 macro index S "<enter-command>unset wait_key<enter><shell-escape>mutt-notmuch-py ~/.mail/temporary/search<enter><change-folder-readonly>+temporary/search<enter>" "search mail (using notmuch)"
 
-source ~/.vim/bundle/badwolf/contrib/badwolf.muttrc
+source ~/.dotfiles/contrib/sjl/badwolf/contrib/badwolf.muttrc

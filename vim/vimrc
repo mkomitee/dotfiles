@@ -7,9 +7,6 @@ Bundle 'gmarik/vundle'
 Bundle 'AfterColors.vim'
 Bundle 'Jinja'
 Bundle 'Lokaltog/vim-distinguished'
-Bundle 'ajf/puppet-vim'
-Bundle 'chrisbra/Recover.vim.git'
-Bundle 'ervandew/supertab.git'
 Bundle 'godlygeek/tabular'
 Bundle 'jpalardy/vim-slime'
 Bundle 'kana/vim-textobj-indent.git'
@@ -17,15 +14,11 @@ Bundle 'kana/vim-textobj-user.git'
 Bundle 'kien/ctrlp.vim'
 Bundle 'klen/python-mode'
 Bundle 'kshenoy/vim-signature'
-Bundle 'mako.vim'
 Bundle 'mkomitee/snipmate.vim'
 Bundle 'nelstrom/vim-markdown-folding'
 Bundle 'python_match.vim'
 Bundle 'scrooloose/nerdcommenter'
-Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/snipmate-snippets'
-Bundle 'sjl/gundo.vim'
-Bundle 'tmatilai/gitolite.vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-git'
 Bundle 'tpope/vim-markdown'
@@ -53,13 +46,11 @@ set splitright                 " new vertical splits goto the right
 set autoread                   " reread files which changes on disk if they
                                "  havnt changed in the buffer
 set foldlevelstart=0           " Start with all folds open
-set nojoinspaces               " Don't be fancy with join
 set dictionary=/usr/share/dict/words        " for spell checking
 set spellfile=~/.dotfiles/vim/en.utf-8.add  " to add words
 set spelllang=en_us            " yes, i do speak it
 set spellsuggest=best,10       " only display the 10 best suggestions
 set number                     " line numbers
-set updatecount=10             " update swap files every 10 chars
 set nostartofline              " don't move the cursor to the start of the
                                " line when we move vertically in the buffer
 set pumheight=10               " show no more than 10 entries in completion menus
@@ -87,6 +78,7 @@ set notimeout
 set ttimeout
 set ttimeoutlen=10
 set nomodeline
+set display=lastline
 " undofile ----------------------------------------------------------------- {{{
 if exists('&undofile')
     set undofile         " Save undo history to a file for persistence
@@ -94,10 +86,11 @@ if exists('&undofile')
 endif
 " }}}
 " fillchars ---------------------------------------------------------------- {{{
-set fillchars=        " reset fillchars
-set fillchars+=fold:- " fill foldtext with dashes
-set fillchars+=diff:⣿ " indicate deleted lines in diffs with ⣿
-set fillchars+=vert:│ " indicate vertical splits with │
+set fillchars=         " reset fillchars
+set fillchars+=fold:-  " fill foldtext with dashes
+set fillchars+=diff:⣿  " indicate deleted lines in diffs with ⣿
+set fillchars+=vert:│  " indicate vertical splits with │
+set fillchars+=stlnc:- " indicate horizontal splits with -
 " }}}
 " listchars ---------------------------------------------------------------- {{{
 set listchars=            " reset listchars
@@ -128,30 +121,13 @@ set shortmess+=T " truncate other messages in the middle if they are too long to
                  "  Ignored in Ex mode.
 set shortmess+=I " don't give the intro message when starting Vim |:intro|.
 " }}}
-" iskeyword ---------------------------------------------------------------- {{{
-set iskeyword-=: " treat : as a keyword
-set iskeyword-=; " treat ; as a keyword
-set iskeyword-=, " treat , as a keyword
-set iskeyword+=_ " treat _ as a keyword
-" }}}
-" diffopt ------------------------------------------------------------------ {{{
-set diffopt=        " reset diffopt
-set diffopt+=filler " add filler to diff to keep text synchronized
-set diffopt+=iwhite " ignore white space in diff
-" }}}
 " completeopt -------------------------------------------------------------- {{{
 set completeopt=         " reset completeopt
 set completeopt+=longest " insert the longest match
 set completeopt+=menuone " show the menu when there are matches
-set completeopt+=preview
 "}}}
 " viminfo ------------------------------------------------------------------ {{{
 set viminfo+=n~/.vimdata/viminfo " move the viminfo file into ~/.vimdata
-" }}}
-" switchbuf ---------------------------------------------------------------- {{{
-set switchbuf=                   " reset switchbuf
-set switchbuf+=useopen " switch to a window with the file on open instead of opening it in a second window
-set switchbuf+=usetab  " switch to another tab with the file open instead of opening it in a second window
 " }}}
 " virtualedit -------------------------------------------------------------- {{{
 set virtualedit=        " reset virtualedit
@@ -161,17 +137,11 @@ set virtualedit+=insert " can move past the end of the line in insert mode
 " formatoptions ------------------------------------------------------------ {{{
 set formatoptions=   " reset formatoptions
 set formatoptions+=c " autowrap comments using textwidth
-set formatoptions+=r " insert comment after hitting enter in a comment
-set formatoptions+=o " insert comment after 'o' or 'O' in normal mode
 set formatoptions+=q " format comments with gq
 set formatoptions+=n " recognize numbered lists
-set formatoptions+=1 " don't break a line after a 1 letter word
 " }}}
 " wildmode ----------------------------------------------------------------- {{{
-set wildmode=              " reset wildmode
-set wildmode+=longest:full " complete til longest string, use wildmenu
-set wildmode+=list:full    " when more than one matchm list all and complete the
-                                 " first
+set wildmode=list:longest " approximate completeopt's longest:menu
 " }}}
 " wildignore --------------------------------------------------------------- {{{
 set wildignore+=.git,.hg,.svn,CVS              " ignore vcs directories
@@ -182,18 +152,13 @@ set wildignore+=*.DS_Store                     " ignore mac crap
 set wildignore+=*.pyc,*.pyo                    " ignore pyton compiled objects
 " }}}
 " statusline --------------------------------------------------------------- {{{
-set statusline=                            " clear statusline
-set statusline+=%F\                        " full filename
-set statusline+=%m%r%w                     " flags
-set statusline+=%y\                        " filetype
-set statusline+=%=                         " seperator
-set statusline+=%{GitStatusLine()}\  " Git branch info
-set statusline+=c:%c\                      " column
-set statusline+=l:%l/%L\                   " line
-set statusline+=(%p%%)                     " percentage thru file
-" }}}
-" whichwrap ---------------------------------------------------------------- {{{
-set whichwrap+=<,> " <Left> and <Right> can move to the previous/next line
+set statusline=         " clear statusline
+set statusline+=%F\     " full filename
+set statusline+=%m%r%w  " flags
+set statusline+=%y\     " filetype
+set statusline+=%=      " seperator
+set statusline+=c:%c\   " column
+set statusline+=l:%l/%L " line
 " }}}
 " }}}
 " Leaders ------------------------------------------------------------------ {{{
@@ -202,21 +167,6 @@ let mapleader = " "     " this may change soon, I keep wanting to have the
 let localleader = '\\'
 " }}}
 " Custom functions --------------------------------------------------------- {{{
-function! GitStatusLine() " ------------------------------------------------ {{{
-    let git_info = fugitive#head(8)
-    if git_info != ''
-        return "Git(".git_info.")"
-    else
-        return ''
-    endif
-endfunction
-"}}}
-function! WhatGroup() " ---------------------------------------------------- {{{
-    if !exists("*synstack")
-        return
-    endif
-    echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
-endfunc " }}}
 function! RemoveTrailingWhiteSpace() " ------------------------------------- {{{
     " Allow a buffer local variable twsok (trailing whitespace ok) to permit
     " trailing whitspace -- sometimes I need to do this if im editing someone elses
@@ -237,11 +187,8 @@ endfun " }}}
 function! RestoreCursorPosition() " ---------------------------------------- {{{
     " Restore cursor position to the last time you were in the file, this uses marks
     " so it's dependent on viminfo
-  if line("'\"") <= line("$")
     normal! g`"
     call FocusFold()
-    return 1
-  endif
 endfunction " }}}
 function! Pulse(n) " ------------------------------------------------------- {{{
     let current_window = winnr()
@@ -275,7 +222,7 @@ function! Pulse(n) " ------------------------------------------------------- {{{
     execute 'hi ' . old_hi
     setlocal nocursorline
 endfunction " }}}
-function! FocusFold() " -------------------------------------------------- {{{
+function! FocusFold() " ---------------------------------------------------- {{{
     let c = virtcol(".")
     let l = line(".")
     normal! zM
@@ -287,13 +234,14 @@ function! FocusFold() " -------------------------------------------------- {{{
 endfunction " }}}
 " }}}
 " Custom maps -------------------------------------------------------------- {{{
-" Center view and focus when searching ------------------------------------- {{{
-nnoremap <silent> n nzz:call Pulse(5)<cr>
-nnoremap <silent> N Nzz:call Pulse(5)<cr>
+" Focus when searching ----------------------------------------------------- {{{
+nnoremap <silent> n n:call Pulse(5)<cr>
+nnoremap <silent> N N:call Pulse(5)<cr>
 " }}}
-" Center view after traversing the jumplist -------------------------------- {{{
-nnoremap <silent> <C-o> <C-o>zz
-nnoremap <silent> <C-i> <C-i>zz
+" Focus after traversing the jumplist -------------------------------------- {{{
+nnoremap <silent> <C-o> <C-o>:call Pulse(5)<cr>
+nnoremap <silent> <C-i> <C-i>:call Pulse(5)<cr>
+
 " }}}
 " j and k will go one line, even if they're wrapped ------------------------ {{{
 nnoremap <silent> j gj
@@ -324,21 +272,12 @@ noremap <silent> Y y$
 " }}}
 " Easily modify ~/.{g,}vimrc ----------------------------------------------- {{{
 nnoremap <silent> <leader>ev :e $MYVIMRC<CR>
-nnoremap <silent> <leader>egv :e$MYGVIMRC<CR>
 " }}}
 " Strip whitespace --------------------------------------------------------- {{{
 nnoremap <silent> <leader>W :RemoveTrailingWhiteSpace<cr>
 " }}}
 " sudo write-file in case you're in a file you dont have privileges to write {{{
 cmap <silent> w!! w !sudo tee % >/dev/null<cr>
-" }}}
-" jj = Esc ----------------------------------------------------------------- {{{
-inoremap <silent> jj <Esc>
-" }}}
-" Remove F1 Help ----------------------------------------------------------- {{{
-inoremap <F1> <nop>
-nnoremap <F1> <nop>
-vnoremap <F1> <nop>
 " }}}
 " Easy window resizing ----------------------------------------------------- {{{
 noremap <silent> <up> <C-W>+
@@ -388,24 +327,22 @@ command! -bang WA wa<bang>
 command! -bang Wq wq<bang>
 command! -bang WQ wq<bang>
 " }}}
-command! WhatGroup :call WhatGroup()
 command! RemoveTrailingWhiteSpace :call RemoveTrailingWhiteSpace()
-command! SoftTabs :call SoftTabs()
-command! -nargs=0 Pulse call s:Pulse(9)
+command! -nargs=0 Pulse call Pulse(9)
 " }}}
 " Colorscheme -------------------------------------------------------------- {{{
 colorscheme distinguished
 " }}}
 " Plugin Configurations ---------------------------------------------------- {{{
+" NetRW -------------------------------------------------------------------- {{{
+let g:netrw_list_hide = '^\.,\~$,^tags$'
+" }}}
 " Ctrl+P ------------------------------------------------------------------- {{{
-let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'undo', 'line'. 'changes']
-
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_cache_dir = $HOME.'/.vimdata/ctrlp'
 let g:ctrlp_map = '<leader>p'
 let g:ctrlp_mruf_relative = 1
 let g:ctrlp_reuse_window = 'netrw\|help'
-let g:ctrlp_dotfiles              = 0
 nnoremap <silent> <leader>b :CtrlPBuffer<CR>
 nnoremap <silent> <leader>m :CtrlPMRU<CR>
 "  <C-t> → will open the finding match in a tab
@@ -468,8 +405,8 @@ nnoremap <silent> <leader>dp :diffput<CR>
 " perl   => Devel::REPL's re.pl
 " ruby   => irb
 let g:slime_no_mappings = 0
-let g:slime_target = "tmux"
 let g:slime_paste_file = $HOME.'/.vimdata/slime'
+let g:slime_target = "tmux"
 au FileType python let g:slime_python_ipython = 1
 " <leader>s - send region or motion
 " }}}
@@ -481,24 +418,6 @@ vmap <silent> <leader><leader> <plug>NERDCommenterToggle<cr>vgv
 nmap <silent> <leader>cc <plug>NERDCommenterToggle
 nmap <silent> <leader><leader> <plug>NERDCommenterToggle
 nmap <silent> <leader>c$ <plug>NERDCommenterToEOL
-" }}}
-" NERDTree ----------------------------------------------------------------- {{{
-nnoremap <silent> <leader>d :NERDTreeToggle<CR>
-nnoremap <silent> <leader>dd :NERDTreeToggle<CR>
-" }}}
-" Supertab ----------------------------------------------------------------- {{{
-let g:SuperTabDefaultCompletionType = "context"
-let g:SuperTabClosePreviewOnPopupClose = 1
-let g:SuperTabLongestEnhanced = 1
-let g:SuperTabCrMapping = 0
-let g:SuperTabLongestHighlight = 1
-" }}}
-" Gundo -------------------------------------------------------------------- {{{
-let g:gundo_debug = 1
-let g:gundo_preview_bottom = 1
-let g:gundo_tree_statusline = "Gundo"
-let g:gundo_preview_statusline = "Gundo Preview"
-nnoremap <silent> <leader>g :GundoToggle<cr>
 " }}}
 " }}}
 " Filetype detection ------------------------------------------------------- {{{
@@ -560,7 +479,8 @@ au FileType vim au BufWritePre <buffer> RemoveTrailingWhiteSpace
 au FileType vim setl foldmethod=marker
 au FileType help setl nolist
 au FileType help setl nonumber
-au BufWinEnter *.txt if &ft == 'help' | wincmd L | endif
+au FileType help setl nomodified
+au FileType help setl nomodifiable
 " }}}
 " }}}
 " Folding ------------------------------------------------------------------ {{{
@@ -608,9 +528,6 @@ silent execute '!mkdir -p $HOME/.vimdata/tags'
 if exists('$TMUX')
     let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
     let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-else
-    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
 " }}}
 " Toggle listchars as we enter and exit insert mode ------------------------ {{{
@@ -634,56 +551,5 @@ nnoremap <silent> <leader>t :e $HOME/.tasks.md<cr>
 " }}}
 " Load abbreviations ------------------------------------------------------- {{{
 source ~/.vim/abbrev
-" }}}
-" }}}
-" Cargo Cult! -------------------------------------------------------------- {{{
-" Next/Last Text Objects https://gist.github.com/1171642 ------------------- {{{
-" Motion for "next/last object".  "Last" here means "previous", not "final".
-" Unfortunately the "p" motion was already taken for paragraphs.
-"
-" Next acts on the next object of the given type in the current line, last acts
-" on the previous object of the given type in the current line.
-"
-" Currently only works for (, [, {, b, r, B, ', and ".
-"
-" Some examples (C marks cursor positions, V means visually selected):
-"
-" din'  -> delete in next single quotes                foo = bar('spam')
-"                                                      C
-"                                                      foo = bar('')
-"                                                                C
-"
-" canb  -> change around next parens                   foo = bar('spam')
-"                                                      C
-"                                                      foo = bar
-"                                                               C
-"
-" vil"  -> select inside last double quotes            print "hello ", name
-"                                                                        C
-"                                                      print "hello ", name
-"                                                             VVVVVV
-
-onoremap <silent> an :<c-u>call <SID>NextTextObject('a', 'f')<cr>
-xnoremap <silent> an :<c-u>call <SID>NextTextObject('a', 'f')<cr>
-onoremap <silent> in :<c-u>call <SID>NextTextObject('i', 'f')<cr>
-xnoremap <silent> in :<c-u>call <SID>NextTextObject('i', 'f')<cr>
-
-onoremap <silent> al :<c-u>call <SID>NextTextObject('a', 'F')<cr>
-xnoremap <silent> al :<c-u>call <SID>NextTextObject('a', 'F')<cr>
-onoremap <silent> il :<c-u>call <SID>NextTextObject('i', 'F')<cr>
-xnoremap <silent> il :<c-u>call <SID>NextTextObject('i', 'F')<cr>
-function! s:NextTextObject(motion, dir) " ------------------------------------ {{{
-  let c = nr2char(getchar())
-
-  if c ==# "b"
-      let c = "("
-  elseif c ==# "B"
-      let c = "{"
-  elseif c ==# "r"
-      let c = "["
-  endif
-
-  exe "normal! ".a:dir.c."v".a:motion.c
-endfunction " }}}
 " }}}
 " }}}

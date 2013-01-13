@@ -28,3 +28,6 @@
 [submodule "contrib/rupa/z"]
 	path = contrib/rupa/z
 	url = git://github.com/rupa/z.git
+[submodule "contrib/sjl/badwolf"]
+	path = contrib/sjl/badwolf
+	url = git://github.com/sjl/badwolf.git
