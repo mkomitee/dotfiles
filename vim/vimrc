@@ -7,6 +7,7 @@ Bundle 'gmarik/vundle'
 Bundle 'AfterColors.vim'
 Bundle 'Jinja'
 Bundle 'Lokaltog/vim-distinguished'
+Bundle 'Lokaltog/vim-easymotion'
 Bundle 'godlygeek/tabular'
 Bundle 'jpalardy/vim-slime'
 Bundle 'kana/vim-textobj-indent.git'
@@ -414,9 +415,7 @@ au FileType python let g:slime_python_ipython = 1
 let g:NERDCreateDefaultMappings = 0
 let g:NERDSpaceDelims = 1
 vmap <silent> <leader>cc <plug>NERDCommenterToggle<cr>vgv
-vmap <silent> <leader><leader> <plug>NERDCommenterToggle<cr>vgv
 nmap <silent> <leader>cc <plug>NERDCommenterToggle
-nmap <silent> <leader><leader> <plug>NERDCommenterToggle
 nmap <silent> <leader>c$ <plug>NERDCommenterToEOL
 " }}}
 " }}}
