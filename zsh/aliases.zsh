@@ -1,6 +1,7 @@
 #!/bin/zsh
 alias gp='git pull'
 alias gaa='git add -A'
+alias tig='tig --all'
 
 alias mutt='ulimit -n 10240;mutt'
 alias bc='bc -l'
@@ -18,3 +19,4 @@ alias vi=vim
 alias ack='noglob ack'
 
 alias a='tmux -u2 attach || tmux -u2'
+
