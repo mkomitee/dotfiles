@@ -22,9 +22,6 @@
 [submodule "contrib/trapd00r/Term-ExtendedColor"]
 	path = contrib/trapd00r/Term-ExtendedColor
 	url = https://github.com/trapd00r/Term-ExtendedColor.git
-[submodule "contrib/mkomitee/ls--"]
-	path = contrib/mkomitee/ls--
-	url = https://github.com/mkomitee/ls--.git
 [submodule "contrib/rupa/z"]
 	path = contrib/rupa/z
 	url = git://github.com/rupa/z.git
