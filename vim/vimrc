@@ -235,6 +235,10 @@ function! FocusFold() " ---------------------------------------------------- {{{
 endfunction " }}}
 " }}}
 " Custom maps -------------------------------------------------------------- {{{
+" Format Paragraph/Line ---------------------------------------------------- {{{
+nnoremap <silent> Q gqip
+nnoremap <silent> ql ^vg_gq
+" }}}
 " Focus when searching ----------------------------------------------------- {{{
 nnoremap <silent> n n:call Pulse(5)<cr>
 nnoremap <silent> N N:call Pulse(5)<cr>
