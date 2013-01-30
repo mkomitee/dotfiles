@@ -1,2 +1,54 @@
 snippet pdb
 	import pdb; pdb.set_trace()
+snippet module
+	'''
+	${1:Module Documentation}
+	'''
+
+	from __future__ import print_function, division, absolute_import, unicode_literals
+	import logging
+
+	LOG = logging.getLogger(__name__)
+
+
+	${2}
+
+
+	if __name__ == '__main__':
+		pass
+snippet script
+	#!/usr/bin/env python
+	'''${1:program}
+
+	Usage: $1 [-v | -vv] ${2}
+		   $1 -h | --help
+		   $1 --version
+
+	Options:
+		-h --help          Show this screen.
+		--version          Show version.    
+		-v --verbose       Increase verbosity
+		${3}
+	'''
+
+	from __future__ import print_function, division, absolute_import, unicode_literals
+	import docopt
+	import logging
+	import os
+	import sys
+
+	LOG = logging.getLogger(__name__)
+	__prog__ = '$1'
+	__version__ = '1.0.0'
+
+
+	def main():
+		'''
+		Main program logic
+		'''
+		args = docopt.docopt(__doc__, version='%s %s' % (__prog__, __version__))
+		${4}
+		return 0
+
+	if __name__ == '__main__':
+		sys.exit(main())
