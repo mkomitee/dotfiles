@@ -447,9 +447,9 @@ au FileType man nnoremap <buffer> <space><space> <C-D>
 " }}}
 " markdown ----------------------------------------------------------------- {{{
 au FileType markdown au BufWritePre <buffer> RemoveTrailingWhiteSpace
-au FileType markdown setl shiftwidth=2
-au FileType markdown setl softtabstop=2
-au FileType markdown setl tabstop=2
+au FileType markdown setl shiftwidth=4
+au FileType markdown setl softtabstop=4
+au FileType markdown setl tabstop=4
 au Filetype markdown nnoremap <silent> <buffer> <leader>1 yypVr=:redraw<cr>
 au Filetype markdown nnoremap <silent> <buffer> <leader>2 yypVr-:redraw<cr>
 au Filetype markdown nnoremap <silent> <buffer> <leader>3 mzI###<space><ESC>`zlll <ESC>
