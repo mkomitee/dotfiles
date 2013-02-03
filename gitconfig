@@ -107,3 +107,6 @@
 
 [push]
     default = upstream
+
+[init]
+    templatedir = ~/.dotfiles/git-template
