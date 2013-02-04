@@ -2,8 +2,9 @@
 " Initialize vundle -------------------------------------------------------- {{{
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
-" }}}
 Bundle 'gmarik/vundle'
+" }}}
+
 Bundle 'AfterColors.vim'
 Bundle 'Jinja'
 Bundle 'Lokaltog/vim-distinguished'
@@ -316,8 +317,10 @@ endfor
 " Focus Fold --------------------------------------------------------------- {{{
 nnoremap <silent> zf :call FocusFold()<cr>
 " }}}
-" Simple visual sorting ---------------------------------------------------- {{{
+" Simple sorting ----------------------------------------------------------- {{{
 vnoremap <silent> <leader>s :sort<cr>gv
+nnoremap <silent> <leader>s mzvip:sort<cr>`z:delm z<cr>
+
 " }}}
 " }}}
 " Custom commands ---------------------------------------------------------- {{{
