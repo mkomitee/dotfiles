@@ -1,4 +1,2 @@
 bind generic g move-first-line
 bind generic G move-last-line
-bind generic n next
-bind generic p previous
