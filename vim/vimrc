@@ -6,6 +6,7 @@ Bundle 'gmarik/vundle'
 " }}}
 
 Bundle 'AfterColors.vim'
+Bundle 'ConradIrwin/vim-comment-object'
 Bundle 'Jinja'
 Bundle 'Lokaltog/vim-distinguished'
 Bundle 'Lokaltog/vim-easymotion'
@@ -16,6 +17,7 @@ Bundle 'kana/vim-textobj-user.git'
 Bundle 'kien/ctrlp.vim'
 Bundle 'klen/python-mode'
 Bundle 'kshenoy/vim-signature'
+Bundle 'majutsushi/tagbar'
 Bundle 'mkomitee/snipmate.vim'
 Bundle 'nelstrom/vim-markdown-folding'
 Bundle 'python_match.vim'
@@ -43,11 +45,7 @@ set list                       " show invisibles
 set showbreak=↪                " indicate a line is the continuation of a
                                "  wrapped line
 set showmatch                  " show matching parenthesis
-set splitbelow                 " new horizontal splits to below
-set splitright                 " new vertical splits goto the right
-set autoread                   " reread files which changes on disk if they
-                               "  havnt changed in the buffer
-set foldlevelstart=0           " Start with all folds open
+set foldlevelstart=0           " Start with all folds closed
 set dictionary=/usr/share/dict/words        " for spell checking
 set spellfile=~/.dotfiles/vim/en.utf-8.add  " to add words
 set spelllang=en_us            " yes, i do speak it
@@ -63,7 +61,6 @@ set incsearch                  " search as I type
 set ignorecase                 " ignore case when searching, ...
 set smartcase                  " unless I search for uppercase
 set hlsearch                   " and highlight searches
-set gdefault                   " replace all occurrances on the line by default
 set backupdir=$HOME/.vimdata/vimbackup/ " save backups in alternate location
 set directory=$HOME/.vimdata/vimswap/   " save swap files here
 set viewdir=$HOME/.vimdata/vimviews/    " save views here
@@ -74,7 +71,6 @@ set smarttab                   " shiftwidth at start of line, tabstop elsewhere
 set softtabstop=4              " 1 tab = 4 spaces
 set tabstop=4                  " 1 tab = 4 spaces
 set textwidth=80               " wrap at 80 columns
-set nospell                    " spell checking is off
 set tags=./tags;               " name of the tags files which is relative to the project
 set notimeout
 set ttimeout
@@ -236,18 +232,12 @@ function! FocusFold() " ---------------------------------------------------- {{{
 endfunction " }}}
 " }}}
 " Custom maps -------------------------------------------------------------- {{{
-" Format Paragraph/Line ---------------------------------------------------- {{{
-nnoremap <silent> Q gqip
-nnoremap <silent> ql ^vg_gq
+" Open the quickfix window {{{
+nnoremap <leader>qf :cwin<cr>
 " }}}
 " Focus when searching ----------------------------------------------------- {{{
 nnoremap <silent> n n:call Pulse(5)<cr>
 nnoremap <silent> N N:call Pulse(5)<cr>
-" }}}
-" Focus after traversing the jumplist -------------------------------------- {{{
-nnoremap <silent> <C-o> <C-o>:call Pulse(5)<cr>
-nnoremap <silent> <C-i> <C-i>:call Pulse(5)<cr>
-
 " }}}
 " j and k will go one line, even if they're wrapped ------------------------ {{{
 nnoremap <silent> j gj
@@ -279,9 +269,6 @@ noremap <silent> Y y$
 " Easily modify ~/.{g,}vimrc ----------------------------------------------- {{{
 nnoremap <silent> <leader>ev :e $MYVIMRC<CR>
 " }}}
-" Strip whitespace --------------------------------------------------------- {{{
-nnoremap <silent> <leader>W :RemoveTrailingWhiteSpace<cr>
-" }}}
 " sudo write-file in case you're in a file you dont have privileges to write {{{
 cmap <silent> w!! w !sudo tee % >/dev/null<cr>
 " }}}
@@ -293,9 +280,6 @@ nnoremap <silent> <right> <C-W>>
 " }}}
 " . returns to starting place after repeat --------------------------------- {{{
 nnoremap <silent> . .`[
-" }}}
-" Simple way to find out where the hell my cursor is ----------------------- {{{
-nnoremap <silent> <leader>? :call Pulse(9)<cr>
 " }}}
 " Custom text objects around and in character pairs ------------------------ {{{
 let pairs = { ':' : ':',
@@ -351,8 +335,6 @@ let g:ctrlp_cache_dir = $HOME.'/.vimdata/ctrlp'
 let g:ctrlp_map = '<leader>p'
 let g:ctrlp_mruf_relative = 1
 let g:ctrlp_reuse_window = 'netrw\|help'
-nnoremap <silent> <leader>b :CtrlPBuffer<CR>
-nnoremap <silent> <leader>m :CtrlPMRU<CR>
 "  <C-t> → will open the finding match in a tab
 "  <C-v> → will open the finding match in a vertical split
 "  <C-h> → will open the finding match in a horizontal split
@@ -380,31 +362,6 @@ nnoremap <silent> <Leader>a, :Tabularize /,\zs<CR>
 vnoremap <silent> <Leader>a: :Tabularize /:\zs<CR>
 nnoremap <silent> <Leader>a: :Tabularize /:\zs<CR>
 " }}}
-" Fugitive ----------------------------------------------------------------- {{{
-" :Gstatus → git status → Ctrl→n → go to the next file → Ctrl→p → go to the preview file
-" :Gwrite → git add
-" :Gcommit → git commit (press wq for send)
-" :Gblame → git blame
-" :Gmove → git mv
-" :Gremove → git rm
-" :Glog → git log
-" :Gdiff → split the window and display the changes
-" :Ggrep → does a grep in the tree
-" :Gbrowse → opens the actual file in the browser (normally its on github)
-" :Git → after this you can perform every other normal git command you want
-nnoremap <silent> <leader>gd :Gdiff<CR>
-nnoremap <silent> <leader>gs :Gstatus<CR>
-nnoremap <silent> <leader>gw :Gwrite<CR>
-nnoremap <silent> <leader>ga :Gadd<CR>
-nnoremap <silent> <leader>gb :Gblame<CR>
-nnoremap <silent> <leader>gl :Glog<CR>
-nnoremap <silent> <leader>gc :Gcommit -v<CR>
-nnoremap <silent> <leader>gm :Gmove<CR>
-nnoremap <silent> <leader>gr :Gremove<CR>
-nnoremap <silent> <leader>gp :! git push<CR>
-nnoremap <silent> <leader>dg :diffget<CR>
-nnoremap <silent> <leader>dp :diffput<CR>
-" }}}
 " slime -------------------------------------------------------------------- {{{
 " :SlimeConfig - configure which tmux pane to send text
 " :SlimeSend - send text, can use a range, or marks including the marks used to
@@ -416,7 +373,6 @@ let g:slime_no_mappings = 0
 let g:slime_paste_file = $HOME.'/.vimdata/slime'
 let g:slime_target = "tmux"
 au FileType python let g:slime_python_ipython = 1
-" <leader>s - send region or motion
 " }}}
 " NERDCommenter ------------------------------------------------------------ {{{
 let g:NERDCreateDefaultMappings = 0
@@ -453,9 +409,6 @@ au FileType markdown au BufWritePre <buffer> RemoveTrailingWhiteSpace
 au FileType markdown setl shiftwidth=4
 au FileType markdown setl softtabstop=4
 au FileType markdown setl tabstop=4
-au Filetype markdown nnoremap <silent> <buffer> <leader>1 yypVr=:redraw<cr>
-au Filetype markdown nnoremap <silent> <buffer> <leader>2 yypVr-:redraw<cr>
-au Filetype markdown nnoremap <silent> <buffer> <leader>3 mzI###<space><ESC>`zlll <ESC>
 au BufNewFile,BufRead $HOME/.tasks.md setl nospell
 " }}}
 " perl --------------------------------------------------------------------- {{{
@@ -468,12 +421,6 @@ au FileType puppet au BufWritePre <buffer> RemoveTrailingWhiteSpace
 " python ------------------------------------------------------------------- {{{
 au FileType python au BufWritePre <buffer> RemoveTrailingWhiteSpace
 au FileType python setl textwidth=79
-" }}}
-" rst ---------------------------------------------------------------------- {{{
-au Filetype rst nnoremap <silent> <buffer> <leader>1 yypVr=:redraw<cr>
-au Filetype rst nnoremap <silent> <buffer> <leader>2 yypVr-:redraw<cr>
-au Filetype rst nnoremap <silent> <buffer> <leader>3 yypVr~:redraw<cr>
-au Filetype rst nnoremap <silent> <buffer> <leader>4 yypVr`:redraw<cr>
 " }}}
 " ruby --------------------------------------------------------------------- {{{
 au FileType ruby au BufWritePre <buffer> RemoveTrailingWhiteSpace
@@ -506,21 +453,7 @@ function! MyFoldText() " --------------------------------------------------- {{{
     let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
     return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
 endfunction " }}}
-function! AddFoldMark() " -------------------------------------------------- {{{
-    let _s=@/
-    let c0 = virtcol(".")
-    let l0 = line(".")
-    .,.s/\s\+$//e
-    normal $
-    let c1 = col(".")
-    let filler = repeat("-", 80 - 5 - c1) . " {{{" " }}}
-    call append(l0, filler)
-    let @/=_s
-    normal J
-    call cursor(l0, c0)
-endfunction " }}}
 set foldtext=MyFoldText()
-nnoremap <silent> <leader>f :call AddFoldMark()<cr>
 " }}}
 " Miscellaneous ------------------------------------------------------------ {{{
 " Prepare our vim cache directories ---------------------------------------- {{{
@@ -552,9 +485,6 @@ augroup restoreCursorPosition
   autocmd!
   autocmd BufReadPost * call RestoreCursorPosition()
 augroup END
-" }}}
-" My tasks, ... ------------------------------------------------------------ {{{
-nnoremap <silent> <leader>t :e $HOME/.tasks.md<cr>
 " }}}
 " Load abbreviations ------------------------------------------------------- {{{
 source ~/.vim/abbrev
