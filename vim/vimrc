@@ -234,6 +234,12 @@ endfunction " }}}
 " Custom maps -------------------------------------------------------------- {{{
 " Open the quickfix window {{{
 nnoremap <leader>qf :cwin<cr>
+augroup quickfix
+  autocmd!
+  autocmd QuickFixCmdPost [^l]* nested cwindow
+  autocmd QuickFixCmdPost    l* nested lwindow
+augroup END
+
 " }}}
 " Focus when searching ----------------------------------------------------- {{{
 nnoremap <silent> n n:call Pulse(5)<cr>
