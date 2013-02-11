@@ -45,7 +45,7 @@ set list                       " show invisibles
 set showbreak=↪                " indicate a line is the continuation of a
                                "  wrapped line
 set showmatch                  " show matching parenthesis
-set foldlevelstart=0           " Start with all folds closed
+set foldlevelstart=99          " Start with all folds open
 set dictionary=/usr/share/dict/words        " for spell checking
 set spellfile=~/.dotfiles/vim/en.utf-8.add  " to add words
 set spelllang=en_us            " yes, i do speak it
@@ -394,6 +394,9 @@ let g:slime_no_mappings = 0
 let g:slime_paste_file = $HOME.'/.vimdata/slime'
 let g:slime_target = "tmux"
 au FileType python let g:slime_python_ipython = 1
+" }}}
+" tagbar {{{
+nnoremap <silent> <leader>t :TagbarToggle<cr>
 " }}}
 " NERDCommenter ------------------------------------------------------------ {{{
 let g:NERDCreateDefaultMappings = 0
