@@ -103,10 +103,10 @@
 (define-key evil-motion-state-map "`" 'evil-goto-mark-line)
 
 ;; Arrow keys to resize splits
-(define-key evil-normal-state-map [up] (kbd "C-w +"))
-(define-key evil-normal-state-map [down] (kbd "C-w -"))
-(define-key evil-normal-state-map [left] (kbd "C-w <"))
-(define-key evil-normal-state-map [right] (kbd "C-w >"))
+;; (define-key evil-normal-state-map [up] (kbd "C-w +"))
+;; (define-key evil-normal-state-map [down] (kbd "C-w -"))
+;; (define-key evil-normal-state-map [left] (kbd "C-w <"))
+;; (define-key evil-normal-state-map [right] (kbd "C-w >"))
 
 ;; Here's how to define a new ex command
 (evil-ex-define-cmd "esh[ell]" 'eshell)
@@ -162,5 +162,7 @@
 (add-hook 'prog-mode-hook
           (lambda ()
             (setq fci-rule-column 80)))
+
+(setq python-python-command "ipython")
 
 (server-start)
