@@ -2,13 +2,13 @@
 ;; know what I'm doing. https://github.com/technomancy/emacs-starter-kit/
 (require 'package)
 (add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/") t)
+             '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
 
 (when (not package-archive-contents)
   (package-refresh-contents))
 
-;; These are the packages I wabnt installed
+;; These are the packages I want installed
 (defvar my-packages '(starter-kit
                       starter-kit-lisp
                       starter-kit-bindings
@@ -16,11 +16,8 @@
                       evil
                       textmate
                       color-theme
-                      ack-and-a-half
                       fill-column-indicator
                       markdown-mode
-                      color-theme-molokai
-                      puppet-mode
                       python-mode
                       )
   "A list of packages to ensure are installed at launch.")
@@ -36,43 +33,17 @@
 ;; Enable line numbers
 (global-linum-mode t)
 
+(require 'textmate)
+(textmate-mode)
+
 ;; Color-column
 (require 'fill-column-indicator)
 (setq fci-rule-width 1)
 (setq fci-rule-color "darkred")
 (add-hook 'after-change-major-mode-hook 'fci-mode)
-(add-hook 'after-change-major-mode-hook 'whitespace-mode)
 (add-hook 'python-mode-hook
           (lambda ()
             (setq fci-rule-column 80)))
-
-(require 'textmate)
-(textmate-mode)
-
-;; No idea what a good emacs theme is so using molokai which is decent
-(require 'color-theme)
-(color-theme-molokai)
-
-;; create some aliases for ack
-(defalias 'ack 'ack-and-a-half)
-(defalias 'ack-same 'ack-and-a-half-same)
-(defalias 'ack-find-file 'ack-and-a-half-find-file)
-(defalias 'ack-find-file-same 'ack-and-a-half-find-file-same)
-
-;; Enable flymake/pylint, note this only works when epylint is in my
-;; path, which isn't the case at home when started with spotlight. It
-;; has to be started from the commandline.
-(when (load "flymake" t)
-  (defun flymake-pylint-init ()
-    (let* ((temp-file (flymake-init-create-temp-buffer-copy
-                       'flymake-create-temp-inplace))
-           (local-file (file-relative-name
-                        temp-file
-                        (file-name-directory buffer-file-name))))
-      (list "epylint" (list local-file))))
-
-  (add-to-list 'flymake-allowed-file-name-masks
-               '("\\.py\\'" flymake-pylint-init)))
 
 (defmacro allow-line-as-region-for-function (orig-function)
 `(defun ,(intern (concat (symbol-name orig-function) "-or-line"))
@@ -100,30 +71,32 @@
 (require 'surround)
 (global-surround-mode 1)
 
+;; escape to ... escape.
 (define-key minibuffer-local-map [escape] 'keyboard-escape-quit)
 (define-key minibuffer-local-ns-map [escape] 'keyboard-escape-quit)
 (define-key minibuffer-local-completion-map [escape] 'keyboard-escape-quit)
 (define-key minibuffer-local-must-match-map [escape] 'keyboard-escape-quit)
 (define-key minibuffer-local-isearch-map [escape] 'keyboard-escape-quit)
 
+;; Emulate some of my maps from vim
 (define-key evil-normal-state-map "\C-j" 'evil-window-down)
 (define-key evil-normal-state-map "\C-k" 'evil-window-up)
 (define-key evil-normal-state-map "\C-h" 'evil-window-left)
 (define-key evil-normal-state-map "\C-l" 'evil-window-right)
-(define-key evil-normal-state-map "\C-c" 'delete-window)
 (define-key evil-normal-state-map "|" (kbd ":vsplit C-m C-l"))
 (define-key evil-normal-state-map "_" (kbd ":split C-m C-j"))
-(define-key evil-normal-state-map " d" 'speedbar)
 (define-key evil-normal-state-map " b" 'ido-display-buffer)
 (define-key evil-normal-state-map " p" 'textmate-goto-file)
 (define-key evil-normal-state-map " ev" (kbd ":e ~/.dotfiles/emacs/init.el"))
-(define-key evil-normal-state-map "  " 'comment-or-uncomment-region-or-line)
-(define-key evil-visual-state-map "  " 'comment-or-uncomment-region-or-line)
+(define-key evil-normal-state-map " cc" 'comment-or-uncomment-region-or-line)
+(define-key evil-visual-state-map " cc" 'comment-or-uncomment-region-or-line)
+(define-key evil-visual-state-map " s" 'sort-lines)
 
 ;; Since there's no 'noremap' functionality available, I have to first
 ;; define a sequence of characters to perform the shift, and THEN
 ;; remap > and < to call that other sequence and then gv, this works
 ;; but it makes me sad.
+
 (define-key evil-visual-state-map "g>" 'evil-shift-right)
 (define-key evil-visual-state-map "g<" 'evil-shift-left)
 (define-key evil-visual-state-map ">" (kbd "g>gv"))
@@ -133,11 +106,19 @@
 (define-key evil-motion-state-map "'" 'evil-goto-mark)
 (define-key evil-motion-state-map "`" 'evil-goto-mark-line)
 
+;; Arrow keys to resize splits
+(define-key evil-normal-state-map [up] (kbd "C-w +"))
+(define-key evil-normal-state-map [down] (kbd "C-w -"))
+(define-key evil-normal-state-map [left] (kbd "C-w <"))
+(define-key evil-normal-state-map [right] (kbd "C-w >"))
+
 ;; Here's how to define a new ex command
-(defun evil-ex-define-cmd "ack" 'ack)
-(defun evil-ex-define-cmd "eshell" 'eshell)
-;; TODO: get something like this working
-;; (defun evil-ex-define-cmd "sort" 'sort-lines)
+(evil-ex-define-cmd "esh[ell]" 'eshell)
+(evil-ex-define-cmd "WQ" 'evil-save-and-close)
+(evil-ex-define-cmd "Wq" 'evil-save-and-close)
+(evil-ex-define-cmd "QA" 'evil-quit-all)
+(evil-ex-define-cmd "Qa" 'evil-quit-all)
+(evil-ex-define-cmd "sort" 'sort-lines)
 
 ;; We prefer normal mode in several places
 (defvar my-normal-modes'(
@@ -145,7 +126,6 @@
                          )
   "List of modes to put in normal mode by default, despite evil defaults")
 
-;; This ensures they're installed
 (dolist (p my-normal-modes)
   (delete p 'evil-emacs-state-modes)
   (add-to-list 'evil-normal-state-modes p))
@@ -162,5 +142,25 @@
 (add-hook 'dired-mode-hook
           (lambda ()
             (dired-omit-mode 1)))
+
+;; emacs 24.1 doesn't have plist-to-alist, but color themes still use
+;; it, ... so we define it.
+(defun plist-to-alist (the-plist)
+  (defun get-tuple-from-plist (the-plist)
+    (when the-plist
+      (cons (car the-plist) (cadr the-plist))))
+
+  (let ((alist '()))
+    (while the-plist
+      (add-to-list 'alist (get-tuple-from-plist the-plist))
+      (setq the-plist (cddr the-plist)))
+      alist))
+
+(require 'color-theme)
+(color-theme-tty-dark)
+
+(remove-hook 'prog-mode-hook 'esk-turn-on-hl-line-mode)
+(remove-hook 'prog-mode-hook 'esk-turn-on-idle-highlight-mode)
+(add-hook 'prog-mode-hook 'esk-turn-on-whitespace)
 
 (server-start)
