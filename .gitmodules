@@ -16,18 +16,9 @@
 [submodule "contrib/altercation/solarized"]
 	path = contrib/altercation/solarized
 	url = https://github.com/altercation/solarized.git
-[submodule "contrib/trapd00r/ls--"]
-	path = contrib/trapd00r/ls--
-	url = https://github.com/trapd00r/ls--.git
-[submodule "contrib/trapd00r/Term-ExtendedColor"]
-	path = contrib/trapd00r/Term-ExtendedColor
-	url = https://github.com/trapd00r/Term-ExtendedColor.git
 [submodule "contrib/rupa/z"]
 	path = contrib/rupa/z
 	url = git://github.com/rupa/z.git
-[submodule "contrib/sjl/badwolf"]
-	path = contrib/sjl/badwolf
-	url = git://github.com/sjl/badwolf.git
 [submodule "contrib/visionmedia/git-extras"]
 	path = contrib/visionmedia/git-extras
 	url = git://github.com/visionmedia/git-extras.git
