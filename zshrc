@@ -26,9 +26,6 @@ source $ZSH/functions.zsh
 source $ZSH/jobs.zsh
 source $ZSH/prompt.zsh
 source $ZSH/colours.zsh
-source $ZSH/funny.zsh
-source $ZSH/latex.zsh
-source $ZSH/extract.zsh
 
 if [ -d $CONTRIB/zsh-users/zsh-syntax-highlighting ]; then
     ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
@@ -104,10 +101,3 @@ abbreviations=(
 )
 
 KEYTIMEOUT=20
-
-
-if [ $(uname) != "SunOS" ]; then
-    if [ -f $CONTRIB/rupa/z/z.sh ] ; then
-        source $CONTRIB/rupa/z/z.sh
-    fi
-fi

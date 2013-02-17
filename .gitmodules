@@ -16,9 +16,6 @@
 [submodule "contrib/altercation/solarized"]
 	path = contrib/altercation/solarized
 	url = https://github.com/altercation/solarized.git
-[submodule "contrib/rupa/z"]
-	path = contrib/rupa/z
-	url = git://github.com/rupa/z.git
 [submodule "contrib/visionmedia/git-extras"]
 	path = contrib/visionmedia/git-extras
 	url = git://github.com/visionmedia/git-extras.git
