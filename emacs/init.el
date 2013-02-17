@@ -40,10 +40,6 @@
 (require 'fill-column-indicator)
 (setq fci-rule-width 1)
 (setq fci-rule-color "darkred")
-(add-hook 'after-change-major-mode-hook 'fci-mode)
-(add-hook 'python-mode-hook
-          (lambda ()
-            (setq fci-rule-column 80)))
 
 (defmacro allow-line-as-region-for-function (orig-function)
 `(defun ,(intern (concat (symbol-name orig-function) "-or-line"))
@@ -162,5 +158,9 @@
 (remove-hook 'prog-mode-hook 'esk-turn-on-hl-line-mode)
 (remove-hook 'prog-mode-hook 'esk-turn-on-idle-highlight-mode)
 (add-hook 'prog-mode-hook 'esk-turn-on-whitespace)
+(add-hook 'prog-mode-hook 'fci-mode)
+(add-hook 'prog-mode-hook
+          (lambda ()
+            (setq fci-rule-column 80)))
 
 (server-start)
