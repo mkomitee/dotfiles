@@ -11,6 +11,7 @@
 ;; These are the packages I want installed
 (defvar my-packages '(starter-kit
                       starter-kit-lisp
+                      puppet-mode
                       starter-kit-bindings
                       starter-kit-eshell
                       evil
