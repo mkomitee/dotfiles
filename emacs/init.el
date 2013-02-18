@@ -88,6 +88,8 @@
 (define-key evil-normal-state-map " cc" 'comment-or-uncomment-region-or-line)
 (define-key evil-visual-state-map " cc" 'comment-or-uncomment-region-or-line)
 (define-key evil-visual-state-map " s" 'sort-lines)
+(define-key evil-normal-state-map "j" (kbd "gj"))
+(define-key evil-normal-state-map "k" (kbd "gk"))
 
 ;; Since there's no 'noremap' functionality available, I have to first
 ;; define a sequence of characters to perform the shift, and THEN
