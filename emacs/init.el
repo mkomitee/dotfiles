@@ -169,4 +169,12 @@
 
 (setq python-python-command "ipython")
 
+(setq auto-mode-alist
+      (append
+       ;; File name (within directory) starts with a dot.
+       '(("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode)
+         ("\\.pp\\'" . puppet-mode))
+                    auto-mode-alist))
+
 (server-start)
