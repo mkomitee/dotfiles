@@ -9,9 +9,8 @@ fpath=(
     $HOME/.dotfiles/contrib//zsh-users/zsh-completions/src
     $fpath
 )
-
-# Filter out any fpath directories which don't exist
 fpath=($^fpath(N))
+export FPATH
 
 # Setup path
 path=(
@@ -21,6 +20,7 @@ path=(
     $HOME/.dotfiles/contrib/visionmedia/git-extras/bin
     $HOME/.dotfiles/contrib/willgit/mainline/bin
     $HOME/.rvm/bin
+    /usr/local/opt/coreutils/libexec/gnubin
     /usr/local/bin
     /usr/local/sbin
     /usr/bin
@@ -29,20 +29,25 @@ path=(
     /sbin
     /opt/X11/bin
     /usr/texbin
-    # $path
 )
-
-# Prefer homebrew coreutils if availale
-coreutils=$(brew --prefix coreutils) 2> /dev/null
-if [ -n $coreutils ]; then
-    path=(
-        $coreutils/libexec/gnubin
-        $path
-    )
-fi
-
-# Filter out any path directories which don't exist
 path=($^path(N))
+export PATH
+
+# Aaaand manpath
+manpath=(
+    $HOME/share/man
+    $HOME/.cabal/share/man
+    $HOME/.dotfiles/contrib/visionmedia/git-extras/man
+    $HOME/.rvm/man
+    /usr/local/opt/coreutils/libexec/gnuman
+    /usr/local/share/man
+    /usr/share/man
+    /opt/X11/share/man
+    /usr/texbin/man
+)
+manpath=($^manpath(N))
+export MANPATH
+
 
 # Activate the default python virtual environment
 VENV="$HOME/.venv/${UNAME}.${ARCH}"
