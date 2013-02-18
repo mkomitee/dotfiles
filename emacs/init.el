@@ -112,11 +112,12 @@
 ;; (define-key evil-normal-state-map [right] (kbd "C-w >"))
 
 ;; Here's how to define a new ex command
-(evil-ex-define-cmd "esh[ell]" 'eshell)
-(evil-ex-define-cmd "WQ" 'evil-save-and-close)
-(evil-ex-define-cmd "Wq" 'evil-save-and-close)
+(evil-ex-define-cmd "Q" 'evil-quit)
 (evil-ex-define-cmd "QA" 'evil-quit-all)
 (evil-ex-define-cmd "Qa" 'evil-quit-all)
+(evil-ex-define-cmd "WQ" 'evil-save-and-close)
+(evil-ex-define-cmd "Wq" 'evil-save-and-close)
+(evil-ex-define-cmd "esh[ell]" 'eshell)
 (evil-ex-define-cmd "sort" 'sort-lines)
 
 ;; We prefer normal mode in several places
