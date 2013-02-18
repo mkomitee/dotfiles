@@ -177,6 +177,12 @@
          ("\\.pp\\'" . puppet-mode))
                     auto-mode-alist))
 
+;; all numbers are Unicode codepoint in decimal.
+(setq whitespace-display-mappings
+      '((space-mark 32 [183] [46])
+        (newline-mark 10 [8617 10])
+        (tab-mark 9 [9656 9] [92 9])))
+
 (setq whitespace-style (quote (face
                                trailing
                                newline
