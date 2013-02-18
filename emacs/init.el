@@ -177,6 +177,13 @@
          ("\\.pp\\'" . puppet-mode))
                     auto-mode-alist))
 
+(setq whitespace-style (quote (face
+                               trailing
+                               newline
+                               indentation
+                               empty
+                               tab-mark)))
+
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
