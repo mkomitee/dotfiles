@@ -28,12 +28,16 @@
   (when (not (package-installed-p p))
     (package-install p)))
 
-;; add our additional libraries to our  load path
+;; add our additional libraries to our load path
 (add-to-list 'load-path "~/.dotfiles/emacs/lib")
+
+;; Load up our utility functions, ...
+(require 'utils)
 
 ;; Enable line numbers
 (global-linum-mode t)
 
+;; Textmate-mode has a nice project find which we use
 (require 'textmate)
 (textmate-mode)
 
@@ -42,20 +46,7 @@
 (setq fci-rule-width 1)
 (setq fci-rule-color "darkred")
 
-(defmacro allow-line-as-region-for-function (orig-function)
-`(defun ,(intern (concat (symbol-name orig-function) "-or-line"))
-   ()
-   ,(format "Like `%s', but acts on the current line if mark is not active."
-            orig-function)
-   (interactive)
-   (if mark-active
-       (call-interactively (function ,orig-function))
-     (save-excursion
-       (beginning-of-line)
-       (set-mark (point))
-       (end-of-line)
-       (call-interactively (function ,orig-function))))))
-
+;; New command for (un)commenting lines as well as selected regions
 (allow-line-as-region-for-function comment-or-uncomment-region)
 
 ;; This enables vim compatible bindings, ...
@@ -64,67 +55,22 @@
 (require 'evil)
 (evil-mode 1)
 
+;; Load up my custom keymaps
+(require 'maps)
+
 ;; emulates surround.vim
 (require 'surround)
 (global-surround-mode 1)
 
-;; escape to ... escape.
+;; escape to ... escape in all modes
 (define-key minibuffer-local-map [escape] 'keyboard-escape-quit)
 (define-key minibuffer-local-ns-map [escape] 'keyboard-escape-quit)
 (define-key minibuffer-local-completion-map [escape] 'keyboard-escape-quit)
 (define-key minibuffer-local-must-match-map [escape] 'keyboard-escape-quit)
 (define-key minibuffer-local-isearch-map [escape] 'keyboard-escape-quit)
 
-;; Emulate some of my maps from vim
-(define-key evil-normal-state-map "\C-j" 'evil-window-down)
-(define-key evil-normal-state-map "\C-k" 'evil-window-up)
-(define-key evil-normal-state-map "\C-h" 'evil-window-left)
-(define-key evil-normal-state-map "\C-l" 'evil-window-right)
-(define-key evil-normal-state-map "|" (kbd ":vsplit C-m C-l"))
-(define-key evil-normal-state-map "_" (kbd ":split C-m C-j"))
-(define-key evil-normal-state-map " b" 'ido-display-buffer)
-(define-key evil-normal-state-map " p" 'textmate-goto-file)
-(define-key evil-normal-state-map " ev" (kbd ":e ~/.dotfiles/emacs/init.el"))
-(define-key evil-normal-state-map " cc" 'comment-or-uncomment-region-or-line)
-(define-key evil-visual-state-map " cc" 'comment-or-uncomment-region-or-line)
-(define-key evil-visual-state-map " s" 'sort-lines)
-(define-key evil-normal-state-map "j" (kbd "gj"))
-(define-key evil-normal-state-map "k" (kbd "gk"))
-
-;; Since there's no 'noremap' functionality available, I have to first
-;; define a sequence of characters to perform the shift, and THEN
-;; remap > and < to call that other sequence and then gv, this works
-;; but it makes me sad.
-
-(define-key evil-visual-state-map "g>" 'evil-shift-right)
-(define-key evil-visual-state-map "g<" 'evil-shift-left)
-(define-key evil-visual-state-map ">" (kbd "g>gv"))
-(define-key evil-visual-state-map "<" (kbd "g<gv"))
-
-;; I switch ' and ` in vim, so I do so here as well
-(define-key evil-motion-state-map "'" 'evil-goto-mark)
-(define-key evil-motion-state-map "`" 'evil-goto-mark-line)
-
-;; Arrow keys to resize splits
-;; (define-key evil-normal-state-map [up] (kbd "C-w +"))
-;; (define-key evil-normal-state-map [down] (kbd "C-w -"))
-;; (define-key evil-normal-state-map [left] (kbd "C-w <"))
-;; (define-key evil-normal-state-map [right] (kbd "C-w >"))
-
-;; Here's how to define a new ex command
-(evil-ex-define-cmd "Q" 'evil-quit)
-(evil-ex-define-cmd "QA" 'evil-quit-all)
-(evil-ex-define-cmd "Qa" 'evil-quit-all)
-(evil-ex-define-cmd "WQ" 'evil-save-and-close)
-(evil-ex-define-cmd "Wq" 'evil-save-and-close)
-(evil-ex-define-cmd "esh[ell]" 'eshell)
-(evil-ex-define-cmd "sort" 'sort-lines)
-
 ;; We prefer normal mode in several places
-(defvar my-normal-modes'(
-                         package-menu-mode
-                         )
-  "List of modes to put in normal mode by default, despite evil defaults")
+(defvar my-normal-modes'(package-menu-mode))
 
 (dolist (p my-normal-modes)
   (delete p 'evil-emacs-state-modes)
@@ -143,19 +89,6 @@
           (lambda ()
             (dired-omit-mode 1)))
 
-;; emacs 24.1 doesn't have plist-to-alist, but color themes still use
-;; it, ... so we define it.
-(defun plist-to-alist (the-plist)
-  (defun get-tuple-from-plist (the-plist)
-    (when the-plist
-      (cons (car the-plist) (cadr the-plist))))
-
-  (let ((alist '()))
-    (while the-plist
-      (add-to-list 'alist (get-tuple-from-plist the-plist))
-      (setq the-plist (cddr the-plist)))
-      alist))
-
 (require 'color-theme)
 (color-theme-tty-dark)
 
@@ -167,17 +100,18 @@
           (lambda ()
             (setq fci-rule-column 80)))
 
+;; Use ipython instead of python where possible
 (setq python-python-command "ipython")
 
+;; Set modes for files based on their filenames
 (setq auto-mode-alist
       (append
-       ;; File name (within directory) starts with a dot.
        '(("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode)
          ("\\.pp\\'" . puppet-mode))
                     auto-mode-alist))
 
-;; all numbers are Unicode codepoint in decimal.
+;; Configure whitespace-mode
 (setq whitespace-display-mappings
       '((space-mark 32 [183] [46])
         (newline-mark 10 [8617 10])
@@ -190,10 +124,10 @@
                                empty
                                tab-mark)))
 
+;; utf-8 all the things.
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
 
+;; Use fuzzy matching with ido-mode
 (setq ido-enable-flex-matching t)
-
-(server-start)
