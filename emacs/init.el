@@ -194,4 +194,6 @@
 (set-keyboard-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
 
+(setq ido-enable-flex-matching t)
+
 (server-start)
