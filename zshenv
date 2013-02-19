@@ -41,13 +41,13 @@ manpath=(
     $HOME/.rvm/man
     /usr/local/opt/coreutils/libexec/gnuman
     /usr/local/share/man
+    /usr/local/man
     /usr/share/man
     /opt/X11/share/man
     /usr/texbin/man
 )
 manpath=($^manpath(N))
 export MANPATH
-
 
 # Activate the default python virtual environment
 VENV="$HOME/.venv/${UNAME}.${ARCH}"
