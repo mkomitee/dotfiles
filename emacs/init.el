@@ -9,17 +9,19 @@
   (package-refresh-contents))
 
 ;; These are the packages I want installed
-(defvar my-packages '(starter-kit
-                      starter-kit-lisp
-                      puppet-mode
-                      starter-kit-bindings
-                      starter-kit-eshell
+(defvar my-packages '(color-theme
+                      color-theme-solarized
                       evil
-                      textmate
-                      color-theme
                       fill-column-indicator
                       markdown-mode
+                      puppet-mode
                       python-mode
+                      starter-kit
+                      starter-kit-bindings
+                      starter-kit-eshell
+                      starter-kit-lisp
+                      textmate
+                      yasnippet
                       )
   "A list of packages to ensure are installed at launch.")
 
@@ -90,7 +92,8 @@
             (dired-omit-mode 1)))
 
 (require 'color-theme)
-(color-theme-tty-dark)
+;; (color-theme-tty-dark)
+(color-theme-solarized-light)
 
 (remove-hook 'prog-mode-hook 'esk-turn-on-hl-line-mode)
 (remove-hook 'prog-mode-hook 'esk-turn-on-idle-highlight-mode)
@@ -131,3 +134,8 @@
 
 ;; Use fuzzy matching with ido-mode
 (setq ido-enable-flex-matching t)
+
+;; snippets ftw
+(require 'yasnippet)
+(yas-global-mode 1)
+(setq yas-snippet-dirs '("~/.dotfiles/emacs/snippets"))

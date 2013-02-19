@@ -1,0 +1,11 @@
+# name: Try/Except/Else/Finally
+# key: try
+# --
+try:
+    ${pass}
+except ${Exception} as e:
+    ${raise}
+else:
+    ${pass}
+finally:
+    ${pass}

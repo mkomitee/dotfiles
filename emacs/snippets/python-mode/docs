@@ -1,0 +1,11 @@
+# name: docstring
+# key: docs
+'''
+File:        $1
+Author:      Michael Komitee
+Created:     `(current-time-string)`
+Description: $2
+$3
+'''
+
+$4
