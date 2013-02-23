@@ -9,13 +9,12 @@
   (package-refresh-contents))
 
 ;; These are the packages I want installed
-(defvar my-packages '(color-theme
-                      color-theme-solarized
-                      evil
+(defvar my-packages '(evil
                       fill-column-indicator
                       markdown-mode
                       puppet-mode
                       python-mode
+                      haskell-mode
                       starter-kit
                       starter-kit-bindings
                       starter-kit-eshell
@@ -91,10 +90,6 @@
           (lambda ()
             (dired-omit-mode 1)))
 
-(require 'color-theme)
-;; (color-theme-tty-dark)
-(color-theme-solarized-light)
-
 (remove-hook 'prog-mode-hook 'esk-turn-on-hl-line-mode)
 (remove-hook 'prog-mode-hook 'esk-turn-on-idle-highlight-mode)
 (add-hook 'prog-mode-hook 'esk-turn-on-whitespace)
@@ -139,3 +134,6 @@
 (require 'yasnippet)
 (yas-global-mode 1)
 (setq yas-snippet-dirs '("~/.dotfiles/emacs/snippets"))
+
+(setq frame-background-mode 'dark)
+(load-theme 'wombat)
