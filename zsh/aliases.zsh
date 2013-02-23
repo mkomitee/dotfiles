@@ -8,6 +8,7 @@ alias dot='cd ~dot'
 alias vi=vim
 alias ack='noglob ack'
 alias a='tmux -u2 attach || tmux -u2'
+alias turses='(source ~/.venv/turses/bin/activate && turses -a mkomitee)'
 alias -g bar_chart='python ~/.dotfiles/contrib/bitly/data_hacks.git/data_hacks/bar_chart.py'
 alias -g histogram='python ~/.dotfiles/contrib/bitly/data_hacks.git/data_hacks/histogram.py'
 alias -g ninety_five_percent='python ~/.dotfiles/contrib/bitly/data_hacks.git/data_hacks/ninety_five_percent.py'
