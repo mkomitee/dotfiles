@@ -22,3 +22,6 @@
 [submodule "contrib/willgit/mainline"]
 	path = contrib/willgit/mainline
 	url = git://gitorious.org/willgit/mainline.git
+[submodule "emacs/bundles/emacs-for-python"]
+	path = emacs/bundles/emacs-for-python
+	url = git://github.com/gabrielelanaro/emacs-for-python.git

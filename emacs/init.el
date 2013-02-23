@@ -31,6 +31,9 @@
 
 ;; add our additional libraries to our load path
 (add-to-list 'load-path "~/.dotfiles/emacs/lib")
+(require 'em-glob)
+(dolist (dir (eshell-extended-glob "~/.dotfiles/emacs/bundles/*"))
+  (add-to-list 'load-path dir))
 
 ;; Load up our utility functions, ...
 (require 'utils)
@@ -130,9 +133,16 @@
 ;; Use fuzzy matching with ido-mode
 (setq ido-enable-flex-matching t)
 
+
+(require 'epy-setup)      ;; It will setup other loads, it is ;; required!
+(require 'epy-python)     ;; If you want the python facilities ;; [optional]
+(epy-setup-checker "pyflakes %f")
+(epy-setup-ipython)
+(setq skeleton-pair nil) 
+
 ;; snippets ftw
 (require 'yasnippet)
-(yas-global-mode 1)
+;; (yas-global-mode t)
 (setq yas-snippet-dirs '("~/.dotfiles/emacs/snippets"))
 
 (setq frame-background-mode 'dark)
