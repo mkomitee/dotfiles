@@ -8,4 +8,8 @@ alias dot='cd ~dot'
 alias vi=vim
 alias ack='noglob ack'
 alias a='tmux -u2 attach || tmux -u2'
-
+alias -g bar_chart='python ~/.dotfiles/contrib/bitly/data_hacks.git/data_hacks/bar_chart.py'
+alias -g histogram='python ~/.dotfiles/contrib/bitly/data_hacks.git/data_hacks/histogram.py'
+alias -g ninety_five_percent='python ~/.dotfiles/contrib/bitly/data_hacks.git/data_hacks/ninety_five_percent.py'
+alias -g run_for='python ~/.dotfiles/contrib/bitly/data_hacks.git/data_hacks/run_for.py'
+alias -g sample='python ~/.dotfiles/contrib/bitly/data_hacks.git/data_hacks/sample.py'

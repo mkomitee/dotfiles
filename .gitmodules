@@ -25,3 +25,6 @@
 [submodule "emacs/bundles/emacs-for-python"]
 	path = emacs/bundles/emacs-for-python
 	url = git://github.com/gabrielelanaro/emacs-for-python.git
+[submodule "contrib/bitly/data_hacks.git"]
+	path = contrib/bitly/data_hacks.git
+	url = git://github.com/bitly/data_hacks.git
