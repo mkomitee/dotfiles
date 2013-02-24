@@ -38,8 +38,9 @@
 ;; Load up our utility functions, ...
 (require 'utils)
 
-;; Enable line numbers
+;; Enable line umbers
 (global-linum-mode t)
+(setq linum-format "%d |")
 
 ;; Textmate-mode has a nice project find which we use
 (require 'textmate)
@@ -74,7 +75,8 @@
 (define-key minibuffer-local-isearch-map [escape] 'keyboard-escape-quit)
 
 ;; We prefer normal mode in several places
-(defvar my-normal-modes'(package-menu-mode))
+(defvar my-normal-modes'(package-menu-mode
+                         help))
 
 (dolist (p my-normal-modes)
   (delete p 'evil-emacs-state-modes)
