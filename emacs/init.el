@@ -78,9 +78,15 @@
 (defvar my-normal-modes'(package-menu-mode
                          help))
 
+(defvar my-insert-modes'(inferior-python-mode))
+
 (dolist (p my-normal-modes)
   (delete p 'evil-emacs-state-modes)
   (add-to-list 'evil-normal-state-modes p))
+
+(dolist (p my-insert-modes)
+  (delete p 'evil-emacs-state-modes)
+  (add-to-list 'evil-insert-state-modes p))
 
 ;; Don't litter auto-save turds all over the file system
 (setq backup-directory-alist
@@ -136,15 +142,14 @@
 (setq ido-enable-flex-matching t)
 
 
-;; (require 'epy-setup)      ;; It will setup other loads, it is ;; required!
-;; (require 'epy-python)     ;; If you want the python facilities ;; [optional]
-;; (epy-setup-checker "pyflakes %f")
-;; (epy-setup-ipython)
+(require 'epy-setup)      ;; It will setup other loads, it is ;; required!
+(require 'epy-python)     ;; If you want the python facilities ;; [optional]
+(epy-setup-ipython)
 ;; (setq skeleton-pair nil) 
 
 ;; snippets ftw
 (require 'yasnippet)
-(yas-global-mode t)
+;; (yas-global-mode t)
 (setq yas-snippet-dirs '("~/.dotfiles/emacs/snippets"))
 
 (setq frame-background-mode 'dark)

@@ -15,6 +15,11 @@
 (define-key evil-normal-state-map "j" (kbd "gj"))
 (define-key evil-normal-state-map "k" (kbd "gk"))
 
+(define-key evil-insert-state-map "\C-j" 'evil-window-down)
+(define-key evil-insert-state-map "\C-k" 'evil-window-up)
+(define-key evil-insert-state-map "\C-h" 'evil-window-left)
+(define-key evil-insert-state-map "\C-l" 'evil-window-right)
+
 ;; Since there's no 'noremap' functionality available, I have to first
 ;; define a sequence of characters to perform the shift, and THEN
 ;; remap > and < to call that other sequence and then gv, this works
@@ -43,5 +48,6 @@
 (evil-ex-define-cmd "Wq" 'evil-save-and-close)
 (evil-ex-define-cmd "esh[ell]" 'eshell)
 (evil-ex-define-cmd "sort" 'sort-lines)
+(evil-ex-define-cmd "python" 'python-shell-switch-to-shell)
 
 (provide 'maps)
