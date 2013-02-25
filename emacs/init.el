@@ -13,7 +13,6 @@
                       fill-column-indicator
                       markdown-mode
                       puppet-mode
-                      python-mode
                       haskell-mode
                       starter-kit
                       starter-kit-bindings
@@ -110,7 +109,7 @@
             (setq fci-rule-column 80)))
 
 ;; Use ipython instead of python where possible
-(setq python-python-command "ipython")
+;; (setq python-python-command "ipython")
 
 ;; Set modes for files based on their filenames
 (setq auto-mode-alist
@@ -145,10 +144,10 @@
 (require 'epy-setup)      ;; It will setup other loads, it is ;; required!
 (require 'epy-python)     ;; If you want the python facilities ;; [optional]
 (epy-setup-ipython)
-;; (setq skeleton-pair nil) 
+(setq skeleton-pair nil) 
 
 ;; snippets ftw
-(require 'yasnippet)
+;; (require 'yasnippet)
 ;; (yas-global-mode t)
 (setq yas-snippet-dirs '("~/.dotfiles/emacs/snippets"))
 
