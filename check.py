@@ -34,9 +34,13 @@ def check_link(source, destination):
         if os.readlink(source) != destination:
             print("{0} does not point to {1}".format(source, destination),
                   file=sys.stderr)
+            return False
     except (OSError,):
         print("{0} does not point to {1}".format(source, destination),
               file=sys.stderr)
+        return False
+    else:
+        return True
 
 
 def check_contains(path, substring):
@@ -47,17 +51,28 @@ def check_contains(path, substring):
             if not substring in fhandle.read():
                 print("{0} does not contain {1}".format(path, substring),
                       file=sys.stderr)
+                return False
     except (OSError,):
         print("{0} does not contain {1}".format(path, substring),
               file=sys.stderr)
+        return False
+    else:
+        return True
 
 
 def main():
     """Run all checks"""
+    result = True
     for source, destination in LINKS:
-        check_link(source, destination)
+        if not check_link(source, destination):
+            result = False
     for path, substring in CONTAINS:
-        check_contains(path, substring)
+        if not check_contains(path, substring):
+            result = False
+    if result:
+        return 0
+    else:
+        return 1
 
 
 if __name__ == '__main__':

@@ -13,7 +13,6 @@
                       fill-column-indicator
                       markdown-mode
                       puppet-mode
-                      python-mode
                       haskell-mode
                       starter-kit
                       starter-kit-bindings
@@ -40,7 +39,10 @@
 
 ;; Enable line umbers
 (global-linum-mode t)
-(setq linum-format "%d |")
+;; If we don't have a fringe, add a pipe to separate line numbers from
+;; our text
+(if (not (featurep 'fringe))
+  (setq linum-format "%d |"))
 
 ;; Textmate-mode has a nice project find which we use
 (require 'textmate)
@@ -76,9 +78,11 @@
 
 ;; We prefer normal mode in several places
 (defvar my-normal-modes'(package-menu-mode
+                         compilation
                          help))
 
-(defvar my-insert-modes'(inferior-python-mode))
+(defvar my-insert-modes'(inferior-python-mode
+                         inferior-haskell-mode))
 
 (dolist (p my-normal-modes)
   (delete p 'evil-emacs-state-modes)
@@ -108,9 +112,6 @@
 (add-hook 'prog-mode-hook
           (lambda ()
             (setq fci-rule-column 80)))
-
-;; Use ipython instead of python where possible
-(setq python-python-command "ipython")
 
 ;; Set modes for files based on their filenames
 (setq auto-mode-alist
@@ -145,7 +146,11 @@
 (require 'epy-setup)      ;; It will setup other loads, it is ;; required!
 (require 'epy-python)     ;; If you want the python facilities ;; [optional]
 (epy-setup-ipython)
-;; (setq skeleton-pair nil) 
+(setq skeleton-pair nil) 
+
+(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+(add-to-list 'completion-ignored-extensions ".hi")
+(setq haskell-program-name "ghci")
 
 ;; snippets ftw
 (require 'yasnippet)
@@ -154,3 +159,7 @@
 
 (setq frame-background-mode 'dark)
 (load-theme 'wombat)
+
+;; Customize our font if we can
+(if (featurep 'fontset)
+    (set-face-attribute 'default nil :font "Menlo-12"))
