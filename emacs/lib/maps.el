@@ -6,7 +6,7 @@
 (define-key evil-normal-state-map "\C-l" 'evil-window-right)
 (define-key evil-normal-state-map "|" (kbd ":vsplit C-m C-l"))
 (define-key evil-normal-state-map "_" (kbd ":split C-m C-j"))
-(define-key evil-normal-state-map " b" 'ido-display-buffer)
+(define-key evil-normal-state-map " b" 'switch-to-buffer)
 (define-key evil-normal-state-map " p" 'textmate-goto-file)
 (define-key evil-normal-state-map " ev" (kbd ":e ~/.dotfiles/emacs/init.el"))
 (define-key evil-normal-state-map " cc" 'comment-or-uncomment-region-or-line)
