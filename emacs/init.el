@@ -29,6 +29,7 @@
     (package-install p)))
 
 ;; add our additional libraries to our load path
+(add-to-list 'load-path "~/.emacs.d/lib")
 (add-to-list 'load-path "~/.dotfiles/emacs/lib")
 (require 'em-glob)
 (dolist (dir (eshell-extended-glob "~/.dotfiles/emacs/bundles/*"))
@@ -139,14 +140,16 @@
 (set-keyboard-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
 
-;; Use fuzzy matching with ido-mode
-(setq ido-enable-flex-matching t)
-
+(setq ido-create-new-buffer 'never
+      ido-use-virtual-buffers nil
+      ido-default-file-method "selected-window"
+      ido-default-buffer-method "selected-window"
+      )
 
 (require 'epy-setup)      ;; It will setup other loads, it is ;; required!
 (require 'epy-python)     ;; If you want the python facilities ;; [optional]
 (epy-setup-ipython)
-(setq skeleton-pair nil) 
+(setq skeleton-pair nil)
 
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-to-list 'completion-ignored-extensions ".hi")
@@ -160,6 +163,4 @@
 (setq frame-background-mode 'dark)
 (load-theme 'wombat)
 
-;; Customize our font if we can
-(if (featurep 'fontset)
-    (set-face-attribute 'default nil :font "Menlo-12"))
+(require 'local)
