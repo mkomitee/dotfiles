@@ -153,7 +153,7 @@
 (setq haskell-program-name "ghci")
 
 ;; snippets ftw
-(require 'yasnippet)
+;; (require 'yasnippet)
 ;; (yas-global-mode t)
 (setq yas-snippet-dirs '("~/.dotfiles/emacs/snippets"))
 
