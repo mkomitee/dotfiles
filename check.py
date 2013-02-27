@@ -18,6 +18,7 @@ LINKS = (
     ("~/.tmux.conf", ".dotfiles/tmux/tmux.conf"),
     ("~/.vim", ".dotfiles/vim"),
     ("~/scripts", ".dotfiles/scripts"),
+    ("~/.xmonad/xmonad.hs", "../.dotfiles/xmonad.hs"),
 )
 
 CONTAINS = (
