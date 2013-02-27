@@ -163,4 +163,17 @@
 (setq frame-background-mode 'dark)
 (load-theme 'wombat)
 
+;; If we're in X-windows, ...
+(if (eq window-system 'X)
+    ;; Enable x-clipboard integration
+    (setq x-select-enable-clipboard t
+          x-select-enable-primary t)
+  )
+
+;; Load local modifications
 (require 'local)
+
+;; If we're in a window system of any kind
+(if window-system
+    ;; start the server
+    (server-start))
