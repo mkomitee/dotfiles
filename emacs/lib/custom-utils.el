@@ -11,4 +11,4 @@
        (set-mark (point))
        (end-of-line)
        (call-interactively (function ,orig-function))))))
-(provide 'utils)
+(provide 'custom-utils)

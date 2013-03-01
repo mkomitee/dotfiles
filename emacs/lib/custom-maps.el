@@ -50,4 +50,4 @@
 (evil-ex-define-cmd "sort" 'sort-lines)
 (evil-ex-define-cmd "python" 'python-shell-switch-to-shell)
 
-(provide 'maps)
+(provide 'custom-maps)

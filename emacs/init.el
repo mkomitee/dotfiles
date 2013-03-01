@@ -9,11 +9,12 @@
   (package-refresh-contents))
 
 ;; These are the packages I want installed
-(defvar my-packages '(evil
+(defvar my-packages '(ag
+                      evil
                       fill-column-indicator
+                      haskell-mode
                       markdown-mode
                       puppet-mode
-                      haskell-mode
                       starter-kit
                       starter-kit-bindings
                       starter-kit-eshell
@@ -31,15 +32,25 @@
 ;; add our additional libraries to our load path
 (add-to-list 'load-path "~/.emacs.d/lib")
 (add-to-list 'load-path "~/.dotfiles/emacs/lib")
-(require 'em-glob)
-(dolist (dir (eshell-extended-glob "~/.dotfiles/emacs/bundles/*"))
-  (add-to-list 'load-path dir))
 
-;; Load up our utility functions, ...
-(require 'utils)
+;; This enables vim compatible bindings, ...
+(setq evil-default-state 'normal)
+(setq evil-want-C-u-scroll t)
+(require 'evil)
+(evil-mode 1)
 
-;; Enable line umbers
+(require 'custom-utils)
+(require 'custom-maps)
+(require 'custom-python)
+(require 'custom-haskell)
+
+;; Theming, ...
+(setq frame-background-mode 'dark)
+(load-theme 'wombat)
+
+;; Enable line numbers
 (global-linum-mode t)
+
 ;; If we don't have a fringe, add a pipe to separate line numbers from
 ;; our text
 (if (not (featurep 'fringe))
@@ -57,17 +68,8 @@
 ;; New command for (un)commenting lines as well as selected regions
 (allow-line-as-region-for-function comment-or-uncomment-region)
 
-;; This enables vim compatible bindings, ...
-(setq evil-default-state 'normal)
-(setq evil-want-C-u-scroll t)
-(require 'evil)
-(evil-mode 1)
-
-;; Load up my custom keymaps
-(require 'maps)
-
 ;; emulates surround.vim
-(require 'surround)
+(require 'surround "~/.dotfiles/emacs/lib/extensions/surround.el")
 (global-surround-mode 1)
 
 ;; escape to ... escape in all modes
@@ -78,9 +80,11 @@
 (define-key minibuffer-local-isearch-map [escape] 'keyboard-escape-quit)
 
 ;; We prefer normal mode in several places
-(defvar my-normal-modes'(package-menu-mode
+(defvar my-normal-modes'(ag-mode
                          compilation
-                         help))
+                         help
+                         package-menu-mode
+                         ))
 
 (defvar my-insert-modes'(inferior-python-mode
                          inferior-haskell-mode))
@@ -146,22 +150,8 @@
       ido-default-buffer-method "selected-window"
       )
 
-(require 'epy-setup)      ;; It will setup other loads, it is ;; required!
-(require 'epy-python)     ;; If you want the python facilities ;; [optional]
-(epy-setup-ipython)
-(setq skeleton-pair nil)
-
-(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-(add-to-list 'completion-ignored-extensions ".hi")
-(setq haskell-program-name "ghci")
-
-;; snippets ftw
-;; (require 'yasnippet)
-;; (yas-global-mode t)
+(require 'yasnippet)
 (setq yas-snippet-dirs '("~/.dotfiles/emacs/snippets"))
-
-(setq frame-background-mode 'dark)
-(load-theme 'wombat)
 
 ;; If we're in X-windows, ...
 (if (eq window-system 'X)
@@ -169,6 +159,8 @@
     (setq x-select-enable-clipboard t
           x-select-enable-primary t)
   )
+
+(require 'ag)
 
 ;; Load local modifications
 (require 'local)
