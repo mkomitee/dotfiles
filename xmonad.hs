@@ -31,11 +31,11 @@
 
 import XMonad
 
+{- modMask            = mod4Mask, -}
 main = do
      xmonad $ defaultConfig
-            { terminal = "urxvt" }
-
-            
-
-
-            
+            { terminal           = "urxvt",
+              borderWidth        = 1,
+              normalBorderColor  = "#cccccc",
+              focusedBorderColor = "#cd8b00",
+              focusFollowsMouse  = False }

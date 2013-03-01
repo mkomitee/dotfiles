@@ -12,6 +12,8 @@
 (defvar my-packages '(ag
                       evil
                       fill-column-indicator
+                      git-commit
+                      git-gutter
                       haskell-mode
                       markdown-mode
                       puppet-mode
@@ -118,6 +120,11 @@
           (lambda ()
             (setq fci-rule-column 80)))
 
+(add-hook 'python-mode-hook 'fci-mode)
+(add-hook 'python-mode-hook
+          (lambda ()
+            (setq fci-rule-column 80)))
+
 ;; Set modes for files based on their filenames
 (setq auto-mode-alist
       (append
@@ -152,6 +159,13 @@
 
 (require 'yasnippet)
 (setq yas-snippet-dirs '("~/.dotfiles/emacs/snippets"))
+
+(require 'git-commit)
+(add-hook 'git-commit-mode-hook 'turn-on-fly-spell)
+(add-hook 'git-commit-mode-hook (lambda () (toggle-save-place0)))
+
+(setq frame-background-mode 'dark)
+(load-theme 'wombat)
 
 ;; If we're in X-windows, ...
 (if (eq window-system 'X)
