@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 UNAME=$(uname)
-arch=$(arch)
+ARCH=$(arch)
 
 # Setup zsh fpath
 fpath=(
@@ -17,6 +17,7 @@ path=(
     $HOME/bin
     $HOME/.cabal/bin
     $HOME/scripts
+    $HOME/.${UNAME}.${ARCH}/bin
     $HOME/.dotfiles/contrib/visionmedia/git-extras/bin
     $HOME/.dotfiles/contrib/willgit/mainline/bin
     $HOME/.rvm/bin
@@ -50,10 +51,18 @@ manpath=(
 manpath=($^manpath(N))
 export MANPATH
 
+# perl path, ...
+perl5lib=(
+    $HOME/.${UNAME}.${ARCH}/lib64/perl5
+    $HOME/.${UNAME}.${ARCH}/share/perl5
+)
+perl5lib=($^perl5lib(N))
+export PERL5LIB
+
 # Activate the default python virtual environment
 VENV="$HOME/.venv/${UNAME}.${ARCH}"
 if [ -f $VENV ]; then
-    . $VENV/bin/activate
+    source $VENV/bin/activate
 fi
 
 # GREP CONFIG
@@ -71,6 +80,10 @@ export PAGER=less
 export EDITOR=vim
 export SVNEDITOR=$EDITOR
 export VISUAL=$EDITOR
+
+export PYTHONDONTWRITEBYTECODE=1
+export PEP8_ARGS='--ignore=E501'
+export PYLINT_ARGS='-d C0301,W0142'
 
 if [ -f $HOME/.zshenv.local ]; then
     source $HOME/.zshenv.local
