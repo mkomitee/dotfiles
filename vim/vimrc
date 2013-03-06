@@ -9,7 +9,6 @@ Bundle 'AfterColors.vim'
 Bundle 'ConradIrwin/vim-comment-object'
 Bundle 'Jinja'
 Bundle 'Lokaltog/vim-distinguished'
-Bundle 'Lokaltog/vim-easymotion'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'airblade/vim-gitgutter.git'
 Bundle 'garbas/vim-snipmate'
@@ -19,7 +18,6 @@ Bundle 'jpalardy/vim-slime'
 Bundle 'kana/vim-textobj-indent.git'
 Bundle 'kana/vim-textobj-user.git'
 Bundle 'kien/ctrlp.vim'
-Bundle 'klen/python-mode'
 Bundle 'kshenoy/vim-signature'
 Bundle 'majutsushi/tagbar'
 Bundle 'nelstrom/vim-markdown-folding'
@@ -27,10 +25,11 @@ Bundle 'python_match.vim'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'tomtom/tlib_vim'
 Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-unimpaired'
 Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-repeat'
+Bundle 'tpope/vim-sleuth'
 Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-unimpaired'
 
 " Turn on all the features ... --------------------------------------------- {{{
 syntax on
@@ -41,10 +40,11 @@ runtime macros/matchit.vim
 " Preferences -------------------------------------------------------------- {{{
 set encoding=utf-8             " Prefer utf-8 character encoding
 set autoindent                 " Try to line up code intelligently
+set autoread                   " reload files if modified outside of vim & safe
 set hidden                     " Allow for hidden buffers
 set backspace=indent,eol,start " Nothing is too sacred to be <BS>
 set laststatus=2               " Every window always gets a statusline
-set history=10000              " Keep a lot of ex commands in history
+set history=1000               " Keep a lot of ex commands in history
 set list                       " show invisibles
 set showbreak=↪                " indicate a line is the continuation of a
                                "  wrapped line
@@ -71,9 +71,8 @@ set viewdir=$HOME/.vimdata/vimviews/    " save views here
 set wildmenu                   " commandline completion is nice
 set expandtab                  " by default, use spaces & no tabs
 set shiftwidth=4               " shift width (>> & autoindent)
+set shiftround                 " round indent to multiple of shiftwidth
 set smarttab                   " shiftwidth at start of line, tabstop elsewhere
-set softtabstop=4              " 1 tab = 4 spaces
-set tabstop=4                  " 1 tab = 4 spaces
 set textwidth=80               " wrap at 80 columns
 set tags=./tags;               " name of the tags files which is relative to the project
 set notimeout
@@ -236,6 +235,12 @@ function! FocusFold() " ---------------------------------------------------- {{{
 endfunction " }}}
 " }}}
 " Custom maps -------------------------------------------------------------- {{{
+" A few useful sane maps (from tpope/sensible.vim {{{
+inoremap <C-U> <C-G>u<C-U>
+nnoremap & :&&<CR>
+xnoremap & :&&<CR>
+nnoremap Y y$
+" }}}
 " Open the quickfix window {{{
 nnoremap <leader>qf :cwin<cr>
 augroup quickfix
@@ -349,36 +354,6 @@ let g:ctrlp_reuse_window = 'netrw\|help'
 "  <C-v> → will open the finding match in a vertical split
 "  <C-h> → will open the finding match in a horizontal split
 " }}}
-" Python-Mode -------------------------------------------------------------- {{{
-" K             Show python docs
-" <Ctrl-Space>  Rope autocomplete
-" <Ctrl-c>g     Rope goto definition
-" <Ctrl-c>d     Rope show documentation
-" <Ctrl-c>f     Rope find occurrences
-" <Leader>b     Set, unset breakpoint (g:pymode_breakpoint enabled)
-" [[            Jump on previous class or function (normal, visual, operator modes)
-" ]]            Jump on next class or function (normal, visual, operator modes)
-" [M            Jump on previous class or method (normal, visual, operator modes)
-" ]M            Jump on next class or method (normal, visual, operator modes)
-let g:pydoc = 'pydoc'
-let g:pymode_breakpoint = 1
-let g:pymode_breakpoint_key = '<leader>b'
-let g:pymode_doc = 1
-let g:pymode_doc_key = 'K'
-let g:pymode_folding = 1
-let g:pymode_indent = 0
-let g:pymode_lint = 0
-let g:pymode_motion = 1
-let g:pymode_rope = 1
-let g:pymode_run = 0
-let g:pymode_syntax = 1
-let g:pymode_syntax_all = 1
-let g:pymode_syntax_indent_errors = g:pymode_syntax_all
-let g:pymode_syntax_space_errors = g:pymode_syntax_all
-let g:pymode_utils_whitespaces = 0
-let g:pymode_virtualenv = 0
-
-" }}}
 " Tabularize --------------------------------------------------------------- {{{
 vnoremap <silent> <Leader>a=> :Tabularize /=><CR>
 vnoremap <silent> <Leader>a= :Tabularize /=<CR>
@@ -435,8 +410,6 @@ au FileType man nnoremap <buffer> <space><space> <C-D>
 " markdown ----------------------------------------------------------------- {{{
 au FileType markdown au BufWritePre <buffer> RemoveTrailingWhiteSpace
 au FileType markdown setl shiftwidth=4
-au FileType markdown setl softtabstop=4
-au FileType markdown setl tabstop=4
 au BufNewFile,BufRead $HOME/.tasks.md setl nospell
 " }}}
 " perl --------------------------------------------------------------------- {{{
