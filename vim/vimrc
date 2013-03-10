@@ -343,6 +343,9 @@ command! -nargs=0 Pulse call Pulse(9)
 colorscheme distinguished
 " }}}
 " Plugin Configurations ---------------------------------------------------- {{{
+" vimshell ----------------------------------------------------------------- {{{
+let g:vimshell_prompt = "% "
+" }}}
 " NetRW -------------------------------------------------------------------- {{{
 let g:netrw_list_hide = '^\.,\~$,^tags$'
 " }}}
