@@ -31,7 +31,7 @@
     ls = ls-files
     rl = reflog --full-history --all --pretty=rl --abbrev-commit --decorate=short
     branches = branch -vv
-    d = diff --word-diff
+    dw = diff --color-words='[^[:space:]]|([[:alnum:]]|UTF_8_GUARD)+' 
     ds = diff --staged --word-diff
     ref = show-ref
     vimdiff = difftool
