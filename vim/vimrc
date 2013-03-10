@@ -144,7 +144,7 @@ set formatoptions+=q " format comments with gq
 set formatoptions+=n " recognize numbered lists
 " }}}
 " wildmode ----------------------------------------------------------------- {{{
-set wildmode=list:longest " approximate completeopt's longest:menu
+set wildmode=list:full " closest to ido-mode
 " }}}
 " wildignore --------------------------------------------------------------- {{{
 set wildignore+=.git,.hg,.svn,CVS              " ignore vcs directories
