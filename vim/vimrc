@@ -346,6 +346,9 @@ colorscheme distinguished
 " vimshell ----------------------------------------------------------------- {{{
 let g:vimshell_prompt = "% "
 " }}}
+" snipmate ----------------------------------------------------------------- {{{
+set rtp+=~/.vim/snippets
+" }}}
 " NetRW -------------------------------------------------------------------- {{{
 let g:netrw_list_hide = '^\.,\~$,^tags$'
 " }}}
@@ -380,7 +383,7 @@ let g:slime_paste_file = $HOME.'/.vimdata/slime'
 let g:slime_target = "tmux"
 au FileType python let g:slime_python_ipython = 1
 " }}}
-" tagbar {{{
+" tagbar ------------------------------------------------------------------- {{{
 nnoremap <silent> <leader>t :TagbarToggle<cr>
 " }}}
 " NERDCommenter ------------------------------------------------------------ {{{
