@@ -25,3 +25,15 @@ function which_scm() {
         which_scm $dir/..
     fi
 }
+
+function g {
+    if [[ $# > 0 ]]; then
+        git "$@"
+    else
+        git status --short --branch
+    fi
+}
+
+function v {
+    vim ${@:-'.'}
+}
