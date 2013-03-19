@@ -13,9 +13,11 @@ Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'Shougo/vimproc'
 Bundle 'Shougo/vimshell'
 Bundle 'airblade/vim-gitgutter.git'
+Bundle 'dhruvasagar/vim-table-mode'
 Bundle 'garbas/vim-snipmate'
 Bundle 'godlygeek/tabular'
 Bundle 'honza/snipmate-snippets'
+Bundle 'jonathanfilip/vim-lucius'
 Bundle 'jpalardy/vim-slime'
 Bundle 'kana/vim-textobj-indent.git'
 Bundle 'kana/vim-textobj-user.git'
@@ -341,7 +343,8 @@ command! RemoveTrailingWhiteSpace :call RemoveTrailingWhiteSpace()
 command! -nargs=0 Pulse call Pulse(9)
 " }}}
 " Colorscheme -------------------------------------------------------------- {{{
-colorscheme distinguished
+set background=dark
+colorscheme lucius
 " }}}
 " Plugin Configurations ---------------------------------------------------- {{{
 " vimshell ----------------------------------------------------------------- {{{
