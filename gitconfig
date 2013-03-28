@@ -38,7 +38,7 @@
     head = log -1
     stat = status -sb
     st = status -sb
-    ci = commit
+    ci = commit -v
     co = checkout 
     di = diff
     dc = diff --cached
@@ -54,6 +54,7 @@
     remotes = remote -v
     list = stash list --pretty=rl --abbrev-commit --decorate=short
     save = stash save -u
+    div = divergence
 
 [pager]
     status = yes
