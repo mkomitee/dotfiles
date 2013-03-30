@@ -5,9 +5,7 @@ CONTRIB=$DOT/contrib
 
 hash -d dot=$DOT
 
-source $ZSH/cdr.zsh
-source $ZSH/termsupport.zsh
-source $ZSH/lang.zsh
+source $ZSH/locale.zsh
 source $ZSH/completion.zsh
 source $ZSH/history.zsh
 source $ZSH/aliases.zsh
