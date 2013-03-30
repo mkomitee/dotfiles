@@ -87,6 +87,9 @@ set ttimeout
 set ttimeoutlen=10
 set nomodeline
 set display=lastline
+if exists('+colorcolumn')
+  set colorcolumn=+1
+endif
 " undofile ----------------------------------------------------------------- {{{
 if exists('&undofile')
     set undofile         " Save undo history to a file for persistence
