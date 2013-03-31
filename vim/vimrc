@@ -102,7 +102,7 @@ set fillchars=         " reset fillchars
 set fillchars+=fold:-  " fill foldtext with dashes
 set fillchars+=diff:⣿  " indicate deleted lines in diffs with ⣿
 set fillchars+=vert:│  " indicate vertical splits with │
-set fillchars+=stlnc:- " indicate horizontal splits with -
+set fillchars+=stlnc:━ " indicate horizontal splits with -
 " }}}
 " listchars -----------------------------------------------------------------{{{
 set listchars=            " reset listchars
