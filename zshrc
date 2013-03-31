@@ -15,6 +15,7 @@ source $ZSH/functions.zsh
 source $ZSH/jobs.zsh
 source $ZSH/prompt.zsh
 source $ZSH/colours.zsh
+source $ZSH/extensions.zsh
 
 if [ -d $CONTRIB/zsh-users/zsh-syntax-highlighting ]; then
     ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
