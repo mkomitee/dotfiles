@@ -1,5 +1,5 @@
-" Load Plugins ------------------------------------------------------------- {{{
-" Initialize vundle -------------------------------------------------------- {{{
+" Load Plugins --------------------------------------------------------------{{{
+" Initialize vundle ---------------------------------------------------------{{{
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 Bundle 'gmarik/vundle'
@@ -39,13 +39,13 @@ Bundle 'tpope/vim-sleuth'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired'
 
-" Turn on all the features ... --------------------------------------------- {{{
+" Turn on all the features ... ----------------------------------------------{{{
 syntax on
 filetype plugin indent on
 runtime macros/matchit.vim
 " }}}
 " }}}
-" Preferences -------------------------------------------------------------- {{{
+" Preferences ---------------------------------------------------------------{{{
 set encoding=utf-8             " Prefer utf-8 character encoding
 set autoindent                 " Try to line up code intelligently
 set autoread                   " reload files if modified outside of vim & safe
@@ -91,26 +91,27 @@ set display=lastline
 if exists('+colorcolumn')
   set colorcolumn=+1
 endif
-" undofile ----------------------------------------------------------------- {{{
+
+" undofile ------------------------------------------------------------------{{{
 if exists('&undofile')
     set undofile         " Save undo history to a file for persistence
     set undodir=$HOME/.vimdata/vimundo/ " Save undo data here
 endif
 " }}}
-" fillchars ---------------------------------------------------------------- {{{
+" fillchars -----------------------------------------------------------------{{{
 set fillchars=         " reset fillchars
 set fillchars+=fold:-  " fill foldtext with dashes
 set fillchars+=diff:⣿  " indicate deleted lines in diffs with ⣿
 set fillchars+=vert:│  " indicate vertical splits with │
 set fillchars+=stlnc:- " indicate horizontal splits with -
 " }}}
-" listchars ---------------------------------------------------------------- {{{
+" listchars -----------------------------------------------------------------{{{
 set listchars=            " reset listchars
 set listchars+=tab:▸\     " display tabs
 set listchars+=extends:❯  " hint that theres more to the right, ...
 set listchars+=precedes:❮ " hint that theres more to the left, ...
 " }}}
-" shortmess ---------------------------------------------------------------- {{{
+" shortmess -----------------------------------------------------------------{{{
 set shortmess=   " reset shortmess
 set shortmess+=f " '(3 of 5)' instead of '(file 3 of 5)'
 set shortmess+=i " '[noeol] instead of '[Incompelte last line]'
@@ -133,29 +134,29 @@ set shortmess+=T " truncate other messages in the middle if they are too long to
                  "  Ignored in Ex mode.
 set shortmess+=I " don't give the intro message when starting Vim |:intro|.
 " }}}
-" completeopt -------------------------------------------------------------- {{{
+" completeopt ---------------------------------------------------------------{{{
 set completeopt=         " reset completeopt
 set completeopt+=longest " insert the longest match
 set completeopt+=menuone " show the menu when there are matches
 "}}}
-" viminfo ------------------------------------------------------------------ {{{
+" viminfo -------------------------------------------------------------------{{{
 set viminfo+=n~/.vimdata/viminfo " move the viminfo file into ~/.vimdata
 " }}}
-" virtualedit -------------------------------------------------------------- {{{
+" virtualedit ---------------------------------------------------------------{{{
 set virtualedit=        " reset virtualedit
 set virtualedit+=block  " can move past the end of the line in visual block mode
 set virtualedit+=insert " can move past the end of the line in insert mode
 " }}}
-" formatoptions ------------------------------------------------------------ {{{
+" formatoptions -------------------------------------------------------------{{{
 set formatoptions=   " reset formatoptions
 set formatoptions+=c " autowrap comments using textwidth
 set formatoptions+=q " format comments with gq
 set formatoptions+=n " recognize numbered lists
 " }}}
-" wildmode ----------------------------------------------------------------- {{{
+" wildmode ------------------------------------------------------------------{{{
 set wildmode=list:full " closest to ido-mode
 " }}}
-" wildignore --------------------------------------------------------------- {{{
+" wildignore ----------------------------------------------------------------{{{
 set wildignore+=.git,.hg,.svn,CVS              " ignore vcs directories
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg " ignore images
 set wildignore+=*.o,*.so,*.out                 " ignore compiled objects
@@ -163,7 +164,7 @@ set wildignore+=*.sw?                          " ignore swap files
 set wildignore+=*.DS_Store                     " ignore mac crap
 set wildignore+=*.pyc,*.pyo                    " ignore pyton compiled objects
 " }}}
-" statusline --------------------------------------------------------------- {{{
+" statusline ----------------------------------------------------------------{{{
 set statusline=         " clear statusline
 set statusline+=%F\     " full filename
 set statusline+=%m%r%w  " flags
@@ -173,13 +174,13 @@ set statusline+=c:%c\   " column
 set statusline+=l:%l/%L " line
 " }}}
 " }}}
-" Leaders ------------------------------------------------------------------ {{{
+" Leaders -------------------------------------------------------------------{{{
 let mapleader = " "     " this may change soon, I keep wanting to have the
                         " default behavior work for ,.
 let localleader = '\\'
 " }}}
-" Custom functions --------------------------------------------------------- {{{
-function! RemoveTrailingWhiteSpace() " ------------------------------------- {{{
+" Custom functions ----------------------------------------------------------{{{
+function! RemoveTrailingWhiteSpace() " --------------------------------------{{{
     " Allow a buffer local variable twsok (trailing whitespace ok) to permit
     " trailing whitspace -- sometimes I need to do this if im editing someone elses
     " code and don't want to own the entire file in vcs. Enable it with
@@ -196,13 +197,13 @@ function! RemoveTrailingWhiteSpace() " ------------------------------------- {{{
         call cursor(l, c)
     endif
 endfun " }}}
-function! RestoreCursorPosition() " ---------------------------------------- {{{
+function! RestoreCursorPosition() " -----------------------------------------{{{
     " Restore cursor position to the last time you were in the file, this uses marks
     " so it's dependent on viminfo
     normal! g`"
     call FocusFold()
 endfunction " }}}
-function! Pulse(n) " ------------------------------------------------------- {{{
+function! Pulse(n) " --------------------------------------------------------{{{
     let current_window = winnr()
     windo set nocursorline
     execute current_window . 'wincmd w'
@@ -234,7 +235,7 @@ function! Pulse(n) " ------------------------------------------------------- {{{
     execute 'hi ' . old_hi
     setlocal nocursorline
 endfunction " }}}
-function! FocusFold() " ---------------------------------------------------- {{{
+function! FocusFold() " -----------------------------------------------------{{{
     let c = virtcol(".")
     let l = line(".")
     normal! zM
@@ -245,14 +246,14 @@ function! FocusFold() " ---------------------------------------------------- {{{
     return 1
 endfunction " }}}
 " }}}
-" Custom maps -------------------------------------------------------------- {{{
-" A few useful sane maps (from tpope/sensible.vim {{{
+" Custom maps ---------------------------------------------------------------{{{
+" A few useful sane maps (from tpope/sensible.vim{{{
 inoremap <C-U> <C-G>u<C-U>
 nnoremap & :&&<CR>
 xnoremap & :&&<CR>
 nnoremap Y y$
 " }}}
-" Open the quickfix window {{{
+" Open the quickfix window{{{
 nnoremap <leader>qf :cwin<cr>
 augroup quickfix
   autocmd!
@@ -261,54 +262,54 @@ augroup quickfix
 augroup END
 
 " }}}
-" Focus when searching ----------------------------------------------------- {{{
+" Focus when searching ------------------------------------------------------{{{
 nnoremap <silent> n n:call Pulse(5)<cr>
 nnoremap <silent> N N:call Pulse(5)<cr>
 " }}}
-" j and k will go one line, even if they're wrapped ------------------------ {{{
+" j and k will go one line, even if they're wrapped -------------------------{{{
 nnoremap <silent> j gj
 nnoremap <silent> k gk
 " }}}
-" When using marks, all by default mark columns as well -------------------- {{{
+" When using marks, all by default mark columns as well ---------------------{{{
 nnoremap <silent> ' `
 " }}}
-" Simple map to disable highlighting --------------------------------------- {{{
+" Simple map to disable highlighting ----------------------------------------{{{
 nnoremap <silent> // :nohl<cr>
 " }}}
-" Easier navigation between open windows ----------------------------------- {{{
+" Easier navigation between open windows ------------------------------------{{{
 nnoremap <silent> <C-k> <C-W>k
 nnoremap <silent> <C-j> <C-W>j
 nnoremap <silent> <C-h> <C-W>h
 nnoremap <silent> <C-l> <C-W>l
 
 " }}}
-" Simple splits, inspired by my tmux configuration ------------------------- {{{
+" Simple splits, inspired by my tmux configuration --------------------------{{{
 nnoremap <silent> _ :sp<cr>
 nnoremap <silent> \| :vsp<cr>
 " }}}
-" Reselect visually selected text after indenting -------------------------- {{{
+" Reselect visually selected text after indenting ---------------------------{{{
 vnoremap <silent> > >gv
 vnoremap <silent> < <gv
 " }}}
-" make Y consistant with C and D. Yank to end of line ---------------------- {{{
+" make Y consistant with C and D. Yank to end of line -----------------------{{{
 noremap <silent> Y y$
 " }}}
-" Easily modify ~/.{g,}vimrc ----------------------------------------------- {{{
+" Easily modify ~/.{g,}vimrc ------------------------------------------------{{{
 nnoremap <silent> <leader>ev :e $MYVIMRC<CR>
 " }}}
-" sudo write-file in case you're in a file you dont have privileges to write {{{
+" sudo write-file in case you're in a file you dont have privileges to write{{{
 cmap <silent> w!! w !sudo tee % >/dev/null<cr>
 " }}}
-" Easy window resizing ----------------------------------------------------- {{{
+" Easy window resizing ------------------------------------------------------{{{
 noremap <silent> <up> <C-W>+
 noremap <silent> <down> <C-W>-
 nnoremap <silent> <left> <C-W><
 nnoremap <silent> <right> <C-W>>
 " }}}
-" . returns to starting place after repeat --------------------------------- {{{
+" . returns to starting place after repeat ----------------------------------{{{
 nnoremap <silent> . .`[
 " }}}
-" Custom text objects around and in character pairs ------------------------ {{{
+" Custom text objects around and in character pairs -------------------------{{{
 let pairs = { ':' : ':',
             \ '.' : '.',
             \ ',' : ',',
@@ -325,17 +326,17 @@ for [start, end] in items(pairs)
     exe "nnoremap <silent> da".start." F".start."df".end
 endfor
 " }}}
-" Focus Fold --------------------------------------------------------------- {{{
+" Focus Fold ----------------------------------------------------------------{{{
 nnoremap <silent> zf :call FocusFold()<cr>
 " }}}
-" Simple sorting ----------------------------------------------------------- {{{
+" Simple sorting ------------------------------------------------------------{{{
 vnoremap <silent> <leader>s :sort<cr>gv
 nnoremap <silent> <leader>s mzvip:sort<cr>`z:delm z<cr>
 
 " }}}
 " }}}
-" Custom commands ---------------------------------------------------------- {{{
-" Allow common typos in commands ------------------------------------------- {{{
+" Custom commands -----------------------------------------------------------{{{
+" Allow common typos in commands --------------------------------------------{{{
 command! -bang E e<bang>
 command! -bang Q q<bang>
 command! -bang W w<bang>
@@ -349,21 +350,21 @@ command! -bang WQ wq<bang>
 command! RemoveTrailingWhiteSpace :call RemoveTrailingWhiteSpace()
 command! -nargs=0 Pulse call Pulse(9)
 " }}}
-" Colorscheme -------------------------------------------------------------- {{{
+" Colorscheme ---------------------------------------------------------------{{{
 set background=dark
 colorscheme lucius
 " }}}
-" Plugin Configurations ---------------------------------------------------- {{{
-" vimshell ----------------------------------------------------------------- {{{
+" Plugin Configurations -----------------------------------------------------{{{
+" vimshell ------------------------------------------------------------------{{{
 let g:vimshell_prompt = "% "
 " }}}
-" snipmate ----------------------------------------------------------------- {{{
+" snipmate ------------------------------------------------------------------{{{
 set rtp+=~/.vim/snippets
 " }}}
-" NetRW -------------------------------------------------------------------- {{{
+" NetRW ---------------------------------------------------------------------{{{
 let g:netrw_list_hide = '^\.,\~$,^tags$'
 " }}}
-" Ctrl+P ------------------------------------------------------------------- {{{
+" Ctrl+P --------------------------------------------------------------------{{{
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_cache_dir = $HOME.'/.vimdata/ctrlp'
 let g:ctrlp_map = '<leader>p'
@@ -374,7 +375,7 @@ nnoremap <silent> <Leader>b <esc>:CtrlPBuffer<cr>
 "  <C-v> → will open the finding match in a vertical split
 "  <C-h> → will open the finding match in a horizontal split
 " }}}
-" Tabularize --------------------------------------------------------------- {{{
+" Tabularize ----------------------------------------------------------------{{{
 vnoremap <silent> <Leader>a=> :Tabularize /=><CR>
 vnoremap <silent> <Leader>a= :Tabularize /=<CR>
 vnoremap <silent> <Leader>a, :Tabularize /,\zs<CR>
@@ -382,7 +383,7 @@ nnoremap <silent> <Leader>a, :Tabularize /,\zs<CR>
 vnoremap <silent> <Leader>a: :Tabularize /:\zs<CR>
 nnoremap <silent> <Leader>a: :Tabularize /:\zs<CR>
 " }}}
-" slime -------------------------------------------------------------------- {{{
+" slime ---------------------------------------------------------------------{{{
 " :SlimeConfig - configure which tmux pane to send text
 " :SlimeSend - send text, can use a range, or marks including the marks used to
 " delimit visual mode selection
@@ -394,10 +395,10 @@ let g:slime_paste_file = $HOME.'/.vimdata/slime'
 let g:slime_target = "tmux"
 au FileType python let g:slime_python_ipython = 1
 " }}}
-" tagbar ------------------------------------------------------------------- {{{
+" tagbar --------------------------------------------------------------------{{{
 nnoremap <silent> <leader>t :TagbarToggle<cr>
 " }}}
-" NERDCommenter ------------------------------------------------------------ {{{
+" NERDCommenter -------------------------------------------------------------{{{
 let g:NERDCreateDefaultMappings = 0
 let g:NERDSpaceDelims = 1
 vmap <silent> <leader>cc <plug>NERDCommenterToggle<cr>vgv
@@ -405,18 +406,18 @@ nmap <silent> <leader>cc <plug>NERDCommenterToggle
 nmap <silent> <leader>c$ <plug>NERDCommenterToEOL
 " }}}
 " }}}
-" Filetype detection ------------------------------------------------------- {{{
+" Filetype detection --------------------------------------------------------{{{
 au BufNewFile,BufRead gitconfig setf gitconfig
 au BufNewFile,BufRead /private/tmp/crontab.* setl backupcopy=yes
 " }}}
-" Filetype configurations -------------------------------------------------- {{{
-" make --------------------------------------------------------------------- {{{
+" Filetype configurations ---------------------------------------------------{{{
+" make ----------------------------------------------------------------------{{{
 au FileType make au BufWritePre <buffer> RemoveTrailingWhiteSpace
 au FileType make setl noexpandtab
 au FileType make setl nosmarttab
 au FileType make setl softtabstop=0
 " }}}
-" man ---------------------------------------------------------------------- {{{
+" man -----------------------------------------------------------------------{{{
 au FileType man setl nolist
 au FileType man setl nonumber
 au FileType man setl tabstop=8
@@ -427,29 +428,29 @@ au FileType man setl foldlevel=99
 au FileType man nnoremap <buffer> q :q<cr>
 au FileType man nnoremap <buffer> <space><space> <C-D>
 " }}}
-" markdown ----------------------------------------------------------------- {{{
+" markdown ------------------------------------------------------------------{{{
 au FileType markdown au BufWritePre <buffer> RemoveTrailingWhiteSpace
 au FileType markdown setl shiftwidth=4
 au BufNewFile,BufRead $HOME/.tasks.md setl nospell
 " }}}
-" perl --------------------------------------------------------------------- {{{
+" perl ----------------------------------------------------------------------{{{
 au FileType perl au BufWritePre <buffer> RemoveTrailingWhiteSpace
 au FileType perl setl iskeyword+=$,%,@
 " }}}
-" puppet ------------------------------------------------------------------- {{{
+" puppet --------------------------------------------------------------------{{{
 au FileType puppet au BufWritePre <buffer> RemoveTrailingWhiteSpace
 " }}}
-" python ------------------------------------------------------------------- {{{
+" python --------------------------------------------------------------------{{{
 au FileType python au BufWritePre <buffer> RemoveTrailingWhiteSpace
 au FileType python setl textwidth=79
 " }}}
-" ruby --------------------------------------------------------------------- {{{
+" ruby ----------------------------------------------------------------------{{{
 au FileType ruby au BufWritePre <buffer> RemoveTrailingWhiteSpace
 " }}}
-" shell -------------------------------------------------------------------- {{{
+" shell ---------------------------------------------------------------------{{{
 au FileType sh,zsh au BufWritePre <buffer> RemoveTrailingWhiteSpace
 " }}}
-" vim ---------------------------------------------------------------------- {{{
+" vim -----------------------------------------------------------------------{{{
 au FileType vim au BufWritePre <buffer> RemoveTrailingWhiteSpace
 au FileType vim setl foldmethod=marker
 au FileType help setl nolist
@@ -458,26 +459,8 @@ au FileType help setl nomodified
 au FileType help setl nomodifiable
 " }}}
 " }}}
-" Folding ------------------------------------------------------------------ {{{
-function! MyFoldText() " --------------------------------------------------- {{{
-    let line = getline(v:foldstart)
-
-    let nucolwidth = &fdc + &number * &numberwidth
-    let windowwidth = winwidth(0) - nucolwidth - 3
-    let foldedlinecount = v:foldend - v:foldstart
-
-    " expand tabs into spaces
-    let onetab = strpart('          ', 0, &tabstop)
-    let line = substitute(line, '\t', onetab, 'g')
-
-    let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
-    let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
-    return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
-endfunction " }}}
-set foldtext=MyFoldText()
-" }}}
-" Miscellaneous ------------------------------------------------------------ {{{
-" Prepare our vim cache directories ---------------------------------------- {{{
+" Miscellaneous -------------------------------------------------------------{{{
+" Prepare our vim cache directories -----------------------------------------{{{
 silent execute '!mkdir -p $HOME/.vimdata/vimbackup'
 silent execute '!mkdir -p $HOME/.vimdata/vimswap'
 silent execute '!mkdir -p $HOME/.vimdata/vimviews'
@@ -485,29 +468,29 @@ silent execute '!mkdir -p $HOME/.vimdata/vimundo'
 silent execute '!mkdir -p $HOME/.vimdata/ctrlp'
 silent execute '!mkdir -p $HOME/.vimdata/tags'
 " }}}
-" Use a bar-shaped cursor for insert mode, even through tmux. -------------- {{{
+" Use a bar-shaped cursor for insert mode, even through tmux. ---------------{{{
 if exists('$TMUX')
     let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
     let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
 endif
 " }}}
-" Toggle listchars as we enter and exit insert mode ------------------------ {{{
+" Toggle listchars as we enter and exit insert mode -------------------------{{{
 augroup trailing
     au!
     au InsertEnter * :set listchars-=trail:⌴
     au InsertLeave * :set listchars+=trail:⌴
 augroup END
 " }}}
-" Highlight VCS conflict markers ------------------------------------------- {{{
+" Highlight VCS conflict markers --------------------------------------------{{{
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 " }}}
-" Restore cursor position -------------------------------------------------- {{{
+" Restore cursor position ---------------------------------------------------{{{
 augroup restoreCursorPosition
   autocmd!
   autocmd BufReadPost * call RestoreCursorPosition()
 augroup END
 " }}}
-" Load abbreviations ------------------------------------------------------- {{{
+" Load abbreviations --------------------------------------------------------{{{
 source ~/.vim/abbrev
 " }}}
 " }}}
