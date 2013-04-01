@@ -356,6 +356,9 @@ set background=dark
 colorscheme lucius
 " }}}
 " Plugin Configurations -----------------------------------------------------{{{
+" Supertab ------------------------------------------------------------------{{{
+let g:SuperTabDefaultCompletionType = "context"
+" }}}
 " vimshell ------------------------------------------------------------------{{{
 let g:vimshell_prompt = "% "
 " }}}
