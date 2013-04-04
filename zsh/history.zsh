@@ -16,13 +16,13 @@ setopt inc_append_history
 
 function hgrep() {
     fc -ap $HISTFILE
-    noglob fc -lnm *"$*"* 1
+    noglob fc -lnm "$*"* 1
 }
 
 alias hgrep="noglob hgrep"
 
 function history() {
-    noglob fc -lm *"$*"* 1
+    noglob fc -lm "$*"* 1
 }
 
 alias history="noglob history"
