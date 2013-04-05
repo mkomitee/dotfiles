@@ -27,9 +27,6 @@ bindkey -M vicmd "j" history-search-forward
 bindkey -M vicmd "?" history-incremental-search-backward
 bindkey -M vicmd "/" history-incremental-search-forward
 
-bindkey -M vicmd "B" vi-backward-kill-word
-bindkey -M vicmd "'" quote-line
-
 bindkey -M viins "^L" clear-screen
 bindkey -M viins "^W" backward-kill-word
 bindkey -M viins "^A" beginning-of-line
