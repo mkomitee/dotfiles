@@ -18,3 +18,13 @@ function g {
 function v {
     vim ${@:-'.'}
 }
+
+function virtualenv {
+    local PYTHONDONTWRITEBYTECODE=0
+    command virtualenv $*
+}
+
+function pip {
+    local PYTHONDONTWRITEBYTECODE=0
+    command pip $*
+}
