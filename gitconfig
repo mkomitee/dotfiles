@@ -55,6 +55,13 @@
     list = stash list --pretty=rl --abbrev-commit --decorate=short
     save = stash save -u
     div = divergence
+    ; assume/unassume to ignore/unignore changes in a file for now, 
+    ; assumed lists those we're assuming are unchanged
+    assume = update-index --assume-unchanged
+    unassume = update-index --no-assume-unchanged
+    assumed = "!git ls-files -v | grep ^h | cut -c 3-"
+    ; snapshot to take a snapshot without removing changes from the tree
+    snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
 
 [pager]
     status = yes
@@ -75,6 +82,7 @@
 [diff]
     tool = vimdiff
     guitool = gvimdiff
+    algorithm = patience
 
 [branch]
     autosetuprebase = always
