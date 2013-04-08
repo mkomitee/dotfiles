@@ -15,8 +15,8 @@ function g {
     fi
 }
 
-function v {
-    vim ${@:-'.'}
+function vim {
+    command vim ${@:-'.'}
 }
 
 function virtualenv {
