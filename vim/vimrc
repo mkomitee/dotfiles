@@ -13,6 +13,7 @@ Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'Shougo/vimproc'
 Bundle 'Shougo/vimshell'
 Bundle 'airblade/vim-gitgutter.git'
+Bundle 'davidhalter/jedi-vim.git'
 Bundle 'dhruvasagar/vim-table-mode'
 Bundle 'ervandew/supertab.git'
 Bundle 'garbas/vim-snipmate'
@@ -357,6 +358,10 @@ set background=dark
 colorscheme lucius
 " }}}
 " Plugin Configurations -----------------------------------------------------{{{
+" jedi.vim ------------------------------------------------------------------{{{
+let g:jedi#goto_command = "gf"
+let g:jedi#popup_on_dot = 0
+"  }}}
 " Supertab ------------------------------------------------------------------{{{
 let g:SuperTabDefaultCompletionType = "context"
 " }}}
