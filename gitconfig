@@ -4,11 +4,11 @@
 [color]
     ui = auto
 
-[core] 
+[core]
     pager = less -FRXMQ
     abbrev = 8
     editor = vim
-    whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol 
+    whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
     excludesfile = ~/.dotfiles/gitignore
 
 [log]
@@ -24,14 +24,14 @@
     lg = "%C(yellow)%h %C(blue)%cd%Cred%d%Creset %s%Cblue [%aN]"
     rl = "%C(yellow)%h %C(red)%gd %C(blue)%cd%Cred%d%Creset %gs%Cblue [%aN]"
 
-[alias] 
+[alias]
     l = log --graph --full-history --all --pretty=lg --abbrev-commit --decorate=short
     lc = local-commits --decorate=short --pretty=lg
     track = checkout -t
     ls = ls-files
     rl = reflog --full-history --all --pretty=rl --abbrev-commit --decorate=short
     branches = branch -vv
-    dw = diff --color-words='[^[:space:]]|([[:alnum:]]|UTF_8_GUARD)+' 
+    dw = diff --color-words='[^[:space:]]|([[:alnum:]]|UTF_8_GUARD)+'
     ds = diff --staged --word-diff
     ref = show-ref
     vimdiff = difftool
@@ -39,7 +39,7 @@
     stat = status -sb
     st = status -sb
     ci = commit -v
-    co = checkout 
+    co = checkout
     di = diff
     dc = diff --cached
     aa = add --all
@@ -55,7 +55,7 @@
     list = stash list --pretty=rl --abbrev-commit --decorate=short
     save = stash save -u
     div = divergence
-    ; assume/unassume to ignore/unignore changes in a file for now, 
+    ; assume/unassume to ignore/unignore changes in a file for now,
     ; assumed lists those we're assuming are unchanged
     assume = update-index --assume-unchanged
     unassume = update-index --no-assume-unchanged
