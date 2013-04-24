@@ -15,10 +15,6 @@ function g {
     fi
 }
 
-function vim {
-    command vim ${@:-'.'}
-}
-
 function virtualenv {
     local PYTHONDONTWRITEBYTECODE=0
     command virtualenv $*
