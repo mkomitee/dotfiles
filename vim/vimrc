@@ -354,7 +354,7 @@ command! -nargs=0 Pulse call Pulse(9)
 " }}}
 " Colorscheme ---------------------------------------------------------------{{{
 set background=dark
-colorscheme lucius
+colorscheme distinguished
 " }}}
 " Plugin Configurations -----------------------------------------------------{{{
 " Supertab ------------------------------------------------------------------{{{
