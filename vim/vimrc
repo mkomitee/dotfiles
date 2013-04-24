@@ -411,6 +411,10 @@ vmap <silent> <leader>cc <plug>NERDCommenterToggle<cr>vgv
 nmap <silent> <leader>cc <plug>NERDCommenterToggle
 nmap <silent> <leader>c$ <plug>NERDCommenterToEOL
 " }}}
+" startify ------------------------------------------------------------------{{{
+let g:startify_show_files_number = 20
+let g:startify_bookmarks = [ '~/.vimrc' ]
+" }}}
 " }}}
 " Filetype detection --------------------------------------------------------{{{
 au BufNewFile,BufRead gitconfig setf gitconfig
