@@ -26,6 +26,7 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'kshenoy/vim-signature'
 Bundle 'majutsushi/tagbar'
 Bundle 'mhinz/vim-startify'
+Bundle 'mkomitee/vim-gf-python'
 Bundle 'nelstrom/vim-markdown-folding'
 Bundle 'nelstrom/vim-visual-star-search'
 Bundle 'python_match.vim'
@@ -250,6 +251,10 @@ function! FocusFold() " -----------------------------------------------------{{{
 endfunction " }}}
 " }}}
 " Custom maps ---------------------------------------------------------------{{{
+" %% in command mode inserts current files directory, so :e %%x.txt will edit
+" x.txt in the same directory as the current file. {{{
+cnoremap %% <C-R>=expand('%:h').'/'<cr>
+" }}}
 " A few useful sane maps (from tpope/sensible.vim{{{
 inoremap <C-U> <C-G>u<C-U>
 nnoremap & :&&<CR>
