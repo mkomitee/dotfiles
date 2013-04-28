@@ -42,10 +42,9 @@
     co = checkout
     di = diff
     dc = diff --cached
-    aa = add --all
     sm = submodule
     wc = whatchanged
-    aa = add -A
+    aa = add -A :/
     ap = add --patch
     commit = commit -v
     ammend = commit --amend -v
