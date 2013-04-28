@@ -14,3 +14,4 @@ alias -g ninety_five_percent='python ~/.dotfiles/contrib/bitly/data_hacks.git/da
 alias -g run_for='python ~/.dotfiles/contrib/bitly/data_hacks.git/data_hacks/run_for.py'
 alias -g sample='python ~/.dotfiles/contrib/bitly/data_hacks.git/data_hacks/sample.py'
 alias -g vi=vim
+alias lss=less
