@@ -55,6 +55,8 @@ tags
 ### ~/.gitignore-boilerplates/python.gitignore
 
 *.py[cod]
+.coverage
+htmlcov/
 
 ### ~/.gitignore-boilerplates/ruby.gitignore
 
