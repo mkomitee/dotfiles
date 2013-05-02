@@ -61,6 +61,8 @@
     assumed = "!git ls-files -v | grep ^h | cut -c 3-"
     ; snapshot to take a snapshot without removing changes from the tree
     snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
+    incoming = !git fetch && git log --pretty=oneline --abbrev-commit --graph ..@{u}
+    outgoing = !git fetch && git log --pretty=oneline --abbrev-commit --graph @{u}..
 
 [pager]
     status = yes
