@@ -7,39 +7,29 @@ Bundle 'gmarik/vundle'
 
 Bundle 'AfterColors.vim'
 Bundle 'ConradIrwin/vim-comment-object'
-Bundle 'Jinja'
 Bundle 'Lokaltog/vim-distinguished'
 Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'Shougo/vimproc'
-Bundle 'Shougo/vimshell'
 Bundle 'airblade/vim-gitgutter.git'
-Bundle 'dhruvasagar/vim-table-mode'
 Bundle 'ervandew/supertab.git'
 Bundle 'garbas/vim-snipmate'
 Bundle 'godlygeek/tabular'
 Bundle 'honza/snipmate-snippets'
-Bundle 'jonathanfilip/vim-lucius'
 Bundle 'jpalardy/vim-slime'
 Bundle 'kana/vim-textobj-indent.git'
 Bundle 'kana/vim-textobj-user.git'
 Bundle 'kien/ctrlp.vim'
 Bundle 'kshenoy/vim-signature'
 Bundle 'majutsushi/tagbar'
-Bundle 'mhinz/vim-startify'
 Bundle 'mkomitee/vim-gf-python'
-Bundle 'nelstrom/vim-markdown-folding'
 Bundle 'nelstrom/vim-visual-star-search'
 Bundle 'python_match.vim'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'sjl/splice.vim'
 Bundle 'tomtom/tlib_vim'
 Bundle 'tpope/vim-characterize'
-Bundle 'tpope/vim-dispatch'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-markdown'
-Bundle 'tpope/vim-obsession'
 Bundle 'tpope/vim-repeat'
-Bundle 'tpope/vim-sleuth'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired'
 
@@ -83,6 +73,8 @@ set viewdir=$HOME/.vimdata/vimviews/    " save views here
 set wildmenu                   " commandline completion is nice
 set expandtab                  " by default, use spaces & no tabs
 set shiftwidth=4               " shift width (>> & autoindent)
+set softtabstop=4              " 1 tab = 4 spaces
+set tabstop=4                  " 1 tab = 4 spaces
 set shiftround                 " round indent to multiple of shiftwidth
 set smarttab                   " shiftwidth at start of line, tabstop elsewhere
 set textwidth=80               " wrap at 80 columns
@@ -366,9 +358,6 @@ colorscheme distinguished
 " Supertab ------------------------------------------------------------------{{{
 let g:SuperTabDefaultCompletionType = "context"
 " }}}
-" vimshell ------------------------------------------------------------------{{{
-let g:vimshell_prompt = "% "
-" }}}
 " NetRW ---------------------------------------------------------------------{{{
 let g:netrw_list_hide = '^\.,\~$,^tags$'
 " }}}
@@ -416,11 +405,6 @@ vmap <silent> <leader>cc <plug>NERDCommenterToggle<cr>vgv
 nmap <silent> <leader>cc <plug>NERDCommenterToggle
 nmap <silent> <leader>c$ <plug>NERDCommenterToEOL
 " }}}
-" startify ------------------------------------------------------------------{{{
-let g:startify_show_files_number = 20
-let g:startify_bookmarks = [ '~/.vimrc' ]
-" }}}
-" }}}
 " Filetype detection --------------------------------------------------------{{{
 au BufNewFile,BufRead gitconfig setf gitconfig
 au BufNewFile,BufRead /private/tmp/crontab.* setl backupcopy=yes
@@ -431,6 +415,7 @@ au FileType make au BufWritePre <buffer> RemoveTrailingWhiteSpace
 au FileType make setl noexpandtab
 au FileType make setl nosmarttab
 au FileType make setl softtabstop=0
+au FileType make setl tabstop=4
 " }}}
 " man -----------------------------------------------------------------------{{{
 au FileType man setl nolist
@@ -446,6 +431,7 @@ au FileType man nnoremap <buffer> <space><space> <C-D>
 " markdown ------------------------------------------------------------------{{{
 au FileType markdown au BufWritePre <buffer> RemoveTrailingWhiteSpace
 au FileType markdown setl shiftwidth=4
+au FileType markdown setl softtabstop=4
 au BufNewFile,BufRead $HOME/.tasks.md setl nospell
 " }}}
 " perl ----------------------------------------------------------------------{{{
