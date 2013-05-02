@@ -1,5 +1,7 @@
 " Load Plugins --------------------------------------------------------------{{{
 " Initialize vundle ---------------------------------------------------------{{{
+set nocompatible
+filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 Bundle 'gmarik/vundle'
@@ -10,6 +12,7 @@ Bundle 'ConradIrwin/vim-comment-object'
 Bundle 'Lokaltog/vim-distinguished'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'airblade/vim-gitgutter.git'
+Bundle 'duff/vim-scratch.git'
 Bundle 'ervandew/supertab.git'
 Bundle 'garbas/vim-snipmate'
 Bundle 'godlygeek/tabular'
@@ -21,11 +24,13 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'kshenoy/vim-signature'
 Bundle 'majutsushi/tagbar'
 Bundle 'mkomitee/vim-gf-python'
+Bundle 'nelstrom/vim-americanize'
 Bundle 'nelstrom/vim-visual-star-search'
 Bundle 'python_match.vim'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'sjl/splice.vim'
 Bundle 'tomtom/tlib_vim'
+Bundle 'tpope/vim-abolish'
 Bundle 'tpope/vim-characterize'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-markdown'
