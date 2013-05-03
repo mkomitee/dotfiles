@@ -252,6 +252,8 @@ endfunction " }}}
 " x.txt in the same directory as the current file. {{{
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 " }}}
+" ZZ = wq, XX = cquit
+nnoremap XX :cquit<cr>
 " A few useful sane maps (from tpope/sensible.vim{{{
 inoremap <C-U> <C-G>u<C-U>
 nnoremap & :&&<CR>
