@@ -373,6 +373,7 @@ let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_cache_dir = $HOME.'/.vimdata/ctrlp'
 let g:ctrlp_map = '<leader>p'
 let g:ctrlp_mruf_relative = 1
+let g:ctrlp_max_height=1000
 let g:ctrlp_reuse_window = 'netrw\|help'
 let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'rtscript',
                        \  'undo', 'line', 'changes', 'mixed', 'bookmarkdir']
