@@ -22,6 +22,7 @@ Bundle 'kana/vim-textobj-user.git'
 Bundle 'kien/ctrlp.vim'
 Bundle 'kshenoy/vim-signature'
 Bundle 'majutsushi/tagbar'
+Bundle 'mileszs/ack.vim.git'
 Bundle 'mkomitee/vim-gf-python'
 Bundle 'mkomitee/vim-snippets'
 Bundle 'nelstrom/vim-americanize'
@@ -362,6 +363,9 @@ set background=dark
 colorscheme distinguished
 " }}}
 " Plugin Configurations -----------------------------------------------------{{{
+" ack2ag {{{
+let g:ackprg = 'ag --nogroup --nocolor --column'
+" }}}
 " Supertab ------------------------------------------------------------------{{{
 let g:SuperTabDefaultCompletionType = "context"
 " }}}
