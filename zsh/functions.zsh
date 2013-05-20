@@ -15,6 +15,14 @@ function g {
     fi
 }
 
+function s {
+    if [[ $# > 0 ]]; then
+        sudo "$@"
+    else
+        sudo -s
+    fi
+}
+
 function virtualenv {
     local PYTHONDONTWRITEBYTECODE=0
     command virtualenv $*

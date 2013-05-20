@@ -1,7 +1,6 @@
 #!/bin/zsh
 alias tig='tig --all'
 alias bc='bc -l'
-alias s=sudo
 alias s-s='sudo -s'
 alias tmux='tmux -u2'
 alias dot='cd ~dot'
