@@ -28,3 +28,6 @@
 [submodule "contrib/bitly/data_hacks.git"]
 	path = contrib/bitly/data_hacks.git
 	url = git://github.com/bitly/data_hacks.git
+[submodule "contrib/holman/boom"]
+	path = contrib/holman/boom
+	url = git://github.com/holman/boom.git

@@ -14,3 +14,4 @@ alias -g run_for='python ~/.dotfiles/contrib/bitly/data_hacks.git/data_hacks/run
 alias -g sample='python ~/.dotfiles/contrib/bitly/data_hacks.git/data_hacks/sample.py'
 alias -g vi=vim
 alias lss=less
+alias boom='ruby ~/.dotfiles/contrib/holman/boom/bin/boom'
