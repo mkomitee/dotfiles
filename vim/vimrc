@@ -37,6 +37,7 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-tbone'
 Bundle 'tpope/vim-unimpaired'
 
 " Turn on all the features ... ----------------------------------------------{{{
