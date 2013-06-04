@@ -3,7 +3,7 @@ function vim-clear-cache() {
     find ~/.vimdata -type f -delete
 }
 
-function psg() {
+function psgrep() {
     ps auxww | grep --color=always $* | grep -v grep
 }
 
