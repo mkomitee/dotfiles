@@ -16,6 +16,7 @@ Bundle 'duff/vim-scratch.git'
 Bundle 'ervandew/supertab.git'
 Bundle 'garbas/vim-snipmate'
 Bundle 'godlygeek/tabular'
+Bundle 'int3/vim-extradite'
 Bundle 'jpalardy/vim-slime'
 Bundle 'kana/vim-textobj-indent.git'
 Bundle 'kana/vim-textobj-user.git'
@@ -29,6 +30,7 @@ Bundle 'nelstrom/vim-americanize'
 Bundle 'nelstrom/vim-visual-star-search'
 Bundle 'python_match.vim'
 Bundle 'scrooloose/nerdcommenter'
+Bundle 'sjl/gundo.vim'
 Bundle 'sjl/splice.vim'
 Bundle 'tomtom/tlib_vim'
 Bundle 'tpope/vim-abolish'
@@ -39,6 +41,7 @@ Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-tbone'
 Bundle 'tpope/vim-unimpaired'
+Bundle 'tpope/vim-vividchalk'
 
 " Turn on all the features ... ----------------------------------------------{{{
 syntax on
@@ -361,7 +364,7 @@ command! -nargs=0 Pulse call Pulse(9)
 " }}}
 " Colorscheme ---------------------------------------------------------------{{{
 set background=dark
-colorscheme distinguished
+colorscheme vividchalk
 " }}}
 " Plugin Configurations -----------------------------------------------------{{{
 " ack2ag {{{
