@@ -464,6 +464,8 @@ au FileType puppet au BufWritePre <buffer> RemoveTrailingWhiteSpace
 " python --------------------------------------------------------------------{{{
 au FileType python au BufWritePre <buffer> RemoveTrailingWhiteSpace
 au FileType python setl textwidth=79
+au FileType pyrex au BufWritePre <buffer> RemoveTrailingWhiteSpace
+au FileType pyrex setl textwidth=79
 " }}}
 " ruby ----------------------------------------------------------------------{{{
 au FileType ruby au BufWritePre <buffer> RemoveTrailingWhiteSpace
