@@ -1,2 +1,4 @@
-hi SignColumn ctermfg=NONE ctermbg=235
-hi VertSplit term=NONE, cterm=NONE, gui=NONE ctermbg=234
+hi SignColumn            cterm=NONE ctermfg=14 ctermbg=0
+hi SignatureMarkTextHL   cterm=NONE ctermfg=1  ctermbg=0
+hi SignatureMarkerTextHL cterm=NONE ctermfg=4  ctermbg=0
+hi VertSplit             cterm=NONE ctermfg=1  ctermbg=0

@@ -370,6 +370,10 @@ colorscheme vividchalk
 " ack2ag {{{
 let g:ackprg = 'ag --nogroup --nocolor --column'
 " }}}
+" vim-signature{{{
+let g:SignatureMarkTextHL='SignatureMarkTextHL'
+let g:SignatureMarkerTextHL='SignatureMarkerTextHL'
+" }}}
 " Supertab ------------------------------------------------------------------{{{
 let g:SuperTabDefaultCompletionType = "context"
 " }}}
