@@ -108,5 +108,24 @@ function toggle_prompt() {
     fi
 }
 
+function title {
+  [ "$DISABLE_AUTO_TITLE" != "true" ] || return
+  printf '\033]2;%s\033\\' "$1"
+}
+
+# Set the window title (tmux pane) to indicate we're ready for a command, also
+# setup the prompt.
+function my_precmd {
+  setup_prompt
+  title "shell"
+}
+
+# Set the window title (tmux pane) to the command we're running. This is for vim
+# & window pane navigation integration
+function my_preexec {
+  title "$1"
+}
+
 autoload -U add-zsh-hook
-add-zsh-hook precmd setup_prompt
+add-zsh-hook precmd  my_precmd
+add-zsh-hook preexec my_preexec
