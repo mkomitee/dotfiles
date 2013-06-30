@@ -6,7 +6,7 @@ else
     set columns=89
 endif
 
-set guifont=Bitstream\ Vera\ Sans\ Mono\ 8 
+set guifont=Bitstream\ Vera\ Sans\ Mono\ 10
 
 set guioptions-=a " autoselect
 set guioptions-=A " autoselect
@@ -47,7 +47,7 @@ set columns=116
 nnoremap <silent> <ESC> :nohl<CR><ESC>
 
 set background=dark
-colorscheme solarized
+colorscheme distinguished
 hi SignColumn    ctermfg=10 ctermbg=0 guifg=#586e75 guibg=#073642"
 hi ShowMarksHLl  ctermfg=1 ctermbg=0 guifg=#586e75 guibg=#073642"
 hi ShowMarksHLu  ctermfg=9 ctermbg=0 guifg=#cb4b16 guibg=#073642"

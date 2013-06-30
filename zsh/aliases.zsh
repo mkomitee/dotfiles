@@ -15,3 +15,4 @@ alias -g sample='python ~/.dotfiles/contrib/bitly/data_hacks.git/data_hacks/samp
 alias -g vi=vim
 alias lss=less
 alias boom='ruby ~/.dotfiles/contrib/holman/boom/bin/boom'
+alias curl='curl --negotiate --user :'

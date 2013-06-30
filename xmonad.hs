@@ -30,12 +30,41 @@
 -- mod-button3       Set the window to floating mode and resize by dragging
 
 import XMonad
+import XMonad.Layout.Spacing
+import XMonad.Layout.Grid
+import XMonad.Layout.SimplestFloat
+import XMonad.Layout.IM
+import XMonad.Layout.ResizableTile
+import XMonad.Layout.Reflect
+import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.ManageDocks
+import XMonad.Util.Run(spawnPipe)
+import XMonad.Util.EZConfig(additionalKeys)
+import XMonad.Hooks.DynamicLog(xmobar)
+import Data.Ratio ((%))
+import System.IO
 
-{- modMask            = mod4Mask, -}
+
+
+
+
+layout = tiled ||| Mirror tiled ||| Grid ||| simplestFloat ||| gimp ||| Full
+  where
+    tiled     = Tall 1 (3/100) (1/2)
+    gimp      = withIM (1%7) (Role "gimp-toolbox") $ gimpright
+    gimpright = reflectHoriz $ withIM (1%7) (Role "gimp-dock") $ gimpMain
+    gimpMain  = ResizableTall 2 (1/118) (11/20) [1] ||| Full
+
+
+
 main = do
-     xmonad $ defaultConfig
-            { terminal           = "urxvt",
-              borderWidth        = 1,
-              normalBorderColor  = "#cccccc",
-              focusedBorderColor = "#cd8b00",
-              focusFollowsMouse  = False }
+     xmonad =<< xmobar defaultConfig
+            { terminal           = "urxvt256c"
+            , modMask            = mod4Mask
+            , borderWidth        = 0
+            , normalBorderColor  = "#cccccc"
+            , focusedBorderColor = "#cd8b00"
+            , focusFollowsMouse  = False
+            , manageHook = manageDocks
+            , layoutHook = avoidStruts( smartSpacing 10 $ layout )
+            }

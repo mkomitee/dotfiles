@@ -19,6 +19,7 @@ LINKS = (
     ("~/.vim", ".dotfiles/vim"),
     ("~/scripts", ".dotfiles/scripts"),
     ("~/.xmonad/xmonad.hs", "../.dotfiles/xmonad.hs"),
+    ("~/.xmobarrc", ".dotfiles/xmobarrc"),
 )
 
 CONTAINS = (

@@ -1,0 +1,12 @@
+Config { font = "xft:Cantarel-10"
+       , bgColor = "black"
+       , fgColor = "#c0c0c0"
+       , position = Top
+       , commands = [ Run Weather "KNYC" ["-t"," <tempF>F"] 36000
+                    , Run Date "%A %B %e, %H:%M %p" "date" 10
+                    , Run StdinReader
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "%StdinReader% }{ %KNYC% - %date%"
+       }

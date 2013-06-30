@@ -21,6 +21,7 @@ path=(
     $HOME/.dotfiles/contrib/visionmedia/git-extras/bin
     $HOME/.dotfiles/contrib/willgit/mainline/bin
     $HOME/.rvm/bin
+    $HOME/.pyenv/bin
     /usr/local/opt/coreutils/libexec/gnubin
     /usr/local/bin
     /usr/local/sbin
