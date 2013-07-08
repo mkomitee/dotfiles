@@ -40,10 +40,9 @@ import Data.Ratio ((%))
 import System.IO
 
 
-layout = tiled ||| Mirror tiled ||| Grid ||| Full
+myLayout = tiled ||| Mirror tiled ||| Grid ||| Full
   where
     tiled     = Tall 1 (3/100) (1/2)
-
 
 myPP = defaultPP { ppCurrent         = xmobarColor "green" ""
                  , ppHidden          = xmobarColor "yellow" ""
@@ -59,6 +58,12 @@ myPP = defaultPP { ppCurrent         = xmobarColor "green" ""
                                        )
                  }
 
+myManageHook = composeAll
+    [ className =? "Gimp"      --> doFloat
+    , className =? "Vncviewer" --> doFloat
+    , manageDocks
+    ]
+
 main = do
      status <- spawnPipe "xmobar"
      xmonad $ defaultConfig
@@ -68,7 +73,7 @@ main = do
             , normalBorderColor  = "#cccccc"
             , focusedBorderColor = "#cd8b00"
             , focusFollowsMouse  = False
-            , manageHook = manageDocks
-            , layoutHook = avoidStruts $ smartSpacing 10 $ layout 
-            , logHook = dynamicLogWithPP $ myPP { ppOutput = hPutStrLn status }
+            , manageHook         = myManageHook
+            , layoutHook         = avoidStruts $ smartSpacing 10 $ myLayout 
+            , logHook            = dynamicLogWithPP $ myPP { ppOutput = hPutStrLn status }
             }

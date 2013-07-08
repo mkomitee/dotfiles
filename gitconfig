@@ -123,3 +123,6 @@
 
 [init]
     templatedir = ~/.dotfiles/git-template
+
+[credential]
+	helper = cache
