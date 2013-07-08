@@ -32,33 +32,36 @@
 import XMonad
 import XMonad.Layout.Spacing
 import XMonad.Layout.Grid
-import XMonad.Layout.SimplestFloat
-import XMonad.Layout.IM
-import XMonad.Layout.ResizableTile
-import XMonad.Layout.Reflect
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
-import XMonad.Util.Run(spawnPipe)
-import XMonad.Util.EZConfig(additionalKeys)
-import XMonad.Hooks.DynamicLog(xmobar)
+import XMonad.Util.Run
+import XMonad.Util.Loggers
 import Data.Ratio ((%))
 import System.IO
 
 
-
-
-
-layout = tiled ||| Mirror tiled ||| Grid ||| simplestFloat ||| gimp ||| Full
+layout = tiled ||| Mirror tiled ||| Grid ||| Full
   where
     tiled     = Tall 1 (3/100) (1/2)
-    gimp      = withIM (1%7) (Role "gimp-toolbox") $ gimpright
-    gimpright = reflectHoriz $ withIM (1%7) (Role "gimp-dock") $ gimpMain
-    gimpMain  = ResizableTall 2 (1/118) (11/20) [1] ||| Full
 
 
+myPP = defaultPP { ppCurrent         = xmobarColor "green" ""
+                 , ppHidden          = xmobarColor "yellow" ""
+                 , ppUrgent          = xmobarColor "red" ""
+                 , ppHiddenNoWindows = id
+                 , ppTitle           = xmobarColor "green" "" . shorten 80
+                 , ppLayout          = (\ x -> pad $ case x of
+                                                 "SmartSpacing 10 Tall"        -> "Tall"
+                                                 "SmartSpacing 10 Mirror Tall" -> "Wide"
+                                                 "SmartSpacing 10 Grid"        -> "Grid"
+                                                 "SmartSpacing 10 Full"        -> "Full"
+                                                 _                             -> x
+                                       )
+                 }
 
 main = do
-     xmonad =<< xmobar defaultConfig
+     status <- spawnPipe "xmobar"
+     xmonad $ defaultConfig
             { terminal           = "urxvt256c"
             , modMask            = mod4Mask
             , borderWidth        = 0
@@ -66,5 +69,6 @@ main = do
             , focusedBorderColor = "#cd8b00"
             , focusFollowsMouse  = False
             , manageHook = manageDocks
-            , layoutHook = avoidStruts( smartSpacing 10 $ layout )
+            , layoutHook = avoidStruts $ smartSpacing 10 $ layout 
+            , logHook = dynamicLogWithPP $ myPP { ppOutput = hPutStrLn status }
             }

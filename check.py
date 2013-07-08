@@ -10,16 +10,17 @@ import os.path
 import sys
 
 LINKS = (
-    ("~/.zshenv", ".dotfiles/zshenv"),
-    ("~/.zshrc", ".dotfiles/zshrc"),
-    ("~/.ctags", ".dotfiles/ctags"),
-    ("~/.editrc", ".dotfiles/editrc"),
-    ("~/.inputrc", ".dotfiles/inputrc"),
-    ("~/.tmux.conf", ".dotfiles/tmux/tmux.conf"),
-    ("~/.vim", ".dotfiles/vim"),
-    ("~/scripts", ".dotfiles/scripts"),
-    ("~/.xmonad/xmonad.hs", "../.dotfiles/xmonad.hs"),
-    ("~/.xmobarrc", ".dotfiles/xmobarrc"),
+    ("~/.zshenv", "~/.dotfiles/zshenv"),
+    ("~/.zshrc", "~/.dotfiles/zshrc"),
+    ("~/.ctags", "~/.dotfiles/ctags"),
+    ("~/.editrc", "~/.dotfiles/editrc"),
+    ("~/.inputrc", "~/.dotfiles/inputrc"),
+    ("~/.tmux.conf", "~/.dotfiles/tmux/tmux.conf"),
+    ("~/.vim", "~/.dotfiles/vim"),
+    ("~/scripts", "~/.dotfiles/scripts"),
+    ("~/.xmonad/xmonad.hs", "~/.dotfiles/xmonad/xmonad.hs"),
+    ("~/.xmonad/session", "~/.dotfiles/xmonad/session"),
+    ("~/.xmobarrc", "~/.dotfiles/xmonad/xmobarrc"),
 )
 
 CONTAINS = (
@@ -29,11 +30,16 @@ CONTAINS = (
 )
 
 
+def expand(path):
+    return os.path.abspath(os.path.expandvars(os.path.expanduser(path)))
+
+
 def check_link(source, destination):
     """Print an error message if the source isn't a link to the destination"""
     try:
-        source = os.path.expanduser(source)
-        if os.readlink(source) != destination:
+        source = expand(source)
+        destination = expand(destination)
+        if expand(os.readlink(source)) != destination:
             print("{0} does not point to {1}".format(source, destination),
                   file=sys.stderr)
             return False
