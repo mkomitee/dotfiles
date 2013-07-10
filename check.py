@@ -21,6 +21,9 @@ LINKS = (
     ("~/.xmonad/xmonad.hs", "~/.dotfiles/xmonad/xmonad.hs"),
     ("~/.xmonad/session", "~/.dotfiles/xmonad/session"),
     ("~/.xmobarrc", "~/.dotfiles/xmonad/xmobarrc"),
+    ("~/.irssi/config", "~/.dotfiles/irssi/config"),
+    ("~/.irssi/default.theme", "~/.dotfiles/irssi/default.theme"),
+    ("~/.irssi/scripts", "~/.dotfiles/irssi/scripts"),
 )
 
 CONTAINS = (
