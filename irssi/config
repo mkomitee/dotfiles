@@ -70,7 +70,8 @@ channels = (
     chatnet = "Freenode";
     autojoin = "Yes";
   },
-  { name = "#freenode"; chatnet = "Freenode"; autojoin = "Yes"; }
+  { name = "#pocoo"; chatnet = "Freenode"; autojoin = "Yes"; },
+  { name = "#vim"; chatnet = "Freenode"; autojoin = "Yes"; }
 );
 
 aliases = {
