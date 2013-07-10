@@ -58,14 +58,17 @@ servers = (
   }
 );
 
-chatnets = { Freenode = { type = "IRC"; }; EFNet = { type = "IRC"; }; };
+chatnets = {
+  Freenode = { type = "IRC"; nick = "mkomitee"; };
+  EFNet = { type = "IRC"; nick = "zim"; };
+};
 
-channels = ( 
+channels = (
   { name = "#warezt1"; chatnet = "EFNet"; autojoin = "Yes"; },
   { 
-    name = "#python-requests"; 
-    chatnet = "Freenode"; 
-    autojoin = "Yes"; 
+    name = "#python-requests";
+    chatnet = "Freenode";
+    autojoin = "Yes";
   },
   { name = "#freenode"; chatnet = "Freenode"; autojoin = "Yes"; }
 );
@@ -268,7 +271,7 @@ settings = {
 hilights = (
   { text = "komitee"; nick = "yes"; word = "yes"; },
   { text = "mkomitee"; nick = "yes"; word = "yes"; },
-  { text = "zim"; nick = "yes"; word = "yes"; },
+  { text = "zim"; nick = "yes"; word = "yes"; }
 );
 ignores = (
   {
