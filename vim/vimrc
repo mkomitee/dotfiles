@@ -12,6 +12,7 @@ Bundle 'ConradIrwin/vim-comment-object'
 Bundle 'Lokaltog/vim-distinguished'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'YankRing.vim'
+Bundle 'chriskempson/base16-vim'
 Bundle 'duff/vim-scratch.git'
 Bundle 'ervandew/supertab.git'
 Bundle 'garbas/vim-snipmate'
@@ -365,7 +366,7 @@ command! -nargs=0 Pulse call Pulse(9)
 " }}}
 " Colorscheme ---------------------------------------------------------------{{{
 set background=dark
-colorscheme distinguished
+colorscheme base16-default
 " }}}
 " Plugin Configurations -----------------------------------------------------{{{
 " ack2ag {{{
