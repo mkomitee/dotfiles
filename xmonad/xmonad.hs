@@ -67,7 +67,7 @@ myManageHook = composeAll
 main = do
      status <- spawnPipe "xmobar"
      xmonad $ defaultConfig
-            { terminal           = "urxvt256c"
+            { terminal           = "urxvt256cc"
             , modMask            = mod4Mask
             , borderWidth        = 0
             , normalBorderColor  = "#cccccc"

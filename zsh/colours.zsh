@@ -12,3 +12,8 @@ export LESS_TERMCAP_se=$'\E[0m'
 export LESS_TERMCAP_so=$'\E[01;44;33m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
+
+# base16, alters colors via escape codes.
+if [ -x $CONTRIB/chriskempson/base16-shell/base16-default.dark.sh ]; then
+    $CONTRIB/chriskempson/base16-shell/base16-default.dark.sh
+fi

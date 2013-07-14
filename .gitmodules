@@ -31,3 +31,15 @@
 [submodule "contrib/holman/boom"]
 	path = contrib/holman/boom
 	url = git://github.com/holman/boom.git
+[submodule "contrib/chriskempson/base16-xresources"]
+	path = contrib/chriskempson/base16-xresources
+	url = https://github.com/chriskempson/base16-xresources.git
+[submodule "contrib/chriskempson/base16-shell"]
+	path = contrib/chriskempson/base16-shell
+	url = https://github.com/chriskempson/base16-shell
+[submodule "contrib/muennich/urxvt-perls"]
+	path = contrib/muennich/urxvt-perls
+	url = https://github.com/muennich/urxvt-perls.git
+[submodule "contrib/ervandew/urxvt-vim-scrollback"]
+	path = contrib/ervandew/urxvt-vim-scrollback
+	url = https://github.com/ervandew/urxvt-vim-scrollback.git

@@ -1,47 +1,47 @@
-URxvt.background:	rgba:2222/2222/2222/dddd
-URxvt.boldfont:	xft:DeJaVu Sans Mono:bold:size=10
-URxvt.color0:	#2E3436
-URxvt.color1:	#CC0000
-URxvt.color10:	#8AE234
-URxvt.color11:	#FCE94F
-URxvt.color12:	#729FCF
-URxvt.color13:	#AD7FA8
-URxvt.color14:	#34E2E2
-URxvt.color15:	#EEEEEC
-URxvt.color2:	#4E9A06
-URxvt.color3:	#C4A000
-URxvt.color4:	#3465A4
-URxvt.color5:	#75507B
-URxvt.color6:	#06989A
-URxvt.color7:	#D3D7CF
-URxvt.color8:	#555753
-URxvt.color9:	#EF2929
-URxvt.colorUL:	#86a2b0
-URxvt.copyCommand:	xclip -i -selection clipboard
-URxvt.cursorBlink:	true
-URxvt.cursorUnderline:	true
-URxvt.depth:	32
-URxvt.font:	xft:DeJaVu Sans Mono:size=10
-URxvt.foreground:	#DEDEDE
-URxvt.inheritPixmap:	true
-URxvt.internalBorder:	0
-URxvt.keysym.Shift-Down:	command:\033]721;1\007
-URxvt.keysym.Shift-Up:	command:\033]720;1\007
-URxvt.matcher.button:	1
-URxvt.pasteCommand:	xclip -o -selection clipboard
-URxvt.perl-ext-common:	default,matcher,clipboard
-URxvt.saveLines:	12000
-URxvt.scrollBar:	false
-URxvt.scrollTtyKeypress:	true
-URxvt.scrollTtyOutput:	false
-URxvt.scrollstyle:	plain
-URxvt.shading:	15
-URxvt.underlineURLs:	true
-URxvt.url-launcher:	/usr/bin/google-chrome
-URxvt.xftAntialias:	true
-Urxvt.loginShell:	true
-Xft.antialias:	true
-Xft.dpi:	96
-Xft.hinting:	full
-Xft.hintstyle:	hintslight
-Xft.rgba:	rgb
+*.background:               rgba:2222/2222/2222/dddd
+*.foreground:               #DEDEDE
+*.boldfont:                 xft:DeJaVu Sans Mono:bold:size=10
+*.color0:                   #2E3436
+*.color1:                   #CC0000
+*.color10:                  #8AE234
+*.color11:                  #FCE94F
+*.color12:                  #729FCF
+*.color13:                  #AD7FA8
+*.color14:                  #34E2E2
+*.color15:                  #EEEEEC
+*.color2:                   #4E9A06
+*.color3:                   #C4A000
+*.color4:                   #3465A4
+*.color5:                   #75507B
+*.color6:                   #06989A
+*.color7:                   #D3D7CF
+*.color8:                   #555753
+*.color9:                   #EF2929
+*.colorUL:                  #86a2b0
+URxvt.copyCommand:          xclip -i -selection clipboard
+URxvt.cursorBlink:          true
+URxvt.cursorUnderline:      true
+URxvt.depth:                32
+URxvt.font:                 xft:DeJaVu Sans Mono:size=10
+URxvt.inheritPixmap:        true
+URxvt.internalBorder:       0
+URxvt.keysym.Shift-Down:    command:\033]721;1\007
+URxvt.keysym.Shift-Up:      command:\033]720;1\007
+URxvt.matcher.button:       1
+URxvt.pasteCommand:         xclip -o -selection clipboard
+URxvt.perl-ext-common:      default,matcher,clipboard-osc,vim-scrollback
+URxvt.saveLines:            12000
+URxvt.scrollBar:            false
+URxvt.scrollTtyKeypress:    true
+URxvt.scrollTtyOutput:      false
+URxvt.scrollstyle:          plain
+URxvt.shading:              15
+URxvt.underlineURLs:        true
+URxvt.url-launcher:         /usr/bin/google-chrome
+URxvt.xftAntialias:         true
+Urxvt.loginShell:           true
+Xft.antialias:              true
+Xft.dpi:                    96
+Xft.hinting:                full
+Xft.hintstyle:              hintslight
+Xft.rgba:                   rgb

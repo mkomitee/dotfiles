@@ -310,6 +310,7 @@ noremap <silent> Y y$
 " }}}
 " Easily modify ~/.{g,}vimrc ------------------------------------------------{{{
 nnoremap <silent> <leader>ev :e $MYVIMRC<CR>
+nnoremap <silent> <leader>egv :e $MYGVIMRC<CR>
 " }}}
 " sudo write-file in case you're in a file you dont have privileges to write{{{
 cmap <silent> w!! w !sudo tee % >/dev/null<cr>
