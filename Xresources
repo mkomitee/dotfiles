@@ -1,4 +1,3 @@
-*.background:               rgba:2222/2222/2222/dddd
 *.foreground:               #DEDEDE
 *.boldfont:                 xft:DeJaVu Sans Mono:bold:size=10
 *.color0:                   #2E3436
@@ -18,6 +17,7 @@
 *.color8:                   #555753
 *.color9:                   #EF2929
 *.colorUL:                  #86a2b0
+URxvt.background:           rgba:2222/2222/2222/dddd
 URxvt.copyCommand:          xclip -i -selection clipboard
 URxvt.cursorBlink:          true
 URxvt.cursorUnderline:      true

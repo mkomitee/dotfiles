@@ -58,11 +58,34 @@ myPP = defaultPP { ppCurrent         = xmobarColor "green" ""
                                        )
                  }
 
+{- Simple PP which only shows the current workspace number -}
+myWSPP = defaultPP { ppCurrent         = id
+                   , ppVisible         = const ""
+                   , ppHidden          = const ""
+                   , ppHiddenNoWindows = const ""
+                   , ppUrgent          = const ""
+                   , ppTitle           = const ""
+                   , ppLayout          = const ""
+                   }
+
 myManageHook = composeAll
     [ className =? "Gimp"      --> doFloat
     , className =? "Vncviewer" --> doFloat
     , manageDocks
     ]
+
+{- It would be really nice if this could be dynamic keyed off of my HOME
+ - environment variable, which I can query with getEnv, but because it's an IO
+ - String and not a string so I can't figure out how to concatenate it. At some
+ - point i'll figure this out -}
+wsFile = "/home/mkomitee/.xmonad/WORKSPACE"
+
+{- This just takes a string, and puts it in wsFile. Coupled with myWSPP used in
+ - a loghook, I get a file that tells me what workspace i'm in so I can have a
+ - separate gvim session per workspace. -}
+updateWSFile ws = do outFile <- openFile wsFile WriteMode
+                     hPutStrLn outFile ws
+                     hClose outFile
 
 main = do
      status <- spawnPipe "xmobar"
@@ -75,5 +98,7 @@ main = do
             , focusFollowsMouse  = False
             , manageHook         = myManageHook
             , layoutHook         = avoidStruts $ smartSpacing 10 $ myLayout 
-            , logHook            = dynamicLogWithPP $ myPP { ppOutput = hPutStrLn status }
+            , logHook            = do { dynamicLogWithPP myPP   { ppOutput = hPutStrLn status }
+                                      ; dynamicLogWithPP myWSPP { ppOutput = updateWSFile }
+                                      }
             }
