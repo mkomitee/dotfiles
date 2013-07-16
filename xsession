@@ -23,13 +23,13 @@ fi
 # Start the urxvt daemon
 which urxvt256cd > /dev/null 2>&1
 if [ $? = 0 ]; then
+    TERMINAL=urxvt256cc
     urxvt256cd -q -f -o
+else
+    TERMINAL=urxvtc
+    urxvtd -q -f -o
 fi
 
-# Simple panel to use as a systray
-# which xfce4-panel > /dev/null 2>&1
-# if [ $? = 0 ]; then
-    # xfce4-panel --disable-wm-check &
-# fi
+export TERMINAL
 
 exec xmonad

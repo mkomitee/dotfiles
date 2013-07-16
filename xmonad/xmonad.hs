@@ -36,19 +36,21 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Util.Run
 import XMonad.Util.Loggers
+import XMonad.Hooks.FadeInactive
 import Data.Ratio ((%))
 import System.IO
+import System.Environment
 
 
 myLayout = tiled ||| Mirror tiled ||| Grid ||| Full
   where
     tiled     = Tall 1 (3/100) (1/2)
 
-myPP = defaultPP { ppCurrent         = xmobarColor "green" ""
-                 , ppHidden          = xmobarColor "yellow" ""
-                 , ppUrgent          = xmobarColor "red" ""
+myPP = defaultPP { ppCurrent         = dzenColor "green" ""
+                 , ppHidden          = dzenColor "yellow" ""
+                 , ppUrgent          = dzenColor "red" ""
                  , ppHiddenNoWindows = id
-                 , ppTitle           = xmobarColor "green" "" . shorten 80
+                 , ppTitle           = shorten 80
                  , ppLayout          = (\ x -> pad $ case x of
                                                  "SmartSpacing 10 Tall"        -> "Tall"
                                                  "SmartSpacing 10 Mirror Tall" -> "Wide"
@@ -58,7 +60,10 @@ myPP = defaultPP { ppCurrent         = xmobarColor "green" ""
                                        )
                  }
 
-{- Simple PP which only shows the current workspace number -}
+{- Simple PP which only shows the current workspace number. This is used to -}
+{- update  $HOME/.xmonad/WORKSPACE which we use to identify the currently -}
+{- active window. This, for example, allows us to have one gvim session per -}
+{- workspace -}
 myWSPP = defaultPP { ppCurrent         = id
                    , ppVisible         = const ""
                    , ppHidden          = const ""
@@ -74,31 +79,29 @@ myManageHook = composeAll
     , manageDocks
     ]
 
-{- It would be really nice if this could be dynamic keyed off of my HOME
- - environment variable, which I can query with getEnv, but because it's an IO
- - String and not a string so I can't figure out how to concatenate it. At some
- - point i'll figure this out -}
-wsFile = "/home/mkomitee/.xmonad/WORKSPACE"
 
-{- This just takes a string, and puts it in wsFile. Coupled with myWSPP used in
- - a loghook, I get a file that tells me what workspace i'm in so I can have a
- - separate gvim session per workspace. -}
-updateWSFile ws = do outFile <- openFile wsFile WriteMode
+{- WORKSPACE file is $HOME/.xmonad/WORKSPACE -}
+updateWSFile ws = do home <- getEnv "HOME"
+                     let wsFile = home ++ "/.xmonad/WORKSPACE"
+                     outFile <- openFile wsFile WriteMode
                      hPutStrLn outFile ws
                      hClose outFile
 
+{- TERMINAL is set from .xsession -}
 main = do
-     status <- spawnPipe "xmobar"
+     status   <- spawnPipe "dzen2 -ta l -fn 'DeJaVu Sans Mono:bold:size=10'"
+     terminal <- getEnv "TERMINAL"
      xmonad $ defaultConfig
-            { terminal           = "urxvt256cc"
+            { terminal           = terminal
             , modMask            = mod4Mask
             , borderWidth        = 0
-            , normalBorderColor  = "#cccccc"
+            , normalBorderColor  = "#000000"
             , focusedBorderColor = "#cd8b00"
             , focusFollowsMouse  = False
             , manageHook         = myManageHook
             , layoutHook         = avoidStruts $ smartSpacing 10 $ myLayout 
             , logHook            = do { dynamicLogWithPP myPP   { ppOutput = hPutStrLn status }
                                       ; dynamicLogWithPP myWSPP { ppOutput = updateWSFile }
+                                      ; fadeInactiveLogHook 0.7
                                       }
             }
