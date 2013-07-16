@@ -24,6 +24,11 @@ LINKS = (
     ("~/.irssi/config", "~/.dotfiles/irssi/config"),
     ("~/.irssi/default.theme", "~/.dotfiles/irssi/default.theme"),
     ("~/.irssi/scripts", "~/.dotfiles/irssi/scripts"),
+    ("~/.Xresources", "~/.dotfiles/Xresources"),
+    ("~/.conkyrc", "~/.dotfiles/conkyrc"),
+    ("~/.xsession", "~/.dotfiles/xsession"),
+    ("~/.xinitrc", "~/.dotfiles/xsession"),
+    ("~/.urxvt/ext/vim-scrollback", "~/.dotfiles/contrib/ervandew/urxvt-vim-scrollback/vim-scrollback"),
 )
 
 CONTAINS = (

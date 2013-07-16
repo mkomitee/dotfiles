@@ -29,7 +29,6 @@ else
     TERMINAL=urxvtc
     urxvtd -q -f -o
 fi
-
 export TERMINAL
 
 exec xmonad

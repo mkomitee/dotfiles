@@ -98,8 +98,10 @@ myModMask x              = mod1Mask
 
 {- TERMINAL is set from .xsession -}
 main = do
-     hostname <- fmap nodeName getSystemID
-     status   <- spawnPipe "dzen2 -ta l -fn 'DeJaVu Sans Mono:bold:size=10'"
+     hostname    <- fmap nodeName getSystemID
+     leftStatus  <- spawnPipe "dzen2 -ta l -fn 'DeJaVu Sans Mono:bold:size=10'"
+     rightStatus <- spawnPipe "conky | dzen2 -ta r -fn 'DeJaVu Sans Mono:bold:size=10' -x -200 -w 200"
+
      terminal <- getEnv "TERMINAL"
      xmonad $ defaultConfig
             { terminal           = terminal
@@ -110,7 +112,7 @@ main = do
             , focusFollowsMouse  = False
             , manageHook         = myManageHook
             , layoutHook         = avoidStruts $ smartSpacing 10 $ myLayout 
-            , logHook            = do { dynamicLogWithPP myPP   { ppOutput = hPutStrLn status }
+            , logHook            = do { dynamicLogWithPP myPP   { ppOutput = hPutStrLn leftStatus }
                                       ; dynamicLogWithPP myWSPP { ppOutput = updateWSFile }
                                       ; fadeInactiveLogHook 0.7
                                       }
