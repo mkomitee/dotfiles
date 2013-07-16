@@ -37,6 +37,8 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Util.Run
 import XMonad.Util.Loggers
 import XMonad.Hooks.FadeInactive
+import System.Posix.Unistd
+import Data.List.Utils
 import Data.Ratio ((%))
 import System.IO
 import System.Environment
@@ -73,6 +75,7 @@ myWSPP = defaultPP { ppCurrent         = id
                    , ppLayout          = const ""
                    }
 
+{- This needs some work -}
 myManageHook = composeAll
     [ className =? "Gimp"      --> doFloat
     , className =? "Vncviewer" --> doFloat
@@ -80,20 +83,27 @@ myManageHook = composeAll
     ]
 
 
-{- WORKSPACE file is $HOME/.xmonad/WORKSPACE -}
+{- WORKSPACE file is $HOME/.xmonad/WORKSPACE. This gets updated by myWSPP -}
 updateWSFile ws = do home <- getEnv "HOME"
                      let wsFile = home ++ "/.xmonad/WORKSPACE"
                      outFile <- openFile wsFile WriteMode
                      hPutStrLn outFile ws
                      hClose outFile
 
+{- I want my modmask to be Super @ home where I run Linux and Alt elsewhere -}
+{- where I'm forced to run windows and some key combinations cannot be passed -}
+{- through vnc (like Super+L) I'll key this off of the hostname -}
+myModMask "huzzah.local" = mod4Mask
+myModMask x              = mod1Mask
+
 {- TERMINAL is set from .xsession -}
 main = do
+     hostname <- fmap nodeName getSystemID
      status   <- spawnPipe "dzen2 -ta l -fn 'DeJaVu Sans Mono:bold:size=10'"
      terminal <- getEnv "TERMINAL"
      xmonad $ defaultConfig
             { terminal           = terminal
-            , modMask            = mod4Mask
+            , modMask            = myModMask hostname
             , borderWidth        = 0
             , normalBorderColor  = "#000000"
             , focusedBorderColor = "#cd8b00"
