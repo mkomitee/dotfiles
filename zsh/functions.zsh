@@ -12,10 +12,18 @@ function gvim() {
             server="GVIM:$(cat $HOME/.xmonad/WORKSPACE)"
         fi
     fi
-    if [ "$@" = '' ]; then
-        command gvim --servername $server || command gvim
-    else
+    if [[ $# > 0 ]]; then
         command gvim --servername $server --remote-silent $@ || command gvim $@
+    else
+        command gvim --servername $server || command gvim
+    fi
+}
+
+function vim() {
+    if [ $DISPLAY = '' ]; then
+        command vim $@
+    else
+        gvim $@
     fi
 }
 

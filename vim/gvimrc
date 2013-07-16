@@ -39,3 +39,8 @@ nnoremap <silent> <ESC> :nohl<CR><ESC>
 set background=dark
 colorscheme base16-default
 set clipboard=unnamed
+
+augroup decorations
+    autocmd!
+    autocmd FocusGained * call Pulse(10)
+augroup END
