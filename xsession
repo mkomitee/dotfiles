@@ -31,4 +31,6 @@ else
 fi
 export TERMINAL
 
+eval $(ssh-agent)
+
 exec xmonad

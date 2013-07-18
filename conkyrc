@@ -17,4 +17,4 @@ border_inner_margin 0
 border_outer_margin 0
  
 TEXT
-${if_match "${nodename_short}" == "huzzah"} ${execbar volume} ${endif} ${if_match "${nodename_short}" != "huzzah"} ${nodename_short} ${endif} ${time %a %b %d, %I:%M %p} ${audacious_main_volume}
+${if_match "${nodename_short}" == "huzzah"} ${execbar volume} ${else} ${nodename_short} ${endif} ${exec weather KNYC}°F ${time %a %b %d, %I:%M %p} ${audacious_main_volume}
