@@ -1,7 +1,20 @@
-background yes
-out_to_console yes
-out_to_x no
+background no
+out_to_console no
+out_to_x yes
+use_xft yes
+xftfont 123:size=8
+alignment top_right
 update_interval 1
+gap_x 0
+gap_y 0
+double_buffer yes
+own_window yes
+own_window_type desktop
+own_window_hints above
+default_bar_size 80 8 
+border_width 0
+border_inner_margin 0
+border_outer_margin 0
  
 TEXT
-${time %a %b %d, %I:%M %p}
+${if_match "${nodename_short}" == "huzzah"} ${execbar volume} ${endif} ${if_match "${nodename_short}" != "huzzah"} ${nodename_short} ${endif} ${time %a %b %d, %I:%M %p} ${audacious_main_volume}
