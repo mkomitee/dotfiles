@@ -20,7 +20,7 @@ function gvim() {
 }
 
 function vim() {
-    if [ $DISPLAY = '' ]; then
+    if [ "$DISPLAY" = '' ]; then
         command vim $@
     else
         gvim $@
