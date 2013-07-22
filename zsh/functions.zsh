@@ -11,6 +11,8 @@ function gvim() {
         if [ -f $HOME/.xmonad/WORKSPACE ]; then
             server="GVIM:$(cat $HOME/.xmonad/WORKSPACE)"
         fi
+    elif [ "$DESKTOP_SESSION" = "gnome" ]; then
+        server="GVIM:$(xdotool get_desktop)"
     fi
     if [[ $# > 0 ]]; then
         command gvim --servername $server --remote-silent $@ || command gvim $@
