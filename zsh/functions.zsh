@@ -21,14 +21,6 @@ function gvim() {
     fi
 }
 
-function vim() {
-    if [ "$DISPLAY" = '' ]; then
-        command vim $@
-    else
-        gvim $@
-    fi
-}
-
 function psgrep() {
     ps auxww | grep --color=always $* | grep -v grep
 }
