@@ -4,9 +4,6 @@
 [submodule "contrib/zsh-users/zsh-syntax-highlighting"]
 	path = contrib/zsh-users/zsh-syntax-highlighting
 	url = git://github.com/zsh-users/zsh-syntax-highlighting.git
-[submodule "vim/bundle/vundle"]
-	path = vim/bundle/vundle
-	url = https://github.com/gmarik/vundle.git
 [submodule "contrib/sigurdga/ls-colors-solarized"]
 	path = contrib/sigurdga/ls-colors-solarized
 	url = https://github.com/sigurdga/ls-colors-solarized.git
@@ -43,3 +40,6 @@
 [submodule "contrib/ervandew/urxvt-vim-scrollback"]
 	path = contrib/ervandew/urxvt-vim-scrollback
 	url = https://github.com/ervandew/urxvt-vim-scrollback.git
+[submodule "vim/bundle/neobundle.vim"]
+	path = vim/bundle/neobundle.vim
+	url = git://github.com/Shougo/neobundle.vim

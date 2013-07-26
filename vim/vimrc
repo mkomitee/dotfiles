@@ -1,54 +1,56 @@
 " Load Plugins --------------------------------------------------------------{{{
 " Initialize vundle ---------------------------------------------------------{{{
 set nocompatible
-filetype off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-Bundle 'gmarik/vundle'
+if has('vim_starting')
+    set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
+call neobundle#rc(expand('~/.vim/bundle/'))
+NeoBundleFetch 'Shougo/neobundle.vim'
 " }}}
 
-Bundle 'AfterColors.vim'
-Bundle 'ConradIrwin/vim-comment-object'
-Bundle 'Lokaltog/vim-distinguished'
-Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'YankRing.vim'
-Bundle 'chriskempson/base16-vim'
-Bundle 'duff/vim-scratch.git'
-Bundle 'ervandew/supertab.git'
-Bundle 'garbas/vim-snipmate'
-Bundle 'godlygeek/tabular'
-Bundle 'int3/vim-extradite'
-Bundle 'jpalardy/vim-slime'
-Bundle 'kana/vim-textobj-indent.git'
-Bundle 'kana/vim-textobj-user.git'
-Bundle 'kien/ctrlp.vim'
-Bundle 'kshenoy/vim-signature'
-Bundle 'majutsushi/tagbar'
-Bundle 'mhinz/vim-signify'
-Bundle 'mileszs/ack.vim.git'
-Bundle 'mkomitee/vim-gf-python'
-Bundle 'mkomitee/vim-snippets'
-Bundle 'nelstrom/vim-americanize'
-Bundle 'nelstrom/vim-visual-star-search'
-Bundle 'python_match.vim'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'sjl/gundo.vim'
-Bundle 'sjl/splice.vim'
-Bundle 'tomtom/tlib_vim'
-Bundle 'tpope/vim-abolish'
-Bundle 'tpope/vim-characterize'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-markdown'
-Bundle 'tpope/vim-repeat'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-tbone'
-Bundle 'tpope/vim-unimpaired'
-Bundle 'tpope/vim-vividchalk'
+NeoBundle 'AfterColors.vim'
+NeoBundle 'ConradIrwin/vim-comment-object'
+NeoBundle 'Lokaltog/vim-distinguished'
+NeoBundle 'MarcWeber/vim-addon-mw-utils'
+NeoBundle 'YankRing.vim'
+NeoBundle 'chriskempson/base16-vim'
+NeoBundle 'duff/vim-scratch.git'
+NeoBundle 'ervandew/supertab.git'
+NeoBundle 'garbas/vim-snipmate'
+NeoBundle 'godlygeek/tabular'
+NeoBundle 'int3/vim-extradite'
+NeoBundle 'jpalardy/vim-slime'
+NeoBundle 'kana/vim-textobj-indent.git'
+NeoBundle 'kana/vim-textobj-user.git'
+NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'kshenoy/vim-signature'
+NeoBundle 'majutsushi/tagbar'
+NeoBundle 'mhinz/vim-signify'
+NeoBundle 'mileszs/ack.vim.git'
+NeoBundle 'mkomitee/vim-gf-python'
+NeoBundle 'mkomitee/vim-snippets'
+NeoBundle 'nelstrom/vim-americanize'
+NeoBundle 'nelstrom/vim-visual-star-search'
+NeoBundle 'python_match.vim'
+NeoBundle 'scrooloose/nerdcommenter'
+NeoBundle 'sjl/gundo.vim'
+NeoBundle 'sjl/splice.vim'
+NeoBundle 'tomtom/tlib_vim'
+NeoBundle 'tpope/vim-abolish'
+NeoBundle 'tpope/vim-characterize'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'tpope/vim-markdown'
+NeoBundle 'tpope/vim-repeat'
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'tpope/vim-tbone'
+NeoBundle 'tpope/vim-unimpaired'
+NeoBundle 'tpope/vim-vividchalk'
 
 " Turn on all the features ... ----------------------------------------------{{{
 syntax on
 filetype plugin indent on
 runtime macros/matchit.vim
+NeoBundleCheck
 " }}}
 " }}}
 " Preferences ---------------------------------------------------------------{{{
