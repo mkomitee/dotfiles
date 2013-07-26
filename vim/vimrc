@@ -27,6 +27,7 @@ NeoBundle 'kshenoy/vim-signature'
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'mhinz/vim-signify'
 NeoBundle 'mileszs/ack.vim.git'
+NeoBundle 'mkitt/tabline.vim.git'
 NeoBundle 'mkomitee/vim-gf-python'
 NeoBundle 'mkomitee/vim-snippets'
 NeoBundle 'nelstrom/vim-americanize'
@@ -93,6 +94,7 @@ set shiftround                 " round indent to multiple of shiftwidth
 set smarttab                   " shiftwidth at start of line, tabstop elsewhere
 set textwidth=80               " wrap at 80 columns
 set tags=./tags;               " name of the tags files which is relative to the project
+set showtabline=2              " always show the tab line
 set notimeout
 set ttimeout
 set ttimeoutlen=10
