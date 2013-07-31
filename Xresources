@@ -1,5 +1,6 @@
 *.foreground:               #DEDEDE
-*.boldfont:                 xft:DeJaVu Sans Mono:bold:size=10
+*.font:                     xft:Droid Sans Mono:size=9,style=regular
+*.boldFont:                 xft:Droid Sans Mono:size=9,style=regular
 *.color0:                   #2E3436
 *.color1:                   #CC0000
 *.color10:                  #8AE234
@@ -22,7 +23,6 @@ URxvt.copyCommand:          xclip -i -selection clipboard
 URxvt.cursorBlink:          true
 URxvt.cursorUnderline:      true
 URxvt.depth:                32
-URxvt.font:                 xft:DeJaVu Sans Mono:size=10
 URxvt.inheritPixmap:        true
 URxvt.internalBorder:       0
 URxvt.keysym.Shift-Down:    command:\033]721;1\007
