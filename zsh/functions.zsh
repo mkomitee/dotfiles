@@ -3,6 +3,21 @@ function vim-clear-cache() {
     find ~/.vimdata -type f -delete
 }
 
+function resume() {
+    if [ "$TMUX" = "" ]; then
+        local session="$1"
+        if [ "$session" = "" ]; then
+            session=main
+        fi
+        tmux -u2 attach-session -t $session
+        if [ $? != 0 ]; then
+            tmux -u2 new-session -s $session
+        fi
+    else
+        echo "Don't nest TMUX sessions"
+    fi
+}
+
 # When I'm using xmonad and have a WORKSPACE file to work with, support having
 # one gvim server per xmonad workspace. Otherwise, just one server period.
 function gvim() {
