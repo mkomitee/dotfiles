@@ -17,3 +17,4 @@ alias boom='ruby ~/.dotfiles/contrib/holman/boom/bin/boom'
 alias curl='curl --negotiate --user :'
 alias irc='ssh -t matrix.gs tmux -u2 attach-session -t irc'
 alias a='resume main'
+alias y=true
