@@ -18,3 +18,4 @@ alias curl='curl --negotiate --user :'
 alias irc='ssh -t matrix.gs tmux -u2 attach-session -t irc'
 alias a='resume main'
 alias y=true
+alias reexec="exec zsh -l"
