@@ -43,3 +43,6 @@
 [submodule "vim/bundle/neobundle.vim"]
 	path = vim/bundle/neobundle.vim
 	url = git://github.com/Shougo/neobundle.vim
+[submodule "contrib/seebi/tmux-colors-solarized"]
+	path = contrib/seebi/tmux-colors-solarized
+	url = https://github.com/seebi/tmux-colors-solarized
