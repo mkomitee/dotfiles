@@ -1,0 +1,5 @@
+# remap prefix to Control + a
+set-option -g prefix C-a
+unbind C-b
+bind C-a send-prefix
+source $HOME/.dotfiles/contrib/altercation/solarized/tmux/tmuxcolors-dark.conf
