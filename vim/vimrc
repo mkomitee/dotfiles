@@ -450,6 +450,14 @@ au FileType make setl nosmarttab
 au FileType make setl softtabstop=0
 au FileType make setl tabstop=4
 " }}}
+" go ----------------------------------------------------------------------{{{
+au FileType go au BufWritePre <buffer> RemoveTrailingWhiteSpace
+au FileType go setl noexpandtab
+au FileType go setl tabstop=4
+au FileType go setl shiftwidth=4
+au FileType go setl cursorline
+au FileType go setl cursorcolumn
+" }}}       go
 " man -----------------------------------------------------------------------{{{
 au FileType man setl nolist
 au FileType man setl nonumber

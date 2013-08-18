@@ -27,7 +27,7 @@ function git_prompt() {
             echoed=1
         fi
         if [ "$ref" != "master" ]; then
-            echo -n "%{$fg_bold[black]%}($ref)%{$reset_color%}"
+            echo -n "%{$fg[yellow]%}($ref)%{$reset_color%}"
             echoed=1
         fi
         if [ -n "$echoed" ]; then
@@ -57,7 +57,7 @@ function prompt() {
 function jobs_prompt() {
     local JOBS=$(jobs | wc -l | sed 's/ //g')
     if [ "$JOBS" != "0" ]; then
-        echo "%{$fg_bold[black]%}($JOBS)%{$reset_color%} "
+        echo "%{$fg[yellow]%}($JOBS)%{$reset_color%} "
     fi
 }
 
@@ -77,7 +77,7 @@ function exit_code() {
 }
 
 function history_prompt() {
-    echo "%{$fg_bold[black]%}!%!%{$reset_color%}"
+    echo "%{$fg[yellow]%}!%!%{$reset_color%}"
 }
 
 function enable_prompt() {
@@ -85,7 +85,7 @@ function enable_prompt() {
 }
 
 function current_dir() {
-    echo "%{$fg_bold[black]%}%3~%{$reset_color%}"
+    echo "%{$fg[yellow]%}%3~%{$reset_color%}"
 }
 
 function setup_prompt() {
