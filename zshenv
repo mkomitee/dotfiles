@@ -3,6 +3,8 @@
 UNAME=$(uname)
 ARCH=$(arch)
 
+export GOROOT=$HOME/.${UNAME}.${ARCH}/go
+
 # Setup zsh fpath
 fpath=(
     $HOME/.dotfiles/zsh
@@ -18,6 +20,7 @@ path=(
     $HOME/.cabal/bin
     $HOME/scripts
     $HOME/.${UNAME}.${ARCH}/bin
+    $GOROOT/bin
     $HOME/.dotfiles/contrib/visionmedia/git-extras/bin
     $HOME/.dotfiles/contrib/willgit/mainline/bin
     $HOME/.rvm/bin
