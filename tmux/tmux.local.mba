@@ -10,4 +10,4 @@ set-option -g default-command "/usr/local/bin/reattach-to-user-namespace -l /usr
 bind C-c run "tmux save-buffer - | reattach-to-user-namespace pbcopy"
 bind C-v run "tmux set-buffer $(reattach-to-user-namespace pbpaste); tmux paste-buffer"
 
-source-file $HOME/.dotfiles/contrib/seebi/tmux-colors-solarized/tmuxcolors-light.conf
+source-file $HOME/.dotfiles/contrib/seebi/tmux-colors-solarized/tmuxcolors-dark.conf
