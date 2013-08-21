@@ -1,4 +1,4 @@
-set guifont=Bitstream\ Vera\ Sans\ Mono\ 10
+set guifont=Source\ Code\ Pro:h14
 
 set guioptions-=a " autoselect
 set guioptions-=A " autoselect
