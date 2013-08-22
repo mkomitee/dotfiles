@@ -8,38 +8,38 @@ call neobundle#rc(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 " }}}
 
+" NeoBundle 'chriskempson/base16-vim'
+" NeoBundle 'duff/vim-scratch.git'
+" NeoBundle 'ervandew/supertab.git'
+" NeoBundle 'jpalardy/vim-slime'
+" NeoBundle 'majutsushi/tagbar'
+" NeoBundle 'mileszs/ack.vim.git'
+" NeoBundle 'mkitt/tabline.vim.git'
+" NeoBundle 'mkomitee/vim-gf-python'
+" NeoBundle 'nelstrom/vim-americanize'
+" NeoBundle 'nelstrom/vim-visual-star-search'
+" NeoBundle 'tpope/vim-abolish'
+" NeoBundle 'tpope/vim-vividchalk'
 NeoBundle 'AfterColors.vim'
 NeoBundle 'ConradIrwin/vim-comment-object'
 NeoBundle 'Lokaltog/vim-distinguished'
 NeoBundle 'Lokaltog/vim-easymotion'
-NeoBundle 'MarcWeber/vim-addon-mw-utils'
+NeoBundle 'Valloric/YouCompleteMe.git', {'build' : { 'unix': './install.sh --clang-completer' }}
 NeoBundle 'YankRing.vim'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'altercation/vim-colors-solarized'
-NeoBundle 'chriskempson/base16-vim'
-NeoBundle 'duff/vim-scratch.git'
-NeoBundle 'ervandew/supertab.git'
-NeoBundle 'garbas/vim-snipmate'
+NeoBundle 'garbas/vim-snipmate', {'depends': ['tomtom/tlib_vim', 'MarcWeber/vim-addon-mw-utils']}
 NeoBundle 'godlygeek/tabular'
 NeoBundle 'int3/vim-extradite'
-NeoBundle 'jpalardy/vim-slime'
 NeoBundle 'kana/vim-textobj-indent.git'
 NeoBundle 'kana/vim-textobj-user.git'
 NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'kshenoy/vim-signature'
-NeoBundle 'majutsushi/tagbar'
-NeoBundle 'mileszs/ack.vim.git'
-NeoBundle 'mkitt/tabline.vim.git'
-NeoBundle 'mkomitee/vim-gf-python'
 NeoBundle 'mkomitee/vim-snippets'
-NeoBundle 'nelstrom/vim-americanize'
-NeoBundle 'nelstrom/vim-visual-star-search'
 NeoBundle 'python_match.vim'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'sjl/gundo.vim'
 NeoBundle 'sjl/splice.vim'
-NeoBundle 'tomtom/tlib_vim'
-NeoBundle 'tpope/vim-abolish'
 NeoBundle 'tpope/vim-characterize'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-markdown'
@@ -47,7 +47,6 @@ NeoBundle 'tpope/vim-repeat'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-tbone'
 NeoBundle 'tpope/vim-unimpaired'
-NeoBundle 'tpope/vim-vividchalk'
 
 if !empty($GOROOT)
     set runtimepath+=$GOROOT/misc/vim
@@ -100,7 +99,7 @@ set shiftround                 " round indent to multiple of shiftwidth
 set smarttab                   " shiftwidth at start of line, tabstop elsewhere
 set textwidth=80               " wrap at 80 columns
 set tags=./tags;               " name of the tags files which is relative to the project
-set showtabline=2              " always show the tab line
+" set showtabline=2              " always show the tab line
 set notimeout
 set ttimeout
 set ttimeoutlen=10
@@ -393,15 +392,16 @@ command! -nargs=0 Pulse call Pulse(9)
 colorscheme distinguished
 " }}}
 " Plugin Configurations -----------------------------------------------------{{{
-" ack2ag {{{
-let g:ackprg = 'ag --nogroup --nocolor --column'
+" snipmate {{{
+imap ss <esc>a<Plug>snipMateNextOrTrigger
+smap ss <Plug>snipMateNextOrTrigger
 " }}}
 " vim-signature{{{
 let g:SignatureMarkTextHL='SignatureMarkTextHL'
 let g:SignatureMarkerTextHL='SignatureMarkerTextHL'
 " }}}
 " Supertab ------------------------------------------------------------------{{{
-let g:SuperTabDefaultCompletionType = "context"
+" let g:SuperTabDefaultCompletionType = "context"
 " }}}
 " NetRW ---------------------------------------------------------------------{{{
 let g:netrw_list_hide = '^\.,\~$,^tags$'
@@ -436,13 +436,13 @@ nnoremap <silent> <Leader>a: :Tabularize /:\zs<CR>
 " python => ipython
 " perl   => Devel::REPL's re.pl
 " ruby   => irb
-let g:slime_no_mappings = 0
-let g:slime_paste_file = $HOME.'/.vimdata/slime'
-let g:slime_target = "tmux"
-au FileType python let g:slime_python_ipython = 1
+" let g:slime_no_mappings = 0
+" let g:slime_paste_file = $HOME.'/.vimdata/slime'
+" let g:slime_target = "tmux"
+" au FileType python let g:slime_python_ipython = 1
 " }}}
 " tagbar --------------------------------------------------------------------{{{
-nnoremap <silent> <leader>t :TagbarToggle<cr>
+" nnoremap <silent> <leader>t :TagbarToggle<cr>
 " }}}
 " NERDCommenter -------------------------------------------------------------{{{
 let g:NERDCreateDefaultMappings = 0
