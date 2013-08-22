@@ -75,8 +75,8 @@
 *.boldFont:                 xft:Droid Sans Mono:size=9,style=regular
 URxvt.depth:                32
 URxvt.copyCommand:          xclip -i -selection clipboard
-URxvt.cursorBlink:          true
-URxvt.cursorUnderline:      true
+URxvt.cursorBlink:          false
+URxvt.cursorUnderline:      false
 URxvt.inheritPixmap:        true
 URxvt.internalBorder:       0
 URxvt.keysym.Shift-Down:    command:\033]721;1\007
