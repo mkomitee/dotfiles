@@ -34,7 +34,6 @@ path=(
     /sbin
     /opt/X11/bin
     /usr/texbin
-    /usr/local/share/python
 )
 path=($^path(N))
 export PATH
