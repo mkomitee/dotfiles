@@ -11,11 +11,13 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 " NeoBundle 'chriskempson/base16-vim'
 " NeoBundle 'duff/vim-scratch.git'
 " NeoBundle 'ervandew/supertab.git'
+" NeoBundle 'garbas/vim-snipmate', {'depends': ['tomtom/tlib_vim', 'MarcWeber/vim-addon-mw-utils']}
 " NeoBundle 'jpalardy/vim-slime'
 " NeoBundle 'majutsushi/tagbar'
 " NeoBundle 'mileszs/ack.vim.git'
 " NeoBundle 'mkitt/tabline.vim.git'
 " NeoBundle 'mkomitee/vim-gf-python'
+" NeoBundle 'mkomitee/vim-snippets'
 " NeoBundle 'nelstrom/vim-americanize'
 " NeoBundle 'nelstrom/vim-visual-star-search'
 " NeoBundle 'tpope/vim-abolish'
@@ -24,18 +26,18 @@ NeoBundle 'AfterColors.vim'
 NeoBundle 'ConradIrwin/vim-comment-object'
 NeoBundle 'Lokaltog/vim-distinguished'
 NeoBundle 'Lokaltog/vim-easymotion'
+NeoBundle 'Townk/vim-autoclose'
+NeoBundle 'UltiSnips'
 NeoBundle 'Valloric/YouCompleteMe.git', {'build' : { 'unix': './install.sh --clang-completer' }}
 NeoBundle 'YankRing.vim'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'altercation/vim-colors-solarized'
-NeoBundle 'garbas/vim-snipmate', {'depends': ['tomtom/tlib_vim', 'MarcWeber/vim-addon-mw-utils']}
 NeoBundle 'godlygeek/tabular'
 NeoBundle 'int3/vim-extradite'
 NeoBundle 'kana/vim-textobj-indent.git'
 NeoBundle 'kana/vim-textobj-user.git'
 NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'kshenoy/vim-signature'
-NeoBundle 'mkomitee/vim-snippets'
 NeoBundle 'python_match.vim'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'sjl/gundo.vim'
@@ -392,11 +394,13 @@ command! -nargs=0 Pulse call Pulse(9)
 colorscheme distinguished
 " }}}
 " Plugin Configurations -----------------------------------------------------{{{
-" snipmate {{{
-imap ss <esc>a<Plug>snipMateNextOrTrigger
-smap ss <Plug>snipMateNextOrTrigger
+" ultisnips {{{
+let g:UltiSnipsExpandTrigger="<c-j>"
 " }}}
-" vim-signature{{{
+" youcompleteme {{{
+let g:ycm_complete_in_comments = 0
+" }}}
+" vim-signature {{{
 let g:SignatureMarkTextHL='SignatureMarkTextHL'
 let g:SignatureMarkerTextHL='SignatureMarkerTextHL'
 " }}}
