@@ -401,6 +401,14 @@ let g:UltiSnipsExpandTrigger="<c-j>"
 " }}}
 " youcompleteme {{{
 let g:ycm_complete_in_comments = 0
+let g:ycm_filetype_whitelist = {
+    \ 'go': 1,
+    \ 'perl': 1,
+    \ 'puppet': 1,
+    \ 'python': 1,
+    \ 'ruby': 1,
+    \ 'vim': 1,
+\}
 " }}}
 " vim-signature {{{
 let g:SignatureMarkTextHL='SignatureMarkTextHL'
