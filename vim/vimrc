@@ -469,9 +469,22 @@ nmap <silent> <leader>c$ <plug>NERDCommenterToEOL
 au BufNewFile,BufRead gitconfig setf gitconfig
 au BufNewFile,BufRead /private/tmp/crontab.* setl backupcopy=yes
 au BufNewFile,BufRead *.moin setf moin
+
+
+
 " }}}
 " Filetype configurations ---------------------------------------------------{{{
 " moin ----------------------------------------------------------------------{{{
+function MoinLevel()
+    let h = matchstr(getline(v:lnum), '^=\+')
+    if empty(h)
+        return "="
+    else
+        return ">" . len(h)
+    endif
+endfunction
+au FileType moin setlocal foldexpr=MoinLevel()
+au FileType moin setlocal foldmethod=expr
 au FileType moin setl textwidth=0
 " }}}
 " make ----------------------------------------------------------------------{{{
