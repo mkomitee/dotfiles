@@ -466,12 +466,10 @@ nmap <silent> <leader>cc <plug>NERDCommenterToggle
 nmap <silent> <leader>c$ <plug>NERDCommenterToEOL
 " }}}
 " Filetype detection --------------------------------------------------------{{{
-au BufNewFile,BufRead gitconfig setf gitconfig
-au BufNewFile,BufRead /private/tmp/crontab.* setl backupcopy=yes
+au BufNewFile,BufRead *.md setf markdown
 au BufNewFile,BufRead *.moin setf moin
-
-
-
+au BufNewFile,BufRead /private/tmp/crontab.* setl backupcopy=yes
+au BufNewFile,BufRead gitconfig setf gitconfig
 " }}}
 " Filetype configurations ---------------------------------------------------{{{
 " moin ----------------------------------------------------------------------{{{
@@ -512,10 +510,21 @@ au FileType man nnoremap <buffer> q :q<cr>
 au FileType man nnoremap <buffer> <space><space> <C-D>
 " }}}
 " markdown ------------------------------------------------------------------{{{
+function MarkdownLevel()
+    let h = matchstr(getline(v:lnum), '^#\+')
+    if empty(h)
+        return "="
+    else
+        return ">" . len(h)
+    endif
+endfunction
+
 au FileType markdown au BufWritePre <buffer> RemoveTrailingWhiteSpace
+au FileType markdown setl foldexpr=MarkdownLevel()
+au FileType markdown setl foldmethod=expr
 au FileType markdown setl shiftwidth=4
 au FileType markdown setl softtabstop=4
-au BufNewFile,BufRead $HOME/.tasks.md setl nospell
+
 " }}}
 " perl ----------------------------------------------------------------------{{{
 au FileType perl au BufWritePre <buffer> RemoveTrailingWhiteSpace
