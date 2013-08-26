@@ -38,6 +38,7 @@ NeoBundle 'kana/vim-textobj-indent.git'
 NeoBundle 'kana/vim-textobj-user.git'
 NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'kshenoy/vim-signature'
+NeoBundle 'moin.vim'
 NeoBundle 'python_match.vim'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'sjl/gundo.vim'
@@ -458,8 +459,12 @@ nmap <silent> <leader>c$ <plug>NERDCommenterToEOL
 " Filetype detection --------------------------------------------------------{{{
 au BufNewFile,BufRead gitconfig setf gitconfig
 au BufNewFile,BufRead /private/tmp/crontab.* setl backupcopy=yes
+au BufNewFile,BufRead *.moin setf moin
 " }}}
 " Filetype configurations ---------------------------------------------------{{{
+" moin ----------------------------------------------------------------------{{{
+au FileType moin setl textwidth=0
+" }}}
 " make ----------------------------------------------------------------------{{{
 au FileType make au BufWritePre <buffer> RemoveTrailingWhiteSpace
 au FileType make setl noexpandtab
