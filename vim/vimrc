@@ -8,49 +8,24 @@ call neobundle#rc(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 " }}}
 
-" NeoBundle 'chriskempson/base16-vim'
-" NeoBundle 'duff/vim-scratch.git'
-" NeoBundle 'ervandew/supertab.git'
-" NeoBundle 'garbas/vim-snipmate', {'depends': ['tomtom/tlib_vim', 'MarcWeber/vim-addon-mw-utils']}
-" NeoBundle 'jpalardy/vim-slime'
-" NeoBundle 'majutsushi/tagbar'
-" NeoBundle 'mileszs/ack.vim.git'
-" NeoBundle 'mkitt/tabline.vim.git'
-" NeoBundle 'mkomitee/vim-gf-python'
-" NeoBundle 'mkomitee/vim-snippets'
-" NeoBundle 'nelstrom/vim-americanize'
-" NeoBundle 'nelstrom/vim-visual-star-search'
-" NeoBundle 'tpope/vim-abolish'
-" NeoBundle 'tpope/vim-vividchalk'
 NeoBundle 'AfterColors.vim'
-NeoBundle 'ConradIrwin/vim-comment-object'
 NeoBundle 'Lokaltog/vim-distinguished'
-NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'SirVer/ultisnips'
-NeoBundle 'Townk/vim-autoclose'
-NeoBundle 'Valloric/YouCompleteMe.git', {'build' : { 'unix': './install.sh --clang-completer' }}
 NeoBundle 'YankRing.vim'
-NeoBundle 'airblade/vim-gitgutter'
-NeoBundle 'altercation/vim-colors-solarized'
-NeoBundle 'godlygeek/tabular'
-NeoBundle 'int3/vim-extradite'
+NeoBundle 'duff/vim-scratch.git'
+NeoBundle 'ervandew/supertab.git'
 NeoBundle 'kana/vim-textobj-indent.git'
 NeoBundle 'kana/vim-textobj-user.git'
 NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'klen/python-mode'
 NeoBundle 'kshenoy/vim-signature'
 NeoBundle 'mitsuhiko/vim-python-combined'
 NeoBundle 'moin.vim'
 NeoBundle 'python_match.vim'
 NeoBundle 'scrooloose/nerdcommenter'
-NeoBundle 'sjl/gundo.vim'
-NeoBundle 'sjl/splice.vim'
-NeoBundle 'tpope/vim-characterize'
-NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-markdown'
 NeoBundle 'tpope/vim-repeat'
 NeoBundle 'tpope/vim-surround'
-NeoBundle 'tpope/vim-tbone'
-NeoBundle 'tpope/vim-unimpaired'
 
 if !empty($GOROOT)
     set runtimepath+=$GOROOT/misc/vim
@@ -396,26 +371,22 @@ command! -nargs=0 Pulse call Pulse(9)
 colorscheme distinguished
 " }}}
 " Plugin Configurations -----------------------------------------------------{{{
-" ultisnips {{{
-let g:UltiSnipsExpandTrigger="<c-j>"
-" }}}
-" youcompleteme {{{
-let g:ycm_complete_in_comments = 0
-let g:ycm_filetype_whitelist = {
-    \ 'go': 1,
-    \ 'perl': 1,
-    \ 'puppet': 1,
-    \ 'python': 1,
-    \ 'ruby': 1,
-    \ 'vim': 1,
-\}
-" }}}
 " vim-signature {{{
 let g:SignatureMarkTextHL='SignatureMarkTextHL'
 let g:SignatureMarkerTextHL='SignatureMarkerTextHL'
 " }}}
-" Supertab ------------------------------------------------------------------{{{
-" let g:SuperTabDefaultCompletionType = "context"
+" python-mode {{{
+let g:pymode_breakpoint = 1
+let g:pymode_doc = 1
+let g:pymode_folding = 1
+let g:pymode_indent = 1
+let g:pymode_lint = 0
+let g:pymode_motion = 1
+let g:pymode_rope = 0
+let g:pymode_run = 0
+let g:pymode_syntax = 1
+let g:pymode_syntax_all = 1
+let g:pymode_virtualenv = 0
 " }}}
 " NetRW ---------------------------------------------------------------------{{{
 let g:netrw_list_hide = '^\.,\~$,^tags$'
@@ -434,29 +405,6 @@ nnoremap <silent> <Leader>b <esc>:CtrlPBuffer<cr>
 "  <C-t> → will open the finding match in a tab
 "  <C-v> → will open the finding match in a vertical split
 "  <C-h> → will open the finding match in a horizontal split
-" }}}
-" Tabularize ----------------------------------------------------------------{{{
-vnoremap <silent> <Leader>a=> :Tabularize /=><CR>
-vnoremap <silent> <Leader>a= :Tabularize /=<CR>
-vnoremap <silent> <Leader>a, :Tabularize /,\zs<CR>
-nnoremap <silent> <Leader>a, :Tabularize /,\zs<CR>
-vnoremap <silent> <Leader>a: :Tabularize /:\zs<CR>
-nnoremap <silent> <Leader>a: :Tabularize /:\zs<CR>
-" }}}
-" slime ---------------------------------------------------------------------{{{
-" :SlimeConfig - configure which tmux pane to send text
-" :SlimeSend - send text, can use a range, or marks including the marks used to
-" delimit visual mode selection
-" python => ipython
-" perl   => Devel::REPL's re.pl
-" ruby   => irb
-" let g:slime_no_mappings = 0
-" let g:slime_paste_file = $HOME.'/.vimdata/slime'
-" let g:slime_target = "tmux"
-" au FileType python let g:slime_python_ipython = 1
-" }}}
-" tagbar --------------------------------------------------------------------{{{
-" nnoremap <silent> <leader>t :TagbarToggle<cr>
 " }}}
 " NERDCommenter -------------------------------------------------------------{{{
 let g:NERDCreateDefaultMappings = 0
