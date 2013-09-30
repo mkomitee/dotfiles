@@ -1,4 +1,0 @@
-#!/usr/local/bin/zsh
-
-ref=$(git symbolic-ref HEAD)
-echo ${ref#refs/heads/}
