@@ -1,0 +1,4 @@
+#!/usr/local/bin/perl -w
+use strict;
+my $epoch = shift;
+print scalar localtime($epoch) . "\n";

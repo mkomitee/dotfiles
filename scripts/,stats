@@ -1,0 +1,24 @@
+#!/usr/local/bin/python
+import numpy
+import sys
+
+raw = numpy.array([float(l.strip()) for l in sys.stdin.readlines()])
+data = dict(
+    samples=len(raw), mean=raw.mean(), max=raw.max(), min=raw.min(),
+    std=raw.std()
+)
+print '''Samples:            {samples:15}
+Mean:               {mean:20.2f}
+Max:                {max:20.2f}
+Min:                {min:20.2f}
+Standard Deviation: {std:20.2f}'''.format(**data)
+
+try:
+    nbins = int(sys.argv[1])
+except IndexError:
+    nbins = 10
+N, bins = numpy.histogram(raw, nbins, range=(raw.min(), raw.max()))
+for n in range(len(bins)-1):
+    print "{0!s:>3} samples fall into bin [{1:.2f}, {2:.2f}]".format(N[n], bins[n], bins[n+1])
+
+

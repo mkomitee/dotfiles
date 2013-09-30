@@ -1,0 +1,14 @@
+#!/usr/local/bin/python
+import sys
+
+def main():
+    total = 0
+    count = 0
+    for line in sys.stdin.readlines():
+        total += float(line.strip())
+        count += 1
+    print 'Total: {0} Average: {1}'.format(total, total/count)
+
+
+if __name__ == '__main__':
+    main()
