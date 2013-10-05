@@ -66,3 +66,6 @@ htmlcov/
 *#
 
 html
+
+### Simple say to indicate a file should be ignored
+*.gitignore
