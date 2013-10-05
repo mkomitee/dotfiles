@@ -23,6 +23,7 @@ NeoBundle 'mitsuhiko/vim-python-combined'
 NeoBundle 'moin.vim'
 NeoBundle 'python_match.vim'
 NeoBundle 'scrooloose/nerdcommenter'
+NeoBundle 'scrooloose/syntastic'
 NeoBundle 'tpope/vim-markdown'
 NeoBundle 'tpope/vim-repeat'
 NeoBundle 'tpope/vim-surround'
@@ -376,6 +377,26 @@ colorscheme distinguished
 let g:SignatureMarkTextHL='SignatureMarkTextHL'
 let g:SignatureMarkerTextHL='SignatureMarkerTextHL'
 " }}}
+" syntastic {{{
+let g:syntastic_python_checkers=['flake8', 'pylint', 'python']
+
+autocmd FileType python map <buffer> <leader>8 :SyntasticCheck<CR>
+
+let g:syntastic_aggregate_errors=1
+let g:syntastic_always_populate_loc_list=1
+let g:syntastic_auto_jump=0
+let g:syntastic_auto_loc_list=1
+let g:syntastic_check_on_open=0
+let g:syntastic_check_on_wq=0
+let g:syntastic_debug=0
+let g:syntastic_echo_current_error=1
+let g:syntastic_enable_balloons=0
+let g:syntastic_enable_highlighting=0
+let g:syntastic_enable_signs=1
+let g:syntastic_mode_map = { 'mode': 'passive' }
+let g:syntastic_quiet_warnings=0
+" }}}
+
 " python-mode {{{
 let g:pymode_breakpoint = 0
 let g:pymode_doc = 1

@@ -27,7 +27,8 @@ LINKS = (
     ("~/.Xresources", "~/.dotfiles/Xresources"),
     ("~/.xsession", "~/.dotfiles/xsession"),
     ("~/.xinitrc", "~/.dotfiles/xsession"),
-    ("~/.urxvt/ext/vim-scrollback", "~/.dotfiles/contrib/ervandew/urxvt-vim-scrollback/vim-scrollback"),
+    ("~/.urxvt/ext/vim-scrollback",
+     "~/.dotfiles/contrib/ervandew/urxvt-vim-scrollback/vim-scrollback"),
     ("~/.pip/pip.conf", "~/.dotfiles/pip.conf"),
 )
 
@@ -39,6 +40,7 @@ CONTAINS = (
 
 
 def expand(path):
+    '''expand variables and ~username directories and make them absolute'''
     return os.path.abspath(os.path.expandvars(os.path.expanduser(path)))
 
 
