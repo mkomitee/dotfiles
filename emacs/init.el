@@ -1,8 +1,10 @@
 ;; Enabling to gain access to the emacs-starter-kit because I don't
 ;; know what I'm doing. https://github.com/technomancy/emacs-starter-kit/
 (require 'package)
+
 (add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/"))
+             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+
 (package-initialize)
 
 (when (not package-archive-contents)
@@ -12,7 +14,6 @@
 (defvar my-packages '(ag
                       evil
                       fill-column-indicator
-                      git-commit
                       git-gutter
                       haskell-mode
                       markdown-mode
@@ -159,10 +160,6 @@
 
 (require 'yasnippet)
 (setq yas-snippet-dirs '("~/.dotfiles/emacs/snippets"))
-
-(require 'git-commit)
-(add-hook 'git-commit-mode-hook 'turn-on-fly-spell)
-(add-hook 'git-commit-mode-hook (lambda () (toggle-save-place0)))
 
 (setq frame-background-mode 'dark)
 (load-theme 'wombat)
