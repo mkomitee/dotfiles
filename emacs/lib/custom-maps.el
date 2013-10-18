@@ -7,13 +7,16 @@
 (define-key evil-normal-state-map "|" (kbd ":vsplit C-m C-l"))
 (define-key evil-normal-state-map "_" (kbd ":split C-m C-j"))
 (define-key evil-normal-state-map " b" 'switch-to-buffer)
-(define-key evil-normal-state-map " p" 'textmate-goto-file)
+(define-key evil-normal-state-map " p" 'projectile-find-file)
+
 (define-key evil-normal-state-map " ev" (kbd ":e ~/.dotfiles/emacs/init.el"))
-(define-key evil-normal-state-map " cc" 'comment-or-uncomment-region-or-line)
-(define-key evil-visual-state-map " cc" 'comment-or-uncomment-region-or-line)
+(define-key evil-normal-state-map " cc" 'evilnc-comment-or-uncomment-lines)
+(define-key evil-visual-state-map " cc" 'evilnc-comment-or-uncomment-lines)
+
 (define-key evil-visual-state-map " s" 'sort-lines)
 (define-key evil-normal-state-map "j" (kbd "gj"))
 (define-key evil-normal-state-map "k" (kbd "gk"))
+(define-key evil-normal-state-map "Y" (kbd "y$"))
 
 (define-key evil-insert-state-map "\C-j" 'evil-window-down)
 (define-key evil-insert-state-map "\C-k" 'evil-window-up)
@@ -49,5 +52,59 @@
 (evil-ex-define-cmd "esh[ell]" 'eshell)
 (evil-ex-define-cmd "sort" 'sort-lines)
 (evil-ex-define-cmd "python" 'python-shell-switch-to-shell)
+
+(define-key evil-insert-state-map (kbd "RET") 'evil-ret-and-indent)
+(define-key evil-insert-state-map (kbd "RET") 'evil-ret)
+(evil-define-key 'insert eshell-mode-map (kbd "RET") 'eshell-send-input)
+
+(after 'ag-autoloads
+  (define-key evil-normal-state-map (kbd "SPC /") 'ag-regexp-project-at-point))
+
+;; escape minibuffer
+(define-key minibuffer-local-map [escape] 'my-minibuffer-keyboard-quit)
+(define-key minibuffer-local-ns-map [escape] 'my-minibuffer-keyboard-quit)
+(define-key minibuffer-local-completion-map [escape] 'my-minibuffer-keyboard-quit)
+(define-key minibuffer-local-must-match-map [escape] 'my-minibuffer-keyboard-quit)
+(define-key minibuffer-local-isearch-map [escape] 'my-minibuffer-keyboard-quit)
+
+(after 'auto-complete
+  (define-key ac-completing-map "\t" 'ac-expand)
+  (define-key ac-completing-map [tab] 'ac-expand)
+  (define-key ac-completing-map (kbd "C-n") 'ac-next)
+  (define-key ac-completing-map (kbd "C-p") 'ac-previous))
+
+;; better M-x, or so they say.
+(after 'smex
+  (global-set-key (kbd "M-x") 'smex)
+  (global-set-key (kbd "C-x C-m") 'smex)
+  (global-set-key (kbd "C-c C-m") 'smex))
+
+;; This makes those windows with lists of possible commands more useful
+(require-package 'guide-key)
+(require 'guide-key)
+(setq guide-key/guide-key-sequence '("C-x" "C-c"))
+(setq guide-key/recursive-key-sequence-flag t)
+(guide-key-mode 1)
+
+;; This makes C-c escape
+;; (defun my-esc (prompt)
+;;   "Functionality for escaping generally.  Includes exiting Evil insert state and C-g binding. "
+;;   (cond
+;;    ;; If we're in one of the Evil states that defines [escape] key, return [escape] so as
+;;    ;; Key Lookup will use it.
+;;    ((or (evil-insert-state-p) (evil-normal-state-p) (evil-replace-state-p) (evil-visual-state-p)) [escape])
+;;    ;; This is the best way I could infer for now to have C-c work during evil-read-key.
+;;    ;; Note: As long as I return [escape] in normal-state, I don't need this.
+;;    ;;((eq overriding-terminal-local-map evil-read-key-map) (keyboard-quit) (kbd ""))
+;;    (t (kbd "C-g"))))
+;; (define-key key-translation-map (kbd "C-c") 'my-esc)
+;; ;; Works around the fact that Evil uses read-event directly when in operator state, which
+;; ;; doesn't use the key-translation-map.
+;; (define-key evil-operator-state-map (kbd "C-c") 'keyboard-quit)
+;; ;; Not sure what behavior this changes, but might as well set it, seeing the Elisp manual's
+;; ;; documentation of it.
+;; (set-quit-char "C-c")
+
+
 
 (provide 'custom-maps)
