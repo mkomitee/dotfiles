@@ -7,18 +7,38 @@ data = dict(
     samples=len(raw), mean=raw.mean(), max=raw.max(), min=raw.min(),
     std=raw.std()
 )
-print '''Samples:            {samples:15}
-Mean:               {mean:20.2f}
-Max:                {max:20.2f}
-Min:                {min:20.2f}
-Standard Deviation: {std:20.2f}'''.format(**data)
+print '''Samples:            {samples:19}
+Mean:               {mean:19.2f}
+Max:                {max:19.2f}
+Min:                {min:19.2f}
+Standard Deviation: {std:19.2f}'''.format(**data)
 
 try:
     nbins = int(sys.argv[1])
 except IndexError:
     nbins = 10
+total = 0
 N, bins = numpy.histogram(raw, nbins, range=(raw.min(), raw.max()))
 for n in range(len(bins)-1):
-    print "{0!s:>3} samples fall into bin [{1:.2f}, {2:.2f}]".format(N[n], bins[n], bins[n+1])
+    samples = N[n]
+    total += samples
+    low = '{0:.2f}'.format(bins[n])
+    high = '{0:.2f}'.format(bins[n+1])
+    pct = 100 * samples / data['samples']
+    pct_thus_far = 100 * total / data['samples']
 
-
+    if n+1 == nbins or n == 0:
+        print "{0!s:>4} ({3!s:>2}%) samples in bin [{1!s:>5}, {2!s:>5}]".format(
+            samples,
+            low,
+            high,
+            pct
+        )
+    else:
+        print "{0!s:>4} ({3!s:>2}%) samples in bin [{1!s:>5}, {2!s:>5}] ({4!s:>2}% <= {2!s:>5})".format(
+            samples,
+            low,
+            high,
+            pct,
+            pct_thus_far
+        )
