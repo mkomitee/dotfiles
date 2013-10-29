@@ -30,6 +30,8 @@
 (add-to-list 'evil-emacs-state-modes 'inferior-python-mode)
 (add-to-list 'evil-emacs-state-modes 'inferior-haskell-mode)
 
+(add-to-list 'evil-normal-state-modes 'flycheck-error-list-mode)
+
 (evil-mode 1)
 (global-surround-mode 1)
 

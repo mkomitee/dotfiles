@@ -13,6 +13,8 @@
 (require 'fill-column-indicator)
 (setq fci-rule-width 1)
 (setq fci-rule-color "darkred")
+(setq fci-rule-character ?\u254e)
+
 (add-hook 'prog-mode-hook 'fci-mode)
 (add-hook 'prog-mode-hook
           (lambda ()
@@ -41,7 +43,7 @@
 ;; If we don't have a fringe, add a pipe to separate line numbers from
 ;; our text
 (if (not (featurep 'fringe))
-  (setq linum-format "%d |"))
+  (setq linum-format "%d \u254e"))
 
 ;; Theming, ...
 (setq frame-background-mode 'dark)
