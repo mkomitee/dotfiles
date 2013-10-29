@@ -165,6 +165,7 @@ set wildignore+=*.pyc,*.pyo                         " ignore compiled python
 set wildignore+=*.log,*.LOG                         " ignore log files
 set wildignore+=*.[12345678]                        " ignore rotated logs
 set wildignore+=*.gz,*.tar,*.tgz,*.bz2,*.cpio,*.rpm " ignore archives
+set wildignore+=*.ignore                            " ignore extras
 " }}}
 " statusline ----------------------------------------------------------------{{{
 set statusline=         " clear statusline
