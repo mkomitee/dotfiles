@@ -30,10 +30,10 @@
 (require 'custom-markdown)
 (require 'custom-ag)
 (require 'custom-evil)
+(require 'custom-maps)
 (require 'custom-python)
 (require 'custom-haskell)
 (require 'custom-puppet)
-(require 'custom-maps)
 
 ;; Load local modifications
 (require 'local)
