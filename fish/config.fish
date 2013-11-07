@@ -67,6 +67,8 @@ set LANG en_US.UTF-8
 
 source $HOME/.config/fish/aliases.fish
 
+
+
 if status --is-interactive
     source $HOME/.config/fish/interactive.fish
 end

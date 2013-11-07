@@ -1,18 +1,16 @@
-alias dot='cd ~/.dotfiles'
-alias vi=vim
-alias boom='ruby ~/.dotfiles/contrib/holman/boom/bin/boom'
-alias bc='bc -l'
-alias a='resume main'
-alias tig='tig --all'
-alias tmux='tmux -u2'
-alias vim-clear-cache='find ~/.vimdata -type f -delete'
-alias curl='curl --negotiate --user :'
-alias irc='ssh -t matrix.gs tmux -u2 attach-session -t irc'
-alias y=true
-alias reexec="exec fish -l"
-
-alias bar_chart='python ~/.dotfiles/contrib/bitly/data_hacks.git/data_hacks/bar_chart.py'
-alias histogram='python ~/.dotfiles/contrib/bitly/data_hacks.git/data_hacks/histogram.py'
-alias ninety_five_percent='python ~/.dotfiles/contrib/bitly/data_hacks.git/data_hacks/ninety_five_percent.py'
-alias run_for='python ~/.dotfiles/contrib/bitly/data_hacks.git/data_hacks/run_for.py'
-alias sample='python ~/.dotfiles/contrib/bitly/data_hacks.git/data_hacks/sample.py'
+function vi; vim $argv; end
+function bc; command bc -l $argv; end
+function a; resume main; end
+function tig; command tig --all $argv; end
+function tmux; command tmux -u2 $argv; end
+function vim-clear-cache; find ~/.vimdata -type f -delete; end
+function kcurl; curl --negotiate --user : $argv; end
+function irc; ssh -t matrix.gs tmux -u2 attach-session -t irc; end
+function reexec; exec fish -l; end
+function ef; vim ~/.config/fish/config.fish; end
+function ev; vim ~/.vimrc; end
+function ed; vim ~/.vim/en.utf-8.add; end
+function ez; vim ~/.zshrc; end
+function et; vim ~/.tmux.conf; end
+function eg; vim ~/.gitconfig; end
+function cuts; cut -d' ' $argv; end

@@ -5,5 +5,3 @@ function s
         sudo -s
     end
 end
-
-
