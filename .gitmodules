@@ -46,3 +46,6 @@
 [submodule "contrib/seebi/tmux-colors-solarized"]
 	path = contrib/seebi/tmux-colors-solarized
 	url = https://github.com/seebi/tmux-colors-solarized
+[submodule "contrib/sjl/z"]
+	path = contrib/sjl/z
+	url = https://github.com/sjl/z-fish/

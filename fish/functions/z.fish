@@ -1,0 +1,1 @@
+../../contrib/sjl/z/z.fish
