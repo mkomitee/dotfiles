@@ -9,9 +9,12 @@ function resume() {
         if [ "$session" = "" ]; then
             session=main
         fi
-        tmux -u2 attach-session -t $session
+        tmux attach-session -t $session
         if [ $? != 0 ]; then
-            tmux -u2 new-session -s $session
+            (
+                unset KRB5CCNAME
+                tmux new-session -s $session
+            )
         fi
     else
         echo "Don't nest TMUX sessions"
