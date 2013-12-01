@@ -34,6 +34,7 @@ path=(
     /sbin
     /opt/X11/bin
     /usr/texbin
+    /opt/bin
 )
 path=($^path(N))
 export PATH
@@ -50,6 +51,7 @@ manpath=(
     /usr/share/man
     /opt/X11/share/man
     /usr/texbin/man
+    /opt/share/man
 )
 manpath=($^manpath(N))
 export MANPATH
