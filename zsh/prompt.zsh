@@ -109,6 +109,7 @@ function toggle_prompt() {
 }
 
 function title {
+  [ "$TERM" != "linux" ] || return
   [ "$DISABLE_AUTO_TITLE" != "true" ] || return
   printf '\033]2;%s\033\\' "$1"
 }
