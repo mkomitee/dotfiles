@@ -19,4 +19,6 @@ alias irc='ssh -t matrix.gs tmux -u2 attach-session -t irc'
 alias aa='resume main'
 alias y=true
 alias reexec="exec zsh -l"
-
+alias gd="git diff"
+alias gdc="git diff --cached"
+alias gds="git diff --staged"
