@@ -25,6 +25,7 @@ path=(
     $HOME/.dotfiles/contrib/willgit/mainline/bin
     $HOME/.rvm/bin
     $HOME/.pyenv/bin
+    /usr/local/java/jdk/bin
     /usr/local/opt/coreutils/libexec/gnubin
     /usr/local/bin
     /usr/local/sbin
@@ -45,6 +46,8 @@ manpath=(
     $HOME/.cabal/share/man
     $HOME/.dotfiles/contrib/visionmedia/git-extras/man
     $HOME/.rvm/man
+    $HOME/.${UNAME}.${ARCH}/share/man
+    /usr/local/java/jdk/man
     /usr/local/opt/coreutils/libexec/gnuman
     /usr/local/share/man
     /usr/local/man
