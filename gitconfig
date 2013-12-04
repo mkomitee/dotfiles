@@ -76,6 +76,7 @@
     tags = tag -ln1
     vimdiff = difftool
     wc = whatchanged
+    added-file = log --diff-filter=A --
 
 [pager]
     status = yes
@@ -130,6 +131,7 @@
 
 [merge]
     tool = splice
+    conflictstyle = diff3
 
 [push]
     default = upstream
@@ -139,3 +141,9 @@
 
 [credential]
 	helper = cache
+
+[grep]
+    lineNumber = true
+
+[rerere]
+    enabled = true
