@@ -26,6 +26,7 @@
     rl = "%C(yellow)%h %C(red)%gd %C(blue)%cd%Cred%d%Creset %gs%Cblue <%aN>"
 
 [alias]
+    a = add
     l = log --graph --full-history --all --pretty=lgr --abbrev-commit --decorate=short
     lc = local-commits --decorate=short --pretty=lgr
     track = checkout -t
