@@ -7,7 +7,7 @@ alias -g run_for='python ~/.dotfiles/contrib/bitly/data_hacks.git/data_hacks/run
 alias -g sample='python ~/.dotfiles/contrib/bitly/data_hacks.git/data_hacks/sample.py'
 
 # git aliases
-alias gaa="git add --all"
+alias gaa="git add --all ."
 alias gap="git add --patch"
 alias gcv="git commit -v"
 alias gd="git diff"
@@ -17,7 +17,7 @@ alias gs="git status --short --branch"
 
 alias -g vi=vim
 alias aa='resume main'
-alias ack='noglob ack'
+alias ack='ag'
 alias bc='bc -l'
 alias boom='ruby ~/.dotfiles/contrib/holman/boom/bin/boom'
 alias curl='curl --negotiate --user :'
