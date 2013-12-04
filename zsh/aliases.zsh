@@ -13,6 +13,7 @@ alias gcv="git commit -v"
 alias gd="git diff"
 alias gdc="git diff --cached"
 alias gds="git diff --staged"
+alias gs="git status --short --branch"
 
 alias -g vi=vim
 alias aa='resume main'
