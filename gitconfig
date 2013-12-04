@@ -27,6 +27,7 @@
 
 [alias]
     a = add
+    d = diff
     l = log --graph --full-history --all --pretty=lgr --abbrev-commit --decorate=short
     lc = local-commits --decorate=short --pretty=lgr
     track = checkout -t
