@@ -26,46 +26,56 @@
     rl = "%C(yellow)%h %C(red)%gd %C(blue)%cd%Cred%d%Creset %gs%Cblue <%aN>"
 
 [alias]
-    s = status -sb
-    a = add
-    d = diff
-    l = log --graph --full-history --all --pretty=lgr --abbrev-commit --decorate=short
-    lc = local-commits --decorate=short --pretty=lgr
-    track = checkout -t
-    ls = ls-files
-    rl = reflog --full-history --all --pretty=rl --abbrev-commit --decorate=short
-    branches = branch -vv
-    dw = diff --color-words='[^[:space:]]|([[:alnum:]]|UTF_8_GUARD)+'
-    ds = diff --staged --word-diff
-    ref = show-ref
-    vimdiff = difftool
     head = log -1
-    stat = status -sb
-    st = status -sb
-    ci = commit -v
+    incoming = !git fetch && git log --pretty=oneline --abbrev-commit --graph ..@{u}
+    l = log --graph --full-history --all --pretty=lgr --abbrev-commit --decorate=short
+    outgoing = !git fetch && git log --pretty=oneline --abbrev-commit --graph @{u}..
+
     co = checkout
-    di = diff
+    track = checkout -t
+
+    d = diff
     dc = diff --cached
-    sm = submodule
-    wc = whatchanged
-    aa = add -A :/
-    ap = add --patch
+    di = diff
+    ds = diff --staged
+    dsw = diff --staged --word-diff
+    dw = diff --color-words='[^[:space:]]|([[:alnum:]]|UTF_8_GUARD)+'
+
+    s = status -sb
+    st = status -sb
+    stat = status -sb
+
+    ci = commit -v
     ammend = commit --amend -v
     amend = commit --amend -v
-    tags = tag -ln1
-    remotes = remote -v
+
+    a = add
+    aa = add -A :/
+    ap = add --patch
+
     list = stash list --pretty=rl --abbrev-commit --decorate=short
     save = stash save -u
-    div = divergence
+
     ; assume/unassume to ignore/unignore changes in a file for now,
     ; assumed lists those we're assuming are unchanged
     assume = update-index --assume-unchanged
     unassume = update-index --no-assume-unchanged
     assumed = "!git ls-files -v | grep ^h | cut -c 3-"
+
     ; snapshot to take a snapshot without removing changes from the tree
     snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
-    incoming = !git fetch && git log --pretty=oneline --abbrev-commit --graph ..@{u}
-    outgoing = !git fetch && git log --pretty=oneline --abbrev-commit --graph @{u}..
+
+    branches = branch -vv
+    div = divergence
+    lc = local-commits --decorate=short --pretty=lgr
+    ls = ls-files
+    ref = show-ref
+    remotes = remote -v
+    rl = reflog --full-history --all --pretty=rl --abbrev-commit --decorate=short
+    sm = submodule
+    tags = tag -ln1
+    vimdiff = difftool
+    wc = whatchanged
 
 [pager]
     status = yes
