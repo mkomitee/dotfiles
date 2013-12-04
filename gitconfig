@@ -26,6 +26,7 @@
     rl = "%C(yellow)%h %C(red)%gd %C(blue)%cd%Cred%d%Creset %gs%Cblue <%aN>"
 
 [alias]
+    s = status -sb
     a = add
     d = diff
     l = log --graph --full-history --all --pretty=lgr --abbrev-commit --decorate=short
