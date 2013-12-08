@@ -25,6 +25,7 @@ NeoBundle 'dag/vim-fish'
 NeoBundle 'dahu/LearnVim'
 NeoBundle 'duff/vim-scratch.git'
 NeoBundle 'ervandew/supertab.git'
+NeoBundle 'jpalardy/vim-slime'
 NeoBundle 'kana/vim-textobj-indent.git'
 NeoBundle 'kana/vim-textobj-user.git'
 NeoBundle 'kien/ctrlp.vim'
@@ -463,6 +464,16 @@ nmap <silent> <leader>c$ <plug>NERDCommenterToEOL
 " }}}
 " YankRing ------------------------------------------------------------------{{{
 let g:yankring_history_dir = "$HOME/.vimdata"
+" }}}
+" Slime {{{
+" Ctrl+A, q will tell you the tmux pane ID's.
+" Run :SlimeConfig,
+"     socket: default,
+"     tmux pane: :.$n where $n is the pane ID where ipython is located
+" Normal Mode Ctrl+C will send the next paragraph to another tmux pane.
+" Visual Mode Ctrl+C will send the selected text to another tmux pane.
+let g:slime_target = "tmux"
+let g:slime_python_ipython = 1
 " }}}
 " Filetype detection --------------------------------------------------------{{{
 au BufNewFile,BufRead *.md setf markdown
