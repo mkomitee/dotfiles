@@ -474,6 +474,7 @@ let g:yankring_history_dir = "$HOME/.vimdata"
 " Visual Mode Ctrl+C will send the selected text to another tmux pane.
 let g:slime_target = "tmux"
 let g:slime_python_ipython = 1
+let g:slime_paste_file="$HOME/.vimdata/slime_paste"
 " }}}
 " Filetype detection --------------------------------------------------------{{{
 au BufNewFile,BufRead *.md setf markdown
