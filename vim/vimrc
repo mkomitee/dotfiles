@@ -39,6 +39,9 @@ NeoBundle 'tpope/vim-markdown'
 NeoBundle 'tpope/vim-repeat'
 NeoBundle 'tpope/vim-surround'
 
+NeoBundle 'sjl/badwolf'
+NeoBundle 'junegunn/seoul256.vim'
+
 if !empty($GOROOT)
     set runtimepath+=$GOROOT/misc/vim
 endif
@@ -382,7 +385,8 @@ command! RemoveTrailingWhiteSpace :call RemoveTrailingWhiteSpace()
 command! -nargs=0 Pulse call Pulse(9)
 " }}}
 " Colorscheme ---------------------------------------------------------------{{{
-colorscheme Tomorrow-Night-Eighties
+" colorscheme Tomorrow-Night-Eighties
+colorscheme badwolf
 " }}}
 " Plugin Configurations -----------------------------------------------------{{{
 " silver searcher " ---------------------------------------------------------{{{

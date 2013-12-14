@@ -1,0 +1,29 @@
+#!/bin/sh
+
+tmux split-window -h
+tmux split-window -h
+tmux split-window
+tmux select-pane -t 2
+tmux split-window
+tmux select-pane -t 1
+tmux split-window
+tmux split-window -h
+tmux select-pane -t 1
+tmux split-window -h
+tmux select-pane -t 1
+tmux split-window
+tmux select-pane -t 3
+tmux split-window
+tmux select-pane -t 5
+tmux split-window
+tmux select-pane -t 7
+tmux split-window
+tmux select-pane -t 9
+tmux split-window
+tmux select-pane -t 11
+tmux split-window
+tmux select-pane -t 13
+tmux split-window
+tmux select-pane -t 15
+tmux split-window
+tmux select-pane -t 1
