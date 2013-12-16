@@ -82,7 +82,7 @@ export ACK_COLOR_MATCH='red'
 export ACKRC=~/.dotfiles/ackrc
 
 # LESS CONFIG
-export LESS="-RMQ"
+export LESS="-RMQigMws"
 
 export PAGER=less
 export EDITOR=vim
