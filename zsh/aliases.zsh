@@ -30,3 +30,5 @@ alias tig='tig --all'
 alias tmux='tmux -u2'
 alias turses='(source ~/.venv/turses/bin/activate && turses -a mkomitee)'
 alias y=true
+
+alias type='type -a'
