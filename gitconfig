@@ -5,17 +5,17 @@
     ui = auto
 
 [core]
-    pager = less -FRXMQ
+    pager = less -FRXMQigMws
     abbrev = 8
     editor = vim -pc ':normal gg'
-    whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
+    whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
     excludesfile = ~/.dotfiles/gitignore
 
 [log]
     abbrevcommit = yes
     decorate = short
     showroot = true
-    date=short
+    date = short
 
 [interactive]
     single = yes
@@ -23,60 +23,47 @@
 [pretty]
     lg = "%C(yellow)%h %C(blue)%cd%Cred%d%Creset %s%Cblue <%aN>"
     lgr = "%C(yellow)%h %C(blue)%cr%Cred%d%Creset %s%Cblue <%aN>"
-    rl = "%C(yellow)%h %C(red)%gd %C(blue)%cd%Cred%d%Creset %gs%Cblue <%aN>"
 
 [alias]
-    head = log -1
-    incoming = !git fetch && git log --pretty=oneline --abbrev-commit --graph ..@{u}
-    l = log --graph --full-history --all --pretty=lgr --abbrev-commit --decorate=short
-    outgoing = !git fetch && git log --pretty=oneline --abbrev-commit --graph @{u}..
-
     co = checkout
     track = checkout -t
 
-    d = diff
-    dc = diff --cached
     di = diff
-    ds = diff --staged
-    dsw = diff --staged --word-diff
     dw = diff --color-words='[^[:space:]]|([[:alnum:]]|UTF_8_GUARD)+'
+    dc = diff --cached
+    dcw = diff --cached --word-diff --color-words='[^[:space:]]|([[:alnum:]]|UTF_8_GUARD)+'
+    ds = diff --staged
+    dsw = diff --staged --word-diff --color-words='[^[:space:]]|([[:alnum:]]|UTF_8_GUARD)+'
 
-    s = status -sb
     st = status -sb
     stat = status -sb
 
     ci = commit -v
-    ammend = commit --amend -v
+    cm = commit -m
+
     amend = commit --amend -v
 
-    a = add
     aa = add -A :/
-    ap = add --patch
 
-    list = stash list --pretty=rl --abbrev-commit --decorate=short
-    save = stash save -u
-
-    ; assume/unassume to ignore/unignore changes in a file for now,
-    ; assumed lists those we're assuming are unchanged
-    assume = update-index --assume-unchanged
-    unassume = update-index --no-assume-unchanged
-    assumed = "!git ls-files -v | grep ^h | cut -c 3-"
-
-    ; snapshot to take a snapshot without removing changes from the tree
-    snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
-
-    branches = branch -vv
-    div = divergence
     lc = local-commits --decorate=short --pretty=lgr
-    ls = ls-files
-    ref = show-ref
-    remotes = remote -v
-    rl = reflog --full-history --all --pretty=rl --abbrev-commit --decorate=short
-    sm = submodule
-    tags = tag -ln1
-    vimdiff = difftool
-    wc = whatchanged
+
     added-file = log --diff-filter=A --
+
+    branches = branch -avv
+    remotes = remote -v
+    tags = tag -l
+
+    root = rev-parse --show-toplevel
+    id = rev-parse
+    currentbranch = rev-parse --abbrev-ref HEAD
+
+    pull = pull --ff-only
+    up = merge --ff-only
+
+    ack = log --color=always --all --topo-order --pretty=lg --full-history -S 
+
+    shelve = stash save --include-untracked
+    unshelve = stash pop
 
 [pager]
     status = yes
@@ -96,7 +83,6 @@
 
 [diff]
     tool = vimdiff
-    guitool = gvimdiff
     algorithm = patience
 
 [branch]
@@ -118,9 +104,6 @@
 
 [mergetool "vmt"]
     cmd = vim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
-
-[mergetool "gvmt"]
-    cmd = gvim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
 
 [mergetool "splice"]
     cmd = "vim -f $BASE $LOCAL $REMOTE $MERGED -c 'SpliceInit'"
