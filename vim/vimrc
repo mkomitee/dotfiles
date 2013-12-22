@@ -190,6 +190,8 @@ set statusline+=%=      " seperator
 set statusline+=c:%c\   " column
 set statusline+=l:%l/%L " line
 " }}}
+" Try really hard to use the correct syntax highlighting
+autocmd BufEnter * :syntax sync fromstart
 " }}}
 " Leaders -------------------------------------------------------------------{{{
 let mapleader = " "     " this may change soon, I keep wanting to have the
