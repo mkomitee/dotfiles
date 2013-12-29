@@ -1,5 +1,6 @@
 source $HOME/.dotfiles/vim/vimrc
-colorscheme Tomorrow-Night-Eighties
 set background=dark
-set exrc
-set secure
+" colorscheme Tomorrow-Night-Eighties
+colorscheme distinguished
+" colorscheme badwolf
+" colorscheme flatcolor

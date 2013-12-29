@@ -15,14 +15,9 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 " }}}
 
 NeoBundle 'AfterColors.vim'
-NeoBundle 'Lokaltog/vim-distinguished'
-NeoBundle 'MaxSt/FlatColor'
-NeoBundle 'SirVer/ultisnips'
 NeoBundle 'YankRing.vim'
 NeoBundle 'cakebaker/scss-syntax.vim'
-NeoBundle 'chriskempson/vim-tomorrow-theme'
 NeoBundle 'dag/vim-fish'
-NeoBundle 'dahu/LearnVim'
 NeoBundle 'duff/vim-scratch.git'
 NeoBundle 'ervandew/supertab.git'
 NeoBundle 'jpalardy/vim-slime'
@@ -39,9 +34,12 @@ NeoBundle 'sjl/splice.vim'
 NeoBundle 'tpope/vim-markdown'
 NeoBundle 'tpope/vim-repeat'
 NeoBundle 'tpope/vim-surround'
+NeoBundle 'tpope/vim-vinegar'
 
+NeoBundle 'Lokaltog/vim-distinguished'
+NeoBundle 'MaxSt/FlatColor'
+NeoBundle 'chriskempson/vim-tomorrow-theme'
 NeoBundle 'sjl/badwolf'
-NeoBundle 'junegunn/seoul256.vim'
 
 if !empty($GOROOT)
     set runtimepath+=$GOROOT/misc/vim
@@ -95,12 +93,14 @@ set shiftround                 " round indent to multiple of shiftwidth
 set smarttab                   " shiftwidth at start of line, tabstop elsewhere
 set textwidth=80               " wrap at 80 columns
 set tags=./tags;               " name of the tags files which is relative to the project
-" set showtabline=2              " always show the tab line
 set notimeout
 set ttimeout
 set ttimeoutlen=10
 set nomodeline
 set display=lastline
+set exrc
+set secure
+
 if exists('+colorcolumn')
   set colorcolumn=+1
 endif
@@ -120,7 +120,7 @@ set fillchars+=stlnc:━ " indicate horizontal splits with -
 " }}}
 " listchars -----------------------------------------------------------------{{{
 set listchars=            " reset listchars
-set listchars+=tab:▸\     " display tabs
+set listchars+=tab:▸⋅     " display tabs
 set listchars+=extends:❯  " hint that theres more to the right, ...
 set listchars+=precedes:❮ " hint that theres more to the left, ...
 " }}}
@@ -386,10 +386,6 @@ command! -bang WQ wq<bang>
 " }}}
 command! RemoveTrailingWhiteSpace :call RemoveTrailingWhiteSpace()
 command! -nargs=0 Pulse call Pulse(9)
-" }}}
-" Colorscheme ---------------------------------------------------------------{{{
-" colorscheme Tomorrow-Night-Eighties
-colorscheme badwolf
 " }}}
 " Plugin Configurations -----------------------------------------------------{{{
 " silver searcher " ---------------------------------------------------------{{{
