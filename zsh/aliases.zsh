@@ -1,10 +1,10 @@
 # Simple stats
 #!/bin/zsh
-alias -g bar_chart='python ~/.dotfiles/contrib/bitly/data_hacks.git/data_hacks/bar_chart.py'
-alias -g histogram='python ~/.dotfiles/contrib/bitly/data_hacks.git/data_hacks/histogram.py'
-alias -g ninety_five_percent='python ~/.dotfiles/contrib/bitly/data_hacks.git/data_hacks/ninety_five_percent.py'
-alias -g run_for='python ~/.dotfiles/contrib/bitly/data_hacks.git/data_hacks/run_for.py'
-alias -g sample='python ~/.dotfiles/contrib/bitly/data_hacks.git/data_hacks/sample.py'
+alias bar_chart='python ~/.dotfiles/contrib/bitly/data_hacks.git/data_hacks/bar_chart.py'
+alias histogram='python ~/.dotfiles/contrib/bitly/data_hacks.git/data_hacks/histogram.py'
+alias ninety_five_percent='python ~/.dotfiles/contrib/bitly/data_hacks.git/data_hacks/ninety_five_percent.py'
+alias run_for='python ~/.dotfiles/contrib/bitly/data_hacks.git/data_hacks/run_for.py'
+alias sample='python ~/.dotfiles/contrib/bitly/data_hacks.git/data_hacks/sample.py'
 
 # git aliases
 alias gaa="git add --all ."
@@ -15,7 +15,7 @@ alias gdc="git diff --cached"
 alias gds="git diff --staged"
 alias gs="git status --short --branch"
 
-alias -g vi=vim
+alias vi=vim
 alias aa='resume main'
 alias ack='ag'
 alias bc='bc -l'
