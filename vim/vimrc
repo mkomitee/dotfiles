@@ -14,7 +14,9 @@ call neobundle#rc(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 " }}}
 
+" NeoBundle 'sjl/splice.vim'
 NeoBundle 'AfterColors.vim'
+NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'YankRing.vim'
 NeoBundle 'cakebaker/scss-syntax.vim'
 NeoBundle 'dag/vim-fish'
@@ -30,7 +32,7 @@ NeoBundle 'moin.vim'
 NeoBundle 'python_match.vim'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'scrooloose/syntastic'
-NeoBundle 'sjl/splice.vim'
+NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-markdown'
 NeoBundle 'tpope/vim-repeat'
 NeoBundle 'tpope/vim-surround'
