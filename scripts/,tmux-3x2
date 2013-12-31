@@ -2,7 +2,7 @@
 
 NEW=0
 DIR=$(pwd)
-NAME=4x2
+NAME=3x2
 
 set -- $(getopt -o nd:N: --long new,dir:,name:"$@")
 while [ $# -gt 0 ]
@@ -31,14 +31,13 @@ done
 
 [ $NEW -eq 1 ] && tmux new-window -c $DIR -n $NAME
 
-tmux split-window -h -c $DIR
-tmux split-window -h -c $DIR
-tmux split-window -c $DIR
-tmux select-pane -t 2
 tmux split-window -c $DIR
 tmux select-pane -t 1
-tmux split-window -c $DIR
-tmux split-window -h -c $DIR
+tmux split-window -h -p 33 -c $DIR
 tmux select-pane -t 1
-tmux split-window -h -c $DIR
+tmux split-window -h -p 50 -c $DIR
+tmux select-pane -t 4
+tmux split-window -h -p 33 -c $DIR
+tmux select-pane -t 4
+tmux split-window -h -p 50 -c $DIR
 tmux select-pane -t 1
