@@ -123,7 +123,7 @@ set fillchars+=stlnc:━ " indicate horizontal splits with -
 " }}}
 " listchars -----------------------------------------------------------------{{{
 set listchars=            " reset listchars
-set listchars+=tab:▸⋅     " display tabs
+set listchars+=tab:▸▸     " display tabs
 set listchars+=extends:❯  " hint that theres more to the right, ...
 set listchars+=precedes:❮ " hint that theres more to the left, ...
 " }}}
