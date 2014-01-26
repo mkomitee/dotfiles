@@ -236,11 +236,14 @@ endfunction " }}}
 function! Pulse(n) " --------------------------------------------------------{{{
     let current_window = winnr()
     windo set nocursorline
+    windo set nocursorcolumn
     execute current_window . 'wincmd w'
     setlocal cursorline
+    setlocal cursorcolumn
 
     redir => old_hi
         silent execute 'hi CursorLine'
+        silent execute 'hi CursorColumn'
     redir END
     let old_hi = split(old_hi, '\n')[0]
     let old_hi = substitute(old_hi, 'xxx', '', '')
@@ -253,17 +256,20 @@ function! Pulse(n) " --------------------------------------------------------{{{
 
     for i in range(start, end, width)
         execute "hi CursorLine ctermbg=" . (color + i)
+        execute "hi CursorColumn ctermbg=" . (color + i)
         redraw
         sleep 6m
     endfor
     for i in range(end, start, -1 * width)
         execute "hi CursorLine ctermbg=" . (color + i)
+        execute "hi CursorColumn ctermbg=" . (color + i)
         redraw
         sleep 6m
     endfor
 
     execute 'hi ' . old_hi
     setlocal nocursorline
+    setlocal nocursorcolumn
 endfunction " }}}
 function! FocusFold() " -----------------------------------------------------{{{
     let c = virtcol(".")
@@ -272,7 +278,7 @@ function! FocusFold() " -----------------------------------------------------{{{
     normal! zv
     normal! zz
     call cursor(l, c)
-    call Pulse(9)
+    call Pulse(3)
     return 1
 endfunction " }}}
 " }}}
@@ -302,8 +308,8 @@ augroup END
 
 " }}}
 " Focus when searching ------------------------------------------------------{{{
-nnoremap <silent> n n:call Pulse(5)<cr>
-nnoremap <silent> N N:call Pulse(5)<cr>
+nnoremap <silent> n n:call Pulse(3)<cr>
+nnoremap <silent> N N:call Pulse(3)<cr>
 " }}}
 " j and k will go one line, even if they're wrapped -------------------------{{{
 nnoremap <silent> j gj
@@ -388,7 +394,7 @@ command! -bang Wq wq<bang>
 command! -bang WQ wq<bang>
 " }}}
 command! RemoveTrailingWhiteSpace :call RemoveTrailingWhiteSpace()
-command! -nargs=0 Pulse call Pulse(9)
+command! -nargs=0 Pulse call Pulse(3)
 " }}}
 " Plugin Configurations -----------------------------------------------------{{{
 " silver searcher " ---------------------------------------------------------{{{
