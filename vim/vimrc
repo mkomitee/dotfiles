@@ -642,6 +642,9 @@ vnoremap S  :s//g<LEFT><LEFT>
 
 set autoindent                              "Retain indentation on next line
 set smartindent                             "Turn on autoindenting of blocks
+autocmd FileType python setlocal cinwords+=with
+autocmd FileType python setlocal cinwords+=class
+autocmd FileType python setlocal cinwords+=def
 "
 "And no magic outdent for comments
 inoremap # X<C-H>#|
