@@ -347,10 +347,10 @@ nnoremap <silent> <leader>egv :e $MYGVIMRC<CR>
 cmap <silent> w!! w !sudo tee % >/dev/null<cr>
 " }}}
 " Easy window resizing ------------------------------------------------------{{{
-noremap <silent> <up> <C-W>+
-noremap <silent> <down> <C-W>-
-nnoremap <silent> <left> <C-W><
-nnoremap <silent> <right> <C-W>>
+" noremap <silent> <up> <C-W>+
+" noremap <silent> <down> <C-W>-
+" nnoremap <silent> <left> <C-W><
+" nnoremap <silent> <right> <C-W>>
 " }}}
 " . returns to starting place after repeat ----------------------------------{{{
 nnoremap <silent> . .`[
@@ -616,5 +616,21 @@ map <C-l> <C-w>l
 " }}}
 " Load abbreviations --------------------------------------------------------{{{
 source ~/.vim/abbrev
+" }}}
+"
+" Experimentation {{{
+" Swap v and CTRL-V because visual block mode is actually useful. (IBV2013)
+nnoremap    v <C-V>
+nnoremap <C-V>   v
+vnoremap    v <C-V>
+vnoremap <C-V>   v
+
+" IBV2013 - This lets you drag around a visually selected thing.
+runtime plugin/dragvisuals.vim
+vnoremap  <expr> <left>    DVB_Drag('left')
+vnoremap  <expr> <right>   DVB_Drag('right')
+vnoremap  <expr> <down>    DVB_Drag('down')
+vnoremap  <expr> <up>      DVB_Drag('up')
+let g:DVB_TrimWS = 1
 " }}}
 " }}}
