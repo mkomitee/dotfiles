@@ -341,7 +341,7 @@ noremap <silent> Y y$
 " }}}
 " Easily modify ~/.{g,}vimrc ------------------------------------------------{{{
 nnoremap <silent> <leader>ev :e $MYVIMRC<CR>
-nnoremap <silent> <leader>egv :e $MYGVIMRC<CR>
+nnoremap <silent> <leader>eg :e $MYGVIMRC<CR>
 " }}}
 " sudo write-file in case you're in a file you dont have privileges to write{{{
 cmap <silent> w!! w !sudo tee % >/dev/null<cr>
@@ -376,8 +376,8 @@ endfor
 nnoremap <silent> zf :call FocusFold()<cr>
 " }}}
 " Simple sorting ------------------------------------------------------------{{{
-vnoremap <silent> <leader>s :sort<cr>gv
-nnoremap <silent> <leader>s mzvip:sort<cr>`z:delm z<cr>
+vnoremap <silent> <leader>so :sort<cr>gv
+nnoremap <silent> <leader>so mzvip:sort<cr>`z:delm z<cr>
 
 " }}}
 " }}}
@@ -487,6 +487,10 @@ let g:yankring_history_dir = "$HOME/.vimdata"
 let g:slime_target = "tmux"
 let g:slime_python_ipython = 1
 let g:slime_paste_file="$HOME/.vimdata/slime_paste"
+let g:slime_no_mappings = 1
+xmap <leader>ss <Plug>SlimeRegionSend
+nmap <leader>ss <Plug>SlimeMotionSend
+nmap <leader>sl <Plug>SlimeLineSend
 " }}}
 " Filetype detection --------------------------------------------------------{{{
 au BufNewFile,BufRead *.md setf markdown
@@ -660,6 +664,10 @@ endfunction
 
 " Use space to jump down a page (like browsers do)...
 nnoremap <Space><Space><Space> <PageDown>
+
+nnoremap <leader>yr :YRShow<cr>
+nnoremap <leader>sc :Scratch<cr>
+nnoremap <leader>sy :SyntasticCheck<cr>
 
 " }}}
 " }}}
