@@ -665,6 +665,37 @@ endfunction
 " Use space to jump down a page (like browsers do)...
 nnoremap <Space><Space><Space> <PageDown>
 
+" Don't move when you use * https://twitter.com/dotvimrc/status/428208518487764992
+nnoremap <silent> * :let stay_star_view = winsaveview()<cr>*:call winrestview(stay_star_view)<cr>
+
+
+" User events concept ...
+function! CustomBufEnter()
+    " if &filetype=="python"
+        " doautocmd User BufEnterPython
+    " elseif &filetype=="vim"
+        " doautocmd User BufEnterVim
+    " endif
+endfunction
+
+function! CustomBufLeave()
+    " if &filetype=="python"
+        " doautocmd User BufLeavePython
+    " elseif &filetype=="vim"
+        " doautocmd User BufLeaveVim
+    " endif
+endfunction
+
+augroup custom_events
+  autocmd!
+  autocmd BufEnter * call CustomBufEnter()
+  autocmd BufLeave * call CustomBufLeave()
+  " autocmd User BufEnterPython echomsg "+PYTHON"
+  " autocmd User BufLeavePython echomsg "-PYTHON"
+  " autocmd User BufEnterVim echomsg "+VIM"
+  " autocmd User BufLeaveVim echomsg "-VIM"
+augroup END
+
 nnoremap <leader>yr :YRShow<cr>
 nnoremap <leader>sc :Scratch<cr>
 nnoremap <leader>sy :SyntasticCheck<cr>
