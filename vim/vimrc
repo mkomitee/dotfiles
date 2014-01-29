@@ -19,6 +19,7 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'AfterColors.vim'
 NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'YankRing.vim'
+NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'cakebaker/scss-syntax.vim'
 NeoBundle 'dag/vim-fish'
 NeoBundle 'duff/vim-scratch.git'
@@ -33,6 +34,7 @@ NeoBundle 'moin.vim'
 NeoBundle 'python_match.vim'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'scrooloose/syntastic'
+NeoBundle 'sjl/gundo.vim'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-markdown'
 NeoBundle 'tpope/vim-repeat'
@@ -696,9 +698,11 @@ augroup custom_events
   " autocmd User BufLeaveVim echomsg "-VIM"
 augroup END
 
+nnoremap <leader>gg :GitGutterToggle<cr>
 nnoremap <leader>yr :YRShow<cr>
 nnoremap <leader>sc :Scratch<cr>
 nnoremap <leader>sy :SyntasticCheck<cr>
+nnoremap <leader>uu :GundoToggle<cr>
 
 " }}}
 " }}}
