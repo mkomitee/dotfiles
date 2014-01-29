@@ -42,7 +42,7 @@
     cm = commit -m
 
     amend = commit --amend -v
-    fixup = commit --fixup
+    fixup = commit --fixup HEAD
 
     aa = add -A :/
 
