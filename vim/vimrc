@@ -310,8 +310,8 @@ augroup END
 
 " }}}
 " Focus when searching ------------------------------------------------------{{{
-nnoremap <silent> n n:call Pulse(3)<cr>
-nnoremap <silent> N N:call Pulse(3)<cr>
+nnoremap <silent> n n:call Pulse(1)<cr>
+nnoremap <silent> N N:call Pulse(1)<cr>
 " }}}
 " j and k will go one line, even if they're wrapped -------------------------{{{
 nnoremap <silent> j gj
