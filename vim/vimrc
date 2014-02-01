@@ -627,11 +627,6 @@ source ~/.vim/abbrev
 " }}}
 "
 " Experimentation {{{
-" Swap v and CTRL-V because visual block mode is actually useful. (IBV2013)
-nnoremap    v <C-V>
-nnoremap <C-V>   v
-vnoremap    v <C-V>
-vnoremap <C-V>   v
 
 " IBV2013 - This lets you drag around a visually selected thing.
 runtime plugin/dragvisuals.vim
