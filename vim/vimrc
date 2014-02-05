@@ -101,6 +101,7 @@ set shiftround                 " round indent to multiple of shiftwidth
 set smarttab                   " shiftwidth at start of line, tabstop elsewhere
 set textwidth=80               " wrap at 80 columns
 set tags=./tags;               " name of the tags files which is relative to the project
+set nojoinspaces               " 1 space when joining lines at a period, not 2
 set notimeout
 set ttimeout
 set ttimeoutlen=10
