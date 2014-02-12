@@ -75,7 +75,6 @@ set spellfile=~/.dotfiles/vim/en.utf-8.add  " to add words
 set spelllang=en_us            " yes, i do speak it
 set spellsuggest=best,10       " only display the 10 best suggestions
 set number                     " line numbers
-set relativenumber             " relative line numbers
 set nostartofline              " don't move the cursor to the start of the
                                " line when we move vertically in the buffer
 set pumheight=10               " show no more than 10 entries in completion menus
