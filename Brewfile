@@ -14,6 +14,7 @@ install fasd
 install git
 install gnupg2
 install htop-osx
+install iftop
 install mercurial
 install reattach-to-user-namespace
 install ssh-copy-id
@@ -25,10 +26,10 @@ install wireshark
 
 # Languages
 install go
+install haskell-platform
 install pypy
 install python
 install python3
-install haskell-platform
 
 # Datastores
 install cassandra
