@@ -436,7 +436,6 @@ let g:syntastic_enable_balloons=0
 let g:syntastic_enable_highlighting=0
 let g:syntastic_enable_signs=1
 let g:syntastic_mode_map = { 'mode': 'passive' }
-let g:syntastic_quiet_warnings=0
 " }}}
 " python-mode {{{
 let g:pymode_breakpoint = 0
