@@ -251,21 +251,23 @@ settings = {
     user_name = "mkomitee";
     nick = "mkomitee";
   };
-  "fe-text" = { actlist_sort = "refnum"; };
+  "fe-text" = { actlist_sort = "refnum"; indent = "25"; };
   "fe-common/core" = {
     theme = "default";
     show_names_on_join = "no";
     autocreate_windows = "yes";
+    use_status_window = "no";
   };
   "perl/core/scripts" = {
-    awl_display_key = "$H%n$N:$C$S"
-    awl_display_key_active = "$H%c$N:$C$S"
+    awl_display_key = "$H%n$N:$C$S";
+    awl_display_key_active = "$H%c$N:$C$S";
     awl_placement = "top";
     awl_separator = "\\ ";
     uberprompt_load_hook = "/^vm_add";
     uberprompt_unload_hook = "/^vm_del";
     uberprompt_format = "[$vim_cmd_mode] $*$uber] ";
   };
+  "irc/core" = { skip_motd = "yes"; };
 };
 hilights = (
   { text = "komitee"; nick = "yes"; word = "yes"; },
