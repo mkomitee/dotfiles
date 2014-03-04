@@ -29,6 +29,7 @@ NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'kshenoy/vim-signature'
 NeoBundle 'mitsuhiko/vim-python-combined'
 NeoBundle 'moin.vim'
+NeoBundle 'naquad/Partial.vim'
 NeoBundle 'python_match.vim'
 NeoBundle 'reedes/vim-wordy'
 NeoBundle 'scrooloose/nerdcommenter'
@@ -45,6 +46,7 @@ NeoBundle 'Lokaltog/vim-distinguished'
 NeoBundle 'MaxSt/FlatColor'
 NeoBundle 'chriskempson/vim-tomorrow-theme'
 NeoBundle 'sjl/badwolf'
+NeoBundle 'tomasr/molokai'
 
 if !empty($GOROOT)
     set runtimepath+=$GOROOT/misc/vim
