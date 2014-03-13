@@ -18,6 +18,8 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 " NeoBundle 'sjl/splice.vim'
 NeoBundle 'AfterColors.vim'
 NeoBundle 'Lokaltog/vim-easymotion'
+NeoBundle 'SirVer/ultisnips'
+NeoBundle 'SirVer/vim-snippets'
 NeoBundle 'YankRing.vim'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'duff/vim-scratch.git'
@@ -479,6 +481,14 @@ nmap <silent> <leader>c$ <plug>NERDCommenterToEOL
 " }}}
 " YankRing ------------------------------------------------------------------{{{
 let g:yankring_history_dir = "$HOME/.vimdata"
+" }}}
+" Ultisnips {{{
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsListSnippets="<c-`tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:snips_email="mkomitee@gmail.com"
+let g:snips_github="https://github.com/mkomitee"
 " }}}
 " Slime {{{
 " Ctrl+A, q will tell you the tmux pane ID's.
