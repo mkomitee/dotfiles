@@ -482,7 +482,7 @@ nmap <silent> <leader>c$ <plug>NERDCommenterToEOL
 " YankRing ------------------------------------------------------------------{{{
 let g:yankring_history_dir = "$HOME/.vimdata"
 " }}}
-" Ultisnips {{{
+" Ultisnips -----------------------------------------------------------------{{{
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsListSnippets="<c-`tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
