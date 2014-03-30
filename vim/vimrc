@@ -36,7 +36,9 @@ NeoBundle 'python_match.vim'
 NeoBundle 'reedes/vim-wordy'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'scrooloose/syntastic'
+NeoBundle 'sheerun/vim-polyglot'
 NeoBundle 'sjl/gundo.vim'
+NeoBundle 'tpope/vim-dispatch'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-markdown'
 NeoBundle 'tpope/vim-repeat'
@@ -57,7 +59,7 @@ endif
 " Turn on all the features ... ----------------------------------------------{{{
 syntax on
 filetype plugin indent on
-runtime macros/matchit.vim
+runtime! macros/matchit.vim
 NeoBundleCheck
 " }}}
 " }}}
@@ -73,6 +75,7 @@ set list                       " show invisibles
 set showbreak=↪                " indicate a line is the continuation of a
                                "  wrapped line
 set showmatch                  " show matching parenthesis
+set showcmd
 set foldlevelstart=99          " Start with all folds open
 set dictionary=/usr/share/dict/words        " for spell checking
 set spellfile=~/.dotfiles/vim/en.utf-8.add  " to add words
@@ -300,6 +303,9 @@ inoremap <C-U> <C-G>u<C-U>
 nnoremap & :&&<CR>
 xnoremap & :&&<CR>
 nnoremap Y y$
+if maparg('<C-L>', 'n') ==# ''
+    nnoremap <silent> <C-L> :nohlsearch<CR><C-L>
+endif
 " }}}
 " Reindent {{{
 nnoremap <leader>G :call Preserve("normal gg=G")<cr>
@@ -710,5 +716,19 @@ nnoremap <leader>sc :Scratch<cr>
 nnoremap <leader>sy :SyntasticCheck<cr>
 nnoremap <leader>uu :GundoToggle<cr>
 
+" fugitive git bindings
+nnoremap <leader>ga :Git add %:p<CR><CR>
+nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gc :Gcommit -v -q<CR>
+nnoremap <leader>gt :Gcommit -v -q %:p<CR>
+nnoremap <leader>gd :Gdiff<CR>
+nnoremap <leader>ge :Gedit<CR>
+nnoremap <leader>gr :Gread<CR>
+nnoremap <leader>gw :Gwrite<CR><CR>
+nnoremap <leader>gl :silent! Glog<CR>:bot copen<CR>
+nnoremap <leader>gp :Ggrep<Space>
+nnoremap <leader>gm :Gmove<Space>
+nnoremap <leader>gb :Git branch<Space>
+nnoremap <leader>go :Git checkout<Space>
 " }}}
 " }}}
