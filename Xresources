@@ -71,8 +71,10 @@
 ! *.colorUL:                  #86a2b0
 ! URxvt.background:           rgba:2222/2222/2222/dddd
 
-*.font:                     xft:Droid Sans Mono:size=9,style=regular
-*.boldFont:                 xft:Droid Sans Mono:size=9,style=regular
+*.font:                     xft:Ubuntu Mono:size=14
+*.boldFont:                 xft:Ubuntu Mono:size=14
+Emacs.font:                 Ubuntu Mono:size=14
+Emacs.boldFont:             Ubuntu Mono:size=14
 URxvt.depth:                32
 URxvt.copyCommand:          xclip -i -selection clipboard
 URxvt.cursorBlink:          false
