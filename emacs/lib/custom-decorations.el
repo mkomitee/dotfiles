@@ -47,7 +47,8 @@
 
 ;; Theming, ...
 (setq frame-background-mode 'dark)
-(load-theme 'wombat)
+(require 'molokai-theme)
+(load-theme 'molokai)
 
 ;; change mode-line color by evil state
 (lexical-let ((default-color (cons (face-background 'mode-line)
