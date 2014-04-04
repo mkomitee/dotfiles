@@ -106,5 +106,6 @@
 ;; (set-quit-char "C-c")
 
 
+(define-key evil-normal-state-map [escape] 'custom/evil-force-normal-state)
 
 (provide 'custom-maps)

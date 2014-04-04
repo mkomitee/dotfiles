@@ -68,4 +68,13 @@
 (defadvice evil-ex-search-previous (after advice-for-evil-ex-search-previous activate)
   (evil-scroll-line-to-center (line-number-at-pos)))
 
+(evil-define-command custom/evil-force-normal-state ()
+  "Switch to normal state without recording current command. 
+Cancel highlight search"
+  :repeat abort
+  :suppress-operator t
+  ()
+  (evil-ex-nohighlight)
+  (evil-normal-state))
+
 (provide 'custom-evil)
