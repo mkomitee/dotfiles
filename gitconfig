@@ -41,7 +41,8 @@
     ci = commit -v
     cm = commit -m
 
-    amend = commit --amend -v
+    amend = commit --amend -v --no-edit
+    reword = commit --amend -v
     fixup = commit --fixup HEAD
 
     aa = add -A :/
