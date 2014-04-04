@@ -14,6 +14,10 @@
       inhibit-startup-echo-area-message t
       inhibit-startup-message t)
 
+
+;; Load local modifications
+(require 'local-pre)
+
 (require 'custom-utils)
 (require 'custom-core)
 (require 'custom-decorations)
@@ -36,7 +40,7 @@
 (require 'custom-puppet)
 
 ;; Load local modifications
-(require 'local)
+(require 'local-post)
 
 ;; If we're in a window system of any kind
 (if window-system
