@@ -23,11 +23,3 @@
 (smex-initialize)
 
 (provide 'custom-ido)
-
-;; (setq ido-create-new-buffer 'never
-;;       ido-use-virtual-buffers nil
-;;       ido-default-file-method "selected-window"
-;;       ido-default-buffer-method "selected-window"
-;;       )
-
-
