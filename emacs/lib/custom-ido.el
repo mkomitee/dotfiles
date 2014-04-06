@@ -1,5 +1,4 @@
 (defvar ido-enable-prefix nil)
-(defvar ido-use-virtual-buffers t)
 (defvar ido-enable-flex-matching t)
 (defvar ido-create-new-buffer 'prompt)
 (defvar ido-use-filename-at-point 'guess)
