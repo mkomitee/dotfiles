@@ -10,6 +10,7 @@
 
 (require-package 'evil)
 (require-package 'evil-leader)
+(require-package 'evil-matchit)
 (require-package 'evil-visualstar)
 (require-package 'evil-nerd-commenter)
 (require-package 'evil-indent-textobject)
@@ -34,6 +35,7 @@
 
 (evil-mode 1)
 (global-surround-mode 1)
+(global-evil-matchit-mode 1)
 
 ;; This doesn't work quite right.
 ;; (defun my-evil-modeline-change (default-color)
