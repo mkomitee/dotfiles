@@ -7,7 +7,7 @@
 (define-key evil-normal-state-map "|" (kbd ":vsplit C-m C-l"))
 (define-key evil-normal-state-map "_" (kbd ":split C-m C-j"))
 (define-key evil-normal-state-map " b" 'switch-to-buffer)
-(define-key evil-normal-state-map " p" 'projectile-find-file)
+(define-key evil-normal-state-map " p" 'helm-projectile)
 
 (define-key evil-normal-state-map " ev" (kbd ":e ~/.dotfiles/emacs/init.el"))
 (define-key evil-normal-state-map " cc" 'evilnc-comment-or-uncomment-lines)
