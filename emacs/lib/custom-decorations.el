@@ -47,6 +47,7 @@
 
 ;; Theming, ...
 (setq frame-background-mode 'dark)
+(require-package 'molokai-theme)
 (require 'molokai-theme)
 (load-theme 'molokai)
 
