@@ -52,6 +52,8 @@
 (evil-ex-define-cmd "esh[ell]" 'eshell)
 (evil-ex-define-cmd "sort" 'sort-lines)
 (evil-ex-define-cmd "python" 'python-shell-switch-to-shell)
+(evil-ex-define-cmd "Exp[lore]" 'dired-jump)
+(evil-ex-define-cmd "color[scheme]" 'customize-themes)
 
 (define-key evil-insert-state-map (kbd "RET") 'evil-ret-and-indent)
 (define-key evil-insert-state-map (kbd "RET") 'evil-ret)
