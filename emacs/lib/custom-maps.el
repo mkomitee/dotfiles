@@ -108,4 +108,15 @@
 
 (define-key evil-normal-state-map [escape] 'custom/evil-force-normal-state)
 
+(define-key evil-normal-state-map "  w" 'evil-ace-jump-word-mode)
+(define-key evil-normal-state-map "  b" 'evil-ace-jump-word-mode)
+(define-key evil-normal-state-map "  f" 'evil-ace-jump-char-mode)
+(define-key evil-normal-state-map "  F" 'evil-ace-jump-char-mode)
+(define-key evil-normal-state-map "  t" 'evil-ace-jump-char-to-mode)
+(define-key evil-normal-state-map "  T" 'evil-ace-jump-char-to-mode)
+(define-key evil-normal-state-map "  j" 'evil-ace-jump-line-mode)
+(define-key evil-normal-state-map "  k" 'evil-ace-jump-line-mode)
+(define-key evil-normal-state-map "  '" 'ace-jump-mode-pop-mark)
+(define-key evil-normal-state-map "  `" 'ace-jump-mode-pop-mark)
+
 (provide 'custom-maps)

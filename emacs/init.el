@@ -33,6 +33,7 @@
 (require 'custom-lisp)
 (require 'custom-markdown)
 (require 'custom-ag)
+(require 'custom-ace)
 (require 'custom-evil)
 (require 'custom-maps)
 (require 'custom-python)
