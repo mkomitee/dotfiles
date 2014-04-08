@@ -12,10 +12,10 @@
 ; src http://pedrokroger.com/2010/07/configuring-emacs-as-a-python-ide-2/
 (defun annotate-pdb ()
   (interactive)
-  (highlight-lines-matching-regexp "import ipdb")
-  (highlight-lines-matching-regexp "ipdb.set_trace()")
-  (highlight-lines-matching-regexp "import pdb")
-  (highlight-lines-matching-regexp "pdb.set_trace()"))
+  (highlight-phrase "import ipdb")
+  (highlight-phrase "ipdb.set_trace()")
+  (highlight-phrase "import pdb")
+  (highlight-phrase "pdb.set_trace()"))
 
 (add-hook 'python-mode-hook 'annotate-pdb)
 (add-hook 'python-mode-hook 'fci-mode)
