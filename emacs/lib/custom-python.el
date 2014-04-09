@@ -29,4 +29,6 @@
                  'delete-trailing-whitespace)))
 (add-hook 'python-mode-hook 'my-python-hook)
 
+(evil-define-key 'insert python-mode-map (kbd "RET") 'evil-ret-and-indent)
+
 (provide 'custom-python)
