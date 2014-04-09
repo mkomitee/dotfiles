@@ -72,12 +72,18 @@
   (evil-scroll-line-to-center (line-number-at-pos)))
 
 (evil-define-command custom/evil-force-normal-state ()
-  "Switch to normal state without recording current command. 
+  "Switch to normal state without recording current command.
 Cancel highlight search"
   :repeat abort
   :suppress-operator t
   ()
   (evil-ex-nohighlight)
   (evil-normal-state))
+
+(defun my-move-key (keymap-from keymap-to key)
+  "Moves key binding from one keymap to another, deleting from the old location. "
+  (define-key keymap-to key (lookup-key keymap-from key))
+  (define-key keymap-from key nil))
+(my-move-key evil-motion-state-map evil-normal-state-map (kbd "RET"))
 
 (provide 'custom-evil)
