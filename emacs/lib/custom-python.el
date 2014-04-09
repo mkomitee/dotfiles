@@ -1,6 +1,8 @@
 (require-package 'python)
+(require-package 'jedi)
 
 (setq
+ jedi:complete-on-dot t
  python-shell-interpreter "ipython"
  python-shell-interpreter-args ""
  python-shell-prompt-regexp "In \[[0-9]+\]: "
@@ -17,10 +19,14 @@
   (highlight-phrase "import pdb")
   (highlight-phrase "pdb.set_trace()"))
 
-(add-hook 'python-mode-hook 'annotate-pdb)
-(add-hook 'python-mode-hook 'fci-mode)
-(add-hook 'python-mode-hook
-          (lambda ()
-            (setq fci-rule-column 80)))
+(defun my-python-hook ()
+  (progn
+    (annotate-pdb)
+    (fci-mode)
+    (setq fci-rule-column 80)
+    (jedi:setup)
+    (add-to-list 'write-file-functions
+                 'delete-trailing-whitespace)))
+(add-hook 'python-mode-hook 'my-python-hook)
 
 (provide 'custom-python)
