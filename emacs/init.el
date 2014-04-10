@@ -20,6 +20,7 @@
 
 (require 'custom-utils)
 (require 'custom-core)
+(require 'custom-evil)
 (require 'custom-decorations)
 (require 'custom-smartparens)
 (require 'custom-yasnippet)
@@ -34,11 +35,10 @@
 (require 'custom-markdown)
 (require 'custom-ag)
 (require 'custom-ace)
-(require 'custom-evil)
-(require 'custom-maps)
 (require 'custom-python)
 (require 'custom-haskell)
 (require 'custom-puppet)
+(require 'custom-maps)
 
 ;; Load local modifications
 (require 'local-post)
