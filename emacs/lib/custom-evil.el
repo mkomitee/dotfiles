@@ -38,18 +38,6 @@
 (global-surround-mode 1)
 (global-evil-matchit-mode 1)
 
-;; This doesn't work quite right.
-;; (defun my-evil-modeline-change (default-color)
-;;   "changes the modeline color when the evil mode changes"
-;;   (let ((color (cond ((evil-emacs-state-p)  '("#5f0000" . "#ffffff"))
-;;                      (t default-color))))
-;;     (set-face-background 'mode-line (car color))
-;;     (set-face-foreground 'mode-line (cdr color))))
-
-;; (lexical-let ((default-color (cons (face-background 'mode-line)
-;;                                    (face-foreground 'mode-line))))
-;;   (add-hook 'post-command-hook (lambda () (my-evil-modeline-change default-color))))
-
 (evil-define-text-object my-evil-next-match (count &optional beg end type)
   "Select next match."
   (evil-ex-search-previous 1)
