@@ -44,9 +44,10 @@
 (setq linum-format "%4d ")
 (global-linum-mode t)
 
-;; If we don't have a fringe, add a pipe to separate line numbers from
-;; our text
-(if (not (featurep 'fringe))
+;; If we have a fringe, make them16 pixels wide, otherwise add a pipe
+;; symbol to separate line numbers from our text
+(if (featurep 'fringe)
+    (fringe-mode 16)
   (setq linum-format "%d \u254e"))
 
 ;; Theming, ...
