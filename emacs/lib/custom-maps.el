@@ -9,6 +9,16 @@
 (define-key evil-normal-state-map " b" 'helm-buffers-list)
 (define-key evil-normal-state-map " p" 'helm-projectile)
 
+;; Since we lose the Ctrl+h prefix in evil mode, redefine these
+(define-key evil-normal-state-map " hf" 'describe-function)
+(define-key evil-normal-state-map " hk" 'describe-key)
+(define-key evil-normal-state-map " hv" 'describe-variable)
+(define-key evil-normal-state-map " hs" 'describe-syntax)
+(define-key evil-normal-state-map " hm" 'describe-mode)
+(define-key evil-normal-state-map " hp" 'describe-package)
+(define-key evil-normal-state-map " hb" 'describe-bindings)
+(define-key evil-normal-state-map " hh" 'help-for-help)
+
 (define-key evil-normal-state-map " ev" (kbd ":e ~/.dotfiles/emacs/init.el"))
 (define-key evil-normal-state-map " cc" 'evilnc-comment-or-uncomment-lines)
 (define-key evil-visual-state-map " cc" 'evilnc-comment-or-uncomment-lines)
