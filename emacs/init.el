@@ -28,7 +28,6 @@
 (require 'custom-yasnippet)
 (require 'custom-autocomplete)
 (require 'custom-projectfile)
-(require 'custom-helm)
 (require 'custom-ido)
 (require 'custom-git)
 (require 'custom-flycheck)
