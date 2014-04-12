@@ -38,8 +38,6 @@
   (after 'git-gutter+ (diminish 'git-gutter+-mode))
   (after 'pretty-mode (diminish 'smooth-scroll-mode)))
 
-(global-hl-line-mode +1)
-
 (require 'linum)
 (setq linum-format "%4d ")
 (global-linum-mode t)
