@@ -24,9 +24,8 @@
     (annotate-pdb)
     (fci-mode)
     (setq fci-rule-column 80)
-    (jedi:setup)
-    (add-to-list 'write-file-functions
-                 'delete-trailing-whitespace)))
+    (jedi:setup)))
+
 (add-hook 'python-mode-hook 'my-python-hook)
 
 (evil-define-key 'insert python-mode-map (kbd "RET") 'evil-ret-and-indent)

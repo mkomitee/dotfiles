@@ -7,8 +7,6 @@
     (require 'evil-paredit)
     (paredit-mode t)
     (evil-paredit-mode t)
-    (add-to-list 'write-file-functions
-                 'delete-trailing-whitespace)
     (rainbow-delimiters-mode t)))
 
 (add-hook 'emacs-lisp-mode-hook 'my-lisp-hook)

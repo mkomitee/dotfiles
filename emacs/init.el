@@ -38,6 +38,7 @@
 (require 'custom-ag)
 (require 'custom-ace)
 (require 'custom-python)
+(require 'custom-make)
 (require 'custom-haskell)
 (require 'custom-puppet)
 (require 'custom-maps)

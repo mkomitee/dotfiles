@@ -83,5 +83,6 @@
           x-select-enable-primary t)
   )
 
-(provide 'custom-core)
+(add-hook 'before-save-hook 'whitespace-cleanup)
 
+(provide 'custom-core)
