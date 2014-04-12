@@ -1,5 +1,6 @@
 (require-package 'python)
 (require-package 'jedi)
+(require-package 'jedi-direx)
 
 (setq
  jedi:complete-on-dot t
@@ -9,6 +10,12 @@
  python-shell-prompt-output-regexp "Out\[[0-9]+\]: "
  python-shell-completion-setup-code ""
  python-shell-completion-string-code "';'.join(get_ipython().complete('''%s''')[1])\n")
+
+(eval-after-load "python"
+  '(define-key python-mode-map "\C-cx" 'jedi-direx:pop-to-buffer))
+(add-hook 'jedi-mode-hook 'jedi-direx:setup)
+
+(add-to-list 'evil-emacs-state-modes 'direx:direx-mode)
 
 ; Highlight the call to ipdb
 ; src http://pedrokroger.com/2010/07/configuring-emacs-as-a-python-ide-2/
