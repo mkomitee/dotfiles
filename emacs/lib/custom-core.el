@@ -48,6 +48,8 @@
 (defalias 'yes-or-no-p 'y-or-n-p)
 (xterm-mouse-mode t)
 
+(show-paren-mode t)
+
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
 (set-selection-coding-system 'utf-8)

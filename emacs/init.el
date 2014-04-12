@@ -24,7 +24,7 @@
 (require 'custom-core)
 (require 'custom-evil)
 (require 'custom-decorations)
-(require 'custom-smartparens)
+;; (require 'custom-smartparens)
 (require 'custom-yasnippet)
 (require 'custom-autocomplete)
 (require 'custom-projectfile)
