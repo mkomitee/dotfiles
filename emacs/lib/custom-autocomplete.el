@@ -1,7 +1,7 @@
 (defvar ac-auto-show-menu t)
 (defvar ac-auto-start 1)
 (defvar ac-comphist-file (concat user-emacs-directory ".cache/ac-comphist.dat"))
-(defvar ac-quick-help nil)
+(defvar ac-quick-help-prefer-pos-tip nil)
 (defvar ac-show-menu-immediately-on-auto-complete t)
 
 (require-package 'auto-complete)
