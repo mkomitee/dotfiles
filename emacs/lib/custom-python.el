@@ -4,6 +4,7 @@
 
 (setq
  jedi:complete-on-dot t
+ jedi:tooltip-method nil
  python-shell-interpreter "ipython"
  python-shell-interpreter-args ""
  python-shell-prompt-regexp "In \[[0-9]+\]: "
