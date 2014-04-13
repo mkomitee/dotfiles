@@ -12,8 +12,6 @@
  python-shell-completion-setup-code ""
  python-shell-completion-string-code "';'.join(get_ipython().complete('''%s''')[1])\n")
 
-(eval-after-load "python"
-  '(define-key python-mode-map "\C-cx" 'jedi-direx:pop-to-buffer))
 (add-hook 'jedi-mode-hook 'jedi-direx:setup)
 
 ; Highlight the call to ipdb
