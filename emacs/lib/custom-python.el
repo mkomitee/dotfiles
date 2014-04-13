@@ -16,8 +16,6 @@
   '(define-key python-mode-map "\C-cx" 'jedi-direx:pop-to-buffer))
 (add-hook 'jedi-mode-hook 'jedi-direx:setup)
 
-(add-to-list 'evil-emacs-state-modes 'direx:direx-mode)
-
 ; Highlight the call to ipdb
 ; src http://pedrokroger.com/2010/07/configuring-emacs-as-a-python-ide-2/
 (defun annotate-pdb ()

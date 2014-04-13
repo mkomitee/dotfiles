@@ -74,4 +74,6 @@ Cancel highlight search"
   (define-key keymap-from key nil))
 (my-move-key evil-motion-state-map evil-normal-state-map (kbd "RET"))
 
+(add-to-list 'evil-emacs-state-modes 'direx:direx-mode)
+
 (provide 'custom-evil)
