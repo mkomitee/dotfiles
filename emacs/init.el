@@ -39,6 +39,7 @@
 (require 'custom-make)
 (require 'custom-haskell)
 (require 'custom-puppet)
+(require 'custom-winner)
 (require 'custom-maps)
 
 ;; Load local modifications
