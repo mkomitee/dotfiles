@@ -1,4 +1,3 @@
-
 ;; Emulate some of my maps from vim
 (define-key evil-normal-state-map "\C-j" 'evil-window-down)
 (define-key evil-normal-state-map "\C-k" 'evil-window-up)
