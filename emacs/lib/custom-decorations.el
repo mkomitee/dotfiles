@@ -49,10 +49,14 @@
   (setq linum-format "%d \u254e"))
 
 ;; Theming, ...
-(setq frame-background-mode 'dark)
+(setq custom-safe-themes '("0e121ff9bef6937edad8dfcff7d88ac9219b5b4f1570fd1702e546a80dba0832" default)
+      frame-background-mode 'dark)
 (require-package 'molokai-theme)
 (require 'molokai-theme)
 (load-theme 'molokai)
+
+;; Fonts
+(set-frame-font "Anonymous Pro-15" nil t)
 
 ;; change mode-line color by evil state
 (lexical-let ((default-color (cons (face-background 'mode-line)
@@ -66,7 +70,5 @@
                                  (t default-color))))
                 (set-face-background 'mode-line (car color))
                 (set-face-foreground 'mode-line (cdr color))))))
-
-
 
 (provide 'custom-decorations)

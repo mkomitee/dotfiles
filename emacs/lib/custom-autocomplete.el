@@ -9,8 +9,7 @@
 (require 'auto-complete-config)
 (ac-config-default)
 
-(after 'linum
-  (ac-linum-workaround))
+(after 'linum (ac-linum-workaround))
 
 (add-to-list 'ac-modes 'vimrc-mode)
 
