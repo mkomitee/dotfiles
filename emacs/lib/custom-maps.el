@@ -5,8 +5,8 @@
 (define-key evil-normal-state-map "\C-l" 'evil-window-right)
 (define-key evil-normal-state-map "|" (kbd ":vsplit C-m C-l"))
 (define-key evil-normal-state-map "_" (kbd ":split C-m C-j"))
-(define-key evil-normal-state-map " b" 'ido-switch-buffer)
-(define-key evil-normal-state-map " p" 'ido-find-file)
+(define-key evil-normal-state-map " b" 'switch-to-buffer)
+(define-key evil-normal-state-map " p" 'projectile-find-file)
 (define-key evil-normal-state-map "   " 'smex)
 
 ;; Since we lose the Ctrl+h prefix in evil mode, redefine these
