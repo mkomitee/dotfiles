@@ -56,7 +56,7 @@
 (load-theme 'molokai)
 
 ;; Fonts
-(set-frame-font "Anonymous Pro-15" nil t)
+(set-frame-font "Anonymous Pro-12" nil t)
 
 ;; change mode-line color by evil state
 (lexical-let ((default-color (cons (face-background 'mode-line)

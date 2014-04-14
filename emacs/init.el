@@ -32,7 +32,9 @@
 (require 'custom-winner)
 (require 'custom-maps)
 
-;; If we're in a window system of any kind
-(if window-system
-    ;; start the server
-    (server-start))
+;; If we're in a window system of any kind start the server
+(when window-system
+  (setq server-use-tcp t
+        server-host system-name)
+  (server-start)
+  (server-mode))
