@@ -71,10 +71,10 @@
 ! *.colorUL:                  #86a2b0
 ! URxvt.background:           rgba:2222/2222/2222/dddd
 
-*.font:                     xft:Ubuntu Mono:size=14
-*.boldFont:                 xft:Ubuntu Mono:size=14
-Emacs.font:                 Ubuntu Mono:size=14
-Emacs.boldFont:             Ubuntu Mono:size=14
+*.font:                     xft:Anonymous Pro:size=14
+*.boldFont:                 xft:Anonymous Pro:size=14
+Emacs.font:                 Anonymous Pro:size=15
+Emacs.boldFont:             Anonymous Pro:size=15
 URxvt.depth:                32
 URxvt.copyCommand:          xclip -i -selection clipboard
 URxvt.cursorBlink:          false
