@@ -45,17 +45,46 @@
       uniquify-ignore-buffers-re "^\\*" ; leave special buffers alone
       uniquify-after-kill-buffer-p t)
 
+
+;; interatively do things ...
+(defvar ido-enable-prefix nil)
+(defvar ido-enable-flex-matching t)
+(defvar ido-create-new-buffer 'prompt)
+(defvar ido-use-filename-at-point 'guess)
+(defvar ido-save-directory-list-file (concat user-emacs-directory ".cache/ido.last"))
+
+(require 'ido)
+(ido-mode t)
+(ido-everywhere t)
+(require-package 'ido-ubiquitous)
+(ido-ubiquitous-mode t)
+(require-package 'flx-ido)
+(flx-ido-mode t)
+(require-package 'ido-vertical-mode)
+(ido-vertical-mode)
+(defvar smex-save-file (concat user-emacs-directory ".cache/smex-items"))
+(require-package 'smex)
+(require 'smex)
+(smex-initialize)
+
+;; Projectile for better fuzzy matching and more
+(defvar projectile-cache-file (concat user-emacs-directory ".cache/projectile.cache"))
+(defvar projectile-known-projects-file (concat user-emacs-directory ".cache/projectile-bookmarks.eld"))
+(require-package 'projectile)
+(require 'projectile)
+(add-to-list 'projectile-globally-ignored-directories "elpa")
+(add-to-list 'projectile-globally-ignored-directories ".cache")
+(projectile-global-mode t)
+(setq projectile-require-project-root nil)
+
 (defalias 'yes-or-no-p 'y-or-n-p)
 (xterm-mouse-mode t)
-
-(show-paren-mode t)
 
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
 (set-selection-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
 
-(which-function-mode t)
 (global-visual-line-mode)
 (blink-cursor-mode -1)
 
@@ -72,19 +101,9 @@
   (add-hook 'multiple-cursors-mode-enabled-hook 'evil-emacs-state)
   (add-hook 'multiple-cursors-mode-disabled-hook 'evil-normal-state))
 
-(setq-default
- indent-tabs-mode nil
- show-trailing-whitespace t)
-
 ;; If we're in X-windows, ...
 (if (eq window-system 'X)
     ;; Enable x-clipboard integration
     (setq x-select-enable-clipboard t
           x-select-enable-primary t)
   )
-
-(add-hook 'before-save-hook 'whitespace-cleanup)
-
-(electric-indent-mode t)
-
-(provide 'custom-core)

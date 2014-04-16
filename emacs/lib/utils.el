@@ -25,5 +25,3 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 (require-package 'exec-path-from-shell)
 (ignore-errors ;; windows
   (exec-path-from-shell-initialize))
-
-(provide 'custom-utils)

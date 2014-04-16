@@ -1,6 +1,3 @@
-;; add our additional libraries to our load path
-(add-to-list 'load-path "~/.dotfiles/emacs/lib")
-
 (require 'package)
 (setq package-archives '(("melpa" . "http://melpa.milkbox.net/packages/")
                          ("org" . "http://orgmode.org/elpa/")
@@ -10,27 +7,24 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 
-(require 'custom-utils)
-(require 'custom-core)
-(require 'custom-evil)
-(require 'custom-decorations)
-(require 'custom-yasnippet)
-(require 'custom-autocomplete)
-(require 'custom-projectfile)
-(require 'custom-ido)
-(require 'custom-git)
-(require 'custom-flycheck)
-(require 'custom-vim)
-(require 'custom-lisp)
-(require 'custom-markdown)
-(require 'custom-ag)
-(require 'custom-ace)
-(require 'custom-python)
-(require 'custom-make)
-(require 'custom-haskell)
-(require 'custom-puppet)
-(require 'custom-winner)
-(require 'custom-maps)
+(set 'global-emacs-config-directory "~/.dotfiles/emacs/")
+(defun komitee/load (name)
+  (load-file (concat global-emacs-config-directory "/lib/" name ".el")))
+
+(komitee/load "utils")
+(komitee/load "core")
+(komitee/load "evil")
+(komitee/load "decorations")
+(komitee/load "autocomplete")
+(komitee/load "coding")
+(komitee/load "prose")
+(komitee/load "misc")
+(komitee/load "maps")
+
+;; Apply local customizations
+(set 'local-emacs-config (concat user-emacs-directory "local.el"))
+(when (file-exists-p local-emacs-config)
+          (load-file local-emacs-config))
 
 ;; If we're in a window system of any kind start the server
 (when window-system

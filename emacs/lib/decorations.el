@@ -4,22 +4,6 @@
 (require-package 'pretty-mode)
 (global-pretty-mode)
 
-(require-package 'smooth-scroll)
-(require 'smooth-scroll)
-(setq smooth-scroll/vscroll-step-size 8)
-(smooth-scroll-mode t)
-
-(require-package 'fill-column-indicator)
-(require 'fill-column-indicator)
-(setq fci-rule-width 1)
-(setq fci-rule-color "darkred")
-(setq fci-rule-character ?\u254e)
-
-(add-hook 'prog-mode-hook 'fci-mode)
-(add-hook 'prog-mode-hook
-          (lambda ()
-            (setq fci-rule-column 80)))
-
 (require-package 'diminish)
 (after 'diminish-autoloads
   (diminish 'global-visual-line-mode)
@@ -35,8 +19,7 @@
   (after 'eldoc (diminish 'eldoc-mode))
   (after 'smartparens (diminish 'smartparens-mode))
   (after 'company (diminish 'company-mode))
-  (after 'git-gutter+ (diminish 'git-gutter+-mode))
-  (after 'pretty-mode (diminish 'smooth-scroll-mode)))
+  (after 'git-gutter+ (diminish 'git-gutter+-mode)))
 
 (require 'linum)
 (setq linum-format "%4d ")
@@ -45,7 +28,7 @@
 ;; If we have a fringe, make them16 pixels wide, otherwise add a pipe
 ;; symbol to separate line numbers from our text
 (if (featurep 'fringe)
-    (fringe-mode 16)
+    (fringe-mode 8)
   (setq linum-format "%d \u254e"))
 
 ;; Theming, ...
@@ -70,5 +53,3 @@
                                  (t default-color))))
                 (set-face-background 'mode-line (car color))
                 (set-face-foreground 'mode-line (cdr color))))))
-
-(provide 'custom-decorations)

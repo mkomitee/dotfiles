@@ -110,5 +110,3 @@
 (define-key evil-normal-state-map "  k" 'evil-ace-jump-line-mode)
 (define-key evil-normal-state-map "  '" 'ace-jump-mode-pop-mark)
 (define-key evil-normal-state-map "  `" 'ace-jump-mode-pop-mark)
-
-(provide 'custom-maps)
