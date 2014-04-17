@@ -18,7 +18,10 @@
 ;; Show matching parenthesis
 (show-paren-mode t)
 
-(add-hook 'before-save-hook 'whitespace-cleanup)
+;; Cleanup whitespace on save
+(defun komitee/whitespace-hook ()
+  (add-hook 'before-save-hook 'whitespace-cleanup nil t))
+(add-hook 'prog-mode-hook 'komitee/whitespace-hook)
 
 ;; Display a thin red vertical line at the 80th column
 (require-package 'fill-column-indicator)
