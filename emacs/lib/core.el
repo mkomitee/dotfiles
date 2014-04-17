@@ -27,11 +27,12 @@
 
 ;; store most files in the cache
 (setq backup-directory-alist
-      `((".*" . ,(concat user-emacs-directory ".cache/backups")))
+      `(("." . ,(concat user-emacs-directory ".cache/backups")))
       auto-save-file-name-transforms
-      `((".*" ,(concat user-emacs-directory ".cache/backups") t))
+      `(("." ,(concat user-emacs-directory ".cache/backups") t))
       auto-save-list-file-prefix
-      (concat user-emacs-directory ".cache/auto-save-list/.saves-"))
+      (concat user-emacs-directory ".cache/auto-save-list/.saves-")
+      backup-by-copying t)
 
 ;; better scrolling
 (setq scroll-margin 3
