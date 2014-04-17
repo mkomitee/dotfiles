@@ -19,6 +19,7 @@
   (after 'eldoc (diminish 'eldoc-mode))
   (after 'smartparens (diminish 'smartparens-mode))
   (after 'company (diminish 'company-mode))
+  (after 'whitespace (diminish 'whitespace-mode))
   (after 'git-gutter+ (diminish 'git-gutter+-mode)))
 
 (require 'linum)
