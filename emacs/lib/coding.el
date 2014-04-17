@@ -48,7 +48,8 @@
 (global-flycheck-mode t)
 (defun komitee/flycheck-hook ()
   (if (eq (length flycheck-current-errors) 0)
-      (delete-windows-on flycheck-error-list-buffer)
+      (if (get-buffer flycheck-error-list-buffer)
+          (delete-windows-on flycheck-error-list-buffer))
     (flycheck-list-errors)))
 (add-hook 'flycheck-after-syntax-check-hook 'komitee/flycheck-hook)
 
@@ -59,17 +60,12 @@
 (add-hook 'prog-mode-hook 'komitee/rainbow-hook)
 
 (require-package 'paredit)
+(require-package 'evil-paredit)
+(require 'evil-paredit)
 
-(defun my-lisp-hook ()
-  (progn
-    (turn-on-eldoc-mode)
-    (require 'evil-paredit)
-    (paredit-mode t)
-    (evil-paredit-mode t)))
-
-(add-hook 'emacs-lisp-mode-hook 'my-lisp-hook)
-(add-hook 'lisp-interaction-mode-hook 'my-lisp-hook)
-(add-hook 'ielm-mode-hook 'my-lisp-hook)
+(add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+(add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
+(add-hook 'emacs-lisp-mode-hook 'evil-paredit-mode)
 
 ;; Python
 (require-package 'python)
@@ -97,14 +93,8 @@
   (highlight-phrase "import pdb")
   (highlight-phrase "pdb.set_trace()"))
 
-(defun my-python-hook ()
-  (progn
-    (annotate-pdb)
-    (fci-mode)
-    (setq fci-rule-column 80)
-    (jedi:setup)))
-
-(add-hook 'python-mode-hook 'my-python-hook)
+(add-hook 'python-mode-hook 'annotate-pdb)
+(add-hook 'python-mode-hook 'jedi:setup)
 
 (evil-define-key 'insert python-mode-map (kbd "RET") 'evil-ret-and-indent)
 

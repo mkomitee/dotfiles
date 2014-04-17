@@ -14,7 +14,6 @@
 (require-package 'evil-visualstar)
 (require-package 'evil-nerd-commenter)
 (require-package 'evil-indent-textobject)
-(require-package 'evil-paredit)
 (require-package 'surround)
 
 (require 'evil)

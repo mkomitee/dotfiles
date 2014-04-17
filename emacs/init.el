@@ -7,7 +7,7 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 
-(set 'global-emacs-config-directory "~/.dotfiles/emacs/")
+(defvar-local global-emacs-config-directory "~/.dotfiles/emacs/")
 (defun komitee/load (name)
   (load-file (concat global-emacs-config-directory "/lib/" name ".el")))
 
@@ -22,11 +22,12 @@
 (komitee/load "maps")
 
 ;; Apply local customizations
-(set 'local-emacs-config (concat user-emacs-directory "local.el"))
+(defvar-local local-emacs-config (concat user-emacs-directory "local.el"))
 (when (file-exists-p local-emacs-config)
           (load-file local-emacs-config))
 
 ;; If we're in a window system of any kind start the server
+(require 'server)
 (when window-system
   (setq server-use-tcp t
         server-host system-name)
