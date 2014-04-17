@@ -53,3 +53,9 @@
                                  (t default-color))))
                 (set-face-background 'mode-line (car color))
                 (set-face-foreground 'mode-line (cdr color))))))
+(custom-set-faces
+ '(rainbow-delimiters-depth-1-face ((t (:foreground "snow"))))
+ '(rainbow-delimiters-depth-2-face ((t (:foreground "light slate blue"))))
+ '(rainbow-delimiters-depth-3-face ((t (:foreground "honeydew"))))
+ '(rainbow-delimiters-depth-4-face ((t (:foreground "royal blue"))))
+ '(rainbow-delimiters-unmatched-face ((t (:foreground "red")))))
