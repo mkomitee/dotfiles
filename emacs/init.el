@@ -1,6 +1,6 @@
-(defvar-local global-emacs-config-directory "~/.dotfiles/emacs/")
+(defvar komitee/emacs-config-directory "~/.dotfiles/emacs/")
 (defun komitee/load (name)
-  (load-file (concat global-emacs-config-directory "/lib/" name ".el")))
+  (load-file (concat komitee/emacs-config-directory "/lib/" name ".el")))
 
 (komitee/load "packages")
 (komitee/load "utils")
@@ -13,9 +13,9 @@
 (komitee/load "maps")
 
 ;; Apply local customizations
-(defvar-local local-emacs-config (concat user-emacs-directory "local.el"))
-(when (file-exists-p local-emacs-config)
-          (load-file local-emacs-config))
+(defvar komitee/local-emacs-config (concat user-emacs-directory "local.el"))
+(when (file-exists-p komitee/local-emacs-config)
+          (load-file komitee/local-emacs-config))
 
 ;; If we're in a window system of any kind start the server
 (require 'server)

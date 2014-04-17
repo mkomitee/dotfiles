@@ -100,3 +100,8 @@
     (setq x-select-enable-clipboard t
           x-select-enable-primary t)
   )
+
+;; make sure $PATH is set correctly
+(when (fboundp 'exec-path-from-shell-initialize)
+  (ignore-errors ;; windows
+    (exec-path-from-shell-initialize)))

@@ -13,7 +13,3 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
       (setq deactivate-mark t)
     (when (get-buffer "*Completions*") (delete-windows-on "*Completions*"))
     (abort-recursive-edit)))
-
-;; make sure $PATH is set correctly
-(ignore-errors ;; windows
-  (exec-path-from-shell-initialize))
