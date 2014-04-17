@@ -19,7 +19,6 @@
 (show-paren-mode t)
 
 (add-hook 'before-save-hook 'whitespace-cleanup)
-(electric-indent-mode t)
 
 ;; Display a thin red vertical line at the 80th column
 (require-package 'fill-column-indicator)
