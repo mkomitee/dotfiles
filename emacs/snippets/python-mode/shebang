@@ -1,5 +1,0 @@
-# name: #!/usr/bin/env python ...
-# key: shebang
-# --
-#!/usr/bin/env python
-$0
