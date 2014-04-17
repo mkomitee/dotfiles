@@ -1,9 +1,9 @@
 ;; General
 
-;; Figure out how indentation should work for these languages by
-;; inspecting the file. For new files, default to spaces.
-(require-package 'smart-tabs-mode)
-(smart-tabs-insinuate 'c 'c++ 'cperl 'java 'python 'ruby)
+;; No tabs while coding
+(defun komitee/notabs ()
+  (setq indent-tabs-mode nil))
+(add-hook 'prog-mode-hook 'komitee/notabs)
 
 ;; Highlight incorrect use of whitespace
 (require 'whitespace)
