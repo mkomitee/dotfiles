@@ -24,7 +24,6 @@
 (add-hook 'prog-mode-hook 'komitee/whitespace-hook)
 
 ;; Display a thin red vertical line at the 80th column
-(require-package 'fill-column-indicator)
 (require 'fill-column-indicator)
 (setq fci-rule-width 1)
 (setq fci-rule-color "darkred")
@@ -36,14 +35,12 @@
 (add-hook 'prog-mode-hook 'komitee/fci-hook)
 
 ;; Snippets are useful!
-(require-package 'yasnippet)
 (require 'yasnippet)
 (yas-global-mode t)
 (evil-define-key 'insert yas-minor-mode-map (kbd "TAB")
   'yas-next-field-or-maybe-expand)
 
 ;; automatically check file syntax at start, save & when idle
-(require-package 'flycheck)
 (after 'flycheck
   (setq flycheck-check-syntax-automatically '(save mode-enabled))
   (setq flycheck-checkers (delq 'emacs-lisp-checkdoc flycheck-checkers)))
@@ -58,13 +55,10 @@
 (add-hook 'flycheck-after-syntax-check-hook 'komitee/flycheck-hook)
 
 ;; Lisp
-(require-package 'rainbow-delimiters)
 (defun komitee/rainbow-hook ()
   (rainbow-delimiters-mode t))
 (add-hook 'prog-mode-hook 'komitee/rainbow-hook)
 
-(require-package 'paredit)
-(require-package 'evil-paredit)
 (require 'evil-paredit)
 
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
@@ -72,10 +66,6 @@
 (add-hook 'emacs-lisp-mode-hook 'evil-paredit-mode)
 
 ;; Python
-(require-package 'python)
-(require-package 'jedi)
-(require-package 'jedi-direx)
-
 (setq
  jedi:complete-on-dot t
  jedi:tooltip-method nil
@@ -106,11 +96,6 @@
 (add-hook 'makefile-mode-hook 'indent-tabs-mode)
 
 ;; haskell
-(require-package 'haskell-mode)
-
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-to-list 'completion-ignored-extensions ".hi")
 (setq haskell-program-name "ghci")
-
-;; puppet
-(require-package 'puppet-mode)

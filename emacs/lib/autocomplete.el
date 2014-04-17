@@ -5,7 +5,6 @@
 (defvar ac-max-width 0.5)
 (defvar ac-show-menu-immediately-on-auto-complete t)
 
-(require-package 'auto-complete)
 (require 'auto-complete-config)
 (ac-config-default)
 

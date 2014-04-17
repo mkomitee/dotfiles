@@ -8,14 +8,6 @@
 (defvar evil-emacs-state-cursor '("red" box))
 (defvar evilnc-hotkey-comment-operator "gc")
 
-(require-package 'evil)
-(require-package 'evil-leader)
-(require-package 'evil-matchit)
-(require-package 'evil-visualstar)
-(require-package 'evil-nerd-commenter)
-(require-package 'evil-indent-textobject)
-(require-package 'surround)
-
 (require 'evil)
 (require 'evil-leader)
 (require 'evil-nerd-commenter)

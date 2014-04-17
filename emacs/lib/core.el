@@ -56,21 +56,16 @@
 (require 'ido)
 (ido-mode t)
 (ido-everywhere t)
-(require-package 'ido-ubiquitous)
 (ido-ubiquitous-mode t)
-(require-package 'flx-ido)
 (flx-ido-mode t)
-(require-package 'ido-vertical-mode)
 (ido-vertical-mode)
 (defvar smex-save-file (concat user-emacs-directory ".cache/smex-items"))
-(require-package 'smex)
 (require 'smex)
 (smex-initialize)
 
 ;; Projectile for better fuzzy matching and more
 (defvar projectile-cache-file (concat user-emacs-directory ".cache/projectile.cache"))
 (defvar projectile-known-projects-file (concat user-emacs-directory ".cache/projectile-bookmarks.eld"))
-(require-package 'projectile)
 (require 'projectile)
 (add-to-list 'projectile-globally-ignored-directories "elpa")
 (add-to-list 'projectile-globally-ignored-directories ".cache")
@@ -88,14 +83,12 @@
 (global-visual-line-mode)
 (blink-cursor-mode -1)
 
-(require-package 'undo-tree)
 (require 'undo-tree)
 (setq undo-tree-auto-save-history t)
 (setq-default undo-tree-history-directory-alist
               `(("." . ,(concat user-emacs-directory ".cache/undo"))))
 (global-undo-tree-mode)
 
-(require-package 'multiple-cursors)
 (require 'multiple-cursors)
 (after 'evil
   (add-hook 'multiple-cursors-mode-enabled-hook 'evil-emacs-state)

@@ -1,10 +1,7 @@
-(require-package 'smart-mode-line)
 (add-hook 'after-init-hook (sml/setup))
 
-(require-package 'pretty-mode)
 (global-pretty-mode)
 
-(require-package 'diminish)
 (after 'diminish-autoloads
   (diminish 'global-visual-line-mode)
   (diminish 'visual-line-mode)
@@ -35,7 +32,6 @@
 ;; Theming, ...
 (setq custom-safe-themes '("0e121ff9bef6937edad8dfcff7d88ac9219b5b4f1570fd1702e546a80dba0832" default)
       frame-background-mode 'dark)
-(require-package 'molokai-theme)
 (require 'molokai-theme)
 (load-theme 'molokai)
 
