@@ -103,7 +103,9 @@
 
 ;; This makes those windows with lists of possible commands more useful
 (require 'guide-key)
-(setq guide-key/guide-key-sequence '("C-x" "C-c"))
+(setq guide-key/guide-key-sequence '("C-x" "C-c" "SPC" "SPCSPC" "g"
+                                     "C-w" "SPC h" "z" "]" "["))
+
 (setq guide-key/recursive-key-sequence-flag t)
 (guide-key-mode 1)
 
