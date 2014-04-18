@@ -9,6 +9,15 @@
 
 (define-key evil-normal-state-map " b" 'switch-to-buffer)
 (define-key evil-normal-state-map " p" 'projectile-find-file)
+(define-key evil-normal-state-map " r" 'projectile-recentf)
+(define-key evil-normal-state-map " a" 'projectile-ag)
+(define-key evil-normal-state-map " w" 'evil-ace-jump-word-mode)
+(define-key evil-normal-state-map " f" 'evil-ace-jump-char-mode)
+(define-key evil-normal-state-map " t" 'evil-ace-jump-char-to-mode)
+(define-key evil-normal-state-map " j" 'evil-ace-jump-line-mode)
+(define-key evil-normal-state-map " '" 'ace-jump-mode-pop-mark)
+(define-key evil-normal-state-map " `" 'ace-jump-mode-pop-mark)
+
 (define-key evil-normal-state-map "   " 'smex)
 
 ;; Since we lose the Ctrl+h prefix in evil mode, redefine these
