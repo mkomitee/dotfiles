@@ -5,6 +5,8 @@
 (define-key evil-normal-state-map "\C-l" 'evil-window-right)
 (define-key evil-normal-state-map "|" (kbd ":vsplit C-m C-l"))
 (define-key evil-normal-state-map "_" (kbd ":split C-m C-j"))
+(define-key evil-normal-state-map "-" 'projectile-dired)
+
 (define-key evil-normal-state-map " b" 'switch-to-buffer)
 (define-key evil-normal-state-map " p" 'projectile-find-file)
 (define-key evil-normal-state-map "   " 'smex)
@@ -62,7 +64,7 @@
 (evil-ex-define-cmd "esh[ell]" 'eshell)
 (evil-ex-define-cmd "sort" 'sort-lines)
 (evil-ex-define-cmd "python" 'python-shell-switch-to-shell)
-(evil-ex-define-cmd "Exp[lore]" 'dired-jump)
+(evil-ex-define-cmd "Exp[lore]" 'projectile-dired)
 (evil-ex-define-cmd "color[scheme]" 'customize-themes)
 
 (define-key evil-insert-state-map (kbd "RET") 'evil-ret-and-indent)
