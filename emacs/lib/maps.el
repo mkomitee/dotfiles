@@ -77,7 +77,6 @@
 (evil-ex-define-cmd "color[scheme]" 'customize-themes)
 
 (define-key evil-insert-state-map (kbd "RET") 'evil-ret-and-indent)
-(define-key evil-insert-state-map (kbd "RET") 'evil-ret)
 (evil-define-key 'insert eshell-mode-map (kbd "RET") 'eshell-send-input)
 
 (after 'ag-autoloads
