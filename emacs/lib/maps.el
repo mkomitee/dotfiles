@@ -72,7 +72,7 @@
 (evil-ex-define-cmd "Wq" 'evil-save-and-close)
 (evil-ex-define-cmd "esh[ell]" 'eshell)
 (evil-ex-define-cmd "sort" 'sort-lines)
-(evil-ex-define-cmd "python" 'python-shell-switch-to-shell)
+(evil-ex-define-cmd "python" 'run-python)
 (evil-ex-define-cmd "Exp[lore]" 'projectile-dired)
 (evil-ex-define-cmd "color[scheme]" 'customize-themes)
 
