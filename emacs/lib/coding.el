@@ -93,7 +93,9 @@
 (evil-define-key 'insert python-mode-map (kbd "RET") 'evil-ret-and-indent)
 
 ;; make
-(add-hook 'makefile-mode-hook 'indent-tabs-mode)
+(defun komitee/tabs ()
+  (setq indent-tabs-mode t))
+(add-hook 'makefile-mode-hook 'komitee/tabs)
 
 ;; haskell
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
