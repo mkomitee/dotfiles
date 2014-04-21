@@ -27,12 +27,16 @@
 
 ;; store most files in the cache
 (setq backup-directory-alist
-      `(("." . ,(concat user-emacs-directory ".cache/backups")))
+      `(("." . ,(concat user-emacs-directory ".cache/backups/")))
       auto-save-file-name-transforms
-      `(("." ,(concat user-emacs-directory ".cache/backups") t))
+      `((".*" ,(concat user-emacs-directory ".cache/backups/") t))
       auto-save-list-file-prefix
       (concat user-emacs-directory ".cache/auto-save-list/.saves-")
       backup-by-copying t)
+
+;; Don't use lockfiles. This prevents us from dropping .#foo# file
+;; turds in the filesystem, but will prevent us from detecting conflicts
+(setq create-lockfiles nil)
 
 ;; better scrolling
 (setq scroll-margin 3
