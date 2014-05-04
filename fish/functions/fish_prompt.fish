@@ -1,8 +1,29 @@
+
+function fish_vi_indicator --description "Displays the current mode"
+  switch $fish_bind_mode
+    case default
+      set_color red
+      echo "[N]"
+    case insert
+      set_color green
+      echo "[I]"
+    case visual
+      set_color magenta
+      echo "[V]"
+  end
+  set_color normal
+end
+
+
 function fish_prompt --description 'Write out the prompt'
 
     z --add "$PWD"
     
     set -l last_status $status
+
+    if not set -q installed_user_key_bindings
+        fish_user_key_bindings
+    end
 
     # Just calculate these once, to save a few cycles when displaying the prompt
     if not set -q __fish_prompt_hostname
@@ -83,5 +104,5 @@ function fish_prompt --description 'Write out the prompt'
         set -g __fish_prompt_host (set_color $fish_color_host)
     end
 
-    echo -n -s "$__fish_prompt_user" "$USER" "$__fish_prompt_normal" @ "$__fish_prompt_host" "$__fish_prompt_hostname" "$__fish_prompt_normal" ' ' "$__fish_prompt_cwd" (prompt_pwd) (__fish_git_prompt) "$__fish_prompt_normal" "$prompt_status" "$prompt_jobs" "$delim" ' '
+    echo -n -s "$__fish_prompt_user" "$USER" "$__fish_prompt_normal" @ "$__fish_prompt_host" "$__fish_prompt_hostname" "$__fish_prompt_normal" ' ' "$__fish_prompt_cwd" (prompt_pwd) (__fish_git_prompt) (fish_vi_indicator) "$__fish_prompt_normal" "$prompt_status" "$prompt_jobs" "$delim" ' '
 end
