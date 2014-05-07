@@ -1,108 +1,85 @@
-
-function fish_vi_indicator --description "Displays the current mode"
-  switch $fish_bind_mode
-    case default
-      set_color red
-      echo "[N]"
-    case insert
-      set_color green
-      echo "[I]"
-    case visual
-      set_color magenta
-      echo "[V]"
-  end
-  set_color normal
-end
-
-
 function fish_prompt --description 'Write out the prompt'
 
-    z --add "$PWD"
-    
-    set -l last_status $status
+    # Cache this for later
+    set last_status $status
 
+    z --add "$PWD"
+
+    # Yep, this shouldn't be necessary, but I'm at a loss.
     if not set -q installed_user_key_bindings
         fish_user_key_bindings
     end
 
-    # Just calculate these once, to save a few cycles when displaying the prompt
-    if not set -q __fish_prompt_hostname
-        set -g __fish_prompt_hostname (hostname|cut -d . -f 1)
+    # Cache these so we don't need to execute set_color over and over
+    if not set -q __fish_color_normal
+        set -g __fish_color_normal (set_color normal)
+    end
+    if not set -q __fish_color_red
+        set -g __fish_color_red (set_color red)
+    end
+    if not set -q __fish_color_blue
+        set -g __fish_color_blue (set_color blue)
+    end
+    if not set -q __fish_color_cyan
+        set -g __fish_color_cyan (set_color cyan)
+    end
+    if not set -q __fish_color_yellow
+        set -g __fish_color_yellow (set_color yellow)
     end
 
-    if not set -q __fish_prompt_normal
-        set -g __fish_prompt_normal (set_color normal)
-    end
-
-    if not set -q -g __fish_classic_git_functions_defined
-        set -g __fish_classic_git_functions_defined
-
-        function __fish_repaint_user --on-variable fish_color_user --description "Event handler, repaint when fish_color_user changes"
-            if status --is-interactive
-                set -e __fish_prompt_user
-                commandline -f repaint ^/dev/null
-            end
-        end
-        
-        function __fish_repaint_host --on-variable fish_color_host --description "Event handler, repaint when fish_color_host changes"
-            if status --is-interactive
-                set -e __fish_prompt_host
-                commandline -f repaint ^/dev/null
-            end
-        end
-        
-        function __fish_repaint_status --on-variable fish_color_status --description "Event handler; repaint when fish_color_status changes"
-            if status --is-interactive
-                set -e __fish_prompt_status
-                commandline -f repaint ^/dev/null
-            end
-        end
-    end
-
-    set -l delim '>'
-
-    switch $USER
-
-    case root
-
-        if not set -q __fish_prompt_cwd
-            if set -q fish_color_cwd_root
-                set -g __fish_prompt_cwd (set_color $fish_color_cwd_root)
-            else
-                set -g __fish_prompt_cwd (set_color $fish_color_cwd)
-            end
-        end
-
-    case '*'
-
-        if not set -q __fish_prompt_cwd
-            set -g __fish_prompt_cwd (set_color $fish_color_cwd)
-        end
-
-    end
-
-    set -l __job_count (jobs | wc -l)
-    set -l __fish_prompt_jobs (set_color $fish_color_quote)
-    if test $__job_count -ne 0
-        set -g prompt_jobs "$__fish_prompt_jobs ($__job_count)$__fish_prompt_normal"
-    else
-        set -g prompt_jobs ""
-    end
-
-    set -l prompt_status
+    # Give an indication if the previous command exited abnormally
     if test $last_status -ne 0
-        if not set -q __fish_prompt_status
-            set -g __fish_prompt_status (set_color $fish_color_status)
-        end
-        set prompt_status "$__fish_prompt_status [$last_status]$__fish_prompt_normal"
+        set __fish_status [$last_status]
+        set __fish_prompt_status "$__fish_color_red$__fish_status$__fish_color_normal "
+    else
+        set __fish_prompt_status ""
     end
 
-    if not set -q __fish_prompt_user
-        set -g __fish_prompt_user (set_color $fish_color_user)
+    # Cache this so we don't need to recheck the current hostname whenever we
+    # want to display a prompt.
+    if not set -q __fish_hostname
+        set -g __fish_hostname (hostname | cut -d . -f 1,2)
     end
-    if not set -q __fish_prompt_host
-        set -g __fish_prompt_host (set_color $fish_color_host)
+    if test $USER = root
+        set __fish_color_host $__fish_color_red
+    else if test $fish_bind_mode = default
+        set __fish_color_host $__fish_color_blue
+    else if test $fish_bind_mode = visual
+        set __fish_color_host $__fish_color_cyan
+    else
+        set __fish_color_host $__fish_color_yellow
+    end
+    set __fish_prompt_host "$__fish_color_host$__fish_hostname$__fish_color_normal "
+
+    # Include the cwd
+    set __fish_color_cwd $__fish_color_yellow
+    set __fish_cwd (prompt_pwd)
+    set __fish_prompt_cwd "$__fish_color_cwd$__fish_cwd$__fish_color_normal "
+
+    # Give an indication if we have jobs running in the background or suspended
+    set __fish_jobs_count (jobs | wc -l)
+    if test $__fish_jobs_count -ne 0
+        set __fish_color_jobs $__fish_color_red
+        set __fish_jobs "($__fish_jobs_count)"
+        set __fish_prompt_jobs "$__fish_color_jobs$__fish_jobs$__fish_color_normal "
+    else
+        set __fish_prompt_jobs ""
     end
 
-    echo -n -s "$__fish_prompt_user" "$USER" "$__fish_prompt_normal" @ "$__fish_prompt_host" "$__fish_prompt_hostname" "$__fish_prompt_normal" ' ' "$__fish_prompt_cwd" (prompt_pwd) (__fish_git_prompt) (fish_vi_indicator) "$__fish_prompt_normal" "$prompt_status" "$prompt_jobs" "$delim" ' '
+    # Another indication of whether I'm root or not
+    if test $USER = root
+        set __fish_delimiter '#'
+        set __fish_color_delimiter $__fish_color_red
+    else
+        set __fish_delimiter '%'
+        set __fish_color_delimiter $__fish_color_yellow
+    end
+    set __fish_prompt_delimiter "$__fish_color_delimiter$__fish_delimiter$__fish_color_normal "
+
+    # Put it all together
+    echo -n -s $__fish_prompt_status \
+               $__fish_prompt_host \
+               $__fish_prompt_cwd \
+               $__fish_prompt_jobs \
+               $__fish_prompt_delimiter
 end
