@@ -70,3 +70,5 @@ html
 
 ### Simple say to indicate a file should be ignored
 *.ignore
+.env
+.fenv
