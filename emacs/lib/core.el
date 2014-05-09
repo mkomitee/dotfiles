@@ -115,3 +115,6 @@
 (require 'popwin)
 (popwin-mode 1)
 (push '("*Flycheck errors*" :position bottom :height 5) popwin:special-display-config)
+
+;; Side-by-side diff is superior.
+(setq ediff-split-window-function 'split-window-horizontally)
