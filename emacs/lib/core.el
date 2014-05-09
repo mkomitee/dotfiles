@@ -110,3 +110,8 @@
 (when (fboundp 'exec-path-from-shell-initialize)
   (ignore-errors ;; windows
     (exec-path-from-shell-initialize)))
+
+;; Use popwin to keep control of my windows
+(require 'popwin)
+(popwin-mode 1)
+(push '("*Flycheck errors*" :position bottom :height 5) popwin:special-display-config)

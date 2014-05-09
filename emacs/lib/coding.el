@@ -49,9 +49,7 @@
   (if (eq (length flycheck-current-errors) 0)
       (if (get-buffer flycheck-error-list-buffer)
           (delete-windows-on flycheck-error-list-buffer))
-    (progn
-      (flycheck-list-errors)
-      (minimize-window (get-buffer-window flycheck-error-list-buffer)))))
+    (flycheck-list-errors)))
 (add-hook 'flycheck-after-syntax-check-hook 'komitee/flycheck-hook)
 
 ;; Lisp

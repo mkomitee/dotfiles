@@ -30,6 +30,7 @@
                            molokai-theme
                            multiple-cursors
                            paredit
+                           popwin
                            pretty-mode
                            projectile
                            puppet-mode
