@@ -22,3 +22,6 @@
 [submodule "contrib/sjl/z"]
 	path = contrib/sjl/z
 	url = https://github.com/sjl/z-fish/
+[submodule "vim/neobundle.vim"]
+	path = vim/neobundle.vim
+	url = git://github.com/Shougo/neobundle.vim

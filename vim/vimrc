@@ -1,8 +1,9 @@
 " Load Plugins --------------------------------------------------------------{{{
 " Initialize NeoBundle ------------------------------------------------------{{{
 set nocompatible
+set runtimepath+=~/.dotfiles/vim/
 if has('vim_starting')
-    set runtimepath+=~/.vim/bundle/neobundle.vim/
+    set runtimepath+=~/.dotfiles/vim/neobundle.vim/
 endif
 
 if $SHELL =~ '/fish$'
@@ -614,8 +615,10 @@ silent execute '!mkdir -p $HOME/.vimdata/tags'
 " }}}
 " Use a bar-shaped cursor for insert mode, even through tmux. ---------------{{{
 if exists('$TMUX')
-    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+    if !exists('$WINDOWID')
+        let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+        let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+    endif
 endif
 " }}}
 " Toggle listchars as we enter and exit insert mode -------------------------{{{
@@ -641,18 +644,10 @@ map <C-k> <C-w>k
 map <C-l> <C-w>l
 " }}}
 " Load abbreviations --------------------------------------------------------{{{
-source ~/.vim/abbrev
+source ~/.dotfiles/vim/abbrev
 " }}}
 "
 " Experimentation {{{
-
-" IBV2013 - This lets you drag around a visually selected thing.
-runtime plugin/dragvisuals.vim
-vnoremap  <expr> <C-Left>    DVB_Drag('left')
-vnoremap  <expr> <C-Right>   DVB_Drag('right')
-vnoremap  <expr> <C-Down>    DVB_Drag('down')
-vnoremap  <expr> <C-Up>      DVB_Drag('up')
-let g:DVB_TrimWS = 1
 
 " IBV2012 "I'm sick of typing :%s/.../.../g"
 
