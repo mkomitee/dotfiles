@@ -10,8 +10,6 @@
 
 (after 'linum (ac-linum-workaround))
 
-(add-to-list 'ac-modes 'vimrc-mode)
-
 (defadvice ac-expand (before advice-for-ac-expand activate)
   (when (yas-expand)
     (ac-stop)))

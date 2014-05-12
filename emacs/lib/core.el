@@ -95,9 +95,6 @@
 (global-undo-tree-mode)
 
 (require 'multiple-cursors)
-(after 'evil
-  (add-hook 'multiple-cursors-mode-enabled-hook 'evil-emacs-state)
-  (add-hook 'multiple-cursors-mode-disabled-hook 'evil-normal-state))
 
 ;; If we're in X-windows, ...
 (if (eq window-system 'X)
@@ -118,3 +115,8 @@
 
 ;; Side-by-side diff is superior.
 (setq ediff-split-window-function 'split-window-horizontally)
+
+;; A mode where all keys are automatically prefixed with C-
+;; except for "g" which causes the next key to be prefixed
+;; with M-
+(require 'god-mode)

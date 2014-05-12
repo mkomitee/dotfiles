@@ -37,8 +37,7 @@
 ;; Snippets are useful!
 (require 'yasnippet)
 (yas-global-mode t)
-(evil-define-key 'insert yas-minor-mode-map (kbd "TAB")
-  'yas-next-field-or-maybe-expand)
+(global-set-key (kbd "TAB") 'yas-next-field-or-maybe-expand)
 
 ;; automatically check file syntax at start, save & when idle
 (after 'flycheck
@@ -57,11 +56,8 @@
   (rainbow-delimiters-mode t))
 (add-hook 'prog-mode-hook 'komitee/rainbow-hook)
 
-(require 'evil-paredit)
-
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
-(add-hook 'emacs-lisp-mode-hook 'evil-paredit-mode)
 
 ;; Python
 (setq
@@ -84,11 +80,8 @@
   (highlight-phrase "ipdb.set_trace()")
   (highlight-phrase "import pdb")
   (highlight-phrase "pdb.set_trace()"))
-
 (add-hook 'python-mode-hook 'annotate-pdb)
 (add-hook 'python-mode-hook 'jedi:setup)
-
-(evil-define-key 'insert python-mode-map (kbd "RET") 'evil-ret-and-indent)
 
 ;; make
 (defun komitee/tabs ()

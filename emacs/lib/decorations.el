@@ -38,21 +38,30 @@
 ;; Fonts
 (set-frame-font "Anonymous Pro-11" nil t)
 
-;; change mode-line color by evil state
-(lexical-let ((default-color (cons (face-background 'mode-line)
-                                   (face-foreground 'mode-line))))
-  (add-hook 'post-command-hook
-            (lambda ()
-              (let ((color (cond ((minibufferp) default-color)
-                                 ((evil-insert-state-p) '("#e80000" . "#ffffff"))
-                                 ((evil-emacs-state-p)  '("#444488" . "#ffffff"))
-                                 ((buffer-modified-p)   '("#006fa0" . "#ffffff"))
-                                 (t default-color))))
-                (set-face-background 'mode-line (car color))
-                (set-face-foreground 'mode-line (cdr color))))))
 (custom-set-faces
  '(rainbow-delimiters-depth-1-face ((t (:foreground "snow"))))
  '(rainbow-delimiters-depth-2-face ((t (:foreground "light slate blue"))))
  '(rainbow-delimiters-depth-3-face ((t (:foreground "honeydew"))))
  '(rainbow-delimiters-depth-4-face ((t (:foreground "royal blue"))))
  '(rainbow-delimiters-unmatched-face ((t (:foreground "red")))))
+
+
+;; Causes god mode to change the cursor from a pipe to a box
+(defun my-update-cursor ()
+  (setq cursor-type (if (or god-local-mode buffer-read-only)
+                        'box
+                      'bar)))
+(add-hook 'god-mode-enabled-hook 'my-update-cursor)
+(add-hook 'god-mode-disabled-hook 'my-update-cursor)
+
+;; (defun komitee/god-mode-update-cursor ()
+;;   (let ((limited-colors-p (> 257 (length (defined-colors)))))
+;;     (cond (god-local-mode (progn
+;;                             (set-face-background 'mode-line (if limited-colors-p "white" "#e9e2cb"))
+;;                             (set-face-background 'mode-line-inactive (if limited-colors-p "white" "#e9e2cb"))))
+;;           (t (progn
+;;                (set-face-background 'mode-line (if limited-colors-p "black" "#0a2832"))
+;;                (set-face-background 'mode-line-inactive (if limited-colors-p "black" "#0a2832")))))))
+
+;; (add-hook 'god-mode-enabled-hook 'komitee/god-mode-update-cursor)
+;; (add-hook 'god-mode-disabled-hook 'komitee/god-mode-update-cursor)

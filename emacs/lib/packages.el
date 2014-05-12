@@ -1,14 +1,8 @@
 (defvar komitee/packages '(ace-jump-mode
+                           ace-window
                            ag
                            auto-complete
                            diminish
-                           evil
-                           evil-indent-textobject
-                           evil-leader
-                           evil-matchit
-                           evil-nerd-commenter
-                           evil-paredit
-                           evil-visualstar
                            exec-path-from-shell
                            fill-column-indicator
                            flx-ido
@@ -17,6 +11,7 @@
                            gist
                            git-gutter+
                            git-gutter-fringe+
+                           god-mode
                            guide-key
                            haskell-mode
                            ido-ubiquitous

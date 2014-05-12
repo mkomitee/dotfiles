@@ -5,7 +5,6 @@
 (komitee/load "packages")
 (komitee/load "utils")
 (komitee/load "core")
-(komitee/load "evil")
 (komitee/load "decorations")
 (komitee/load "autocomplete")
 (komitee/load "coding")
