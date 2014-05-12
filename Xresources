@@ -71,8 +71,8 @@
 ! *.colorUL:                  #86a2b0
 ! URxvt.background:           rgba:2222/2222/2222/dddd
 
-*.font:                     xft:Anonymous Pro:size=14
-*.boldFont:                 xft:Anonymous Pro:size=14
+*.font:                     xft:Anonymous Pro:size=12
+*.boldFont:                 xft:Anonymous Pro:size=12
 Emacs.font:                 Anonymous Pro:size=15
 Emacs.boldFont:             Anonymous Pro:size=15
 URxvt.depth:                32

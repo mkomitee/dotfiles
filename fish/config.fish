@@ -25,6 +25,11 @@ set PATH $PATH /sbin
 set PATH $PATH /opt/X11/bin 
 set PATH $PATH /usr/texbin
 set PATH $PATH /opt/bin
+set PATH $PATH /prod/systems/bin
+set PATH $PATH /proj/systems/bin
+set PATH $PATH /proj/systems/etc
+set PATH $PATH /proj/systems/network/bin
+set PATH $PATH /prod/wiki/bin
 
 set MANPATH $HOME/share/man
 set MANPATH $MANPATH $HOME/.cabal/share/man
@@ -42,14 +47,6 @@ set MANPATH $MANPATH /opt/share/man
 
 set PERL5LIB $HOME/.$UNAME.$ARCH/lib64/perl5
 set PERL5LIB $PERL5LIB $HOME/.$UNAME.$ARCH/share/perl5
-
-# Activate the default python virtual environment
-if test -f $HOME/.venv/$UNAME.$ARCH/bin/activate.fish
-    # This is being evaluated BEFORE fish_prompt is declared, so activate.fish
-    # messes up my prompt. Disable virtualenv prompt manipulation.
-    set VIRTUAL_ENV_DISABLE_PROMPT 1
-    source $HOME/.venv/$UNAME.$ARCH/bin/activate.fish
-end
 
 set GREP_OPTIONS '--color=auto --exclude-dir=.git --exclude-dir=.svn --exclude-dir=CVS --binary-files=without-match'
 set GREP_COLOR '1;32'
