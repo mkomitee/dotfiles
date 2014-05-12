@@ -4,15 +4,6 @@
 [submodule "contrib/zsh-users/zsh-syntax-highlighting"]
 	path = contrib/zsh-users/zsh-syntax-highlighting
 	url = git://github.com/zsh-users/zsh-syntax-highlighting.git
-[submodule "contrib/sigurdga/ls-colors-solarized"]
-	path = contrib/sigurdga/ls-colors-solarized
-	url = https://github.com/sigurdga/ls-colors-solarized.git
-[submodule "contrib/seebi/dircolors-solarized"]
-	path = contrib/seebi/dircolors-solarized
-	url = https://github.com/seebi/dircolors-solarized.git
-[submodule "contrib/altercation/solarized"]
-	path = contrib/altercation/solarized
-	url = https://github.com/altercation/solarized.git
 [submodule "contrib/visionmedia/git-extras"]
 	path = contrib/visionmedia/git-extras
 	url = git://github.com/visionmedia/git-extras.git
@@ -25,30 +16,9 @@
 [submodule "contrib/bitly/data_hacks.git"]
 	path = contrib/bitly/data_hacks.git
 	url = git://github.com/bitly/data_hacks.git
-[submodule "contrib/holman/boom"]
-	path = contrib/holman/boom
-	url = git://github.com/holman/boom.git
-[submodule "contrib/chriskempson/base16-xresources"]
-	path = contrib/chriskempson/base16-xresources
-	url = https://github.com/chriskempson/base16-xresources.git
-[submodule "contrib/chriskempson/base16-shell"]
-	path = contrib/chriskempson/base16-shell
-	url = https://github.com/chriskempson/base16-shell
-[submodule "contrib/muennich/urxvt-perls"]
-	path = contrib/muennich/urxvt-perls
-	url = https://github.com/muennich/urxvt-perls.git
-[submodule "contrib/ervandew/urxvt-vim-scrollback"]
-	path = contrib/ervandew/urxvt-vim-scrollback
-	url = https://github.com/ervandew/urxvt-vim-scrollback.git
 [submodule "vim/bundle/neobundle.vim"]
 	path = vim/bundle/neobundle.vim
 	url = git://github.com/Shougo/neobundle.vim
-[submodule "contrib/seebi/tmux-colors-solarized"]
-	path = contrib/seebi/tmux-colors-solarized
-	url = https://github.com/seebi/tmux-colors-solarized
 [submodule "contrib/sjl/z"]
 	path = contrib/sjl/z
 	url = https://github.com/sjl/z-fish/
-[submodule "contrib/mbadolato/iTerm2-Color-Schemes"]
-	path = contrib/mbadolato/iTerm2-Color-Schemes
-	url = https://github.com/mbadolato/iTerm2-Color-Schemes
