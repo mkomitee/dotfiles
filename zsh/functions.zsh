@@ -51,7 +51,7 @@ function g {
     fi
 }
 
-function ss {
+function s {
     if [[ $# > 0 ]]; then
         sudo "$@"
     else

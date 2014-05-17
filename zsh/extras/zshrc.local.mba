@@ -5,4 +5,4 @@ alias emacsclient="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -a /Ap
 alias e="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -a /Applications/Emacs.app/Contents/MacOS/Emacs -n"
 
 
-eval `dircolors ~/.dotfiles/contrib/seebi/dircolors-solarized/dircolors.ansi-light`
+# eval `dircolors ~/.dotfiles/contrib/seebi/dircolors-solarized/dircolors.ansi-light`
