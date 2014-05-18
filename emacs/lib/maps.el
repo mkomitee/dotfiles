@@ -17,8 +17,7 @@
 
 ;; All characters will automatically be prefixed w/ C- unless they start with
 ;; g, which will automatically prefix the following character w/ M-
-(global-set-key (kbd "<escape>") 'god-local-mode)
-(define-key god-local-mode-map (kbd "i") 'god-local-mode)
+(global-set-key (kbd "C-c g") 'god-local-mode)
 
 ;; Recommended by the author of god-mode
 (define-key god-local-mode-map (kbd ".") 'repeat)
@@ -26,6 +25,14 @@
 (global-set-key (kbd "C-x C-2") 'split-window-below)
 (global-set-key (kbd "C-x C-3") 'split-window-right)
 (global-set-key (kbd "C-x C-0") 'delete-window)
+
+(global-set-key (kbd "C-c |") 'split-window-horizontally)
+(global-set-key (kbd "C-c _") 'split-window-vertically)
+
+(global-set-key (kbd "C-c h") 'windmove-left)
+(global-set-key (kbd "C-c l") 'windmove-right)
+(global-set-key (kbd "C-c j") 'windmove-down)
+(global-set-key (kbd "C-c k") 'windmove-up)
 
 ;; This makes those windows with lists of possible commands more useful
 (require 'guide-key)
