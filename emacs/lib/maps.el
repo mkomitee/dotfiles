@@ -33,6 +33,7 @@
 (global-set-key (kbd "C-c l") 'windmove-right)
 (global-set-key (kbd "C-c j") 'windmove-down)
 (global-set-key (kbd "C-c k") 'windmove-up)
+(global-set-key (kbd "C-c C-k") 'delete-window)
 
 ;; This makes those windows with lists of possible commands more useful
 (require 'guide-key)
