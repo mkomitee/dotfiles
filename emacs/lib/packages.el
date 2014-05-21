@@ -3,6 +3,7 @@
                            ag
                            auto-complete
                            diminish
+                           elpy
                            exec-path-from-shell
                            fill-column-indicator
                            flx-ido
@@ -14,8 +15,6 @@
                            haskell-mode
                            ido-ubiquitous
                            ido-vertical-mode
-                           jedi
-                           jedi-direx
                            magit
                            markdown-mode
                            molokai-theme
@@ -25,7 +24,6 @@
                            pretty-mode
                            projectile
                            puppet-mode
-                           python
                            rainbow-delimiters
                            smart-mode-line
                            smex
@@ -39,7 +37,8 @@
 (setq package-archives '(("melpa" . "http://melpa.milkbox.net/packages/")
                          ("org" . "http://orgmode.org/elpa/")
                          ("marmalade" . "http://marmalade-repo.org/packages/")
-                         ("gnu" . "http://elpa.gnu.org/packages/")))
+                         ("gnu" . "http://elpa.gnu.org/packages/")
+                         ("elpy" . "http://jorgenschaefer.github.io/packages/")))
 (package-initialize)
 (when (not package-archive-contents)
   (package-refresh-contents))

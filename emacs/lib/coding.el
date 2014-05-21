@@ -59,28 +59,8 @@
 (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
 
 ;; Python
-(setq
- jedi:complete-on-dot t
- jedi:tooltip-method nil
- python-shell-interpreter "ipython"
- python-shell-interpreter-args ""
- python-shell-prompt-regexp "In \[[0-9]+\]: "
- python-shell-prompt-output-regexp "Out\[[0-9]+\]: "
- python-shell-completion-setup-code ""
- python-shell-completion-string-code "';'.join(get_ipython().complete('''%s''')[1])\n")
-
-(add-hook 'jedi-mode-hook 'jedi-direx:setup)
-
-; Highlight the call to ipdb
-; src http://pedrokroger.com/2010/07/configuring-emacs-as-a-python-ide-2/
-(defun annotate-pdb ()
-  (interactive)
-  (highlight-phrase "import ipdb")
-  (highlight-phrase "ipdb.set_trace()")
-  (highlight-phrase "import pdb")
-  (highlight-phrase "pdb.set_trace()"))
-(add-hook 'python-mode-hook 'annotate-pdb)
-(add-hook 'python-mode-hook 'jedi:setup)
+(elpy-enable)
+(elpy-use-ipython)
 
 ;; make
 (defun komitee/tabs ()
