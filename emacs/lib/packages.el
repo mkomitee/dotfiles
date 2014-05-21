@@ -6,17 +6,13 @@
                            exec-path-from-shell
                            fill-column-indicator
                            flx-ido
-                           flx-ido
                            flycheck
-                           gist
                            git-gutter+
                            git-gutter-fringe+
                            god-mode
                            guide-key
                            haskell-mode
                            ido-ubiquitous
-                           ido-ubiquitous
-                           ido-vertical-mode
                            ido-vertical-mode
                            jedi
                            jedi-direx
@@ -32,7 +28,6 @@
                            python
                            rainbow-delimiters
                            smart-mode-line
-                           smex
                            smex
                            surround
                            undo-tree

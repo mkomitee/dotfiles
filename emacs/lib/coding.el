@@ -37,7 +37,6 @@
 ;; Snippets are useful!
 (require 'yasnippet)
 (yas-global-mode t)
-(global-set-key (kbd "TAB") 'yas-next-field-or-maybe-expand)
 
 ;; automatically check file syntax at start, save & when idle
 (after 'flycheck
