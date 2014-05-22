@@ -57,6 +57,7 @@
 (defvar ido-create-new-buffer 'prompt)
 (defvar ido-use-filename-at-point 'guess)
 (defvar ido-save-directory-list-file (concat user-emacs-directory ".cache/ido.last"))
+(defvar ido-enable-flex-matching t)
 
 (require 'ido)
 (ido-mode t)
