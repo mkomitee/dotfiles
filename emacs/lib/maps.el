@@ -3,7 +3,7 @@
 (define-key global-map (kbd "C-c f") 'projectile-find-file)
 (define-key global-map (kbd "C-c r") 'projectile-recentf)
 
-(define-key global-map (kbd "C-;") 'comment-or-uncomment-region)
+(define-key global-map (kbd "C-;") 'comment-or-uncomment-region-or-line)
 
 ;; Allows completion for commands.
 (define-key global-map (kbd "M-x") 'smex)
