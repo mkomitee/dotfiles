@@ -21,10 +21,6 @@
 
 ;; Recommended by the author of god-mode
 (define-key god-local-mode-map (kbd ".") 'repeat)
-(global-set-key (kbd "C-x C-1") 'delete-other-windows)
-(global-set-key (kbd "C-x C-2") 'split-window-below)
-(global-set-key (kbd "C-x C-3") 'split-window-right)
-(global-set-key (kbd "C-x C-0") 'delete-window)
 
 (global-set-key (kbd "C-c |") 'split-window-horizontally)
 (global-set-key (kbd "C-c _") 'split-window-vertically)
@@ -34,6 +30,17 @@
 (global-set-key (kbd "C-c j") 'windmove-down)
 (global-set-key (kbd "C-c k") 'windmove-up)
 (global-set-key (kbd "C-c C-k") 'delete-window)
+
+;; http://www.masteringemacs.org/articles/2014/02/28/my-emacs-keybindings/
+(global-set-key (kbd "C-x C-k") 'delete-window)
+(global-set-key (kbd "M-o") 'other-window)
+(global-set-key (kbd "S-C-<left>") 'shrink-window-horizontally)
+(global-set-key (kbd "S-C-<right>") 'enlarge-window-horizontally)
+(global-set-key (kbd "S-C-<down>") 'shrink-window-vertically)
+(global-set-key (kbd "S-C-<up>") 'enlarge-window-vertically)
+
+;; http://www.masteringemacs.org/articles/2010/10/04/beginners-guide-to-emacs/
+(global-set-key (kbd "RET") 'newline-and-indent)
 
 ;; This makes those windows with lists of possible commands more useful
 (require 'guide-key)
