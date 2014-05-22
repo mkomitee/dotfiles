@@ -96,9 +96,9 @@ set incsearch                  " search as I type
 set ignorecase                 " ignore case when searching, ...
 set smartcase                  " unless I search for uppercase
 set hlsearch                   " and highlight searches
-set backupdir=$HOME/.vimdata/vimbackup/ " save backups in alternate location
-set directory=$HOME/.vimdata/vimswap/   " save swap files here
-set viewdir=$HOME/.vimdata/vimviews/    " save views here
+set backupdir=$HOME/.vim/data/vimbackup/ " save backups in alternate location
+set directory=$HOME/.vim/data/vimswap/   " save swap files here
+set viewdir=$HOME/.vim/data/vimviews/    " save views here
 set wildmenu                   " commandline completion is nice
 set expandtab                  " by default, use spaces & no tabs
 set shiftwidth=4               " shift width (>> & autoindent)
@@ -124,7 +124,7 @@ endif
 " undofile ------------------------------------------------------------------{{{
 if exists('&undofile')
     set undofile         " Save undo history to a file for persistence
-    set undodir=$HOME/.vimdata/vimundo/ " Save undo data here
+    set undodir=$HOME/.vim/data/vimundo/ " Save undo data here
 endif
 " }}}
 " fillchars -----------------------------------------------------------------{{{
@@ -169,7 +169,7 @@ set completeopt+=longest " insert the longest match
 set completeopt+=menuone " show the menu when there are matches
 "}}}
 " viminfo -------------------------------------------------------------------{{{
-set viminfo+=n~/.vimdata/viminfo " move the viminfo file into ~/.vimdata
+set viminfo+=n~/.vim/data/viminfo " move the viminfo file into ~/.vim/data
 " }}}
 " virtualedit ---------------------------------------------------------------{{{
 set virtualedit=        " reset virtualedit
@@ -469,7 +469,7 @@ let g:netrw_list_hide = '^\.,\~$,^tags$'
 " }}}
 " Ctrl+P --------------------------------------------------------------------{{{
 let g:ctrlp_cmd = 'CtrlPMixed'
-let g:ctrlp_cache_dir = $HOME.'/.vimdata/ctrlp'
+let g:ctrlp_cache_dir = $HOME.'/.vim/data/ctrlp'
 let g:ctrlp_map = '<leader>p'
 let g:ctrlp_mruf_relative = 1
 let g:ctrlp_max_height=1000
@@ -490,7 +490,7 @@ nmap <silent> <leader>cc <plug>NERDCommenterToggle
 nmap <silent> <leader>c$ <plug>NERDCommenterToEOL
 " }}}
 " YankRing ------------------------------------------------------------------{{{
-let g:yankring_history_dir = "$HOME/.vimdata"
+let g:yankring_history_dir = "$HOME/.vim/data"
 " }}}
 " Ultisnips -----------------------------------------------------------------{{{
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -509,7 +509,7 @@ let g:snips_github="https://github.com/mkomitee"
 " Visual Mode Ctrl+C will send the selected text to another tmux pane.
 let g:slime_target = "tmux"
 let g:slime_python_ipython = 1
-let g:slime_paste_file="$HOME/.vimdata/slime_paste"
+let g:slime_paste_file="$HOME/.vim/data/slime_paste"
 let g:slime_no_mappings = 1
 xmap <leader>ss <Plug>SlimeRegionSend
 nmap <leader>ss <Plug>SlimeMotionSend
@@ -606,12 +606,12 @@ au FileType help setl nomodifiable
 " }}}
 " Miscellaneous -------------------------------------------------------------{{{
 " Prepare our vim cache directories -----------------------------------------{{{
-silent execute '!mkdir -p $HOME/.vimdata/vimbackup'
-silent execute '!mkdir -p $HOME/.vimdata/vimswap'
-silent execute '!mkdir -p $HOME/.vimdata/vimviews'
-silent execute '!mkdir -p $HOME/.vimdata/vimundo'
-silent execute '!mkdir -p $HOME/.vimdata/ctrlp'
-silent execute '!mkdir -p $HOME/.vimdata/tags'
+silent execute '!mkdir -p $HOME/.vim/data/vimbackup'
+silent execute '!mkdir -p $HOME/.vim/data/vimswap'
+silent execute '!mkdir -p $HOME/.vim/data/vimviews'
+silent execute '!mkdir -p $HOME/.vim/data/vimundo'
+silent execute '!mkdir -p $HOME/.vim/data/ctrlp'
+silent execute '!mkdir -p $HOME/.vim/data/tags'
 " }}}
 " Use a bar-shaped cursor for insert mode, even through tmux. ---------------{{{
 if exists('$TMUX')
