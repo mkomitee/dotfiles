@@ -9,7 +9,3 @@
 (ac-config-default)
 
 (after 'linum (ac-linum-workaround))
-
-(defadvice ac-expand (before advice-for-ac-expand activate)
-  (when (yas-expand)
-    (ac-stop)))

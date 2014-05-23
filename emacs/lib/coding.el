@@ -37,6 +37,9 @@
 ;; Snippets are useful!
 (require 'yasnippet)
 (yas-global-mode t)
+(setq yas-prompt-functions '(yas-ido-prompt
+                             yas-completing-prompt
+                             yas-no-prompt))
 
 ;; automatically check file syntax at start, save & when idle
 (after 'flycheck
