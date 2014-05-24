@@ -14,6 +14,7 @@
                            god-mode
                            guide-key
                            haskell-mode
+                           ido-hacks
                            ido-ubiquitous
                            ido-vertical-mode
                            magit
