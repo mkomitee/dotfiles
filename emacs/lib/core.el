@@ -102,3 +102,6 @@
 ;; except for "g" which causes the next key to be prefixed
 ;; with M-
 (require 'god-mode)
+
+;; Sentences endings don't require two spaces.
+(setq sentence-end-double-space nil)
