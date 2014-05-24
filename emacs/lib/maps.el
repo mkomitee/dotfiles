@@ -25,10 +25,10 @@
 (define-key global-map (kbd "C-c |") 'split-window-horizontally)
 (define-key global-map (kbd "C-c _") 'split-window-vertically)
 
-(define-key global-map (kbd "C-c h") 'windmove-left)
-(define-key global-map (kbd "C-c l") 'windmove-right)
-(define-key global-map (kbd "C-c j") 'windmove-down)
-(define-key global-map (kbd "C-c k") 'windmove-up)
+(define-key global-map (kbd "S-M-<left>") 'windmove-left)
+(define-key global-map (kbd "S-M-<right>") 'windmove-right)
+(define-key global-map (kbd "S-M-<down>") 'windmove-down)
+(define-key global-map (kbd "S-M-<up>") 'windmove-up)
 (define-key global-map (kbd "C-c C-k") 'delete-window)
 
 ;; http://www.masteringemacs.org/articles/2014/02/28/my-emacs-keybindings/
