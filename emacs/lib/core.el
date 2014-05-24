@@ -6,25 +6,25 @@
 
 ;; minibuffer history
 (require 'savehist)
-(setq savehist-file (concat user-emacs-directory ".cache/savehist")
+(setq savehist-file (concat user-emacs-directory ".savehist")
       savehist-additional-variables '(search ring regexp-search-ring)
       savehist-autosave-interval 60)
 (savehist-mode +1)
 
 ;; recent files
 (require 'recentf)
-(setq recentf-save-file (concat user-emacs-directory ".cache/recentf")
+(setq recentf-save-file (concat user-emacs-directory ".recentf")
       recentf-max-saved-items 100
       recentf-max-menu-items 50)
 (recentf-mode +1)
 
 ;; store most files in the cache
 (setq backup-directory-alist
-      `(("." . ,(concat user-emacs-directory ".cache/backups/")))
+      `(("." . ,(concat user-emacs-directory ".backups/")))
       auto-save-file-name-transforms
-      `((".*" ,(concat user-emacs-directory ".cache/backups/") t))
+      `((".*" ,(concat user-emacs-directory ".backups/") t))
       auto-save-list-file-prefix
-      (concat user-emacs-directory ".cache/auto-save-list/.saves-")
+      (concat user-emacs-directory ".auto-save-list/.saves-")
       backup-by-copying t)
 
 ;; Don't use lockfiles. This prevents us from dropping .#foo# file
@@ -46,7 +46,7 @@
 (defvar ido-enable-prefix nil)
 (defvar ido-create-new-buffer 'prompt)
 (defvar ido-use-filename-at-point 'guess)
-(defvar ido-save-directory-list-file (concat user-emacs-directory ".cache/ido.last"))
+(defvar ido-save-directory-list-file (concat user-emacs-directory ".ido.last"))
 (defvar ido-enable-flex-matching t)
 
 (require 'ido)
@@ -55,16 +55,14 @@
 (ido-ubiquitous-mode t)
 (flx-ido-mode t)
 (ido-vertical-mode)
-(defvar smex-save-file (concat user-emacs-directory ".cache/smex-items"))
+(defvar smex-save-file (concat user-emacs-directory ".smex-items"))
 (require 'smex)
 (smex-initialize)
 
 ;; Projectile for better fuzzy matching and more
-(defvar projectile-cache-file (concat user-emacs-directory ".cache/projectile.cache"))
-(defvar projectile-known-projects-file (concat user-emacs-directory ".cache/projectile-bookmarks.eld"))
+(defvar projectile-cache-file (concat user-emacs-directory ".projectile.cache"))
+(defvar projectile-known-projects-file (concat user-emacs-directory ".projectile-bookmarks.eld"))
 (require 'projectile)
-(add-to-list 'projectile-globally-ignored-directories "elpa")
-(add-to-list 'projectile-globally-ignored-directories ".cache")
 (projectile-global-mode t)
 (setq projectile-require-project-root nil)
 
@@ -82,7 +80,7 @@
 (require 'undo-tree)
 (setq undo-tree-auto-save-history t)
 (setq-default undo-tree-history-directory-alist
-              `(("." . ,(concat user-emacs-directory ".cache/undo"))))
+              `(("." . ,(concat user-emacs-directory ".undo"))))
 (global-undo-tree-mode)
 
 (require 'multiple-cursors)
