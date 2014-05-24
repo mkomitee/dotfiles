@@ -1,6 +1,7 @@
 ;; Like C-p in vim
 (define-key global-map (kbd "C-c b") 'switch-to-buffer)
 (define-key global-map (kbd "C-c f") 'projectile-find-file)
+(define-key global-map (kbd "C-x f") 'projectile-find-file)
 (define-key global-map (kbd "C-c r") 'projectile-recentf)
 
 (define-key global-map (kbd "C-;") 'comment-or-uncomment-region-or-line)
@@ -14,6 +15,7 @@
 ;; This is like w and f in easy-motion in vim.
 (define-key global-map (kbd "C-c w") 'ace-jump-word-mode)
 (define-key global-map (kbd "C-c c") 'ace-jump-char-mode)
+(define-key global-map (kbd "C-c l") 'ace-jump-line-mode)
 
 ;; All characters will automatically be prefixed w/ C- unless they start with
 ;; g, which will automatically prefix the following character w/ M-
@@ -44,6 +46,12 @@
 
 ;; http://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-beginning-of-a-line/
 (global-set-key (kbd "C-a") 'smarter-move-beginning-of-line)
+
+(define-key global-map (kbd "C-'") 'bookmark-set)
+(define-key global-map (kbd "M-'") 'bookmark-jump)
+
+(define-key global-map (kbd "C-`") 'push-mark-no-activate)
+(define-key global-map (kbd "M-`") 'jump-to-mark)
 
 ;; This makes those windows with lists of possible commands more useful
 (require 'guide-key)
