@@ -42,6 +42,9 @@
 ;; http://www.masteringemacs.org/articles/2010/10/04/beginners-guide-to-emacs/
 (define-key global-map (kbd "RET") 'newline-and-indent)
 
+;; http://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-beginning-of-a-line/
+(global-set-key (kbd "C-a") 'smarter-move-beginning-of-line)
+
 ;; This makes those windows with lists of possible commands more useful
 (require 'guide-key)
 (setq guide-key/guide-key-sequence '("C-x" "C-c"))
