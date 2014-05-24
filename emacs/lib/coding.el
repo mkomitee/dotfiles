@@ -55,6 +55,7 @@
 ;; Python
 (elpy-enable)
 (elpy-use-ipython)
+(elpy-clean-modeline)
 
 ;; make
 (defun komitee/tabs ()
