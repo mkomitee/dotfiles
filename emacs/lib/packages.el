@@ -2,6 +2,7 @@
                            ace-window
                            ag
                            auto-complete
+                           better-defaults
                            diminish
                            elpy
                            exec-path-from-shell

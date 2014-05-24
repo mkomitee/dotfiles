@@ -1,15 +1,8 @@
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
-(menu-bar-mode -1)
+(require 'better-defaults)
 
 (setq inhibit-splash-screen t
       inhibit-startup-echo-area-message t
       inhibit-startup-message t)
-
-;; move cursor to the last position upon open
-(require 'saveplace)
-(setq save-place-file (concat user-emacs-directory ".cache/places"))
-(setq-default save-place t)
 
 ;; minibuffer history
 (require 'savehist)
@@ -44,16 +37,13 @@
       scroll-preserve-screen-position t)
 
 ;; better buffer names for duplicates
-(require 'uniquify)
-(setq uniquify-buffer-name-style 'forward
-      uniquify-separator "/"
+(setq uniquify-separator "/"
       uniquify-ignore-buffers-re "^\\*" ; leave special buffers alone
       uniquify-after-kill-buffer-p t)
 
 
 ;; interatively do things ...
 (defvar ido-enable-prefix nil)
-(defvar ido-enable-flex-matching t)
 (defvar ido-create-new-buffer 'prompt)
 (defvar ido-use-filename-at-point 'guess)
 (defvar ido-save-directory-list-file (concat user-emacs-directory ".cache/ido.last"))
@@ -96,13 +86,6 @@
 (global-undo-tree-mode)
 
 (require 'multiple-cursors)
-
-;; If we're in X-windows, ...
-(if (eq window-system 'X)
-    ;; Enable x-clipboard integration
-    (setq x-select-enable-clipboard t
-          x-select-enable-primary t)
-  )
 
 ;; make sure $PATH is set correctly
 (when (fboundp 'exec-path-from-shell-initialize)

@@ -15,9 +15,6 @@
                          trailing))
 (add-hook 'prog-mode-hook 'whitespace-mode)
 
-;; Show matching parenthesis
-(show-paren-mode t)
-
 ;; Cleanup whitespace on save
 (defun komitee/whitespace-hook ()
   (add-hook 'before-save-hook 'whitespace-cleanup nil t))
