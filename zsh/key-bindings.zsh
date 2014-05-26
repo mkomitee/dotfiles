@@ -3,7 +3,9 @@ function zle-line-init zle-keymap-select {
 }
 zle -N zle-line-init
 zle -N zle-keymap-select
-bindkey -v
+
+# bindkey -v
+bindkey -e
 
 # In vi-mode, map v to edit the command line
 autoload edit-command-line
@@ -32,7 +34,7 @@ bindkey -M viins "^W" backward-kill-word
 bindkey -M viins "^A" beginning-of-line
 bindkey -M viins "^E" end-of-line
 
-bindkey "^O" expand-cmd-path
+bindkey -M viins "^O" expand-cmd-path
 
 bindkey -M viins "\e[A" history-search-backward
 bindkey -M viins "\e[B" history-search-forward
