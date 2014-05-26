@@ -105,3 +105,6 @@
 
 ;; Sentences endings don't require two spaces.
 (setq sentence-end-double-space nil)
+
+;; Relocate customiztions
+(setq custom-file (concat komitee/emacs-config-directory "/lib/custom.el"))

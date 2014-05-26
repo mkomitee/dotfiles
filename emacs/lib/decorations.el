@@ -35,14 +35,6 @@
 (require 'molokai-theme)
 (load-theme 'molokai)
 
-(custom-set-faces
- '(rainbow-delimiters-depth-1-face ((t (:foreground "snow"))))
- '(rainbow-delimiters-depth-2-face ((t (:foreground "light slate blue"))))
- '(rainbow-delimiters-depth-3-face ((t (:foreground "honeydew"))))
- '(rainbow-delimiters-depth-4-face ((t (:foreground "royal blue"))))
- '(rainbow-delimiters-unmatched-face ((t (:foreground "red")))))
-
-
 ;; Causes god mode to change the cursor from a pipe to a box
 (defun my-update-cursor ()
   (setq cursor-type (if (or god-local-mode buffer-read-only)
