@@ -47,6 +47,7 @@
   (setq flycheck-checkers (delq 'emacs-lisp-checkdoc flycheck-checkers)))
 (global-flycheck-mode t)
 (setq flycheck-highlighting-mode 'lines)
+(setq flycheck-display-errors-delay 0)
 
 ;; Lisp
 (defun komitee/rainbow-hook ()
