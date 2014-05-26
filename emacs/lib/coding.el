@@ -40,9 +40,13 @@
 
 ;; automatically check file syntax at start, save & when idle
 (after 'flycheck
-  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (setq flycheck-check-syntax-automatically '(save
+                                              mode-enabled
+                                              new-line
+                                              idle-change))
   (setq flycheck-checkers (delq 'emacs-lisp-checkdoc flycheck-checkers)))
 (global-flycheck-mode t)
+(setq flycheck-highlighting-mode 'lines)
 
 ;; Lisp
 (defun komitee/rainbow-hook ()
