@@ -10,6 +10,7 @@
 (komitee/load "coding")
 (komitee/load "misc")
 (komitee/load "maps")
+(komitee/load "custom")
 
 ;; Apply local customizations
 (defvar komitee/local-emacs-config (concat user-emacs-directory "local.el"))

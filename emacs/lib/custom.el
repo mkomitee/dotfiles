@@ -10,8 +10,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:background "#1B1D1E" :foreground "#F8F8F2"))))
- '(flymake-errline ((t (:background "dark red" :weight bold))))
+ ;; '(default ((t (:background "#1B1D1E" :foreground "#F8F8F2"))))
  '(rainbow-delimiters-depth-1-face ((t (:foreground "snow"))))
  '(rainbow-delimiters-depth-2-face ((t (:foreground "light slate blue"))))
  '(rainbow-delimiters-depth-3-face ((t (:foreground "honeydew"))))
