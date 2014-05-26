@@ -60,6 +60,7 @@
 (elpy-enable)
 (elpy-use-ipython)
 (elpy-clean-modeline)
+(setq elpy-default-minor-modes (delete 'flymake-mode elpy-default-minor-modes))
 
 ;; make
 (defun komitee/tabs ()

@@ -58,3 +58,7 @@
 (setq guide-key/guide-key-sequence '("C-x" "C-c"))
 (setq guide-key/recursive-key-sequence-flag t)
 (guide-key-mode 1)
+
+;; Using flycheck instead of flymake
+(define-key elpy-mode-map (kbd "C-c C-n") 'flycheck-next-error)
+(define-key elpy-mode-map (kbd "C-c C-p") 'flycheck-previous-error)
