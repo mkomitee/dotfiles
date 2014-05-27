@@ -34,6 +34,8 @@
 (define-key global-map (kbd "S-M-<up>") 'windmove-up)
 (define-key global-map (kbd "C-c C-k") 'delete-window)
 
+(define-key global-map (kbd "M-p") 'ace-window)
+
 ;; http://www.masteringemacs.org/articles/2014/02/28/my-emacs-keybindings/
 (define-key global-map (kbd "C-x C-k") 'delete-window)
 (define-key global-map (kbd "M-o") 'other-window)
