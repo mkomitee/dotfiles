@@ -8,6 +8,7 @@
 (komitee/load "decorations")
 (komitee/load "autocomplete")
 (komitee/load "coding")
+(komitee/load "prose")
 (komitee/load "misc")
 (komitee/load "maps")
 (komitee/load "custom")

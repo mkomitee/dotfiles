@@ -32,6 +32,7 @@
                            surround
                            undo-tree
                            vimrc-mode
+                           writegood-mode
                            yasnippet))
 
 

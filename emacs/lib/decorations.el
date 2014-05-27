@@ -5,6 +5,8 @@
 (after 'diminish-autoloads
   (diminish 'global-visual-line-mode)
   (diminish 'visual-line-mode)
+  (after 'flyspell (diminish 'flyspell-mode))
+  (after 'simple (diminish 'auto-fill-function))
   (after 'paredit (diminish 'paredit-mode))
   (after 'hi-lock (diminish 'hi-lock-mode))
   (after 'flycheck (diminish 'flycheck-mode))
@@ -17,7 +19,9 @@
   (after 'smartparens (diminish 'smartparens-mode))
   (after 'company (diminish 'company-mode))
   (after 'whitespace (diminish 'whitespace-mode))
-  (after 'git-gutter+ (diminish 'git-gutter+-mode)))
+  (after 'git-gutter+ (diminish 'git-gutter+-mode))
+  (after 'writegood-mode (diminish 'writegood-mode))
+  )
 
 (require 'linum)
 (setq linum-format "%4d ")
