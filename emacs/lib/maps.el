@@ -54,6 +54,8 @@
 (define-key global-map (kbd "C-`") 'push-mark-no-activate)
 (define-key global-map (kbd "M-`") 'jump-to-mark)
 
+(define-key global-map (kbd "C-%") 'goto-match-paren)
+
 ;; This makes those windows with lists of possible commands more useful
 (require 'guide-key)
 (setq guide-key/guide-key-sequence '("C-x" "C-c"))
