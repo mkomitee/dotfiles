@@ -67,3 +67,6 @@
 ;; Using flycheck instead of flymake
 (define-key elpy-mode-map (kbd "C-c C-n") 'flycheck-next-error)
 (define-key elpy-mode-map (kbd "C-c C-p") 'flycheck-previous-error)
+
+;; Expand Region -- note, C-- C-= will contract the region.
+(define-key global-map (kbd "C-=") 'er/expand-region)

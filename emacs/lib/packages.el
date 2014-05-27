@@ -6,6 +6,7 @@
                            diminish
                            elpy
                            exec-path-from-shell
+                           expand-region
                            fill-column-indicator
                            flx-ido
                            flycheck
