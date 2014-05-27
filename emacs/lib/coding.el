@@ -31,6 +31,11 @@
     (setq fci-rule-column 80)))
 (add-hook 'prog-mode-hook 'komitee/fci-hook)
 
+(defun komitee/comment-auto-fill ()
+  (setq-local comment-auto-fill-only-comments t)
+  (auto-fill-mode 1))
+(add-hook 'prog-mode-hook 'komitee/comment-auto-fill)
+
 ;; Snippets are useful!
 (require 'yasnippet)
 (yas-global-mode t)
