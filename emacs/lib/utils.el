@@ -62,3 +62,11 @@ vi style of % jumping to matching brace."
         ((looking-at "\\s\{") (forward-list 1) (backward-char 1))
         ((looking-at "\\s\}") (forward-char 1) (backward-list 1))
         (t (self-insert-command (or arg 1)))))
+
+(defun komitee/compile-elisp ()
+  "Byte compile dotfile directories"
+  (interactive)
+  (progn
+    (byte-recompile-directory (concat komitee/emacs-config-directory "/lib") 0)
+    (byte-compile-file (concat komitee/emacs-config-directory "/init.el"))
+    (byte-compile-file komitee/local-emacs-config)))

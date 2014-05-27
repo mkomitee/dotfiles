@@ -65,6 +65,7 @@ htmlcov/
 ### emacs
 *#
 .#*
+*.elc
 
 html
 
