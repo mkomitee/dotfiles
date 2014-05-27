@@ -1,6 +1,6 @@
 ;; Like C-p in vim
 (define-key global-map (kbd "C-c b") 'switch-to-buffer)
-(define-key global-map (kbd "C-c f") 'projectile-find-file)
+;; (define-key global-map (kbd "C-c f") 'projectile-find-file)
 (define-key global-map (kbd "C-x f") 'projectile-find-file)
 (define-key global-map (kbd "C-c r") 'projectile-recentf)
 
@@ -16,6 +16,7 @@
 (define-key global-map (kbd "C-c w") 'ace-jump-word-mode)
 (define-key global-map (kbd "C-c c") 'ace-jump-char-mode)
 (define-key global-map (kbd "C-c l") 'ace-jump-line-mode)
+(define-key global-map (kbd "C-c f") 'ace-jump-char-mode)
 
 ;; All characters will automatically be prefixed w/ C- unless they start with
 ;; g, which will automatically prefix the following character w/ M-
