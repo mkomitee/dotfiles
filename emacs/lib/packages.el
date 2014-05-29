@@ -5,6 +5,8 @@
                            better-defaults
                            diminish
                            elpy
+                           evil
+                           evil-matchit
                            exec-path-from-shell
                            expand-region
                            fill-column-indicator
