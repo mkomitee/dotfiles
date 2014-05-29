@@ -1,8 +1,5 @@
 ;; Like C-p in vim
 (define-key global-map (kbd "C-c b") 'switch-to-buffer)
-;; (define-key global-map (kbd "C-c f") 'projectile-find-file)
-(define-key global-map (kbd "C-x f") 'projectile-find-file)
-(define-key global-map (kbd "C-c r") 'projectile-recentf)
 
 (define-key global-map (kbd "C-;") 'comment-or-uncomment-region-or-line)
 
