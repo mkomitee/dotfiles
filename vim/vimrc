@@ -19,10 +19,12 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 " NeoBundle 'sjl/splice.vim'
 NeoBundle 'AfterColors.vim'
 NeoBundle 'Lokaltog/vim-easymotion'
+NeoBundle 'Rykka/riv.vim'
 NeoBundle 'SirVer/ultisnips'
 NeoBundle 'SirVer/vim-snippets'
 NeoBundle 'YankRing.vim'
 NeoBundle 'airblade/vim-gitgutter'
+NeoBundle 'davidbeckingsale/writegood.vim'
 NeoBundle 'duff/vim-scratch.git'
 NeoBundle 'ervandew/supertab.git'
 NeoBundle 'fish-syntax'
@@ -534,6 +536,7 @@ endfunction
 au FileType moin setlocal foldexpr=MoinLevel()
 au FileType moin setlocal foldmethod=expr
 au FileType moin setl textwidth=0
+au FileType moin call writegood#enable()
 " }}}
 " make ----------------------------------------------------------------------{{{
 au FileType make au BufWritePre <buffer> RemoveTrailingWhiteSpace
@@ -574,7 +577,12 @@ au FileType markdown setl foldexpr=MarkdownLevel()
 au FileType markdown setl foldmethod=expr
 au FileType markdown setl shiftwidth=4
 au FileType markdown setl softtabstop=4
+au FileType markdown call writegood#enable()
 
+" }}}
+" rst
+" ---------------------------------------------------------------------------{{{
+au FileType rst call writegood#enable()
 " }}}
 " perl ----------------------------------------------------------------------{{{
 au FileType perl au BufWritePre <buffer> RemoveTrailingWhiteSpace
