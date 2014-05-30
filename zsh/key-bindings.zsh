@@ -4,8 +4,8 @@ function zle-line-init zle-keymap-select {
 zle -N zle-line-init
 zle -N zle-keymap-select
 
-# bindkey -v
-bindkey -e
+bindkey -v
+# bindkey -e
 
 # In vi-mode, map v to edit the command line
 autoload edit-command-line
