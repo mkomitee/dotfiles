@@ -111,8 +111,14 @@
 (defvar evil-emacs-state-cursor '("red" box))
 (defvar evilnc-hotkey-comment-operator "gc")
 
+; Emacs now has a good editor.
 (evil-mode 1)
 (global-surround-mode 1)
 (global-evil-matchit-mode 1)
 (global-evil-leader-mode)
 (evil-leader/set-leader "<SPC>")
+
+; Configure ace-jump mode
+(setq ace-jump-word-mode-use-query-char nil
+      ace-jump-mode-scope 'window
+      ace-jump-mode-case-fold nil)
