@@ -98,13 +98,21 @@
 ;; Side-by-side diff is superior.
 (setq ediff-split-window-function 'split-window-horizontally)
 
-;; A mode where all keys are automatically prefixed with C-
-;; except for "g" which causes the next key to be prefixed
-;; with M-
-(require 'god-mode)
-
 ;; Sentences endings don't require two spaces.
 (setq sentence-end-double-space nil)
 
 ;; Relocate customiztions
 (setq custom-file (concat komitee/emacs-config-directory "/lib/custom.el"))
+
+(defvar evil-default-state 'normal)
+(defvar evil-want-C-u-scroll t)
+(defvar evil-search-module 'evil-search)
+(defvar evil-magic 'very-magic)
+(defvar evil-emacs-state-cursor '("red" box))
+(defvar evilnc-hotkey-comment-operator "gc")
+
+(evil-mode 1)
+(global-surround-mode 1)
+(global-evil-matchit-mode 1)
+(global-evil-leader-mode)
+(evil-leader/set-leader "<SPC>")

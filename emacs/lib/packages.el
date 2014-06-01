@@ -6,7 +6,12 @@
                            diminish
                            elpy
                            evil
+                           evil-indent-textobject
+                           evil-leader
                            evil-matchit
+                           evil-nerd-commenter
+                           evil-paredit
+                           evil-visualstar
                            exec-path-from-shell
                            expand-region
                            fill-column-indicator
@@ -14,7 +19,6 @@
                            flycheck
                            git-gutter+
                            git-gutter-fringe+
-                           god-mode
                            guide-key
                            haskell-mode
                            ido-hacks
