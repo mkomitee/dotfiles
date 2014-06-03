@@ -104,14 +104,15 @@
 ;; Relocate customiztions
 (setq custom-file (concat komitee/emacs-config-directory "/lib/custom.el"))
 
-(defvar evil-default-state 'normal)
-(defvar evil-want-C-u-scroll t)
-(defvar evil-search-module 'evil-search)
-(defvar evil-magic 'very-magic)
-(defvar evil-emacs-state-cursor '("red" box))
-(defvar evilnc-hotkey-comment-operator "gc")
-
 ; Emacs now has a good editor.
+(setq evil-want-C-u-scroll t
+      evil-search-module 'evil-search
+      evil-magic 'very-magic
+      evil-emacs-state-cursor '("red" box)
+      evil-normal-state-cursor '("white" box)
+      evil-insert-state-cursor '("white" bar)
+      evilnc-hotkey-comment-operator "gc")
+
 (evil-mode 1)
 (global-surround-mode 1)
 (global-evil-matchit-mode 1)

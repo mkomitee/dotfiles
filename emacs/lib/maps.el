@@ -1,3 +1,4 @@
+
 ;; Like C-p in vim
 (define-key global-map (kbd "C-c b") 'switch-to-buffer)
 (define-key global-map (kbd "C-;") 'evilnc-comment-or-uncomment-lines)
@@ -76,6 +77,7 @@
   "ev" (lambda () (interactive) (find-file "~/.dotfiles/emacs/init.el"))
   "cc" 'evilnc-comment-or-uncomment-lines
   "s" 'sort-lines
+  "u" 'universal-argument
   ;; I map C-h to evil-window-left, which kills my help-map prefix. I
   ;; replicate most of its functionality here.
   "hf" 'describe-function
@@ -133,3 +135,15 @@
 (define-key minibuffer-local-completion-map [escape] 'my-minibuffer-keyboard-quit)
 (define-key minibuffer-local-must-match-map [escape] 'my-minibuffer-keyboard-quit)
 (define-key minibuffer-local-isearch-map [escape] 'my-minibuffer-keyboard-quit)
+
+(lexical-let ((default-color (cons (face-background 'mode-line)
+                                   (face-foreground 'mode-line))))
+  (add-hook 'post-command-hook
+            (lambda ()
+              (let ((color (cond ((minibufferp) default-color)
+                                 ((evil-emacs-state-p) '("#e80000" . "#ffffff"))
+                                 ((evil-insert-state-p)  '("#444488" . "#ffffff"))
+                                 ((buffer-modified-p)   '("#006fa0" . "#ffffff"))
+                                 (t default-color))))
+                (set-face-background 'mode-line (car color))
+                (set-face-foreground 'mode-line (cdr color))))))
