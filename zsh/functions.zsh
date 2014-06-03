@@ -1,6 +1,6 @@
 #!/bin/zsh
 function vim-clear-cache() {
-    find ~/.vimdata -type f -delete
+    find ~/.vim/data -type f -delete
 }
 
 function resume() {
