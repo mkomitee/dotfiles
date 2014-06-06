@@ -16,18 +16,15 @@ call neobundle#rc(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 " }}}
 
-" NeoBundle 'sjl/splice.vim'
 NeoBundle 'AfterColors.vim'
 NeoBundle 'Lokaltog/vim-easymotion'
-NeoBundle 'Rykka/riv.vim'
 NeoBundle 'SirVer/ultisnips'
 NeoBundle 'SirVer/vim-snippets'
 NeoBundle 'YankRing.vim'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'davidbeckingsale/writegood.vim'
-NeoBundle 'duff/vim-scratch.git'
 NeoBundle 'ervandew/supertab.git'
-NeoBundle 'fish-syntax'
+NeoBundle 'glts/vim-textobj-comment'
 NeoBundle 'jpalardy/vim-slime'
 NeoBundle 'kana/vim-textobj-indent.git'
 NeoBundle 'kana/vim-textobj-user.git'
@@ -35,27 +32,21 @@ NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'kshenoy/vim-signature'
 NeoBundle 'mitsuhiko/vim-python-combined'
 NeoBundle 'moin.vim'
-NeoBundle 'naquad/Partial.vim'
 NeoBundle 'python_match.vim'
 NeoBundle 'reedes/vim-wordy'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'sheerun/vim-polyglot'
 NeoBundle 'sjl/gundo.vim'
-NeoBundle 'tommcdo/vim-lion'
+NeoBundle 'tpope/vim-abolish'
 NeoBundle 'tpope/vim-dispatch'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-markdown'
-NeoBundle 'tpope/vim-obsession'
 NeoBundle 'tpope/vim-repeat'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-unimpaired.git'
 NeoBundle 'tpope/vim-vinegar'
 
-NeoBundle 'Lokaltog/vim-distinguished'
-NeoBundle 'MaxSt/FlatColor'
-NeoBundle 'chriskempson/vim-tomorrow-theme'
-NeoBundle 'sjl/badwolf'
 NeoBundle 'tomasr/molokai'
 
 if !empty($GOROOT)
@@ -330,8 +321,25 @@ nnoremap <silent> n n:call Pulse(1)<cr>
 nnoremap <silent> N N:call Pulse(1)<cr>
 " }}}
 " j and k will go one line, even if they're wrapped -------------------------{{{
+
+nnoremap <silent> 0 g0
+nnoremap <silent> ^ g^
 nnoremap <silent> j gj
 nnoremap <silent> k gk
+nnoremap <silent> $ g$
+
+onoremap <silent> 0 g0
+onoremap <silent> ^ g^
+onoremap <silent> j gj
+onoremap <silent> k gk
+onoremap <silent> $ g$
+
+vnoremap <silent> 0 g0
+vnoremap <silent> ^ g^
+vnoremap <silent> j gj
+vnoremap <silent> k gk
+vnoremap <silent> $ g$
+
 " }}}
 " When using marks, all by default mark columns as well ---------------------{{{
 nnoremap <silent> ' `
@@ -739,4 +747,8 @@ nnoremap <leader>go :Git checkout<Space>
 nnoremap <leader>gps :Dispatch! git push<CR>
 nnoremap <leader>gpl :Dispatch! git pull<CR>
 " }}}
+" {{{
+
+" }}}
+
 " }}}
