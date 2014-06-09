@@ -489,7 +489,7 @@ let g:pymode_virtualenv = 0
 let g:netrw_list_hide = '^\.,\~$,^tags$'
 " }}}
 " Ctrl+P --------------------------------------------------------------------{{{
-let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_cache_dir = $HOME.'/.vim/data/ctrlp'
 let g:ctrlp_map = '<leader>p'
 let g:ctrlp_mruf_relative = 1
@@ -497,6 +497,7 @@ let g:ctrlp_max_height=1000
 let g:ctrlp_reuse_window = 'netrw\|help'
 let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'rtscript',
                        \  'undo', 'line', 'changes', 'mixed', 'bookmarkdir']
+let g:ctrlp_root_markers = ['.project']
 
 nnoremap <silent> <Leader>b <esc>:CtrlPBuffer<cr>
 "  <C-t> → will open the finding match in a tab
