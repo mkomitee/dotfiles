@@ -330,23 +330,26 @@ nnoremap <silent> N N:call Pulse(1)<cr>
 " }}}
 " j and k will go one line, even if they're wrapped -------------------------{{{
 
-nnoremap <silent> 0 g0
-nnoremap <silent> ^ g^
 nnoremap <silent> j gj
 nnoremap <silent> k gk
 nnoremap <silent> $ g$
 
-onoremap <silent> 0 g0
-onoremap <silent> ^ g^
 onoremap <silent> j gj
 onoremap <silent> k gk
 onoremap <silent> $ g$
 
-vnoremap <silent> 0 g0
-vnoremap <silent> ^ g^
 vnoremap <silent> j gj
 vnoremap <silent> k gk
 vnoremap <silent> $ g$
+
+" }}}
+" smart-home: ^ and 0 will toggle between one another {{{
+nnoremap <expr> <silent> ^ col('.') == match(getline('.'),'\S')+1 ? 'g0' : 'g^'
+vnoremap <expr> <silent> ^ col('.') == match(getline('.'),'\S')+1 ? 'g0' : 'g^'
+onoremap <expr> <silent> ^ col('.') == match(getline('.'),'\S')+1 ? 'g0' : 'g^'
+nnoremap <expr> <silent> 0 col('.') == 1 ? 'g^' : 'g0'
+vnoremap <expr> <silent> 0 col('.') == 1 ? 'g^' : 'g0'
+onoremap <expr> <silent> 0 col('.') == 1 ? 'g^' : 'g0'
 
 " }}}
 " When using marks, all by default mark columns as well ---------------------{{{
