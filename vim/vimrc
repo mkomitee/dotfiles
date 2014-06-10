@@ -289,14 +289,6 @@ function! FocusFold() " -----------------------------------------------------{{{
 endfunction " }}}
 " }}}
 " Custom maps ---------------------------------------------------------------{{{
-" Smart Home {{{
-" ^ will bring me to the first non white-space character on the line UNLESS
-"   we're already there, in which case will bring me to the start of the line.
-noremap <expr> <silent> ^ col('.') == match(getline('.'),'\S')+1 ? '0' : '^'
-" 0 will bring me to the first character on the line UNLESS we're already there,
-" in which case will bring me to the first non white-space character on the line
-noremap <expr> <silent> 0 col('.') == 1 ? '^' : '0'
-" }}}
 " %% in command mode inserts current files directory, so :e %%x.txt will edit
 " x.txt in the same directory as the current file. {{{
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
