@@ -32,6 +32,7 @@ NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'kshenoy/vim-signature'
 NeoBundle 'mitsuhiko/vim-python-combined'
 NeoBundle 'moin.vim'
+NeoBundle 'paradigm/TextObjectify'
 NeoBundle 'python_match.vim'
 NeoBundle 'reedes/vim-wordy'
 NeoBundle 'scrooloose/nerdcommenter'
@@ -179,7 +180,7 @@ set formatoptions+=n " recognize numbered lists
 set wildmode=list:full " closest to ido-mode
 " }}}
 " wildignore ----------------------------------------------------------------{{{
-set wildignore+=.git,.hg,.svn,CVS                   " ignore vcs directories
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/CVS/*   " ignore vcs directories
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg      " ignore images
 set wildignore+=*.o,*.so,*.out                      " ignore compiled objects
 set wildignore+=*.sw?                               " ignore swap files
@@ -507,7 +508,7 @@ nmap <silent> <leader>c$ <plug>NERDCommenterToEOL
 let g:yankring_history_dir = "$HOME/.vim/data"
 " }}}
 " Ultisnips -----------------------------------------------------------------{{{
-let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsExpandTrigger="<s-tab>"
 let g:UltiSnipsListSnippets="<c-`tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
