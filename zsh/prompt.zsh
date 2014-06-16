@@ -90,9 +90,9 @@ function current_dir() {
 
 function setup_prompt() {
     if [ "$PROMPT_DISABLED" != "1" ]; then
-        PROMPT='$(exit_code)$(shorthost) $(git_prompt)$(current_dir) $(jobs_prompt)$(prompt) '
+        PROMPT='$(exit_code)$(shorthost) $(virtualenv_prompt)$(git_prompt)$(current_dir) $(jobs_prompt)$(prompt) '
     else
-        PROMPT='$(exit_code)$(shorthost) $(current_dir) $(jobs_prompt)$(prompt) '
+        PROMPT='$(exit_code)$(shorthost) $(virtualenv_prompt)$(current_dir) $(jobs_prompt)$(prompt) '
     fi
 }
 
