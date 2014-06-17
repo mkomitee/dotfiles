@@ -34,11 +34,11 @@ NeoBundle 'mitsuhiko/vim-python-combined'
 NeoBundle 'moin.vim'
 NeoBundle 'python_match.vim'
 NeoBundle 'reedes/vim-wordy'
-NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'sheerun/vim-polyglot'
 NeoBundle 'sjl/gundo.vim'
 NeoBundle 'tpope/vim-abolish'
+NeoBundle 'tpope/vim-commentary'
 NeoBundle 'tpope/vim-dispatch'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-repeat'
@@ -452,12 +452,9 @@ nnoremap <silent> <Leader>b <esc>:CtrlPBuffer<cr>
 "  <C-v> → will open the finding match in a vertical split
 "  <C-h> → will open the finding match in a horizontal split
 " }}}
-" NERDCommenter -------------------------------------------------------------{{{
-let g:NERDCreateDefaultMappings = 0
-let g:NERDSpaceDelims = 1
-vmap <silent> <leader>cc <plug>NERDCommenterToggle<cr>vgv
-nmap <silent> <leader>cc <plug>NERDCommenterToggle
-nmap <silent> <leader>c$ <plug>NERDCommenterToEOL
+" commentary ----------------------------------------------------------------{{{
+vmap  <leader>cc gcgv
+nmap <silent> <leader>cc gcc
 " }}}
 " YankRing ------------------------------------------------------------------{{{
 let g:yankring_history_dir = "$HOME/.vim/data"
