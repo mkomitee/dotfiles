@@ -41,7 +41,6 @@ NeoBundle 'sjl/gundo.vim'
 NeoBundle 'tpope/vim-abolish'
 NeoBundle 'tpope/vim-dispatch'
 NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'tpope/vim-markdown'
 NeoBundle 'tpope/vim-repeat'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-unimpaired.git'
@@ -532,18 +531,7 @@ au FileType man nnoremap <buffer> q :q<cr>
 au FileType man nnoremap <buffer> <space><space> <C-D>
 " }}}
 " markdown ------------------------------------------------------------------{{{
-function MarkdownLevel()
-    let h = matchstr(getline(v:lnum), '^#\+')
-    if empty(h)
-        return "="
-    else
-        return ">" . len(h)
-    endif
-endfunction
-
 au FileType markdown au BufWritePre <buffer> RemoveTrailingWhiteSpace
-au FileType markdown setl foldexpr=MarkdownLevel()
-au FileType markdown setl foldmethod=expr
 au FileType markdown setl shiftwidth=4
 au FileType markdown setl softtabstop=4
 au FileType markdown call writegood#enable()
