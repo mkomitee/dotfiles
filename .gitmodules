@@ -16,12 +16,6 @@
 [submodule "contrib/bitly/data_hacks.git"]
 	path = contrib/bitly/data_hacks.git
 	url = git://github.com/bitly/data_hacks.git
-[submodule "vim/bundle/neobundle.vim"]
-	path = vim/bundle/neobundle.vim
-	url = git://github.com/Shougo/neobundle.vim
-[submodule "contrib/sjl/z"]
-	path = contrib/sjl/z
-	url = https://github.com/sjl/z-fish/
 [submodule "vim/neobundle.vim"]
 	path = vim/neobundle.vim
 	url = git://github.com/Shougo/neobundle.vim

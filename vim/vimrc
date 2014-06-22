@@ -1,73 +1,37 @@
 " Load Plugins --------------------------------------------------------------{{{
-" Initialize NeoBundle ------------------------------------------------------{{{
 set nocompatible
-set runtimepath+=~/.dotfiles/vim/
 if has('vim_starting')
+    set runtimepath+=~/.dotfiles/vim/
     set runtimepath+=~/.dotfiles/vim/neobundle.vim/
 endif
-
-if $SHELL =~ '/fish$'
-    set shell=sh
-endif
-
 let g:neobundle#types#git#default_protocol = "git"
-
 call neobundle#rc(expand('~/.vim/bundle/'))
-NeoBundleFetch 'Shougo/neobundle.vim'
-" }}}
 
 NeoBundle 'AfterColors.vim'
-NeoBundle 'SirVer/ultisnips'
-NeoBundle 'SirVer/vim-snippets'
-NeoBundle 'YankRing.vim'
-NeoBundle 'airblade/vim-gitgutter'
-NeoBundle 'davidbeckingsale/writegood.vim'
-NeoBundle 'ervandew/supertab.git'
 NeoBundle 'glts/vim-textobj-comment'
-NeoBundle 'jpalardy/vim-slime'
 NeoBundle 'justinmk/vim-sneak'
 NeoBundle 'kana/vim-textobj-indent.git'
 NeoBundle 'kana/vim-textobj-user.git'
 NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'kshenoy/vim-signature'
-NeoBundle 'mitsuhiko/vim-python-combined'
-NeoBundle 'moin.vim'
-NeoBundle 'python_match.vim'
-NeoBundle 'reedes/vim-wordy'
-NeoBundle 'scrooloose/syntastic'
 NeoBundle 'sheerun/vim-polyglot'
-NeoBundle 'sjl/gundo.vim'
-NeoBundle 'tpope/vim-abolish'
 NeoBundle 'tpope/vim-commentary'
-NeoBundle 'tpope/vim-dispatch'
-NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-repeat'
+NeoBundle 'tpope/vim-sensible'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-unimpaired.git'
-NeoBundle 'tpope/vim-vinegar'
 NeoBundle 'wellle/targets.vim'
+NeoBundleLazy 'davidbeckingsale/writegood.vim'
+NeoBundleLazy 'python_match.vim'
 
+NeoBundle 'jeetsukumaran/vim-nefertiti', {'gui': 1}
 NeoBundle 'tomasr/molokai'
 
-if !empty($GOROOT)
-    set runtimepath+=$GOROOT/misc/vim
-endif
-
-" Turn on all the features ... ----------------------------------------------{{{
-syntax on
-filetype plugin indent on
-runtime! macros/matchit.vim
 NeoBundleCheck
 " }}}
-" }}}
 " Preferences ---------------------------------------------------------------{{{
-set encoding=utf-8             " Prefer utf-8 character encoding
-set autoindent                 " Try to line up code intelligently
 set autoread                   " reload files if modified outside of vim & safe
 set hidden                     " Allow for hidden buffers
-set backspace=indent,eol,start " Nothing is too sacred to be <BS>
-set laststatus=2               " Every window always gets a statusline
-set history=1000               " Keep a lot of ex commands in history
 set list                       " show invisibles
 set showbreak=↪                " indicate a line is the continuation of a
                                "  wrapped line
@@ -82,10 +46,7 @@ set number                     " line numbers
 set nostartofline              " don't move the cursor to the start of the
                                " line when we move vertically in the buffer
 set pumheight=10               " show no more than 10 entries in completion menus
-set scrolloff=5                " keep at least 5 lines of context when scrolling
-set sidescrolloff=10           " keep at least 10 characters of context when scrolling
 set sidescroll=1               " scroll horizontally by 1
-set incsearch                  " search as I type
 set ignorecase                 " ignore case when searching, ...
 set smartcase                  " unless I search for uppercase
 set hlsearch                   " and highlight searches
@@ -97,16 +58,11 @@ set expandtab                  " by default, use spaces & no tabs
 set shiftwidth=4               " shift width (>> & autoindent)
 set softtabstop=4              " 1 tab = 4 spaces
 set tabstop=4                  " 1 tab = 4 spaces
-set shiftround                 " round indent to multiple of shiftwidth
-set smarttab                   " shiftwidth at start of line, tabstop elsewhere
 set textwidth=80               " wrap at 80 columns
 set tags=./tags;               " name of the tags files which is relative to the project
 set nojoinspaces               " 1 space when joining lines at a period, not 2
 set notimeout
-set ttimeout
-set ttimeoutlen=10
 set nomodeline
-set display=lastline
 set exrc
 set secure
 
@@ -203,8 +159,7 @@ set statusline+=l:%l/%L " line
 autocmd BufEnter * :syntax sync fromstart
 " }}}
 " Leaders -------------------------------------------------------------------{{{
-let mapleader = " "     " this may change soon, I keep wanting to have the
-                        " default behavior work for ,.
+let mapleader = " "
 let localleader = '\\'
 " }}}
 " Custom functions ----------------------------------------------------------{{{
@@ -220,17 +175,17 @@ function! Preserve(command) " -----------------------------------------------{{{
   call cursor(l, c)
 endfunction " }}}
 function! RemoveTrailingWhiteSpace() " --------------------------------------{{{
-    " Allow a buffer local variable twsok (trailing whitespace ok) to permit
-    " trailing whitspace -- sometimes I need to do this if im editing someone elses
-    " code and don't want to own the entire file in vcs. Enable it with
-    " let twsok=1, disable it with unlet twsok
-    if !exists("b:twsok")
+    " Allow a buffer local variable trailing_witespace_ok  to permit trailing
+    " whitspace -- sometimes I need to do this if im editing someone elses code
+    " and don't want to own the entire file in vcs. Enable it with let
+    " trailing_witespace_ok=1, disable it with unlet trailing_witespace_ok
+    if !exists("b:trailing_whitespace_ok")
         call Preserve("%s/\\s\\+$//e")
     endif
 endfun " }}}
 function! RestoreCursorPosition() " -----------------------------------------{{{
-    " Restore cursor position to the last time you were in the file, this uses marks
-    " so it's dependent on viminfo
+    " Restore cursor position to the last time you were in the file, this uses
+    " marks so it's dependent on viminfo
     for ft in ['gitcommit', 'hgcommit', 'cvs', 'svn']
         if &filetype==ft
             return
@@ -256,15 +211,6 @@ cnoremap %% <C-R>=expand('%:h').'/'<cr>
 " }}}
 " ZZ = wq, XX = cquit
 nnoremap XX :cquit<cr>
-" A few useful sane maps (from tpope/sensible.vim{{{
-inoremap <C-U> <C-G>u<C-U>
-nnoremap & :&&<CR>
-xnoremap & :&&<CR>
-nnoremap Y y$
-if maparg('<C-L>', 'n') ==# ''
-    nnoremap <silent> <C-L> :nohlsearch<CR><C-L>
-endif
-" }}}
 " Reindent {{{
 nnoremap <leader>G :call Preserve("normal gg=G")<cr>
 " }}}
@@ -341,30 +287,23 @@ nnoremap <silent> <right> <C-W>>
 " . returns to starting place after repeat ----------------------------------{{{
 nnoremap <silent> . .`[
 " }}}
-" Custom text objects around and in character pairs -------------------------{{{
-let pairs = { ':' : ':',
-            \ '.' : '.',
-            \ ',' : ',',
-            \ '/' : '/',
-            \ '<bar>' : '<bar>' }
-for [start, end] in items(pairs)
-    exe "nnoremap <silent> ci".start." T".start."ct".end
-    exe "nnoremap <silent> ca".start." F".start."cf".end
-    exe "nnoremap <silent> yi".start." T".start."yt".end
-    exe "nnoremap <silent> ya".start." F".start."yf".end
-    exe "nnoremap <silent> vi".start." T".start."vt".end
-    exe "nnoremap <silent> va".start." F".start."vf".end
-    exe "nnoremap <silent> di".start." T".start."dt".end
-    exe "nnoremap <silent> da".start." F".start."df".end
-endfor
-" }}}
 " Focus Fold ----------------------------------------------------------------{{{
 nnoremap <silent> zf :call FocusFold()<cr>
 " }}}
 " Simple sorting ------------------------------------------------------------{{{
 vnoremap <silent> <leader>so :sort<cr>gv
 nnoremap <silent> <leader>so mzvip:sort<cr>`z:delm z<cr>
-
+" }}}
+" Window navigation ---------------------------------------------------------{{{
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+" }}}
+" Don't move when you use */# -----------------------------------------------{{{
+" https://twitter.com/dotvimrc/status/428208518487764992
+nnoremap <silent> * :let b:pos = winsaveview()<cr>*:call winrestview(b:pos)<cr>
+nnoremap <silent> # :let b:pos = winsaveview()<cr>#:call winrestview(b:pos)<cr>
 " }}}
 " }}}
 " Custom commands -----------------------------------------------------------{{{
@@ -402,37 +341,6 @@ endif
 let g:SignatureMarkTextHL='SignatureMarkTextHL'
 let g:SignatureMarkerTextHL='SignatureMarkerTextHL'
 " }}}
-" syntastic {{{
-let g:syntastic_python_checkers=['flake8', 'pylint', 'python']
-
-autocmd FileType python map <buffer> <leader>8 :SyntasticCheck<CR>
-
-let g:syntastic_aggregate_errors=1
-let g:syntastic_always_populate_loc_list=1
-let g:syntastic_auto_jump=0
-let g:syntastic_auto_loc_list=1
-let g:syntastic_check_on_open=0
-let g:syntastic_check_on_wq=0
-let g:syntastic_debug=0
-let g:syntastic_echo_current_error=1
-let g:syntastic_enable_balloons=0
-let g:syntastic_enable_highlighting=0
-let g:syntastic_enable_signs=1
-let g:syntastic_mode_map = { 'mode': 'passive' }
-" }}}
-" python-mode {{{
-let g:pymode_breakpoint = 0
-let g:pymode_doc = 1
-let g:pymode_folding = 1
-let g:pymode_indent = 1
-let g:pymode_lint = 0
-let g:pymode_motion = 1
-let g:pymode_rope = 0
-let g:pymode_run = 0
-let g:pymode_syntax = 1
-let g:pymode_syntax_all = 1
-let g:pymode_virtualenv = 0
-" }}}
 " NetRW ---------------------------------------------------------------------{{{
 let g:netrw_list_hide = '^\.,\~$,^tags$'
 " }}}
@@ -456,32 +364,6 @@ nnoremap <silent> <Leader>b <esc>:CtrlPBuffer<cr>
 vmap  <leader>cc gcgv
 nmap <silent> <leader>cc gcc
 " }}}
-" YankRing ------------------------------------------------------------------{{{
-let g:yankring_history_dir = "$HOME/.vim/data"
-" }}}
-" Ultisnips -----------------------------------------------------------------{{{
-let g:UltiSnipsExpandTrigger="<s-tab>"
-let g:UltiSnipsListSnippets="<c-`tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-let g:snips_email="mkomitee@gmail.com"
-let g:snips_github="https://github.com/mkomitee"
-" }}}
-" Slime {{{
-" Ctrl+A, q will tell you the tmux pane ID's.
-" Run :SlimeConfig,
-"     socket: default,
-"     tmux pane: :.$n where $n is the pane ID where ipython is located
-" Normal Mode Ctrl+C will send the next paragraph to another tmux pane.
-" Visual Mode Ctrl+C will send the selected text to another tmux pane.
-let g:slime_target = "tmux"
-let g:slime_python_ipython = 1
-let g:slime_paste_file="$HOME/.vim/data/slime_paste"
-let g:slime_no_mappings = 1
-xmap <leader>ss <Plug>SlimeRegionSend
-nmap <leader>ss <Plug>SlimeMotionSend
-nmap <leader>sl <Plug>SlimeLineSend
-" }}}
 " Filetype detection --------------------------------------------------------{{{
 au BufNewFile,BufRead *.md setf markdown
 au BufNewFile,BufRead *.moin setf moin
@@ -501,6 +383,7 @@ endfunction
 au FileType moin setlocal foldexpr=MoinLevel()
 au FileType moin setlocal foldmethod=expr
 au FileType moin setl textwidth=0
+au FileType moin NeoBundleSource writegood
 au FileType moin call writegood#enable()
 " }}}
 " make ----------------------------------------------------------------------{{{
@@ -531,11 +414,13 @@ au FileType man nnoremap <buffer> <space><space> <C-D>
 au FileType markdown au BufWritePre <buffer> RemoveTrailingWhiteSpace
 au FileType markdown setl shiftwidth=4
 au FileType markdown setl softtabstop=4
+au FileType markdown NeoBundleSource writegood
 au FileType markdown call writegood#enable()
 
 " }}}
 " rst
 " ---------------------------------------------------------------------------{{{
+au FileType rst NeoBundleSource writegood
 au FileType rst call writegood#enable()
 " }}}
 " perl ----------------------------------------------------------------------{{{
@@ -548,8 +433,11 @@ au FileType puppet au BufWritePre <buffer> RemoveTrailingWhiteSpace
 " python --------------------------------------------------------------------{{{
 au FileType python au BufWritePre <buffer> RemoveTrailingWhiteSpace
 au FileType python setl textwidth=79
+au FileType python NeoBundleSource python_match.vim
 au FileType pyrex au BufWritePre <buffer> RemoveTrailingWhiteSpace
 au FileType pyrex setl textwidth=79
+au FileType pyrex NeoBundleSource python_match.vim
+
 " }}}
 " ruby ----------------------------------------------------------------------{{{
 au FileType ruby au BufWritePre <buffer> RemoveTrailingWhiteSpace
@@ -583,13 +471,6 @@ if exists('$TMUX')
     endif
 endif
 " }}}
-" Toggle listchars as we enter and exit insert mode -------------------------{{{
-augroup trailing
-    au!
-    au InsertEnter * :set listchars-=trail:⌴
-    au InsertLeave * :set listchars+=trail:⌴
-augroup END
-" }}}
 " Highlight VCS conflict markers --------------------------------------------{{{
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 " }}}
@@ -599,102 +480,9 @@ augroup restoreCursorPosition
   autocmd BufReadPost * call RestoreCursorPosition()
 augroup END
 " }}}
-" Window navigation ---------------------------------------------------------{{{
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
 " }}}
+
 " Load abbreviations --------------------------------------------------------{{{
 source ~/.dotfiles/vim/abbrev
 " }}}
-"
-" Experimentation {{{
 
-" IBV2012 "I'm sick of typing :%s/.../.../g"
-
-nnoremap S  :%s//g<LEFT><LEFT>
-vnoremap S  :s//g<LEFT><LEFT>
-
-" IBV2012 "Fix smartindent stupidities"
-
-set autoindent                              "Retain indentation on next line
-set smartindent                             "Turn on autoindenting of blocks
-autocmd FileType python setlocal cinwords+=with
-autocmd FileType python setlocal cinwords+=class
-autocmd FileType python setlocal cinwords+=def
-"
-"And no magic outdent for comments
-inoremap # X<C-H>#|
-
-"And no shift magic on comments
-nnoremap <silent> >> :call ShiftLine()<CR>|
-
-function! ShiftLine()
-    set nosmartindent
-    normal! >>
-    set smartindent
-endfunction
-
-" Use space to jump down a page (like browsers do)...
-nnoremap <Space><Space><Space> <PageDown>
-
-" Don't move when you use * https://twitter.com/dotvimrc/status/428208518487764992
-nnoremap <silent> * :let stay_star_view = winsaveview()<cr>*:call winrestview(stay_star_view)<cr>
-
-
-" User events concept ...
-function! CustomBufEnter()
-    " if &filetype=="python"
-        " doautocmd User BufEnterPython
-    " elseif &filetype=="vim"
-        " doautocmd User BufEnterVim
-    " endif
-endfunction
-
-function! CustomBufLeave()
-    " if &filetype=="python"
-        " doautocmd User BufLeavePython
-    " elseif &filetype=="vim"
-        " doautocmd User BufLeaveVim
-    " endif
-endfunction
-
-augroup custom_events
-  autocmd!
-  autocmd BufEnter * call CustomBufEnter()
-  autocmd BufLeave * call CustomBufLeave()
-  " autocmd User BufEnterPython echomsg "+PYTHON"
-  " autocmd User BufLeavePython echomsg "-PYTHON"
-  " autocmd User BufEnterVim echomsg "+VIM"
-  " autocmd User BufLeaveVim echomsg "-VIM"
-augroup END
-
-nnoremap <leader>gg :GitGutterToggle<cr>
-nnoremap <leader>yr :YRShow<cr>
-nnoremap <leader>sc :Scratch<cr>
-nnoremap <leader>sy :SyntasticCheck<cr>
-nnoremap <leader>uu :GundoToggle<cr>
-
-" fugitive git bindings
-nnoremap <leader>ga :Git add %:p<CR><CR>
-nnoremap <leader>gs :Gstatus<CR>
-nnoremap <leader>gc :Gcommit -v -q<CR>
-nnoremap <leader>gt :Gcommit -v -q %:p<CR>
-nnoremap <leader>gd :Gdiff<CR>
-nnoremap <leader>ge :Gedit<CR>
-nnoremap <leader>gr :Gread<CR>
-nnoremap <leader>gw :Gwrite<CR><CR>
-nnoremap <leader>gl :silent! Glog<CR>:bot copen<CR>
-nnoremap <leader>gp :Ggrep<Space>
-nnoremap <leader>gm :Gmove<Space>
-nnoremap <leader>gb :Git branch<Space>
-nnoremap <leader>go :Git checkout<Space>
-nnoremap <leader>gps :Dispatch! git push<CR>
-nnoremap <leader>gpl :Dispatch! git pull<CR>
-" }}}
-" {{{
-
-" }}}
-
-" }}}
