@@ -12,7 +12,6 @@ NeoBundle 'glts/vim-textobj-comment'
 NeoBundle 'justinmk/vim-sneak'
 NeoBundle 'kana/vim-textobj-indent.git'
 NeoBundle 'kana/vim-textobj-user.git'
-NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'kshenoy/vim-signature'
 NeoBundle 'sheerun/vim-polyglot'
 NeoBundle 'tpope/vim-commentary'
@@ -23,6 +22,72 @@ NeoBundle 'tpope/vim-unimpaired.git'
 NeoBundle 'wellle/targets.vim'
 NeoBundleLazy 'davidbeckingsale/writegood.vim'
 NeoBundleLazy 'python_match.vim'
+NeoBundleLazy 'tpope/vim-endwise'
+
+NeoBundleLazy 'gregsexton/gitv', {
+            \   'depends': 'tpope/vim-fugitive',
+            \   'autoload': {
+            \       'commands': ['Gitv'],
+            \   },
+            \}
+NeoBundleLazy 'int3/vim-extradite', {
+            \   'depends': 'tpope/vim-fugitive',
+            \   'autoload': {
+            \       'commands': ['Extradite'],
+            \   },
+            \}
+NeoBundleLazy 'kien/ctrlp.vim', {
+            \   'autoload': {
+            \       'commands': [
+            \           'CtrlP', 'CtrlPBuffer'
+            \       ],
+            \   },
+            \}
+NeoBundleLazy 'szw/vim-ctrlspace', {
+            \   'autoload': {
+            \       'mappings': ['<C-Space>', '<Nul>'],
+            \   },
+            \}
+if neobundle#tap('vim-ctrlspace')
+  function! neobundle#tapped.hooks.on_post_source(bundle)
+    doautoall BufEnter
+  endfunction
+endif
+NeoBundleLazy 'tpope/vim-characterize', {
+            \   'autoload': {
+            \       'mappings': ['ga'],
+            \   }
+            \}
+NeoBundleLazy 'tpope/vim-dispatch', {
+            \   'autoload': {
+            \       'commands': ['Dispatch', 'Make', 'Start']
+            \   },
+            \}
+NeoBundleLazy 'tpope/vim-fugitive', {
+            \   'augroup': 'fugitive',
+            \   'autoload': {
+            \       'commands': [
+            \           'Git', 'Git!', 'Gcd', 'Glcd', 'Gstatus', 'Gcommit',
+            \           'Ggrep', 'Glgrep', 'Glog', 'Gllog', 'Gedit', 'Gsplit',
+            \           'Gvsplit', 'Gtabedit', 'Gpdit', 'Gsplit!', 'Gvsplit!',
+            \           'Gtabedit!', 'Gpedit!', 'Gread', 'Gread!', 'Gwrite',
+            \           'Gwq', 'Gwq!', 'Gdiff', 'Gsdiff', 'Gvdiff', 'Gmove',
+            \           'Gremove', 'Gblame', 'Gbrowse', 'Gbrowse!'
+            \       ],
+            \
+            \   },
+            \}
+if neobundle#tap('vim-fugitive')
+  function! neobundle#tapped.hooks.on_post_source(bundle)
+    doautoall fugitive BufNewFile
+  endfunction
+endif
+NeoBundleLazy 'tpope/vim-vinegar', {
+            \   'augroup': 'vinegar',
+            \   'autoload': {
+            \       'mappings': ['-'],
+            \   },
+            \}
 
 NeoBundle 'jeetsukumaran/vim-nefertiti', {'gui': 1}
 NeoBundle 'tomasr/molokai'
@@ -355,7 +420,8 @@ let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'rtscript',
                        \  'undo', 'line', 'changes', 'mixed', 'bookmarkdir']
 let g:ctrlp_root_markers = ['.project']
 
-nnoremap <silent> <Leader>b <esc>:CtrlPBuffer<cr>
+nnoremap <silent> <Leader>p :CtrlP<cr>
+nnoremap <silent> <Leader>b :CtrlPBuffer<cr>
 "  <C-t> → will open the finding match in a tab
 "  <C-v> → will open the finding match in a vertical split
 "  <C-h> → will open the finding match in a horizontal split
@@ -363,6 +429,25 @@ nnoremap <silent> <Leader>b <esc>:CtrlPBuffer<cr>
 " commentary ----------------------------------------------------------------{{{
 vmap  <leader>cc gcgv
 nmap <silent> <leader>cc gcc
+" }}}
+" Git Bindings --------------------------------------------------------------{{{
+nnoremap <leader>ga :Git add %:p<CR><CR>
+nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gc :Gcommit -v -q<CR>
+nnoremap <leader>gt :Gcommit -v -q %:p<CR>
+nnoremap <leader>gd :Gdiff<CR>
+nnoremap <leader>ge :Gedit<CR>
+nnoremap <leader>gr :Gread<CR>
+nnoremap <leader>gw :Gwrite<CR><CR>
+nnoremap <leader>gl :silent! Glog<CR>:bot copen<CR>
+nnoremap <leader>gp :Ggrep<Space>
+nnoremap <leader>gm :Gmove<Space>
+nnoremap <leader>gb :Git branch<Space>
+nnoremap <leader>go :Git checkout<Space>
+nnoremap <leader>gps :Dispatch! git push<CR>
+nnoremap <leader>gpl :Dispatch! git pull<CR>
+let g:extradite_showhash=1
+let g:extradite_diff_split="belowright vertical split"
 " }}}
 " Filetype detection --------------------------------------------------------{{{
 au BufNewFile,BufRead *.md setf markdown
@@ -441,6 +526,7 @@ au FileType pyrex NeoBundleSource python_match.vim
 " }}}
 " ruby ----------------------------------------------------------------------{{{
 au FileType ruby au BufWritePre <buffer> RemoveTrailingWhiteSpace
+au FileType ruby NeoBundleSource vim-endwise
 " }}}
 " shell ---------------------------------------------------------------------{{{
 au FileType sh,zsh au BufWritePre <buffer> RemoveTrailingWhiteSpace
