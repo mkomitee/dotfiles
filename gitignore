@@ -78,3 +78,5 @@ html
 *.sqlite3
 *.egg-info
 *.keytab
+.project
+*.db
