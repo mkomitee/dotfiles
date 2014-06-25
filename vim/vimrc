@@ -96,7 +96,7 @@ NeoBundleLazy 'Valloric/YouCompleteMe', {
             \   },
             \}
 
-NeoBundle 'jeetsukumaran/vim-nefertiti', {'gui': 1}
+NeoBundle 'morhetz/gruvbox'
 NeoBundle 'tomasr/molokai'
 
 NeoBundleCheck

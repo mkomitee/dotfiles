@@ -1,4 +1,7 @@
 source $HOME/.dotfiles/vim/vimrc
 set background=dark
-colorscheme molokai
+if !has("gui_running")
+    let g:gruvbox_italic=0
+endif
+colorscheme gruvbox
 NeoBundleSource YouCompleteMe

@@ -1,2 +1,2 @@
 source $HOME/.dotfiles/vim/gvimrc
-colorscheme nefertiti
+colorscheme gruvbox
