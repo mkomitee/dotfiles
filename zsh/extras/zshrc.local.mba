@@ -6,3 +6,6 @@ alias e="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -a /Applications
 
 
 # eval `dircolors ~/.dotfiles/contrib/seebi/dircolors-solarized/dircolors.ansi-light`
+if [ -f ~/.colors.sh ]; then
+    ~/.colors.sh
+fi
