@@ -21,13 +21,6 @@ NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-unimpaired.git'
 NeoBundle 'wellle/targets.vim'
 
-NeoBundle 'Valloric/YouCompleteMe', {
-            \   'build': {
-            \       'unix': './install.sh --clang-completer',
-            \       'mac': './install.sh --clang-completer',
-            \   },
-            \}
-
 NeoBundleLazy 'davidbeckingsale/writegood.vim'
 NeoBundleLazy 'python_match.vim'
 NeoBundleLazy 'tpope/vim-endwise'
@@ -94,6 +87,12 @@ NeoBundleLazy 'tpope/vim-vinegar', {
             \   'augroup': 'vinegar',
             \   'autoload': {
             \       'mappings': ['-'],
+            \   },
+            \}
+NeoBundleLazy 'Valloric/YouCompleteMe', {
+            \   'build': {
+            \       'unix': './install.sh --clang-completer',
+            \       'mac': './install.sh --clang-completer',
             \   },
             \}
 
