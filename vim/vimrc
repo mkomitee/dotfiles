@@ -377,6 +377,12 @@ map <C-l> <C-w>l
 nnoremap <silent> * :let b:pos = winsaveview()<cr>*:call winrestview(b:pos)<cr>
 nnoremap <silent> # :let b:pos = winsaveview()<cr>#:call winrestview(b:pos)<cr>
 " }}}
+" Show highlight group ------------------------------------------------------{{{
+nnoremap <silent>gh :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name")
+            \. '> trans<' . synIDattr(synID(line("."),col("."),0),"name")
+            \. "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name")
+            \. ">"<CR>
+" }}}
 " }}}
 " Custom commands -----------------------------------------------------------{{{
 " Allow common typos in commands --------------------------------------------{{{
