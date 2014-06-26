@@ -28,6 +28,10 @@ zstyle ':completion:*' menu select=2
 zstyle ':completion:*:*:kill:*:processes' list-colors  '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:*:kill:*:jobs' list-colors  '=(#b) #(%[0-9]#)*=0=01;31'
 
+# Remove trailing slashes in directory completion
+zstyle ':completion:*' squeeze-slashes true
+
+
 ps -ww >/dev/null 2>&1
 if [ $? ]; then
     zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm"
