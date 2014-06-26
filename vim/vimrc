@@ -157,6 +157,10 @@ if exists('+colorcolumn')
   set colorcolumn=+1
 endif
 
+if exists('+breakindent')
+    set breakindent
+endif
+
 " undofile ------------------------------------------------------------------{{{
 if exists('&undofile')
     set undofile         " Save undo history to a file for persistence
