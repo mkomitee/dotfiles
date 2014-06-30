@@ -66,6 +66,12 @@ if neobundle#tap('vim-ctrlspace')
     doautoall BufEnter
   endfunction
 endif
+NeoBundleLazy 'terryma/vim-expand-region', {
+            \   'autoload': {
+            \       'mappings': ['<Plug>(expand_region_expand)',
+            \                    '<Plug>(expand_region_shrink)'],
+            \   },
+            \}
 NeoBundleLazy 'tpope/vim-characterize', {
             \   'autoload': {
             \       'mappings': ['ga'],
@@ -97,9 +103,6 @@ if neobundle#tap('vim-fugitive')
 endif
 NeoBundleLazy 'tpope/vim-vinegar', {
             \   'augroup': 'vinegar',
-            \   'autoload': {
-            \       'mappings': ['-'],
-            \   },
             \}
 NeoBundleLazy 'Valloric/YouCompleteMe', {
             \   'build': {
@@ -472,13 +475,17 @@ nnoremap <leader>gpl :Dispatch! git pull<CR>
 let g:extradite_showhash=1
 let g:extradite_diff_split="belowright vertical split"
 " }}}
-" Slime " -------------------------------------------------------------------{{{
+" Slime ---------------------------------------------------------------------{{{
 let g:slime_target = "tmux"
 let g:slime_python_ipython = 1
 let g:slime_no_mappings = 1
 xmap <localleader>s <Plug>SlimeRegionSend
 nmap <localleader>s <Plug>SlimeMotionSend
 nmap <localleader>ss <Plug>SlimeLineSend
+" }}}
+" Expand-region -------------------------------------------------------------{{{
+map + <Plug>(expand_region_expand)
+map - <Plug>(expand_region_shrink)
 " }}}
 " }}}
 " Filetype detection --------------------------------------------------------{{{
@@ -570,6 +577,9 @@ au FileType help setl nolist
 au FileType help setl nonumber
 au FileType help setl nomodified
 au FileType help setl nomodifiable
+" }}}
+" netrw ---------------------------------------------------------------------{{{
+au FileType netrw NeoBundleSource vim-vinegar
 " }}}
 " }}}
 " Miscellaneous -------------------------------------------------------------{{{
