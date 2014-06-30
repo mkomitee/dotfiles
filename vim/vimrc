@@ -37,6 +37,18 @@ NeoBundleLazy 'int3/vim-extradite', {
             \       'commands': ['Extradite'],
             \   },
             \}
+NeoBundleLazy 'jpalardy/vim-slime' , {
+            \   'autoload': {
+            \       'commands': ['SlimeConfig', 'SlimeSend', 'SlimeSend1'],
+            \       'mappings': [
+            \                     '<Plug>SlimeRegionSend',
+            \                     '<Plug>SlimeLineSend',
+            \                     '<Plug>SlimeMotionSend',
+            \                     '<Plug>SlimeParagraphSend',
+            \                     '<Plug>SlimeConfig',
+            \                     ],
+            \   },
+            \}
 NeoBundleLazy 'kien/ctrlp.vim', {
             \   'autoload': {
             \       'commands': [
@@ -411,8 +423,6 @@ if executable('ag')
     nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
     " new command for ag name Ag. used :Ag [options] term [/path]
     command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
-    " bind \ to :Ag -- this may be going too far :)
-    nnoremap \ :Ag<SPACE>
 endif
 " }}}
 " vim-signature {{{
@@ -461,6 +471,15 @@ nnoremap <leader>gps :Dispatch! git push<CR>
 nnoremap <leader>gpl :Dispatch! git pull<CR>
 let g:extradite_showhash=1
 let g:extradite_diff_split="belowright vertical split"
+" }}}
+" Slime " -------------------------------------------------------------------{{{
+let g:slime_target = "tmux"
+let g:slime_python_ipython = 1
+let g:slime_no_mappings = 1
+xmap <localleader>s <Plug>SlimeRegionSend
+nmap <localleader>s <Plug>SlimeMotionSend
+nmap <localleader>ss <Plug>SlimeLineSend
+" }}}
 " }}}
 " Filetype detection --------------------------------------------------------{{{
 au BufNewFile,BufRead *.md setf markdown
@@ -580,7 +599,6 @@ augroup restoreCursorPosition
 augroup END
 " }}}
 " }}}
-
 " Load abbreviations --------------------------------------------------------{{{
 source ~/.dotfiles/vim/abbrev
 " }}}
