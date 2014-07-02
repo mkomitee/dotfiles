@@ -572,10 +572,13 @@ au FileType markdown NeoBundleSource writegood
 au FileType markdown call writegood#enable()
 
 " }}}
-" rst
-" ---------------------------------------------------------------------------{{{
+" rst -----------------------------------------------------------------------{{{
+let g:rst_syntax_code_list = []  " Unfortunately, including the defaults here
+                                 " breaks spell check
 au FileType rst NeoBundleSource writegood
 au FileType rst call writegood#enable()
+au FileType rst setlocal spell
+au FileType rst let b:surround_96 = "``\r``"
 " }}}
 " perl ----------------------------------------------------------------------{{{
 au FileType perl au BufWritePre <buffer> RemoveTrailingWhiteSpace
