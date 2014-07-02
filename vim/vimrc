@@ -27,6 +27,7 @@ NeoBundleLazy 'mhinz/vim-signify'
 NeoBundleLazy 'python_match.vim'
 NeoBundleLazy 'tpope/vim-endwise'
 NeoBundleLazy 'tpope/vim-fugitive'
+NeoBundleLazy 'vim-scripts/moin.vim'
 
 NeoBundleLazy 'gregsexton/gitv', {
             \   'depends': 'tpope/vim-fugitive',
@@ -536,6 +537,7 @@ au FileType moin setlocal foldexpr=MoinLevel()
 au FileType moin setlocal foldmethod=expr
 au FileType moin setl textwidth=0
 au FileType moin NeoBundleSource writegood
+au FileType moin NeoBundleSource moin
 au FileType moin call writegood#enable()
 " }}}
 " make ----------------------------------------------------------------------{{{
