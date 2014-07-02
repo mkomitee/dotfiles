@@ -1,8 +1,8 @@
 " Load Plugins --------------------------------------------------------------{{{
 set nocompatible
 if has('vim_starting')
-    set runtimepath+=~/.dotfiles/vim/
-    set runtimepath+=~/.dotfiles/vim/neobundle.vim/
+    set runtimepath+=~/.dotfiles/vim
+    set runtimepath+=~/.dotfiles/vim/neobundle.vim
 endif
 let g:neobundle#types#git#default_protocol = "git"
 call neobundle#rc(expand('~/.vim/bundle/'))
@@ -128,6 +128,10 @@ NeoBundle 'morhetz/gruvbox'
 NeoBundle 'tomasr/molokai'
 
 NeoBundleCheck
+
+if has('vim_starting')
+    set runtimepath+=~/.dotfiles/vim/after
+endif
 " }}}
 " Preferences ---------------------------------------------------------------{{{
 set autoread                   " reload files if modified outside of vim & safe
@@ -234,6 +238,7 @@ set formatoptions=   " reset formatoptions
 set formatoptions+=c " autowrap comments using textwidth
 set formatoptions+=q " format comments with gq
 set formatoptions+=n " recognize numbered lists
+set formatoptions+=j " joining comments deletes comment leader
 " }}}
 " wildmode ------------------------------------------------------------------{{{
 set wildmode=list:longest
