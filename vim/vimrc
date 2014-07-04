@@ -577,6 +577,8 @@ au FileType sh,zsh au BufWritePre <buffer> RemoveTrailingWhiteSpace
 " vim -----------------------------------------------------------------------{{{
 au FileType vim au BufWritePre <buffer> RemoveTrailingWhiteSpace
 au FileType vim setl foldmethod=marker
+" }}}
+" help ----------------------------------------------------------------------{{{
 au FileType help setl nolist
 au FileType help setl nonumber
 au FileType help setl nomodified
