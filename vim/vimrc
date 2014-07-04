@@ -56,6 +56,11 @@ NeoBundleLazy 'kien/ctrlp.vim', {
             \       ],
             \   },
             \}
+NeoBundleLazy 'rgarver/Kwbd.vim', {
+            \   'autoload': {
+            \       'commands': ['Kwbd'],
+            \   },
+            \}
 NeoBundleLazy 'szw/vim-ctrlspace', {
             \   'autoload': {
             \       'mappings': ['<C-Space>', '<Nul>'],
@@ -312,6 +317,8 @@ augroup quickfix
   autocmd QuickFixCmdPost [^l]* nested cwindow
   autocmd QuickFixCmdPost    l* nested lwindow
 augroup END
+
+nnoremap <leader>d :Kwbd<cr>
 
 " }}}
 " j and k will go one line, even if they're wrapped -------------------------{{{
