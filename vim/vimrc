@@ -21,9 +21,12 @@ NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-unimpaired.git'
 NeoBundle 'wellle/targets.vim'
 
+NeoBundleLazy 'bling/vim-airline'
 NeoBundleLazy 'davidbeckingsale/writegood.vim'
+NeoBundleLazy 'mhinz/vim-signify'
 NeoBundleLazy 'python_match.vim'
 NeoBundleLazy 'tpope/vim-endwise'
+NeoBundleLazy 'tpope/vim-fugitive'
 
 NeoBundleLazy 'gregsexton/gitv', {
             \   'depends': 'tpope/vim-fugitive',
@@ -54,6 +57,11 @@ NeoBundleLazy 'kien/ctrlp.vim', {
             \       'commands': [
             \           'CtrlP', 'CtrlPBuffer'
             \       ],
+            \   },
+            \}
+NeoBundleLazy 'majutsushi/tagbar', {
+            \   'autoload': {
+            \       'commands': ['TagbarToggle'],
             \   },
             \}
 NeoBundleLazy 'rgarver/Kwbd.vim', {

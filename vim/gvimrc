@@ -1,4 +1,4 @@
-set guifont=Anonymous\ Pro\ 11
+set guifont=Anonymous\ Pro:h12
 
 set guioptions-=a " autoselect
 set guioptions-=A " autoselect
