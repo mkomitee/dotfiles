@@ -1,3 +1,29 @@
 source $HOME/.dotfiles/vim/vimrc
 set background=dark
 colorscheme gruvbox
+
+let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#show_buffers=0
+let g:airline_powerline_fonts=1
+let g:airline_mode_map = {
+            \ '__' : '-',
+            \ 'n'  : 'N',
+            \ 'i'  : 'I',
+            \ 'R'  : 'R',
+            \ 'c'  : 'C',
+            \ 'v'  : 'V',
+            \ 'V'  : 'V',
+            \ '' : 'V',
+            \ 's'  : 'S',
+            \ 'S'  : 'S',
+            \ '' : 'S',
+            \ }
+
+NeoBundleSource YouCompleteMe
+
+NeoBundleSource ctrlp.vim
+NeoBundleSource tagbar
+NeoBundleSource vim-fugitive
+NeoBundleSource vim-signify
+
+NeoBundleSource vim-airline
