@@ -1,5 +1,10 @@
 source $HOME/.dotfiles/vim/vimrc
 set background=dark
+if !has("gui_running")
+    if exists("$TMUX")
+        let g:gruvbox_italic=0
+    endif
+endif
 colorscheme gruvbox
 
 let g:airline#extensions#tabline#enabled=1
