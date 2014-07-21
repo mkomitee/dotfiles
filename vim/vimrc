@@ -561,6 +561,11 @@ au FileType go setl noexpandtab
 au FileType go setl tabstop=4
 au FileType go setl shiftwidth=4
 " }}}
+" yaml ----------------------------------------------------------------------{{{
+au FileType yaml au BufWritePre <buffer> RemoveTrailingWhiteSpace
+au FileType yaml setl tabstop=4
+au FileType yaml setl shiftwidth=4
+" }}}
 " man -----------------------------------------------------------------------{{{
 au FileType man setl nolist
 au FileType man setl nonumber
