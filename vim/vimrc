@@ -24,6 +24,7 @@ NeoBundle 'tpope/vim-unimpaired.git'
 NeoBundle 'wellle/targets.vim'
 
 NeoBundleLazy 'bling/vim-airline'
+NeoBundleLazy 'christoomey/vim-tmux-navigator'
 NeoBundleLazy 'davidbeckingsale/writegood.vim'
 NeoBundleLazy 'mhinz/vim-signify'
 NeoBundleLazy 'python_match.vim'
