@@ -16,6 +16,7 @@ install gnupg2
 install htop-osx
 install iftop
 install mercurial
+install pstree
 install reattach-to-user-namespace
 install ssh-copy-id
 install the_silver_searcher
