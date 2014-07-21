@@ -24,6 +24,7 @@ NeoBundle 'tpope/vim-unimpaired.git'
 NeoBundle 'wellle/targets.vim'
 
 NeoBundleLazy 'bling/vim-airline'
+NeoBundleLazy 'bps/vim-textobj-python'
 NeoBundleLazy 'christoomey/vim-tmux-navigator'
 NeoBundleLazy 'davidbeckingsale/writegood.vim'
 NeoBundleLazy 'mhinz/vim-signify'
@@ -604,9 +605,22 @@ au FileType puppet au BufWritePre <buffer> RemoveTrailingWhiteSpace
 au FileType python au BufWritePre <buffer> RemoveTrailingWhiteSpace
 au FileType python setl textwidth=79
 au FileType python NeoBundleSource python_match.vim
+au FileType python NeoBundleSource vim-textobj-python
 au FileType pyrex au BufWritePre <buffer> RemoveTrailingWhiteSpace
 au FileType pyrex setl textwidth=79
 au FileType pyrex NeoBundleSource python_match.vim
+au FileType pyrex NeoBundleSource vim-textobj-python
+"
+" Use custom maps to not interfere with those dealing with comments
+xmap aF <Plug>(textobj-python-function-a)
+omap aF <Plug>(textobj-python-function-a)
+xmap iF <Plug>(textobj-python-function-i)
+omap iF <Plug>(textobj-python-function-i)
+
+xmap aC <Plug>(textobj-python-class-a)
+omap aC <Plug>(textobj-python-class-a)
+xmap iC <Plug>(textobj-python-class-i)
+omap iC <Plug>(textobj-python-class-i)
 
 " }}}
 " ruby ----------------------------------------------------------------------{{{
