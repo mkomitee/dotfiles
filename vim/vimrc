@@ -8,7 +8,9 @@ let g:neobundle#types#git#default_protocol = "git"
 call neobundle#rc(expand('~/.vim/bundle/'))
 
 NeoBundle 'AfterColors.vim'
+NeoBundle 'SirVer/ultisnips'
 NeoBundle 'glts/vim-textobj-comment'
+NeoBundle 'honza/vim-snippets'
 NeoBundle 'justinmk/vim-sneak'
 NeoBundle 'kana/vim-textobj-indent.git'
 NeoBundle 'kana/vim-textobj-user.git'
@@ -443,6 +445,11 @@ command! -bang WQ wq<bang>
 command! RemoveTrailingWhiteSpace :call RemoveTrailingWhiteSpace()
 " }}}
 " Plugin Configurations -----------------------------------------------------{{{
+" ultisnips " ---------------------------------------------------------------{{{
+let g:UltiSnipsExpandTrigger="<c-x>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+" }}}
 " silver searcher " ---------------------------------------------------------{{{
 if executable('ag')
     " Use ag for grep
