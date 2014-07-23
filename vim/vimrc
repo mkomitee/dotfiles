@@ -482,7 +482,7 @@ let g:ctrlp_max_height=1000
 let g:ctrlp_reuse_window = 'netrw\|help'
 let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'rtscript',
                        \  'undo', 'line', 'changes', 'mixed', 'bookmarkdir']
-let g:ctrlp_root_markers = ['.project']
+let g:ctrlp_root_markers = ['.project', 'requirements.txt']
 
 nnoremap <silent> <Leader>p :CtrlP<cr>
 nnoremap <silent> <Leader>b :CtrlPBuffer<cr>
