@@ -5,6 +5,7 @@ function vim-clear-cache() {
 
 function resume() {
     if [ "$TMUX" = "" ]; then
+        unset KRB5CCNAME
         local session="$1"
         if [ "$session" = "" ]; then
             session=main
