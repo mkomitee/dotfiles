@@ -55,13 +55,6 @@
 (setq guide-key/recursive-key-sequence-flag t)
 (guide-key-mode 1)
 
-;; Using flycheck instead of flymake
-(define-key elpy-mode-map (kbd "C-c C-n") 'flycheck-next-error)
-(define-key elpy-mode-map (kbd "C-c C-p") 'flycheck-previous-error)
-
-;; Expand Region -- note, C-- C-= will contract the region.
-(define-key global-map (kbd "C-=") 'er/expand-region)
-
 (evil-leader/set-key
   "b" 'switch-to-buffer
   "p" 'projectile-find-file
@@ -128,22 +121,3 @@
 
 ;; eshell is ... different.
 (evil-define-key 'insert eshell-mode-map (kbd "RET") 'eshell-send-input)
-
-;; escape minibuffer
-(define-key minibuffer-local-map [escape] 'my-minibuffer-keyboard-quit)
-(define-key minibuffer-local-ns-map [escape] 'my-minibuffer-keyboard-quit)
-(define-key minibuffer-local-completion-map [escape] 'my-minibuffer-keyboard-quit)
-(define-key minibuffer-local-must-match-map [escape] 'my-minibuffer-keyboard-quit)
-(define-key minibuffer-local-isearch-map [escape] 'my-minibuffer-keyboard-quit)
-
-(lexical-let ((default-color (cons (face-background 'mode-line)
-                                   (face-foreground 'mode-line))))
-  (add-hook 'post-command-hook
-            (lambda ()
-              (let ((color (cond ((minibufferp) default-color)
-                                 ((evil-emacs-state-p) '("#e80000" . "#ffffff"))
-                                 ((evil-insert-state-p)  '("#444488" . "#ffffff"))
-                                 ((buffer-modified-p)   '("#006fa0" . "#ffffff"))
-                                 (t default-color))))
-                (set-face-background 'mode-line (car color))
-                (set-face-foreground 'mode-line (cdr color))))))

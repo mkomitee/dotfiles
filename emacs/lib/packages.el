@@ -1,46 +1,28 @@
 (defvar komitee/packages '(ace-jump-mode
                            ace-window
                            ag
-                           auto-complete
                            better-defaults
                            diminish
-                           elpy
                            evil
                            evil-indent-textobject
                            evil-leader
                            evil-matchit
                            evil-nerd-commenter
-                           evil-paredit
                            evil-visualstar
                            exec-path-from-shell
-                           expand-region
                            fill-column-indicator
                            flx-ido
-                           flycheck
-                           git-gutter+
-                           git-gutter-fringe+
                            guide-key
-                           haskell-mode
                            ido-hacks
                            ido-ubiquitous
                            ido-vertical-mode
-                           magit
-                           markdown-mode
                            molokai-theme
-                           multiple-cursors
-                           paredit
                            popwin
-                           pretty-mode
                            projectile
-                           puppet-mode
                            rainbow-delimiters
-                           smart-mode-line
                            smex
                            surround
-                           undo-tree
-                           vimrc-mode
-                           writegood-mode
-                           yasnippet))
+                           undo-tree))
 
 
 (require 'package)

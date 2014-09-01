@@ -2,16 +2,15 @@
 (defun komitee/load (name)
   (load-file (concat komitee/emacs-config-directory "/lib/" name ".el")))
 
+(komitee/load "custom")
 (komitee/load "packages")
 (komitee/load "utils")
 (komitee/load "core")
 (komitee/load "decorations")
-(komitee/load "autocomplete")
 (komitee/load "coding")
 (komitee/load "prose")
 (komitee/load "misc")
 (komitee/load "maps")
-(komitee/load "custom")
 
 ;; Apply local customizations
 (defvar komitee/local-emacs-config (concat user-emacs-directory "local.el"))

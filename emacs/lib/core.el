@@ -83,8 +83,6 @@
               `(("." . ,(concat user-emacs-directory ".undo"))))
 (global-undo-tree-mode)
 
-(require 'multiple-cursors)
-
 ;; make sure $PATH is set correctly
 (when (fboundp 'exec-path-from-shell-initialize)
   (ignore-errors ;; windows

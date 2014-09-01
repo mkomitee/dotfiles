@@ -1,6 +1,5 @@
 (defun komitee/prose-hook ()
   (progn
-    (writegood-mode)
     (turn-on-auto-fill)
     (set-fill-column 72)
     (turn-on-fci-mode)
