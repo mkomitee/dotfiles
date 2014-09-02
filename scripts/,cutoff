@@ -1,0 +1,13 @@
+#!/usr/local/bin/python
+import numpy
+import sys
+
+raw = numpy.array([float(l.strip()) for l in sys.stdin.readlines()])
+try:
+    cutoff = float(sys.argv[1])
+except IndexError:
+    cutoff = None
+
+for n in raw:
+    if cutoff is None or n < cutoff:
+        print n

@@ -33,16 +33,18 @@ def getTerminalSize():
     return int(cr[1]), int(cr[0])
 
 width = getTerminalSize()[0]
-print(width)
-raw = numpy.array([float(l.strip()) for l in sys.stdin.readlines()])
+raw = [l.strip() for l in sys.stdin.readlines()]
+raw = [float(i) for i in raw if i != '']
+raw = numpy.array(raw)
 data = dict(
     samples=len(raw), mean=raw.mean(), max=raw.max(), min=raw.min(),
-    std=raw.std()
+    std=raw.std(), sum=raw.sum()
 )
 print '''Samples:              {samples:19}
 Mean:                 {mean:19.2f}
 Max:                  {max:19.2f}
 Min:                  {min:19.2f}
+Sum:                  {sum:19.2f}
 Standard Deviation:   {std:19.2f}'''.format(**data)
 
 try:
@@ -58,7 +60,7 @@ for n in range(len(bins)-1):
     high = '{0:.2f}'.format(bins[n+1])
     pct = 100 * samples / data['samples']
     pct_thus_far = 100 * total / data['samples']
-    info = "{0!s:>4} ({3!s:>3}%) samples in bin [{1!s:>5}, {2!s:>5}] ({4!s:>3}% <= {2!s:>5})".format(
+    info = "{0!s:>4} ({3!s:>3}%) samples in bin [{1!s:>7}, {2!s:>7}] ({4!s:>4}% <= {2!s:>7})".format(
         samples,
         low,
         high,
