@@ -32,8 +32,8 @@
 (define-key global-map (kbd "M-o") 'other-window)
 (define-key global-map (kbd "S-C-<left>") 'shrink-window-horizontally)
 (define-key global-map (kbd "S-C-<right>") 'enlarge-window-horizontally)
-(define-key global-map (kbd "S-C-<down>") 'shrink-window-vertically)
-(define-key global-map (kbd "S-C-<up>") 'enlarge-window-vertically)
+(define-key global-map (kbd "S-C-<down>") 'shrink-window)
+(define-key global-map (kbd "S-C-<up>") 'enlarge-window)
 
 ;; http://www.masteringemacs.org/articles/2010/10/04/beginners-guide-to-emacs/
 (define-key global-map (kbd "RET") 'newline-and-indent)
