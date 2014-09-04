@@ -25,10 +25,10 @@
 *color7:  #bdae93
 *color15: #ebdbb2
 
-*.font:                     xft:Anonymous Pro for Powerline:size=12
-*.boldFont:                 xft:Anonymous Pro for Powerline:size=12
-Emacs.font:                 Anonymous Pro for Powerline:size=15
-Emacs.boldFont:             Anonymous Pro for Powerline:size=15
+*.font:                     xft:Droid Sans Mono:size=12
+*.boldFont:                 xft:Droid Sans Mono:size=12
+Emacs.font:                 Droid Sans Mono:size=12
+Emacs.boldFont:             Droid Sans Mono:size=12
 URxvt.depth:                32
 URxvt.copyCommand:          xclip -i -selection clipboard
 URxvt.cursorBlink:          false

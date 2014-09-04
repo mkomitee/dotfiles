@@ -12,6 +12,7 @@
                            exec-path-from-shell
                            fill-column-indicator
                            flx-ido
+                           go-mode
                            guide-key
                            ido-hacks
                            ido-ubiquitous
