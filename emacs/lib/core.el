@@ -121,3 +121,6 @@
 (setq ace-jump-word-mode-use-query-char nil
       ace-jump-mode-scope 'window
       ace-jump-mode-case-fold nil)
+
+;; We want _ to be considered a word character, like it is in vim.
+(modify-syntax-entry ?_ "w")
