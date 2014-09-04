@@ -7,7 +7,8 @@
  '(custom-safe-themes
    (quote ("756597b162f1be60a12dbd52bab71d40d6a2845a3e3c2584c6573ee9c332a66e"
            "0e121ff9bef6937edad8dfcff7d88ac9219b5b4f1570fd1702e546a80dba0832"
-           default))))
+           default)))
+ '(tab-width 4))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
