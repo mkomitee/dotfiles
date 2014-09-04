@@ -32,3 +32,5 @@ alias turses='(source ~/.venv/turses/bin/activate && turses -a mkomitee)'
 alias y=true
 
 alias type='type -a'
+
+alias pyprofile='python -mcProfile -o $(uuid -v4).profile'
