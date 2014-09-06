@@ -34,3 +34,5 @@ alias y=true
 alias type='type -a'
 
 alias pyprofile='python -mcProfile -o $(uuid -v4).profile'
+
+alias yolo='sudo $(fc -ln -1)'
