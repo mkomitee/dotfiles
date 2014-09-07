@@ -51,7 +51,7 @@
 
 ;; This makes those windows with lists of possible commands more useful
 (require 'guide-key)
-(setq guide-key/guide-key-sequence '("C-x" "C-c" "SPC" "SPC-c" "SPC-e" "SPC-h"))
+(setq guide-key/guide-key-sequence '("C-x" "C-c" "SPC" "M-g" "M-s" "z" "g" "]" "[" "Z"))
 (setq guide-key/recursive-key-sequence-flag t)
 (guide-key-mode 1)
 
