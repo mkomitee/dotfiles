@@ -49,6 +49,9 @@
 
 (define-key global-map (kbd "C-%") 'goto-match-paren)
 
+(define-key evil-normal-state-map (kbd "[b") 'evil-prev-buffer)
+(define-key evil-normal-state-map (kbd "]b") 'evil-next-buffer)
+
 ;; This makes those windows with lists of possible commands more useful
 (require 'guide-key)
 (setq guide-key/guide-key-sequence '("C-x" "C-c" "SPC" "M-g" "M-s" "z" "g" "]" "[" "Z"))
