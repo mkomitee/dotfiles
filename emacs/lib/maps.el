@@ -68,7 +68,7 @@
   "'" 'ace-jump-mode-pop-mark
   "`" 'ace-jump-mode-pop-mark
   "ev" (lambda () (interactive) (find-file "~/.dotfiles/emacs/init.el"))
-  "cc" 'evilnc-comment-or-uncomment-lines
+  "c" 'evilnc-comment-operator
   "s" 'sort-lines
   "u" 'universal-argument
   ;; I map C-h to evil-window-left, which kills my help-map prefix. I

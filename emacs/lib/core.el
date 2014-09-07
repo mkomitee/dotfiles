@@ -116,6 +116,7 @@
 (global-evil-matchit-mode 1)
 (global-evil-leader-mode)
 (evil-leader/set-leader "<SPC>")
+(require 'evil-nerd-commenter)
 
 ; Configure ace-jump mode
 (setq ace-jump-word-mode-use-query-char nil
