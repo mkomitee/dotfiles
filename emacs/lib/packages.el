@@ -8,6 +8,7 @@
                            evil-leader
                            evil-matchit
                            evil-nerd-commenter
+                           evil-tabs
                            evil-visualstar
                            exec-path-from-shell
                            fill-column-indicator
