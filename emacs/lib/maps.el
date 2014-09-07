@@ -51,6 +51,7 @@
 
 (define-key evil-normal-state-map (kbd "[b") 'evil-prev-buffer)
 (define-key evil-normal-state-map (kbd "]b") 'evil-next-buffer)
+(define-key evil-normal-state-map (kbd "0") 'smarter-move-beginning-of-line)
 
 ;; This makes those windows with lists of possible commands more useful
 (require 'guide-key)
