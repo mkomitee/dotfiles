@@ -11,6 +11,7 @@
                            evil-tabs
                            evil-visualstar
                            exec-path-from-shell
+                           expand-region
                            fill-column-indicator
                            flx-ido
                            go-mode

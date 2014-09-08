@@ -4,7 +4,6 @@
   `(eval-after-load ,feature
      '(progn ,@body)))
 
-
 (defun comment-or-uncomment-region-or-line ()
     "Comments or uncomments the region or the current line if there's no active region."
     (interactive)
@@ -81,3 +80,10 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
       (setq deactivate-mark t)
     (when (get-buffer "*Completions*") (delete-windows-on "*Completions*"))
     (abort-recursive-edit)))
+
+(defun komitee/nohl-quit ()
+  "nohl & then quit; when used in normal mode will cancel search highlighting."
+  (interactive)
+  (progn
+    (evil-ex-nohighlight)
+    (keyboard-quit)))

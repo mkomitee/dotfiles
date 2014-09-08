@@ -1,61 +1,34 @@
-
-;; Like C-p in vim
-(define-key global-map (kbd "C-c b") 'switch-to-buffer)
-(define-key global-map (kbd "C-;") 'evilnc-comment-or-uncomment-lines)
-
-
 ;; Allows completion for commands.
 (define-key global-map (kbd "M-x") 'smex)
 (define-key global-map (kbd "C-x C-m") 'smex)
 (define-key global-map (kbd "C-c C-m") 'smex)
 (define-key global-map (kbd "C-c /") 'ag-regexp-project-at-point)
 
-;; This is like w and f in easy-motion in vim.
-(define-key global-map (kbd "C-c w") 'ace-jump-word-mode)
-(define-key global-map (kbd "C-c c") 'ace-jump-char-mode)
-(define-key global-map (kbd "C-c l") 'ace-jump-line-mode)
-(define-key global-map (kbd "C-c f") 'ace-jump-char-mode)
-
-(define-key global-map (kbd "C-c |") 'split-window-horizontally)
-(define-key global-map (kbd "C-c _") 'split-window-vertically)
-
-(define-key global-map (kbd "S-M-<left>") 'windmove-left)
-(define-key global-map (kbd "S-M-<right>") 'windmove-right)
-(define-key global-map (kbd "S-M-<down>") 'windmove-down)
-(define-key global-map (kbd "S-M-<up>") 'windmove-up)
-(define-key global-map (kbd "C-c C-k") 'delete-window)
-
-(define-key global-map (kbd "M-p") 'ace-window)
-
 ;; http://www.masteringemacs.org/articles/2014/02/28/my-emacs-keybindings/
-(define-key global-map (kbd "C-x C-k") 'delete-window)
-(define-key global-map (kbd "M-o") 'other-window)
-(define-key global-map (kbd "S-C-<left>") 'shrink-window-horizontally)
-(define-key global-map (kbd "S-C-<right>") 'enlarge-window-horizontally)
-(define-key global-map (kbd "S-C-<down>") 'shrink-window)
-(define-key global-map (kbd "S-C-<up>") 'enlarge-window)
+(define-key global-map (kbd "S-<left>") 'shrink-window-horizontally)
+(define-key global-map (kbd "S-<right>") 'enlarge-window-horizontally)
+(define-key global-map (kbd "S-<down>") 'shrink-window)
+(define-key global-map (kbd "S-<up>") 'enlarge-window)
 
-;; http://www.masteringemacs.org/articles/2010/10/04/beginners-guide-to-emacs/
-(define-key global-map (kbd "RET") 'newline-and-indent)
-
-;; http://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-beginning-of-a-line/
-(global-set-key (kbd "C-a") 'smarter-move-beginning-of-line)
-
+;; Not sure about these.
 (define-key global-map (kbd "C-'") 'bookmark-set)
 (define-key global-map (kbd "M-'") 'bookmark-jump)
-
 (define-key global-map (kbd "C-`") 'push-mark-no-activate)
 (define-key global-map (kbd "M-`") 'jump-to-mark)
 
-(define-key global-map (kbd "C-%") 'goto-match-paren)
-
 (define-key evil-normal-state-map (kbd "[b") 'evil-prev-buffer)
 (define-key evil-normal-state-map (kbd "]b") 'evil-next-buffer)
-(define-key evil-normal-state-map (kbd "0") 'smarter-move-beginning-of-line)
+(define-key evil-normal-state-map (kbd "[w") 'evil-window-prev)
+(define-key evil-normal-state-map (kbd "]w") 'evil-window-next)
+(define-key evil-normal-state-map (kbd "C-w ?") 'ace-window)
+(define-key evil-normal-state-map (kbd "<down>") 'shrink-window)
+(define-key evil-normal-state-map (kbd "<up>") 'enlarge-window)
+(define-key evil-normal-state-map (kbd "<right>") 'enlarge-window-horizontally)
+(define-key evil-normal-state-map (kbd "<left>") 'shrink-window-horizontally)
 
 ;; This makes those windows with lists of possible commands more useful
 (require 'guide-key)
-(setq guide-key/guide-key-sequence '("C-x" "C-c" "SPC" "M-g" "M-s" "z" "g" "]" "[" "Z"))
+(setq guide-key/guide-key-sequence '("C-x" "C-c" "SPC" "M-g" "M-s" "z" "g" "]" "[" "Z" "C-w"))
 (setq guide-key/recursive-key-sequence-flag t)
 (guide-key-mode 1)
 
@@ -94,18 +67,30 @@
   "h?" 'help-for-help
   "h." 'display-local-help)
 
-
 ;; Easier window navigation. Note, this kills the C-h help-map prefix,
 ;; which is why I replicate most of that functionality in my leader-map.
 (define-key evil-normal-state-map "\C-j" 'evil-window-down)
 (define-key evil-normal-state-map "\C-k" 'evil-window-up)
 (define-key evil-normal-state-map "\C-h" 'evil-window-left)
 (define-key evil-normal-state-map "\C-l" 'evil-window-right)
-(define-key evil-normal-state-map "|" (kbd ":vsplit C-m C-l"))
-(define-key evil-normal-state-map "_" (kbd ":split C-m C-j"))
-(define-key evil-normal-state-map "j" (kbd "gj"))
-(define-key evil-normal-state-map "k" (kbd "gk"))
+(define-key evil-normal-state-map "|" 'evil-window-vsplit)
+(define-key evil-normal-state-map "_" 'evil-window-split)
+(define-key evil-normal-state-map "j" 'evil-next-visual-line)
+(define-key evil-normal-state-map "k" 'evil-previous-visual-line)
+(define-key evil-normal-state-map "$" 'evil-end-of-visual-line)
+(define-key evil-visual-state-map "j" 'evil-next-visual-line)
+(define-key evil-visual-state-map "k" 'evil-previous-visual-line)
+(define-key evil-visual-state-map "$" 'evil-end-of-visual-line)
+(define-key evil-operator-state-map "j" 'evil-next-visual-line)
+(define-key evil-operator-state-map "k" 'evil-previous-visual-line)
+(define-key evil-operator-state-map "$" 'evil-end-of-visual-line)
+(define-key evil-normal-state-map (kbd "0") 'smarter-move-beginning-of-line)
+(define-key evil-visual-state-map (kbd "0") 'smarter-move-beginning-of-line)
+(define-key evil-operator-state-map (kbd "0") 'smarter-move-beginning-of-line)
 (define-key evil-normal-state-map "Y" (kbd "y$"))
+(define-key evil-normal-state-map "+" 'er/expand-region)
+(define-key evil-visual-state-map "+" 'er/expand-region)
+(define-key evil-visual-state-map "-" 'er/contract-region)
 
 ;; I switch ' and ` in vim, so I do so here as well
 (define-key evil-motion-state-map "'" 'evil-goto-mark)
@@ -119,6 +104,7 @@
 (evil-ex-define-cmd "Wq" 'evil-save-and-close)
 (evil-ex-define-cmd "esh[ell]" 'eshell)
 (evil-ex-define-cmd "sort" 'sort-lines)
+(evil-ex-define-cmd "ag" 'projectile-ag)
 
 ;; indent god damnit.
 (define-key evil-insert-state-map (kbd "RET") 'evil-ret-and-indent)
@@ -126,9 +112,8 @@
 ;; eshell is ... different.
 (evil-define-key 'insert eshell-mode-map (kbd "RET") 'eshell-send-input)
 
-
 ;; escape quits
-(define-key evil-normal-state-map [escape] 'keyboard-quit)
+(define-key evil-normal-state-map [escape] 'komitee/nohl-quit)
 (define-key evil-visual-state-map [escape] 'keyboard-quit)
 (define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
 (define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
