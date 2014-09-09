@@ -117,6 +117,7 @@
 (global-evil-leader-mode)
 (evil-leader/set-leader "<SPC>")
 (require 'evil-nerd-commenter)
+(global-evil-tabs-mode)
 
 ; Configure ace-jump mode
 (setq ace-jump-word-mode-use-query-char nil
