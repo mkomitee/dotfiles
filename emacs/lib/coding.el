@@ -21,15 +21,15 @@
 (add-hook 'prog-mode-hook 'komitee/whitespace-hook)
 
 ;; Display a thin red vertical line at the 80th column
-(require 'fill-column-indicator)
-(setq fci-rule-width 1)
-(setq fci-rule-color "darkred")
-(setq fci-rule-character ?\u254e)
-(defun komitee/fci-hook ()
-  (progn
-    (turn-on-fci-mode)
-    (setq fci-rule-column 80)))
-(add-hook 'prog-mode-hook 'komitee/fci-hook)
+;; (require 'fill-column-indicator)
+;; (setq fci-rule-width 1)
+;; (setq fci-rule-color "darkred")
+;; (setq fci-rule-character ?\u254e)
+;; (defun komitee/fci-hook ()
+;;   (progn
+;;     (turn-on-fci-mode)
+;;     (setq fci-rule-column 80)))
+;; (add-hook 'prog-mode-hook 'komitee/fci-hook)
 
 (defun komitee/comment-auto-fill ()
   (setq-local comment-auto-fill-only-comments t)
