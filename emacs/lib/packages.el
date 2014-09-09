@@ -25,7 +25,8 @@
                            rainbow-delimiters
                            smex
                            surround
-                           undo-tree))
+                           undo-tree
+                           yasnippet))
 
 
 (require 'package)

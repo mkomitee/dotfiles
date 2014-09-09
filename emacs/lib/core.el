@@ -125,3 +125,7 @@
 
 ;; We want _ to be considered a word character, like it is in vim.
 (modify-syntax-entry ?_ "w")
+
+;; Snippets are useful
+(require 'yasnippet)
+(yas-global-mode 1)
