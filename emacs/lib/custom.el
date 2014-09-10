@@ -10,6 +10,7 @@
            default)))
  '(evil-backspace-join-lines t)
  '(indicate-buffer-boundaries (quote left))
+ '(python-fill-docstring-style (quote django))
  '(tab-width 4))
 
 (custom-set-faces
