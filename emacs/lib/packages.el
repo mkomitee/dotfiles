@@ -17,6 +17,7 @@
                            flx-ido
                            go-mode
                            guide-key
+                           haskell-mode
                            ido-hacks
                            ido-ubiquitous
                            ido-vertical-mode
@@ -24,6 +25,7 @@
                            molokai-theme
                            popwin
                            projectile
+                           puppet-mode
                            rainbow-delimiters
                            smex
                            surround
