@@ -1,4 +1,3 @@
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -11,6 +10,7 @@
  '(evil-backspace-join-lines t)
  '(indicate-buffer-boundaries (quote left))
  '(tab-width 4))
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

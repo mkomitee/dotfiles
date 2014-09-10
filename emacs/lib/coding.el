@@ -1,5 +1,7 @@
 ;; General
 
+(add-hook 'prog-mode-hook 'flycheck-mode)
+
 ;; No tabs while coding
 (defun komitee/notabs ()
   (setq indent-tabs-mode nil))

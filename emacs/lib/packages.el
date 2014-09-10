@@ -13,6 +13,7 @@
                            exec-path-from-shell
                            expand-region
                            fill-column-indicator
+                           flycheck
                            flx-ido
                            go-mode
                            guide-key
