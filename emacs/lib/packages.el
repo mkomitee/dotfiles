@@ -19,6 +19,7 @@
                            ido-hacks
                            ido-ubiquitous
                            ido-vertical-mode
+                           markdown-mode+
                            molokai-theme
                            popwin
                            projectile
