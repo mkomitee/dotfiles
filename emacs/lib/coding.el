@@ -45,6 +45,15 @@
                    company-files company-dabbrev )
                  )))
 
+(add-hook 'python-mode-hook
+          (lambda ()
+            (set (make-local-variable 'company-backends)
+                 '(company-anaconda company-semantic
+                   (company-dabbrev-code company-gtags company-etags
+                                         company-keywords)
+                   company-files company-dabbrev )
+                 )))
+
 ;; This is super annoying.
 (after 'flycheck
   (setq flycheck-checkers

@@ -4,6 +4,7 @@
                            better-defaults
                            company
                            company-go
+                           company-anaconda
                            diminish
                            evil
                            evil-indent-textobject
