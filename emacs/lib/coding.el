@@ -2,6 +2,11 @@
 
 (add-hook 'prog-mode-hook 'flycheck-mode)
 
+;; This is super annoying.
+(after 'flycheck
+  (setq flycheck-checkers
+        (delq 'emacs-lisp-checkdoc flycheck-checkers)))
+
 ;; No tabs while coding
 (defun komitee/notabs ()
   (setq indent-tabs-mode nil))
