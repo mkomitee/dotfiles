@@ -1,5 +1,8 @@
 ;; General
 
+;; Check spelling in comments / docstrings
+(add-hook 'prog-mode-hook 'flyspell-prog-mode)
+
 (add-hook 'prog-mode-hook 'flycheck-mode)
 
 ;; This is super annoying.

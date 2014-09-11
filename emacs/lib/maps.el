@@ -22,6 +22,7 @@
 (define-key evil-normal-state-map (kbd "]w") 'evil-window-next)
 (define-key evil-normal-state-map (kbd "[e") 'previous-error)
 (define-key evil-normal-state-map (kbd "]e") 'next-error)
+(define-key evil-normal-state-map (kbd "]s") 'flyspell-goto-next-error)
 (define-key evil-normal-state-map (kbd "C-w ?") 'ace-window)
 (define-key evil-normal-state-map (kbd "C-w <left>") 'winner-undo)
 (define-key evil-normal-state-map (kbd "C-w <right>") 'winner-redo)
