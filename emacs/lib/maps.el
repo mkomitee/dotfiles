@@ -31,6 +31,15 @@
 (define-key evil-normal-state-map (kbd "<right>") 'enlarge-window-horizontally)
 (define-key evil-normal-state-map (kbd "<left>") 'shrink-window-horizontally)
 
+;; vim style auto-complete bindings. This will likely change once I
+;; know some elisp and can tab dwim.
+(define-key evil-insert-state-map (kbd "C-x C-f") 'ac-complete-filename)
+(define-key evil-insert-state-map (kbd "C-x C-n") 'ac-complete-words-in-buffer)
+(define-key evil-insert-state-map (kbd "C-x C-i") 'ac-complete-words-in-same-mode-buffers)
+(define-key evil-insert-state-map (kbd "C-x C-d") 'ac-complete-symbols)
+(define-key evil-insert-state-map (kbd "C-x C-o") 'auto-complete)
+(define-key evil-insert-state-map (kbd "C-x C-u") 'auto-complete)
+
 ;; This makes those windows with lists of possible commands more useful
 (require 'guide-key)
 (setq guide-key/guide-key-sequence '("C-x" "C-c" "SPC" "M-g" "M-s" "z" "g" "]" "[" "Z" "C-w"))

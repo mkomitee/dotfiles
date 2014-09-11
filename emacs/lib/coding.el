@@ -5,6 +5,8 @@
 
 (add-hook 'prog-mode-hook 'flycheck-mode)
 
+(add-hook 'prog-mode-hook 'auto-complete-mode)
+
 ;; This is super annoying.
 (after 'flycheck
   (setq flycheck-checkers
