@@ -6,6 +6,44 @@
 (add-hook 'prog-mode-hook 'flycheck-mode)
 
 (add-hook 'prog-mode-hook 'company-mode)
+;; (LANG-SPECIFIC company-semantic (company-dabbrev-code company-gtags
+;;                                                       company-etags
+;;                                                       company-keywords)
+;;                company-files company-dabbrev)
+;;
+;; Where LANG-SPECIFIC:
+;;     company-elisp
+;;     company-css
+;;     company-clang
+;;     company-cmake
+;;     company-go
+;;     company-ropemacs
+;;
+;; in 24.4, try compay-capf.at the same level as company-semantic.
+
+
+(setq company-backends '(company-semantic (company-dabbrev-code
+                                           company-gtags company-etags
+                                           company-keywords)
+                                          company-files company-dabbrev))
+
+(add-hook 'go-mode-hook
+          (lambda ()
+            (set (make-local-variable 'company-backends)
+                 '(company-go company-semantic
+                   (company-dabbrev-code company-gtags company-etags
+                                         company-keywords)
+                   company-files company-dabbrev )
+                 )))
+
+(add-hook 'emacs-lisp-mode-hook
+          (lambda ()
+            (set (make-local-variable 'company-backends)
+                 '(company-elisp company-semantic
+                   (company-dabbrev-code company-gtags company-etags
+                                         company-keywords)
+                   company-files company-dabbrev )
+                 )))
 
 ;; This is super annoying.
 (after 'flycheck
