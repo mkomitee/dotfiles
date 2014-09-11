@@ -1,9 +1,9 @@
 (defvar komitee/packages '(ace-jump-mode
                            ace-window
-                           ac-python
                            ag
-                           auto-complete
                            better-defaults
+                           company
+                           company-go
                            diminish
                            evil
                            evil-indent-textobject
