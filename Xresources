@@ -25,10 +25,11 @@
 *color7:  #bdae93
 *color15: #ebdbb2
 
-*.font:                     xft:Droid Sans Mono:size=12
-*.boldFont:                 xft:Droid Sans Mono:size=12
-Emacs.font:                 Droid Sans Mono:size=12
-Emacs.boldFont:             Droid Sans Mono:size=12
+*.font:                     xft:Droid Sans Mono:size=10
+*.boldFont:                 xft:Droid Sans Mono:style=bold:size=10
+emacs*font:                 Droid Sans Mono:style=regular:size=11
+emacs*boldFont:             Droid Sans Mono:style=bold:size=11
+xterm*faceName:             Droid Sans Mono:style=regular:size=10
 URxvt.depth:                32
 URxvt.copyCommand:          xclip -i -selection clipboard
 URxvt.cursorBlink:          false
@@ -39,7 +40,7 @@ URxvt.keysym.Shift-Down:    command:\033]721;1\007
 URxvt.keysym.Shift-Up:      command:\033]720;1\007
 URxvt.matcher.button:       1
 URxvt.pasteCommand:         xclip -o -selection clipboard
-URxvt.perl-ext-common:      default,matcher,clipboard-osc,vim-scrollback
+URxvt.perl-ext-common:      default,matcher,clipboard-osc
 URxvt.saveLines:            12000
 URxvt.scrollBar:            false
 URxvt.scrollTtyKeypress:    true
@@ -50,8 +51,15 @@ URxvt.underlineURLs:        true
 URxvt.url-launcher:         /usr/bin/google-chrome
 URxvt.xftAntialias:         true
 Urxvt.loginShell:           true
+
 Xft.antialias:              true
 Xft.dpi:                    96
+Xft.autohint:               false
 Xft.hinting:                full
 Xft.hintstyle:              hintslight
+Xft.lcdfilter:              lcddefault
 Xft.rgba:                   rgb
+
+! ImageMagick display command
+Display.font:               xft:Droid Sans Mono:size=11
+Display.boldFont:           xft:Droid Sans Mono:size=11
