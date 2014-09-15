@@ -159,5 +159,5 @@ bar {
         status_command i3status
 }
 
-exec emacs --daemon
+exec --no-startup-id emacs --daemon
 exec_always --no-startup-id xmodmap ~/.xmodmaprc
