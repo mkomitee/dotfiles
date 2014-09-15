@@ -23,6 +23,9 @@
 (define-key evil-normal-state-map (kbd "[e") 'previous-error)
 (define-key evil-normal-state-map (kbd "]e") 'next-error)
 (define-key evil-normal-state-map (kbd "]s") 'flyspell-goto-next-error)
+(define-key evil-normal-state-map (kbd "]r") 'er/expand-region)
+(define-key evil-visual-state-map (kbd "]r") 'er/expand-region)
+(define-key evil-visual-state-map (kbd "[r") 'er/contract-region)
 (define-key evil-normal-state-map (kbd "C-w ?") 'ace-window)
 (define-key evil-normal-state-map (kbd "C-w <left>") 'winner-undo)
 (define-key evil-normal-state-map (kbd "C-w <right>") 'winner-redo)
@@ -94,9 +97,7 @@
 (define-key evil-visual-state-map (kbd "0") 'smarter-move-beginning-of-line)
 (define-key evil-operator-state-map (kbd "0") 'smarter-move-beginning-of-line)
 (define-key evil-normal-state-map "Y" (kbd "y$"))
-(define-key evil-normal-state-map "+" 'er/expand-region)
-(define-key evil-visual-state-map "+" 'er/expand-region)
-(define-key evil-visual-state-map "-" 'er/contract-region)
+
 
 ;; I switch ' and ` in vim, so I do so here as well
 (define-key evil-motion-state-map "'" 'evil-goto-mark)

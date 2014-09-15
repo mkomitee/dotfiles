@@ -119,6 +119,10 @@
 (require 'evil-nerd-commenter)
 (global-evil-tabs-mode)
 
+
+;; Update modes
+(setq evil-emacs-state-modes (remove 'Custom-mode evil-emacs-state-modes))
+
 ; Configure ace-jump mode
 (setq ace-jump-word-mode-use-query-char nil
       ace-jump-mode-scope 'window
