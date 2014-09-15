@@ -118,7 +118,7 @@
 (evil-leader/set-leader "<SPC>")
 (require 'evil-nerd-commenter)
 (global-evil-tabs-mode)
-
+(require 'evil-jumper)
 
 ;; Update modes
 (setq evil-emacs-state-modes (remove 'Custom-mode evil-emacs-state-modes))

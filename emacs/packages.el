@@ -8,6 +8,7 @@
                            diminish
                            evil
                            evil-indent-textobject
+                           evil-jumper
                            evil-leader
                            evil-matchit
                            evil-nerd-commenter
