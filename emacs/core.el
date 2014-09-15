@@ -100,7 +100,7 @@
 (setq sentence-end-double-space nil)
 
 ;; Relocate customiztions
-(setq custom-file (concat komitee/emacs-config-directory "/lib/custom.el"))
+(setq custom-file (concat komitee/emacs-config-directory "custom.el"))
 
 ; Emacs now has a good editor.
 (setq evil-want-C-u-scroll t

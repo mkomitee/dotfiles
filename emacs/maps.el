@@ -53,7 +53,7 @@
   "j" 'evil-ace-jump-line-mode
   "'" 'ace-jump-mode-pop-mark
   "`" 'ace-jump-mode-pop-mark
-  "ev" (lambda () (interactive) (find-file "~/.dotfiles/emacs/init.el"))
+  "ev" (lambda () (interactive) (dired komitee/emacs-config-directory))
   "c" 'evilnc-comment-operator
   "s" 'sort-lines
   "u" 'universal-argument
