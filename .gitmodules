@@ -22,3 +22,6 @@
 [submodule "contrib/Lokaltog/powerline-fonts"]
 	path = contrib/Lokaltog/powerline-fonts
 	url = git://github.com/Lokaltog/powerline-fonts
+[submodule "contrib/muennich/urxvt-perls"]
+	path = contrib/muennich/urxvt-perls
+	url = https://github.com/muennich/urxvt-perls
