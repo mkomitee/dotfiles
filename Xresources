@@ -31,6 +31,7 @@ emacs*font:                 Droid Sans Mono:style=regular:size=11
 emacs*boldFont:             Droid Sans Mono:style=bold:size=11
 xterm*faceName:             Droid Sans Mono:style=regular:size=10
 URxvt.depth:                32
+URxvt.transparent:          false
 URxvt.cursorBlink:          false
 URxvt.cursorUnderline:      false
 URxvt.inheritPixmap:        true
@@ -47,13 +48,20 @@ URxvt.saveLines:            12000
 URxvt.scrollBar:            false
 
 URxvt.perl-lib:             /u/komitee/.dotfiles/urxvt/
-URxvt.perl-ext-common:      default,matcher,keyboard-select
+URxvt.perl-ext-common:      default,matcher,keyboard-select,clipboard
 URxvt.keysym.3-Escape:      perl:keyboard-select:activate
+URxvt.keysym.M-v:           perl:keyboard-select:activate
+URxvt.keysym.M-p:           perl:clipboard:paste
+URxvt.clipboard.autocopy:   true
+URxvt.clipboard.copycmd:    xclip -i -selection clipboard
+URxvt.clipboard.pastecmd:   xclip -o -selection clipboard
+
 URxvt.matcher.button:       1
 URxvt.keysym.Shift-Down:    command:\033]721;1\007
 URxvt.keysym.Shift-Up:      command:\033]720;1\007
 URxvt.copyCommand:          xclip -i -selection clipboard
 URxvt.pasteCommand:         xclip -o -selection clipboard
+URxvt.skipBuiltinGlyphs:    true
 
 Xft.antialias:              true
 Xft.dpi:                    96
