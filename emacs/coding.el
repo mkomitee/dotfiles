@@ -79,6 +79,11 @@
   (add-hook 'before-save-hook 'whitespace-cleanup nil t))
 (add-hook 'prog-mode-hook 'komitee/whitespace-hook)
 
+(defun komitee/remove-whitespace-hook ()
+  "remove whitespace cleanup hook"
+  (interactive)
+  (setq before-save-hook ()))
+
 ;; Display a thin red vertical line at the 80th column
 ;; (require 'fill-column-indicator)
 ;; (setq fci-rule-width 1)
