@@ -44,6 +44,12 @@
 (setq guide-key/recursive-key-sequence-flag t)
 (guide-key-mode 1)
 
+;; Evil nerd commenter maps
+(global-set-key (kbd "M-;") 'evilnc-comment-or-uncomment-lines)
+(global-set-key (kbd "C-c l") 'evilnc-quick-comment-or-uncomment-to-the-line)
+(global-set-key (kbd "C-c c") 'evilnc-copy-and-comment-lines)
+(global-set-key (kbd "C-c p") 'evilnc-comment-or-uncomment-paragraphs)
+
 (evil-leader/set-key
   "b" 'switch-to-buffer
   "p" 'projectile-find-file
@@ -57,7 +63,6 @@
   "'" 'ace-jump-mode-pop-mark
   "`" 'ace-jump-mode-pop-mark
   "ev" (lambda () (interactive) (dired komitee/emacs-config-directory))
-  "c" 'evilnc-comment-operator
   "s" 'sort-lines
   "u" 'universal-argument
   ;; I map C-h to evil-window-left, which kills my help-map prefix. I
@@ -77,7 +82,17 @@
   "hC" 'describe-coding-system
   "hI" 'describe-input-method
   "h?" 'help-for-help
-  "h." 'display-local-help)
+  "h." 'display-local-help
+
+  ;; Evil-nerd-commenter maps
+  "ci" 'evilnc-comment-or-uncomment-lines
+  "cl" 'evilnc-quick-comment-or-uncomment-to-the-line
+  "ll" 'evilnc-quick-comment-or-uncomment-to-the-line
+  "cc" 'evilnc-copy-and-comment-lines
+  "cp" 'evilnc-comment-or-uncomment-paragraphs
+  "cr" 'comment-or-uncomment-region
+  "cv" 'evilnc-toggle-invert-comment-line-by-line
+  "<SPC>" 'evilnc-comment-operator)
 
 ;; Easier window navigation. Note, this kills the C-h help-map prefix,
 ;; which is why I replicate most of that functionality in my leader-map.
