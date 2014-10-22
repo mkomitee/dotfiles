@@ -347,13 +347,25 @@ nnoremap <silent> j gj
 nnoremap <silent> k gk
 nnoremap <silent> $ g$
 
+nnoremap <silent> gj j
+nnoremap <silent> gk k
+nnoremap <silent> g$ $
+
 onoremap <silent> j gj
 onoremap <silent> k gk
 onoremap <silent> $ g$
 
+onoremap <silent> gj j
+onoremap <silent> gk k
+onoremap <silent> g$ $
+
 vnoremap <silent> j gj
 vnoremap <silent> k gk
 vnoremap <silent> $ g$
+
+vnoremap <silent> gj j
+vnoremap <silent> gk k
+vnoremap <silent> g$ $
 
 " }}}
 " smart-home: ^ and 0 will toggle between one another {{{
