@@ -13,7 +13,9 @@
  '(guide-key/idle-delay 0.5)
  '(guide-key/popup-window-position (quote bottom))
  '(indicate-buffer-boundaries (quote left))
+ '(initial-buffer-choice (quote remember-notes))
  '(python-fill-docstring-style (quote django))
+ '(remember-notes-initial-major-mode (quote rst-mode))
  '(tab-width 4))
 
 (custom-set-faces
