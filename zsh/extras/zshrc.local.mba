@@ -1,8 +1,8 @@
-source "`brew --prefix grc`/etc/grc.bashrc"
 alias gpg=gpg2
 alias emacs=/Applications/Emacs.app/Contents/MacOS/Emacs
 alias emacsclient="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -a /Applications/Emacs.app/Contents/MacOS/Emacs -n"
 alias e="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -a /Applications/Emacs.app/Contents/MacOS/Emacs -n"
+alias pstree="pstree -g 3"
 
 
 # eval `dircolors ~/.dotfiles/contrib/seebi/dircolors-solarized/dircolors.ansi-light`
