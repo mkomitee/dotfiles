@@ -1,7 +1,10 @@
 alias gpg=gpg2
-alias emacs=/Applications/Emacs.app/Contents/MacOS/Emacs
-alias emacsclient="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -a /Applications/Emacs.app/Contents/MacOS/Emacs -n"
-alias e="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -a /Applications/Emacs.app/Contents/MacOS/Emacs -n"
+
+EMACS=~/Applications/Emacs.app/Contents/MacOS/Emacs
+ECLIENT=~/Applications/Emacs.app/Contents/MacOS/bin-x86_64-10_9/emacsclient
+alias emacs=$EMACS
+alias emacsclient="$ECLIENT -a $EMACS -n"
+alias e="$ECLIENT -a $EMACS -n"
 alias pstree="pstree -g 3"
 
 
