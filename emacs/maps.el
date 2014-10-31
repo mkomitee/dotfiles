@@ -40,7 +40,8 @@
 
 ;; This makes those windows with lists of possible commands more useful
 (require 'guide-key)
-(setq guide-key/guide-key-sequence '("C-x" "C-c" "SPC" "M-g" "M-s" "z" "g" "]" "[" "Z" "C-w"))
+(setq guide-key/guide-key-sequence '("C-x" "C-c" "SPC" "M-g" "M-s" "z" "g" "]"
+                                     "[" "Z" "C-w"))
 (setq guide-key/recursive-key-sequence-flag t)
 (guide-key-mode 1)
 
@@ -62,7 +63,8 @@
   "j" 'evil-ace-jump-line-mode
   "'" 'ace-jump-mode-pop-mark
   "`" 'ace-jump-mode-pop-mark
-  "ev" (lambda () (interactive) (dired komitee/emacs-config-directory))
+  "ev" (lambda () (interactive)
+         (ido-find-file-in-dir komitee/emacs-config-directory))
   "s" 'sort-lines
   "u" 'universal-argument
   ;; I map C-h to evil-window-left, which kills my help-map prefix. I
