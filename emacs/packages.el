@@ -26,6 +26,7 @@
                            ido-ubiquitous
                            ido-vertical-mode
                            markdown-mode+
+                           moe-theme
                            molokai-theme
                            popwin
                            projectile
