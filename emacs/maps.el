@@ -136,6 +136,8 @@
 ;; eshell is ... different.
 (evil-define-key 'insert eshell-mode-map (kbd "RET") 'eshell-send-input)
 
+(evil-define-key 'normal haskell-mode-map
+  (kbd "C-c C-c") 'inferior-haskell-send-decl)
 ;; escape quits
 (define-key evil-normal-state-map [escape] 'komitee/nohl-quit)
 (define-key evil-visual-state-map [escape] 'keyboard-quit)
