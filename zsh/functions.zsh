@@ -1,4 +1,5 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
+
 function vim-clear-cache() {
     find ~/.vim/data -type f -delete
 }

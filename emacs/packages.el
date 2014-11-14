@@ -6,6 +6,7 @@
                            company-go
                            company-anaconda
                            diminish
+                           elisp-slime-nav
                            evil
                            evil-indent-textobject
                            evil-jumper

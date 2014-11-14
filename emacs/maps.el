@@ -136,6 +136,10 @@
 ;; eshell is ... different.
 (evil-define-key 'insert eshell-mode-map (kbd "RET") 'eshell-send-input)
 
+(evil-define-key 'normal emacs-lisp-mode-map
+  (kbd "K") 'elisp-slime-nav-describe-elisp-thing-at-point)
+(evil-define-key 'normal python-mode-map
+  (kbd "K") 'python-eldoc-function)
 (evil-define-key 'normal haskell-mode-map
   (kbd "C-c C-c") 'inferior-haskell-send-decl)
 ;; escape quits

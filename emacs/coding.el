@@ -105,7 +105,9 @@
   (rainbow-delimiters-mode t))
 (add-hook 'prog-mode-hook 'komitee/rainbow-hook)
 
+(require 'elisp-slime-nav)
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+(add-hook 'emacs-lisp-mode-hook 'elisp-slime-nav-mode)
 
 ;; make
 (defun komitee/tabs ()

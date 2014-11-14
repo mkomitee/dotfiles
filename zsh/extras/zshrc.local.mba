@@ -1,14 +1,10 @@
+#!/usr/bin/env zsh
 alias gpg=gpg2
 
-EMACS=~/Applications/Emacs.app/Contents/MacOS/Emacs
-ECLIENT=~/Applications/Emacs.app/Contents/MacOS/bin-x86_64-10_9/emacsclient
-alias emacs=$EMACS
-alias emacsclient="$ECLIENT -a $EMACS -n"
-alias e="$ECLIENT -a $EMACS -n"
+alias emacsclient="emacsclient -q -a emacs -n"
+alias e=emacsclient
 alias pstree="pstree -g 3"
 
-
-# eval `dircolors ~/.dotfiles/contrib/seebi/dircolors-solarized/dircolors.ansi-light`
 if [ -f ~/.colors.sh ]; then
     ~/.colors.sh
 fi

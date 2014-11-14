@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
 
 autoload colors; colors;
 setopt prompt_subst

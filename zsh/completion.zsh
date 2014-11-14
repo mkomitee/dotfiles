@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 unsetopt auto_remove_slash
 unsetopt complete_in_word
 unsetopt correct
