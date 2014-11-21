@@ -27,7 +27,7 @@ EOS
             break
             ;;
         *)
-            echo $USAGE 2>&1
+            echo $USAGE 1>&2
             exit 1
             ;;
     esac
@@ -36,15 +36,16 @@ done
 shift $(( $OPTIND - 1 ))
 
 if [ "$*" == "" ]; then
-    echo $USAGE 2>&1
+    echo $USAGE 1>&2
     exit 1
 fi
 
 while :; do
     $NOOP $*
-    if [ $? -eq 0 ]; then
+    rc=$?
+    if [ $rc -eq 0 ]; then
         exit 0
     fi
-    echo "'$*' exited $?"
+    echo "'$*' exited $rc" 1>&2
     sleep $INTERVAL
 done
