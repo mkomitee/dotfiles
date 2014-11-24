@@ -9,6 +9,7 @@
            "0e121ff9bef6937edad8dfcff7d88ac9219b5b4f1570fd1702e546a80dba0832"
            default)))
  '(eshell-aliases-file (concat komitee/emacs-config-directory "aliases"))
+ '(eshell-directory-name "~/")
  '(evil-backspace-join-lines t)
  '(guide-key/idle-delay 0.5)
  '(guide-key/popup-window-position (quote bottom))

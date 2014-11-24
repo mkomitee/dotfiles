@@ -363,9 +363,9 @@ vnoremap <silent> j gj
 vnoremap <silent> k gk
 vnoremap <silent> $ g$
 
-vnoremap <silent> gj j
-vnoremap <silent> gk k
-vnoremap <silent> g$ $
+vnoremap <silent> gj gj
+vnoremap <silent> gk gk
+vnoremap <silent> g$ g$
 
 " }}}
 " smart-home: ^ and 0 will toggle between one another {{{
@@ -388,6 +388,10 @@ nnoremap <silent> <C-k> <C-W>k
 nnoremap <silent> <C-j> <C-W>j
 nnoremap <silent> <C-h> <C-W>h
 nnoremap <silent> <C-l> <C-W>l
+inoremap <silent> <C-k> <Esc><C-W>k
+inoremap <silent> <C-j> <Esc><C-W>j
+inoremap <silent> <C-h> <Esc><C-W>h
+inoremap <silent> <C-l> <Esc><C-W>l
 
 " }}}
 " Simple splits, inspired by my tmux configuration --------------------------{{{
