@@ -61,6 +61,7 @@
 
 ;; No tabs while coding
 (defun komitee/notabs ()
+  (interactive)
   (setq indent-tabs-mode nil))
 (add-hook 'prog-mode-hook 'komitee/notabs)
 
@@ -111,6 +112,7 @@
 
 ;; make
 (defun komitee/tabs ()
+  (interactive)
   (setq indent-tabs-mode t))
 (add-hook 'makefile-mode-hook 'komitee/tabs)
 
