@@ -81,7 +81,7 @@
     cmd = vimdiff  \"$LOCAL\" \"$REMOTE\"
 
 [format]
-    pretty = lgr
+    pretty = lg
 
 [diff]
     tool = vimdiff
