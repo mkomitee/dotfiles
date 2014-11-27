@@ -5,7 +5,7 @@ if has('vim_starting')
     set runtimepath+=~/.dotfiles/vim/neobundle.vim
 endif
 let g:neobundle#types#git#default_protocol = "git"
-call neobundle#rc(expand('~/.vim/bundle/'))
+call neobundle#begin(expand('~/.vim/bundle/'))
 
 NeoBundle 'AfterColors.vim'
 NeoBundle 'SirVer/ultisnips'
@@ -132,6 +132,7 @@ NeoBundle 'morhetz/gruvbox'
 NeoBundle 'tomasr/molokai'
 
 NeoBundleCheck
+call neobundle#end()
 
 if has('vim_starting')
     set runtimepath+=~/.dotfiles/vim/after
