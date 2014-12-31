@@ -80,3 +80,7 @@ html
 *.keytab
 .project
 *.db
+
+
+# Other build artifacts
+*.png
