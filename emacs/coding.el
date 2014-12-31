@@ -6,6 +6,8 @@
 (add-hook 'prog-mode-hook 'flycheck-mode)
 
 (add-hook 'prog-mode-hook 'company-mode)
+
+(add-hook 'prog-mode-hook 'electric-pair-mode)
 ;; (LANG-SPECIFIC company-semantic (company-dabbrev-code company-gtags
 ;;                                                       company-etags
 ;;                                                       company-keywords)

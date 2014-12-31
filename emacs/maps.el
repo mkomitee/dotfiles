@@ -45,24 +45,12 @@
 (setq guide-key/recursive-key-sequence-flag t)
 (guide-key-mode 1)
 
-;; Evil nerd commenter maps
-(global-set-key (kbd "M-;") 'evilnc-comment-or-uncomment-lines)
-(global-set-key (kbd "C-c l") 'evilnc-quick-comment-or-uncomment-to-the-line)
-(global-set-key (kbd "C-c c") 'evilnc-copy-and-comment-lines)
-(global-set-key (kbd "C-c p") 'evilnc-comment-or-uncomment-paragraphs)
-
 (evil-leader/set-key
   "b" 'switch-to-buffer
   "p" 'projectile-find-file
   "r" 'projectile-recentf
   "a" 'projectile-ag
   "/" 'projectile-ag
-  "w" 'evil-ace-jump-word-mode
-  "f" 'evil-ace-jump-char-mode
-  "t" 'evil-ace-jump-char-to-mode
-  "j" 'evil-ace-jump-line-mode
-  "'" 'ace-jump-mode-pop-mark
-  "`" 'ace-jump-mode-pop-mark
   "ev" (lambda () (interactive)
          (ido-find-file-in-dir komitee/emacs-config-directory))
   "s" 'sort-lines
@@ -84,17 +72,7 @@
   "hC" 'describe-coding-system
   "hI" 'describe-input-method
   "h?" 'help-for-help
-  "h." 'display-local-help
-
-  ;; Evil-nerd-commenter maps
-  "ci" 'evilnc-comment-or-uncomment-lines
-  "cl" 'evilnc-quick-comment-or-uncomment-to-the-line
-  "ll" 'evilnc-quick-comment-or-uncomment-to-the-line
-  "cc" 'evilnc-copy-and-comment-lines
-  "cp" 'evilnc-comment-or-uncomment-paragraphs
-  "cr" 'comment-or-uncomment-region
-  "cv" 'evilnc-toggle-invert-comment-line-by-line
-  "<SPC>" 'evilnc-comment-operator)
+  "h." 'display-local-help)
 
 ;; Easier window navigation. Note, this kills the C-h help-map prefix,
 ;; which is why I replicate most of that functionality in my leader-map.
@@ -118,6 +96,20 @@
 (define-key evil-visual-state-map (kbd "0") 'smarter-move-beginning-of-line)
 (define-key evil-operator-state-map (kbd "0") 'smarter-move-beginning-of-line)
 (define-key evil-normal-state-map "Y" (kbd "y$"))
+
+
+;; bind evil-args text objects
+(define-key evil-inner-text-objects-map "a" 'evil-inner-arg)
+(define-key evil-outer-text-objects-map "a" 'evil-outer-arg)
+
+;; bind evil-forward/backward-args
+(define-key evil-normal-state-map "L" 'evil-forward-arg)
+(define-key evil-normal-state-map "H" 'evil-backward-arg)
+(define-key evil-motion-state-map "L" 'evil-forward-arg)
+(define-key evil-motion-state-map "H" 'evil-backward-arg)
+
+;; bind evil-jump-out-args
+(define-key evil-normal-state-map "K" 'evil-jump-out-args)
 
 
 ;; I switch ' and ` in vim, so I do so here as well

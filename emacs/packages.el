@@ -1,5 +1,4 @@
-(defvar komitee/packages '(ace-jump-mode
-                           ace-window
+(defvar komitee/packages '(ace-window
                            ag
                            better-defaults
                            company
@@ -8,11 +7,15 @@
                            diminish
                            elisp-slime-nav
                            evil
+                           evil-args
+                           evil-commentary
+                           evil-easymotion
                            evil-indent-textobject
                            evil-jumper
                            evil-leader
                            evil-matchit
-                           evil-nerd-commenter
+                           evil-snipe
+                           evil-surround
                            evil-tabs
                            evil-visualstar
                            exec-path-from-shell
@@ -34,7 +37,6 @@
                            puppet-mode
                            rainbow-delimiters
                            smex
-                           surround
                            undo-tree
                            yasnippet))
 

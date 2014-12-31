@@ -112,21 +112,23 @@
       evilnc-hotkey-comment-operator "gc")
 
 (evil-mode 1)
-(global-surround-mode 1)
 (global-evil-matchit-mode 1)
 (global-evil-leader-mode)
 (evil-leader/set-leader "<SPC>")
-(require 'evil-nerd-commenter)
 (global-evil-tabs-mode)
 (require 'evil-jumper)
+(require 'evil-args)
+(require 'evil-commentary)
+(evil-commentary-default-setup)
+(evilem-default-keybindings "SPC")
+(require 'evil-surround)
+(global-evil-surround-mode 1)
+(require 'evil-snipe)
+(global-evil-snipe-mode 1)
+(evil-snipe-replace-evil)
 
 ;; Update modes
 (setq evil-emacs-state-modes (remove 'Custom-mode evil-emacs-state-modes))
-
-; Configure ace-jump mode
-(setq ace-jump-word-mode-use-query-char nil
-      ace-jump-mode-scope 'window
-      ace-jump-mode-case-fold nil)
 
 ;; We want _ to be considered a word character, like it is in vim.
 (modify-syntax-entry ?_ "w")
