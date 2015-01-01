@@ -1,6 +1,5 @@
 
 (defvar komitee/packages '(ace-window
-                           ag
                            company
                            company-anaconda
                            company-go
@@ -30,7 +29,6 @@
                            popwin
                            projectile
                            rainbow-delimiters
-                           smex
                            undo-tree
                            use-package))
 

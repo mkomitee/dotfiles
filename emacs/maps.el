@@ -1,8 +1,8 @@
-;; Allows completion for commands.
-(define-key global-map (kbd "M-x") 'smex)
-(define-key global-map (kbd "C-x C-m") 'smex)
-(define-key global-map (kbd "C-c C-m") 'smex)
-(define-key global-map (kbd "C-c /") 'ag-regexp-project-at-point)
+(use-package ag
+  :ensure t
+  :commands ag-regexp-project-at-point
+  :bind ("C-c /" . ag-regexp-project-at-point)
+  :init (setq ag-highlight-search t))
 
 ;; http://www.masteringemacs.org/articles/2014/02/28/my-emacs-keybindings/
 (define-key global-map (kbd "S-<left>") 'shrink-window-horizontally)
@@ -140,6 +140,7 @@
   (kbd "K") 'python-eldoc-function)
 (evil-define-key 'normal haskell-mode-map
   (kbd "C-c C-c") 'inferior-haskell-send-decl)
+
 ;; escape quits
 (define-key evil-normal-state-map [escape] 'komitee/nohl-quit)
 (define-key evil-visual-state-map [escape] 'keyboard-quit)

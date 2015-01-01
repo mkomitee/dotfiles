@@ -65,9 +65,16 @@
             :ensure t
             :init (ido-vertical-mode))))
 
-(defvar smex-save-file (concat user-emacs-directory ".smex-items"))
-(require 'smex)
-(smex-initialize)
+;; Allows completion for commands.
+(use-package smex
+  :ensure t
+  :commands smex
+  :bind (("M-x" . smex)
+         ("C-x C-m" . smex)
+         ("C-c C-m" . smex))
+  :init (progn
+          (setq smex-save-file (concat user-emacs-directory ".smex-items"))
+          (smex-initialize)))
 
 ;; Projectile for better fuzzy matching and more
 (defvar projectile-cache-file (concat user-emacs-directory ".projectile.cache"))
