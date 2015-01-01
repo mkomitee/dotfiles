@@ -131,3 +131,7 @@
       "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
 
 (add-hook 'python-mode-hook (lambda () (run-python "ipython" t nil)))
+
+(use-package puppet-mode
+  :ensure t
+  :mode "\\.pp\\'")

@@ -1,4 +1,5 @@
-(require 'better-defaults)
+(use-package better-defaults
+  :ensure t)
 
 (setq inhibit-splash-screen t
       inhibit-startup-echo-area-message t
@@ -43,18 +44,27 @@
 
 
 ;; interatively do things ...
-(defvar ido-enable-prefix nil)
-(defvar ido-create-new-buffer 'prompt)
-(defvar ido-use-filename-at-point 'guess)
-(defvar ido-save-directory-list-file (concat user-emacs-directory ".ido.last"))
-(defvar ido-enable-flex-matching t)
+(use-package ido
+  :init (progn
+          (setq ido-enable-prefix nil
+                ido-create-new-buffer 'prompt
+                ido-use-filename-at-point 'guess
+                ido-save-directory-list-file (concat user-emacs-directory ".ido.last")
+                ido-enable-flex-matching t)
+          (ido-mode t)
+          (ido-everywhere t)
+          (use-package flx-ido
+            :ensure t
+            :init (flx-ido-mode t))
+          (use-package ido-hacks
+            :ensure t)
+          (use-package ido-ubiquitous
+            :ensure t
+            :init (ido-ubiquitous-mode t))
+          (use-package ido-vertical-mode
+            :ensure t
+            :init (ido-vertical-mode))))
 
-(require 'ido)
-(ido-mode t)
-(ido-everywhere t)
-(ido-ubiquitous-mode t)
-(flx-ido-mode t)
-(ido-vertical-mode)
 (defvar smex-save-file (concat user-emacs-directory ".smex-items"))
 (require 'smex)
 (smex-initialize)
@@ -134,5 +144,6 @@
 (modify-syntax-entry ?_ "w")
 
 ;; Snippets are useful
-(require 'yasnippet)
-(yas-global-mode 1)
+(use-package yasnippet
+  :ensure t
+  :init (yas-global-mode 1))

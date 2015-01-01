@@ -1,9 +1,9 @@
+
 (defvar komitee/packages '(ace-window
                            ag
-                           better-defaults
                            company
-                           company-go
                            company-anaconda
+                           company-go
                            diminish
                            elisp-slime-nav
                            evil
@@ -22,23 +22,17 @@
                            expand-region
                            fill-column-indicator
                            flycheck
-                           flx-ido
                            go-mode
-                           guide-key
                            haskell-mode
-                           ido-hacks
-                           ido-ubiquitous
-                           ido-vertical-mode
                            markdown-mode+
                            moe-theme
                            molokai-theme
                            popwin
                            projectile
-                           puppet-mode
                            rainbow-delimiters
                            smex
                            undo-tree
-                           yasnippet))
+                           use-package))
 
 
 (require 'package)
@@ -54,3 +48,5 @@
 (dolist (package komitee/packages)
   (unless (package-installed-p package)
     (package-install package)))
+
+(require 'use-package)

@@ -39,11 +39,13 @@
 (define-key evil-insert-state-map (kbd "C-x C-u") 'company-complete)
 
 ;; This makes those windows with lists of possible commands more useful
-(require 'guide-key)
-(setq guide-key/guide-key-sequence '("C-x" "C-c" "SPC" "M-g" "M-s" "z" "g" "]"
-                                     "[" "Z" "C-w"))
-(setq guide-key/recursive-key-sequence-flag t)
-(guide-key-mode 1)
+(use-package guide-key
+  :ensure t
+  :init (progn
+          (setq guide-key/guide-key-sequence '("C-x" "C-c" "SPC" "M-g" "M-s"
+                                               "z" "g" "]" "[" "Z" "C-w")
+                guide-key/recursive-key-sequence-flag t)
+          (guide-key-mode 1)))
 
 (evil-leader/set-key
   "b" 'switch-to-buffer
