@@ -1,18 +1,3 @@
-(defmacro after (feature &rest body)
-  "After FEATURE is loaded, evaluate BODY."
-  (declare (indent defun))
-  `(eval-after-load ,feature
-     '(progn ,@body)))
-
-(defun comment-or-uncomment-region-or-line ()
-    "Comments or uncomments the region or the current line if there's no active region."
-    (interactive)
-    (let (beg end)
-        (if (region-active-p)
-            (setq beg (region-beginning) end (region-end))
-            (setq beg (line-beginning-position) end (line-end-position)))
-        (comment-or-uncomment-region beg end)))
-
 ;; http://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-beginning-of-a-line/
 (defun smarter-move-beginning-of-line (arg)
   "Move point back to indentation of beginning of line.
@@ -49,18 +34,6 @@ Equivalent to \\[set-mark-command] when \\[transient-mark-mode] is disabled"
 This is the same as using \\[set-mark-command] with the prefix argument."
   (interactive)
   (set-mark-command 1))
-
-(defun goto-match-paren (arg)
-  "Go to the matching parenthesis if on parenthesis, otherwise insert %.
-vi style of % jumping to matching brace."
-  (interactive "p")
-  (cond ((looking-at "\\s\(") (forward-list 1) (backward-char 1))
-        ((looking-at "\\s\)") (forward-char 1) (backward-list 1))
-        ((looking-at "\\s\[") (forward-list 1) (backward-char 1))
-        ((looking-at "\\s\]") (forward-char 1) (backward-list 1))
-        ((looking-at "\\s\{") (forward-list 1) (backward-char 1))
-        ((looking-at "\\s\}") (forward-char 1) (backward-list 1))
-        (t (self-insert-command (or arg 1)))))
 
 (defun komitee/compile-elisp ()
   "Byte compile dotfile directories"

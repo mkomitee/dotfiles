@@ -1,15 +1,10 @@
-(require 'linum)
-(setq linum-format "%4d ")
-(global-linum-mode t)
+(req-package linum
+  :config (global-linum-mode t)
+  )
 
-;; If we have a fringe, make them16 pixels wide, otherwise add a pipe
-;; symbol to separate line numbers from our text
+;; If we have a fringe, make it 8 pixels wide
 (if (featurep 'fringe)
-    (fringe-mode 8)
-  (setq linum-format "%d \u254e"))
-
-;; Theming, ...
-(setq frame-background-mode 'dark)
+    (fringe-mode 8))
 
 (req-package moe-theme
   :config (load-theme 'moe-dark t))

@@ -1,56 +1,18 @@
 (req-package better-defaults)
 
-(setq inhibit-splash-screen t
-      inhibit-startup-echo-area-message t
-      inhibit-startup-message t)
-
 ;; minibuffer history
-(require 'savehist)
-(setq savehist-file (concat user-emacs-directory ".savehist")
-      savehist-additional-variables '(search ring regexp-search-ring)
-      savehist-autosave-interval 60)
-(savehist-mode +1)
+(req-package savehist
+  :config (savehist-mode +1)
+  )
 
 ;; recent files
-(require 'recentf)
-(setq recentf-save-file (concat user-emacs-directory ".recentf")
-      recentf-max-saved-items 100
-      recentf-max-menu-items 50)
-(recentf-mode +1)
-
-;; store most files in the cache
-(setq backup-directory-alist
-      `(("." . ,(concat user-emacs-directory ".backups/")))
-      auto-save-file-name-transforms
-      `((".*" ,(concat user-emacs-directory ".backups/") t))
-      auto-save-list-file-prefix
-      (concat user-emacs-directory ".auto-save-list/.saves-")
-      backup-by-copying t)
-
-;; Don't use lockfiles. This prevents us from dropping .#foo# file
-;; turds in the filesystem, but will prevent us from detecting conflicts
-(setq create-lockfiles nil)
-
-;; better scrolling
-(setq scroll-margin 3
-      scroll-conservatively 9999
-      scroll-preserve-screen-position t)
-
-;; better buffer names for duplicates
-(setq uniquify-separator "/"
-      uniquify-ignore-buffers-re "^\\*" ; leave special buffers alone
-      uniquify-after-kill-buffer-p t)
-
+(req-package recentf
+  :config (recentf-mode +1)
+  )
 
 ;; interatively do things ...
 (req-package ido
   :config (progn
-            (setq ido-enable-prefix nil
-                  ido-create-new-buffer 'prompt
-                  ido-use-filename-at-point 'guess
-                  ido-save-directory-list-file (concat user-emacs-directory ".ido.last")
-                  ido-enable-flex-matching t)
-            (ido-mode t)
             (ido-everywhere t)
             (req-package flx-ido
               :config (flx-ido-mode t)
@@ -71,7 +33,6 @@
          ("C-x C-m" . smex)
          ("C-c C-m" . smex))
   :config (progn
-            (setq smex-save-file (concat user-emacs-directory ".smex-items"))
             (smex-initialize)
             )
   )
@@ -86,13 +47,12 @@
 (prefer-coding-system 'utf-8)
 
 (global-visual-line-mode)
+(diminish 'visual-line-mode)
 (blink-cursor-mode -1)
 
 (require 'undo-tree)
-(setq undo-tree-auto-save-history t)
-(setq-default undo-tree-history-directory-alist
-              `(("." . ,(concat user-emacs-directory ".undo"))))
 (global-undo-tree-mode)
+(diminish 'undo-tree-mode)
 
 ;; make sure $PATH is set correctly
 (req-package exec-path-from-shell
@@ -111,9 +71,6 @@
 
 ;; Side-by-side diff is superior.
 (setq ediff-split-window-function 'split-window-horizontally)
-
-;; Sentences endings don't require two spaces.
-(setq sentence-end-double-space nil)
 
 ;; Relocate customiztions
 (setq custom-file (concat komitee/emacs-config-directory "custom.el"))
@@ -182,11 +139,6 @@
               :bind ("C-c /" . ag-regexp-project-at-point)
               :config (setq ag-highlight-search t))
             (projectile-global-mode t)
-            (setq projectile-cache-file (concat user-emacs-directory
-                                                ".projectile.cache")
-                  projectile-known-projects-file (concat user-emacs-directory
-                                                         ".projectile-bookmarks.eld")
-                  projectile-require-project-root nil)
             (evil-ex-define-cmd "ag" 'projectile-ag)
             (evil-leader/set-key
               "p" 'projectile-find-file

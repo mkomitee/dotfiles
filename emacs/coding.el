@@ -75,20 +75,13 @@
 ;; No tabs while coding
 (defun komitee/notabs ()
   (interactive)
-  (setq indent-tabs-mode nil))
+  (setq-local indent-tabs-mode nil))
 (add-hook 'prog-mode-hook 'komitee/notabs)
 
 ;; Manage whitespace
 (req-package whitespace
   :diminish whitespace-mode
   :config (progn
-            ;; Highlight incorrect use of whitespace
-            (setq whitespace-style '(face
-                                     faces
-                                     space-before-tab
-                                     tab-mark
-                                     tabs
-                                     trailing))
             (add-hook 'prog-mode-hook 'whitespace-mode)
 
             ;; Cleanup whitespace on save
@@ -97,10 +90,11 @@
             (add-hook 'prog-mode-hook 'komitee/whitespace-hook)
 
             ;; Make it disable-able
+            ;; XXX This disables more than just the whitespace hook.
             (defun komitee/remove-whitespace-hook ()
               "remove whitespace cleanup hook"
               (interactive)
-              (setq before-save-hook ()))
+              (setq-local before-save-hook ()))
             )
   )
 
@@ -108,13 +102,10 @@
 (req-package fill-column-indicator
   :diminish fci-mode
   :config (progn
-            (setq fci-rule-width 1
-                  fci-rule-color "darkred"
-                  fci-rule-character ?\u254e)
             (defun komitee/fci-hook ()
               (progn
                 (turn-on-fci-mode)
-                (setq fci-rule-column 80)))
+                ))
             (add-hook 'prog-mode-hook 'komitee/fci-hook)
             )
   )
@@ -142,7 +133,7 @@
 
 (defun komitee/tabs ()
   (interactive)
-  (setq indent-tabs-mode t))
+  (setq-local indent-tabs-mode t))
 
 ;; make
 (req-package make-mode
@@ -152,17 +143,6 @@
 ;; python
 (req-package python
   :config (progn
-            (setq python-shell-interpreter "ipython"
-                  python-shell-interpreter-args ""
-                  python-shell-prompt-regexp "In \\[[0-9]+\\]: "
-                  python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: "
-                  python-shell-completion-setup-code
-                  "from IPython.core.completerlib import module_completion"
-                  python-shell-completion-module-string-code
-                  "';'.join(module_completion('''%s'''))\n"
-                  python-shell-completion-string-code
-                  "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
-
             (add-hook 'python-mode-hook (lambda () (run-python "ipython" t nil)))
             )
   )

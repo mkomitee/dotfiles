@@ -22,7 +22,5 @@
 ;; If we're in a window system of any kind start the server
 (require 'server)
 (when window-system
-  (setq server-use-tcp t
-        server-host system-name)
   (server-start)
   (server-mode))
