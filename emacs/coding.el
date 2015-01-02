@@ -168,3 +168,12 @@
   )
 
 (req-package puppet-mode)
+
+(req-package haskell-mode
+  :require evil
+  :config (progn
+            (evil-define-key 'normal
+              haskell-mode-map (kbd "C-c C-c") 'inferior-haskell-send-decl)
+            (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+            )
+  )

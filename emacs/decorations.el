@@ -10,5 +10,8 @@
 
 ;; Theming, ...
 (setq frame-background-mode 'dark)
-(require 'moe-theme)
-(load-theme 'moe-dark t)
+
+(req-package moe-theme
+  :config (load-theme 'moe-dark t))
+
+;; molokai-theme

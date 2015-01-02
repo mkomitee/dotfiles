@@ -123,8 +123,6 @@
   (kbd "K") 'elisp-slime-nav-describe-elisp-thing-at-point)
 (evil-define-key 'normal python-mode-map
   (kbd "K") 'python-eldoc-function)
-(evil-define-key 'normal haskell-mode-map
-  (kbd "C-c C-c") 'inferior-haskell-send-decl)
 
 ;; escape quits
 (define-key evil-normal-state-map [escape] 'komitee/nohl-quit)

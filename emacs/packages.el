@@ -14,10 +14,7 @@
                            evil-visualstar
                            exec-path-from-shell
                            expand-region
-                           haskell-mode
                            markdown-mode+
-                           moe-theme
-                           molokai-theme
                            popwin
                            undo-tree
 

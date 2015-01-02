@@ -144,14 +144,14 @@
 ;; We want _ to be considered a word character, like it is in vim.
 (modify-syntax-entry ?_ "w")
 
-(req-package ag
-  :bind ("C-c /" . ag-regexp-project-at-point)
-  :config (setq ag-highlight-search t))
 
 ;; Projectile for better fuzzy matching and more
 (req-package projectile
   :require evil ag
   :config (progn
+            (req-package ag
+              :bind ("C-c /" . ag-regexp-project-at-point)
+              :config (setq ag-highlight-search t))
             (projectile-global-mode t)
             (setq projectile-cache-file (concat user-emacs-directory ".projectile.cache")
                   projectile-known-projects-file (concat user-emacs-directory ".projectile-bookmarks.eld")
