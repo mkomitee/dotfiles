@@ -95,9 +95,10 @@
 (global-undo-tree-mode)
 
 ;; make sure $PATH is set correctly
-(when (fboundp 'exec-path-from-shell-initialize)
-  (ignore-errors ;; windows
-    (exec-path-from-shell-initialize)))
+(req-package exec-path-from-shell
+  :config (ignore-errors ;; windows
+            (exec-path-from-shell-initialize))
+  )
 
 ;; Use popwin to keep control of my windows
 (req-package popwin

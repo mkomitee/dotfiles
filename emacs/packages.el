@@ -13,7 +13,6 @@
                            evil-tabs
                            evil-visualstar
 
-                           exec-path-from-shell
                            undo-tree
 
                            req-package))
