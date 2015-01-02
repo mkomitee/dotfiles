@@ -1,17 +1,17 @@
 
 (defvar komitee/packages '(
                            evil
-                           evil-args
-                           evil-commentary
-                           evil-easymotion
-                           evil-indent-textobject
-                           evil-jumper
-                           evil-leader
-                           evil-matchit
-                           evil-snipe
-                           evil-surround
-                           evil-tabs
-                           evil-visualstar
+                           ;; evil-args
+                           ;; evil-commentary
+                           ;; evil-easymotion
+                           ;; evil-indent-textobject
+                           ;; evil-jumper
+                           ;; evil-leader
+                           ;; evil-matchit
+                           ;; evil-snipe
+                           ;; evil-surround
+                           ;; evil-tabs
+                           ;; evil-visualstar
 
                            undo-tree
 

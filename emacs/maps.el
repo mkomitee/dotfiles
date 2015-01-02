@@ -5,10 +5,10 @@
 (define-key global-map (kbd "S-<up>") 'enlarge-window)
 
 ;; Not sure about these.
-(define-key global-map (kbd "C-'") 'bookmark-set)
-(define-key global-map (kbd "M-'") 'bookmark-jump)
-(define-key global-map (kbd "C-`") 'push-mark-no-activate)
-(define-key global-map (kbd "M-`") 'jump-to-mark)
+;; (define-key global-map (kbd "C-'") 'bookmark-set)
+;; (define-key global-map (kbd "M-'") 'bookmark-jump)
+;; (define-key global-map (kbd "C-`") 'push-mark-no-activate)
+;; (define-key global-map (kbd "M-`") 'jump-to-mark)
 
 (define-key evil-normal-state-map (kbd "[b") 'evil-prev-buffer)
 (define-key evil-normal-state-map (kbd "]b") 'evil-next-buffer)
@@ -43,30 +43,36 @@
                   guide-key/recursive-key-sequence-flag t)
             (guide-key-mode 1)))
 
-(evil-leader/set-key
-  "b" 'switch-to-buffer
-  "ev" (lambda () (interactive)
-         (ido-find-file-in-dir komitee/emacs-config-directory))
-  "s" 'sort-lines
-  "u" 'universal-argument
-  ;; I map C-h to evil-window-left, which kills my help-map prefix. I
-  ;; replicate most of its functionality here.
-  "hf" 'describe-function
-  "hk" 'describe-key
-  "hv" 'describe-variable
-  "hs" 'describe-syntax
-  "hP" 'describe-package
-  "hm" 'describe-mode
-  "hd" 'apropos-documentation
-  "hb" 'describe-bindings
-  "ha" 'apropos-command
-  "hc" 'describe-key-briefly
-  "hS" 'info-lookup-symbol
-  "hL" 'describe-language-environment
-  "hC" 'describe-coding-system
-  "hI" 'describe-input-method
-  "h?" 'help-for-help
-  "h." 'display-local-help)
+(req-package evil-leader
+  :config (progn
+            (evil-leader/set-leader "<SPC>")
+            (global-evil-leader-mode)
+            (evil-leader/set-key
+              "b" 'switch-to-buffer
+              "ev" (lambda () (interactive)
+                     (ido-find-file-in-dir komitee/emacs-config-directory))
+              "s" 'sort-lines
+              "u" 'universal-argument
+              ;; I map C-h to evil-window-left, which kills my help-map prefix. I
+              ;; replicate most of its functionality here.
+              "hf" 'describe-function
+              "hk" 'describe-key
+              "hv" 'describe-variable
+              "hs" 'describe-syntax
+              "hP" 'describe-package
+              "hm" 'describe-mode
+              "hd" 'apropos-documentation
+              "hb" 'describe-bindings
+              "ha" 'apropos-command
+              "hc" 'describe-key-briefly
+              "hS" 'info-lookup-symbol
+              "hL" 'describe-language-environment
+              "hC" 'describe-coding-system
+              "hI" 'describe-input-method
+              "h?" 'help-for-help
+              "h." 'display-local-help)
+            )
+  )
 
 ;; Easier window navigation. Note, this kills the C-h help-map prefix,
 ;; which is why I replicate most of that functionality in my leader-map.
@@ -92,18 +98,25 @@
 (define-key evil-normal-state-map "Y" (kbd "y$"))
 
 
-;; bind evil-args text objects
-(define-key evil-inner-text-objects-map "a" 'evil-inner-arg)
-(define-key evil-outer-text-objects-map "a" 'evil-outer-arg)
 
-;; bind evil-forward/backward-args
-(define-key evil-normal-state-map "L" 'evil-forward-arg)
-(define-key evil-normal-state-map "H" 'evil-backward-arg)
-(define-key evil-motion-state-map "L" 'evil-forward-arg)
-(define-key evil-motion-state-map "H" 'evil-backward-arg)
+(req-package evil-args
+  :config (progn
+            ;; bind evil-args text objects
+            (define-key evil-inner-text-objects-map "a" 'evil-inner-arg)
+            (define-key evil-outer-text-objects-map "a" 'evil-outer-arg)
 
-;; bind evil-jump-out-args
-(define-key evil-normal-state-map "K" 'evil-jump-out-args)
+            ;; bind evil-forward/backward-args
+            (define-key evil-normal-state-map "L" 'evil-forward-arg)
+            (define-key evil-normal-state-map "H" 'evil-backward-arg)
+            (define-key evil-motion-state-map "L" 'evil-forward-arg)
+            (define-key evil-motion-state-map "H" 'evil-backward-arg)
+
+            ;; bind evil-jump-out-args
+            (define-key evil-normal-state-map "K" 'evil-jump-out-args)
+            )
+  )
+
+
 
 
 ;; I switch ' and ` in vim, so I do so here as well

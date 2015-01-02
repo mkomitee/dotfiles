@@ -119,29 +119,47 @@
 (setq custom-file (concat komitee/emacs-config-directory "custom.el"))
 
 ; Emacs now has a good editor.
-(setq evil-want-C-u-scroll t
-      evil-search-module 'evil-search
-      evil-magic 'very-magic
-      evil-emacs-state-cursor '("red" box)
+(setq evil-emacs-state-cursor '("red" box)
       evil-normal-state-cursor '("white" box)
       evil-insert-state-cursor '("white" bar)
-      evilnc-hotkey-comment-operator "gc")
+      )
 
 (evil-mode 1)
-(global-evil-matchit-mode 1)
-(global-evil-leader-mode)
-(evil-leader/set-leader "<SPC>")
-(global-evil-tabs-mode)
-(require 'evil-jumper)
-(require 'evil-args)
-(require 'evil-commentary)
-(evil-commentary-default-setup)
-(evilem-default-keybindings "SPC")
-(require 'evil-surround)
-(global-evil-surround-mode 1)
-(require 'evil-snipe)
-(global-evil-snipe-mode 1)
-(evil-snipe-replace-evil)
+
+(req-package evil-commentary
+  :config (evil-commentary-default-setup)
+  )
+
+(req-package evil-easymotion
+  :config (evilem-default-keybindings "SPC")
+  )
+
+(req-package evil-indent-textobject)
+
+(req-package evil-jumper
+  :config (global-evil-jumper-mode))
+
+(req-package evil-matchit
+  :config (global-evil-matchit-mode 1)
+  )
+
+(req-package evil-snipe
+  :config (progn
+            (global-evil-snipe-mode 1)
+            (evil-snipe-replace-evil)
+            )
+  )
+
+(req-package evil-surround
+  :config (global-evil-surround-mode 1)
+  )
+
+(req-package evil-tabs
+  :config (global-evil-tabs-mode)
+  )
+
+(req-package evil-visualstar)
+
 
 ;; Update modes, everything that defaults to emacs state should
 ;; instead default to motion state. Anything that requires editing,
