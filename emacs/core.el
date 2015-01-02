@@ -100,9 +100,13 @@
     (exec-path-from-shell-initialize)))
 
 ;; Use popwin to keep control of my windows
-(require 'popwin)
-(popwin-mode 1)
-(push '("*Flycheck errors*" :position bottom :height 5) popwin:special-display-config)
+(req-package popwin
+  :config (progn
+            (popwin-mode 1)
+            (push '("*Flycheck errors*" :position bottom :height 5)
+                  popwin:special-display-config)
+            )
+  )
 
 ;; Side-by-side diff is superior.
 (setq ediff-split-window-function 'split-window-horizontally)
@@ -138,9 +142,14 @@
 (global-evil-snipe-mode 1)
 (evil-snipe-replace-evil)
 
-;; Update modes
-(setq evil-emacs-state-modes (remove 'Custom-mode evil-emacs-state-modes))
-(setq evil-emacs-state-modes (remove 'help-mode evil-emacs-state-modes))
+;; Update modes, everything that defaults to emacs state should
+;; instead default to motion state. Anything that requires editing,
+;; we'll remove from motion state so it's in notmal mode by default,
+;; unless there's a VERY good reason to use emacs state.
+(setq evil-motion-state-modes (append evil-emacs-state-modes
+                                      evil-motion-state-modes))
+(setq evil-emacs-state-modes nil)
+(setq evil-motion-state-modes (remove 'Custom-mode evil-motion-state-modes))
 
 ;; We want _ to be considered a word character, like it is in vim.
 (modify-syntax-entry ?_ "w")

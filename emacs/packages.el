@@ -14,9 +14,6 @@
                            evil-visualstar
 
                            exec-path-from-shell
-                           expand-region
-                           markdown-mode+
-                           popwin
                            undo-tree
 
                            req-package))

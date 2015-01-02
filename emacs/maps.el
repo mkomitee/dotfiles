@@ -17,9 +17,15 @@
 (define-key evil-normal-state-map (kbd "[e") 'previous-error)
 (define-key evil-normal-state-map (kbd "]e") 'next-error)
 (define-key evil-normal-state-map (kbd "]s") 'flyspell-goto-next-error)
-(define-key evil-normal-state-map (kbd "]r") 'er/expand-region)
-(define-key evil-visual-state-map (kbd "]r") 'er/expand-region)
-(define-key evil-visual-state-map (kbd "[r") 'er/contract-region)
+
+(req-package expand-region
+  :config (progn
+            (define-key evil-normal-state-map (kbd "]r") 'er/expand-region)
+            (define-key evil-visual-state-map (kbd "]r") 'er/expand-region)
+            (define-key evil-visual-state-map (kbd "[r") 'er/contract-region)
+            )
+  )
+
 (define-key evil-normal-state-map (kbd "C-w <left>") 'winner-undo)
 (define-key evil-normal-state-map (kbd "C-w <right>") 'winner-redo)
 (define-key evil-normal-state-map (kbd "<down>") 'shrink-window)
@@ -29,12 +35,13 @@
 
 ;; This makes those windows with lists of possible commands more useful
 (req-package guide-key
+  :require popwin
   :diminish guide-key-mode
-  :init (progn
-          (setq guide-key/guide-key-sequence '("C-x" "C-c" "SPC" "M-g" "M-s"
-                                               "z" "g" "]" "[" "Z" "C-w")
-                guide-key/recursive-key-sequence-flag t)
-          (guide-key-mode 1)))
+  :config (progn
+            (setq guide-key/guide-key-sequence '("C-x" "C-c" "SPC" "M-g" "M-s"
+                                                 "z" "g" "]" "[" "Z" "C-w")
+                  guide-key/recursive-key-sequence-flag t)
+            (guide-key-mode 1)))
 
 (evil-leader/set-key
   "b" 'switch-to-buffer
