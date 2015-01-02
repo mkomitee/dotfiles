@@ -1,9 +1,3 @@
-(use-package ag
-  :ensure t
-  :commands ag-regexp-project-at-point
-  :bind ("C-c /" . ag-regexp-project-at-point)
-  :init (setq ag-highlight-search t))
-
 ;; http://www.masteringemacs.org/articles/2014/02/28/my-emacs-keybindings/
 (define-key global-map (kbd "S-<left>") 'shrink-window-horizontally)
 (define-key global-map (kbd "S-<right>") 'enlarge-window-horizontally)
@@ -34,13 +28,9 @@
 (define-key evil-normal-state-map (kbd "<right>") 'enlarge-window-horizontally)
 (define-key evil-normal-state-map (kbd "<left>") 'shrink-window-horizontally)
 
-;; vim style auto-complete bindings.
-(define-key evil-insert-state-map (kbd "C-x C-o") 'company-complete)
-(define-key evil-insert-state-map (kbd "C-x C-u") 'company-complete)
-
 ;; This makes those windows with lists of possible commands more useful
-(use-package guide-key
-  :ensure t
+(req-package guide-key
+  :diminish guide-key-mode
   :init (progn
           (setq guide-key/guide-key-sequence '("C-x" "C-c" "SPC" "M-g" "M-s"
                                                "z" "g" "]" "[" "Z" "C-w")
@@ -49,10 +39,6 @@
 
 (evil-leader/set-key
   "b" 'switch-to-buffer
-  "p" 'projectile-find-file
-  "r" 'projectile-recentf
-  "a" 'projectile-ag
-  "/" 'projectile-ag
   "ev" (lambda () (interactive)
          (ido-find-file-in-dir komitee/emacs-config-directory))
   "s" 'sort-lines
@@ -126,7 +112,6 @@
 (evil-ex-define-cmd "Wq" 'evil-save-and-close)
 (evil-ex-define-cmd "esh[ell]" 'eshell)
 (evil-ex-define-cmd "sort" 'sort-lines)
-(evil-ex-define-cmd "ag" 'projectile-ag)
 
 ;; indent god damnit.
 (define-key evil-insert-state-map (kbd "RET") 'evil-ret-and-indent)

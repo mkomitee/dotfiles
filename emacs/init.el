@@ -17,6 +17,8 @@
 (when (file-exists-p komitee/local-emacs-config)
           (load-file komitee/local-emacs-config))
 
+(req-package-finish)
+
 ;; If we're in a window system of any kind start the server
 (require 'server)
 (when window-system

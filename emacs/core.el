@@ -1,5 +1,4 @@
-(use-package better-defaults
-  :ensure t)
+(req-package better-defaults)
 
 (setq inhibit-splash-screen t
       inhibit-startup-echo-area-message t
@@ -44,44 +43,39 @@
 
 
 ;; interatively do things ...
-(use-package ido
-  :init (progn
-          (setq ido-enable-prefix nil
-                ido-create-new-buffer 'prompt
-                ido-use-filename-at-point 'guess
-                ido-save-directory-list-file (concat user-emacs-directory ".ido.last")
-                ido-enable-flex-matching t)
-          (ido-mode t)
-          (ido-everywhere t)
-          (use-package flx-ido
-            :ensure t
-            :init (flx-ido-mode t))
-          (use-package ido-hacks
-            :ensure t)
-          (use-package ido-ubiquitous
-            :ensure t
-            :init (ido-ubiquitous-mode t))
-          (use-package ido-vertical-mode
-            :ensure t
-            :init (ido-vertical-mode))))
+(req-package ido
+  :config (progn
+            (setq ido-enable-prefix nil
+                  ido-create-new-buffer 'prompt
+                  ido-use-filename-at-point 'guess
+                  ido-save-directory-list-file (concat user-emacs-directory ".ido.last")
+                  ido-enable-flex-matching t)
+            (ido-mode t)
+            (ido-everywhere t)
+            (req-package flx-ido
+              :config (flx-ido-mode t)
+              )
+            (req-package ido-hacks)
+            (req-package ido-ubiquitous
+              :config (ido-ubiquitous-mode t)
+              )
+            (req-package ido-vertical-mode
+              :config (ido-vertical-mode)
+              )
+            )
+  )
 
 ;; Allows completion for commands.
-(use-package smex
-  :ensure t
-  :commands smex
+(req-package smex
   :bind (("M-x" . smex)
          ("C-x C-m" . smex)
          ("C-c C-m" . smex))
-  :init (progn
-          (setq smex-save-file (concat user-emacs-directory ".smex-items"))
-          (smex-initialize)))
+  :config (progn
+            (setq smex-save-file (concat user-emacs-directory ".smex-items"))
+            (smex-initialize)
+            )
+  )
 
-;; Projectile for better fuzzy matching and more
-(defvar projectile-cache-file (concat user-emacs-directory ".projectile.cache"))
-(defvar projectile-known-projects-file (concat user-emacs-directory ".projectile-bookmarks.eld"))
-(require 'projectile)
-(projectile-global-mode t)
-(setq projectile-require-project-root nil)
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 (xterm-mouse-mode t)
@@ -150,7 +144,29 @@
 ;; We want _ to be considered a word character, like it is in vim.
 (modify-syntax-entry ?_ "w")
 
+(req-package ag
+  :bind ("C-c /" . ag-regexp-project-at-point)
+  :config (setq ag-highlight-search t))
+
+;; Projectile for better fuzzy matching and more
+(req-package projectile
+  :require evil ag
+  :config (progn
+            (projectile-global-mode t)
+            (setq projectile-cache-file (concat user-emacs-directory ".projectile.cache")
+                  projectile-known-projects-file (concat user-emacs-directory ".projectile-bookmarks.eld")
+                  projectile-require-project-root nil)
+            (evil-ex-define-cmd "ag" 'projectile-ag)
+            (evil-leader/set-key
+              "p" 'projectile-find-file
+              "r" 'projectile-recentf
+              "a" 'projectile-ag
+              "/" 'projectile-ag
+              )
+            )
+  )
+
 ;; Snippets are useful
-(use-package yasnippet
-  :ensure t
-  :init (yas-global-mode 1))
+(req-package yasnippet
+  :diminish yas-minor-mode
+  :config (yas-global-mode 1))

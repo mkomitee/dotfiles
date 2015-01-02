@@ -1,10 +1,5 @@
 
 (defvar komitee/packages '(ace-window
-                           company
-                           company-anaconda
-                           company-go
-                           diminish
-                           elisp-slime-nav
                            evil
                            evil-args
                            evil-commentary
@@ -19,18 +14,14 @@
                            evil-visualstar
                            exec-path-from-shell
                            expand-region
-                           fill-column-indicator
-                           flycheck
-                           go-mode
                            haskell-mode
                            markdown-mode+
                            moe-theme
                            molokai-theme
                            popwin
-                           projectile
-                           rainbow-delimiters
                            undo-tree
-                           use-package))
+
+                           req-package))
 
 
 (require 'package)
@@ -47,4 +38,4 @@
   (unless (package-installed-p package)
     (package-install package)))
 
-(require 'use-package)
+(require 'req-package)
