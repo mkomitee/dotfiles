@@ -20,7 +20,6 @@
 (define-key evil-normal-state-map (kbd "]r") 'er/expand-region)
 (define-key evil-visual-state-map (kbd "]r") 'er/expand-region)
 (define-key evil-visual-state-map (kbd "[r") 'er/contract-region)
-(define-key evil-normal-state-map (kbd "C-w ?") 'ace-window)
 (define-key evil-normal-state-map (kbd "C-w <left>") 'winner-undo)
 (define-key evil-normal-state-map (kbd "C-w <right>") 'winner-redo)
 (define-key evil-normal-state-map (kbd "<down>") 'shrink-window)

@@ -1,5 +1,5 @@
 
-(defvar komitee/packages '(ace-window
+(defvar komitee/packages '(
                            evil
                            evil-args
                            evil-commentary
@@ -12,6 +12,7 @@
                            evil-surround
                            evil-tabs
                            evil-visualstar
+
                            exec-path-from-shell
                            expand-region
                            markdown-mode+

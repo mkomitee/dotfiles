@@ -140,6 +140,7 @@
 
 ;; Update modes
 (setq evil-emacs-state-modes (remove 'Custom-mode evil-emacs-state-modes))
+(setq evil-emacs-state-modes (remove 'help-mode evil-emacs-state-modes))
 
 ;; We want _ to be considered a word character, like it is in vim.
 (modify-syntax-entry ?_ "w")
@@ -153,8 +154,10 @@
               :bind ("C-c /" . ag-regexp-project-at-point)
               :config (setq ag-highlight-search t))
             (projectile-global-mode t)
-            (setq projectile-cache-file (concat user-emacs-directory ".projectile.cache")
-                  projectile-known-projects-file (concat user-emacs-directory ".projectile-bookmarks.eld")
+            (setq projectile-cache-file (concat user-emacs-directory
+                                                ".projectile.cache")
+                  projectile-known-projects-file (concat user-emacs-directory
+                                                         ".projectile-bookmarks.eld")
                   projectile-require-project-root nil)
             (evil-ex-define-cmd "ag" 'projectile-ag)
             (evil-leader/set-key
@@ -170,3 +173,8 @@
 (req-package yasnippet
   :diminish yas-minor-mode
   :config (yas-global-mode 1))
+
+(req-package ace-window
+  :require evil
+  :config (define-key evil-normal-state-map (kbd "C-w ?") 'ace-window)
+  )
