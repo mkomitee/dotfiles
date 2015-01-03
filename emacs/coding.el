@@ -162,8 +162,15 @@
             (setq python-fill-docstring-style (quote django)
                   python-shell-interpreter "ipython"
                   )
-            (add-hook 'python-mode-hook (lambda () (run-python "ipython" t nil)))
+            (evil-define-key 'normal python-mode-map
+              (kbd "K") 'python-eldoc-function)
             )
+            (add-hook 'python-mode-hook (lambda () (run-python "ipython" t nil)))
+  )
+
+(req-package lisp-mode
+  :config (evil-define-key 'normal emacs-lisp-mode-map
+            (kbd "K") 'elisp-slime-nav-describe-elisp-thing-at-point)
   )
 
 (req-package puppet-mode)

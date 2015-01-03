@@ -42,8 +42,7 @@ This is the same as using \\[set-mark-command] with the prefix argument."
   "Byte compile dotfile directories"
   (interactive)
   (progn
-    (byte-recompile-directory (concat komitee/emacs-config-directory "/lib") 0)
-    (byte-compile-file (concat komitee/emacs-config-directory "/init.el"))
+    (byte-recompile-directory komitee/emacs-config-directory 0)
     (byte-compile-file komitee/local-emacs-config)
     )
   )

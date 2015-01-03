@@ -1,10 +1,6 @@
 ;; evil is too fundamental and its functions are used too much
 ;; throughout the rest of my config to use req-package ... and evil
 ;; requires undo-tree.
-(defvar komitee/packages '(evil
-                           undo-tree
-                           req-package))
-
 (setq package-archives
       (quote
        (("melpa" . "http://melpa.milkbox.net/packages/")
@@ -18,7 +14,9 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 
-(dolist (package komitee/packages)
+(dolist (package '(evil
+                   undo-tree
+                   req-package))
   (unless (package-installed-p package)
     (package-install package)))
 

@@ -4,12 +4,6 @@
 (define-key global-map (kbd "S-<down>") 'shrink-window)
 (define-key global-map (kbd "S-<up>") 'enlarge-window)
 
-;; Not sure about these.
-;; (define-key global-map (kbd "C-'") 'bookmark-set)
-;; (define-key global-map (kbd "M-'") 'bookmark-jump)
-;; (define-key global-map (kbd "C-`") 'push-mark-no-activate)
-;; (define-key global-map (kbd "M-`") 'jump-to-mark)
-
 (define-key evil-normal-state-map (kbd "[b") 'evil-prev-buffer)
 (define-key evil-normal-state-map (kbd "]b") 'evil-next-buffer)
 (define-key evil-normal-state-map (kbd "[w") 'evil-window-prev)
@@ -78,6 +72,10 @@
               "h." 'display-local-help
               "cv" 'customize-variable
               "cg" 'customize-group
+              "ct" 'customize-themes
+              "cm" 'customize-mode
+              "cf" 'customize-face
+              "ca" 'customize-apropos
               )
             )
   )
@@ -145,11 +143,6 @@
 
 ;; eshell is ... different.
 (evil-define-key 'insert eshell-mode-map (kbd "RET") 'eshell-send-input)
-
-(evil-define-key 'normal emacs-lisp-mode-map
-  (kbd "K") 'elisp-slime-nav-describe-elisp-thing-at-point)
-(evil-define-key 'normal python-mode-map
-  (kbd "K") 'python-eldoc-function)
 
 ;; escape quits
 (define-key evil-normal-state-map [escape] 'komitee/nohl-quit)
