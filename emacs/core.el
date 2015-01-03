@@ -177,6 +177,13 @@
 
 (req-package evil-visualstar)
 
+(req-package evil-numbers
+  :config (progn
+            (define-key evil-normal-state-map (kbd "C-c +") 'evil-numbers/inc-at-pt)
+            (define-key evil-normal-state-map (kbd "C-c -") 'evil-numbers/dec-at-pt)
+            )
+  )
+
 
 ;; Update modes, everything that defaults to emacs state should
 ;; instead default to motion state. Anything that requires editing,
