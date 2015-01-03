@@ -169,8 +169,14 @@
   )
 
 (req-package lisp-mode
-  :config (evil-define-key 'normal emacs-lisp-mode-map
-            (kbd "K") 'elisp-slime-nav-describe-elisp-thing-at-point)
+  :config (progn
+            (evil-define-key 'normal lisp-mode-shared-map
+              (kbd "K") 'elisp-slime-nav-describe-elisp-thing-at-point)
+            (evil-define-key 'normal lisp-mode-shared-map
+              (kbd "SPC !") 'eval-last-sexp)
+            (evil-define-key 'visual lisp-mode-shared-map
+              (kbd "SPC !") 'eval-region)
+            )
   )
 
 (req-package puppet-mode)
