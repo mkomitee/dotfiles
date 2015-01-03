@@ -138,12 +138,6 @@
 (evil-ex-define-cmd "esh[ell]" 'eshell)
 (evil-ex-define-cmd "sort" 'sort-lines)
 
-;; indent god damnit.
-(define-key evil-insert-state-map (kbd "RET") 'evil-ret-and-indent)
-
-;; eshell is ... different.
-(evil-define-key 'insert eshell-mode-map (kbd "RET") 'eshell-send-input)
-
 ;; escape quits
 (define-key evil-normal-state-map [escape] 'komitee/nohl-quit)
 (define-key evil-visual-state-map [escape] 'keyboard-quit)
