@@ -140,7 +140,6 @@
 
 ;; escape quits
 (define-key evil-normal-state-map [escape] 'komitee/nohl-quit)
-(define-key evil-visual-state-map [escape] 'keyboard-quit)
 (define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
 (define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
 (define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
