@@ -21,7 +21,8 @@
                                                        company-keywords)
                                                       company-files
                                                       company-dabbrev)
-                  company-idle-delay nil)
+                  company-idle-delay nil
+                  )
             (define-key evil-insert-state-map (kbd "C-x C-o") 'company-complete)
             (define-key evil-insert-state-map (kbd "C-x C-u") 'company-complete)
             )
@@ -68,25 +69,32 @@
   :config (progn
             (add-hook 'prog-mode-hook 'flycheck-mode)
             (setq flycheck-checkers
-                  (delq 'emacs-lisp-checkdoc flycheck-checkers))
+                  (delq 'emacs-lisp-checkdoc flycheck-checkers)
+                  )
             )
   )
 
 ;; No tabs while coding
 (defun komitee/notabs ()
   (interactive)
-  (setq-local indent-tabs-mode nil))
+  (setq-local indent-tabs-mode nil)
+  )
 (add-hook 'prog-mode-hook 'komitee/notabs)
 
 ;; Manage whitespace
 (req-package whitespace
   :diminish whitespace-mode
   :config (progn
+            (setq whitespace-style
+                  (quote
+                   (face faces space-before-tab tab-mark tabs trailing))
+                  )
             (add-hook 'prog-mode-hook 'whitespace-mode)
 
             ;; Cleanup whitespace on save
             (defun komitee/whitespace-hook ()
-              (add-hook 'before-save-hook 'whitespace-cleanup nil t))
+              (add-hook 'before-save-hook 'whitespace-cleanup nil t)
+              )
             (add-hook 'prog-mode-hook 'komitee/whitespace-hook)
 
             ;; Make it disable-able
@@ -94,7 +102,8 @@
             (defun komitee/remove-whitespace-hook ()
               "remove whitespace cleanup hook"
               (interactive)
-              (setq-local before-save-hook ()))
+              (setq-local before-save-hook ())
+              )
             )
   )
 
@@ -102,10 +111,15 @@
 (req-package fill-column-indicator
   :diminish fci-mode
   :config (progn
+            (setq fci-rule-character 9550
+                  fci-rule-color "darkred"
+                  fci-rule-column 80
+                  )
             (defun komitee/fci-hook ()
               (progn
                 (turn-on-fci-mode)
-                ))
+                )
+              )
             (add-hook 'prog-mode-hook 'komitee/fci-hook)
             )
   )
@@ -113,7 +127,8 @@
 
 (defun komitee/comment-auto-fill ()
   (setq-local comment-auto-fill-only-comments t)
-  (auto-fill-mode 1))
+  (auto-fill-mode 1)
+  )
 (add-hook 'prog-mode-hook 'komitee/comment-auto-fill)
 
 (req-package rainbow-delimiters
@@ -133,7 +148,8 @@
 
 (defun komitee/tabs ()
   (interactive)
-  (setq-local indent-tabs-mode t))
+  (setq-local indent-tabs-mode t)
+  )
 
 ;; make
 (req-package make-mode
@@ -143,6 +159,9 @@
 ;; python
 (req-package python
   :config (progn
+            (setq python-fill-docstring-style (quote django)
+                  python-shell-interpreter "ipython"
+                  )
             (add-hook 'python-mode-hook (lambda () (run-python "ipython" t nil)))
             )
   )

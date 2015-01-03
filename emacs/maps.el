@@ -40,8 +40,13 @@
   :config (progn
             (setq guide-key/guide-key-sequence '("C-x" "C-c" "SPC" "M-g" "M-s"
                                                  "z" "g" "]" "[" "Z" "C-w")
-                  guide-key/recursive-key-sequence-flag t)
-            (guide-key-mode 1)))
+                  guide-key/recursive-key-sequence-flag t
+                  guide-key/idle-delay 0.5
+                  guide-key/popup-window-position (quote bottom)
+                  )
+            (guide-key-mode 1)
+            )
+  )
 
 (req-package evil-leader
   :config (progn
@@ -70,7 +75,10 @@
               "hC" 'describe-coding-system
               "hI" 'describe-input-method
               "h?" 'help-for-help
-              "h." 'display-local-help)
+              "h." 'display-local-help
+              "cv" 'customize-variable
+              "cg" 'customize-group
+              )
             )
   )
 
