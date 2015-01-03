@@ -4,13 +4,13 @@
 (define-key global-map (kbd "S-<down>") 'shrink-window)
 (define-key global-map (kbd "S-<up>") 'enlarge-window)
 
-(define-key evil-normal-state-map (kbd "[b") 'evil-prev-buffer)
-(define-key evil-normal-state-map (kbd "]b") 'evil-next-buffer)
-(define-key evil-normal-state-map (kbd "[w") 'evil-window-prev)
-(define-key evil-normal-state-map (kbd "]w") 'evil-window-next)
-(define-key evil-normal-state-map (kbd "[e") 'previous-error)
-(define-key evil-normal-state-map (kbd "]e") 'next-error)
-(define-key evil-normal-state-map (kbd "]s") 'flyspell-goto-next-error)
+(define-key evil-motion-state-map (kbd "[b") 'evil-prev-buffer)
+(define-key evil-motion-state-map (kbd "]b") 'evil-next-buffer)
+(define-key evil-motion-state-map (kbd "[w") 'evil-window-prev)
+(define-key evil-motion-state-map (kbd "]w") 'evil-window-next)
+(define-key evil-motion-state-map (kbd "[e") 'previous-error)
+(define-key evil-motion-state-map (kbd "]e") 'next-error)
+(define-key evil-motion-state-map (kbd "]s") 'flyspell-goto-next-error)
 
 (req-package expand-region
   :config (progn
@@ -20,8 +20,9 @@
             )
   )
 
-(define-key evil-normal-state-map (kbd "C-w <left>") 'winner-undo)
-(define-key evil-normal-state-map (kbd "C-w <right>") 'winner-redo)
+(define-key evil-window-map (kbd "<left>") 'winner-undo)
+(define-key evil-window-map (kbd "<right>") 'winner-redo)
+
 (define-key evil-normal-state-map (kbd "<down>") 'shrink-window)
 (define-key evil-normal-state-map (kbd "<up>") 'enlarge-window)
 (define-key evil-normal-state-map (kbd "<right>") 'enlarge-window-horizontally)
@@ -90,20 +91,15 @@
 (define-key evil-insert-state-map "\C-k" 'evil-window-up)
 (define-key evil-insert-state-map "\C-h" 'evil-window-left)
 (define-key evil-insert-state-map "\C-l" 'evil-window-right)
+
 (define-key evil-normal-state-map "|" 'evil-window-vsplit)
 (define-key evil-normal-state-map "_" 'evil-window-split)
-(define-key evil-normal-state-map "j" 'evil-next-visual-line)
-(define-key evil-normal-state-map "k" 'evil-previous-visual-line)
-(define-key evil-visual-state-map "j" 'evil-next-visual-line)
-(define-key evil-visual-state-map "k" 'evil-previous-visual-line)
-(define-key evil-operator-state-map "j" 'evil-next-visual-line)
-(define-key evil-operator-state-map "k" 'evil-previous-visual-line)
-(define-key evil-normal-state-map (kbd "0") 'smarter-move-beginning-of-line)
-(define-key evil-visual-state-map (kbd "0") 'smarter-move-beginning-of-line)
-(define-key evil-operator-state-map (kbd "0") 'smarter-move-beginning-of-line)
+
+(define-key evil-motion-state-map "j" 'evil-next-visual-line)
+(define-key evil-motion-state-map "k" 'evil-previous-visual-line)
+
+(define-key evil-motion-state-map "0" 'smarter-move-beginning-of-line)
 (define-key evil-normal-state-map "Y" (kbd "y$"))
-
-
 
 (req-package evil-args
   :config (progn
@@ -121,9 +117,6 @@
             (define-key evil-normal-state-map "K" 'evil-jump-out-args)
             )
   )
-
-
-
 
 ;; I switch ' and ` in vim, so I do so here as well
 (define-key evil-motion-state-map "'" 'evil-goto-mark)

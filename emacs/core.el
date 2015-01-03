@@ -232,5 +232,5 @@
 
 (req-package ace-window
   :require evil
-  :config (define-key evil-normal-state-map (kbd "C-w ?") 'ace-window)
+  :config (define-key evil-window-map "?" 'ace-window)
   )
