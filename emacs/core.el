@@ -184,6 +184,9 @@
             )
   )
 
+(req-package evil-exchange
+  :config (evil-exchange-install))
+
 
 ;; Update modes, everything that defaults to emacs state should
 ;; instead default to motion state. Anything that requires editing,
