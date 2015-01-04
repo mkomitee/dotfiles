@@ -162,8 +162,7 @@
             (setq python-fill-docstring-style (quote django)
                   python-shell-interpreter "ipython"
                   )
-            (evil-define-key 'normal python-mode-map
-              (kbd "K") 'python-eldoc-function)
+            (evil-define-key 'normal python-mode-map "K" 'python-eldoc-function)
             )
             (add-hook 'python-mode-hook (lambda () (run-python "ipython" t nil)))
   )
@@ -171,9 +170,9 @@
 (req-package lisp-mode
   :config (progn
             (evil-define-key 'normal lisp-mode-shared-map
-              (kbd "K") 'elisp-slime-nav-describe-elisp-thing-at-point)
-            (evil-define-key 'normal lisp-mode-shared-map
-              (kbd "SPC !") 'eval-last-sexp)
+              "K" 'elisp-slime-nav-describe-elisp-thing-at-point
+              (kbd "SPC !") 'eval-last-sexp
+              )
             (evil-define-key 'visual lisp-mode-shared-map
               (kbd "SPC !") 'eval-region)
             )

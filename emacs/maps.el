@@ -4,19 +4,19 @@
 (define-key global-map (kbd "S-<down>") 'shrink-window)
 (define-key global-map (kbd "S-<up>") 'enlarge-window)
 
-(define-key evil-motion-state-map (kbd "[b") 'evil-prev-buffer)
-(define-key evil-motion-state-map (kbd "]b") 'evil-next-buffer)
-(define-key evil-motion-state-map (kbd "[w") 'evil-window-prev)
-(define-key evil-motion-state-map (kbd "]w") 'evil-window-next)
-(define-key evil-motion-state-map (kbd "[e") 'previous-error)
-(define-key evil-motion-state-map (kbd "]e") 'next-error)
-(define-key evil-motion-state-map (kbd "]s") 'flyspell-goto-next-error)
+(define-key evil-motion-state-map "[b" 'evil-prev-buffer)
+(define-key evil-motion-state-map "]b" 'evil-next-buffer)
+(define-key evil-motion-state-map "[w" 'evil-window-prev)
+(define-key evil-motion-state-map "]w" 'evil-window-next)
+(define-key evil-motion-state-map "[e" 'previous-error)
+(define-key evil-motion-state-map "]e" 'next-error)
+(define-key evil-motion-state-map "]s" 'flyspell-goto-next-error)
 
 (req-package expand-region
   :config (progn
-            (define-key evil-normal-state-map (kbd "]r") 'er/expand-region)
-            (define-key evil-visual-state-map (kbd "]r") 'er/expand-region)
-            (define-key evil-visual-state-map (kbd "[r") 'er/contract-region)
+            (define-key evil-normal-state-map "]r" 'er/expand-region)
+            (define-key evil-visual-state-map "]r" 'er/expand-region)
+            (define-key evil-visual-state-map "[r" 'er/contract-region)
             )
   )
 
@@ -83,14 +83,10 @@
 
 ;; Easier window navigation. Note, this kills the C-h help-map prefix,
 ;; which is why I replicate most of that functionality in my leader-map.
-(define-key evil-normal-state-map "\C-j" 'evil-window-down)
-(define-key evil-normal-state-map "\C-k" 'evil-window-up)
-(define-key evil-normal-state-map "\C-h" 'evil-window-left)
-(define-key evil-normal-state-map "\C-l" 'evil-window-right)
-(define-key evil-insert-state-map "\C-j" 'evil-window-down)
-(define-key evil-insert-state-map "\C-k" 'evil-window-up)
-(define-key evil-insert-state-map "\C-h" 'evil-window-left)
-(define-key evil-insert-state-map "\C-l" 'evil-window-right)
+(define-key global-map "\C-j" 'evil-window-down)
+(define-key global-map "\C-k" 'evil-window-up)
+(define-key global-map "\C-h" 'evil-window-left)
+(define-key global-map "\C-l" 'evil-window-right)
 
 (define-key evil-normal-state-map "|" 'evil-window-vsplit)
 (define-key evil-normal-state-map "_" 'evil-window-split)
