@@ -125,8 +125,6 @@
             )
   )
 
-
-
 ; Emacs now has a good editor.
 (setq evil-emacs-state-cursor '("red" box)
       evil-normal-state-cursor '("white" box)
@@ -201,7 +199,6 @@
 ;; We want _ to be considered a word character, like it is in vim.
 (modify-syntax-entry ?_ "w")
 
-
 ;; Projectile for better fuzzy matching and more
 (req-package projectile
   :require evil ag
@@ -211,7 +208,13 @@
                   projectile-require-project-root nil)
             (req-package ag
               :bind ("C-c /" . ag-regexp-project-at-point)
-              :config (setq ag-highlight-search t)
+              :config (progn
+                        (setq ag-highlight-search t)
+                        ;; This shouldn't be necessary, but adding
+                        ;; ag-mode to evil-motion-state-modes doesn't
+                        ;; seem to have the desired effect.
+                        (add-hook 'ag-mode-hook 'evil-motion-state)
+                        )
               )
             (projectile-global-mode t)
             (evil-ex-define-cmd "ag" 'projectile-ag)
@@ -223,6 +226,10 @@
               )
             )
   )
+
+;; This shouldn't be necessary, but adding help-mode to
+;; evil-motion-state-modes doesn't seem to have the desired effect.
+(add-hook 'help-mode-hook 'evil-motion-state)
 
 ;; Snippets are useful
 (req-package yasnippet
@@ -241,3 +248,21 @@
             "hM" 'discover-my-major
             )
   )
+
+(req-package magit
+  :config (progn
+            (evil-set-initial-state 'magit-mode 'motion)
+            (evil-set-initial-state 'magit-status-mode 'motion)
+            (evil-set-initial-state 'magit-diff-mode 'motion)
+            (evil-set-initial-state 'magit-log-mode 'motion)
+            (evil-define-key 'motion magit-status-mode-map
+              "s" 'magit-stage-item)
+            (evil-define-key 'motion magit-mode-map
+              "j" 'magit-goto-next-section
+              "k" 'magit-goto-previous-section)
+            (evil-define-key 'motion magit-log-mode-map
+              "j" 'magit-goto-next-section
+              "k" 'magit-goto-previous-section)
+            (evil-define-key 'motion magit-diff-mode-map
+              "j" 'magit-goto-next-section
+              "k" 'magit-goto-previous-section)))
