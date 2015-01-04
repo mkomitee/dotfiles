@@ -251,18 +251,14 @@
 
 (req-package magit
   :config (progn
-            (evil-set-initial-state 'magit-mode 'motion)
-            (evil-set-initial-state 'magit-status-mode 'motion)
-            (evil-set-initial-state 'magit-diff-mode 'motion)
-            (evil-set-initial-state 'magit-log-mode 'motion)
-            (evil-define-key 'motion magit-status-mode-map
-              "s" 'magit-stage-item)
-            (evil-define-key 'motion magit-mode-map
-              "j" 'magit-goto-next-section
-              "k" 'magit-goto-previous-section)
-            (evil-define-key 'motion magit-log-mode-map
-              "j" 'magit-goto-next-section
-              "k" 'magit-goto-previous-section)
-            (evil-define-key 'motion magit-diff-mode-map
-              "j" 'magit-goto-next-section
-              "k" 'magit-goto-previous-section)))
+            (evil-set-initial-state 'magit-status-mode 'emacs)
+            (define-key magit-status-mode-map "j" 'evil-next-visual-line)
+            ;; j now hides the entire magit-section-jump-map. If this
+            ;; becomes a problem we can map that to J, but J would
+            ;; hide magit-key-mode-popup-apply-mailbox. I honestly
+            ;; don't know if I'll ever need either of them, but I have
+            ;; no idea what I'm doing.
+            (define-key magit-status-mode-map "k" 'evil-previous-visual-line)
+            (define-key magit-status-mode-map "K" 'magit-discard-item)
+            )
+  )
