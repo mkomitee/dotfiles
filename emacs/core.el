@@ -234,3 +234,10 @@
   :require evil
   :config (define-key evil-window-map "?" 'ace-window)
   )
+
+(req-package discover-my-major
+  :require evil
+  :config (evil-leader/set-key
+            "hM" 'discover-my-major
+            )
+  )
