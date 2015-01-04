@@ -97,6 +97,14 @@
 (define-key evil-motion-state-map "0" 'smarter-move-beginning-of-line)
 (define-key evil-normal-state-map "Y" (kbd "y$"))
 
+;; There's probably an easier way to do this by defining a function,
+;; but I can't figure it out. It re-selects the shifted region after
+;; the shift.
+(define-key evil-visual-state-map (kbd "C->") 'evil-shift-right)
+(define-key evil-visual-state-map ">" (kbd "C-> gv"))
+(define-key evil-visual-state-map (kbd "C-<") 'evil-shift-left)
+(define-key evil-visual-state-map "<" (kbd "C-< gv"))
+
 (req-package evil-args
   :config (progn
             ;; bind evil-args text objects
