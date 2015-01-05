@@ -78,6 +78,7 @@
               "cf" 'customize-face
               "ca" 'customize-apropos
               "ms" 'magit-status
+              "ml" 'magit-log
               )
             )
   )
