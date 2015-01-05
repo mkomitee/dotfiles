@@ -263,6 +263,8 @@
             (define-key magit-status-mode-map "|" 'komitee/split-horizontally)
             (define-key magit-status-mode-map "_" 'komitee/split-vertically)
             (define-key magit-status-mode-map " b" 'switch-to-buffer)
+            (define-key magit-status-mode-map " h" nil)
+            (define-key magit-status-mode-map " hk" 'describe-key)
             (define-key magit-status-mode-map ":" 'evil-ex)
             (define-key magit-status-mode-map ";" 'magit-git-command)
 
@@ -279,6 +281,8 @@
             ; (define-key magit-diff-mode-map (kbd "SPC") nil)
             (define-key magit-diff-mode-map " "  nil)
             (define-key magit-diff-mode-map " b" 'switch-to-buffer)
+            (define-key magit-diff-mode-map " h" nil)
+            (define-key magit-diff-mode-map " hk" 'describe-key)
             (define-key magit-diff-mode-map ":" 'evil-ex)
             (define-key magit-diff-mode-map ";" 'magit-git-command)
 
@@ -295,7 +299,10 @@
             ; (define-key magit-cherry-mode-map (kbd "SPC") nil)
             (define-key magit-cherry-mode-map " "  nil)
             (define-key magit-cherry-mode-map " b" 'switch-to-buffer)
+            (define-key magit-cherry-mode-map " h" nil)
+            (define-key magit-cherry-mode-map " hk" 'describe-key)
             (define-key magit-cherry-mode-map ":" 'evil-ex)
             (define-key magit-cherry-mode-map ";" 'magit-git-command)
             )
+
   )
