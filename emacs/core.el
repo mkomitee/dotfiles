@@ -313,6 +313,21 @@
             (define-key magit-log-mode-map " hk" 'describe-key)
             (define-key magit-log-mode-map ":" 'evil-ex)
             (define-key magit-log-mode-map ";" 'magit-git-command)
-            )
 
+            ;; Not really from magit, but why not.
+            (evil-set-initial-state 'git-rebase-mode 'emacs)
+            (define-key git-rebase-mode-map "j" 'evil-next-visual-line)
+            (define-key git-rebase-mode-map "k" 'evil-previous-visual-line)
+            (define-key git-rebase-mode-map "K" 'git-rebase-kill-line)
+            (define-key git-rebase-mode-map "|" 'komitee/split-horizontally)
+            (define-key git-rebase-mode-map "_" 'komitee/split-vertically)
+            (define-key git-rebase-mode-map " "  nil)
+            (define-key git-rebase-mode-map " b" 'switch-to-buffer)
+            (define-key git-rebase-mode-map " h" nil)
+            (define-key git-rebase-mode-map " hk" 'describe-key)
+            (define-key git-rebase-mode-map ":" 'evil-ex)
+            (define-key git-rebase-mode-map (kbd "<up>") 'git-rebase-move-line-up)
+            (define-key git-rebase-mode-map (kbd "<down>") 'git-rebase-move-line-down)
+            )
   )
+
