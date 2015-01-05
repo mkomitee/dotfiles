@@ -67,3 +67,19 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
     (keyboard-quit)
     )
   )
+
+(defun komitee/split-horizontally ()
+    (interactive)
+  (progn
+    (split-window-horizontally)
+    (other-window 1)
+    )
+  )
+
+(defun komitee/split-vertically ()
+    (interactive)
+  (progn
+    (split-window-vertically)
+    (other-window 1)
+    )
+  )

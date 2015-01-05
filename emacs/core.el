@@ -260,5 +260,42 @@
             ;; no idea what I'm doing.
             (define-key magit-status-mode-map "k" 'evil-previous-visual-line)
             (define-key magit-status-mode-map "K" 'magit-discard-item)
+            (define-key magit-status-mode-map "|" 'komitee/split-horizontally)
+            (define-key magit-status-mode-map "_" 'komitee/split-vertically)
+            (define-key magit-status-mode-map " b" 'switch-to-buffer)
+            (define-key magit-status-mode-map ":" 'evil-ex)
+            (define-key magit-status-mode-map ";" 'magit-git-command)
+
+            (evil-set-initial-state 'magit-diff-mode 'emacs)
+            (define-key magit-diff-mode-map "j" 'evil-next-visual-line)
+            ;; j now hides the entire magit-section-jump-map. If this
+            ;; becomes a problem we can map that to J, but J would
+            ;; hide magit-key-mode-popup-apply-mailbox. I honestly
+            ;; don't know if I'll ever need either of them, but I have
+            ;; no idea what I'm doing.
+            (define-key magit-diff-mode-map "k" 'evil-previous-visual-line)
+            (define-key magit-diff-mode-map "|" 'komitee/split-horizontally)
+            (define-key magit-diff-mode-map "_" 'komitee/split-vertically)
+            ; (define-key magit-diff-mode-map (kbd "SPC") nil)
+            (define-key magit-diff-mode-map " "  nil)
+            (define-key magit-diff-mode-map " b" 'switch-to-buffer)
+            (define-key magit-diff-mode-map ":" 'evil-ex)
+            (define-key magit-diff-mode-map ";" 'magit-git-command)
+
+            (evil-set-initial-state 'magit-cherry-mode 'emacs)
+            (define-key magit-cherry-mode-map "j" 'evil-next-visual-line)
+            ;; j now hides the entire magit-section-jump-map. If this
+            ;; becomes a problem we can map that to J, but J would
+            ;; hide magit-key-mode-popup-apply-mailbox. I honestly
+            ;; don't know if I'll ever need either of them, but I have
+            ;; no idea what I'm doing.
+            (define-key magit-cherry-mode-map "k" 'evil-previous-visual-line)
+            (define-key magit-cherry-mode-map "|" 'komitee/split-horizontally)
+            (define-key magit-cherry-mode-map "_" 'komitee/split-vertically)
+            ; (define-key magit-cherry-mode-map (kbd "SPC") nil)
+            (define-key magit-cherry-mode-map " "  nil)
+            (define-key magit-cherry-mode-map " b" 'switch-to-buffer)
+            (define-key magit-cherry-mode-map ":" 'evil-ex)
+            (define-key magit-cherry-mode-map ";" 'magit-git-command)
             )
   )

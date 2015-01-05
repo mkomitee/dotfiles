@@ -77,6 +77,7 @@
               "cm" 'customize-mode
               "cf" 'customize-face
               "ca" 'customize-apropos
+              "ms" 'magit-status
               )
             )
   )
@@ -88,8 +89,8 @@
 (define-key global-map "\C-h" 'evil-window-left)
 (define-key global-map "\C-l" 'evil-window-right)
 
-(define-key evil-normal-state-map "|" 'evil-window-vsplit)
-(define-key evil-normal-state-map "_" 'evil-window-split)
+(define-key evil-normal-state-map "|" 'komitee/split-horizontally)
+(define-key evil-normal-state-map "_" 'komitee/split-vertically)
 
 (define-key evil-motion-state-map "j" 'evil-next-visual-line)
 (define-key evil-motion-state-map "k" 'evil-previous-visual-line)
