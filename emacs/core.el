@@ -267,6 +267,7 @@
             (evil-leader/set-key
               "gs" 'magit-status
               "gl" 'magit-log
+              "gC" 'magit-commit
               )
             (evil-set-initial-state 'magit-status-mode 'emacs)
             (define-key magit-status-mode-map "j" 'evil-next-visual-line)
