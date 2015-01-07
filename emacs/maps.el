@@ -34,7 +34,8 @@
   :diminish guide-key-mode
   :config (progn
             (setq guide-key/guide-key-sequence '("C-x" "C-c" "SPC" "M-g" "M-s"
-                                                 "z" "g" "]" "[" "Z" "C-w")
+                                                 "z" "g" "]" "[" "Z" "C-w"
+                                                 "M-SPC")
                   guide-key/recursive-key-sequence-flag t
                   guide-key/idle-delay 0.5
                   guide-key/popup-window-position (quote bottom)
@@ -53,8 +54,7 @@
                      (ido-find-file-in-dir komitee/emacs-config-directory))
               "s" 'sort-lines
               "u" 'universal-argument
-              ;; I map C-h to evil-window-left, which kills my help-map prefix. I
-              ;; replicate most of its functionality here.
+
               "hf" 'describe-function
               "hk" 'describe-key
               "hv" 'describe-variable
@@ -71,14 +71,13 @@
               "hI" 'describe-input-method
               "h?" 'help-for-help
               "h." 'display-local-help
+
               "cv" 'customize-variable
               "cg" 'customize-group
               "ct" 'customize-themes
               "cm" 'customize-mode
               "cf" 'customize-face
               "ca" 'customize-apropos
-              "ms" 'magit-status
-              "ml" 'magit-log
               )
             )
   )

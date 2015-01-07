@@ -145,7 +145,7 @@
   )
 
 (req-package evil-easymotion
-  :config (evilem-default-keybindings "SPC")
+  :config (evilem-default-keybindings "M-SPC")
   )
 
 (req-package evil-indent-textobject)
@@ -249,8 +249,25 @@
             )
   )
 
-(req-package magit
+(req-package git-gutter-fringe
   :config (progn
+            (global-git-gutter-mode)
+            (evil-leader/set-key
+              "ghs" 'git-gutter:stage-hunk
+              "ghr" 'git-gutter:revert-hunk
+              "ghN" 'git-gutter:previous-hunk
+              "ghn" 'git-gutter:next-hunk
+              )
+            )
+  )
+
+(req-package magit
+  :require evil
+  :config (progn
+            (evil-leader/set-key
+              "gs" 'magit-status
+              "gl" 'magit-log
+              )
             (evil-set-initial-state 'magit-status-mode 'emacs)
             (define-key magit-status-mode-map "j" 'evil-next-visual-line)
             ;; j now hides the entire magit-section-jump-map. If this
@@ -313,8 +330,12 @@
             (define-key magit-log-mode-map " hk" 'describe-key)
             (define-key magit-log-mode-map ":" 'evil-ex)
             (define-key magit-log-mode-map ";" 'magit-git-command)
+            )
+  )
 
-            ;; Not really from magit, but why not.
+(req-package git-rebase-mode
+  :require evil
+  :config (progn
             (evil-set-initial-state 'git-rebase-mode 'emacs)
             (define-key git-rebase-mode-map "j" 'evil-next-visual-line)
             (define-key git-rebase-mode-map "k" 'evil-previous-visual-line)
@@ -330,4 +351,3 @@
             (define-key git-rebase-mode-map (kbd "<down>") 'git-rebase-move-line-down)
             )
   )
-
