@@ -20,7 +20,10 @@
   )
 
 (req-package uniquify
-  :config (setq uniquify-ignore-buffers-re "^\\*")
+  :config (setq uniquify-ignore-buffers-re "^\\*"
+                uniquify-min-dir-content 1
+                uniquify-trailing-separator-p t
+                )
   )
 
 ;; minibuffer history
@@ -255,6 +258,7 @@
   :config (progn
             (global-git-gutter-mode)
             (evil-leader/set-key
+              "gha" 'git-gutter:stage-hunk
               "ghs" 'git-gutter:stage-hunk
               "ghr" 'git-gutter:revert-hunk
               "ghN" 'git-gutter:previous-hunk
@@ -268,9 +272,13 @@
   :config (progn
             (evil-leader/set-key
               "gs" 'magit-status
-              "gl" 'magit-log
+              "gll" 'magit-log
+              "glr" 'magit-reflog
               "gC" 'magit-commit
               "gP" 'magit-push
+              "gD" 'magit-diff-unstaged
+              "gdh" 'magit-diff-unstaged
+              "gds" 'magit-diff-staged
               )
             (evil-set-initial-state 'magit-status-mode 'emacs)
             (define-key magit-status-mode-map "j" 'evil-next-visual-line)
@@ -334,6 +342,10 @@
             (define-key magit-log-mode-map " hk" 'describe-key)
             (define-key magit-log-mode-map ":" 'evil-ex)
             (define-key magit-log-mode-map ";" 'magit-git-command)
+
+            (evil-set-initial-state 'magit-reflog-mode 'emacs)
+            (evil-set-initial-state 'magit-key-mode 'emacs)
+
             )
   )
 
