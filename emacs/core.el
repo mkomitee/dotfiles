@@ -220,6 +220,8 @@
             (evil-ex-define-cmd "ag" 'projectile-ag)
             (evil-leader/set-key
               "p" 'projectile-find-file
+              "P" 'projectile-switch-project
+              "B" 'projectile-switch-to-buffer
               "r" 'projectile-recentf
               "a" 'projectile-ag
               "/" 'projectile-ag
