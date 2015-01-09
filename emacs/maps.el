@@ -52,32 +52,31 @@
               "b" 'switch-to-buffer
               "ev" (lambda () (interactive)
                      (ido-find-file-in-dir komitee/emacs-config-directory))
-              "s" 'sort-lines
               "u" 'universal-argument
 
-              "hf" 'describe-function
-              "hk" 'describe-key
-              "hv" 'describe-variable
-              "hs" 'describe-syntax
-              "hP" 'describe-package
-              "hm" 'describe-mode
-              "hd" 'apropos-documentation
-              "hb" 'describe-bindings
-              "ha" 'apropos-command
-              "hc" 'describe-key-briefly
-              "hS" 'info-lookup-symbol
-              "hL" 'describe-language-environment
-              "hC" 'describe-coding-system
-              "hI" 'describe-input-method
-              "h?" 'help-for-help
-              "h." 'display-local-help
+              "hdp" 'describe-package
+              "hdcs" 'describe-coding-system
+              "hdf" 'describe-function
+              "hdb" 'describe-bindings
+              "hdim" 'describe-input-method
+              "hdk" 'describe-key
+              "hdle" 'describe-language-environment
+              "hdm" 'describe-mode
+              "hds" 'describe-syntax
+              "hdv" 'describe-variable
 
-              "cv" 'customize-variable
-              "cg" 'customize-group
-              "ct" 'customize-themes
-              "cm" 'customize-mode
-              "cf" 'customize-face
-              "ca" 'customize-apropos
+              "hac" 'apropos-command
+              "had" 'apropos-documentation
+              "hdlh" 'display-local-help
+              "hfh" 'help-for-help
+              "hils" 'info-lookup-symbol
+
+              "hca" 'customize-apropos
+              "hcf" 'customize-face
+              "hcg" 'customize-group
+              "hcm" 'customize-mode
+              "hct" 'customize-themes
+              "hcv" 'customize-variable
               )
             )
   )

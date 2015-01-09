@@ -13,6 +13,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(flyspell-incorrect
+   ((t (:background "#303030" :foreground "#ff4ea3" :underline
+                    (:color "yellow1" :style wave) :weight normal))))
  '(rainbow-delimiters-depth-1-face ((t (:foreground "snow"))))
  '(rainbow-delimiters-depth-2-face ((t (:foreground "light slate blue"))))
  '(rainbow-delimiters-depth-3-face ((t (:foreground "honeydew"))))
