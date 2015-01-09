@@ -61,7 +61,8 @@
               "hdim" 'describe-input-method
               "hdk" 'describe-key
               "hdle" 'describe-language-environment
-              "hdm" 'describe-mode
+              "hdM" 'describe-mode
+              "hdm" 'describe-minor-mode
               "hds" 'describe-syntax
               "hdv" 'describe-variable
 
