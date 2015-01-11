@@ -14,7 +14,7 @@
 
 (req-package expand-region
   :config (progn
-            (define-key evil-normal-state-map "]r" 'er/expand-region)
+            (define-key evil-motion-state-map "]r" 'er/expand-region)
             (define-key evil-visual-state-map "]r" 'er/expand-region)
             (define-key evil-visual-state-map "[r" 'er/contract-region)
             )
@@ -23,10 +23,10 @@
 (define-key evil-window-map (kbd "<left>") 'winner-undo)
 (define-key evil-window-map (kbd "<right>") 'winner-redo)
 
-(define-key evil-normal-state-map (kbd "<down>") 'shrink-window)
-(define-key evil-normal-state-map (kbd "<up>") 'enlarge-window)
-(define-key evil-normal-state-map (kbd "<right>") 'enlarge-window-horizontally)
-(define-key evil-normal-state-map (kbd "<left>") 'shrink-window-horizontally)
+(define-key evil-motion-state-map (kbd "<down>") 'shrink-window)
+(define-key evil-motion-state-map (kbd "<up>") 'enlarge-window)
+(define-key evil-motion-state-map (kbd "<right>") 'enlarge-window-horizontally)
+(define-key evil-motion-state-map (kbd "<left>") 'shrink-window-horizontally)
 
 ;; This makes those windows with lists of possible commands more useful
 (req-package guide-key
@@ -89,8 +89,8 @@
 (define-key global-map "\C-h" 'evil-window-left)
 (define-key global-map "\C-l" 'evil-window-right)
 
-(define-key evil-normal-state-map "|" 'komitee/split-horizontally)
-(define-key evil-normal-state-map "_" 'komitee/split-vertically)
+(define-key evil-motion-state-map "|" 'komitee/split-horizontally)
+(define-key evil-motion-state-map "_" 'komitee/split-vertically)
 
 (define-key evil-motion-state-map "j" 'evil-next-visual-line)
 (define-key evil-motion-state-map "k" 'evil-previous-visual-line)
@@ -137,7 +137,7 @@
 (evil-ex-define-cmd "sort" 'sort-lines)
 
 ;; escape quits
-(define-key evil-normal-state-map [escape] 'komitee/nohl-quit)
+(define-key evil-motion-state-map [escape] 'komitee/nohl-quit)
 (define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
 (define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
 (define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)

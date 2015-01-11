@@ -177,8 +177,8 @@
 
 (req-package evil-numbers
   :config (progn
-            (define-key evil-normal-state-map (kbd "C-c +") 'evil-numbers/inc-at-pt)
-            (define-key evil-normal-state-map (kbd "C-c -") 'evil-numbers/dec-at-pt)
+            (define-key evil-motion-state-map (kbd "C-c +") 'evil-numbers/inc-at-pt)
+            (define-key evil-motion-state-map (kbd "C-c -") 'evil-numbers/dec-at-pt)
             )
   )
 
