@@ -364,3 +364,10 @@
             (define-key git-rebase-mode-map (kbd "<down>") 'git-rebase-move-line-down)
             )
   )
+
+(req-package evil-god-state
+  :config (progn
+            (evil-leader/set-key
+              "eg" 'evil-execute-in-god-state)
+            (evil-define-key 'god global-map [escape] 'evil-god-state-bail)
+            ))
