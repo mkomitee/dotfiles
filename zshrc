@@ -18,9 +18,11 @@ source $ZSH/colours.zsh
 source $ZSH/extensions.zsh
 source $ZSH/fasd.zsh
 
-if [ -d $CONTRIB/zsh-users/zsh-syntax-highlighting ]; then
-    ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
-    source $CONTRIB/zsh-users/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if [ $TERM != 'eterm-color' ]; then
+    if [ -d $CONTRIB/zsh-users/zsh-syntax-highlighting ]; then
+        ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
+        source $CONTRIB/zsh-users/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    fi
 fi
 
 # LS CONFIG
