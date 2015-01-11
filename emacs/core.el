@@ -162,10 +162,7 @@
   )
 
 (req-package evil-snipe
-  :config (progn
-            (global-evil-snipe-mode 1)
-            (evil-snipe-replace-evil)
-            )
+  :config (global-evil-snipe-mode 1)
   )
 
 (req-package evil-surround
