@@ -12,6 +12,9 @@
 (define-key evil-motion-state-map "]e" 'next-error)
 (define-key evil-motion-state-map "]s" 'flyspell-goto-next-error)
 
+(define-key evil-motion-state-map "]t" 'elscreen-next)
+(define-key evil-motion-state-map "[t" 'elscreen-previous)
+
 (req-package expand-region
   :config (progn
             (define-key evil-motion-state-map "]r" 'er/expand-region)
@@ -78,6 +81,10 @@
               "hcm" 'customize-mode
               "hct" 'customize-themes
               "hcv" 'customize-variable
+
+              "o" 'delete-other-windows
+
+              "w" 'evil-window-map
               )
             )
   )
@@ -128,6 +135,7 @@
 (evil-ex-define-cmd "Wq" 'evil-save-and-close)
 (evil-ex-define-cmd "esh[ell]" 'eshell)
 (evil-ex-define-cmd "sort" 'sort-lines)
+(evil-ex-define-cmd "log" 'magit-log)
 
 ;; escape quits
 (define-key evil-motion-state-map [escape] 'komitee/nohl-quit)
