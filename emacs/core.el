@@ -273,97 +273,124 @@
               "gs" 'magit-status
               "gll" 'magit-log
               "glr" 'magit-reflog
-              "gC" 'magit-commit
+              "gc" 'magit-commit
               "gP" 'magit-push
               "gD" 'magit-diff-unstaged
               "gdh" 'magit-diff-unstaged
               "gds" 'magit-diff-staged
               )
-            (evil-set-initial-state 'magit-status-mode 'emacs)
-            (define-key magit-status-mode-map "j" 'evil-next-visual-line)
-            ;; j now hides the entire magit-section-jump-map. If this
-            ;; becomes a problem we can map that to J, but J would
-            ;; hide magit-key-mode-popup-apply-mailbox. I honestly
-            ;; don't know if I'll ever need either of them, but I have
-            ;; no idea what I'm doing.
-            (define-key magit-status-mode-map "k" 'evil-previous-visual-line)
-            (define-key magit-status-mode-map "K" 'magit-discard-item)
-            (define-key magit-status-mode-map "|" 'komitee/split-horizontally)
-            (define-key magit-status-mode-map "_" 'komitee/split-vertically)
-            (define-key magit-status-mode-map " b" 'switch-to-buffer)
-            (define-key magit-status-mode-map " h" nil)
-            (define-key magit-status-mode-map " hk" 'describe-key)
-            (define-key magit-status-mode-map ":" 'evil-ex)
-            (define-key magit-status-mode-map ";" 'magit-git-command)
 
-            (evil-set-initial-state 'magit-diff-mode 'emacs)
-            (define-key magit-diff-mode-map "j" 'evil-next-visual-line)
-            ;; j now hides the entire magit-section-jump-map. If this
-            ;; becomes a problem we can map that to J, but J would
-            ;; hide magit-key-mode-popup-apply-mailbox. I honestly
-            ;; don't know if I'll ever need either of them, but I have
-            ;; no idea what I'm doing.
-            (define-key magit-diff-mode-map "k" 'evil-previous-visual-line)
-            (define-key magit-diff-mode-map "|" 'komitee/split-horizontally)
-            (define-key magit-diff-mode-map "_" 'komitee/split-vertically)
-            (define-key magit-diff-mode-map " "  nil)
-            (define-key magit-diff-mode-map " b" 'switch-to-buffer)
-            (define-key magit-diff-mode-map " h" nil)
-            (define-key magit-diff-mode-map " hk" 'describe-key)
-            (define-key magit-diff-mode-map ":" 'evil-ex)
-            (define-key magit-diff-mode-map ";" 'magit-git-command)
+            (evil-define-key 'motion magit-mode-map
+              "j" 'magit-goto-next-section)
+            (evil-define-key 'motion magit-mode-map
+              "k" 'magit-goto-previous-section)
+            (evil-define-key 'motion magit-mode-map
+              "J" 'magit-goto-next-sibling-section)
+            (evil-define-key 'motion magit-mode-map
+              "K" 'magit-goto-previous-sibling-section)
+            (evil-define-key 'motion magit-mode-map
+              "H" 'magit-goto-parent-section)
 
+            (evil-define-key 'motion magit-status-mode-map
+              "q" 'magit-mode-quit-window)
+            (evil-set-initial-state 'magit-status-mode 'motion)
+            (evil-leader/set-key-for-mode 'magit-status-mode
+              ";q" 'magit-mode-quit-window
+              ";s" 'magit-stage-item
+              ";u" 'magit-unstage-item
+              ";i" 'magit-ignore-item
+              ";I" 'magit-ignore-item-locally
+              ";j" 'magit-section-jump-map
+              ";." 'magit-mark-item
+              ";=" 'magit-diff-with-mark
+              ";d" 'magit-ediff
+              ";k" 'magit-discard-item
+              ";g" 'magit-refresh
+              ";G" 'magit-refresh-all
+              ";c" 'magit-commit
+              ";m" 'magit-merge
+              ";C" 'magit-checkout
+              ";f" 'magit-fetch-current
+              ";F" 'magit-pull
+              ";!" 'magit-git-command-topdir
+              ";P" 'magit-push
+              ";t" 'magit-tag
+              ";l" 'magit-log
+              ";z" 'magit-stash
+              )
+
+            (evil-set-initial-state 'magit-diff-mode 'motion)
+            (evil-define-key 'motion magit-diff-mode-map
+              "q" 'magit-mode-quit-window)
+            (evil-leader/set-key-for-mode 'magit-diff-mode
+              ";q" 'magit-mode-quit-window)
             (evil-set-initial-state 'magit-cherry-mode 'emacs)
-            (define-key magit-cherry-mode-map "j" 'evil-next-visual-line)
-            ;; j now hides the entire magit-section-jump-map. If this
-            ;; becomes a problem we can map that to J, but J would
-            ;; hide magit-key-mode-popup-apply-mailbox. I honestly
-            ;; don't know if I'll ever need either of them, but I have
-            ;; no idea what I'm doing.
-            (define-key magit-cherry-mode-map "k" 'evil-previous-visual-line)
-            (define-key magit-cherry-mode-map "|" 'komitee/split-horizontally)
-            (define-key magit-cherry-mode-map "_" 'komitee/split-vertically)
-            (define-key magit-cherry-mode-map " "  nil)
-            (define-key magit-cherry-mode-map " b" 'switch-to-buffer)
-            (define-key magit-cherry-mode-map " h" nil)
-            (define-key magit-cherry-mode-map " hk" 'describe-key)
-            (define-key magit-cherry-mode-map ":" 'evil-ex)
-            (define-key magit-cherry-mode-map ";" 'magit-git-command)
+            (evil-define-key 'motion magit-cherry-mode-map
+              "q" 'magit-mode-quit-window)
+            (evil-leader/set-key-for-mode 'magit-cherry-mode
+              ";q" 'magit-mode-quit-window)
 
-            (evil-set-initial-state 'magit-log-mode 'emacs)
-            (define-key magit-log-mode-map "j" 'evil-next-visual-line)
-            (define-key magit-log-mode-map "k" 'evil-previous-visual-line)
-            (define-key magit-log-mode-map "|" 'komitee/split-horizontally)
-            (define-key magit-log-mode-map "_" 'komitee/split-vertically)
-            (define-key magit-log-mode-map " "  nil)
-            (define-key magit-log-mode-map " b" 'switch-to-buffer)
-            (define-key magit-log-mode-map " h" nil)
-            (define-key magit-log-mode-map " hk" 'describe-key)
-            (define-key magit-log-mode-map ":" 'evil-ex)
-            (define-key magit-log-mode-map ";" 'magit-git-command)
+            (evil-set-initial-state 'magit-log-mode 'motion)
+            (evil-define-key 'motion magit-log-mode-map
+              "q" 'magit-mode-quit-window)
+            (evil-leader/set-key-for-mode 'magit-log-mode
+              ";q" 'magit-mode-quit-window
+              ";e" 'magit-log-show-more-entries
+              ";h" 'magit-log-toggle-margin
+              ";=" 'magit-diff-with-mark
+              ";d" 'magit-ediff
+              ";g" 'magit-refresh
+              ";G" 'magit-refresh-all
+              )
 
-            (evil-set-initial-state 'magit-reflog-mode 'emacs)
+            (evil-set-initial-state 'magit-reflog-mode 'motion)
+            (evil-define-key 'motion magit-reflog-mode-map
+              "q" 'magit-mode-quit-window)
+            (evil-leader/set-key-for-mode 'magit-reflog-mode
+              ";q" 'magit-mode-quit-window
+              ";e" 'magit-log-show-more-entries
+              ";h" 'magit-log-toggle-margin
+              ";=" 'magit-diff-with-mark
+              ";d" 'magit-ediff
+              ";g" 'magit-refresh
+              ";G" 'magit-refresh-all
+              )
+
             (evil-set-initial-state 'magit-key-mode 'emacs)
-
             )
   )
 
 (req-package git-rebase-mode
   :require evil
   :config (progn
-            (evil-set-initial-state 'git-rebase-mode 'emacs)
-            (define-key git-rebase-mode-map "j" 'evil-next-visual-line)
-            (define-key git-rebase-mode-map "k" 'evil-previous-visual-line)
-            (define-key git-rebase-mode-map "K" 'git-rebase-kill-line)
-            (define-key git-rebase-mode-map "|" 'komitee/split-horizontally)
-            (define-key git-rebase-mode-map "_" 'komitee/split-vertically)
-            (define-key git-rebase-mode-map " "  nil)
-            (define-key git-rebase-mode-map " b" 'switch-to-buffer)
-            (define-key git-rebase-mode-map " h" nil)
-            (define-key git-rebase-mode-map " hk" 'describe-key)
-            (define-key git-rebase-mode-map ":" 'evil-ex)
-            (define-key git-rebase-mode-map (kbd "<up>") 'git-rebase-move-line-up)
-            (define-key git-rebase-mode-map (kbd "<down>") 'git-rebase-move-line-down)
+            (evil-set-initial-state 'git-rebase-mode 'motion)
+            (evil-leader/set-key-for-mode 'git-rebase-mode
+              ";w" 'git-rebase-server-edit
+              ";q" 'git-rebase-abort
+              ";a" 'git-rebase-abort
+              ";x" 'git-rebase-exec
+              ";p" 'git-rebase-pick
+              ";r" 'git-rebase-reword
+              ";e" 'git-rebase-edit
+              ";s" 'git-rebase-squash
+              ";f" 'git-rebase-fixup
+              ";D" 'git-rebase-kill-line
+              ";P" 'git-rebase-insert
+              ";J" 'git-rebase-move-line-down
+              ";K" 'git-rebase-move-line-up
+              )
+            )
+  )
+
+(req-package git-commit-mode
+  :require evil
+  :config (progn
+            (evil-set-initial-state 'git-commit-mode 'normal)
+            (evil-leader/set-key-for-mode 'git-commit-mode
+              ";w" 'git-commit-commit
+              ";q" 'git-commit-abort
+              ";a" 'git-commit-abort
+              )
             )
   )
 
