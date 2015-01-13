@@ -291,9 +291,9 @@
             (evil-define-key 'motion magit-mode-map
               "H" 'magit-goto-parent-section)
 
+            (evil-set-initial-state 'magit-status-mode 'motion)
             (evil-define-key 'motion magit-status-mode-map
               "q" 'magit-mode-quit-window)
-            (evil-set-initial-state 'magit-status-mode 'motion)
             (evil-leader/set-key-for-mode 'magit-status-mode
               ";q" 'magit-mode-quit-window
               ";s" 'magit-stage-item
@@ -308,8 +308,8 @@
               ";g" 'magit-refresh
               ";G" 'magit-refresh-all
               ";c" 'magit-commit
+              ";C" 'magit-commit-add-log
               ";m" 'magit-merge
-              ";C" 'magit-checkout
               ";f" 'magit-fetch-current
               ";F" 'magit-pull
               ";!" 'magit-git-command-topdir
@@ -317,6 +317,7 @@
               ";t" 'magit-tag
               ";l" 'magit-log
               ";z" 'magit-stash
+              ";r" 'magit-interactive-rebase
               )
 
             (evil-set-initial-state 'magit-diff-mode 'motion)
