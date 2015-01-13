@@ -293,7 +293,8 @@
 
             (evil-set-initial-state 'magit-status-mode 'motion)
             (evil-define-key 'motion magit-status-mode-map
-              "q" 'magit-mode-quit-window)
+              "q" 'magit-mode-quit-window
+              "RET" 'magit-visit-item)
             (evil-leader/set-key-for-mode 'magit-status-mode
               ";q" 'magit-mode-quit-window
               ";s" 'magit-stage-item
