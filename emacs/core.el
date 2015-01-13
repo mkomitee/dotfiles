@@ -294,7 +294,29 @@
             (evil-set-initial-state 'magit-status-mode 'motion)
             (evil-define-key 'motion magit-status-mode-map
               "q" 'magit-mode-quit-window
-              "RET" 'magit-visit-item)
+              (kbd "RET") 'magit-visit-item
+              "s" 'magit-stage-item
+              "u" 'magit-unstage-item
+              "i" 'magit-ignore-item
+              "I" 'magit-ignore-item-locally
+              "J" 'magit-section-jump-map
+              "." 'magit-mark-item
+              "=" 'magit-diff-with-mark
+              "d" 'magit-ediff
+              "K" 'magit-discard-item
+              "g" 'magit-refresh
+              "G" 'magit-refresh-all
+              "c" 'magit-commit
+              "C" 'magit-commit-add-log
+              "m" 'magit-merge
+              "f" 'magit-fetch-current
+              "F" 'magit-pull
+              "!" 'magit-git-command-topdir
+              "P" 'magit-push
+              "t" 'magit-tag
+              "l" 'magit-log
+              "z" 'magit-stash
+              "r" 'magit-interactive-rebase)
             (evil-leader/set-key-for-mode 'magit-status-mode
               ";q" 'magit-mode-quit-window
               ";s" 'magit-stage-item
