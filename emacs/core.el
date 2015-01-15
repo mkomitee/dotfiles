@@ -262,7 +262,7 @@
               "ghn" 'git-gutter:next-hunk
               )
             (define-key evil-motion-state-map "]h" 'git-gutter:next-hunk)
-            (define-key evil-visual-state-map "]h" 'git-gutter:previous-hunk)
+            (define-key evil-motion-state-map "[h" 'git-gutter:previous-hunk)
             )
   )
 
