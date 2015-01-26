@@ -150,7 +150,11 @@
 
 (req-package eldoc
   :diminish eldoc-mode
-  :config (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+  :config
+  (progn
+    (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
+    (add-hook 'python-mode-hook 'eldoc-mode)
+    )
   )
 
 (defun komitee/tabs ()
