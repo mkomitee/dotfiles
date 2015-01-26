@@ -163,6 +163,7 @@
   :require exec-path-from-shell
   :config (progn
             (evil-define-key 'normal go-mode-map "K" 'godoc-at-point)
+            (evil-define-key 'motion go-mode-map "gd" 'godef-jump)
             (exec-path-from-shell-copy-env "GOROOT")
             (exec-path-from-shell-copy-env "GOPATH")
             (setq gofmt-command "goimports")
