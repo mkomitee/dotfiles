@@ -162,6 +162,7 @@
 (req-package go-mode
   :require exec-path-from-shell
   :config (progn
+            (evil-define-key 'normal go-mode-map "K" 'godoc-at-point)
             (exec-path-from-shell-copy-env "GOROOT")
             (exec-path-from-shell-copy-env "GOPATH")
             (setq gofmt-command "goimports")
@@ -176,14 +177,21 @@
   )
 
 ;; python
+(defun komitee/python-eldoc-at-point ()
+  (interactive)
+  (python-eldoc-at-point (python-info-current-symbol))
+  )
+
 (req-package python
   :config (progn
             (setq python-fill-docstring-style (quote django)
                   python-shell-interpreter "ipython"
                   )
-            (evil-define-key 'normal python-mode-map "K" 'python-eldoc-function)
-            )
             (add-hook 'python-mode-hook (lambda () (run-python "ipython" t nil)))
+            (evil-define-key 'normal python-mode-map
+              "K" 'komitee/python-eldoc-at-point
+              )
+            )
   )
 
 (req-package lisp-mode
