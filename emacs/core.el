@@ -86,7 +86,8 @@
 (req-package smex
   :bind (("M-x" . smex)
          ("C-x C-m" . smex)
-         ("C-c C-m" . smex))
+         ("C-c C-m" . smex)
+         ("M-?" . smex-major-mode-commands))
   :config (progn
             (setq smex-save-file "~/.emacs.d/.smex-items")
             (smex-initialize)
