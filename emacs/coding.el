@@ -160,7 +160,10 @@
 
 ;; go
 (req-package go-mode
+  :require exec-path-from-shell
   :config (progn
+            (exec-path-from-shell-copy-env "GOROOT")
+            (exec-path-from-shell-copy-env "GOPATH")
             (setq gofmt-command "goimports")
             (add-hook 'before-save-hook 'gofmt-before-save)
             (add-hook 'go-mode-hook 'komitee/tabs)
