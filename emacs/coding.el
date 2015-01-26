@@ -60,7 +60,7 @@
   )
 
 (req-package company-anaconda
-  :require company
+  :require (anaconda-mode company)
   :config (add-hook 'python-mode-hook
                     (lambda ()
                       (set (make-local-variable 'company-backends)
@@ -178,19 +178,16 @@
   )
 
 ;; python
-(defun komitee/python-eldoc-at-point ()
-  (interactive)
-  (python-eldoc-at-point (python-info-current-symbol))
-  )
-
 (req-package python
+  :require anaconda-mode
   :config (progn
             (setq python-fill-docstring-style (quote django)
                   python-shell-interpreter "ipython"
                   )
             (add-hook 'python-mode-hook (lambda () (run-python "ipython" t nil)))
             (evil-define-key 'normal python-mode-map
-              "K" 'komitee/python-eldoc-at-point
+              "K" 'anaconda-mode-view-doc
+              "gd" 'anaconda-mode-goto-definitions
               )
             )
   )
