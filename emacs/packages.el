@@ -16,7 +16,10 @@
 
 (dolist (package '(evil
                    undo-tree
-                   req-package))
+                   req-package
+                   ;; base16-theme doesn't actually provide
+                   ;; base16-theme, so it doesn't work w/ req-package, Yay.
+                   base16-theme))
   (unless (package-installed-p package)
     (package-install package)))
 

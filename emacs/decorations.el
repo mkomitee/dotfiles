@@ -9,8 +9,14 @@
 (if (featurep 'fringe)
     (fringe-mode 8))
 
-(req-package moe-theme
-  :config (load-theme 'moe-dark t)
-  )
+;; (req-package base16-ocean
+;;   :config (load-theme 'base16-ocean t)
+;;   )
 
+;; base16-theme doesn't provide 'base16-theme. Instead it includes
+;; files which provide-theme 'base16-*, so base16-theme is installed
+;; in packages.el and we load it here.
+(load-theme 'base16-ocean t)
 ;; molokai-theme
+;; moe-theme / moe-dark
+;; base16-theme / base16/ocean
