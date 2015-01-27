@@ -1,6 +1,5 @@
 (req-package linum
   :config (progn
-            (setq linum-format "%4d ")
             (global-linum-mode t)
             )
   )
@@ -8,10 +7,6 @@
 ;; If we have a fringe, make it 8 pixels wide
 (if (featurep 'fringe)
     (fringe-mode 8))
-
-;; (req-package base16-ocean
-;;   :config (load-theme 'base16-ocean t)
-;;   )
 
 ;; base16-theme doesn't provide 'base16-theme. Instead it includes
 ;; files which provide-theme 'base16-*, so base16-theme is installed

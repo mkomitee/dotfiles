@@ -76,8 +76,9 @@
   :config (progn
             (add-hook 'prog-mode-hook 'flycheck-mode)
             (setq flycheck-checkers
-                  (delq 'emacs-lisp-checkdoc flycheck-checkers)
-                  )
+                  (delq 'emacs-lisp-checkdoc flycheck-checkers))
+            (setq flycheck-checkers
+                  (delq 'puppet-parser flycheck-checkers))
             )
   )
 
@@ -207,7 +208,26 @@
             )
   )
 
-(req-package puppet-mode)
+(req-package puppet-mode
+  :config (progn
+            (setq puppet-validate-command "puppet")
+
+            ;; This is lifted from flycheck.el so that I can disabled
+            ;; autoloader_layout checks If that code changes, I'll
+            ;; need to update it here.
+            (flycheck-define-checker puppet-lint
+              "A Puppet DSL style checker using puppet-lint."
+              :command ("puppet-lint"
+                        "--log-format" "%{path}:%{linenumber}:%{kind}: %{message} (%{check})"
+                        "--no-autoloader_layout-check"
+                        source-original)
+              :error-patterns
+              ((warning line-start (file-name) ":" line ":warning: " (message) line-end)
+               (error line-start (file-name) ":" line ":error: " (message) line-end))
+              :modes puppet-mode
+              :predicate flycheck-buffer-saved-p)
+            )
+  )
 
 (req-package haskell-mode
   :require evil
