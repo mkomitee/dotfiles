@@ -1,0 +1,5 @@
+# Integrate copy/paste w/ the x clipboard.
+unbind-key -t vi-copy 'y' 
+bind-key -t vi-copy 'y' copy-pipe "xclip -i"
+unbind p
+bind p run "tmux set-buffer \"$(xclip -o)\"; tmux paste-buffer"
