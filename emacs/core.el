@@ -430,3 +430,5 @@
             (evil-define-key 'god global-map [escape] 'evil-god-state-bail)
             )
   )
+(req-package evil-visual-mark-mode
+  :config (evil-visual-mark-mode))
