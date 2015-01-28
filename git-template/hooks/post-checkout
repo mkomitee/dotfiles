@@ -1,2 +1,0 @@
-#!/bin/bash
-find $(git rev-parse --show-cdup) -name "*.pyc" -delete
