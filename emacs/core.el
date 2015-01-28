@@ -149,6 +149,7 @@
 (evil-mode 1)
 
 (req-package evil-commentary
+  :diminish evil-commentary-mode
   :config (evil-commentary-default-setup)
   )
 
@@ -257,6 +258,7 @@
   )
 
 (req-package git-gutter-fringe
+  :diminish git-gutter-mode
   :config (progn
             (global-git-gutter-mode)
             (evil-leader/set-key
@@ -274,6 +276,7 @@
 (req-package magit
   :require evil
   :config (progn
+            (magit-auto-revert-mode -1)
             (evil-leader/set-key
               "gs" 'magit-status
               "gll" 'magit-log

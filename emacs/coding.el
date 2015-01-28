@@ -136,6 +136,7 @@
 (defun komitee/comment-auto-fill ()
   (setq-local comment-auto-fill-only-comments t)
   (auto-fill-mode 1)
+  (diminish 'auto-fill-function)
   )
 (add-hook 'prog-mode-hook 'komitee/comment-auto-fill)
 
