@@ -52,9 +52,6 @@
             (evil-leader/set-leader "<SPC>")
             (global-evil-leader-mode)
             (evil-leader/set-key
-              "b" 'switch-to-buffer
-              "ev" (lambda () (interactive)
-                     (ido-find-file-in-dir komitee/emacs-config-directory))
               "u" 'universal-argument
 
               "hdp" 'describe-package

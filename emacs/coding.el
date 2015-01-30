@@ -18,7 +18,6 @@
   )
 
 (req-package company
-  :require evil
   :diminish company-mode
   :config (progn
             (global-company-mode)
@@ -30,8 +29,15 @@
                                                       company-dabbrev)
                   company-idle-delay nil
                   )
-            (define-key evil-insert-state-map (kbd "C-x C-o") 'company-complete)
-            (define-key evil-insert-state-map (kbd "C-x C-u") 'company-complete)
+            )
+  )
+
+
+(req-package helm-company
+  :require company evil helm
+  :config (progn
+            (define-key evil-insert-state-map (kbd "C-x C-o") 'helm-company)
+            (define-key evil-insert-state-map (kbd "C-x C-u") 'helm-company)
             )
   )
 
@@ -79,6 +85,15 @@
                   (delq 'emacs-lisp-checkdoc flycheck-checkers))
             (setq flycheck-checkers
                   (delq 'puppet-parser flycheck-checkers))
+            )
+  )
+
+(req-package helm-flycheck
+  :require helm flycheck evil-leader
+  :config (progn
+            (evil-leader/set-key
+              "HF" 'helm-helm-flycheck
+              )
             )
   )
 

@@ -86,19 +86,6 @@
             )
   )
 
-;; Allows completion for commands.
-(req-package smex
-  :bind (("M-x" . smex)
-         ("C-x C-m" . smex)
-         ("C-c C-m" . smex)
-         ("M-?" . smex-major-mode-commands))
-  :config (progn
-            (setq smex-save-file "~/.emacs.d/.smex-items")
-            (smex-initialize)
-            )
-  )
-
-
 (defalias 'yes-or-no-p 'y-or-n-p)
 (xterm-mouse-mode t)
 
@@ -223,15 +210,6 @@
                         )
               )
             (projectile-global-mode t)
-            (evil-ex-define-cmd "ag" 'projectile-ag)
-            (evil-leader/set-key
-              "p" 'projectile-find-file
-              "P" 'projectile-switch-project
-              "B" 'projectile-switch-to-buffer
-              "r" 'projectile-recentf
-              "a" 'projectile-ag
-              "/" 'projectile-ag
-              )
             )
   )
 
@@ -251,7 +229,7 @@
   )
 
 (req-package discover-my-major
-  :require evil
+  :require evil-leader
   :config (evil-leader/set-key
             "hM" 'discover-my-major
             )
@@ -393,7 +371,7 @@
   )
 
 (req-package git-rebase-mode
-  :require evil
+  :require evil-leader
   :config (progn
             (evil-set-initial-state 'git-rebase-mode 'motion)
             (evil-leader/set-key-for-mode 'git-rebase-mode
@@ -415,7 +393,7 @@
   )
 
 (req-package git-commit-mode
-  :require evil
+  :require evil-leader
   :config (progn
             (evil-set-initial-state 'git-commit-mode 'normal)
             (evil-leader/set-key-for-mode 'git-commit-mode
@@ -427,11 +405,73 @@
   )
 
 (req-package evil-god-state
+  :require evil-leader
   :config (progn
             (evil-leader/set-key
               "eg" 'evil-execute-in-god-state)
             (evil-define-key 'god global-map [escape] 'evil-god-state-bail)
             )
   )
-(req-package evil-visual-mark-mode
-  :config (evil-visual-mark-mode))
+
+;; (req-package evil-visual-mark-mode
+;;   :config (evil-visual-mark-mode))
+
+(req-package helm
+  :require evil-leader
+  :diminish helm-mode
+  :bind (
+         ("M-x" . helm-M-x)
+         )
+  :config (progn
+            (global-set-key (kbd "C-c h") 'helm-command-prefix)
+            (global-unset-key (kbd "C-x c"))
+            (evil-leader/set-key
+              "b" 'helm-buffers-list
+              )
+            (when (executable-find "curl")
+              (setq helm-google-suggest-use-curl-p t)
+              )
+            (setq helm-split-window-in-side-p t
+                  helm-move-to-line-cycle-in-source t
+                  helm-ff-search-library-in-sexp t
+                  helm-scroll-amount 8
+                  helm-ff-file-name-history-use-recentf t
+                  )
+            (evil-leader/set-key
+              "f" 'helm-find-files
+              "Hf" 'helm-find-files
+              "ev" (lambda () (interactive)
+                     (helm-find-files-1 (expand-file-name
+                                         komitee/emacs-config-directory)))
+              "Hk" 'helm-show-kill-ring
+              )
+            (helm-mode 1)
+            (helm-autoresize-mode t)
+            )
+  )
+
+(req-package helm-ag)
+
+(req-package helm-projectile
+  :require evil-leader ag
+  :config (progn
+            (evil-leader/set-key
+              "p" 'helm-projectile
+              "P" 'helm-projectile-switch-project
+              "B" 'helm-projectile-switch-to-buffer
+              "r" 'helm-projectile-recentf
+              "/" 'helm-projectile-ag
+              "Ha" 'helm-projectile-ag
+              )
+            (evil-ex-define-cmd "ag" 'helm-projectile-ag)
+            )
+  )
+
+(req-package helm-c-yassnippet
+  :require evil-leader yasnippet
+  :config (progn
+            (evil-leader/set-key
+              "Hy" 'helm-yas-complete
+              )
+            )
+  )
