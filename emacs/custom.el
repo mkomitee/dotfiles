@@ -18,6 +18,7 @@
  '(flyspell-incorrect
    ((t (:background "#303030" :foreground "#ff4ea3" :underline
                     (:color "yellow1" :style wave) :weight normal))))
+ '(helm-selection ((t (:foreground "forest green" :underline t))))
  '(rainbow-delimiters-depth-1-face ((t (:foreground "snow"))))
  '(rainbow-delimiters-depth-2-face ((t (:foreground "light slate blue"))))
  '(rainbow-delimiters-depth-3-face ((t (:foreground "honeydew"))))
