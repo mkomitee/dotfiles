@@ -1,0 +1,2 @@
+#!/bin/sh
+LOCATE_CONFIG=~/.dotfiles/locate.rc /usr/libexec/locate.updatedb

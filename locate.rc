@@ -1,0 +1,5 @@
+FCODES="$HOME/.locate.database"
+SEARCHPATHS="$HOME"
+PRUNEPATHS="$HOME/.snapshots $HOME/.vimdata"
+PRUNENAMES=".git .svn CVS"
+FILESYSTEMS="hfs ufs nfs"
