@@ -468,7 +468,7 @@
   )
 
 (req-package helm-c-yassnippet
-  :require evil-leader yasnippet
+  :require evil-leader yasnippet helm
   :config (progn
             (evil-leader/set-key
               "Hy" 'helm-yas-complete
