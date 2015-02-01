@@ -4,18 +4,9 @@
 (define-key global-map (kbd "S-<down>") 'shrink-window)
 (define-key global-map (kbd "S-<up>") 'enlarge-window)
 
-(define-key evil-motion-state-map "[b" 'evil-prev-buffer)
-(define-key evil-motion-state-map "]b" 'evil-next-buffer)
-(define-key evil-motion-state-map "[w" 'evil-window-prev)
-(define-key evil-motion-state-map "]w" 'evil-window-next)
-(define-key evil-motion-state-map "[e" 'previous-error)
-(define-key evil-motion-state-map "]e" 'next-error)
-(define-key evil-motion-state-map "]s" 'flyspell-goto-next-error)
-
-(define-key evil-motion-state-map "]t" 'elscreen-next)
-(define-key evil-motion-state-map "[t" 'elscreen-previous)
 
 (req-package expand-region
+  :require evil
   :config (progn
             (define-key evil-motion-state-map "]r" 'er/expand-region)
             (define-key evil-visual-state-map "]r" 'er/expand-region)
@@ -23,13 +14,6 @@
             )
   )
 
-(define-key evil-window-map (kbd "<left>") 'winner-undo)
-(define-key evil-window-map (kbd "<right>") 'winner-redo)
-
-(define-key evil-motion-state-map (kbd "<down>") 'shrink-window)
-(define-key evil-motion-state-map (kbd "<up>") 'enlarge-window)
-(define-key evil-motion-state-map (kbd "<right>") 'enlarge-window-horizontally)
-(define-key evil-motion-state-map (kbd "<left>") 'shrink-window-horizontally)
 
 ;; This makes those windows with lists of possible commands more useful
 (req-package guide-key
@@ -48,6 +32,7 @@
   )
 
 (req-package evil-leader
+  :require evil
   :config (progn
             (evil-leader/set-leader "<SPC>")
             (global-evil-leader-mode)
@@ -86,31 +71,8 @@
             )
   )
 
-;; Easier window navigation. Note, this kills the C-h help-map prefix,
-;; which is why I replicate most of that functionality in my leader-map.
-(define-key global-map "\C-j" 'evil-window-down)
-(define-key global-map "\C-k" 'evil-window-up)
-(define-key global-map "\C-h" 'evil-window-left)
-(define-key global-map "\C-l" 'evil-window-right)
-
-(define-key evil-motion-state-map "|" 'komitee/split-horizontally)
-(define-key evil-motion-state-map "_" 'komitee/split-vertically)
-
-(define-key evil-motion-state-map "j" 'evil-next-visual-line)
-(define-key evil-motion-state-map "k" 'evil-previous-visual-line)
-
-(define-key evil-motion-state-map "0" 'smarter-move-beginning-of-line)
-(define-key evil-normal-state-map "Y" (kbd "y$"))
-
-;; There's probably an easier way to do this by defining a function,
-;; but I can't figure it out. It re-selects the shifted region after
-;; the shift.
-(define-key evil-visual-state-map (kbd "C->") 'evil-shift-right)
-(define-key evil-visual-state-map ">" (kbd "C-> gv"))
-(define-key evil-visual-state-map (kbd "C-<") 'evil-shift-left)
-(define-key evil-visual-state-map "<" (kbd "C-< gv"))
-
 (req-package evil-args
+  :require evil
   :config (progn
             (define-key evil-inner-text-objects-map "a" 'evil-inner-arg)
             (define-key evil-outer-text-objects-map "a" 'evil-outer-arg)
@@ -120,25 +82,3 @@
             )
   )
 
-;; I switch ' and ` in vim, so I do so here as well
-(define-key evil-motion-state-map "'" 'evil-goto-mark)
-(define-key evil-motion-state-map "`" 'evil-goto-mark-line)
-
-;; Here's how to define a new ex command
-(evil-ex-define-cmd "Q" 'evil-quit)
-(evil-ex-define-cmd "QA" 'evil-quit-all)
-(evil-ex-define-cmd "Qa" 'evil-quit-all)
-(evil-ex-define-cmd "WQ" 'evil-save-and-close)
-(evil-ex-define-cmd "Wq" 'evil-save-and-close)
-(evil-ex-define-cmd "esh[ell]" 'eshell)
-(evil-ex-define-cmd "sort" 'sort-lines)
-(evil-ex-define-cmd "log" 'magit-log)
-
-;; escape quits
-(define-key evil-motion-state-map [escape] 'komitee/nohl-quit)
-(define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
-(global-set-key [escape] 'evil-exit-emacs-state)

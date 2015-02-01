@@ -121,54 +121,153 @@
   )
 
 ; Emacs now has a good editor.
-(setq evil-emacs-state-cursor '("red" box)
-      evil-normal-state-cursor '("white" box)
-      evil-insert-state-cursor '("white" bar)
-      evil-backspace-join-lines t
-      evil-leader/leader "<SPC>"
-      evil-magic (quote very-magic)
-      evil-search-module (quote evil-search)
-      evil-want-C-u-scroll t
+(setq evil-want-C-u-scroll t
       evil-want-C-w-in-emacs-state t
       evil-want-fine-undo nil
+      evil-want-fine-undo nil
       )
+(req-package evil
+  :config (progn
+            (setq evil-emacs-state-cursor '("red" box)
+                  evil-normal-state-cursor '("white" box)
+                  evil-insert-state-cursor '("white" bar)
+                  evil-backspace-join-lines t
+                  evil-magic (quote very-magic)
+                  evil-search-module (quote evil-search)
+                  )
+            (evil-mode 1)
 
-(evil-mode 1)
+            ;; Update modes, everything that defaults to emacs state should
+            ;; instead default to motion state. Anything that requires editing,
+            ;; we'll remove from motion state so it's in notmal mode by default,
+            ;; unless there's a VERY good reason to use emacs state.
+            (setq evil-motion-state-modes (append evil-emacs-state-modes
+                                                  evil-motion-state-modes)
+                  evil-emacs-state-modes nil
+                  evil-motion-state-modes (remove 'Custom-mode evil-motion-state-modes)
+                  )
+
+            ;; This shouldn't be necessary, but adding help-mode to
+            ;; evil-motion-state-modes doesn't seem to have the desired effect.
+            (add-hook 'help-mode-hook 'evil-motion-state)
+
+
+
+            (define-key evil-motion-state-map "[b" 'evil-prev-buffer)
+            (define-key evil-motion-state-map "]b" 'evil-next-buffer)
+            (define-key evil-motion-state-map "[w" 'evil-window-prev)
+            (define-key evil-motion-state-map "]w" 'evil-window-next)
+            (define-key evil-motion-state-map "[e" 'previous-error)
+            (define-key evil-motion-state-map "]e" 'next-error)
+            (define-key evil-motion-state-map "]s" 'flyspell-goto-next-error)
+
+            (define-key evil-motion-state-map "]t" 'elscreen-next)
+            (define-key evil-motion-state-map "[t" 'elscreen-previous)
+
+
+            (define-key evil-window-map (kbd "<left>") 'winner-undo)
+            (define-key evil-window-map (kbd "<right>") 'winner-redo)
+
+            (define-key evil-motion-state-map (kbd "<down>") 'shrink-window)
+            (define-key evil-motion-state-map (kbd "<up>") 'enlarge-window)
+            (define-key evil-motion-state-map (kbd "<right>") 'enlarge-window-horizontally)
+            (define-key evil-motion-state-map (kbd "<left>") 'shrink-window-horizontally)
+
+            ;; Easier window navigation. Note, this kills the C-h help-map prefix,
+            ;; which is why I replicate most of that functionality in my leader-map.
+            (define-key global-map "\C-j" 'evil-window-down)
+            (define-key global-map "\C-k" 'evil-window-up)
+            (define-key global-map "\C-h" 'evil-window-left)
+            (define-key global-map "\C-l" 'evil-window-right)
+
+            (define-key evil-motion-state-map "|" 'komitee/split-horizontally)
+            (define-key evil-motion-state-map "_" 'komitee/split-vertically)
+
+            (define-key evil-motion-state-map "j" 'evil-next-visual-line)
+            (define-key evil-motion-state-map "k" 'evil-previous-visual-line)
+
+            (define-key evil-motion-state-map "0" 'smarter-move-beginning-of-line)
+            (define-key evil-normal-state-map "Y" (kbd "y$"))
+
+            ;; There's probably an easier way to do this by defining a function,
+            ;; but I can't figure it out. It re-selects the shifted region after
+            ;; the shift.
+            (define-key evil-visual-state-map (kbd "C->") 'evil-shift-right)
+            (define-key evil-visual-state-map ">" (kbd "C-> gv"))
+            (define-key evil-visual-state-map (kbd "C-<") 'evil-shift-left)
+            (define-key evil-visual-state-map "<" (kbd "C-< gv"))
+
+            ;; I switch ' and ` in vim, so I do so here as well
+            (define-key evil-motion-state-map "'" 'evil-goto-mark)
+            (define-key evil-motion-state-map "`" 'evil-goto-mark-line)
+
+            ;; Here's how to define a new ex command
+            (evil-ex-define-cmd "Q" 'evil-quit)
+            (evil-ex-define-cmd "QA" 'evil-quit-all)
+            (evil-ex-define-cmd "Qa" 'evil-quit-all)
+            (evil-ex-define-cmd "WQ" 'evil-save-and-close)
+            (evil-ex-define-cmd "Wq" 'evil-save-and-close)
+            (evil-ex-define-cmd "esh[ell]" 'eshell)
+            (evil-ex-define-cmd "sort" 'sort-lines)
+            (evil-ex-define-cmd "log" 'magit-log)
+
+            ;; escape quits
+            (define-key evil-motion-state-map [escape] 'komitee/nohl-quit)
+            (define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
+            (define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
+            (define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
+            (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
+            (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
+            (global-set-key [escape] 'evil-exit-emacs-state)
+            )
+  )
 
 (req-package evil-commentary
   :diminish evil-commentary-mode
+  :require evil
   :config (evil-commentary-default-setup)
   )
 
 (req-package evil-easymotion
+  :require evil
   :config (evilem-default-keybindings "M-SPC")
   )
 
-(req-package evil-indent-textobject)
+(req-package evil-indent-textobject
+  :require evil
+  )
 
 (req-package evil-jumper
+  :require evil
   :config (global-evil-jumper-mode)
   )
 
 (req-package evil-matchit
+  :require evil
   :config (global-evil-matchit-mode 1)
   )
 
 (req-package evil-snipe
+  :require evil
   :config (global-evil-snipe-mode 1)
   )
 
 (req-package evil-surround
+  :require evil
   :config (global-evil-surround-mode 1)
   )
 
 (req-package evil-tabs
+  :require evil
   :config (global-evil-tabs-mode)
   )
 
-(req-package evil-visualstar)
+(req-package evil-visualstar
+  :require evil
+  )
 
 (req-package evil-numbers
+  :require evil
   :config (progn
             (define-key evil-motion-state-map (kbd "C-c +") 'evil-numbers/inc-at-pt)
             (define-key evil-motion-state-map (kbd "C-c -") 'evil-numbers/dec-at-pt)
@@ -176,46 +275,23 @@
   )
 
 (req-package evil-exchange
+  :require evil
   :config (evil-exchange-install))
 
-
-;; Update modes, everything that defaults to emacs state should
-;; instead default to motion state. Anything that requires editing,
-;; we'll remove from motion state so it's in notmal mode by default,
-;; unless there's a VERY good reason to use emacs state.
-(setq evil-motion-state-modes (append evil-emacs-state-modes
-                                      evil-motion-state-modes)
-      evil-emacs-state-modes nil
-      evil-motion-state-modes (remove 'Custom-mode evil-motion-state-modes)
-      )
 
 ;; We want _ to be considered a word character, like it is in vim.
 (modify-syntax-entry ?_ "w")
 
 ;; Projectile for better fuzzy matching and more
 (req-package projectile
-  :require evil ag
+  :require evil
   :config (progn
             (setq projectile-cache-file "~/.emacs.d/.projectile.cache"
                   projectile-known-projects-file "~/.emacs.d/.projectile-bookmarks.eld"
                   projectile-require-project-root nil)
-            (req-package ag
-              :bind ("C-c /" . ag-regexp-project-at-point)
-              :config (progn
-                        (setq ag-highlight-search t)
-                        ;; This shouldn't be necessary, but adding
-                        ;; ag-mode to evil-motion-state-modes doesn't
-                        ;; seem to have the desired effect.
-                        (add-hook 'ag-mode-hook 'evil-motion-state)
-                        )
-              )
             (projectile-global-mode t)
             )
   )
-
-;; This shouldn't be necessary, but adding help-mode to
-;; evil-motion-state-modes doesn't seem to have the desired effect.
-(add-hook 'help-mode-hook 'evil-motion-state)
 
 ;; Snippets are useful
 (req-package yasnippet
@@ -237,6 +313,7 @@
 
 (req-package git-gutter-fringe
   :diminish git-gutter-mode
+  :require evil evil-leader
   :config (progn
             (global-git-gutter-mode)
             (evil-leader/set-key
@@ -252,7 +329,7 @@
   )
 
 (req-package magit
-  :require evil
+  :require evil evil-leader
   :config (progn
             (magit-auto-revert-mode -1)
             (evil-leader/set-key
@@ -371,7 +448,7 @@
   )
 
 (req-package git-rebase-mode
-  :require evil-leader
+  :require evil evil-leader
   :config (progn
             (evil-set-initial-state 'git-rebase-mode 'motion)
             (evil-leader/set-key-for-mode 'git-rebase-mode
@@ -393,7 +470,7 @@
   )
 
 (req-package git-commit-mode
-  :require evil-leader
+  :require evil evil-leader
   :config (progn
             (evil-set-initial-state 'git-commit-mode 'normal)
             (evil-leader/set-key-for-mode 'git-commit-mode
@@ -405,7 +482,7 @@
   )
 
 (req-package evil-god-state
-  :require evil-leader
+  :require evil evil-leader
   :config (progn
             (evil-leader/set-key
               "eg" 'evil-execute-in-god-state)
@@ -452,10 +529,18 @@
             )
   )
 
-(req-package helm-ag)
+(req-package helm-ag
+  :require helm evil evil-leader
+  :config (progn
+            (evil-leader/set-key
+              "HA" 'helm-ag
+              )
+            (evil-ex-define-cmd "ag" 'helm-ag)
+            )
+  )
 
 (req-package helm-projectile
-  :require evil-leader ag
+  :require evil-leader helm projectile helm-ag
   :config (progn
             (evil-leader/set-key
               "p" 'helm-projectile
@@ -464,7 +549,6 @@
               "r" 'helm-projectile-recentf
               "/" 'helm-projectile-ag
               "Ha" 'helm-projectile-ag
-              "HA" 'helm-ag
               )
             )
   )

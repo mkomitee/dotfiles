@@ -181,7 +181,7 @@
 
 ;; go
 (req-package go-mode
-  :require exec-path-from-shell
+  :require evil exec-path-from-shell
   :config (progn
             (evil-define-key 'normal go-mode-map "K" 'godoc-at-point)
             (evil-define-key 'motion go-mode-map "gd" 'godef-jump)
@@ -200,7 +200,7 @@
 
 ;; python
 (req-package python
-  :require anaconda-mode
+  :require anaconda-mode evil
   :config (progn
             (setq python-fill-docstring-style (quote django)
                   python-shell-interpreter "ipython"
@@ -214,6 +214,7 @@
   )
 
 (req-package lisp-mode
+  :require evil
   :config (progn
             (evil-define-key 'normal lisp-mode-shared-map
               "K" 'elisp-slime-nav-describe-elisp-thing-at-point
