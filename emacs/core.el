@@ -464,12 +464,12 @@
               "r" 'helm-projectile-recentf
               "/" 'helm-projectile-ag
               "Ha" 'helm-projectile-ag
+              "HA" 'helm-ag
               )
-            (evil-ex-define-cmd "ag" 'helm-projectile-ag)
             )
   )
 
-(req-package helm-c-yassnippet
+(req-package helm-c-yasnippet
   :require evil-leader yasnippet helm
   :config (progn
             (evil-leader/set-key
