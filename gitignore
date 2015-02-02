@@ -79,6 +79,7 @@ html
 *.egg-info
 *.keytab
 .project
+.projectile
 *.db
 
 
