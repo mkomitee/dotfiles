@@ -113,12 +113,30 @@
 
 ;; Projectile for better fuzzy matching and more
 (req-package projectile
-  :require evil
+  :require evil evil-leader
   :config (progn
             (setq projectile-cache-file "~/.emacs.d/.projectile.cache"
                   projectile-known-projects-file "~/.emacs.d/.projectile-bookmarks.eld"
                   projectile-require-project-root nil)
+            (evil-leader/set-key
+              "p" 'projectile-find-file
+              "P" 'projectile-switch-project
+              "B" 'projectile-switch-to-buffer
+              "r" 'projectile-recentf
+              "/" 'projectile-ag
+              )
             (projectile-global-mode t)
+            )
+  )
+
+;; Allows completion for commands.
+(req-package smex
+  :bind (("M-x" . smex)
+         ("C-x C-m" . smex)
+         ("C-c C-m" . smex))
+  :config (progn
+            (setq smex-save-file "~/.emacs.d/.smex-items")
+            (smex-initialize)
             )
   )
 

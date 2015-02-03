@@ -8,6 +8,7 @@
 
 (req-package company
   :diminish company-mode
+  :require evil-leader
   :config (progn
             (global-company-mode)
             (setq company-backends '(company-semantic (company-dabbrev-code
@@ -18,6 +19,10 @@
                                                       company-dabbrev)
                   company-idle-delay nil
                   )
+            (evil-define-key 'insert global-map
+              (kbd "C-x C-o") 'company-complete
+              (kbd "C-x C-u") 'company-complete
+              )
             )
   )
 

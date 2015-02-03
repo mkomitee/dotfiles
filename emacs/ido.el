@@ -1,11 +1,20 @@
 ;; interatively do things ...
-(req-package ido
+(req-package ido evil-leader
   :config (progn
             (setq ido-save-directory-list-file "~/.emacs.d/.ido.last"
                   ido-use-filename-at-point (quote guess)
                   ido-ignore-buffers (quote ("\\` "
                                              "\\*Python\\[.*\\]\\*"))
                   )
+            (evil-leader/set-key
+              "f" 'ido-find-file
+              "b" 'ido-switch-buffer
+              "ev" (lambda () (interactive)
+                     (ido-find-file-in-dir (expand-file-name
+                                            komitee/emacs-config-directory)))
+
+
+              )
             (ido-everywhere t)
             )
   )
