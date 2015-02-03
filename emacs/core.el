@@ -83,8 +83,6 @@
             (global-undo-tree-mode)
             )
   )
-;; (require 'undo-tree)
-;; (diminish 'undo-tree-mode)
 
 ;; make sure $PATH is set correctly
 (req-package exec-path-from-shell

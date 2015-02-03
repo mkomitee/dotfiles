@@ -224,5 +224,6 @@
             )
   )
 
-;; (req-package evil-visual-mark-mode
-;;   :config (evil-visual-mark-mode))
+(req-package evil-visual-mark-mode
+  :config (evil-visual-mark-mode)
+  )
