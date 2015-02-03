@@ -130,8 +130,8 @@
 (req-package perspective
   :config (progn
             (evil-define-key 'motion global-map
-              "]p" 'persp-next
-              "[p" 'persp-prev
+              "]t" 'persp-next
+              "[t" 'persp-prev
               )
             (persp-mode)
             )
