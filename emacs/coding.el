@@ -6,17 +6,6 @@
   :config (add-hook 'prog-mode-hook 'flyspell-prog-mode)
   )
 
-(req-package elec-pair
-  :config (progn
-            (defun komitee/disable-electric-pair-mode ()
-              (interactive)
-              (set (make-local-variable 'electric-pair-mode) nil)
-              )
-            (add-hook 'prog-mode-hook 'electric-pair-mode)
-            (add-hook 'minibuffer-setup-hook 'komitee/disable-electric-pair-mode)
-            )
-  )
-
 (req-package company
   :diminish company-mode
   :config (progn
