@@ -13,13 +13,15 @@
             (when (executable-find "curl")
               (setq helm-google-suggest-use-curl-p t)
               )
-            (setq helm-split-window-in-side-p t
-                  helm-move-to-line-cycle-in-source t
-                  helm-ff-search-library-in-sexp t
-                  helm-scroll-amount 8
+            (setq helm-move-to-line-cycle-in-source t
                   helm-ff-file-name-history-use-recentf t
-                  helm-buffer-max-length nil
                   helm-ff-skip-boring-files t
+                  helm-buffer-max-length nil
+                  helm-buffer-details-flag nil
+                  helm-boring-buffer-regexp-list (append
+                                                  helm-boring-buffer-regexp-list
+                                                  '("\\*Python\\["))
+
                   )
             (evil-leader/set-key
               "f" 'helm-find-files
