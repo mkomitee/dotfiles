@@ -16,7 +16,6 @@ source $ZSH/jobs.zsh
 source $ZSH/prompt.zsh
 source $ZSH/colours.zsh
 source $ZSH/extensions.zsh
-source $ZSH/fasd.zsh
 
 if [ $TERM != 'eterm-color' ]; then
     if [ -d $CONTRIB/zsh-users/zsh-syntax-highlighting ]; then
@@ -37,12 +36,12 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 
 unsetopt flowcontrol
 unsetopt beep
-setopt auto_cd
 setopt auto_pushd
 setopt pushd_ignore_dups
 setopt interactive_comments
 setopt rc_quotes
 setopt short_loops
+setopt no_nomatch
 
 KEYTIMEOUT=20
 

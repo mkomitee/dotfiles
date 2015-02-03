@@ -39,3 +39,4 @@ alias yolo='sudo $(fc -ln -1)'
 alias locate.home='locate -d ~/.locate.database'
 
 alias e='emacsclient -n'
+alias dirs='dirs -v'
