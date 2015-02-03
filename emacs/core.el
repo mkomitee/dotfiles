@@ -99,33 +99,41 @@
             )
   )
 
-(req-package elscreen
-  :require evil
-  :config (evil-define-key 'motion global-map
-            "]t" 'elscreen-next
-            "[t" 'elscreen-previous
-            )
-  )
-
-
 ;; We want _ to be considered a word character, like it is in vim.
 (modify-syntax-entry ?_ "w")
 
 ;; Projectile for better fuzzy matching and more
 (req-package projectile
-  :require evil evil-leader
+  :require evil-leader
   :config (progn
             (setq projectile-cache-file "~/.emacs.d/.projectile.cache"
                   projectile-known-projects-file "~/.emacs.d/.projectile-bookmarks.eld"
                   projectile-require-project-root nil)
             (evil-leader/set-key
               "p" 'projectile-find-file
-              "P" 'projectile-switch-project
               "B" 'projectile-switch-to-buffer
               "r" 'projectile-recentf
               "/" 'projectile-ag
               )
             (projectile-global-mode t)
+            )
+  )
+
+(req-package persp-projectile
+  :require perspective evil-leader
+  :config (evil-leader/set-key
+              "P" 'projectile-persp-switch-project
+              )
+
+  )
+
+(req-package perspective
+  :config (progn
+            (evil-define-key 'motion global-map
+              "]p" 'persp-next
+              "[p" 'persp-prev
+              )
+            (persp-mode)
             )
   )
 
