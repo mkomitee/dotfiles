@@ -66,3 +66,18 @@
             "Hy" 'helm-yas-complete
             )
   )
+
+(req-package helm-company
+  :require company evil helm
+  :config (evil-define-key 'insert global-map
+            (kbd "C-x C-o") 'helm-company
+            (kbd "C-x C-u") 'helm-company
+            )
+  )
+
+(req-package helm-flycheck
+  :require helm flycheck evil-leader
+  :config (evil-leader/set-key
+            "HF" 'helm-helm-flycheck
+            )
+  )

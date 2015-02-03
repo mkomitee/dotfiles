@@ -22,14 +22,6 @@
   )
 
 
-(req-package helm-company
-  :require company evil helm
-  :config (evil-define-key 'insert global-map
-            (kbd "C-x C-o") 'helm-company
-            (kbd "C-x C-u") 'helm-company
-            )
-  )
-
 (req-package company-go
   :require (go-mode company)
   :config (add-hook 'go-mode-hook
@@ -74,13 +66,6 @@
                   (delq 'emacs-lisp-checkdoc flycheck-checkers))
             (setq flycheck-checkers
                   (delq 'puppet-parser flycheck-checkers))
-            )
-  )
-
-(req-package helm-flycheck
-  :require helm flycheck evil-leader
-  :config (evil-leader/set-key
-            "HF" 'helm-helm-flycheck
             )
   )
 
