@@ -18,10 +18,12 @@
                   helm-ff-skip-boring-files t
                   helm-buffer-max-length nil
                   helm-buffer-details-flag nil
-                  helm-boring-buffer-regexp-list (append
-                                                  helm-boring-buffer-regexp-list
-                                                  '("\\*Python\\["))
-
+                  helm-boring-buffer-regexp-list '("\\` "
+                                                   "\\*helm"
+                                                   "\\*helm-mode"
+                                                   "\\*Echo Area"
+                                                   "\\*Minibuf"
+                                                   "\\*Python\\[")
                   )
             (evil-leader/set-key
               "f" 'helm-find-files

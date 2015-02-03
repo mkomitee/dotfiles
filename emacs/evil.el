@@ -73,7 +73,6 @@
             (define-key global-map "\C-h" 'evil-window-left)
             (define-key global-map "\C-l" 'evil-window-right)
 
-
             (evil-define-key 'visual global-map
               ;; There's probably an easier way to do this by defining a function,
               ;; but I can't figure it out. It re-selects the shifted region after

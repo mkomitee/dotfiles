@@ -132,7 +132,10 @@
 
 (req-package ace-window
   :require evil
-  :config (define-key evil-window-map "?" 'ace-window)
+  :config (progn
+            (define-key evil-window-map "?" 'ace-window)
+            (define-key evil-window-map "S" 'ace-swap-window)
+            )
   )
 
 (req-package discover-my-major
