@@ -1,7 +1,5 @@
 (req-package linum
-  :config (progn
-            (global-linum-mode t)
-            )
+  :config (global-linum-mode t)
   )
 
 ;; If we have a fringe, make it 8 pixels wide

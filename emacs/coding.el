@@ -35,9 +35,9 @@
 
 (req-package helm-company
   :require company evil helm
-  :config (progn
-            (define-key evil-insert-state-map (kbd "C-x C-o") 'helm-company)
-            (define-key evil-insert-state-map (kbd "C-x C-u") 'helm-company)
+  :config (evil-define-key 'insert global-map
+            (kbd "C-x C-o") 'helm-company
+            (kbd "C-x C-u") 'helm-company
             )
   )
 
@@ -90,10 +90,8 @@
 
 (req-package helm-flycheck
   :require helm flycheck evil-leader
-  :config (progn
-            (evil-leader/set-key
-              "HF" 'helm-helm-flycheck
-              )
+  :config (evil-leader/set-key
+            "HF" 'helm-helm-flycheck
             )
   )
 
@@ -138,12 +136,7 @@
                   fci-rule-color "darkred"
                   fci-rule-column 80
                   )
-            (defun komitee/fci-hook ()
-              (progn
-                (turn-on-fci-mode)
-                )
-              )
-            (add-hook 'prog-mode-hook 'komitee/fci-hook)
+            (add-hook 'prog-mode-hook 'turn-on-fci-mode)
             )
   )
 
@@ -183,8 +176,10 @@
 (req-package go-mode
   :require evil exec-path-from-shell
   :config (progn
-            (evil-define-key 'normal go-mode-map "K" 'godoc-at-point)
-            (evil-define-key 'motion go-mode-map "gd" 'godef-jump)
+            (evil-define-key 'motion go-mode-map
+              "K" 'godoc-at-point
+              "gd" 'godef-jump
+              )
             (exec-path-from-shell-copy-env "GOROOT")
             (exec-path-from-shell-copy-env "GOPATH")
             (setq gofmt-command "goimports")
@@ -206,7 +201,7 @@
                   python-shell-interpreter "ipython"
                   )
             (add-hook 'python-mode-hook (lambda () (run-python "ipython" t nil)))
-            (evil-define-key 'normal python-mode-map
+            (evil-define-key 'motion python-mode-map
               "K" 'anaconda-mode-view-doc
               "gd" 'anaconda-mode-goto-definitions
               )
@@ -221,7 +216,8 @@
               (kbd "SPC !") 'eval-last-sexp
               )
             (evil-define-key 'visual lisp-mode-shared-map
-              (kbd "SPC !") 'eval-region)
+              (kbd "SPC !") 'eval-region
+              )
             )
   )
 
@@ -249,8 +245,9 @@
 (req-package haskell-mode
   :require evil
   :config (progn
-            (evil-define-key 'normal
-              haskell-mode-map (kbd "C-c C-c") 'inferior-haskell-send-decl)
+            (evil-define-key 'normal haskell-mode-map
+              (kbd "C-c C-c") 'inferior-haskell-send-decl
+              )
             (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
             )
   )
