@@ -102,9 +102,11 @@
 ;; We want _ to be considered a word character, like it is in vim.
 (modify-syntax-entry ?_ "w")
 
+(req-package ag)
+
 ;; Projectile for better fuzzy matching and more
 (req-package projectile
-  :require evil-leader
+  :require evil-leader ag
   :config (progn
             (setq projectile-cache-file "~/.emacs.d/.projectile.cache"
                   projectile-known-projects-file "~/.emacs.d/.projectile-bookmarks.eld"
