@@ -89,3 +89,10 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
   (let ((face (or (get-char-property (point) 'read-face-name)
                   (get-char-property (point) 'face))))
     (if face (message "Face: %s" face) (message "No face at %d" pos))))
+
+(defun komitee/split-file (file)
+  "Read the contents of a file and return as a list."
+  (when (file-readable-p file)
+    (with-temp-buffer
+      (insert-file-contents file)
+      (split-string (buffer-string)))))

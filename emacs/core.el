@@ -109,7 +109,10 @@
             (setq projectile-cache-file "~/.emacs.d/.projectile.cache"
                   projectile-known-projects-file "~/.emacs.d/.projectile-bookmarks.eld"
                   projectile-require-project-root nil
-                  projectile-enable-caching t)
+                  projectile-enable-caching t
+                  projectile-ignored-projects (append
+                                               (komitee/split-file "~/.emacs.d/.projectile-ignored-projects")
+                                               (directory-files "~/.emacs.d/elpa" t)))
             (evil-leader/set-key
               "p" 'projectile-find-file
               "B" 'projectile-switch-to-buffer

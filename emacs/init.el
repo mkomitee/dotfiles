@@ -9,7 +9,6 @@
 (komitee/load "core")
 (komitee/load "evil")
 (komitee/load "vcs")
-;; (komitee/load "helm")
 (komitee/load "ido")
 (komitee/load "decorations")
 (komitee/load "coding")
