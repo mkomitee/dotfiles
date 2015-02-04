@@ -102,7 +102,12 @@
 ;; We want _ to be considered a word character, like it is in vim.
 (modify-syntax-entry ?_ "w")
 
-(req-package ag)
+(req-package ag
+  :require evil
+  ;; This shouldn't be necessary, but adding ag-mode to
+  ;; evil-motion-state-modes doesn't seem to have the desired effect.
+  :config (add-hook 'ag-mode-hook 'evil-motion-state)
+  )
 
 ;; Projectile for better fuzzy matching and more
 (req-package projectile
