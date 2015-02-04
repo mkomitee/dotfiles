@@ -1,8 +1,11 @@
-(req-package git-gutter-fringe
+(req-package git-gutter
   :diminish git-gutter-mode
-  :require evil evil-leader
+  :config (global-git-gutter-mode)
+  )
+
+(req-package git-gutter-fringe
+  :require evil evil-leader git-gutter-mode
   :config (progn
-            (global-git-gutter-mode)
             (evil-leader/set-key
               "gha" 'git-gutter:stage-hunk
               "ghs" 'git-gutter:stage-hunk
