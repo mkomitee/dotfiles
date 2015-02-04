@@ -108,7 +108,8 @@
   :config (progn
             (setq projectile-cache-file "~/.emacs.d/.projectile.cache"
                   projectile-known-projects-file "~/.emacs.d/.projectile-bookmarks.eld"
-                  projectile-require-project-root nil)
+                  projectile-require-project-root nil
+                  projectile-enable-caching t)
             (evil-leader/set-key
               "p" 'projectile-find-file
               "B" 'projectile-switch-to-buffer

@@ -27,7 +27,6 @@
             )
   )
 
-
 (req-package company-go
   :require (go-mode company)
   :config (add-hook 'go-mode-hook
