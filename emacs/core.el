@@ -5,8 +5,10 @@
       frame-background-mode (quote dark)
       indicate-buffer-boundaries (quote left)
       scroll-conservatively 9999
+      scroll-up-aggressively 0.0
+      scroll-down-aggressively 0.0
       scroll-margin 3
-      scroll-preserve-screen-position 1
+      scroll-preserve-screen-position t
       sentence-end-double-space nil
       tab-width 4
       ediff-split-window-function 'split-window-horizontally
@@ -21,6 +23,8 @@
 
 (req-package uniquify
   :config (setq uniquify-ignore-buffers-re "^\\*"
+                uniquify-buffer-name-style 'post-forward
+                uniquify-separator "::"
                 uniquify-min-dir-content 1
                 uniquify-trailing-separator-p t
                 )
@@ -143,6 +147,9 @@
             (evil-define-key 'motion global-map
               "]t" 'persp-next
               "[t" 'persp-prev
+              )
+            (evil-leader/set-key
+              "t" 'persp-switch
               )
             (persp-mode)
             )
