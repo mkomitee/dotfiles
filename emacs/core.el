@@ -175,6 +175,9 @@
   :config (progn
             (define-key evil-window-map "?" 'ace-window)
             (define-key evil-window-map "S" 'ace-swap-window)
+            (define-key evil-window-map "x" 'delete-other-windows)
+            (define-key evil-window-map "z" 'ace-maximize-window)
+            (define-key evil-window-map (kbd "DEL") 'ace-delete-window)
             )
   )
 
