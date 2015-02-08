@@ -2,7 +2,7 @@
 
 ;; If we have a fringe, make it 8 pixels wide
 (if (featurep 'fringe)
-    (fringe-mode '(8 . 0)))
+    (fringe-mode 0))
 
 ;; base16-theme doesn't provide 'base16-theme. Instead it includes
 ;; files which provide-theme 'base16-*, so base16-theme is installed
