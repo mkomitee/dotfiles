@@ -107,19 +107,6 @@
             )
   )
 
-;; Display a thin red vertical line at the 80th column
-(req-package fill-column-indicator
-  :diminish fci-mode
-  :config (progn
-            (setq fci-rule-character 9550
-                  fci-rule-color "darkred"
-                  fci-rule-column 80
-                  )
-            (add-hook 'prog-mode-hook 'turn-on-fci-mode)
-            )
-  )
-
-
 (defun komitee/comment-auto-fill ()
   (setq-local comment-auto-fill-only-comments t)
   (auto-fill-mode 1)

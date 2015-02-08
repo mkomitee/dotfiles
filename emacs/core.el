@@ -74,8 +74,6 @@
 (set-selection-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
 
-(global-visual-line-mode)
-(diminish 'visual-line-mode)
 (blink-cursor-mode -1)
 
 (req-package undo-tree
@@ -187,3 +185,16 @@
             )
   )
 
+;; Display a thin red vertical line at the 80th column
+(req-package fill-column-indicator
+  :diminish fci-mode
+  :config (progn
+            (setq fci-rule-character 9550
+                  fci-rule-color "darkred"
+                  fci-rule-column 80
+                  )
+            (define-globalized-minor-mode global-fci-mode
+              fci-mode fci-mode)
+            (global-fci-mode)
+            )
+  )
