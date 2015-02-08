@@ -196,8 +196,7 @@
                   fci-rule-color "darkred"
                   fci-rule-column 80
                   )
-            (define-globalized-minor-mode global-fci-mode
-              fci-mode fci-mode)
-            (global-fci-mode)
+            (add-hook 'prog-mode-hook 'turn-on-fci-mode)
+            (add-hook 'text-mode-hook 'turn-on-fci-mode)
             )
   )
