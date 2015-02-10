@@ -1,5 +1,6 @@
 ;; interatively do things ...
-(req-package ido evil-leader
+(req-package ido
+  :require evil-leader
   :config (progn
             (setq ido-save-directory-list-file "~/.emacs.d/.ido.last"
                   ido-ignore-buffers (quote ("\\` "
@@ -20,7 +21,11 @@
 
 (req-package flx-ido
   :require ido
-  :config (flx-ido-mode t)
+  :config (progn
+            (flx-ido-mode t)
+            (setq ido-enable-flex-matching t)
+            (setq ido-use-faces nil)
+            )
   )
 
 (req-package ido-hacks
