@@ -201,3 +201,10 @@
             (add-hook 'text-mode-hook 'turn-on-fci-mode)
             )
   )
+
+(req-package crontab-mode
+  :config (progn
+            (add-to-list 'auto-mode-alist '("\\.cron\\(tab\\)?\\'" . crontab-mode))
+            (add-to-list 'auto-mode-alist '("cron\\(tab\\)?\\."    . crontab-mode))
+            )
+  )
