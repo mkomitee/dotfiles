@@ -137,8 +137,6 @@
               "hct" 'customize-themes
               "hcv" 'customize-variable
 
-              "o" 'delete-other-windows
-
               "w" 'evil-window-map
               )
             )

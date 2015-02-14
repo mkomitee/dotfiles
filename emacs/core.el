@@ -123,35 +123,36 @@
                                                (komitee/split-file "~/.emacs.d/.projectile-ignored-projects")
                                                (directory-files "~/.emacs.d/elpa" t)))
             (evil-leader/set-key
-              "p" 'projectile-find-file
-              "B" 'projectile-switch-to-buffer
-              "r" 'projectile-recentf
+              "fp" 'projectile-find-file
+              "fP" 'projectile-switch-project
+              "fB" 'projectile-switch-to-buffer
+              "fr" 'projectile-recentf
               "/" 'projectile-ag
               )
             (projectile-global-mode t)
             )
   )
 
-(req-package persp-projectile
-  :require perspective evil-leader
-  :config (evil-leader/set-key
-              "P" 'projectile-persp-switch-project
-              )
+;; (req-package persp-projectile
+;;   :require perspective evil-leader
+;;   :config (evil-leader/set-key
+;;               "P" 'projectile-persp-switch-project
+;;               )
 
-  )
+;;   )
 
-(req-package perspective
-  :config (progn
-            (evil-define-key 'motion global-map
-              "]t" 'persp-next
-              "[t" 'persp-prev
-              )
-            (evil-leader/set-key
-              "t" 'persp-switch
-              )
-            (persp-mode)
-            )
-  )
+;; (req-package perspective
+;;   :config (progn
+;;             (evil-define-key 'motion global-map
+;;               "]t" 'persp-next
+;;               "[t" 'persp-prev
+;;               )
+;;             (evil-leader/set-key
+;;               "t" 'persp-switch
+;;               )
+;;             (persp-mode)
+;;             )
+;;   )
 
 ;; Allows completion for commands.
 (req-package smex

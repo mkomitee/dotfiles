@@ -7,8 +7,8 @@
                                              "\\*Python\\[.*\\]\\*"))
                   )
             (evil-leader/set-key
-              "f" 'ido-find-file
-              "b" 'ido-switch-buffer
+              "ff" 'ido-find-file
+              "fb" 'ido-switch-buffer
               "ev" (lambda () (interactive)
                      (ido-find-file-in-dir (expand-file-name
                                             komitee/emacs-config-directory)))
