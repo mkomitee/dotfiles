@@ -103,6 +103,16 @@
             )
   )
 
+(req-package help-fns+
+  :require evil-leader
+  :config (progn
+            (evil-leader/set-key
+              "hdc" 'describe-command
+              "hdo" 'describe-option
+              )
+            )
+  )
+
 (req-package evil-leader
   :require evil
   :config (progn
@@ -112,7 +122,6 @@
               "u" 'universal-argument
 
               "hdp" 'describe-package
-              "hdcs" 'describe-coding-system
               "hdf" 'describe-function
               "hdb" 'describe-bindings
               "hdim" 'describe-input-method
