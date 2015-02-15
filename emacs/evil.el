@@ -91,7 +91,6 @@
             (evil-ex-define-cmd "WQ" 'evil-save-and-close)
             (evil-ex-define-cmd "Wq" 'evil-save-and-close)
             (evil-ex-define-cmd "esh[ell]" 'eshell)
-            (evil-ex-define-cmd "sort" 'sort-lines)
 
             ;; escape quits
             (define-key evil-normal-state-map [escape] 'komitee/nohl-quit)
