@@ -106,9 +106,20 @@
 
 (req-package ag
   :require evil
-  ;; This shouldn't be necessary, but adding ag-mode to
-  ;; evil-motion-state-modes doesn't seem to have the desired effect.
-  :config (add-hook 'ag-mode-hook 'evil-motion-state)
+  :config (progn
+            (setq ag-reuse-buffers t
+                  ag-reuse-window t)
+            (evil-leader/set-key
+              "/t" 'ag-project-files ;; Prompts for a FILE-TYPE
+              )
+            ;; This shouldn't be necessary, but adding ag-mode to
+            ;; evil-motion-state-modes doesn't seem to have the
+            ;; desired effect.
+            (add-hook 'ag-mode-hook 'evil-motion-state)
+            ;; Not sure why this isn't the default, but I'd prefer to
+            ;; auto-switch to the ag buffer
+            (add-hook 'ag-mode-hook (lambda () (pop-to-buffer "*ag search*")))
+            )
   )
 
 ;; Projectile for better fuzzy matching and more
@@ -127,7 +138,7 @@
               "fP" 'projectile-switch-project
               "fB" 'projectile-switch-to-buffer
               "fr" 'projectile-recentf
-              "/" 'projectile-ag
+              "//" 'projectile-ag
               )
             (projectile-global-mode t)
             )
