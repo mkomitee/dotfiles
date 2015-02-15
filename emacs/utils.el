@@ -63,6 +63,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
   "nohl & then quit; when used in normal mode will cancel search highlighting."
   (interactive)
   (progn
+    (evil-search-highlight-persist-remove-all)
     (evil-ex-nohighlight)
     (keyboard-quit)
     )

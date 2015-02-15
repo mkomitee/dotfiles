@@ -231,5 +231,12 @@
   )
 
 (req-package evil-visual-mark-mode
+  :require evil
   :config (evil-visual-mark-mode)
+  )
+
+
+(req-package evil-search-highlight-persist
+  :require evil
+  :config (evil-search-highlight-persist)
   )

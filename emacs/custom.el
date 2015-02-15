@@ -14,6 +14,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:background "#000000"))))
+ '(evil-search-highlight-persist-highlight-face
+   ((t (:box (:line-width 1 :color "grey75" :style released-button)))))
  '(evil-visual-mark-face
    ((t (:background "color-89" :foreground "yellow" :underline t))))
  '(flyspell-incorrect
