@@ -24,16 +24,6 @@
             (dolist (mode '(package-menu-mode))
               (evil-set-initial-state mode 'motion))
 
-            ;; This shouldn't be necessary because these modes initial
-            ;; evil state is already set to motion, but I've found
-            ;; that for some modes, the initial state doesn't appear
-            ;; to be set properly the first time they're entered. For
-            ;; them, explicitly adding this hook works around the
-            ;; issue.
-            (dolist (hook '(package-menu-mode-hook
-                            help-mode-hook))
-              (add-hook hook 'evil-motion-state))
-
             (evil-define-key 'motion package-menu-mode-map
               "H" 'package-menu-quick-help)
 
@@ -202,11 +192,6 @@
 (req-package evil-surround
   :require evil
   :config (global-evil-surround-mode 1)
-  )
-
-(req-package evil-tabs
-  :require evil
-  :config (global-evil-tabs-mode)
   )
 
 (req-package evil-visualstar
