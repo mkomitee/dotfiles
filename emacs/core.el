@@ -126,6 +126,8 @@
                   projectile-known-projects-file "~/.emacs.d/.projectile-bookmarks.eld"
                   projectile-require-project-root nil
                   projectile-enable-caching t
+                  projectile-file-exists-local-cache-expire 30
+                  projectile-enable-idle-timer t
                   projectile-ignored-projects (append
                                                (komitee/split-file "~/.emacs.d/.projectile-ignored-projects")
                                                (directory-files "~/.emacs.d/elpa" t)))
