@@ -12,35 +12,30 @@
                   evil-normal-state-cursor '("white" box)
                   evil-insert-state-cursor '("white" bar)
                   evil-backspace-join-lines t
-                  evil-magic (quote very-magic)
-                  evil-search-module (quote evil-search)
+                  evil-magic 'very-magic
+                  evil-search-module 'evil-search
                   )
+
             (evil-mode 1)
 
-            ;; Update modes, everything that defaults to emacs state should
-            ;; instead default to motion state. Anything that requires editing,
-            ;; we'll remove from motion state so it's in notmal mode by default,
-            ;; unless there's a VERY good reason to use emacs state.
-            (setq evil-motion-state-modes (append evil-emacs-state-modes
-                                                  evil-motion-state-modes)
-                  evil-emacs-state-modes nil
-                  evil-motion-state-modes (remove 'Custom-mode evil-motion-state-modes)
-                  )
+            (dolist (mode '(Custom-mode))
+              (evil-set-initial-state mode 'normal))
 
-            ;; This shouldn't be necessary, help-mode is already in
-            ;; evil-motion-state-modes, but for some reason the first
-            ;; time I enter it, it's evil-state is nil.
-            (add-hook 'help-mode-hook 'evil-motion-state)
+            (dolist (mode '(package-menu-mode))
+              (evil-set-initial-state mode 'motion))
 
-            (add-to-list 'evil-motion-state-modes 'package-menu-mode)
-            (evil-add-hjkl-bindings package-menu-mode-map 'motion
+            ;; This shouldn't be necessary because these modes initial
+            ;; evil state is already set to motion, but I've found
+            ;; that for some modes, the initial state doesn't appear
+            ;; to be set properly the first time they're entered. For
+            ;; them, explicitly adding this hook works around the
+            ;; issue.
+            (dolist (hook '(package-menu-mode-hook
+                            help-mode-hook))
+              (add-hook hook 'evil-motion-state))
+
+            (evil-define-key 'motion package-menu-mode-map
               "H" 'package-menu-quick-help)
-            )
-            ;; This shouldn't be necessary, package-menu-mode is
-            ;; already in evil-motion-state-modes, but for some reason
-            ;; the first time I enter it, it's evil-state is
-            ;; nil.
-            (add-hook 'package-menu-mode-hook 'evil-motion-state)
 
             (evil-define-key 'motion global-map
               "[b" 'evil-prev-buffer
