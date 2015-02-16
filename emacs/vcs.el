@@ -32,6 +32,10 @@
               "gd" 'magit-diff-unstaged
               "gD" 'magit-diff-staged
               )
+            (define-key magit-status-mode-map "j" 'magit-goto-next-section)
+            (define-key magit-status-mode-map "k" 'magit-goto-previous-section)
+            (define-key magit-log-mode-map "j" 'magit-goto-next-section)
+            (define-key magit-log-mode-map "k" 'magit-goto-previous-section)
             )
   )
 
