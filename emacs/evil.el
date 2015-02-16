@@ -27,9 +27,20 @@
                   evil-motion-state-modes (remove 'Custom-mode evil-motion-state-modes)
                   )
 
-            ;; This shouldn't be necessary, but adding help-mode to
-            ;; evil-motion-state-modes doesn't seem to have the desired effect.
+            ;; This shouldn't be necessary, help-mode is already in
+            ;; evil-motion-state-modes, but for some reason the first
+            ;; time I enter it, it's evil-state is nil.
             (add-hook 'help-mode-hook 'evil-motion-state)
+
+            (add-to-list 'evil-motion-state-modes 'package-menu-mode)
+            (evil-add-hjkl-bindings package-menu-mode-map 'motion
+              "H" 'package-menu-quick-help)
+            )
+            ;; This shouldn't be necessary, package-menu-mode is
+            ;; already in evil-motion-state-modes, but for some reason
+            ;; the first time I enter it, it's evil-state is
+            ;; nil.
+            (add-hook 'package-menu-mode-hook 'evil-motion-state)
 
             (evil-define-key 'motion global-map
               "[b" 'evil-prev-buffer

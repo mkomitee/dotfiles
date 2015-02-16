@@ -112,10 +112,6 @@
             (evil-leader/set-key
               "/t" 'ag-project-files ;; Prompts for a FILE-TYPE
               )
-            ;; This shouldn't be necessary, but adding ag-mode to
-            ;; evil-motion-state-modes doesn't seem to have the
-            ;; desired effect.
-            (add-hook 'ag-mode-hook 'evil-motion-state)
             ;; Not sure why this isn't the default, but I'd prefer to
             ;; auto-switch to the ag buffer
             (add-hook 'ag-mode-hook (lambda () (pop-to-buffer "*ag search*")))
