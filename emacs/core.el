@@ -130,7 +130,8 @@
                   projectile-enable-idle-timer t
                   projectile-ignored-projects (append
                                                (komitee/split-file "~/.emacs.d/.projectile-ignored-projects")
-                                               (directory-files "~/.emacs.d/elpa" t)))
+                                               (mapcar (lambda (p) (concat "~/.emacs.d/elpa/" p))
+                                                       (directory-files "~/.emacs.d/elpa"))))
             (evil-leader/set-key
               "fp" 'projectile-find-file
               "fP" 'projectile-switch-project
