@@ -21,7 +21,8 @@
             (dolist (mode '(Custom-mode))
               (evil-set-initial-state mode 'normal))
 
-            (dolist (mode '(package-menu-mode))
+            (dolist (mode '(package-menu-mode
+                            messages-buffer-mode))
               (evil-set-initial-state mode 'motion))
 
             (evil-define-key 'motion package-menu-mode-map
@@ -29,8 +30,7 @@
 
             (evil-define-key 'normal dired-mode-map
               "h" 'describe-mode
-              "l" 'dired-do-redisplay
-              "g" 'revert-buffer)
+              "l" 'dired-do-redisplay)
 
             (evil-define-key 'motion global-map
               "[b" 'evil-prev-buffer
