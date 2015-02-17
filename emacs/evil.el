@@ -27,6 +27,11 @@
             (evil-define-key 'motion package-menu-mode-map
               "H" 'package-menu-quick-help)
 
+            (evil-define-key 'normal dired-mode-map
+              "h" 'describe-mode
+              "l" 'dired-do-redisplay
+              "g" 'revert-buffer)
+
             (evil-define-key 'motion global-map
               "[b" 'evil-prev-buffer
               "]b" 'evil-next-buffer
