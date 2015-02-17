@@ -5,8 +5,7 @@
       )
 (require 'package)
 (package-initialize)
-(when (not package-archive-contents)
-  (package-refresh-contents))
+(package-refresh-contents)
 
 (dolist (package '(req-package
                    ;; base16-theme doesn't actually provide
