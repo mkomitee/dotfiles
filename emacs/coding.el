@@ -27,6 +27,10 @@
             )
   )
 
+(req-package company-quickhelp
+  :require (company)
+  :config (company-quickhelp-mode t))
+
 (req-package company-go
   :require (go-mode company)
   :config (add-hook 'go-mode-hook
@@ -166,13 +170,15 @@
             (setq python-fill-docstring-style (quote django)
                   python-shell-interpreter "ipython"
                   )
-            (add-hook 'python-mode-hook (lambda () (run-python "ipython" t nil)))
+            (add-hook 'python-mode-hook (lambda () (anaconda-mode)))
             (evil-define-key 'motion python-mode-map
               "K" 'anaconda-mode-view-doc
               "gd" 'anaconda-mode-goto-definitions
               )
             )
   )
+
+(req-package anaconda-mode)
 
 (req-package lisp-mode
   :require evil
