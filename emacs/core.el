@@ -143,6 +143,9 @@
             )
   )
 
+(req-package autorevert
+  :config (global-auto-revert-mode 1))
+
 ;; (req-package persp-projectile
 ;;   :require perspective evil-leader
 ;;   :config (evil-leader/set-key
