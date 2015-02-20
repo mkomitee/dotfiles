@@ -1,12 +1,8 @@
 [user]
     name = Michael Komitee
 
-[color]
-    ui = auto
-
 [core]
     pager = less -FRXMQigMws
-    abbrev = 8
     editor = emacsclient -q -a emacs
     whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
     excludesfile = ~/.dotfiles/gitignore
@@ -14,56 +10,24 @@
 [log]
     abbrevcommit = yes
     decorate = short
-    showroot = true
-    date = short
-
-[interactive]
-    single = yes
-
-[pretty]
-    lg = "%C(yellow)%h %C(blue)%cd%Cred%d%Creset %s%Cblue <%aN>"
-    lgr = "%C(yellow)%h %C(blue)%cr%Cred%d%Creset %s%Cblue <%aN>"
 
 [alias]
-    co = checkout
-    track = checkout -t
-
-    di = diff
-    dw = diff --color-words='[^[:space:]]|([[:alnum:]]|UTF_8_GUARD)+'
     dc = diff --cached
-    dcw = diff --cached --word-diff --color-words='[^[:space:]]|([[:alnum:]]|UTF_8_GUARD)+'
     ds = diff --staged
-    dsw = diff --staged --word-diff --color-words='[^[:space:]]|([[:alnum:]]|UTF_8_GUARD)+'
+
+    co = checkout
+    ci = commit -v
 
     st = status -sb
-    stat = status -sb
-
-    ci = commit -v
-    cm = commit -m
 
     amend = commit --amend -v --no-edit
     reword = commit --amend -v
     fixup = commit --fixup HEAD
 
     aa = add -A :/
-
-    lc = local-commits --decorate=short --pretty=lgr
-
-    added-file = log --diff-filter=A --
-
     branches = branch -avv
     remotes = remote -v
     tags = tag -l
-
-    root = rev-parse --show-toplevel
-    id = rev-parse
-    currentbranch = rev-parse --abbrev-ref HEAD
-
-    pull = pull --ff-only
-    up = merge --ff-only
-
-    ack = log --color=always --all --topo-order --pretty=lg --full-history -S
-
     shelve = stash save --include-untracked
     unshelve = stash pop
 
@@ -74,21 +38,14 @@
 [clean]
     requireForce = no
 
-[url "gitserve"]
-    insteadOf = gs
-
-[difftool "vimdiff"]
-    cmd = vimdiff  \"$LOCAL\" \"$REMOTE\"
-
 [format]
-    pretty = lg
+    pretty = oneline
 
 [diff]
-    tool = vimdiff
     algorithm = patience
 
-[branch]
-    autosetuprebase = always
+[pull]
+    ff = yes
 
 [github]
     user = mkomitee
@@ -101,25 +58,10 @@
 [tig]
     show-author = no
     show-date = no
-    show-line-numbers = yes
     show-rev-graph = yes
-
-[mergetool "vmt"]
-    cmd = vim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
-
-[mergetool "splice"]
-    cmd = "vim -f $BASE $LOCAL $REMOTE $MERGED -c 'SpliceInit'"
-    trustExitCode = true
 
 [mergetool]
     prompt = false
-
-[merge]
-    tool = splice
-    conflictstyle = diff3
-
-[push]
-    default = upstream
 
 [credential]
     helper = cache
