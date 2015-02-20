@@ -52,9 +52,6 @@
               (kbd "<right>") 'enlarge-window-horizontally
               (kbd "<left>") 'shrink-window-horizontally
 
-              "0" 'smarter-move-beginning-of-line
-
-
               ;; I switch ' and ` in vim, so I do so here as well
               "'" 'evil-goto-mark
               "`" 'evil-goto-mark-line
