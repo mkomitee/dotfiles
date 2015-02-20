@@ -71,6 +71,10 @@
             (define-key global-map "\C-h" 'evil-window-left)
             (define-key global-map "\C-l" 'evil-window-right)
 
+            ;; C-h is the default map for this, but it's really useful
+            ;; so we'll re-add it using Meta
+            (define-key global-map "\M-h" 'help-command)
+
             (evil-define-key 'visual global-map
               ;; There's probably an easier way to do this by defining a function,
               ;; but I can't figure it out. It re-selects the shifted region after
@@ -101,15 +105,7 @@
             )
   )
 
-(req-package help-fns+
-  :require evil-leader
-  :config (progn
-            (evil-leader/set-key
-              "hdc" 'describe-command
-              "hdo" 'describe-option
-              )
-            )
-  )
+(req-package help-fns+)
 
 (req-package evil-leader
   :require evil
@@ -119,44 +115,18 @@
             (evil-leader/set-key
               "u" 'universal-argument
 
-              "hdp" 'describe-package
-              "hdf" 'describe-function
-              "hdb" 'describe-bindings
-              "hdim" 'describe-input-method
-              "hdk" 'describe-key
-              "hdle" 'describe-language-environment
-              "hdM" 'describe-mode
-              "hdm" 'describe-minor-mode
-              "hds" 'describe-syntax
-              "hdv" 'describe-variable
+              ;; This is nice, but it doesn't help us when we're in
+              ;; insert-state or an emacs-state.
+              "h" 'help-command
 
-              "hac" 'apropos-command
-              "had" 'apropos-documentation
-              "hdlh" 'display-local-help
-              "hfh" 'help-for-help
-              "hils" 'info-lookup-symbol
-
-              "hca" 'customize-apropos
-              "hcf" 'customize-face
-              "hcg" 'customize-group
-              "hcm" 'customize-mode
-              "hct" 'customize-themes
-              "hcv" 'customize-variable
+              "ca" 'customize-apropos
+              "cf" 'customize-face
+              "cg" 'customize-group
+              "cm" 'customize-mode
+              "ct" 'customize-themes
+              "cv" 'customize-variable
 
               "w" 'evil-window-map
-              )
-            )
-  )
-
-(req-package evil-args
-  :require evil
-  :config (progn
-            (define-key evil-inner-text-objects-map "a" 'evil-inner-arg)
-            (define-key evil-outer-text-objects-map "a" 'evil-outer-arg)
-            (evil-define-key 'motion global-map
-              (kbd "M-l") 'evil-forward-arg
-              (kbd "M-h") 'evil-backward-arg
-              (kbd "M-k") 'evil-jump-out-args
               )
             )
   )

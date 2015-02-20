@@ -21,7 +21,7 @@
   :config (progn
             (setq guide-key/guide-key-sequence '("C-x" "C-c" "SPC" "M-g" "M-s"
                                                  "z" "g" "]" "[" "Z" "C-w"
-                                                 "M-SPC")
+                                                 "M-SPC" "M-h")
                   guide-key/recursive-key-sequence-flag t
                   guide-key/idle-delay 0.5
                   guide-key/popup-window-position (quote bottom)
