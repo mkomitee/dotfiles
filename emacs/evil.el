@@ -102,6 +102,11 @@
             (define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
             (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
             (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
+
+            (define-key evil-motion-state-map [down-mouse-1] nil)
+            (define-key evil-visual-state-map [mouse-2] nil)
+            (define-key evil-normal-state-map [mouse-2] nil)
+            (define-key evil-insert-state-map [mouse-2] nil)
             )
   )
 
