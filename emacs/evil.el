@@ -47,11 +47,6 @@
               "j" 'evil-next-visual-line
               "k" 'evil-previous-visual-line
 
-              (kbd "<down>") 'shrink-window
-              (kbd "<up>") 'enlarge-window
-              (kbd "<right>") 'enlarge-window-horizontally
-              (kbd "<left>") 'shrink-window-horizontally
-
               ;; I switch ' and ` in vim, so I do so here as well
               "'" 'evil-goto-mark
               "`" 'evil-goto-mark-line
@@ -61,8 +56,12 @@
               "Y" (kbd "y$")
               )
 
-            (define-key evil-window-map (kbd "<left>") 'winner-undo)
-            (define-key evil-window-map (kbd "<right>") 'winner-redo)
+            (define-key evil-window-map (kbd "<backspace>") 'winner-undo)
+            (define-key evil-window-map (kbd "<S-backspace>") 'winner-redo)
+            (define-key evil-window-map (kbd "<down>") 'shrink-window)
+            (define-key evil-window-map (kbd "<up>") 'enlarge-window)
+            (define-key evil-window-map (kbd "<right>") 'enlarge-window-horizontally)
+            (define-key evil-window-map (kbd "<left>") 'shrink-window-horizontally)
 
             ;; Easier window navigation. Note, this kills the C-h help-map prefix,
             ;; which is why I replicate most of that functionality in my leader-map.
