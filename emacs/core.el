@@ -221,3 +221,7 @@
             (add-to-list 'auto-mode-alist '("cron\\(tab\\)?\\."    . crontab-mode))
             )
   )
+
+(req-package yaml-mode
+  :config (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+  )
