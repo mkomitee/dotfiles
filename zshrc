@@ -18,9 +18,18 @@ source $ZSH/colours.zsh
 source $ZSH/extensions.zsh
 
 if [ $TERM != 'eterm-color' ]; then
-    if [ -d $CONTRIB/zsh-users/zsh-syntax-highlighting ]; then
+    if [ -f $CONTRIB/zsh-users/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
         ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
         source $CONTRIB/zsh-users/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    fi
+    if [ -f $CONTRIB/hchbaw/opp.zsh/opp.zsh ]; then
+        source $CONTRIB/hchbaw/opp.zsh/opp.zsh
+    fi
+    if [ -f $CONTRIB/hchbaw/opp.zsh/opp/surround.zsh ]; then
+        source $CONTRIB/hchbaw/opp.zsh/opp/surround.zsh
+    fi
+    if [ -f $CONTRIB/hchbaw/opp.zsh/opp/textobj-between.zsh ]; then
+        source $CONTRIB/hchbaw/opp.zsh/opp/textobj-between.zsh
     fi
 fi
 
