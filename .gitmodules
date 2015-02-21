@@ -28,3 +28,6 @@
 [submodule "contrib/hchbaw/opp.zsh"]
 	path = contrib/hchbaw/opp.zsh
 	url = https://github.com/hchbaw/opp.zsh.git
+[submodule "contrib/zsh-users/zaw"]
+	path = contrib/zsh-users/zaw
+	url = https://github.com/zsh-users/zaw.git

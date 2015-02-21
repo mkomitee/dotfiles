@@ -22,6 +22,10 @@ if [ $TERM != 'eterm-color' ]; then
         ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
         source $CONTRIB/zsh-users/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     fi
+    if [ -f $CONTRIB/zsh-users/zaw/zaw.zsh ]; then
+        # C-x ; for ido-stuff
+        source $CONTRIB/zsh-users/zaw/zaw.zsh
+    fi
     if [ -f $CONTRIB/hchbaw/opp.zsh/opp.zsh ]; then
         source $CONTRIB/hchbaw/opp.zsh/opp.zsh
     fi
