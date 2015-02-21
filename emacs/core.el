@@ -146,27 +146,6 @@
 (req-package autorevert
   :config (global-auto-revert-mode 1))
 
-;; (req-package persp-projectile
-;;   :require perspective evil-leader
-;;   :config (evil-leader/set-key
-;;               "P" 'projectile-persp-switch-project
-;;               )
-
-;;   )
-
-;; (req-package perspective
-;;   :config (progn
-;;             (evil-define-key 'motion global-map
-;;               "]t" 'persp-next
-;;               "[t" 'persp-prev
-;;               )
-;;             (evil-leader/set-key
-;;               "t" 'persp-switch
-;;               )
-;;             (persp-mode)
-;;             )
-;;   )
-
 ;; Allows completion for commands.
 (req-package smex
   :bind (("M-x" . smex)
