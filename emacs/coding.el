@@ -217,3 +217,7 @@
             (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
             )
   )
+
+(req-package sh-script
+  :config (add-to-list 'auto-mode-alist '("\\.zsh$" . sh-mode))
+  )
