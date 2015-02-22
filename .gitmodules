@@ -31,3 +31,6 @@
 [submodule "contrib/zsh-users/zaw"]
 	path = contrib/zsh-users/zaw
 	url = https://github.com/zsh-users/zaw.git
+[submodule "contrib/tarruda/zsh-autosuggesions"]
+	path = contrib/tarruda/zsh-autosuggesions
+	url = git://github.com/tarruda/zsh-autosuggestions
