@@ -208,3 +208,8 @@
   :require evil
   :config (evil-search-highlight-persist)
   )
+
+(req-package evil-anzu
+  :require evil
+  :config (global-anzu-mode 1)
+  )
