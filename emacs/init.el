@@ -5,12 +5,12 @@
 
 (komitee/load "custom")
 (komitee/load "packages")
+(komitee/load "decorations")
 (komitee/load "utils")
 (komitee/load "core")
 (komitee/load "evil")
 (komitee/load "vcs")
 (komitee/load "ido")
-(komitee/load "decorations")
 (komitee/load "coding")
 (komitee/load "prose")
 (komitee/load "misc")
