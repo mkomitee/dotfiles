@@ -211,6 +211,7 @@
   )
 
 (req-package evil-anzu
+  :diminish anzu-mode
   :require evil
   :config (global-anzu-mode 1)
   )
