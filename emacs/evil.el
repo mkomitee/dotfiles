@@ -64,6 +64,7 @@
             (define-key evil-window-map (kbd "<left>") 'shrink-window-horizontally)
             (define-key evil-window-map "|" 'komitee/split-horizontally)
             (define-key evil-window-map "_" 'komitee/split-vertically)
+            (define-key evil-window-map "f" 'text-scale-adjust)
 
             ;; Easier window navigation. Note, this kills the C-h help-map prefix,
             ;; which is why I replicate most of that functionality in my leader-map.
