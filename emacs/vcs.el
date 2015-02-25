@@ -36,6 +36,8 @@
             (define-key magit-status-mode-map "k" 'magit-goto-previous-section)
             (define-key magit-log-mode-map "j" 'magit-goto-next-section)
             (define-key magit-log-mode-map "k" 'magit-goto-previous-section)
+            (define-key magit-diff-mode-map "j" 'magit-goto-next-section)
+            (define-key magit-diff-mode-map "k" 'magit-goto-previous-section)
             )
   )
 
