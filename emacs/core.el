@@ -238,3 +238,7 @@
 (req-package discover
   :config (global-discover-mode)
   )
+
+(req-package which-func
+  :config (which-function-mode)
+  )
