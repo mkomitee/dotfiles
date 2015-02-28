@@ -178,7 +178,9 @@
             )
   )
 
-(req-package anaconda-mode)
+(req-package anaconda-mode
+  :diminish anaconda-mode
+  )
 
 (req-package lisp-mode
   :require evil
