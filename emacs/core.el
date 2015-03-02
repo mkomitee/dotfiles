@@ -231,9 +231,39 @@
             )
   )
 
-(req-package yaml-mode
-  :config (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+(req-package js2-mode
+  :config (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
   )
+
+(req-package ssh-config-mode
+  :config (progn
+            (add-to-list 'auto-mode-alist '(".ssh/config\\'"       . ssh-config-mode))
+            (add-to-list 'auto-mode-alist '("sshd?_config\\'"      . ssh-config-mode))
+            (add-to-list 'auto-mode-alist '("known_hosts\\'"       . ssh-known-hosts-mode))
+            (add-to-list 'auto-mode-alist '("authorized_keys2?\\'" . ssh-authorized-keys-mode))
+            )
+  )
+
+(req-package apache-mode)
+(req-package cmake-mode)
+(req-package csv-mode)
+(req-package cython-mode)
+(req-package yaml-mode)
+(req-package haml-mode)
+(req-package jinja2-mode)
+(req-package less-css-mode)
+(req-package json-mode)
+(req-package llvm-mode)
+(req-package mustache-mode)
+(req-package nginx-mode)
+(req-package nix-mode)
+(req-package protobuf-mode)
+(req-package rpm-spec-mode)
+(req-package rust-mode)
+(req-package sass-mode)
+(req-package scss-mode)
+(req-package toml-mode)
+(req-package vimrc-mode)
 
 (req-package discover
   :config (global-discover-mode)
