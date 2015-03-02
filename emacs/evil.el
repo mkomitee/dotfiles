@@ -164,6 +164,7 @@
 
 (req-package evil-snipe
   :require evil
+  :diminish evil-snipe-mode
   :config (global-evil-snipe-mode 1)
   )
 
