@@ -242,3 +242,17 @@
 (req-package which-func
   :config (which-function-mode)
   )
+
+(req-package buffer-move
+  :require evil
+  :config (progn
+            (define-key evil-window-map (kbd "S-h") 'buf-move-left)
+            (define-key evil-window-map (kbd "S-l") 'buf-move-right)
+            (define-key evil-window-map (kbd "S-j") 'buf-move-down)
+            (define-key evil-window-map (kbd "S-k") 'buf-move-up)
+            (define-key global-map (kbd "C-S-h") 'buf-move-left)
+            (define-key global-map (kbd "C-S-l") 'buf-move-right)
+            (define-key global-map (kbd "C-S-j") 'buf-move-down)
+            (define-key global-map (kbd "C-S-k") 'buf-move-up)
+            )
+  )
