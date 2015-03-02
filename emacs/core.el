@@ -256,3 +256,7 @@
             (define-key global-map (kbd "C-S-k") 'buf-move-up)
             )
   )
+
+(req-package evil-org
+  :require evil evil-leader org
+  )
