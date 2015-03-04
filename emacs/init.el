@@ -11,6 +11,7 @@
 (komitee/load "evil")
 (komitee/load "vcs")
 (komitee/load "ido")
+(komitee/load "helm")
 (komitee/load "coding")
 (komitee/load "prose")
 (komitee/load "misc")

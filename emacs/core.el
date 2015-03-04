@@ -132,13 +132,13 @@
                                                (komitee/split-file "~/.emacs.d/.projectile-ignored-projects")
                                                (mapcar (lambda (p) (concat "~/.emacs.d/elpa/" p))
                                                        (directory-files "~/.emacs.d/elpa"))))
-            (evil-leader/set-key
-              "fp" 'projectile-find-file
-              "fP" 'projectile-switch-project
-              "fB" 'projectile-switch-to-buffer
-              "fr" 'projectile-recentf
-              "//" 'projectile-ag
-              )
+            ;; (evil-leader/set-key
+            ;;   "fp" 'projectile-find-file
+            ;;   "fP" 'projectile-switch-project
+            ;;   "fB" 'projectile-switch-to-buffer
+            ;;   "fr" 'projectile-recentf
+            ;;   "//" 'projectile-ag
+            ;;   )
             (projectile-global-mode t)
             )
   )

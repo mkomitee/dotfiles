@@ -6,15 +6,13 @@
                   ido-ignore-buffers (quote ("\\` "
                                              "\\*Python\\[.*\\]\\*"))
                   )
-            (evil-leader/set-key
-              "ff" 'ido-find-file
-              "fb" 'ido-switch-buffer
-              "ev" (lambda () (interactive)
-                     (ido-find-file-in-dir (expand-file-name
-                                            komitee/emacs-config-directory)))
-
-
-              )
+            ;; (evil-leader/set-key
+            ;;   "ff" 'ido-find-file
+            ;;   "fb" 'ido-switch-buffer
+            ;;   "ev" (lambda () (interactive)
+            ;;          (ido-find-file-in-dir (expand-file-name
+            ;;                                 komitee/emacs-config-directory)))
+            ;;   )
             (ido-everywhere t)
             )
   )

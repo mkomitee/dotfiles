@@ -20,10 +20,10 @@
                   company-idle-delay nil
                   company-show-numbers t
                   )
-            (evil-define-key 'insert global-map
-              (kbd "C-x C-o") 'company-complete
-              (kbd "C-x C-u") 'company-complete
-              )
+            ;; (evil-define-key 'insert global-map
+            ;;   (kbd "C-x C-o") 'company-complete
+            ;;   (kbd "C-x C-u") 'company-complete
+            ;;   )
             )
   )
 
