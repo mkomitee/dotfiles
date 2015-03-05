@@ -5,7 +5,7 @@
                   helm-move-to-line-cycle-in-source t
                   helm-ff-search-library-in-sexp t
                   helm-ff-file-name-history-use-recentf t
-                  helm-autoresize-max-height 20
+                  helm-autoresize-max-height 40
                   helm-M-x-fuzzy-match t
                   helm-ag-use-grep-ignore-list t
                   helm-ff-skip-boring-files t
