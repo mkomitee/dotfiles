@@ -109,9 +109,9 @@
   :config (progn
             (setq ag-reuse-buffers t
                   ag-reuse-window t)
-            (evil-leader/set-key
-              "/t" 'ag-project-files ;; Prompts for a FILE-TYPE
-              )
+            ;; (evil-leader/set-key
+            ;;   "/t" 'ag-project-files ;; Prompts for a FILE-TYPE
+            ;;   )
             ;; Not sure why this isn't the default, but I'd prefer to
             ;; auto-switch to the ag buffer
             (add-hook 'ag-mode-hook (lambda () (pop-to-buffer "*ag search*")))
@@ -147,15 +147,15 @@
   :config (global-auto-revert-mode 1))
 
 ;; Allows completion for commands.
-(req-package smex
-  :bind (("M-x" . smex)
-         ("C-x C-m" . smex)
-         ("C-c C-m" . smex))
-  :config (progn
-            (setq smex-save-file "~/.emacs.d/.smex-items")
-            (smex-initialize)
-            )
-  )
+;; (req-package smex
+;;   :bind (("M-x" . smex)
+;;          ("C-x C-m" . smex)
+;;          ("C-c C-m" . smex))
+;;   :config (progn
+;;             (setq smex-save-file "~/.emacs.d/.smex-items")
+;;             (smex-initialize)
+;;             )
+;;   )
 
 ;; Snippets are useful
 (req-package yasnippet
