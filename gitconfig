@@ -43,6 +43,7 @@
 
 [diff]
     algorithm = patience
+    renames = copies
 
 [pull]
     ff = yes
@@ -59,6 +60,10 @@
     show-author = no
     show-date = no
     show-rev-graph = yes
+
+[merge]
+    log = true
+    ff = no
 
 [mergetool]
     prompt = false
