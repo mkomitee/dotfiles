@@ -41,6 +41,9 @@
 (req-package helm-flyspell
   :require helm flyspell
   :config (progn
+            (evil-define-key 'normal global-map
+              "z=" 'helm-flyspell-correct
+              )
             )
   )
 
