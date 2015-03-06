@@ -50,6 +50,8 @@
 (req-package helm-flycheck
   :require helm flycheck
   :config (progn
+            (evil-leader/set-key
+              "?" 'helm-flycheck)
             )
   )
 
