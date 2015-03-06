@@ -1,2 +1,2 @@
- (when (fboundp 'winner-mode)
-      (winner-mode 1))
+(when (fboundp 'winner-mode)
+  (winner-mode 1))

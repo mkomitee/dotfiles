@@ -20,7 +20,7 @@
 ;; Apply local customizations
 (defvar komitee/local-emacs-config (concat user-emacs-directory "local.el"))
 (when (file-exists-p komitee/local-emacs-config)
-          (load-file komitee/local-emacs-config))
+  (load-file komitee/local-emacs-config))
 
 ;; If we're in a window system of any kind start the server
 (req-package server

@@ -45,7 +45,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
   )
 
 (defun komitee/split-horizontally ()
-    (interactive)
+  (interactive)
   (progn
     (split-window-horizontally)
     (other-window 1)
@@ -53,7 +53,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
   )
 
 (defun komitee/split-vertically ()
-    (interactive)
+  (interactive)
   (progn
     (split-window-vertically)
     (other-window 1)

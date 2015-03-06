@@ -1,4 +1,4 @@
-; Emacs now has a good editor.
+;; Emacs now has a good editor.
 
 (req-package evil
   :require undo-tree
