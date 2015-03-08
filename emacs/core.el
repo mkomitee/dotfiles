@@ -198,6 +198,7 @@
 (req-package ace-window
   :require evil
   :config (progn
+            (setq aw-leading-char-style 'path)
             (define-key evil-window-map "?" 'ace-window)
             (define-key evil-window-map "S" 'ace-swap-window)
             (define-key evil-window-map "x" 'delete-other-windows)
