@@ -31,6 +31,7 @@
 
               "gd" 'magit-diff-unstaged
               "gD" 'magit-diff-staged
+              "gb" 'magit-blame-mode
               )
             (define-key magit-status-mode-map "j" 'magit-goto-next-section)
             (define-key magit-status-mode-map "k" 'magit-goto-previous-section)
@@ -38,6 +39,7 @@
             (define-key magit-log-mode-map "k" 'magit-goto-previous-section)
             (define-key magit-diff-mode-map "j" 'magit-goto-next-section)
             (define-key magit-diff-mode-map "k" 'magit-goto-previous-section)
+            (setq vc-follow-symlinks nil)
             )
   )
 
