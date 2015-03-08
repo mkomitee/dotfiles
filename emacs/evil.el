@@ -133,6 +133,9 @@
               "cv" 'customize-variable
 
               "w" 'evil-window-map
+
+              "ss" 'just-one-space
+              "x" 'helm-M-x
               )
             )
   )
