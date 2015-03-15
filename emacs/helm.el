@@ -112,3 +112,7 @@
               )
             )
   )
+
+(req-package helm-swoop)
+
+;; (req-package helm-dash)

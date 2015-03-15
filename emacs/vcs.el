@@ -78,3 +78,16 @@
             )
   )
 
+
+(req-package git-timemachine
+  :config (progn
+            (evil-leader/set-key
+              "gt" 'git-timemachine
+              "gT" 'git-timemachine-quit)
+
+            (evil-define-key 'motion global-map
+              "]c" 'git-timemachine-show-next-revision
+              "[c" 'git-timemachine-show-previous-revision
+              )
+            )
+  )

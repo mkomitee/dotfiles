@@ -300,3 +300,9 @@
             (add-hook 'text-mode-hook 'typo-mode)
             )
   )
+
+(req-package aggressive-indent
+  :config (global-aggressive-indent-mode 1)
+  )
+
+(req-package aggressive-fill-paragraph)
