@@ -310,11 +310,9 @@
             (setq afp-fill-comments-only-mode-list
                   '(emacs-lisp-mode go-mode haskell-mode python-mode sh-mode)
                   )
-            (add-hook 'emacs-lisp-mode-hook 'aggressive-fill-paragraph-mode)
-            (add-hook 'go-mode-hook 'aggressive-fill-paragraph-mode)
-            (add-hook 'haskell-mode-hook 'aggressive-fill-paragraph-mode)
-            (add-hook 'python-mode-hook 'aggressive-fill-paragraph-mode)
-            (add-hook 'sh-mode-hook 'aggressive-fill-paragraph-mode)
-            (add-hook 'text-mode-hook 'aggressive-fill-paragraph-mode)
+            ;; You're going to run into problems and are likely to
+            ;; have to update the above setting with every mode you
+            ;; use for programming.
+            (afp-setup-recommended-hooks)
             )
   )
