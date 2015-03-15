@@ -216,7 +216,6 @@
 
 ;; Display a thin red vertical line at the 80th column
 (req-package fill-column-indicator
-  :diminish fci-mode
   :config (progn
             (setq fci-rule-character 9550
                   fci-rule-color "darkred"

@@ -2,11 +2,11 @@
 
 (req-package evil
   :require undo-tree
-  :pre-load (setq evil-want-C-u-scroll t
-                  evil-want-C-w-in-emacs-state t
-                  evil-want-fine-undo nil
-                  evil-want-fine-undo nil
-                  )
+  :init (setq evil-want-C-u-scroll t
+              evil-want-C-w-in-emacs-state t
+              evil-want-fine-undo nil
+              evil-want-fine-undo nil
+              )
   :config (progn
             (setq evil-emacs-state-cursor '("red" box)
                   evil-normal-state-cursor '("white" box)
