@@ -28,7 +28,7 @@
   )
 
 (req-package company-quickhelp
-  :require (company)
+  :require company
   :config (company-quickhelp-mode t))
 
 (req-package company-go
@@ -144,7 +144,7 @@
 
 ;; go
 (req-package go-mode
-  :require evil exec-path-from-shell
+  :require (evil exec-path-from-shell)
   :config (progn
             (evil-define-key 'motion go-mode-map
               "K" 'godoc-at-point
@@ -165,7 +165,7 @@
 
 ;; python
 (req-package python
-  :require anaconda-mode evil
+  :require (anaconda-mode evil)
   :config (progn
             (setq python-fill-docstring-style (quote django)
                   python-shell-interpreter "ipython"

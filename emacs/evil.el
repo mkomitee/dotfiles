@@ -194,7 +194,7 @@
 
 
 (req-package evil-god-state
-  :require evil evil-leader
+  :require (evil evil-leader)
   :config (progn
             (evil-leader/set-key
               "eg" 'evil-execute-in-god-state

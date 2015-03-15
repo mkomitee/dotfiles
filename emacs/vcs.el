@@ -4,7 +4,7 @@
   )
 
 (req-package git-gutter-fringe
-  :require evil evil-leader git-gutter-mode
+  :require (evil evil-leader git-gutter-mode)
   :config (progn
             (evil-leader/set-key
               "ga" 'git-gutter:stage-hunk
@@ -18,7 +18,7 @@
   )
 
 (req-package magit
-  :require evil evil-leader
+  :require (evil evil-leader)
   :config (progn
             (magit-auto-revert-mode -1)
             (evil-leader/set-key
@@ -44,7 +44,7 @@
   )
 
 (req-package git-rebase-mode
-  :require evil evil-leader
+  :require (evil evil-leader)
   :config (progn
             (evil-set-initial-state 'git-rebase-mode 'motion)
             (evil-leader/set-key-for-mode 'git-rebase-mode
@@ -67,7 +67,7 @@
   )
 
 (req-package git-commit-mode
-  :require evil evil-leader
+  :require (evil evil-leader)
   :config (progn
             (evil-set-initial-state 'git-commit-mode 'normal)
             (evil-leader/set-key-for-mode 'git-commit-mode

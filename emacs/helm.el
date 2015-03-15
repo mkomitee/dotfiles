@@ -29,7 +29,7 @@
   )
 
 (req-package helm-company
-  :require helm company
+  :require (helm company)
   :config (progn
             (evil-define-key 'insert global-map
               (kbd "C-x C-o") 'helm-company
@@ -39,7 +39,7 @@
   )
 
 (req-package helm-flyspell
-  :require helm flyspell
+  :require (helm flyspell)
   :config (progn
             (evil-define-key 'normal global-map
               "z=" 'helm-flyspell-correct
@@ -48,7 +48,7 @@
   )
 
 (req-package helm-flycheck
-  :require helm flycheck
+  :require (helm flycheck)
   :config (progn
             (evil-leader/set-key
               "?" 'helm-flycheck)
@@ -56,7 +56,7 @@
   )
 
 (req-package helm-projectile
-  :require helm projectile helm-ag
+  :require (helm projectile helm-ag)
   :config (progn
             (evil-leader/set-key
               "fp" 'helm-projectile-find-file

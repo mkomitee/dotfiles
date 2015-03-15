@@ -122,7 +122,7 @@
 
 ;; Projectile for better fuzzy matching and more
 (req-package projectile
-  :require evil-leader ag
+  :require (evil-leader ag)
   :config (progn
             (setq projectile-cache-file "~/.emacs.d/.projectile.cache"
                   projectile-known-projects-file "~/.emacs.d/.projectile-bookmarks.eld"
@@ -290,7 +290,7 @@
   )
 
 (req-package evil-org
-  :require evil evil-leader org
+  :require (evil evil-leader org)
   )
 
 (req-package typo
