@@ -128,6 +128,8 @@
   :config (add-hook 'emacs-lisp-mode-hook 'elisp-slime-nav-mode)
   )
 
+(req-package pyvenv)
+
 (req-package eldoc
   :diminish eldoc-mode
   :config
