@@ -80,6 +80,7 @@
 
 
 (req-package git-timemachine
+  :require (evil-leader)
   :config (progn
             (evil-leader/set-key
               "gt" 'git-timemachine
