@@ -43,8 +43,11 @@
     pretty = oneline
 
 [pretty]
+    # ffffffff YYYY-MM-DD (refs) Subject
     oneline-date = "format:%C(auto)%h %C(blue)%ad%C(auto)%d %C(reset)%s"
+    # ffffffff Author Name (refs) Subject
     oneline-author = "format:%C(auto)%h %C(blue)%aN%C(auto)%d%C(reset)% s"
+    # ffffffff YYYY-MM-DD Author Name (refs) Subject
     oneline-date-author = "format:%C(auto)%h %C(blue)%ad %C(yellow)%aN%C(auto)%d%C(reset)% s"
 
 [diff]

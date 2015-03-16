@@ -4,7 +4,7 @@
   )
 
 (req-package git-gutter-fringe
-  :require (evil evil-leader git-gutter-mode)
+  :require (evil evil-leader git-gutter)
   :config (progn
             (evil-leader/set-key
               "ga" 'git-gutter:stage-hunk
