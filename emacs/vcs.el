@@ -3,6 +3,8 @@
   :config (global-git-gutter-mode)
   )
 
+(req-package gitconfig-mode)
+
 (req-package git-gutter-fringe
   :require (evil evil-leader git-gutter)
   :config (progn
