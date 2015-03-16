@@ -113,6 +113,8 @@
             )
   )
 
-(req-package helm-swoop)
-
-;; (req-package helm-dash)
+(req-package helm-swoop
+  :config (evil-leader/set-key
+            "sw" 'helm-swoop
+            )
+  )
