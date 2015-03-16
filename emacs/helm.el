@@ -114,7 +114,11 @@
   )
 
 (req-package helm-swoop
-  :config (evil-leader/set-key
-            "sw" 'helm-swoop
+  :config (progn
+            (evil-leader/set-key
+              "sw" 'helm-swoop
+              )
+            (setq helm-swoop-pre-input-function
+                  (lambda () ""))
             )
   )
