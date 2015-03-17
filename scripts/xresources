@@ -1,0 +1,5 @@
+#!/bin/sh
+xrdb $HOME/.Xresources
+if [ -f $HOME/.Xresources.local ]; then
+    xrdb -override $HOME/.Xresources.local
+fi
