@@ -290,14 +290,6 @@
   :require (evil evil-leader org)
   )
 
-(req-package typo
-  :diminish typo-mode
-  :config (progn
-            (typo-global-mode 1)
-            (add-hook 'text-mode-hook 'typo-mode)
-            )
-  )
-
 (req-package aggressive-indent
   :config (global-aggressive-indent-mode 1)
   )
