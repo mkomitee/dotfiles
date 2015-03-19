@@ -86,7 +86,7 @@ export ACKRC=~/.dotfiles/ackrc
 export LESS="-RMQigMwsS"
 
 export PAGER=less
-export EDITOR="emacsclient -q -a emacs -n"
+export EDITOR="emacsclient -q -a emacs"
 export SVNEDITOR=$EDITOR
 export VISUAL=$EDITOR
 
