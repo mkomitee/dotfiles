@@ -239,3 +239,7 @@
                             (sh-set-shell "zsh"))))
             )
   )
+
+(req-package gdb-mi
+  :config (setq gdb-many-windows t)
+  )
