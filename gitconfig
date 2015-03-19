@@ -54,9 +54,6 @@
     algorithm = patience
     renames = copies
 
-[pull]
-    ff = yes
-
 [github]
     user = mkomitee
 
@@ -72,7 +69,7 @@
 
 [merge]
     log = true
-    ff = no
+    ff = only
 
 [mergetool]
     prompt = false
