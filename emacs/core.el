@@ -247,7 +247,6 @@
 (req-package apache-mode)
 (req-package cmake-mode)
 (req-package csv-mode)
-;; (req-package cython-mode)
 (req-package yaml-mode)
 (req-package haml-mode)
 (req-package jinja2-mode)
