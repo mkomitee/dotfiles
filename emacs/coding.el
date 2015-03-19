@@ -94,12 +94,14 @@
                    (face faces space-before-tab tab-mark tabs trailing))
                   )
             (add-hook 'prog-mode-hook 'whitespace-mode)
+            (add-hook 'text-mode-hook 'whitespace-mode)
 
             ;; Cleanup whitespace on save
             (defun komitee/whitespace-hook ()
               (add-hook 'before-save-hook 'whitespace-cleanup nil t)
               )
             (add-hook 'prog-mode-hook 'komitee/whitespace-hook)
+            (add-hook 'text-mode-hook 'komitee/whitespace-hook)
 
             ;; Make it disable-able
             ;; XXX This disables more than just the whitespace hook.
