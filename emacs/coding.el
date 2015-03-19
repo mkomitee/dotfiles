@@ -243,3 +243,10 @@
 (req-package gdb-mi
   :config (setq gdb-many-windows t)
   )
+
+(req-package cc-vars
+  :config (progn
+            (setq c-basic-offset 4)
+            )
+
+  )

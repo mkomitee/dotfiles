@@ -3,6 +3,13 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(c-default-style
+   (quote
+    ((c-mode . "bsd")
+     (c++-mode . "bsd")
+     (java-mode . "java")
+     (awk-mode . "awk")
+     (other . "gnu"))))
  '(custom-safe-themes
    (quote ("6cb86285d0cee020bcb0e9d0ffa56bad4c5be86d2bd14f2f4997a46130a6fe56"
            "7e8d09164066c3fc1f27a46cb9797e890648a52077fcfe07d91f041d9864a56d"
