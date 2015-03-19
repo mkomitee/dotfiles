@@ -98,8 +98,6 @@
             (popwin-mode 1)
             (push '("*Flycheck errors*" :position bottom :height 5)
                   popwin:special-display-config)
-            (push '("^\*helm .+\*$" :regexp t) popwin:special-display-config)
-            (push '("^\*helm-.+\*$" :regexp t) popwin:special-display-config)
             )
   )
 

@@ -5,10 +5,12 @@
                   helm-move-to-line-cycle-in-source t
                   helm-ff-search-library-in-sexp t
                   helm-ff-file-name-history-use-recentf t
-                  helm-autoresize-max-height 40
+                  helm-autoresize-max-height 30
+                  helm-autoresize-min-height 30
                   helm-M-x-fuzzy-match t
                   helm-ag-use-grep-ignore-list t
                   helm-ff-skip-boring-files t
+                  helm-display-header-line nil
                   )
             (evil-leader/set-key
               "ff" 'helm-find-files
@@ -21,6 +23,13 @@
               )
             (helm-autoresize-mode t)
             (global-set-key (kbd "M-x") 'helm-M-x)
+
+            (defun helm-toggle-header-line ()
+              (if (= (length helm-sources) 1)
+                  (set-face-attribute 'helm-source-header nil :height 0.1)
+                (set-face-attribute 'helm-source-header nil :height 1.0)))
+
+            (add-hook 'helm-before-initialize-hook 'helm-toggle-header-line)
             )
   )
 
