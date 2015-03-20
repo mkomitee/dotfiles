@@ -293,17 +293,3 @@
 (req-package aggressive-indent
   :config (global-aggressive-indent-mode 1)
   )
-
-(req-package aggressive-fill-paragraph
-  :config (progn
-            (setq afp-fill-comments-only-mode-list
-                  '(emacs-lisp-mode go-mode haskell-mode python-mode sh-mode
-                                    makefile-gmake-mode
-                                    )
-                  )
-            ;; You're going to run into problems and are likely to
-            ;; have to update the above setting with every mode you
-            ;; use for programming.
-            (afp-setup-recommended-hooks)
-            )
-  )
