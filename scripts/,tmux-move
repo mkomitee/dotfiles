@@ -1,0 +1,6 @@
+#!/bin/sh
+# Call with -L, -R, -U, or -D for move direction
+old=$(tmux list-panes -F "#P #{pane_active}" | grep 1$ | cut -d' ' -f1)
+tmux select-pane $*
+new=$(tmux list-panes -F "#P #{pane_active}" | grep 1$ | cut -d' ' -f1)
+tmux swap-pane -s ${old} -t ${new} -d
