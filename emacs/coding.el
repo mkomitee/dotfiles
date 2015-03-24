@@ -75,6 +75,7 @@
                   (delq 'emacs-lisp-checkdoc flycheck-checkers))
             (setq flycheck-checkers
                   (delq 'puppet-parser flycheck-checkers))
+            (setq flycheck-indication-mode nil)
             )
   )
 
