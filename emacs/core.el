@@ -1,10 +1,10 @@
 (setq auto-save-list-file-prefix "~/.emacs.d/.auto-save-list/.saves-"
       inhibit-startup-echo-area-message t
       inhibit-startup-screen t
-      initial-buffer-choice (quote remember-notes)
       frame-background-mode (quote dark)
       indicate-buffer-boundaries (quote left)
       scroll-conservatively 9999
+      require-final-newline t
       scroll-up-aggressively 0.0
       scroll-down-aggressively 0.0
       scroll-margin 3
