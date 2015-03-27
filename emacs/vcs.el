@@ -13,42 +13,13 @@
               "]h" 'git-gutter:next-hunk
               "[h" 'git-gutter:previous-hunk
               )
-            ;; Please adjust fringe width if your own sign is too big.
-            (setq-default left-fringe-width 20
-                          right-fringe-width 20)
-
-            (fringe-helper-define 'git-gutter-fr:added nil
-              ".XXXXXX."
-              "XX....XX"
-              "X......X"
-              "X......X"
-              "XXXXXXXX"
-              "XXXXXXXX"
-              "X......X"
-              "X......X")
-
-            (fringe-helper-define 'git-gutter-fr:deleted nil
-              "XXXXXX.."
-              "XX....X."
-              "XX.....X"
-              "XX.....X"
-              "XX.....X"
-              "XX.....X"
-              "XX....X."
-              "XXXXXX..")
-
-            (fringe-helper-define 'git-gutter-fr:modified nil
-              "XXXXXXXX"
-              "X..XX..X"
-              "X..XX..X"
-              "X..XX..X"
-              "X..XX..X"
-              "X..XX..X"
-              "X..XX..X"
-              "X..XX..X")
-
-            (setq git-gutter:update-interval 1
-                  git-gutter:hide-gutter 1)
+            ;; I'm using git-gutter-fringe / git-gutter for
+            ;; stage/revert hunk, but don't actually want to clutter
+            ;; up the fringe. This changes the markers in the fringe
+            ;; to be invisible.
+            (fringe-helper-define 'git-gutter-fr:added nil ".")
+            (fringe-helper-define 'git-gutter-fr:deleted nil ".")
+            (fringe-helper-define 'git-gutter-fr:modified nil ".")
             (global-git-gutter-mode)
             )
   )
