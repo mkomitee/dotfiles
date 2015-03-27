@@ -37,15 +37,15 @@
   :require helm
   )
 
-(req-package helm-company
-  :require (helm company)
-  :config (progn
-            (evil-define-key 'insert global-map
-              (kbd "C-x C-o") 'helm-company
-              (kbd "C-x C-u") 'helm-company
-              )
-            )
-  )
+;; (req-package helm-company
+;;   :require (helm company)
+;;   :config (progn
+;;             (evil-define-key 'insert global-map
+;;               (kbd "C-x C-o") 'helm-company
+;;               (kbd "C-x C-u") 'helm-company
+;;               )
+;;             )
+;;   )
 
 (req-package helm-flyspell
   :require (helm flyspell)
