@@ -32,6 +32,12 @@
     shelve = stash save --include-untracked
     unshelve = stash pop
 
+    log-date=log --pretty=oneline-date
+    log-author=log --pretty=oneline-author
+    log-date-author=log --pretty=oneline-date-author
+    log-author-date=log --pretty=oneline-date-author
+    log-all=log --pretty=oneline-date-author
+
 [pager]
     status = yes
     show-branch = yes
