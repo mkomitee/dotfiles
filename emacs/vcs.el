@@ -27,7 +27,7 @@
 (req-package magit
   :require (evil evil-leader)
   :config (progn
-            (magit-auto-revert-mode -1)
+            (setq magit-last-seen-setup-instructions "1.4.0")
             (evil-leader/set-key
               "gs" 'magit-status
 
