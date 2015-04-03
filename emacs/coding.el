@@ -15,6 +15,7 @@
                                                        company-gtags
                                                        company-etags
                                                        company-keywords)
+                                                      company-ispell
                                                       company-files
                                                       company-dabbrev)
                   company-idle-delay nil
@@ -40,7 +41,8 @@
                                         (company-dabbrev-code company-gtags
                                                               company-etags
                                                               company-keywords)
-                                        company-files company-dabbrev))))
+                                        company-ispell company-files
+                                        company-dabbrev))))
   )
 
 (req-package company-elisp
@@ -49,10 +51,13 @@
                     (lambda ()
                       (set (make-local-variable 'company-backends)
                            '(company-elisp company-semantic
-                                           (company-dabbrev-code company-gtags
-                                                                 company-etags
-                                                                 company-keywords)
-                                           company-files company-dabbrev))))
+                                           (company-dabbrev-code
+                                            company-gtags
+                                            company-etags
+                                            company-keywords)
+                                           company-ispell
+                                           company-files
+                                           company-dabbrev))))
   )
 
 (req-package company-anaconda
@@ -61,10 +66,13 @@
                     (lambda ()
                       (set (make-local-variable 'company-backends)
                            '(company-anaconda company-semantic
-                                              (company-dabbrev-code company-gtags
-                                                                    company-etags
-                                                                    company-keywords)
-                                              company-files company-dabbrev))))
+                                              (company-dabbrev-code
+                                               company-gtags
+                                               company-etags
+                                               company-keywords)
+                                              company-ispell
+                                              company-files
+                                              company-dabbrev))))
   )
 
 (req-package flycheck
