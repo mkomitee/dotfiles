@@ -9,8 +9,8 @@
               )
   :config (progn
             (setq evil-emacs-state-cursor '("red" box)
-                  evil-normal-state-cursor '("white" box)
-                  evil-insert-state-cursor '("white" bar)
+                  evil-normal-state-cursor '("#586e75" box)
+                  evil-insert-state-cursor '("#586e75" bar)
                   evil-backspace-join-lines t
                   evil-magic 'very-magic
                   evil-search-module 'evil-search

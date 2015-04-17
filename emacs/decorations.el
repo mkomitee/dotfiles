@@ -4,13 +4,17 @@
 (if (featurep 'fringe)
     (fringe-mode 0))
 
-(req-package darktooth-theme
-  :config (load-theme 'darktooth t)
+(req-package color-theme-sanityinc-solarized
+  :config (load-theme 'sanityinc-solarized-light t)
   )
 
 ;; base16-theme doesn't provide 'base16-theme. Instead it includes
 ;; files which provide-theme 'base16-*, so base16-theme is installed
 ;; in packages.el and we load it here.
+
+;; moe-theme / moe-light
+
+;; leuven-theme / leuven
 
 ;; darktooth-theme / darktooth
 
