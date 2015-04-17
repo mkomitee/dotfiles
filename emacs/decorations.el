@@ -1,8 +1,10 @@
-(req-package linum)
+(req-package linum
+  :config (global-linum-mode t)
+  )
 
 ;; If we have a fringe, make it 8 pixels wide
 (if (featurep 'fringe)
-    (fringe-mode 0))
+    (fringe-mode))
 
 (req-package color-theme-sanityinc-solarized
   :config (load-theme 'sanityinc-solarized-light t)
