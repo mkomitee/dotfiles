@@ -103,6 +103,11 @@
 
 ;; We want _ to be considered a word character, like it is in vim.
 (modify-syntax-entry ?_ "w")
+(add-hook 'text-mode-hook
+          (lambda () (modify-syntax-entry ?_ "w")))
+(add-hook 'prog-mode-hook
+          (lambda () (modify-syntax-entry ?_ "w")))
+
 
 (req-package ag
   :require evil
