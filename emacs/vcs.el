@@ -4,6 +4,7 @@
 
 (req-package git-gutter-fringe
   :require (evil evil-leader git-gutter)
+  :diminish git-gutter-mode
   :config (progn
             (evil-leader/set-key
               "ga" 'git-gutter:stage-hunk
@@ -26,6 +27,7 @@
 
 (req-package magit
   :require (evil evil-leader)
+  :diminish magit-auto-revert-mode
   :config (progn
             (setq magit-last-seen-setup-instructions "1.4.0")
             (evil-leader/set-key
