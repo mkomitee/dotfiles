@@ -2,29 +2,6 @@
   :config (add-to-list 'auto-mode-alist '("gitconfig\\'" . gitconfig-mode))
   )
 
-(req-package git-gutter-fringe
-  :require (evil evil-leader git-gutter)
-  :diminish git-gutter-mode
-  :config (progn
-            (evil-leader/set-key
-              "ga" 'git-gutter:stage-hunk
-              "gr" 'git-gutter:revert-hunk
-              )
-            (evil-define-key 'motion global-map
-              "]h" 'git-gutter:next-hunk
-              "[h" 'git-gutter:previous-hunk
-              )
-            ;; I'm using git-gutter-fringe / git-gutter for
-            ;; stage/revert hunk, but don't actually want to clutter
-            ;; up the fringe. This changes the markers in the fringe
-            ;; to be invisible.
-            (fringe-helper-define 'git-gutter-fr:added nil ".")
-            (fringe-helper-define 'git-gutter-fr:deleted nil ".")
-            (fringe-helper-define 'git-gutter-fr:modified nil ".")
-            (global-git-gutter-mode)
-            )
-  )
-
 (req-package magit
   :require (evil evil-leader)
   :diminish magit-auto-revert-mode
