@@ -31,3 +31,6 @@
 [submodule "contrib/zsh-users/zaw"]
 	path = contrib/zsh-users/zaw
 	url = https://github.com/zsh-users/zaw.git
+[submodule "contrib/seebi/dircolors-solarized"]
+	path = contrib/seebi/dircolors-solarized
+	url = https://github.com/seebi/dircolors-solarized
