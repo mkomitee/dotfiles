@@ -4,7 +4,7 @@
 
 ;; If we have a fringe, make it 8 pixels wide
 (if (featurep 'fringe)
-    (fringe-mode))
+    (fringe-mode 16))
 
 (req-package color-theme-sanityinc-solarized
   :config (load-theme 'sanityinc-solarized-light t)

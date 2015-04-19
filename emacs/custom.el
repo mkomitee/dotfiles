@@ -29,8 +29,12 @@
    ((t (:inherit lazy-highlight))))
  '(evil-visual-mark-face
    ((t (:background "color-89" :foreground "yellow" :underline t))))
- '(flyspell-incorrect
-   ((t (:background "#303030" :foreground "#ff4ea3" :underline
-                    (:color "yellow1" :style wave) :weight normal))))
+ '(flycheck-fringe-error
+   ((t (:foreground "#dc322f" :inverse-video nil))))
+ '(flycheck-fringe-info
+   ((t (:foreground "#2aa198" :inverse-video nil))))
+ '(flycheck-fringe-warning
+   ((t (:foreground "#b58900" :inverse-video nil))))
+ '(fringe ((t (:background "#fdf6e3" :foreground "657b83"))))
  '(helm-selection ((t (:foreground "forest green" :underline t))))
  '(which-func ((t (:foreground "white")))))
