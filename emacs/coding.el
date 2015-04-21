@@ -121,6 +121,14 @@
             )
   )
 
+(defun komitee/leave-no-trace ()
+  (interactive)
+  (progn
+    (setq-local indent-tabs-mode nil)
+    (setq-local before-save-hook ())
+    (aggressive-indent-mode -1)
+    ))
+
 ;; No tabs while coding
 (defun komitee/notabs ()
   (interactive)
