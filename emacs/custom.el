@@ -27,8 +27,6 @@
    ((t (:inherit ace-jump-face-foreground :height 3.0))))
  '(evil-search-highlight-persist-highlight-face
    ((t (:inherit lazy-highlight))))
- '(evil-visual-mark-face
-   ((t (:background "color-89" :foreground "yellow" :underline t))))
  '(flycheck-fringe-error
    ((t (:foreground "#dc322f" :inverse-video nil))))
  '(flycheck-fringe-info
