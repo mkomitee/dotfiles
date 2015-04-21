@@ -16,7 +16,10 @@
            "2a12e95e9ee6ed57592e7df12f3f028205575e9b3affdb5e6fa589421c618136"
            "756597b162f1be60a12dbd52bab71d40d6a2845a3e3c2584c6573ee9c332a66e"
            "0e121ff9bef6937edad8dfcff7d88ac9219b5b4f1570fd1702e546a80dba0832"
-           default))))
+           default)
+          )
+   )
+ )
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -25,8 +28,6 @@
  ;; If there is more than one, they won't work right.
  '(aw-leading-char-face
    ((t (:inherit ace-jump-face-foreground :height 3.0))))
- '(evil-search-highlight-persist-highlight-face
-   ((t (:inherit lazy-highlight))))
  '(flycheck-fringe-error
    ((t (:foreground "#dc322f" :inverse-video nil))))
  '(flycheck-fringe-info
@@ -34,5 +35,4 @@
  '(flycheck-fringe-warning
    ((t (:foreground "#b58900" :inverse-video nil))))
  '(fringe ((t (:background "#fdf6e3" :foreground "657b83"))))
- '(helm-selection ((t (:foreground "forest green" :underline t))))
- '(which-func ((t (:foreground "white")))))
+ )
