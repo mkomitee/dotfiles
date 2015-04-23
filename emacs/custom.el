@@ -28,11 +28,4 @@
  ;; If there is more than one, they won't work right.
  '(aw-leading-char-face
    ((t (:inherit ace-jump-face-foreground :height 3.0))))
- '(flycheck-fringe-error
-   ((t (:foreground "#dc322f" :inverse-video nil))))
- '(flycheck-fringe-info
-   ((t (:foreground "#2aa198" :inverse-video nil))))
- '(flycheck-fringe-warning
-   ((t (:foreground "#b58900" :inverse-video nil))))
- '(fringe ((t (:background "#fdf6e3" :foreground "657b83"))))
  )

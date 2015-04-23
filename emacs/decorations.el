@@ -7,7 +7,19 @@
     (fringe-mode 16))
 
 (req-package color-theme-sanityinc-solarized
-  :config (load-theme 'sanityinc-solarized-light t)
+  :config (progn
+            (load-theme 'sanityinc-solarized-light t)
+            (custom-theme-set-faces
+             'sanityinc-solarized-light
+             '(flycheck-fringe-error
+               ((t (:foreground "#dc322f" :inverse-video nil))))
+             '(flycheck-fringe-info
+               ((t (:foreground "#2aa198" :inverse-video nil))))
+             '(flycheck-fringe-warning
+               ((t (:foreground "#b58900" :inverse-video nil))))
+             '(fringe ((t (:background "#fdf6e3" :foreground "657b83"))))
+             )
+            )
   )
 
 ;; base16-theme doesn't provide 'base16-theme. Instead it includes
