@@ -130,6 +130,7 @@ NeoBundleLazy 'Valloric/YouCompleteMe', {
 
 NeoBundle 'morhetz/gruvbox'
 NeoBundle 'tomasr/molokai'
+NeoBundle 'altercation/vim-colors-solarized'
 
 NeoBundleCheck
 call neobundle#end()
