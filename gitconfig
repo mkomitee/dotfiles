@@ -33,10 +33,14 @@
     unshelve = stash pop
 
     log-date=log --pretty=oneline-date
+    ld=!git log-date
     log-author=log --pretty=oneline-author
+    la=!git log-author
     log-date-author=log --pretty=oneline-date-author
-    log-author-date=log --pretty=oneline-date-author
-    log-all=log --pretty=oneline-date-author
+    lda=!git log-date-author
+    log-author-date=!git log-date-author
+    lad=!git log-date-author
+    log-all=!git log-date-aut
 
 [pager]
     status = yes
