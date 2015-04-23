@@ -25,12 +25,6 @@
 [submodule "contrib/mbadolato/iTerm2-Color-Schemes"]
 	path = contrib/mbadolato/iTerm2-Color-Schemes
 	url = https://github.com/mbadolato/iTerm2-Color-Schemes
-[submodule "contrib/hchbaw/opp.zsh"]
-	path = contrib/hchbaw/opp.zsh
-	url = https://github.com/hchbaw/opp.zsh.git
-[submodule "contrib/zsh-users/zaw"]
-	path = contrib/zsh-users/zaw
-	url = https://github.com/zsh-users/zaw.git
 [submodule "contrib/seebi/dircolors-solarized"]
 	path = contrib/seebi/dircolors-solarized
 	url = https://github.com/seebi/dircolors-solarized
