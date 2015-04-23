@@ -549,6 +549,9 @@ au BufNewFile,BufRead /private/tmp/crontab.* setl backupcopy=yes
 au BufNewFile,BufRead gitconfig setf gitconfig
 " }}}
 " Filetype configurations ---------------------------------------------------{{{
+" lisp --------------------------------------------------------------------- {{{
+au FileType lisp let b:commentary_format = ";;%s"
+" }}}
 " moin ----------------------------------------------------------------------{{{
 function MoinLevel()
     let h = matchstr(getline(v:lnum), '^=\+')
