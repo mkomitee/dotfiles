@@ -79,7 +79,6 @@
 
 [merge]
     log = true
-    ff = only
 
 [mergetool]
     prompt = false
