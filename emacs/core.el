@@ -294,7 +294,3 @@
 (req-package evil-org
   :require (evil evil-leader org)
   )
-
-(req-package aggressive-indent
-  :config (global-aggressive-indent-mode 1)
-  )
