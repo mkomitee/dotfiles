@@ -24,9 +24,13 @@
 
 ;; If we're in a window system of any kind start the server
 (req-package server
-  :config (when window-system
-            (server-start)
-            )
+  :config (progn
+            (setq server-use-tcp t
+                  server-host (system-name))
+            (when window-system
+              (server-start)
+              )
+  )
   )
 
 (req-package-finish)
