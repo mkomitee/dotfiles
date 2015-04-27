@@ -19,16 +19,12 @@ alias vi=vim
 alias aa='resume main'
 alias ack='ag'
 alias bc='bc -l'
-alias boom='ruby ~/.dotfiles/contrib/holman/boom/bin/boom'
-alias curl='curl --negotiate --user :'
 alias dot='cd ~dot'
-alias irc='ssh -t matrix.gs tmux -u2 attach-session -t irc'
 alias lss=less
 alias reexec="exec zsh -l"
 alias s-s='sudo -s'
 alias tig='tig --all'
 alias tmux='tmux -u2'
-alias turses='(source ~/.venv/turses/bin/activate && turses -a mkomitee)'
 alias y=true
 
 alias type='type -a'
