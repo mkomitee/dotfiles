@@ -24,7 +24,7 @@
                                                  "M-SPC" "M-h")
                   guide-key/recursive-key-sequence-flag t
                   guide-key/idle-delay 0.5
-                  guide-key/popup-window-position (quote bottom)
+                  guide-key/popup-window-position (quote right)
                   )
             (guide-key-mode 1)
             )
