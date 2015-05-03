@@ -273,10 +273,6 @@
   :config (global-discover-mode)
   )
 
-(req-package which-func
-  :config (which-function-mode)
-  )
-
 (req-package buffer-move
   :require evil
   :config (progn
@@ -293,4 +289,22 @@
 
 (req-package evil-org
   :require (evil evil-leader org)
+  )
+
+(req-package eyebrowse
+  :require evil
+  :diminish eyebrowse-mode
+  :config (progn
+            (eyebrowse-mode t)
+            (setq eyebrowse-new-workspace t
+                  eyebrowse-wrap-around t)
+            (evil-define-key 'motion global-map
+              "[t" 'eyebrowse-prev-window-config
+              "]t" 'eyebrowse-next-window-config
+              "gT" 'eyebrowse-prev-window-config
+              "gt" 'eyebrowse-next-window-config
+              )
+            (evil-ex-define-cmd "tabn[ew]" 'eyebrowse-switch-to-window-config)
+            (evil-ex-define-cmd "tabc[lose]" 'eyebrowse-close-window-config)
+            )
   )
