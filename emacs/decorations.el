@@ -6,18 +6,29 @@
 (if (featurep 'fringe)
     (fringe-mode 16))
 
-(req-package color-theme-sanityinc-solarized
+;; (req-package color-theme-sanityinc-solarized
+;;   :config (progn
+;;             (load-theme 'sanityinc-solarized-light t)
+;;             (custom-theme-set-faces
+;;              'sanityinc-solarized-light
+;;              '(flycheck-fringe-error
+;;                ((t (:foreground "#dc322f" :inverse-video nil))))
+;;              '(flycheck-fringe-info
+;;                ((t (:foreground "#2aa198" :inverse-video nil))))
+;;              '(flycheck-fringe-warning
+;;                ((t (:foreground "#b58900" :inverse-video nil))))
+;;              '(fringe ((t (:background "#fdf6e3" :foreground "657b83"))))
+;;              )
+;;             )
+;;   )
+
+(req-package darktooth-theme
   :config (progn
-            (load-theme 'sanityinc-solarized-light t)
+            (load-theme 'darktooth t)
             (custom-theme-set-faces
-             'sanityinc-solarized-light
-             '(flycheck-fringe-error
-               ((t (:foreground "#dc322f" :inverse-video nil))))
-             '(flycheck-fringe-info
-               ((t (:foreground "#2aa198" :inverse-video nil))))
-             '(flycheck-fringe-warning
-               ((t (:foreground "#b58900" :inverse-video nil))))
-             '(fringe ((t (:background "#fdf6e3" :foreground "657b83"))))
+             'darktooth
+             '(evil-search-highlight-persist-highlight-face
+               ((t (:inherit lazy-highlight))))
              )
             )
   )

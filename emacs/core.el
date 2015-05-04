@@ -269,6 +269,11 @@
 (req-package toml-mode)
 (req-package vimrc-mode)
 
+(req-package flycheck-rust
+  :require (rust-mode flycheck)
+  :config (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
+  )
+
 (req-package discover
   :config (global-discover-mode)
   )
