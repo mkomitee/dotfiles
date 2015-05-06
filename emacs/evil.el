@@ -136,6 +136,8 @@
 
               "ss" 'just-one-space
               "x" 'helm-M-x
+
+              "bd" 'evil-delete-buffer
               )
             )
   )
