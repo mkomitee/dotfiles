@@ -29,7 +29,7 @@
           magit-last-seen-setup-instructions "1.4.0"
           )
      go
-     haskell
+     ;; haskell This is mucking about w/ flycheck-init-hooks
      html
      javascript
      markdown
@@ -37,7 +37,6 @@
      python
      ruby
      shell-scripts
-     snippets
      syntax-checking
      ycmd
      )
@@ -151,32 +150,73 @@ before layers configuration."
    dotspacemacs-default-package-repository nil
    )
   ;; User initialization goes here
+  (setq
+   dotspacemacs-additional-packages '(
+                                      apache-mode
+                                      csv-mode
+                                      flycheck-rust
+                                      jinja2-mode
+                                      less-css-mode
+                                      llvm-mode
+                                      mustache-mode
+                                      nginx-mode
+                                      protobuf-mode
+                                      rpm-spec-mode
+                                      sass-mode
+                                      scss-mode
+                                      toml-mode
+                                      vimrc-mode
+                                      )
+
+   )
   )
 
 (defun dotspacemacs/config ()
   "Configuration function.
  This function is called at the very end of Spacemacs initialization after
 layers configuration."
+
+  ;; Error checking
   (evil-define-key 'motion global-map
-    "[t" 'eyebrowse-prev-window-config
-    "]t" 'eyebrowse-next-window-config
-    "gT" 'eyebrowse-prev-window-config
-    "gt" 'eyebrowse-next-window-config
     "[e" 'spacemacs/previous-error
     "]e" 'spacemacs/next-error
     "[h" 'git-gutter:previous-hunk
     "]h" 'git-gutter:next-hunk
     )
   (evil-define-key 'normal flycheck-error-list-mode-map
-    "q" 'quit-window)
+    "q" 'quit-window
+    )
+  (global-flycheck-mode)
+  (add-hook 'flycheck-mode-hook 'flycheck-rust-setup)
+  (add-hook 'rust-mode-hook 'flycheck-mode)
+
+  ;; Tabs
+  (evil-define-key 'motion global-map
+    "[t" 'eyebrowse-prev-window-config
+    "]t" 'eyebrowse-next-window-config
+    "gT" 'eyebrowse-prev-window-config
+    "gt" 'eyebrowse-next-window-config
+    )
   (evil-ex-define-cmd "tabn[ew]" 'eyebrowse-switch-to-window-config)
   (evil-ex-define-cmd "tabc[lose]" 'eyebrowse-close-window-config)
+
+  ;; Whitespace
+  (setq whitespace-style
+        (quote (face faces space-before-tab tab-mark tabs trailing))
+        )
+  (add-hook 'prog-mode-hook 'whitespace-mode)
+  (add-hook 'text-mode-hook 'whitespace-mode)
+  (add-hook 'before-save-hook 'whitespace-cleanup nil t)
+
+  ;; Misc
+  (evil-leader/set-key
+    "gha" 'git-gutter:stage-hunk
+    )
   (setq undo-tree-auto-save-history t
         undo-tree-history-directory-alist (quote (("." . "~/.emacs.d/.undo")))
         )
   (add-hook 'prog-mode-hook 'turn-on-fci-mode)
   (add-hook 'text-mode-hook 'turn-on-fci-mode)
-  (global-flycheck-mode)
   (add-hook 'prog-mode-hook 'flyspell-prog-mode)
   )
 
