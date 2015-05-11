@@ -36,6 +36,7 @@
      puppet
      python
      ruby
+     rust
      shell-scripts
      syntax-checking
      ycmd
