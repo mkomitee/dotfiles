@@ -38,7 +38,8 @@
      ruby
      rust
      shell-scripts
-     syntax-checking
+     (syntax-checking :variables
+                      syntax-checking-enable-tooltips nil)
      ycmd
      )
    ;; A list of packages and/or extensions that will not be install and loaded.
