@@ -152,6 +152,10 @@ before layers configuration."
    dotspacemacs-default-package-repository nil
    )
   ;; User initialization goes here
+  (setq-default
+   server-use-tcp t
+   server-host (system-name)
+   )
   (setq
    dotspacemacs-additional-packages '(
                                       apache-mode
