@@ -199,6 +199,8 @@ layers configuration."
   (global-flycheck-mode)
   (add-hook 'flycheck-mode-hook 'flycheck-rust-setup)
   (add-hook 'rust-mode-hook 'flycheck-mode)
+  (setq flycheck-checkers
+        (delq 'emacs-lisp-checkdoc flycheck-checkers))
 
   ;; Tabs
   (evil-define-key 'motion global-map
@@ -218,20 +220,37 @@ layers configuration."
   (add-hook 'text-mode-hook 'whitespace-mode)
   (add-hook 'before-save-hook 'whitespace-cleanup nil t)
 
+  ;; Completion maps
+  (evil-define-key 'insert global-map
+    (kbd "C-x C-o") 'company-complete
+    (kbd "C-x C-u") 'company-complete
+    )
+
+  ;; Initial state modes
+  (dolist (mode '(Custom-mode))
+    (evil-set-initial-state mode 'normal))
+  (dolist (mode '(package-menu-mode
+                  messages-buffer-mode))
+    (evil-set-initial-state mode 'motion))
+
   ;; Misc
   (evil-leader/set-key
     "gha" 'git-gutter:stage-hunk
     )
+  (require 'gdb-mi)
   (setq undo-tree-auto-save-history t
         undo-tree-history-directory-alist (quote (("." . "~/.emacs.d/.undo")))
+        comment-auto-fill-only-comments t
+        vc-follow-symlinks t
+        gdb-many-windows t
         )
+  (auto-fill-mode 1)
   (add-hook 'prog-mode-hook 'turn-on-fci-mode)
   (add-hook 'text-mode-hook 'turn-on-fci-mode)
   (add-hook 'prog-mode-hook 'flyspell-prog-mode)
   (global-set-key (kbd "M-SPC") 'cycle-spacing)
   (golden-ratio-mode 1)
   )
-
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
