@@ -227,7 +227,10 @@ layers configuration."
   (add-hook 'prog-mode-hook 'turn-on-fci-mode)
   (add-hook 'text-mode-hook 'turn-on-fci-mode)
   (add-hook 'prog-mode-hook 'flyspell-prog-mode)
+
+  (global-set-key (kbd "M-SPC") 'cycle-spacing)
   )
+
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
