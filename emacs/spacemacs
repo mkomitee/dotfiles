@@ -181,6 +181,7 @@ before layers configuration."
  This function is called at the very end of Spacemacs initialization after
 layers configuration."
 
+  ;; Split & focus by default
   (evil-leader/set-key
     "w-" 'split-window-below-and-focus
     "w/" 'split-window-right-and-focus)
@@ -227,8 +228,8 @@ layers configuration."
   (add-hook 'prog-mode-hook 'turn-on-fci-mode)
   (add-hook 'text-mode-hook 'turn-on-fci-mode)
   (add-hook 'prog-mode-hook 'flyspell-prog-mode)
-
   (global-set-key (kbd "M-SPC") 'cycle-spacing)
+  (golden-ratio-mode 1)
   )
 
 
