@@ -20,8 +20,7 @@
      (colors :variables colors-enable-rainbow-identifiers t)
      emacs-lisp
      evil-commentary
-     (evil-snipe :variables
-                 evil-snipe-enable-alternate-f-and-t-behaviors t)
+     evil-snipe
      extra-langs
      eyebrowse
      (git :variables
@@ -181,6 +180,10 @@ before layers configuration."
   "Configuration function.
  This function is called at the very end of Spacemacs initialization after
 layers configuration."
+
+  (evil-leader/set-key
+    "w-" 'split-window-below-and-focus
+    "w/" 'split-window-right-and-focus)
 
   ;; Error checking
   (evil-define-key 'motion global-map
