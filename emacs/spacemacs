@@ -250,6 +250,8 @@ layers configuration."
   (add-hook 'prog-mode-hook 'flyspell-prog-mode)
   (global-set-key (kbd "M-SPC") 'cycle-spacing)
   (golden-ratio-mode 1)
+  (global-linum-mode t)
+  (global-vi-tilde-fringe-mode t)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
