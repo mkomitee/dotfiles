@@ -34,7 +34,6 @@ URxvt.depth:                32
 URxvt.transparent:          false
 URxvt.cursorBlink:          false
 URxvt.cursorUnderline:      false
-! URxvt.inheritPixmap:        true
 URxvt.internalBorder:       0
 URxvt.scrollTtyKeypress:    true
 URxvt.scrollTtyOutput:      false
