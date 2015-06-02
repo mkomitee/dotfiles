@@ -18,6 +18,7 @@
      better-defaults
      c-c++
      (colors :variables colors-enable-rainbow-identifiers t)
+     deft
      emacs-lisp
      evil-commentary
      evil-snipe
@@ -251,6 +252,10 @@ layers configuration."
         comment-auto-fill-only-comments t
         vc-follow-symlinks t
         gdb-many-windows t
+        deft-directory "~/notes"
+        deft-extension "rst"
+        deft-text-mode 'rst-mode
+        deft-use-filename-as-title t
         )
   (auto-fill-mode 1)
   (add-hook 'prog-mode-hook 'turn-on-fci-mode)
