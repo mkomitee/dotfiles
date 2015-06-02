@@ -263,6 +263,17 @@ layers configuration."
   (golden-ratio-mode 1)
   (global-linum-mode t)
   (global-vi-tilde-fringe-mode t)
+
+  ;; deft shouldn't put spaces in filenames
+  (defun komitee-deft-strip-spaces (orig-fun &rest file)
+    ;;this probably doesn't need to be done in three steps!
+    (setq name (pop file))
+    (setq name (replace-regexp-in-string " " "-" name))
+    (push name file)
+    (apply orig-fun file)
+    )
+
+  (advice-add 'deft-new-file-named :around #'komitee-deft-strip-spaces)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
