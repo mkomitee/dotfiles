@@ -17,7 +17,7 @@ source $ZSH/prompt.zsh
 source $ZSH/colours.zsh
 source $ZSH/extensions.zsh
 
-if [ $TERM != 'eterm-color' ]; then
+if [ "$TERM" != 'eterm-color' ]; then
     if [ -f $CONTRIB/zsh-users/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
         ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
         source $CONTRIB/zsh-users/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
