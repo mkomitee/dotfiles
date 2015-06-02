@@ -37,9 +37,7 @@
      python
      ruby
      rust
-     (shell :variables
-            shell-default-shell 'eshell
-            )
+     (shell :variables shell-default-shell 'eshell)
      shell-scripts
      (syntax-checking :variables
                       syntax-checking-enable-tooltips nil)
