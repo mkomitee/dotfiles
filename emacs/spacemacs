@@ -256,6 +256,7 @@ layers configuration."
   (add-hook 'prog-mode-hook 'flyspell-prog-mode)
   (global-set-key (kbd "M-SPC") 'cycle-spacing)
   (golden-ratio-mode 1)
+  (setq golden-ratio-auto-scale t)
   (global-linum-mode t)
   (global-vi-tilde-fringe-mode t)
 
