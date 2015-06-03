@@ -202,7 +202,7 @@ layers configuration."
   (evil-define-key 'normal flycheck-error-list-mode-map
     "q" 'quit-window
     )
-  ;; (global-flycheck-mode)
+  (global-flycheck-mode)
   (setq flycheck-checkers
         (delq 'emacs-lisp-checkdoc flycheck-checkers))
 
