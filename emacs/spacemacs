@@ -51,18 +51,11 @@
    '(
      apache-mode
      csv-mode
-     flycheck-rust
      jinja2-mode
-     less-css-mode
      llvm-mode
-     mustache-mode
      nginx-mode
      protobuf-mode
      rpm-spec-mode
-     sass-mode
-     scss-mode
-     toml-mode
-     vimrc-mode
      )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
@@ -200,12 +193,16 @@ layers configuration."
     "[h" 'git-gutter:previous-hunk
     "]h" 'git-gutter:next-hunk
     )
+
+  (evil-define-key 'motion magit-blame-map
+    "[b" 'magit-blame-previous-chunk
+    "]b" 'magit-blame-next-chunk
+    )
+
   (evil-define-key 'normal flycheck-error-list-mode-map
     "q" 'quit-window
     )
-  (global-flycheck-mode)
-  (add-hook 'flycheck-mode-hook 'flycheck-rust-setup)
-  (add-hook 'rust-mode-hook 'flycheck-mode)
+  ;; (global-flycheck-mode)
   (setq flycheck-checkers
         (delq 'emacs-lisp-checkdoc flycheck-checkers))
 
@@ -244,12 +241,10 @@ layers configuration."
   (evil-leader/set-key
     "gha" 'git-gutter:stage-hunk
     )
-  (require 'gdb-mi)
   (setq undo-tree-auto-save-history t
         undo-tree-history-directory-alist (quote (("." . "~/.emacs.d/.undo")))
         comment-auto-fill-only-comments t
         vc-follow-symlinks t
-        gdb-many-windows t
         deft-directory "~/notes"
         deft-extension "rst"
         deft-text-mode 'rst-mode
