@@ -51,8 +51,10 @@
    '(
      apache-mode
      csv-mode
+     darktooth-theme
      jinja2-mode
      llvm-mode
+     material-theme
      nginx-mode
      protobuf-mode
      rpm-spec-mode
@@ -90,13 +92,13 @@ before layers configuration."
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(
+                         darktooth
+                         spacemacs-dark
                          material
                          solarized-dark
                          solarized-light
-                         leuven
                          monokai
                          zenburn
-                         darktooth
                          )
    ;; If non nil the cursor color matches the state color.
    dotspacemacs-colorize-cursor-according-to-state t
@@ -257,6 +259,9 @@ layers configuration."
   (global-set-key (kbd "M-SPC") 'cycle-spacing)
   (golden-ratio-mode 1)
   (setq golden-ratio-auto-scale t)
+  (add-to-list 'golden-ratio-exclude-buffer-names "*Choices*")
+  (add-to-list 'golden-ratio-exclude-modes "helm-mode")
+  (add-to-list 'golden-ratio-exclude-modes "help-mode")
   (global-linum-mode t)
   (global-vi-tilde-fringe-mode t)
 
