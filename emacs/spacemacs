@@ -251,6 +251,7 @@ layers configuration."
         deft-extension "rst"
         deft-text-mode 'rst-mode
         deft-use-filename-as-title t
+        company-idle-delay nil
         )
   (auto-fill-mode 1)
   (add-hook 'prog-mode-hook 'turn-on-fci-mode)
