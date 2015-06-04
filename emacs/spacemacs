@@ -276,6 +276,9 @@ layers configuration."
     )
 
   (advice-add 'deft-new-file-named :around #'komitee/deft-strip-spaces)
+
+  (add-hook 'prog-mode-hook 'spacemacs/highlight-TODO-words)
+  (add-hook 'text-mode-hook 'spacemacs/highlight-TODO-words)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
