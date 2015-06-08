@@ -235,9 +235,14 @@ layers configuration."
   ;; Initial state modes
   (dolist (mode '(Custom-mode))
     (evil-set-initial-state mode 'normal))
+
   (dolist (mode '(package-menu-mode
                   messages-buffer-mode))
     (evil-set-initial-state mode 'motion))
+
+  (dolist (mode '(term-mode
+                  ansi-term-mode))
+    (evil-set-initial-state mode 'emacs))
 
   ;; Misc
   (evil-leader/set-key
@@ -252,6 +257,7 @@ layers configuration."
         deft-text-mode 'rst-mode
         deft-use-filename-as-title t
         company-idle-delay nil
+        eshell-aliases-file "~/.dotfiles/emacs/aliases"
         )
   (auto-fill-mode 1)
   (add-hook 'prog-mode-hook 'turn-on-fci-mode)
@@ -279,6 +285,8 @@ layers configuration."
 
   (add-hook 'prog-mode-hook 'spacemacs/highlight-TODO-words)
   (add-hook 'text-mode-hook 'spacemacs/highlight-TODO-words)
+
+  (smartparens-global-mode -1)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
