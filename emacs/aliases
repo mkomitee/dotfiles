@@ -2,4 +2,6 @@ alias emacs find-file $1
 alias e find-file $1
 alias emacsclient find-file $1
 alias ff find-file $1
-alias git magit-status $PWD
+alias git-status magit-status $PWD
+alias g magit-status $PWD
+alias gs magit-status $PWD

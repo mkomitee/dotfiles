@@ -1,4 +1,4 @@
-;; -*- mode: dotspacemacs -*-
+;; -*- mode: emacs-lisp -*-
 ;; This file is loaded by Spacemacs at startup.
 ;; It must be stored in your home directory.
 
@@ -33,6 +33,7 @@
      html
      javascript
      markdown
+     org
      puppet
      python
      ruby
@@ -41,6 +42,7 @@
      shell-scripts
      (syntax-checking :variables
                       syntax-checking-enable-tooltips nil)
+     version-control
      ycmd
      )
    ;; List of additional packages that will be installed wihout being
@@ -264,11 +266,6 @@ layers configuration."
   (add-hook 'text-mode-hook 'turn-on-fci-mode)
   (add-hook 'prog-mode-hook 'flyspell-prog-mode)
   (global-set-key (kbd "M-SPC") 'cycle-spacing)
-  (golden-ratio-mode 1)
-  (setq golden-ratio-auto-scale t)
-  (add-to-list 'golden-ratio-exclude-buffer-names "*Choices*")
-  (add-to-list 'golden-ratio-exclude-modes "helm-mode")
-  (add-to-list 'golden-ratio-exclude-modes "help-mode")
   (global-linum-mode t)
   (global-vi-tilde-fringe-mode t)
 
@@ -286,7 +283,12 @@ layers configuration."
   (add-hook 'prog-mode-hook 'spacemacs/highlight-TODO-words)
   (add-hook 'text-mode-hook 'spacemacs/highlight-TODO-words)
 
-  (smartparens-global-mode -1)
+  ;; Disable smartparens auto-close for these symbols.
+  (dolist (sym '("(" "[" "'" "\""))
+    (sp-pair sym nil :actions :rem))
+
+  (evil-leader/set-key
+    "bb" 'helm-buffers-list)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
