@@ -194,8 +194,8 @@ layers configuration."
   (evil-define-key 'motion global-map
     "[e" 'spacemacs/previous-error
     "]e" 'spacemacs/next-error
-    "[h" 'git-gutter:previous-hunk
-    "]h" 'git-gutter:next-hunk
+    "[h" 'diff-hl-previous-hunk
+    "]h" 'diff-hl-next-hunk
     )
 
   (evil-define-key 'motion magit-blame-map
