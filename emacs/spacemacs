@@ -179,6 +179,11 @@ before layers configuration."
    dotspacemacs-default-package-repository nil
    )
   ;; User initialization goes here
+
+  (setq server-use-tcp t
+        server-socket-dir "~/.emacs.d/server"
+        server-host system-name
+        )
   )
 
 (defun dotspacemacs/config ()
