@@ -54,6 +54,7 @@
      apache-mode
      csv-mode
      darktooth-theme
+     groovy-mode
      jinja2-mode
      llvm-mode
      material-theme

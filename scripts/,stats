@@ -1,5 +1,6 @@
 #!/usr/local/bin/python
 import numpy
+import scipy.stats
 import sys
 
 
@@ -38,12 +39,15 @@ raw = [float(i) for i in raw if i != '']
 raw = numpy.array(raw)
 data = dict(
     samples=len(raw), mean=raw.mean(), max=raw.max(), min=raw.min(),
-    std=raw.std(), sum=raw.sum()
+    std=raw.std(), mode=scipy.stats.mode(raw)[0][0], median=numpy.median(raw),
+    sum=raw.sum()
 )
 print '''Samples:              {samples:19}
 Mean:                 {mean:19.2f}
 Max:                  {max:19.2f}
 Min:                  {min:19.2f}
+Median:               {median:19.2f}
+Mode:                 {mode:19.2f}
 Sum:                  {sum:19.2f}
 Standard Deviation:   {std:19.2f}'''.format(**data)
 
