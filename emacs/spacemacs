@@ -258,8 +258,8 @@ layers configuration."
         comment-auto-fill-only-comments t
         vc-follow-symlinks t
         deft-directory "~/notes"
-        deft-extension "rst"
-        deft-text-mode 'rst-mode
+        deft-extension "md"
+        deft-text-mode 'markdown-mode
         deft-use-filename-as-title t
         company-idle-delay nil
         eshell-aliases-file "~/.dotfiles/emacs/aliases"
