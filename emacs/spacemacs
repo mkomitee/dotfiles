@@ -179,6 +179,7 @@ before layers configuration."
   (setq server-use-tcp t
         server-socket-dir "~/.emacs.d/server"
         server-host system-name
+        evil-want-C-w-in-emacs-state t
         )
   )
 
