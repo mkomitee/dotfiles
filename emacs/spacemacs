@@ -93,12 +93,14 @@ before layers configuration."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(material-light
+   dotspacemacs-themes '(
                          material
-                         spacemacs-light
+                         material-light
                          spacemacs-dark
+                         spacemacs-light
+                         solarized-dark
                          solarized-light
-                         solarized-dark)
+                         )
    ;; If non nil the cursor color matches the state color.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
@@ -236,10 +238,50 @@ layers configuration."
   (add-hook 'text-mode-hook 'whitespace-mode)
   (add-hook 'before-save-hook 'whitespace-cleanup nil t)
 
+  (defun komitee/complete-filename ()
+    "Use hippie-expand to expand the filename"
+    (interactive)
+    (let ((hippie-expand-try-functions-list
+           '(try-complete-file-name-partially try-complete-file-name)))
+      (call-interactively 'hippie-expand)))
+
+  (defun komitee/complete-keyword-current-file ()
+    "Use hippie-expand to expand a keyword in the current file"
+    (interactive)
+    (let ((hippie-expand-try-functions-list
+           '(try-expand-dabbrev)))
+      (call-interactively 'hippie-expand)))
+
+  (defun komitee/complete-keyword-all-files ()
+    "Use hippie-expand to expand a keyword in all files"
+    (interactive)
+    (let ((hippie-expand-try-functions-list
+           '(try-expand-dabbrev-all-buffers)))
+      (call-interactively 'hippie-expand)))
+
+  (defun komitee/complete-line ()
+    "Use hippie-expand to expand a line"
+    (interactive)
+    (let ((hippie-expand-try-functions-list
+           '(try-expand-line)))
+      (call-interactively 'hippie-expand)))
+
+  (defun komitee/complete-yas ()
+    "Use hippie-expand to expand a line"
+    (interactive)
+    (let ((hippie-expand-try-functions-list
+           '(yas-hippie-try-expand)))
+      (call-interactively 'hippie-expand)))
+
   ;; Completion maps
   (evil-define-key 'insert global-map
     (kbd "C-x C-o") 'company-complete
     (kbd "C-x C-u") 'company-complete
+    (kbd "C-x C-y") 'komitee/complete-yas
+    (kbd "C-x C-n") 'komitee/complete-keyword-current-file
+    (kbd "C-x C-i") 'komitee/complete-keyword-all-files
+    (kbd "C-x C-f") 'komitee/complete-filename
+    (kbd "C-x C-l") 'komitee/complete-line
     )
 
   ;; Initial state modes
