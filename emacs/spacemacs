@@ -315,6 +315,7 @@ layers configuration."
         deft-extensions '("md" "txt" "text" "markdown" "org" "rst")
         company-idle-delay nil
         eshell-aliases-file "~/.dotfiles/emacs/aliases"
+        evil-snipe-repeat-scope 'whole-buffer
         )
   (makunbound 'deft-extension)
   (auto-fill-mode 1)
