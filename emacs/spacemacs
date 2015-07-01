@@ -92,7 +92,7 @@ before layers configuration."
    dotspacemacs-startup-banner 'official
    ;; List of items to show in the startup buffer. If nil it is disabled.
    ;; Possible values are: `recents' `bookmarks' `projects'."
-   dotspacemacs-startup-lists '(recents projects)
+   dotspacemacs-startup-lists '(recents bookmarks projects)
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
@@ -197,7 +197,6 @@ before layers configuration."
   "Configuration function.
  This function is called at the very end of Spacemacs initialization after
 layers configuration."
-
   ;; Split & focus by default
   (evil-leader/set-key
     "w-" 'split-window-below-and-focus
@@ -337,6 +336,15 @@ layers configuration."
 
   (evil-leader/set-key
     "bb" 'helm-buffers-list)
+
+  ;; Cleanup recent files. recentf is lazily loaded, so to call recentf-cleanup,
+  ;; we must first enable it. I tried using eval-after-load, and the function
+  ;; was called, but i think it was firing before the recentf-save-file got
+  ;; modified in the recentf use-package :config section
+  (recentf-mode)
+  (recentf-cleanup)
+  ;; Cleanup projectile projects if they no longer exist.
+  (projectile-cleanup-known-projects)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
