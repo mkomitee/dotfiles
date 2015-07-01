@@ -31,6 +31,7 @@
      go
      ;; haskell This is mucking about w/ flycheck-init-hooks
      html
+     ipython-notebook
      javascript
      markdown
      org
