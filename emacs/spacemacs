@@ -45,7 +45,9 @@
      (syntax-checking :variables
                       syntax-checking-enable-tooltips nil)
      themes-megapack
+     unimpaired
      version-control
+     vinegar
      ycmd
      )
    ;; List of additional packages that will be installed without being
@@ -202,19 +204,6 @@ layers configuration."
     "w-" 'split-window-below-and-focus
     "w/" 'split-window-right-and-focus)
 
-  ;; Error checking
-  (evil-define-key 'motion global-map
-    "[e" 'spacemacs/previous-error
-    "]e" 'spacemacs/next-error
-    "[h" 'diff-hl-previous-hunk
-    "]h" 'diff-hl-next-hunk
-    )
-
-  (evil-define-key 'motion magit-blame-map
-    "[b" 'magit-blame-previous-chunk
-    "]b" 'magit-blame-next-chunk
-    )
-
   (evil-define-key 'normal flycheck-error-list-mode-map
     "q" 'quit-window
     )
@@ -224,8 +213,8 @@ layers configuration."
 
   ;; Tabs
   (evil-define-key 'motion global-map
-    "[t" 'eyebrowse-prev-window-config
-    "]t" 'eyebrowse-next-window-config
+    "[T" 'eyebrowse-prev-window-config
+    "]T" 'eyebrowse-next-window-config
     "gT" 'eyebrowse-prev-window-config
     "gt" 'eyebrowse-next-window-config
     )
@@ -345,6 +334,9 @@ layers configuration."
   (recentf-cleanup)
   ;; Cleanup projectile projects if they no longer exist.
   (projectile-cleanup-known-projects)
+
+  ;; Necessary until unimpaired fixes [h to use the correct function name.
+  (defalias 'diff-hl-prev-hunk 'diff-hl-previous-hunk)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
