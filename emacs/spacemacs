@@ -340,6 +340,10 @@ layers configuration."
 
   ;; Necessary until unimpaired fixes [h to use the correct function name.
   (defalias 'diff-hl-prev-hunk 'diff-hl-previous-hunk)
+
+  ;; This is required until https://github.com/syl20bnr/spacemacs/issues/2522 is
+  ;; resolved.
+  (require 'magit)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
