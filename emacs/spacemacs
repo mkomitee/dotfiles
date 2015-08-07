@@ -58,7 +58,6 @@
    '(
      apache-mode
      csv-mode
-     groovy-mode
      jinja2-mode
      llvm-mode
      nginx-mode
@@ -321,6 +320,8 @@ layers configuration."
 
   ;; pep8!
   (add-hook 'python-mode-hook '(lambda () (setq fill-column 79)))
+  (add-hook 'jinja2-mode-hook '(lambda () (setq evil-shift-width 2)))
+  (add-hook 'web-mode-hook '(lambda () (setq evil-shift-width 2)))
 
   ;; Disable smartparens auto-close for these symbols.
   (dolist (sym '("(" "[" "'" "\""))
@@ -338,8 +339,11 @@ layers configuration."
   ;; Cleanup projectile projects if they no longer exist.
   (projectile-cleanup-known-projects)
 
-  ;; Necessary until unimpaired fixes [h to use the correct function name.
-  (defalias 'diff-hl-prev-hunk 'diff-hl-previous-hunk)
+  (require 'evil-matchit)
+  (require 'jinja2-mode)
+  (plist-put evilmi-plugins 'jinja2-mode '((evilmi-simple-get-tag evilmi-simple-jump)
+                                          (evilmi-html-get-tag evilmi-html-jump)))
+  (add-hook 'jinja2-mode-hook '(lambda () (evil-matchit-mode)))
 
   ;; This is required until https://github.com/syl20bnr/spacemacs/issues/2522 is
   ;; resolved.
