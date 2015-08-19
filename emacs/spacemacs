@@ -23,14 +23,13 @@
      emacs-lisp
      evil-commentary
      evil-snipe
-     extra-langs
      eyebrowse
      (git :variables
           git-gutter-use-fringe t
           magit-last-seen-setup-instructions "1.4.0"
           )
      go
-     ;; haskell This is mucking about w/ flycheck-init-hooks
+     haskell
      html
      ipython-notebook
      javascript
@@ -42,13 +41,15 @@
      rust
      (shell :variables shell-default-shell 'eshell)
      shell-scripts
+     spell-checking
+     sql
      (syntax-checking :variables
                       syntax-checking-enable-tooltips nil)
      themes-megapack
      unimpaired
      version-control
      vinegar
-     ycmd
+     yaml
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -79,8 +80,10 @@ before layers configuration."
   ;; This setq-default sexp is an exhaustive list of all the supported
   ;; spacemacs settings.
   (setq-default
-   ;; Either `vim' or `emacs'. Evil is always enabled but if the variable
-   ;; is `emacs' then the `holy-mode' is enabled at startup.
+   ;; One of `vim', `emacs' or `hybrid'. Evil is always enabled but if the
+   ;; variable is `emacs' then the `holy-mode' is enabled at startup. `hybrid'
+   ;; uses emacs key bindings for vim's insert mode, but otherwise leaves evil
+   ;; unchanged.
    dotspacemacs-editing-style 'vim
    ;; If non nil output loading progress in `*Messages*' buffer.
    dotspacemacs-verbose-loading nil
@@ -214,8 +217,6 @@ layers configuration."
   (evil-define-key 'motion global-map
     "[T" 'eyebrowse-prev-window-config
     "]T" 'eyebrowse-next-window-config
-    "gT" 'eyebrowse-prev-window-config
-    "gt" 'eyebrowse-next-window-config
     )
   (evil-ex-define-cmd "tabn[ew]" 'eyebrowse-switch-to-window-config)
   (evil-ex-define-cmd "tabc[lose]" 'eyebrowse-close-window-config)
@@ -302,9 +303,10 @@ layers configuration."
                                  (nospace . "_")
                                  (case-fn . downcase))
         deft-extensions '("md" "txt" "text" "markdown" "org" "rst")
-        company-idle-delay nil
         eshell-aliases-file "~/.dotfiles/emacs/aliases"
         evil-snipe-repeat-scope 'whole-buffer
+        evil-move-beyond-eol nil
+        python-fill-docstring-style 'onetwo
         )
   (makunbound 'deft-extension)
   (auto-fill-mode 1)
