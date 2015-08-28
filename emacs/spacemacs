@@ -31,7 +31,7 @@
      go
      haskell
      html
-     ipython-notebook
+     ;; ipython-notebook
      javascript
      markdown
      org
@@ -51,7 +51,7 @@
      vinegar
      yaml
 
-     komitee
+     ;; komitee
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -139,7 +139,8 @@ before layers configuration."
    ;; Default value is `cache'.
    dotspacemacs-auto-save-file-location 'cache
    ;; If non nil then `ido' replaces `helm' for some commands. For now only
-   ;; `find-files' (SPC f f) is replaced.
+   ;; `find-files' (SPC f f), `find-spacemacs-file' (SPC f e s), and
+   ;; `find-contrib-file' (SPC f e c) are replaced.
    dotspacemacs-use-ido nil
    ;; If non nil the paste micro-state is enabled. When enabled pressing `p`
    ;; several times cycle between the kill ring content.
@@ -322,8 +323,6 @@ layers configuration."
   (add-hook 'prog-mode-hook 'spacemacs/highlight-TODO-words)
   (add-hook 'text-mode-hook 'spacemacs/highlight-TODO-words)
 
-  ;; pep8!
-  (add-hook 'python-mode-hook '(lambda () (setq fill-column 79)))
   (add-hook 'jinja2-mode-hook '(lambda () (setq evil-shift-width 2)))
   (add-hook 'web-mode-hook '(lambda () (setq evil-shift-width 2)))
 
@@ -352,7 +351,10 @@ layers configuration."
   ;; This is required until https://github.com/syl20bnr/spacemacs/issues/2522 is
   ;; resolved.
   (require 'magit)
+
+  (add-hook 'makefile-mode-hook '(lambda () (setq indent-tabs-mode t)))
   )
+
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
