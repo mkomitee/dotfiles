@@ -38,7 +38,8 @@ values."
      (auto-completion :variables
                       auto-completion-enable-help-tooltip t
                       auto-completion-enable-sort-by-usage t
-                      auto-completion-show-snippets-in-popup t)
+                      auto-completion-show-snippets-in-popup t
+                      auto-completion-private-snippets-directory "~/.dotfiles/emacs/snippets")
      better-defaults
      c-c++
      (colors :variables colors-enable-rainbow-identifiers t)
@@ -173,7 +174,7 @@ values."
    dotspacemacs-helm-resize t
    ;; if non nil, the helm header is hidden when there is only one source.
    ;; (default nil)
-   dotspacemacs-helm-no-header nil
+   dotspacemacs-helm-no-header t
    ;; define the position to display `helm', options are `bottom', `top',
    ;; `left', or `right'. (default 'bottom)
    dotspacemacs-helm-position 'bottom
@@ -247,10 +248,10 @@ user code."
         )
   )
 
-(defun dotspacemacs/config ()
-  "Configuration function.
+(defun dotspacemacs/user-config ()
+  "Configuration function for user code.
  This function is called at the very end of Spacemacs initialization after
-layers configuration."
+layers configuration. You are free to put any user code."
   ;; Split & focus by default
   (evil-leader/set-key
     "w-" 'split-window-below-and-focus
@@ -273,8 +274,8 @@ layers configuration."
 
   ;; Whitespace
   (setq whitespace-style
-        (quote (face faces space-before-tab tab-mark tabs trailing))
-        )
+        (quote (empty face space-after-tab space-before-tab tabs trailing)))
+
   (add-hook 'prog-mode-hook 'whitespace-mode)
   (add-hook 'text-mode-hook 'whitespace-mode)
   (add-hook 'before-save-hook 'whitespace-cleanup nil t)
@@ -374,7 +375,7 @@ layers configuration."
   (add-hook 'web-mode-hook '(lambda () (setq evil-shift-width 2)))
 
   ;; Disable smartparens auto-close for these symbols.
-  (dolist (sym '("(" "[" "'" "\""))
+  (dolist (sym '("(" "[" "'" "\"" "}"))
     (sp-pair sym nil :actions :rem))
 
   (evil-leader/set-key
@@ -400,6 +401,12 @@ layers configuration."
   (require 'magit)
 
   (add-hook 'makefile-mode-hook '(lambda () (setq indent-tabs-mode t)))
+
+  (define-key evil-motion-state-map "j" 'evil-next-visual-line)
+  (define-key evil-motion-state-map "k" 'evil-previous-visual-line)
+  (define-key evil-visual-state-map "j" 'evil-next-visual-line)
+  (define-key evil-visual-state-map "k" 'evil-previous-visual-line)
+
   )
 
 
