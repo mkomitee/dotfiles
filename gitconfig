@@ -95,3 +95,6 @@
 
 [push]
     default = simple
+
+[commit]
+    template = ~/.dotfiles/gitcommit
