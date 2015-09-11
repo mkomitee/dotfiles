@@ -349,11 +349,12 @@ layers configuration. You are free to put any user code."
         vc-follow-symlinks t
         deft-directory "~/notes"
         deft-use-filter-string-for-filename t
-        deft-text-mode 'markdown-mode
+        deft-text-mode 'org-mode
+        deft-auto-save-interval 0
         deft-file-naming-rules '((noslash . "-")
                                  (nospace . "_")
                                  (case-fn . downcase))
-        deft-extensions '("md" "txt" "text" "markdown" "org" "rst")
+        deft-extensions '("org" "md" "txt" "text" "markdown" "rst")
         eshell-aliases-file "~/.dotfiles/emacs/aliases"
         evil-snipe-repeat-scope 'whole-buffer
         evil-move-beyond-eol nil
@@ -407,6 +408,20 @@ layers configuration. You are free to put any user code."
   (define-key evil-visual-state-map "j" 'evil-next-visual-line)
   (define-key evil-visual-state-map "k" 'evil-previous-visual-line)
 
+  (evil-define-key 'motion global-map
+    "]s" 'flyspell-goto-next-error
+    )
+
+
+  (add-hook 'org-mode-hook '(lambda ()
+                             (org-babel-do-load-languages
+                              'org-babel-load-languages
+                              '((emacs-lisp . nil)
+                                (python . t)
+                                (sh . t)
+                                ))
+                             )
+            )
   )
 
 
