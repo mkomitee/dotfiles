@@ -397,7 +397,7 @@ layers configuration. You are free to put any user code."
     "]s" 'flyspell-goto-next-error
     )
 
-  (add-hook 'org-mode-hook '(lambda ()
+  (add-hook 'org-load-hook '(lambda ()
                              (org-babel-do-load-languages
                               'org-babel-load-languages
                               '((C . t)
@@ -417,6 +417,12 @@ layers configuration. You are free to put any user code."
                                 (sqlite . t)
                                 ))
                              )
+            )
+  (add-hook 'org-load-hook '(lambda ()
+                              (add-to-list 'org-structure-template-alist
+                                           '("p" . ("#+BEGIN_SRC python\n?\n#+END_SRC" "<src lang=\"python\">\n?\n</src>"))
+                              )
+                            )
             )
   )
 
