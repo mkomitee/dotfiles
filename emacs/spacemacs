@@ -260,17 +260,6 @@ layers configuration. You are free to put any user code."
   (evil-define-key 'normal flycheck-error-list-mode-map
     "q" 'quit-window
     )
-  (global-flycheck-mode)
-  (setq flycheck-checkers
-        (delq 'emacs-lisp-checkdoc flycheck-checkers))
-
-  ;; Tabs
-  (evil-define-key 'motion global-map
-    "[T" 'eyebrowse-prev-window-config
-    "]T" 'eyebrowse-next-window-config
-    )
-  (evil-ex-define-cmd "tabn[ew]" 'eyebrowse-switch-to-window-config)
-  (evil-ex-define-cmd "tabc[lose]" 'eyebrowse-close-window-config)
 
   ;; Whitespace
   (setq whitespace-style
@@ -278,7 +267,7 @@ layers configuration. You are free to put any user code."
 
   (add-hook 'prog-mode-hook 'whitespace-mode)
   (add-hook 'text-mode-hook 'whitespace-mode)
-  (add-hook 'before-save-hook 'whitespace-cleanup nil t)
+  (add-hook 'before-save-hook 'whitespace-cleanup)
 
   (defun komitee/complete-filename ()
     "Use hippie-expand to expand the filename"
@@ -318,7 +307,6 @@ layers configuration. You are free to put any user code."
   ;; Completion maps
   (evil-define-key 'insert global-map
     (kbd "C-x C-o") 'company-complete
-    (kbd "C-x C-u") 'company-complete
     (kbd "C-x C-y") 'komitee/complete-yas
     (kbd "C-x C-n") 'komitee/complete-keyword-current-file
     (kbd "C-x C-i") 'komitee/complete-keyword-all-files
@@ -356,7 +344,6 @@ layers configuration. You are free to put any user code."
                                  (case-fn . downcase))
         deft-extensions '("org" "md" "txt" "text" "markdown" "rst")
         eshell-aliases-file "~/.dotfiles/emacs/aliases"
-        evil-snipe-repeat-scope 'whole-buffer
         evil-move-beyond-eol nil
         python-fill-docstring-style 'onetwo
         )
@@ -365,9 +352,7 @@ layers configuration. You are free to put any user code."
   (add-hook 'prog-mode-hook 'turn-on-fci-mode)
   (add-hook 'text-mode-hook 'turn-on-fci-mode)
   (add-hook 'prog-mode-hook 'flyspell-prog-mode)
-  (global-set-key (kbd "M-SPC") 'cycle-spacing)
   (global-linum-mode t)
-  (global-vi-tilde-fringe-mode t)
 
   (add-hook 'prog-mode-hook 'spacemacs/highlight-TODO-words)
   (add-hook 'text-mode-hook 'spacemacs/highlight-TODO-words)
@@ -412,13 +397,24 @@ layers configuration. You are free to put any user code."
     "]s" 'flyspell-goto-next-error
     )
 
-
   (add-hook 'org-mode-hook '(lambda ()
                              (org-babel-do-load-languages
                               'org-babel-load-languages
-                              '((emacs-lisp . nil)
+                              '((C . t)
+                                (awk . t)
+                                (css . t)
+                                (dot . t)
+                                (emacs-lisp . nil)
+                                (haskell . t)
+                                (java . t)
+                                (js . t)
+                                (org . t)
+                                (perl . t)
                                 (python . t)
+                                (ruby . t)
                                 (sh . t)
+                                (sql . t)
+                                (sqlite . t)
                                 ))
                              )
             )
@@ -427,3 +423,24 @@ layers configuration. You are free to put any user code."
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(rainbow-delimiters-depth-1-face ((t (:foreground "#9999bb"))))
+ '(rainbow-delimiters-depth-2-face ((t (:foreground "#9999bb"))))
+ '(rainbow-delimiters-depth-3-face ((t (:foreground "#9999bb"))))
+ '(rainbow-delimiters-depth-4-face ((t (:foreground "#9999bb"))))
+ '(rainbow-delimiters-depth-5-face ((t (:foreground "#9999bb"))))
+ '(rainbow-delimiters-depth-6-face ((t (:foreground "#9999bb"))))
+ '(rainbow-delimiters-depth-7-face ((t (:foreground "#9999bb"))))
+ '(rainbow-delimiters-depth-8-face ((t (:foreground "#9999bb"))))
+ '(rainbow-delimiters-depth-9-face ((t (:foreground "#9999bb")))))
