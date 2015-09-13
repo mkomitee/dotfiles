@@ -424,6 +424,7 @@ layers configuration. You are free to put any user code."
                               )
                             )
             )
+  (setq magit-push-always-verify nil)
   )
 
 
