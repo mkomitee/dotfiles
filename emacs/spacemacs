@@ -38,11 +38,11 @@ values."
      (auto-completion :variables
                       auto-completion-enable-help-tooltip t
                       auto-completion-enable-sort-by-usage t
-                      auto-completion-show-snippets-in-popup t
+                      auto-completion-enable-snippets-in-popup t
                       auto-completion-private-snippets-directory "~/.dotfiles/emacs/snippets")
      better-defaults
      c-c++
-     (colors :variables colors-enable-rainbow-identifiers t)
+     colors
      deft
      evil-commentary
      evil-snipe
@@ -54,12 +54,12 @@ values."
      go
      haskell
      html
-     ;; ipython-notebook
      javascript
      markdown
      org
      puppet
      python
+     (ranger :variables ranger-show-preview t)
      ruby
      rust
      (shell :variables shell-default-shell 'eshell)
