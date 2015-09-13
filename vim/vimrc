@@ -121,12 +121,12 @@ endif
 NeoBundleLazy 'tpope/vim-vinegar', {
             \   'augroup': 'vinegar',
             \}
-NeoBundleLazy 'Valloric/YouCompleteMe', {
-            \   'build': {
-            \       'unix': './install.sh --clang-completer',
-            \       'mac': './install.sh --clang-completer',
-            \   },
-            \}
+" NeoBundleLazy 'Valloric/YouCompleteMe', {
+"             \   'build': {
+"             \       'unix': './install.sh --clang-completer',
+"             \       'mac': './install.sh --clang-completer',
+"             \   },
+"             \}
 
 NeoBundle 'morhetz/gruvbox'
 NeoBundle 'tomasr/molokai'

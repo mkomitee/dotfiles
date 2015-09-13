@@ -22,7 +22,7 @@ let g:airline_mode_map = {
             \ }
 
 let g:ycm_use_ultisnips_completer = 1
-NeoBundleSource YouCompleteMe
+" NeoBundleSource YouCompleteMe
 
 NeoBundleSource vim-tmux-navigator
 
