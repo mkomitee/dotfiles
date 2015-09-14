@@ -261,10 +261,6 @@ layers configuration. You are free to put any user code."
     "q" 'quit-window
     )
 
-  ;; Whitespace
-  (setq whitespace-style
-        (quote (empty face space-after-tab space-before-tab tabs trailing)))
-
   (add-hook 'prog-mode-hook 'whitespace-mode)
   (add-hook 'text-mode-hook 'whitespace-mode)
   (add-hook 'before-save-hook 'whitespace-cleanup)
@@ -346,7 +342,12 @@ layers configuration. You are free to put any user code."
         eshell-aliases-file "~/.dotfiles/emacs/aliases"
         evil-move-beyond-eol nil
         python-fill-docstring-style 'onetwo
+        whitespace-style '(empty face space-after-tab space-before-tab
+                                 tabs trailing)
+        magit-push-always-verify nil
+        org-todo-keywords '((sequence "TODO" "WIP" "HOLD" "DONE"))
         )
+
   (makunbound 'deft-extension)
   (auto-fill-mode 1)
   (add-hook 'prog-mode-hook 'turn-on-fci-mode)
@@ -425,7 +426,6 @@ layers configuration. You are free to put any user code."
                               )
                             )
             )
-  (setq magit-push-always-verify nil)
   )
 
 
