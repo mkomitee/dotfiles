@@ -365,7 +365,8 @@ layers configuration. You are free to put any user code."
     (sp-pair sym nil :actions :rem))
 
   (evil-leader/set-key
-    "bb" 'helm-buffers-list)
+    "bb" 'helm-buffers-list
+    "aa" 'org-agenda)
 
   ;; Cleanup recent files. recentf is lazily loaded, so to call recentf-cleanup,
   ;; we must first enable it. I tried using eval-after-load, and the function
@@ -435,6 +436,7 @@ layers configuration. You are free to put any user code."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(org-agenda-files (quote ("~/notes/TODO.org")))
  )
 
 (custom-set-faces
