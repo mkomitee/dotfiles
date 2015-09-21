@@ -8,7 +8,7 @@ You should not put any user code in this function besides modifying the variable
 values."
   (setq-default
    ;; Base distribution to use. This is a layer contained in the directory
-   ;; `!distribution'. For now available distributions are `spacemacs-core'
+   ;; `+distribution'. For now available distributions are `spacemacs-base'
    ;; or `spacemacs'. (default 'spacemacs)
    dotspacemacs-distribution 'spacemacs
    ;; List of additional paths where to look for configuration layers.
@@ -346,7 +346,13 @@ layers configuration. You are free to put any user code."
                                  tabs trailing)
         magit-push-always-verify nil
         org-todo-keywords '((sequence "TODO" "RESEARCH" "WIP" "HOLD" "DONE"))
-        org-agenda-files '("~/notes/TODO.org")
+        org-agenda-files '("~/notes/TODO.org" "~/notes/NOTES.org")
+        org-directory "~/notes"
+        org-default-notes-file "~/notes/NOTES.org"
+        org-capture-templates '(("t" "Todo" entry (file+headline "~/notes/TODO.org" "Tasks")
+                                 "* TODO %?\n  %i\n  %a")
+                                ("n" "Note" entry (file+datetree "~/notes/NOTES.org")
+                                 "* %?\nEntered on %U\n  %i\n  %a"))
         )
 
   (makunbound 'deft-extension)
@@ -368,7 +374,8 @@ layers configuration. You are free to put any user code."
 
   (evil-leader/set-key
     "bb" 'helm-buffers-list
-    "aa" 'org-agenda)
+    "aA" 'org-agenda
+    "aC" 'org-capture)
 
   ;; Cleanup recent files. recentf is lazily loaded, so to call recentf-cleanup,
   ;; we must first enable it. I tried using eval-after-load, and the function
