@@ -353,6 +353,7 @@ layers configuration. You are free to put any user code."
                                  "* TODO %?\n  %i\n  %a")
                                 ("n" "Note" entry (file+datetree "~/notes/NOTES.org")
                                  "* %?\nEntered on %U\n  %i\n  %a"))
+        org-catch-invisible-edits "smart"
         )
 
   (makunbound 'deft-extension)
@@ -376,6 +377,10 @@ layers configuration. You are free to put any user code."
     "bb" 'helm-buffers-list
     "aA" 'org-agenda
     "aC" 'org-capture)
+
+  (evil-leader/set-key-for-mode 'org-mode
+    "mX" 'org-toggle-checkbox
+    )
 
   ;; Cleanup recent files. recentf is lazily loaded, so to call recentf-cleanup,
   ;; we must first enable it. I tried using eval-after-load, and the function
