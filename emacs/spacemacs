@@ -354,6 +354,9 @@ layers configuration. You are free to put any user code."
                                 ("n" "Note" entry (file+datetree "~/notes/NOTES.org")
                                  "* %?\nEntered on %U\n  %i\n  %a"))
         org-catch-invisible-edits "smart"
+        org-enforce-todo-dependencies t
+        org-enforce-todo-checkbox-dependencies t
+        org-agenda-dim-blocked-tasks t
         )
 
   (makunbound 'deft-extension)
