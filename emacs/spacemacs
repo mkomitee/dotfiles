@@ -136,7 +136,7 @@ values."
                          solarized-dark
                          solarized-light
                          )
-   ;; If non nil the cursor color matches the state color.
+   ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
@@ -338,7 +338,7 @@ layers configuration. You are free to put any user code."
         deft-file-naming-rules '((noslash . "-")
                                  (nospace . "_")
                                  (case-fn . downcase))
-        deft-extensions '("org" "md" "txt" "text" "markdown" "rst")
+        deft-extensions '("org" "md" "markdown" "rst")
         eshell-aliases-file "~/.dotfiles/emacs/aliases"
         evil-move-beyond-eol nil
         python-fill-docstring-style 'onetwo
