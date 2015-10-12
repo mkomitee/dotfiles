@@ -357,12 +357,14 @@ layers configuration. You are free to put any user code."
         org-enforce-todo-dependencies t
         org-enforce-todo-checkbox-dependencies t
         org-agenda-dim-blocked-tasks t
+        visual-line-fringe-indicators '(nil right-curly-arrow)
         )
 
   (makunbound 'deft-extension)
   (auto-fill-mode 1)
   (add-hook 'prog-mode-hook 'turn-on-fci-mode)
   (add-hook 'text-mode-hook 'turn-on-fci-mode)
+  (add-hook 'org-mode-hook 'turn-on-visual-line-mode)
   (add-hook 'prog-mode-hook 'flyspell-prog-mode)
   (global-linum-mode t)
 
