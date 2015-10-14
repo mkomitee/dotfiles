@@ -78,7 +78,7 @@ values."
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages then consider to create a layer, you can also put the
-   ;; configuration in `dotspacemacs/config'.
+   ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages
    '(
      apache-mode
@@ -170,7 +170,7 @@ values."
    ;; `find-files' (SPC f f), `find-spacemacs-file' (SPC f e s), and
    ;; `find-contrib-file' (SPC f e c) are replaced. (default nil)
    dotspacemacs-use-ido nil
-   ;; If non nil, `helm' will try to miminimize the space it uses. (default nil)
+   ;; If non nil, `helm' will try to minimize the space it uses. (default nil)
    dotspacemacs-helm-resize t
    ;; if non nil, the helm header is hidden when there is only one source.
    ;; (default nil)
@@ -250,7 +250,7 @@ user code."
 
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
- This function is called at the very end of Spacemacs initialization after
+This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
   ;; Split & focus by default
   (evil-leader/set-key
@@ -264,6 +264,20 @@ layers configuration. You are free to put any user code."
   (add-hook 'prog-mode-hook 'whitespace-mode)
   (add-hook 'text-mode-hook 'whitespace-mode)
   (add-hook 'before-save-hook 'whitespace-cleanup)
+
+  (defun komitee/add-whitespace-cleanup-hook
+      "Remove whitespace cleanup before-save-hook"
+    (interactive)
+    (progn
+      (remove-hook 'before-save-hook 'whitespace-cleanup)
+      (add-hook 'before-save-hook 'whitespace-cleanup)
+      )
+    )
+
+  (defun komitee/remove-whitespace-cleanup-hook
+    "Remove whitespace cleanup before-save-hook"
+    (interactive)
+    (remove-hook 'before-save-hook 'whitespace-cleanup))
 
   (defun komitee/complete-filename ()
     "Use hippie-expand to expand the filename"
