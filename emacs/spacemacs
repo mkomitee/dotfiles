@@ -83,6 +83,7 @@ values."
    '(
      apache-mode
      csv-mode
+     helm-flx
      jinja2-mode
      llvm-mode
      nginx-mode
@@ -252,6 +253,8 @@ user code."
   "Configuration function for user code.
 This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
+
+  (helm-flx-mode +1)
   ;; Split & focus by default
   (evil-leader/set-key
     "w-" 'split-window-below-and-focus
