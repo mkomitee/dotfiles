@@ -81,6 +81,7 @@ values."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages
    '(
+     beacon
      apache-mode
      csv-mode
      helm-flx
@@ -455,6 +456,7 @@ layers configuration. You are free to put any user code."
                                 ))
                              )
             )
+  (beacon-mode 1)
   (add-hook 'org-load-hook '(lambda ()
                               (add-to-list 'org-structure-template-alist
                                            '("p" . ("#+BEGIN_SRC python\n?\n#+END_SRC" "<src lang=\"python\">\n?\n</src>"))
