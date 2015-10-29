@@ -82,9 +82,11 @@ values."
    dotspacemacs-additional-packages
    '(
      beacon
+     ox-rst
+     ox-twbs
+     ox-impress-js
      apache-mode
      csv-mode
-     helm-flx
      jinja2-mode
      llvm-mode
      nginx-mode
@@ -130,6 +132,7 @@ values."
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(
+                         leuven
                          material
                          material-light
                          spacemacs-dark
@@ -142,9 +145,8 @@ values."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
-   dotspacemacs-default-font '("Input Mono"
+   dotspacemacs-default-font '("Consolas"
                                :size 13
-                               :weight light
                                :width normal
                                :powerline-scale 1.1)
    ;; The leader key
@@ -182,7 +184,7 @@ values."
    dotspacemacs-helm-position 'bottom
    ;; If non nil the paste micro-state is enabled. When enabled pressing `p`
    ;; several times cycle between the kill ring content. (default nil)
-   dotspacemacs-enable-paste-micro-state nil
+   dotspacemacs-enable-paste-micro-state t
    ;; Which-key delay in seconds. The which-key buffer is the popup listing
    ;; the commands bound to the current keystroke sequence. (default 0.4)
    dotspacemacs-which-key-delay 0.4
@@ -219,13 +221,16 @@ values."
    ;; scrolling overrides the default behavior of Emacs which recenters the
    ;; point when it reaches the top or bottom of the screen. (default t)
    dotspacemacs-smooth-scrolling t
+   ;; If non nil line numbers are turned on in all `prog-mode' and `text-mode'.
+   ;; (default nil)
+   dotspacemacs-global-line-numbers t
    ;; If non-nil smartparens-strict-mode will be enabled in programming modes.
    ;; (default nil)
    dotspacemacs-smartparens-strict-mode nil
    ;; Select a scope to highlight delimiters. Possible values are `any',
    ;; `current', `all' or `nil'. Default is `all' (highlight any scope and
    ;; emphasis the current one). (default 'all)
-   dotspacemacs-highlight-delimiters 'all
+   dotspacemacs-highlight-delimiters 'current
    ;; If non nil advises quit functions to keep server open when quitting.
    ;; (default nil)
    dotspacemacs-persistent-server t
@@ -255,7 +260,6 @@ user code."
 This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
 
-  (helm-flx-mode +1)
   ;; Split & focus by default
   (evil-leader/set-key
     "w-" 'split-window-below-and-focus
@@ -383,8 +387,8 @@ layers configuration. You are free to put any user code."
   (add-hook 'prog-mode-hook 'turn-on-fci-mode)
   (add-hook 'text-mode-hook 'turn-on-fci-mode)
   (add-hook 'org-mode-hook 'turn-on-visual-line-mode)
+  (add-hook 'org-mode-hook 'turn-off-fci-mode)
   (add-hook 'prog-mode-hook 'flyspell-prog-mode)
-  (global-linum-mode t)
 
   (add-hook 'prog-mode-hook 'spacemacs/highlight-TODO-words)
   (add-hook 'text-mode-hook 'spacemacs/highlight-TODO-words)
@@ -463,6 +467,23 @@ layers configuration. You are free to put any user code."
                               )
                             )
             )
+  (add-hook 'org-load-hook '(lambda ()
+                              (require 'ox-rst)
+                              (require 'ox-twbs)
+                              (require 'ox-impress-js)
+                              ))
+
+  ;; Fix org-html-export fci-mode issues
+  ;; https://github.com/alpaker/Fill-Column-Indicator/issues/45
+  (defun fci-mode-override-advice (&rest args))
+  (advice-add 'org-html-fontify-code :around
+              (lambda (fun &rest args)
+                (advice-add 'fci-mode :override #'fci-mode-override-advice)
+                (let ((result  (apply fun args)))
+                  (advice-remove 'fci-mode #'fci-mode-override-advice)
+                  result)))
+
+
   (if (file-exists-p "~/.post-local.el")
       (load "~/.post-local.el"))
   )
