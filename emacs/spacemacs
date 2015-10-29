@@ -84,7 +84,7 @@ values."
      beacon
      ox-rst
      ox-twbs
-     ox-impress-js
+     ox-reveal
      apache-mode
      csv-mode
      jinja2-mode
@@ -470,7 +470,7 @@ layers configuration. You are free to put any user code."
   (add-hook 'org-load-hook '(lambda ()
                               (require 'ox-rst)
                               (require 'ox-twbs)
-                              (require 'ox-impress-js)
+                              (require 'ox-reveal)
                               ))
 
   ;; Fix org-html-export fci-mode issues
