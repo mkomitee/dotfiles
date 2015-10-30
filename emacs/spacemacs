@@ -360,7 +360,7 @@ layers configuration. You are free to put any user code."
         deft-file-naming-rules '((noslash . "-")
                                  (nospace . "_")
                                  (case-fn . downcase))
-        deft-extensions '("org" "md" "markdown" "rst")
+        deft-extensions '("org")
         eshell-aliases-file "~/.dotfiles/emacs/aliases"
         evil-move-beyond-eol nil
         python-fill-docstring-style 'onetwo
