@@ -242,6 +242,10 @@ values."
    ;; specified with an installed package.
    ;; Not used for now. (default nil)
    dotspacemacs-default-package-repository nil
+   ;; Delete whitespace while saving buffer. Possible values are `all',
+   ;; `trailing', `changed' or `nil'. Default is `changed' (cleanup whitespace
+   ;; on changed lines) (default 'changed)
+   dotspacemacs-whitespace-cleanup 'changed
    ))
 
 (defun dotspacemacs/user-init ()
@@ -271,21 +275,8 @@ layers configuration. You are free to put any user code."
 
   (add-hook 'prog-mode-hook 'whitespace-mode)
   (add-hook 'text-mode-hook 'whitespace-mode)
-  (add-hook 'before-save-hook 'whitespace-cleanup)
 
-  (defun komitee/add-whitespace-cleanup-hook
-      "Remove whitespace cleanup before-save-hook"
-    (interactive)
-    (progn
-      (remove-hook 'before-save-hook 'whitespace-cleanup)
-      (add-hook 'before-save-hook 'whitespace-cleanup)
-      )
-    )
 
-  (defun komitee/remove-whitespace-cleanup-hook
-    "Remove whitespace cleanup before-save-hook"
-    (interactive)
-    (remove-hook 'before-save-hook 'whitespace-cleanup))
 
   (defun komitee/complete-filename ()
     "Use hippie-expand to expand the filename"
@@ -496,7 +487,7 @@ layers configuration. You are free to put any user code."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(ws-butler-keep-whitespace-before-point nil))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
