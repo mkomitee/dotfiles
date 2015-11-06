@@ -80,6 +80,7 @@ values."
    dotspacemacs-additional-packages
    '(
      beacon
+     confluence
      ox-rst
      ox-twbs
      ox-reveal
@@ -270,15 +271,6 @@ layers configuration. You are free to put any user code."
     "w-" 'split-window-below-and-focus
     "w/" 'split-window-right-and-focus)
 
-  (evil-define-key 'normal flycheck-error-list-mode-map
-    "q" 'quit-window
-    )
-
-  (add-hook 'prog-mode-hook 'whitespace-mode)
-  (add-hook 'text-mode-hook 'whitespace-mode)
-
-
-
   (defun komitee/complete-filename ()
     "Use hippie-expand to expand the filename"
     (interactive)
@@ -332,13 +324,8 @@ layers configuration. You are free to put any user code."
                   messages-buffer-mode))
     (evil-set-initial-state mode 'motion))
 
-  (dolist (mode '(term-mode
-                  ansi-term-mode))
-    (evil-set-initial-state mode 'emacs))
-
   ;; Misc
   (evil-leader/set-key
-    "gha" 'git-gutter:stage-hunk
     "bs" 'scratch
     )
   (setq undo-tree-auto-save-history t
@@ -347,14 +334,12 @@ layers configuration. You are free to put any user code."
         vc-follow-symlinks t
         deft-directory "~/notes"
         deft-use-filter-string-for-filename t
-        deft-text-mode 'org-mode
         deft-auto-save-interval 0
         deft-file-naming-rules '((noslash . "-")
                                  (nospace . "_")
                                  (case-fn . downcase))
         deft-extensions '("org")
         eshell-aliases-file "~/.dotfiles/emacs/aliases"
-        evil-move-beyond-eol nil
         python-fill-docstring-style 'onetwo
         whitespace-style '(empty face space-after-tab space-before-tab
                                  tabs trailing)
@@ -374,13 +359,15 @@ layers configuration. You are free to put any user code."
         visual-line-fringe-indicators '(nil right-curly-arrow)
         )
 
-  (makunbound 'deft-extension)
-  (auto-fill-mode 1)
   (add-hook 'prog-mode-hook 'turn-on-fci-mode)
   (add-hook 'text-mode-hook 'turn-on-fci-mode)
   (add-hook 'org-mode-hook 'turn-on-visual-line-mode)
+
+  (spacemacs/toggle-visual-line-navigation-on)
+  (spacemacs/toggle-auto-fill-mode-on)
+  (spacemacs/toggle-whitespace-globally-on)
+
   (add-hook 'org-mode-hook 'turn-off-fci-mode)
-  (add-hook 'prog-mode-hook 'flyspell-prog-mode)
 
   (add-hook 'prog-mode-hook 'spacemacs/highlight-TODO-words)
   (add-hook 'text-mode-hook 'spacemacs/highlight-TODO-words)
@@ -405,8 +392,7 @@ layers configuration. You are free to put any user code."
   ;; we must first enable it. I tried using eval-after-load, and the function
   ;; was called, but i think it was firing before the recentf-save-file got
   ;; modified in the recentf use-package :config section
-  (recentf-mode)
-  (recentf-cleanup)
+  (add-hook 'recentf-load-hook '(lambda () (recentf-cleanup)))
   ;; Cleanup projectile projects if they no longer exist.
   (projectile-cleanup-known-projects)
 
@@ -421,11 +407,6 @@ layers configuration. You are free to put any user code."
   (require 'magit)
 
   (add-hook 'makefile-mode-hook '(lambda () (setq indent-tabs-mode t)))
-
-  (define-key evil-motion-state-map "j" 'evil-next-visual-line)
-  (define-key evil-motion-state-map "k" 'evil-previous-visual-line)
-  (define-key evil-visual-state-map "j" 'evil-next-visual-line)
-  (define-key evil-visual-state-map "k" 'evil-previous-visual-line)
 
   (evil-define-key 'motion global-map
     "]s" 'flyspell-goto-next-error
@@ -455,14 +436,16 @@ layers configuration. You are free to put any user code."
   (beacon-mode 1)
   (add-hook 'org-load-hook '(lambda ()
                               (add-to-list 'org-structure-template-alist
-                                           '("p" . ("#+BEGIN_SRC python\n?\n#+END_SRC" "<src lang=\"python\">\n?\n</src>"))
+                                           '("p" . ("#+BEGIN_SRC python\n?\n#+END_SRC"
+                                                    "<src lang=\"python\">\n?\n</src>"))
                               )
                             )
             )
   (add-hook 'org-load-hook '(lambda ()
+                              (require 'ox-confluence)
+                              (require 'ox-reveal)
                               (require 'ox-rst)
                               (require 'ox-twbs)
-                              (require 'ox-reveal)
                               ))
 
   ;; Fix org-html-export fci-mode issues
@@ -488,7 +471,11 @@ layers configuration. You are free to put any user code."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(org-startup-folded (quote showeverything))
+ '(org-use-sub-superscripts (quote {}))
+ '(web-mode-enable-element-content-fontification t)
+ '(web-mode-enable-element-tag-fontification t)
+ '(web-mode-enable-html-entities-fontification t))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
