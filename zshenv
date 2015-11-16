@@ -97,3 +97,5 @@ export PYLINT_ARGS='-d C0301,W0142'
 if [ -f $HOME/.zshenv.local ]; then
     source $HOME/.zshenv.local
 fi
+
+unsetopt global_rcs
