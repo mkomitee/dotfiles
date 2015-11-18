@@ -352,12 +352,6 @@ layers configuration. You are free to put any user code."
 
   (add-hook 'org-mode-hook 'turn-off-fci-mode)
 
-  (add-hook 'prog-mode-hook 'spacemacs/highlight-TODO-words)
-  (add-hook 'text-mode-hook 'spacemacs/highlight-TODO-words)
-
-  (add-hook 'jinja2-mode-hook '(lambda () (setq evil-shift-width 2)))
-  (add-hook 'web-mode-hook '(lambda () (setq evil-shift-width 2)))
-
   ;; Disable smartparens auto-close for these symbols.
   (dolist (sym '("(" "[" "'" "\"" "}"))
     (sp-pair sym nil :actions :rem))
@@ -378,12 +372,6 @@ layers configuration. You are free to put any user code."
   (add-hook 'recentf-load-hook '(lambda () (recentf-cleanup)))
   ;; Cleanup projectile projects if they no longer exist.
   (projectile-cleanup-known-projects)
-
-  (require 'evil-matchit)
-  (require 'jinja2-mode)
-  (plist-put evilmi-plugins 'jinja2-mode '((evilmi-simple-get-tag evilmi-simple-jump)
-                                          (evilmi-html-get-tag evilmi-html-jump)))
-  (add-hook 'jinja2-mode-hook '(lambda () (evil-matchit-mode)))
 
   ;; This is required until https://github.com/syl20bnr/spacemacs/issues/2522 is
   ;; resolved.
@@ -446,6 +434,12 @@ layers configuration. You are free to put any user code."
                 (let ((result  (apply fun args)))
                   (advice-remove 'fci-mode #'fci-mode-override-advice)
                   result)))
+
+  (require 'web-mode)
+  (add-to-list 'auto-mode-alist '("\\.jinja2\\'" . web-mode))
+  (setq web-mode-engines-alist
+        '(("jinja" . "\\.jinja2\\'"))
+        )
 
 
   (if (file-exists-p "~/.post-local.el")
