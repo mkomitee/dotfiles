@@ -79,17 +79,16 @@ values."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages
    '(
+     apache-mode
      beacon
      confluence
-     ox-rst
-     ox-twbs
-     ox-reveal
-     apache-mode
      csv-mode
      jinja2-mode
      llvm-mode
      nginx-mode
-     protobuf-mode
+     ox-reveal
+     ox-rst
+     ox-twbs
      rpm-spec-mode
      scratch
      systemd
@@ -135,7 +134,6 @@ values."
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(
-                         darktooth
                          material
                          leuven
                          material-light
@@ -143,7 +141,6 @@ values."
                          spacemacs-light
                          solarized-light
                          solarized-dark
-                         solarized-light
                          gruvbox
                          )
    ;; If non nil the cursor color matches the state color in GUI Emacs.
@@ -270,10 +267,8 @@ values."
   "Initialization function for user code.
 It is called immediately after `dotspacemacs/init'.  You are free to put any
 user code."
-  (setq server-use-tcp t
-        server-socket-dir "~/.emacs.d/server"
+  (setq server-socket-dir "~/.emacs.d/server"
         server-host system-name
-        evil-want-C-w-in-emacs-state t
         )
   )
 
@@ -344,36 +339,8 @@ layers configuration. You are free to put any user code."
   (evil-leader/set-key
     "bs" 'scratch
     )
-  (setq undo-tree-auto-save-history t
-        undo-tree-history-directory-alist (quote (("." . "~/.emacs.d/.undo")))
-        comment-auto-fill-only-comments t
-        vc-follow-symlinks t
-        deft-directory "~/notes"
-        deft-use-filter-string-for-filename t
-        deft-auto-save-interval 0
-        deft-file-naming-rules '((noslash . "-")
-                                 (nospace . "_")
-                                 (case-fn . downcase))
-        deft-extensions '("org")
-        eshell-aliases-file "~/.dotfiles/emacs/aliases"
-        python-fill-docstring-style 'onetwo
-        whitespace-style '(empty face space-after-tab space-before-tab
-                                 tabs trailing)
-        magit-push-always-verify nil
-        org-todo-keywords '((sequence "TODO" "RESEARCH" "WIP" "HOLD" "DONE"))
-        org-agenda-files '("~/notes/TODO.org" "~/notes/NOTES.org")
-        org-directory "~/notes"
-        org-default-notes-file "~/notes/NOTES.org"
-        org-capture-templates '(("t" "Todo" entry (file+headline "~/notes/TODO.org" "Tasks")
-                                 "* TODO %?\n  %i\n  %a")
-                                ("n" "Note" entry (file+datetree "~/notes/NOTES.org")
-                                 "* %?\nEntered on %U\n  %i\n  %a"))
-        org-catch-invisible-edits "smart"
-        org-enforce-todo-dependencies t
-        org-enforce-todo-checkbox-dependencies t
-        org-agenda-dim-blocked-tasks t
-        visual-line-fringe-indicators '(nil right-curly-arrow)
-        )
+
+  (setq org-agenda-files '("~/notes/TODO.org" "~/notes/NOTES.org"))
 
   (add-hook 'prog-mode-hook 'turn-on-fci-mode)
   (add-hook 'text-mode-hook 'turn-on-fci-mode)
@@ -493,11 +460,52 @@ layers configuration. You are free to put any user code."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(comment-auto-fill-only-comments t)
+ '(deft-auto-save-interval 0)
+ '(deft-directory "~/notes")
+ '(deft-extensions (quote ("org")) t)
+ '(deft-file-naming-rules
+    (quote
+     ((noslash . "-")
+      (nospace . "_")
+      (case-fn . downcase))))
+ '(deft-use-filter-string-for-filename t)
+ '(eshell-aliases-file "~/.dotfiles/emacs/aliases")
+ '(evil-want-C-w-in-emacs-state t)
+ '(magit-push-always-verify nil)
+ '(org-capture-templates
+   (quote
+    (("t" "Todo" entry
+      (file+headline "~/notes/TODO.org" "Tasks")
+      "* TODO %?
+  %i
+  %a")
+     ("n" "Note" entry
+      (file+datetree "~/notes/NOTES.org")
+      "* %?
+Entered on %U
+  %i
+  %a"))))
+ '(org-catch-invisible-edits "smart")
+ '(org-default-notes-file "~/notes/NOTES.org")
+ '(org-directory "~/notes")
+ '(org-enforce-todo-checkbox-dependencies t)
+ '(org-enforce-todo-dependencies t)
  '(org-startup-folded (quote showeverything))
+ '(org-todo-keywords (quote ((sequence "TODO" "RESEARCH" "WIP" "HOLD" "DONE"))))
  '(org-use-sub-superscripts (quote {}))
+ '(python-fill-docstring-style (quote onetwo))
+ '(server-use-tcp t)
+ '(undo-tree-auto-save-history t)
+ '(undo-tree-history-directory-alist (quote (("." . "~/.emacs.d/.undo"))))
+ '(vc-follow-symlinks t)
+ '(visual-line-fringe-indicators (quote (nil right-curly-arrow)))
  '(web-mode-enable-element-content-fontification t)
  '(web-mode-enable-element-tag-fontification t)
- '(web-mode-enable-html-entities-fontification t))
+ '(web-mode-enable-html-entities-fontification t)
+ '(whitespace-style
+   (quote
+    (empty face space-after-tab space-before-tab tabs trailing))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
