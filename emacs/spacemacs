@@ -128,6 +128,9 @@ values."
    ;; Possible values are: `recents' `bookmarks' `projects'.
    ;; (default '(recents projects))
    dotspacemacs-startup-lists '(recents bookmarks projects)
+   ;; Number of recent files to show in the startup buffer. Ignored if
+   ;; `dotspacemacs-startup-lists' doesn't include `recents'. (default 5)
+   dotspacemacs-startup-recent-list-size 20
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
@@ -423,6 +426,12 @@ layers configuration. You are free to put any user code."
 
   (evil-define-key 'motion global-map
     "]s" 'flyspell-goto-next-error
+    )
+
+  (spacemacs|define-custom-layout "@Scratch"
+    :binding "s"
+    :body
+    (display-buffer "*scratch*")
     )
 
   (add-hook 'org-load-hook '(lambda ()
