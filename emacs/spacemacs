@@ -109,6 +109,11 @@ values."
   ;; This setq-default sexp is an exhaustive list of all the supported
   ;; spacemacs settings.
   (setq-default
+   ;; If non nil ELPA repositories are contacted via HTTPS whenever it's
+   ;; possible. Set it to nil if you have no way to use HTTPS in your
+   ;; environment, otherwise it is strongly recommended to let it set to t.
+   ;; (default t)
+   dotspacemacs-elpa-https t
    ;; One of `vim', `emacs' or `hybrid'. Evil is always enabled but if the
    ;; variable is `emacs' then the `holy-mode' is enabled at startup. `hybrid'
    ;; uses emacs key bindings for vim's insert mode, but otherwise leaves evil
@@ -277,11 +282,6 @@ user code."
 This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
 
-  ;; Split & focus by default
-  (evil-leader/set-key
-    "w-" 'split-window-below-and-focus
-    "w/" 'split-window-right-and-focus)
-
   (defun komitee/complete-filename ()
     "Use hippie-expand to expand the filename"
     (interactive)
@@ -317,15 +317,6 @@ layers configuration. You are free to put any user code."
            '(yas-hippie-try-expand)))
       (call-interactively 'hippie-expand)))
 
-  ;; Completion maps
-  (evil-define-key 'insert global-map
-    (kbd "C-x C-o") 'company-complete
-    (kbd "C-x C-y") 'komitee/complete-yas
-    (kbd "C-x C-n") 'komitee/complete-keyword-current-file
-    (kbd "C-x C-i") 'komitee/complete-keyword-all-files
-    (kbd "C-x C-f") 'komitee/complete-filename
-    (kbd "C-x C-l") 'komitee/complete-line
-    )
 
   ;; Initial state modes
   (dolist (mode '(Custom-mode))
@@ -335,12 +326,27 @@ layers configuration. You are free to put any user code."
                   messages-buffer-mode))
     (evil-set-initial-state mode 'motion))
 
-  ;; Misc
   (evil-leader/set-key
+    "aA" 'org-agenda
+    "aC" 'org-capture
+    "bb" 'helm-buffers-list
     "bs" 'scratch
+    "w-" 'split-window-below-and-focus
+    "w/" 'split-window-right-and-focus
     )
 
-  (setq org-agenda-files '("~/notes/TODO.org" "~/notes/NOTES.org"))
+  (evil-leader/set-key-for-mode 'org-mode
+    "mX" 'org-toggle-checkbox
+    )
+
+  (evil-define-key 'insert global-map
+    (kbd "C-x C-o") 'company-complete
+    (kbd "C-x C-y") 'komitee/complete-yas
+    (kbd "C-x C-n") 'komitee/complete-keyword-current-file
+    (kbd "C-x C-i") 'komitee/complete-keyword-all-files
+    (kbd "C-x C-f") 'komitee/complete-filename
+    (kbd "C-x C-l") 'komitee/complete-line
+    )
 
   (add-hook 'prog-mode-hook 'turn-on-fci-mode)
   (add-hook 'text-mode-hook 'turn-on-fci-mode)
@@ -356,32 +362,10 @@ layers configuration. You are free to put any user code."
   (dolist (sym '("(" "[" "'" "\"" "}"))
     (sp-pair sym nil :actions :rem))
 
-  (evil-leader/set-key
-    "bb" 'helm-buffers-list
-    "aA" 'org-agenda
-    "aC" 'org-capture)
-
-  (evil-leader/set-key-for-mode 'org-mode
-    "mX" 'org-toggle-checkbox
-    )
-
-  ;; Cleanup recent files. recentf is lazily loaded, so to call recentf-cleanup,
-  ;; we must first enable it. I tried using eval-after-load, and the function
-  ;; was called, but i think it was firing before the recentf-save-file got
-  ;; modified in the recentf use-package :config section
-  (add-hook 'recentf-load-hook '(lambda () (recentf-cleanup)))
   ;; Cleanup projectile projects if they no longer exist.
   (projectile-cleanup-known-projects)
 
-  ;; This is required until https://github.com/syl20bnr/spacemacs/issues/2522 is
-  ;; resolved.
-  (require 'magit)
-
-  (add-hook 'makefile-mode-hook '(lambda () (setq indent-tabs-mode t)))
-
-  (evil-define-key 'motion global-map
-    "]s" 'flyspell-goto-next-error
-    )
+  (global-git-commit-mode t)
 
   (spacemacs|define-custom-layout "@Scratch"
     :binding "s"
@@ -389,41 +373,7 @@ layers configuration. You are free to put any user code."
     (display-buffer "*scratch*")
     )
 
-  (add-hook 'org-load-hook '(lambda ()
-                             (org-babel-do-load-languages
-                              'org-babel-load-languages
-                              '((C . t)
-                                (awk . t)
-                                (css . t)
-                                (dot . t)
-                                (emacs-lisp . nil)
-                                (haskell . t)
-                                (java . t)
-                                (js . t)
-                                (org . t)
-                                (perl . t)
-                                (python . t)
-                                (ruby . t)
-                                (sh . t)
-                                (sql . t)
-                                (sqlite . t)
-                                ))
-                             )
-            )
   (beacon-mode 1)
-  (add-hook 'org-load-hook '(lambda ()
-                              (add-to-list 'org-structure-template-alist
-                                           '("p" . ("#+BEGIN_SRC python\n?\n#+END_SRC"
-                                                    "<src lang=\"python\">\n?\n</src>"))
-                              )
-                            )
-            )
-  (add-hook 'org-load-hook '(lambda ()
-                              (require 'ox-confluence)
-                              (require 'ox-reveal)
-                              (require 'ox-rst)
-                              (require 'ox-twbs)
-                              ))
 
   ;; Fix org-html-export fci-mode issues
   ;; https://github.com/alpaker/Fill-Column-Indicator/issues/45
@@ -467,6 +417,10 @@ layers configuration. You are free to put any user code."
  '(eshell-aliases-file "~/.dotfiles/emacs/aliases")
  '(evil-want-C-w-in-emacs-state t)
  '(magit-push-always-verify nil)
+ '(makefile-mode-hook (quote ((lambda nil (setq indent-tabs-mode t)))))
+ '(org-agenda-files
+   (quote
+    ("~/notes/TODO.org" "~/notes/NOTES.org")))
  '(org-capture-templates
    (quote
     (("t" "Todo" entry
@@ -485,10 +439,49 @@ Entered on %U
  '(org-directory "~/notes")
  '(org-enforce-todo-checkbox-dependencies t)
  '(org-enforce-todo-dependencies t)
+ '(org-load-hook
+   (quote
+    ((lambda nil
+       (progn
+         (org-babel-do-load-languages
+          (quote org-babel-load-languages)
+          (quote
+           ((C . t)
+            (awk . t)
+            (css . t)
+            (dot . t)
+            (emacs-lisp)
+            (haskell . t)
+            (java . t)
+            (js . t)
+            (org . t)
+            (perl . t)
+            (python . t)
+            (ruby . t)
+            (sh . t)
+            (sql . t)
+            (sqlite . t))))
+         (add-to-list
+          (quote org-structure-template-alist)
+          (quote
+           ("p" "#+BEGIN_SRC python
+?
+#+END_SRC" "<src lang=\"python\">
+?
+</src>")))
+         (require
+          (quote ox-confluence))
+         (require
+          (quote ox-reveal))
+         (require
+          (quote ox-rst))
+         (require
+          (quote ox-twbs)))))))
  '(org-startup-folded (quote showeverything))
  '(org-todo-keywords (quote ((sequence "TODO" "RESEARCH" "WIP" "HOLD" "DONE"))))
  '(org-use-sub-superscripts (quote {}))
  '(python-fill-docstring-style (quote onetwo))
+ '(recentf-load-hook (quote ((lambda nil (recentf-cleanup)))))
  '(server-use-tcp t)
  '(undo-tree-auto-save-history t)
  '(undo-tree-history-directory-alist (quote (("." . "~/.emacs.d/.undo"))))
