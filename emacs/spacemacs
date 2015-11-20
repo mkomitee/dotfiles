@@ -391,6 +391,7 @@ layers configuration. You are free to put any user code."
         '(("jinja" . "\\.jinja2\\'"))
         )
 
+  (setq deft-extensions '("org"))
 
   (if (file-exists-p "~/.post-local.el")
       (load "~/.post-local.el"))
@@ -407,7 +408,6 @@ layers configuration. You are free to put any user code."
  '(comment-auto-fill-only-comments t)
  '(deft-auto-save-interval 0)
  '(deft-directory "~/notes")
- '(deft-extensions (quote ("org")) t)
  '(deft-file-naming-rules
     (quote
      ((noslash . "-")
