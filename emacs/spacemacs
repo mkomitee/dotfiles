@@ -282,6 +282,9 @@ user code."
 This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
 
+  (add-to-list 'load-path "~/.dotfiles/emacs")
+  (require 'helm-deft)
+
   (defun komitee/complete-filename ()
     "Use hippie-expand to expand the filename"
     (interactive)
@@ -330,6 +333,7 @@ layers configuration. You are free to put any user code."
     "aA" 'org-agenda
     "aC" 'org-capture
     "bb" 'helm-buffers-list
+    "an" 'helm-deft
     "bs" 'scratch
     "w-" 'split-window-below-and-focus
     "w/" 'split-window-right-and-focus
@@ -416,11 +420,10 @@ layers configuration. You are free to put any user code."
  '(deft-use-filter-string-for-filename t)
  '(eshell-aliases-file "~/.dotfiles/emacs/aliases")
  '(evil-want-C-w-in-emacs-state t)
+ '(helm-deft-dir-list (quote ("~/notes")))
  '(magit-push-always-verify nil)
  '(makefile-mode-hook (quote ((lambda nil (setq indent-tabs-mode t)))))
- '(org-agenda-files
-   (quote
-    ("~/notes/TODO.org" "~/notes/NOTES.org")))
+ '(org-agenda-files (quote ("~/notes/TODO.org" "~/notes/NOTES.org")))
  '(org-capture-templates
    (quote
     (("t" "Todo" entry
