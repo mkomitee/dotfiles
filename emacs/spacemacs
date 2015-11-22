@@ -70,7 +70,7 @@ values."
                       syntax-checking-enable-tooltips nil)
      themes-megapack
      unimpaired
-     vinegar
+    ;; vinegar
      yaml
      )
    ;; List of additional packages that will be installed without being
@@ -329,7 +329,7 @@ layers configuration. You are free to put any user code."
                   messages-buffer-mode))
     (evil-set-initial-state mode 'motion))
 
-  (evil-leader/set-key
+  (spacemacs/set-leader-keys
     "aA" 'org-agenda
     "aC" 'org-capture
     "bb" 'helm-buffers-list
@@ -339,8 +339,8 @@ layers configuration. You are free to put any user code."
     "w/" 'split-window-right-and-focus
     )
 
-  (evil-leader/set-key-for-mode 'org-mode
-    "mX" 'org-toggle-checkbox
+  (spacemacs/set-leader-keys-for-major-mode 'org-mode
+    "X" 'org-toggle-checkbox
     )
 
   (evil-define-key 'insert global-map
