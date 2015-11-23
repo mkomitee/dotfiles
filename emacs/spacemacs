@@ -371,12 +371,6 @@ layers configuration. You are free to put any user code."
 
   (global-git-commit-mode t)
 
-  (spacemacs|define-custom-layout "@Scratch"
-    :binding "s"
-    :body
-    (display-buffer "*scratch*")
-    )
-
   (beacon-mode 1)
 
   ;; Fix org-html-export fci-mode issues
