@@ -385,6 +385,11 @@ layers configuration. You are free to put any user code."
                   (advice-remove 'fci-mode #'fci-mode-override-advice)
                   result)))
 
+  ;; Disable fci-mode in web-mode
+  ;; https://github.com/alpaker/Fill-Column-Indicator/issues/46
+  (add-hook 'after-change-major-mode-hook
+            (lambda () (if (string= major-mode "web-mode")
+                           (turn-off-fci-mode) (turn-on-fci-mode))))
   (require 'web-mode)
   (add-to-list 'auto-mode-alist '("\\.jinja2\\'" . web-mode))
   (setq web-mode-engines-alist
