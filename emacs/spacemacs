@@ -44,6 +44,7 @@ values."
      c-c++
      colors
      deft
+     evil-cleverparens
      evil-commentary
      evil-snipe
      (git :variables
@@ -282,6 +283,8 @@ layers configuration. You are free to put any user code."
 
   (add-to-list 'load-path "~/.dotfiles/emacs")
   (require 'helm-deft)
+
+  (spacemacs/toggle-evil-cleverparens-on)
 
   (defun komitee/complete-filename ()
     "Use hippie-expand to expand the filename"
