@@ -70,7 +70,6 @@ values."
                       syntax-checking-enable-tooltips nil)
      themes-megapack
      unimpaired
-     vinegar
      yaml
      )
    ;; List of additional packages that will be installed without being
