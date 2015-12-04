@@ -399,9 +399,12 @@ layers configuration. You are free to put any user code."
             (lambda () (if (string= major-mode "web-mode")
                            (turn-off-fci-mode) (turn-on-fci-mode))))
   (require 'web-mode)
-  (add-to-list 'auto-mode-alist '("\\.jinja2\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
   (setq web-mode-engines-alist
-        '(("jinja" . "\\.jinja2\\'"))
+        '(
+          ("jinja" . "\\.html\\'")
+          ("jinja" . "\\.js\\'")
+          )
         )
 
   (setq deft-extensions '("org"))
