@@ -41,49 +41,40 @@ values."
                       auto-completion-enable-snippets-in-popup t
                       auto-completion-private-snippets-directory "~/.dotfiles/emacs/snippets")
      better-defaults
-     c-c++
+     (c-c++ :variables
+            c-c++-enable-clang-support t)
      colors
      deft
-     evil-cleverparens
-     evil-commentary
-     evil-snipe
+     eyebrowse
      (git :variables
           git-gutter-use-fringe t
           magit-last-seen-setup-instructions "1.4.0")
-     go
-     haskell
      html
+     ipython-notebook
      javascript
-     markdown
      org
      puppet
      python
-     (ranger :variables ranger-show-preview t)
-     ruby
-     rust
      (shell :variables shell-default-shell 'eshell)
      shell-scripts
      spacemacs-layouts
      spell-checking
-     sql
      (syntax-checking :variables
                       syntax-checking-enable-tooltips nil)
      themes-megapack
      unimpaired
-     yaml
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
-   ;; packages then consider to create a layer, you can also put the
+   ;; packages, then consider to create a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages
    '(
      apache-mode
-     beacon
+     cl-generic
      confluence
      csv-mode
      jinja2-mode
-     llvm-mode
      nginx-mode
      ox-reveal
      ox-rst
@@ -111,13 +102,20 @@ values."
    ;; If non nil ELPA repositories are contacted via HTTPS whenever it's
    ;; possible. Set it to nil if you have no way to use HTTPS in your
    ;; environment, otherwise it is strongly recommended to let it set to t.
+   ;; This variable has no effect if Emacs is launched with the parameter
+   ;; `--insecure' which forces the value of this variable to nil.
    ;; (default t)
    dotspacemacs-elpa-https t
+   ;; Maximum allowed time in seconds to contact an ELPA repository.
+   dotspacemacs-elpa-timeout 5
+   ;; If non nil then spacemacs will check for updates at startup
+   ;; when the current branch is not `develop'. (default t)
+   dotspacemacs-check-for-update t
    ;; One of `vim', `emacs' or `hybrid'. Evil is always enabled but if the
    ;; variable is `emacs' then the `holy-mode' is enabled at startup. `hybrid'
    ;; uses emacs key bindings for vim's insert mode, but otherwise leaves evil
    ;; unchanged. (default 'vim)
-   dotspacemacs-editing-style 'vim
+   dotspacemacs-editing-style 'hybrid
    ;; If non nil output loading progress in `*Messages*' buffer. (default nil)
    dotspacemacs-verbose-loading nil
    ;; Specify the startup banner. Default value is `official', it displays
@@ -167,7 +165,7 @@ values."
    ;; In the terminal, these pairs are generally indistinguishable, so this only
    ;; works in the GUI. (default nil)
    dotspacemacs-distinguish-gui-tab nil
-   dotspacemacs-distinguish-gui-ret nil
+   ;; (Not implemented) dotspacemacs-distinguish-gui-ret nil
    ;; Major mode leader key is a shortcut key which is the equivalent of
    ;; pressing `<leader> m`. Set it to `nil` to disable it. (default ",")
    dotspacemacs-major-mode-leader-key ","
@@ -269,17 +267,19 @@ values."
    ;; specified with an installed package.
    ;; Not used for now. (default nil)
    dotspacemacs-default-package-repository nil
-   ;; Delete whitespace while saving buffer. Possible values are `all',
-   ;; `trailing', `changed' or `nil'. Default is `changed' (cleanup whitespace
-   ;; on changed lines) (default 'changed)
+   ;; Delete whitespace while saving buffer. Possible values are `all'
+   ;; to aggressively delete empty line and long sequences of whitespace,
+   ;; `trailing' to delete only the whitespace at end of lines, `changed'to
+   ;; delete only whitespace for changed lines or `nil' to disable cleanup.
+   ;; (default nil)
    dotspacemacs-whitespace-cleanup 'changed
    ))
 
 (defun dotspacemacs/user-init ()
   "Initialization function for user code.
-It is called immediately after `dotspacemacs/init'.  You are free to put almost any
-user code here. The exception is org related code, which should be placed in
-`dotspacemacs/user-config'"
+It is called immediately after `dotspacemacs/init'. You are free to put almost
+any user code here.  The exception is org related code, which should be placed
+in `dotspacemacs/user-config'."
   (setq server-socket-dir "~/.emacs.d/server"
         server-host system-name
         )
@@ -290,46 +290,12 @@ user code here. The exception is org related code, which should be placed in
 This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
 
-  (add-to-list 'load-path "~/.dotfiles/emacs")
-  (require 'helm-deft)
-
-  (spacemacs/toggle-evil-cleverparens-on)
-
-  (defun komitee/complete-filename ()
-    "Use hippie-expand to expand the filename"
-    (interactive)
-    (let ((hippie-expand-try-functions-list
-           '(try-complete-file-name-partially try-complete-file-name)))
-      (call-interactively 'hippie-expand)))
-
-  (defun komitee/complete-keyword-current-file ()
-    "Use hippie-expand to expand a keyword in the current file"
-    (interactive)
-    (let ((hippie-expand-try-functions-list
-           '(try-expand-dabbrev)))
-      (call-interactively 'hippie-expand)))
-
-  (defun komitee/complete-keyword-all-files ()
-    "Use hippie-expand to expand a keyword in all files"
-    (interactive)
-    (let ((hippie-expand-try-functions-list
-           '(try-expand-dabbrev-all-buffers)))
-      (call-interactively 'hippie-expand)))
-
-  (defun komitee/complete-line ()
-    "Use hippie-expand to expand a line"
-    (interactive)
-    (let ((hippie-expand-try-functions-list
-           '(try-expand-line)))
-      (call-interactively 'hippie-expand)))
-
   (defun komitee/complete-yas ()
     "Use hippie-expand to expand a line"
     (interactive)
     (let ((hippie-expand-try-functions-list
            '(yas-hippie-try-expand)))
       (call-interactively 'hippie-expand)))
-
 
   ;; Initial state modes
   (dolist (mode '(Custom-mode))
@@ -340,10 +306,10 @@ layers configuration. You are free to put any user code."
     (evil-set-initial-state mode 'motion))
 
   (spacemacs/set-leader-keys
+    "ail" 'ein:notebooklist-login
     "aA" 'org-agenda
     "aC" 'org-capture
     "bb" 'helm-buffers-list
-    "an" 'helm-deft
     "bs" 'scratch
     "w-" 'split-window-below-and-focus
     "w/" 'split-window-right-and-focus
@@ -353,13 +319,13 @@ layers configuration. You are free to put any user code."
     "X" 'org-toggle-checkbox
     )
 
+  (evil-define-key 'motion global-map
+    "gc" 'evilnc-comment-operator
+    )
+
   (evil-define-key 'insert global-map
     (kbd "C-x C-o") 'company-complete
     (kbd "C-x C-y") 'komitee/complete-yas
-    (kbd "C-x C-n") 'komitee/complete-keyword-current-file
-    (kbd "C-x C-i") 'komitee/complete-keyword-all-files
-    (kbd "C-x C-f") 'komitee/complete-filename
-    (kbd "C-x C-l") 'komitee/complete-line
     )
 
   (add-hook 'prog-mode-hook 'turn-on-fci-mode)
@@ -380,8 +346,6 @@ layers configuration. You are free to put any user code."
   (projectile-cleanup-known-projects)
 
   (global-git-commit-mode t)
-
-  (beacon-mode 1)
 
   ;; Fix org-html-export fci-mode issues
   ;; https://github.com/alpaker/Fill-Column-Indicator/issues/45
@@ -413,7 +377,6 @@ layers configuration. You are free to put any user code."
       (load "~/.post-local.el"))
   )
 
-
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
 (custom-set-variables
@@ -424,6 +387,7 @@ layers configuration. You are free to put any user code."
  '(comment-auto-fill-only-comments t)
  '(deft-auto-save-interval 0)
  '(deft-directory "~/notes")
+ '(deft-extensions (quote ("org")) t)
  '(deft-file-naming-rules
     (quote
      ((noslash . "-")
@@ -432,8 +396,6 @@ layers configuration. You are free to put any user code."
  '(deft-use-filter-string-for-filename t)
  '(eshell-aliases-file "~/.dotfiles/emacs/aliases")
  '(evil-want-C-w-in-emacs-state t)
- '(helm-deft-dir-list (quote ("~/notes")))
- '(magit-push-always-verify nil)
  '(makefile-mode-hook (quote ((lambda nil (setq indent-tabs-mode t)))))
  '(org-agenda-files (quote ("~/notes/TODO.org" "~/notes/NOTES.org")))
  '(org-capture-templates

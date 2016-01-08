@@ -3,7 +3,7 @@
 
 [core]
     pager = less -FRXMQigMws
-    editor = emacsclient -q -a emacs
+    editor = emacsclient -a emacs -q -t
     whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
     excludesfile = ~/.dotfiles/gitignore
 
