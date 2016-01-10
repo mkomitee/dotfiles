@@ -373,6 +373,15 @@ layers configuration. You are free to put any user code."
 
   (setq deft-extensions '("org"))
 
+  ;; Pad linum with a blank space when in the terminal because there is no
+  ;; fringe. The only way I've been able to figure out how to do this is to
+  ;; run a hook on buffer-list-update-hook. focus-in-hook does /not/ work.
+  (add-hook 'buffer-list-update-hook
+            (lambda () (cond ((display-graphic-p)
+                              (setq linum-format "%4d"))
+                             (t
+                              (setq linum-format "%4d ")))))
+
   (if (file-exists-p "~/.post-local.el")
       (load "~/.post-local.el"))
   )
