@@ -27,6 +27,12 @@ alias tig='tig --all'
 alias tmux='tmux -u2'
 alias y=true
 
+alias e="command emacsclient -a emacs -q -n"
+alias ex="command emacsclient -a emacs -q -n"
+alias exw="command emacsclient -a emacs -q"
+alias ec="command emacsclient -a emacs -q -t"
+alias ecw="command emacsclient -a emacs -q -t"
+
 alias type='type -a'
 
 alias pyprofile='python -mcProfile -o $(uuid -v4).profile'
@@ -34,5 +40,4 @@ alias pyprofile='python -mcProfile -o $(uuid -v4).profile'
 alias yolo='sudo $(fc -ln -1)'
 alias locate.home='locate -d ~/.locate.database'
 
-alias e='emacsclient -n'
 alias dirs='dirs -v'

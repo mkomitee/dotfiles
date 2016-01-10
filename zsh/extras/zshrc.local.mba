@@ -1,8 +1,6 @@
 #!/usr/bin/env zsh
 alias gpg=gpg2
 
-alias emacsclient="emacsclient -q -a emacs -n"
-alias e=emacsclient
 alias pstree="pstree -g 3"
 
 if [ -f ~/.colors.sh ]; then
