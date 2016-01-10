@@ -54,6 +54,7 @@ values."
      ipython-notebook
      javascript
      org
+     osx
      puppet
      python
      (shell :variables shell-default-shell 'eshell)
