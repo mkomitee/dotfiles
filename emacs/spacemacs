@@ -26,6 +26,7 @@ values."
      ;; auto-completion
      ;; better-defaults
      emacs-lisp
+     spacemacs-ivy
      ;; git
      ;; markdown
      ;; org
@@ -309,7 +310,6 @@ layers configuration. You are free to put any user code."
     "ail" 'ein:notebooklist-login
     "aA" 'org-agenda
     "aC" 'org-capture
-    "bb" 'helm-buffers-list
     "bs" 'scratch
     "w-" 'split-window-below-and-focus
     "w/" 'split-window-right-and-focus
