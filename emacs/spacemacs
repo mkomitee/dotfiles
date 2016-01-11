@@ -394,6 +394,19 @@ layers configuration. You are free to put any user code."
                              (t
                               (setq linum-format "%4d ")))))
 
+
+  (add-hook 'eshell-mode-hook
+            (lambda ()
+              (local-set-key (kbd "C-c C-l")
+                             (lambda ()
+                               (interactive)
+                               (insert
+                                (ivy-completing-read "Eshell history: "
+                                                     (delete-dups
+                                                      (ring-elements eshell-history-ring))))))
+              (local-set-key (kbd "C-c C-h") 'eshell-list-history)))
+
+
   (if (file-exists-p "~/.post-local.el")
       (load "~/.post-local.el"))
   )
