@@ -75,6 +75,7 @@ values."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages
    '(
+     ag
      apache-mode
      cl-generic
      confluence
