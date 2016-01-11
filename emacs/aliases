@@ -1,7 +1,12 @@
+alias gs magit-status
+alias g magit-status
+alias v view-file $1
 alias emacs find-file $1
 alias e find-file $1
 alias emacsclient find-file $1
 alias ff find-file $1
 alias git-status magit-status $PWD
-alias g magit-status $PWD
-alias gs magit-status $PWD
+alias la ls -lha $*
+alias ll ls -lh $*
+alias ag ag/search $1 $PWD
+alias d dired $1
