@@ -78,6 +78,7 @@ values."
      cl-generic
      confluence
      csv-mode
+     flx
      jinja2-mode
      nginx-mode
      ox-reveal
@@ -373,6 +374,14 @@ layers configuration. You are free to put any user code."
         )
 
   (setq deft-extensions '("org"))
+
+  ;; Use counsel-M-x for M-x
+  (global-set-key (kbd "M-x") 'counsel-M-x)
+  ;; ivy should use flx matching
+  (setq ivy-re-builders-alist
+        '((t . ivy--regex-fuzzy)))
+  ;; counsel-M-x shouldn't anchor by default
+  (assq-delete-all 'counsel-M-x ivy-initial-inputs-alist)
 
   ;; Pad linum with a blank space when in the terminal because there is no
   ;; fringe. The only way I've been able to figure out how to do this is to
