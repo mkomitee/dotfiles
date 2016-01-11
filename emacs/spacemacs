@@ -395,6 +395,7 @@ layers configuration. You are free to put any user code."
                               (setq linum-format "%4d ")))))
 
 
+  (require 'ag)
   (add-hook 'eshell-mode-hook
             (lambda ()
               (local-set-key (kbd "C-c C-l")
