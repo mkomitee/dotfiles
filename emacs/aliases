@@ -1,5 +1,6 @@
 alias ag spacemacs/counsel-search
 alias d dired $1
+alias history komitee/eshell-ivy-history
 alias ll ls -lh $*
 alias la ls -lha $*
 alias git-status magit-status $PWD
