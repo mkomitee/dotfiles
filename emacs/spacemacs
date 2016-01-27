@@ -75,12 +75,9 @@ values."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages
    '(
-     ag
      apache-mode
-     cl-generic
      confluence
      csv-mode
-     flx
      jinja2-mode
      nginx-mode
      ox-reveal
@@ -91,7 +88,10 @@ values."
      systemd
      )
    ;; A list of packages and/or extensions that will not be install and loaded.
-   dotspacemacs-excluded-packages '()
+   dotspacemacs-excluded-packages
+   '(
+     smartparens
+     )
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
    ;; are declared in a layer which is not a member of
    ;; the list `dotspacemacs-configuration-layers'. (default t)
@@ -143,14 +143,8 @@ values."
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(
+                         badwolf
                          gruvbox
-                         material
-                         leuven
-                         material-light
-                         spacemacs-dark
-                         spacemacs-light
-                         solarized-light
-                         solarized-dark
                          )
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
@@ -342,10 +336,6 @@ layers configuration. You are free to put any user code."
 
   (add-hook 'org-mode-hook 'turn-off-fci-mode)
 
-  ;; Disable smartparens auto-close for these symbols.
-  (dolist (sym '("(" "[" "'" "\"" "}"))
-    (sp-pair sym nil :actions :rem))
-
   ;; Cleanup projectile projects if they no longer exist.
   (projectile-cleanup-known-projects)
 
@@ -377,11 +367,6 @@ layers configuration. You are free to put any user code."
 
   (setq deft-extensions '("org"))
 
-  ;; Use counsel-M-x for M-x
-  (global-set-key (kbd "M-x") 'counsel-M-x)
-  ;; ivy should use flx matching
-  (setq ivy-re-builders-alist
-        '((t . ivy--regex-fuzzy)))
   ;; counsel-M-x shouldn't anchor by default
   (assq-delete-all 'counsel-M-x ivy-initial-inputs-alist)
 
@@ -395,7 +380,6 @@ layers configuration. You are free to put any user code."
                               (setq linum-format "%4d ")))))
 
 
-  (require 'ag)
   (add-hook 'eshell-mode-hook
             (lambda ()
               (local-set-key (kbd "C-c C-l")
@@ -406,7 +390,6 @@ layers configuration. You are free to put any user code."
                                                      (delete-dups
                                                       (ring-elements eshell-history-ring))))))
               (local-set-key (kbd "C-c C-h") 'eshell-list-history)))
-
 
   (if (file-exists-p "~/.post-local.el")
       (load "~/.post-local.el"))
