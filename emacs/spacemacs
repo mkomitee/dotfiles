@@ -139,7 +139,7 @@ values."
    ;; List of items to show in the startup buffer. If nil it is disabled.
    ;; Possible values are: `recents' `bookmarks' `projects' `agenda' `todos'.
    ;; (default '(recents projects))
-   dotspacemacs-startup-lists '(todos agenda recents bookmarks projects)
+   dotspacemacs-startup-lists '(recents bookmarks projects)
    ;; Number of recent files to show in the startup buffer. Ignored if
    ;; `dotspacemacs-startup-lists' doesn't include `recents'. (default 5)
    dotspacemacs-startup-recent-list-size 20
@@ -304,6 +304,14 @@ in `dotspacemacs/user-config'."
 This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
 
+  ;; Initial state modes
+  (dolist (mode '(Custom-mode))
+    (evil-set-initial-state mode 'normal))
+  (dolist (mode '(package-menu-mode
+                  messages-buffer-mode))
+    (evil-set-initial-state mode 'motion))
+
+  ;; Completion stuff
   (defun komitee/complete-yas ()
     "Use hippie-expand to expand a line"
     (interactive)
@@ -311,76 +319,36 @@ layers configuration. You are free to put any user code."
            '(yas-hippie-try-expand)))
       (call-interactively 'hippie-expand)))
 
-  ;; Initial state modes
-  (dolist (mode '(Custom-mode))
-    (evil-set-initial-state mode 'normal))
-
-  (dolist (mode '(package-menu-mode
-                  messages-buffer-mode))
-    (evil-set-initial-state mode 'motion))
-
-  (spacemacs/set-leader-keys
-    "ail" 'ein:notebooklist-login
-    "aA" 'org-agenda
-    "aC" 'org-capture
-    "bs" 'scratch
-    "w-" 'split-window-below-and-focus
-    "w/" 'split-window-right-and-focus
-    )
-
-  (spacemacs/set-leader-keys-for-major-mode 'org-mode
-    "X" 'org-toggle-checkbox
-    )
-
-  (evil-define-key 'motion global-map
-    "gc" 'evilnc-comment-operator
-    )
-
+  ;; vim like completion maps
   (evil-define-key 'insert global-map
     (kbd "C-x C-o") 'company-complete
-    (kbd "C-x C-y") 'komitee/complete-yas
-    )
+    (kbd "C-x C-y") 'komitee/complete-yas)
+  (evil-define-key 'normal global-map
+    (kbd "C-x C-o") 'company-complete
+    (kbd "C-x C-y") 'komitee/complete-yas)
+
+  ;; misc configuration settings
+  (spacemacs/set-leader-keys
+    "ail" 'ein:notebooklist-login
+    "bs" 'scratch
+    "w-" 'split-window-below-and-focus
+    "w/" 'split-window-right-and-focus)
+
+  (evil-define-key 'motion global-map
+    "gc" 'evilnc-comment-operator)
 
   (add-hook 'prog-mode-hook 'turn-on-fci-mode)
   (add-hook 'text-mode-hook 'turn-on-fci-mode)
-  (add-hook 'org-mode-hook 'turn-on-visual-line-mode)
-
   (spacemacs/toggle-visual-line-navigation-on)
   (spacemacs/toggle-auto-fill-mode-on)
   (spacemacs/toggle-whitespace-globally-on)
 
-  (add-hook 'org-mode-hook 'turn-off-fci-mode)
-
   ;; Cleanup projectile projects if they no longer exist.
   (projectile-cleanup-known-projects)
 
+  ;; Let me use emacs as my git-editor. This is necessary in case I don't use a
+  ;; daemon, or the daemon hasn't loaded magit yet.
   (global-git-commit-mode t)
-
-  ;; Fix org-html-export fci-mode issues
-  ;; https://github.com/alpaker/Fill-Column-Indicator/issues/45
-  (defun fci-mode-override-advice (&rest args))
-  (advice-add 'org-html-fontify-code :around
-              (lambda (fun &rest args)
-                (advice-add 'fci-mode :override #'fci-mode-override-advice)
-                (let ((result  (apply fun args)))
-                  (advice-remove 'fci-mode #'fci-mode-override-advice)
-                  result)))
-
-  ;; Disable fci-mode in web-mode
-  ;; https://github.com/alpaker/Fill-Column-Indicator/issues/46
-  (add-hook 'after-change-major-mode-hook
-            (lambda () (if (string= major-mode "web-mode")
-                           (turn-off-fci-mode) (turn-on-fci-mode))))
-  (require 'web-mode)
-  (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
-  (setq web-mode-engines-alist
-        '(
-          ("jinja" . "\\.html\\'")
-          ("jinja" . "\\.js\\'")
-          )
-        )
-
-  (setq deft-extensions '("org"))
 
   ;; counsel-M-x shouldn't anchor by default
   (assq-delete-all 'counsel-M-x ivy-initial-inputs-alist)
@@ -393,18 +361,131 @@ layers configuration. You are free to put any user code."
                               (setq linum-format "%4d"))
                              (t
                               (setq linum-format "%4d ")))))
+  ;; (with-eval-after-load 'spacemacs
+  (require 'recentf)
+  (setq comment-auto-fill-only-comments t
+        evil-want-C-w-in-emacs-state t
+        ivy-use-virtual-buffers nil
+        makefile-mode-hook '((lambda nil (setq indent-tabs-mode t)))
+        python-fill-docstring-style 'onetwo
+        recentf-load-hook '((lambda nil (recentf-cleanup)))
+        server-use-tcp t
+        undo-tree-auto-save-history t
+        undo-tree-history-directory-alist '(("." . "~/.emacs.d/.undo"))
+        vc-follow-symlinks t
+        visual-line-fringe-indicators '(nil right-curly-arrow)
+        whitespace-style '(empty face space-after-tab space-before-tab tabs
+                                 trailing))
+
+  ;; web-mode config
+  ;; Disable fci-mode in web-mode
+  ;; https://github.com/alpaker/Fill-Column-Indicator/issues/46
+  (add-hook 'after-change-major-mode-hook
+            (lambda () (if (string= major-mode "web-mode")
+                           (turn-off-fci-mode) (turn-on-fci-mode))))
+  ;; Need to require it because web-mode needs to be loaded to use it in the
+  ;; auto-mode-alist
+  (require 'web-mode)
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
+  (setq web-mode-enable-control-block-indentation nil
+        web-mode-enable-current-column-highlight nil
+        web-mode-enable-current-element-highlight t
+        web-mode-enable-element-content-fontification t
+        web-mode-enable-element-tag-fontification t
+        web-mode-enable-html-entities-fontification t
+        web-mode-engines-alist '(("jinja" . "\\.html\\'")
+                                 ("jinja" . "\\.js\\'")))
+
+  ;; deft config
+  (setq deft-auto-save-interval 0
+        deft-use-filter-string-for-filename t
+        deft-extensions '("org")
+        deft-directory "~/notes"
+        deft-file-naming-rules '((noslash . "-")
+                                 (nospace . "_")
+                                 (case-fn . downcase)))
+
+  ;; org config
+  (spacemacs/set-leader-keys
+    "aA" 'org-agenda
+    "aC" 'org-capture)
+  (spacemacs/set-leader-keys-for-major-mode 'org-mode
+    "X" 'org-toggle-checkbox)
+  (add-hook 'org-mode-hook 'turn-on-visual-line-mode)
+  (add-hook 'org-mode-hook 'turn-off-fci-mode)
+  ;; Fix org-html-export fci-mode issues
+  ;; https://github.com/alpaker/Fill-Column-Indicator/issues/45
+  (defun fci-mode-override-advice (&rest args))
+  (advice-add 'org-html-fontify-code :around
+              (lambda (fun &rest args)
+                (advice-add 'fci-mode :override #'fci-mode-override-advice)
+                (let ((result  (apply fun args)))
+                  (advice-remove 'fci-mode #'fci-mode-override-advice)
+                  result)))
+  (setq org-agenda-files '("~/notes/TODO.org"
+                           "~/notes/NOTES.org")
+        org-capture-templates '(("t" "Todo" entry
+                                 (file+headline "~/notes/TODO.org" "Tasks")
+                                 "* TODO %?
+  %i
+  %a")
+                                ("n" "Note" entry
+                                 (file+datetree "~/notes/NOTES.org")
+                                 "* %?
+Entered on %U
+  %i
+  %a"))
+        org-catch-invisible-edits "smart"
+        org-default-notes-file "~/notes/NOTES.org"
+        org-directory "~/notes"
+        org-enforce-todo-checkbox-dependencies t
+        org-enforce-todo-dependencies t
+        org-load-hook '((lambda nil
+                          (progn
+                            (org-babel-do-load-languages 'org-babel-load-languages
+                                                         '((C . t)
+                                                           (awk . t)
+                                                           (css . t)
+                                                           (dot . t)
+                                                           (emacs-lisp)
+                                                           (haskell . t)
+                                                           (java . t)
+                                                           (js . t)
+                                                           (org . t)
+                                                           (perl . t)
+                                                           (python . t)
+                                                           (ruby . t)
+                                                           (sh . t)
+                                                           (sql . t)
+                                                           (sqlite . t)))
+                            (add-to-list 'org-structure-template-alist
+                                         '("p" "#+BEGIN_SRC python
+?
+#+END_SRC" "<src lang=\"python\">
+?
+</src>"))
+                            (require 'ox-confluence)
+                            (require 'ox-reveal)
+                            (require 'ox-rst)
+                            (require 'ox-twbs))))
+        org-startup-folded 'showeverything
+        org-todo-keywords '((sequence "TODO" "RESEARCH" "WIP" "HOLD" "DONE"))
+        org-use-sub-superscripts '{})
 
 
+  ;; eshell config
+  (setq eshell-aliases-file "~/.dotfiles/emacs/aliases")
   (add-hook 'eshell-mode-hook
             (lambda ()
-              (local-set-key (kbd "C-c C-l")
-                             (lambda ()
-                               (interactive)
-                               (insert
-                                (ivy-completing-read "Eshell history: "
-                                                     (delete-dups
-                                                      (ring-elements eshell-history-ring))))))
-              (local-set-key (kbd "C-c C-h") 'eshell-list-history)))
+              (spacemacs/set-leader-keys-for-major-mode 'eshell-mode
+                "H" '(lambda ()
+                       (interactive)
+                       (insert
+                        (ivy-completing-read "Eshell history: "
+                                             (delete-dups
+                                              (ring-elements
+                                               eshell-history-ring))))))))
+
 
   (if (file-exists-p "~/.post-local.el")
       (load "~/.post-local.el"))
@@ -417,107 +498,11 @@ layers configuration. You are free to put any user code."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(comment-auto-fill-only-comments t)
- '(deft-auto-save-interval 0)
- '(deft-directory "~/notes")
- '(deft-extensions (quote ("org")) t)
- '(deft-file-naming-rules
-    (quote
-     ((noslash . "-")
-      (nospace . "_")
-      (case-fn . downcase))))
- '(deft-use-filter-string-for-filename t)
- '(eshell-aliases-file "~/.dotfiles/emacs/aliases")
- '(evil-want-C-w-in-emacs-state t)
- '(makefile-mode-hook (quote ((lambda nil (setq indent-tabs-mode t)))))
- '(org-agenda-files (quote ("~/notes/TODO.org" "~/notes/NOTES.org")))
- '(org-capture-templates
-   (quote
-    (("t" "Todo" entry
-      (file+headline "~/notes/TODO.org" "Tasks")
-      "* TODO %?
-  %i
-  %a")
-     ("n" "Note" entry
-      (file+datetree "~/notes/NOTES.org")
-      "* %?
-Entered on %U
-  %i
-  %a"))))
- '(org-catch-invisible-edits "smart")
- '(org-default-notes-file "~/notes/NOTES.org")
- '(org-directory "~/notes")
- '(org-enforce-todo-checkbox-dependencies t)
- '(org-enforce-todo-dependencies t)
- '(org-load-hook
-   (quote
-    ((lambda nil
-       (progn
-         (org-babel-do-load-languages
-          (quote org-babel-load-languages)
-          (quote
-           ((C . t)
-            (awk . t)
-            (css . t)
-            (dot . t)
-            (emacs-lisp)
-            (haskell . t)
-            (java . t)
-            (js . t)
-            (org . t)
-            (perl . t)
-            (python . t)
-            (ruby . t)
-            (sh . t)
-            (sql . t)
-            (sqlite . t))))
-         (add-to-list
-          (quote org-structure-template-alist)
-          (quote
-           ("p" "#+BEGIN_SRC python
-?
-#+END_SRC" "<src lang=\"python\">
-?
-</src>")))
-         (require
-          (quote ox-confluence))
-         (require
-          (quote ox-reveal))
-         (require
-          (quote ox-rst))
-         (require
-          (quote ox-twbs)))))))
- '(org-startup-folded (quote showeverything))
- '(org-todo-keywords (quote ((sequence "TODO" "RESEARCH" "WIP" "HOLD" "DONE"))))
- '(org-use-sub-superscripts (quote {}))
- '(python-fill-docstring-style (quote onetwo))
- '(recentf-load-hook (quote ((lambda nil (recentf-cleanup)))))
- '(server-use-tcp t)
- '(undo-tree-auto-save-history t)
- '(undo-tree-history-directory-alist (quote (("." . "~/.emacs.d/.undo"))))
- '(vc-follow-symlinks t)
- '(visual-line-fringe-indicators (quote (nil right-curly-arrow)))
- '(web-mode-enable-control-block-indentation nil)
- '(web-mode-enable-current-column-highlight nil)
- '(web-mode-enable-current-element-highlight t)
- '(web-mode-enable-element-content-fontification t)
- '(web-mode-enable-element-tag-fontification t)
- '(web-mode-enable-html-entities-fontification t)
- '(whitespace-style
-   (quote
-    (empty face space-after-tab space-before-tab tabs trailing))))
+ )
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(rainbow-delimiters-depth-1-face ((t (:foreground "#9999bb"))))
- '(rainbow-delimiters-depth-2-face ((t (:foreground "#9999bb"))))
- '(rainbow-delimiters-depth-3-face ((t (:foreground "#9999bb"))))
- '(rainbow-delimiters-depth-4-face ((t (:foreground "#9999bb"))))
- '(rainbow-delimiters-depth-5-face ((t (:foreground "#9999bb"))))
- '(rainbow-delimiters-depth-6-face ((t (:foreground "#9999bb"))))
- '(rainbow-delimiters-depth-7-face ((t (:foreground "#9999bb"))))
- '(rainbow-delimiters-depth-8-face ((t (:foreground "#9999bb"))))
- '(rainbow-delimiters-depth-9-face ((t (:foreground "#9999bb")))))
+ )
