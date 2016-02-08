@@ -94,6 +94,7 @@ values."
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages
    '(
+     evil-escape
      smartparens
      )
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -328,6 +329,7 @@ layers configuration. You are free to put any user code."
     (kbd "C-x C-y") 'komitee/complete-yas)
 
   ;; misc configuration settings
+  (add-hook 'python-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
   (spacemacs/set-leader-keys
     "ail" 'ein:notebooklist-login
     "bs" 'scratch
