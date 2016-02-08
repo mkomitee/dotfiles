@@ -297,6 +297,7 @@ any user code here.  The exception is org related code, which should be placed
 in `dotspacemacs/user-config'."
   (setq server-socket-dir "~/.emacs.d/server"
         server-host system-name
+        server-use-tcp t
         )
   )
 
@@ -371,7 +372,6 @@ layers configuration. You are free to put any user code."
         makefile-mode-hook '((lambda nil (setq indent-tabs-mode t)))
         python-fill-docstring-style 'onetwo
         recentf-load-hook '((lambda nil (recentf-cleanup)))
-        server-use-tcp t
         undo-tree-auto-save-history t
         undo-tree-history-directory-alist '(("." . "~/.emacs.d/.undo"))
         vc-follow-symlinks t
