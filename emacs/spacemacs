@@ -64,6 +64,7 @@ values."
      (shell :variables shell-default-shell 'eshell)
      shell-scripts
      spacemacs-ivy
+     spacemacs-helm
      spacemacs-layouts
      spell-checking
      (syntax-checking :variables
@@ -360,9 +361,9 @@ layers configuration. You are free to put any user code."
                               (setq linum-format "%4d"))
                              (t
                               (setq linum-format "%4d ")))))
-  ;; (with-eval-after-load 'spacemacs
   (require 'recentf)
   (setq comment-auto-fill-only-comments t
+        c-indent-offset 4
         evil-want-C-w-in-emacs-state t
         ivy-use-virtual-buffers nil
         makefile-mode-hook '((lambda nil (setq indent-tabs-mode t)))
@@ -374,6 +375,8 @@ layers configuration. You are free to put any user code."
         visual-line-fringe-indicators '(nil right-curly-arrow)
         whitespace-style '(empty face space-after-tab space-before-tab tabs
                                  trailing))
+
+  (spacemacs/toggle-whitespace-globally-on)
 
   ;; web-mode config
   ;; Disable fci-mode in web-mode
