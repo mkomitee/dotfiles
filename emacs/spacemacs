@@ -81,6 +81,7 @@ values."
      apache-mode
      confluence
      csv-mode
+     evil-vimish-fold
      jinja2-mode
      nginx-mode
      ox-reveal
@@ -507,6 +508,11 @@ Entered on %U
           (let ((evil-ex-initial-input ,(cdr command)))
             (call-interactively #'evil-ex))))))
   (add-hook 'ediff-after-quit-hook-internal 'winner-undo)
+
+  ;; Necessary until https://github.com/syl20bnr/spacemacs/issues/3226 gets some
+  ;; love.
+  (vimish-fold-global-mode t)
+  (require 'evil-vimish-fold)
 
   (add-hook 'prog-mode-hook 'turn-on-fci-mode)
   (add-hook 'text-mode-hook 'turn-on-fci-mode)
