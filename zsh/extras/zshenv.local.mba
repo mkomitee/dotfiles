@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
-
-LC_ALL=en_US.UTF-8
-
-export LC_ALL
+# The following lines are from 'eval "$(pyenv init -)"' I've disassembled it
+# and placed the appropriate parts in zshenv.local & zshrc.local
+export PATH="/Users/mkomitee/.pyenv/shims:${PATH}"
+export PYENV_SHELL=zsh

@@ -11,4 +11,21 @@ unalias run-help
 autoload run-help
 HELPDIR=/usr/local/share/zsh/help
 
-eval "$(pyenv init -)"
+# The following lines are from 'eval "$(pyenv init -)"' I've disassembled it
+# and placed the appropriate parts in zshenv.local & zshrc.local
+source '/usr/local/Cellar/pyenv/20160202/libexec/../completions/pyenv.zsh'
+command pyenv rehash 2>/dev/null
+pyenv() {
+    local command
+    command="$1"
+    if [ "$#" -gt 0 ]; then
+        shift
+    fi
+
+    case "$command" in
+        activate|deactivate|rehash|shell)
+            eval "$(pyenv "sh-$command" "$@")";;
+        *)
+            command pyenv "$command" "$@";;
+    esac
+}
