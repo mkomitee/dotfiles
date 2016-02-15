@@ -471,8 +471,14 @@ Entered on %U
                             (require 'ox-rst)
                             (require 'ox-twbs))))
         org-startup-folded 'showeverything
-        org-todo-keywords '((sequence "TODO" "RESEARCH" "WIP" "HOLD" "DONE"))
-        org-use-sub-superscripts '{})
+        org-use-sub-superscripts '{}
+        org-todo-keywords '((sequence "☛ TODO(t)" "|" "✔ DONE(d)")
+                            (sequence "⚑ WAITING(w)" "|")
+                            (sequence "β RESEARCH(r)" "|")
+                            (sequence "|" "✘ CANCELED(c)"))
+
+        )
+
 
 
   ;; eshell config
