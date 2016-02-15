@@ -345,7 +345,6 @@ layers configuration. You are free to put any user code."
   (add-hook 'text-mode-hook 'turn-on-fci-mode)
   (spacemacs/toggle-visual-line-navigation-on)
   (spacemacs/toggle-auto-fill-mode-on)
-  (spacemacs/toggle-whitespace-globally-on)
 
   ;; Cleanup projectile projects if they no longer exist.
   (projectile-cleanup-known-projects)
@@ -379,6 +378,8 @@ layers configuration. You are free to put any user code."
         visual-line-fringe-indicators '(nil right-curly-arrow)
         whitespace-style '(empty face space-after-tab space-before-tab tabs
                                  trailing))
+
+  (spacemacs/toggle-whitespace-globally-on)
 
   ;; web-mode config
   ;; Disable fci-mode in web-mode
