@@ -341,11 +341,6 @@ layers configuration. You are free to put any user code."
   (evil-define-key 'motion global-map
     "gc" 'evilnc-comment-operator)
 
-  (add-hook 'prog-mode-hook 'turn-on-fci-mode)
-  (add-hook 'text-mode-hook 'turn-on-fci-mode)
-  (spacemacs/toggle-visual-line-navigation-on)
-  (spacemacs/toggle-auto-fill-mode-on)
-
   ;; Cleanup projectile projects if they no longer exist.
   (projectile-cleanup-known-projects)
 
@@ -378,8 +373,6 @@ layers configuration. You are free to put any user code."
         visual-line-fringe-indicators '(nil right-curly-arrow)
         whitespace-style '(empty face space-after-tab space-before-tab tabs
                                  trailing))
-
-  (spacemacs/toggle-whitespace-globally-on)
 
   ;; web-mode config
   ;; Disable fci-mode in web-mode
@@ -477,11 +470,7 @@ Entered on %U
         org-todo-keywords '((sequence "☛ TODO(t)" "|" "✔ DONE(d)")
                             (sequence "⚑ WAITING(w)" "|")
                             (sequence "β RESEARCH(r)" "|")
-                            (sequence "|" "✘ CANCELED(c)"))
-
-        )
-
-
+                            (sequence "|" "✘ CANCELED(c)")))
 
   ;; eshell config
   (setq eshell-aliases-file "~/.dotfiles/emacs/aliases")
@@ -518,6 +507,12 @@ Entered on %U
           (let ((evil-ex-initial-input ,(cdr command)))
             (call-interactively #'evil-ex))))))
   (add-hook 'ediff-after-quit-hook-internal 'winner-undo)
+
+  (add-hook 'prog-mode-hook 'turn-on-fci-mode)
+  (add-hook 'text-mode-hook 'turn-on-fci-mode)
+  (spacemacs/toggle-auto-fill-mode-on)
+  (spacemacs/toggle-visual-line-navigation-on)
+  (spacemacs/toggle-whitespace-globally-on)
 
   (if (file-exists-p "~/.post-local.el")
       (load "~/.post-local.el"))
