@@ -1,10 +1,6 @@
 #!/usr/bin/env zsh
 
-function vim-clear-cache() {
-    find ~/.vim/data -type f -delete
-}
-
-function resume() {
+function tmux_resume() {
     if [ "$TMUX" = "" ]; then
         unset KRB5CCNAME
         local session="$1"
@@ -20,24 +16,6 @@ function resume() {
         fi
     else
         echo "Don't nest TMUX sessions"
-    fi
-}
-
-# When I'm using xmonad and have a WORKSPACE file to work with, support having
-# one gvim server per xmonad workspace. Otherwise, just one server period.
-function gvim() {
-    local server=GVIM
-    if [ "$DESKTOP_SESSION" = "xmonad" ]; then
-        if [ -f $HOME/.xmonad/WORKSPACE ]; then
-            server="GVIM:$(cat $HOME/.xmonad/WORKSPACE)"
-        fi
-    elif [ "$DESKTOP_SESSION" = "gnome" ]; then
-        server="GVIM:$(xdotool get_desktop)"
-    fi
-    if [[ $# > 0 ]]; then
-        command gvim --servername $server --remote-silent $@ || command gvim $@
-    else
-        command gvim --servername $server || command gvim
     fi
 }
 
@@ -69,4 +47,18 @@ function virtualenv {
 function pip {
     local PYTHONDONTWRITEBYTECODE=0
     command pip $*
+}
+
+function hgrep() {
+    noglob fc -lm "$*"* 1
+}
+
+function history() {
+    noglob fc -lm "$*"* 1
+}
+
+function colours() {
+    for i in {0..255}; do
+        printf "\x1b[38;5;${i}mcolour${i}\n"
+    done
 }

@@ -16,7 +16,7 @@ alias gds="git diff --staged"
 alias gs="git status --short --branch"
 
 alias vi=vim
-alias aa='resume main'
+alias aa='tmux_resume main'
 alias ack='ag'
 alias bc='bc -l'
 alias dot='cd ~dot'
@@ -39,7 +39,6 @@ alias type='type -a'
 
 alias pyprofile='python -mcProfile -o $(uuid -v4).profile'
 
-alias yolo='sudo $(fc -ln -1)'
 alias locate.home='locate -d ~/.locate.database'
 
 alias dirs='dirs -v'
