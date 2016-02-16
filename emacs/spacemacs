@@ -376,8 +376,6 @@ layers configuration. You are free to put any user code."
         whitespace-style '(empty face space-after-tab space-before-tab tabs
                                  trailing))
 
-  (spacemacs/toggle-whitespace-globally-on)
-
   ;; web-mode config
   ;; Disable fci-mode in web-mode
   ;; https://github.com/alpaker/Fill-Column-Indicator/issues/46
