@@ -132,6 +132,9 @@ function zle-line-init zle-keymap-select {
     zle reset-prompt
 }
 
+zle -N zle-line-init
+zle -N zle-keymap-select
+
 add-zsh-hook precmd mkprompt_setup
 add-zsh-hook preexec mkprompt_timer
 

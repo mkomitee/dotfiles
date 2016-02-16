@@ -83,7 +83,7 @@ export ACK_COLOR_MATCH='red'
 export ACKRC=~/.dotfiles/ackrc
 
 # LESS CONFIG
-export LESS="-RMQigMwsS"
+export LESS='-g -i -M -R -S -w -X -Q -s -z-4'
 
 export PAGER=less
 export EDITOR="emacsclient -a emacs -q -t"
