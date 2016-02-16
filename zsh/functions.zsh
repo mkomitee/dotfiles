@@ -50,15 +50,14 @@ function pip {
 }
 
 function hgrep() {
-    noglob fc -lm "$*"* 1
+    noglob fc -E -lm "$*"* 0
 }
 
-function history() {
-    noglob fc -lm "$*"* 1
-}
+alias history='hgrep'
 
 function colours() {
     for i in {0..255}; do
         printf "\x1b[38;5;${i}mcolour${i}\n"
     done
 }
+

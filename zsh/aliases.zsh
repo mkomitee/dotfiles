@@ -42,3 +42,7 @@ alias pyprofile='python -mcProfile -o $(uuid -v4).profile'
 alias locate.home='locate -d ~/.locate.database'
 
 alias dirs='dirs -v'
+
+alias -g H='head'
+alias -g T='tail'
+alias -g L='less'

@@ -87,10 +87,30 @@ function mkprompt_elapsed() {
             local minutes=$((${remainder}/60))
             local seconds=$((${remainder}%60))
             local clock=$(printf '%d:%02d:%02d' $hours $minutes $seconds)
-            echo "%{$fg[red]%}[${clock}]%{$reset_color%}"
+            echo "%{$fg[red]%}[${clock}]%{$reset_color%} "
         fi
     fi
     MKPROMPT_TIMER=0
+}
+
+function mkprompt_branch() {
+    # Defines path as current directory
+    local current_dir=$PWD
+    # While current path is not root path
+    while [[ $current_dir != '/' ]]; do
+        # Git repository
+        if [[ -d "${current_dir}/.git" ]]; then
+            echo "%{$fg[yellow]%}±" ${"$(<"$current_dir/.git/HEAD")"##*/}%{$reset_color%}
+            return;
+        fi
+        # Mercurial repository
+        if [[ -d "${current_dir}/.hg" ]]; then
+            echo "%{$fg[yellow]%}☿" $(<"$current_dir/.hg/branch")%{$reset_color%}
+            return;
+        fi
+        # Defines path as parent directory and keeps looking for :)
+        current_dir="${current_dir:h}"
+    done
 }
 
 function mkprompt_setup() {
@@ -103,6 +123,7 @@ function mkprompt_setup() {
     PROMPT="${PROMPT}$(mkprompt_prompt) "
     RPROMPT=""
     RPROMPT="${RPROMPT}$(mkprompt_elapsed)"
+    RPROMPT="${RPROMPT}$(mkprompt_branch)"
 }
 
 function zle-line-init zle-keymap-select {
@@ -113,3 +134,7 @@ function zle-line-init zle-keymap-select {
 
 add-zsh-hook precmd mkprompt_setup
 add-zsh-hook preexec mkprompt_timer
+
+TRAPWINCH() {
+    zle && { zle reset-prompt; zle -R }
+}

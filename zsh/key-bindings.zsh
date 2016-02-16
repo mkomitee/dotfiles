@@ -44,3 +44,5 @@ bindkey -M vicmd "\e[A" history-search-backward
 bindkey -M vicmd "\e[B" history-search-forward
 
 bindkey -M viins 'jj' vi-cmd-mode
+
+bindkey ' ' magic-space

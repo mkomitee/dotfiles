@@ -25,6 +25,7 @@ fi
 setopt always_to_end
 setopt append_history
 setopt auto_continue
+setopt hist_ignore_all_dups
 setopt auto_list
 setopt auto_menu
 setopt auto_param_slash
@@ -70,6 +71,22 @@ KEYTIMEOUT=20
 autoload -U compinit
 zmodload -i zsh/complist
 compinit -i -u -d "${HOME}/.zcompdumps/${HOST%%.*}-${EUID}-$ZSH_VERSION"
+
+# Stolen from oh-my-zsh
+zstyle ':completion:*:*:*:*:*' menu select
+
+# colorizes completion menu for kill command
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
+
+# Includes additional information in completion menu for everything that lists
+# processes (e.g. kill)
+zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,args -w -w"
+
+# Ignores all usernames which start with _ (mostly relevant on osx)
+zstyle ':completion:*:*:*:users' ignored-patterns '_*'
+
+# cache expensive completion data
+zstyle ':completion::complete:*' use-cache 1
 
 zstyle ':completion:*' auto-description on
 
