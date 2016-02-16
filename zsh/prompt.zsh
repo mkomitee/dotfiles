@@ -1,5 +1,9 @@
 # #!/usr/bin/env zsh
 
+if [ "$TERM" = "dumb" ]; then
+    return
+fi
+
 MKPROMPT_CUTOFF=3
 MKPROMPT_KEYMAP=
 
