@@ -55,7 +55,6 @@ setopt no_nomatch
 setopt numericglobsort
 setopt pushd_ignore_dups
 setopt rc_quotes
-setopt share_history
 setopt short_loops
 unsetopt auto_remove_slash
 unsetopt beep
