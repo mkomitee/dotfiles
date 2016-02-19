@@ -28,3 +28,6 @@
 [submodule "contrib/seebi/dircolors-solarized"]
 	path = contrib/seebi/dircolors-solarized
 	url = https://github.com/seebi/dircolors-solarized
+[submodule "contrib/tarruda/zsh-autosuggestions"]
+	path = contrib/tarruda/zsh-autosuggestions
+	url = git@github.com:tarruda/zsh-autosuggestions.git
