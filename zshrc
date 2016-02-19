@@ -66,7 +66,8 @@ unsetopt hup
 unsetopt menu_complete
 unsetopt rec_exact
 
-KEYTIMEOUT=20
+# This makes esc quicker.
+KEYTIMEOUT=1
 
 autoload -Uz compinit
 zmodload -i zsh/complist
