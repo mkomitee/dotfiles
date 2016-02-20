@@ -59,12 +59,12 @@ bindkey -M vicmd "$key_info[Home]" beginning-of-line
 bindkey -M vicmd "/" history-incremental-search-forward
 bindkey -M vicmd "?" history-incremental-search-backward
 bindkey -M vicmd "G" end-of-history
-bindkey -M vicmd "^R" vi-history-search-backward
-bindkey -M vicmd "^[[A" history-search-backward
-bindkey -M vicmd "^[[B" history-search-forward
+bindkey -M vicmd "^R" history-incremental-search-backward
+bindkey -M vicmd "^[[A" history-substring-search-up
+bindkey -M vicmd "^[[B" history-substring-search-down
 bindkey -M vicmd "gg" beginning-of-history
-bindkey -M vicmd "j" history-search-forward
-bindkey -M vicmd "k" history-search-backward
+bindkey -M vicmd "j" history-substring-search-up
+bindkey -M vicmd "k" history-substring-search-down
 bindkey -M vicmd v edit-command-line
 bindkey -M viins "$key_info[Down]" history-search-forward
 bindkey -M viins "$key_info[End]" end-of-line
@@ -72,9 +72,9 @@ bindkey -M viins "$key_info[Home]" beginning-of-line
 bindkey -M viins "$key_info[Up]" history-search-backward
 bindkey -M viins "." expand-dot-to-parent-directory-path
 bindkey -M viins "^O" expand-cmd-path
-bindkey -M viins "^R" vi-history-search-backward
-bindkey -M viins "^[[A" history-search-backward
-bindkey -M viins "^[[B" history-search-forward
+bindkey -M viins "^R" history-incremental-search-backward
+bindkey -M viins "^[[A" history-substring-search-up
+bindkey -M viins "^[[B" history-substring-search-down
 bindkey -M viins ' ' magic-space
 
 # These will cause zsh-autosuggest to accept the next word. It's alt+space.
