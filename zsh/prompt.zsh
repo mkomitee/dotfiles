@@ -104,7 +104,7 @@ function mkprompt_branch() {
     while [[ $current_dir != '/' ]]; do
         # Git repository
         if [[ -d "${current_dir}/.git" ]]; then
-            echo "%{$fg[yellow]%}±" ${"$(<"$current_dir/.git/HEAD")"##*/}%{$reset_color%}
+            echo "%{$fg[yellow]%}±" $(git_remote)@${"$(<"$current_dir/.git/HEAD")"##*/}%{$reset_color%}
             return;
         fi
         # Mercurial repository

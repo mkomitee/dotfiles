@@ -69,6 +69,16 @@ function =
 
 alias calc="="
 
+function git_remote() {
+    local remote parts
+    remote=$(git config remote.origin.url)
+    if [ $? != 0 ]; then
+        return 0
+    fi
+    parts=("${(@s:/:)${remote}}")
+    echo ${parts[-1]}
+}
+
 
 function disambiguate_pwd() {
     # short holds the result we want to print
