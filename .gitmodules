@@ -37,3 +37,6 @@
 [submodule "contrib/zsh-users/zaw"]
 	path = contrib/zsh-users/zaw
 	url = https://github.com/zsh-users/zaw.git
+[submodule "contrib/Tarrasch/zsh-autoenv"]
+	path = contrib/Tarrasch/zsh-autoenv
+	url = git@github.com:Tarrasch/zsh-autoenv.git
