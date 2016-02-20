@@ -61,3 +61,10 @@ function colours() {
     done
 }
 
+
+function =
+{
+    echo "$@" | bc -l
+}
+
+alias calc="="
