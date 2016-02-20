@@ -75,7 +75,7 @@ function mkprompt_exit() {
 }
 
 function mkprompt_cwd() {
-    echo "%(!,%{$fg[red]%},%{$fg[yellow]%})%3~%{$reset_color%}"
+    echo "%(!,%{$fg[red]%},%{$fg[yellow]%})$(disambiguate_pwd)%{$reset_color%}"
 }
 
 function mkprompt_timer() {
