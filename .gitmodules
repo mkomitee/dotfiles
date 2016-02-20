@@ -34,3 +34,6 @@
 [submodule "contrib/zsh-users/zsh-history-substring-search"]
 	path = contrib/zsh-users/zsh-history-substring-search
 	url = https://github.com/zsh-users/zsh-history-substring-search.git
+[submodule "contrib/zsh-users/zaw"]
+	path = contrib/zsh-users/zaw
+	url = https://github.com/zsh-users/zaw.git

@@ -14,6 +14,7 @@ source $ZSH/functions.zsh
 source $ZSH/prompt.zsh
 source $DOT/contrib/tarruda/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $DOT/contrib/zsh-users/zsh-history-substring-search/zsh-history-substring-search.zsh
+source $DOT/contrib/zsh-users/zaw/zaw.plugin.zsh
 
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(
     expand-or-complete
