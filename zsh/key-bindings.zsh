@@ -78,7 +78,7 @@ bindkey -M viins "^[[B" history-substring-search-down
 bindkey -M viins ' ' magic-space
 
 # These will cause zsh-autosuggest to accept the next word. It's alt+space.
-# alt+f will accept everything
+# alt+f will accept everything, as will End & right-arrow.
 bindkey -M viins "^[ " forward-word
 
 # These are the non-conflicting bindings from zsh emacs bindings. I've included
