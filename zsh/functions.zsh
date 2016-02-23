@@ -71,7 +71,7 @@ alias calc="="
 
 function git_remote() {
     local remote parts
-    remote=$(git config remote.origin.url)
+    remote=$(command git config remote.origin.url)
     if [ $? != 0 ]; then
         return 0
     fi
