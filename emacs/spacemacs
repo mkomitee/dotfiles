@@ -335,6 +335,7 @@ layers configuration. You are free to put any user code."
   ;; misc configuration settings
   (add-hook 'python-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
   (spacemacs/set-leader-keys
+    "SPC" 'avy-goto-char-timer
     "ail" 'ein:notebooklist-login
     "bs" 'scratch
     "w-" 'split-window-below-and-focus
