@@ -26,7 +26,7 @@ values."
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     ;; spacemacs-helm
+     spacemacs-helm
      ;; auto-completion
      ;; better-defaults
      emacs-lisp
@@ -64,7 +64,6 @@ values."
      (shell :variables shell-default-shell 'eshell)
      shell-scripts
      spacemacs-ivy
-     spacemacs-helm
      spacemacs-layouts
      spell-checking
      (syntax-checking :variables
@@ -270,6 +269,10 @@ values."
    ;; If non-nil smartparens-strict-mode will be enabled in programming modes.
    ;; (default nil)
    dotspacemacs-smartparens-strict-mode nil
+   ;; If non-nil pressing the closing parenthesis `)' key in insert mode passes
+   ;; over any automatically added closing parenthesis, bracket, quote, etc…
+   ;; This can be temporarily disabled by pressing `C-q' before `)'. (default nil)
+   dotspacemacs-smart-closing-parenthesis nil
    ;; Select a scope to highlight delimiters. Possible values are `any',
    ;; `current', `all' or `nil'. Default is `all' (highlight any scope and
    ;; emphasis the current one). (default 'all)
