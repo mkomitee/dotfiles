@@ -336,6 +336,13 @@ layers configuration. You are free to put any user code."
     (kbd "C-x C-o") 'company-complete
     (kbd "C-x C-y") 'komitee/complete-yas)
 
+  ;; vim like spelling mappings
+  (evil-define-key 'normal global-map
+    (kbd "]s") 'flyspell-goto-next-error
+    (kbd "]z") 'flyspell-goto-next-error
+    (kbd "zn") 'flyspell-goto-next-error
+    (kbd "z=") 'helm-flyspell-correct)
+
   ;; misc configuration settings
   (add-hook 'python-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
   (spacemacs/set-leader-keys
