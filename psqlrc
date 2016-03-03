@@ -1,2 +1,4 @@
 \pset pager off
 \timing on
+\x auto
+\pset null 'Ø'
