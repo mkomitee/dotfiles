@@ -81,6 +81,7 @@ values."
      apache-mode
      confluence
      csv-mode
+     dired-narrow
      evil-vimish-fold
      jinja2-mode
      nginx-mode
@@ -334,6 +335,9 @@ layers configuration. You are free to put any user code."
   (evil-define-key 'normal global-map
     (kbd "C-x C-o") 'company-complete
     (kbd "C-x C-y") 'komitee/complete-yas)
+
+  (evil-define-key 'normal dired-mode-map
+    (kbd "/") 'dired-narrow)
 
   ;; vim like spelling mappings
   (evil-define-key 'normal global-map
