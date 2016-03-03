@@ -56,11 +56,10 @@ zle -N edit-command-line
 
 bindkey -M vicmd "$key_info[End]" end-of-line
 bindkey -M vicmd "$key_info[Home]" beginning-of-line
-bindkey -M vicmd "/" zaw-searcher
 bindkey -M vicmd "?" history-incremental-search-backward
+bindkey -M vicmd "/" history-incremental-search-forward
 bindkey -M vicmd "G" end-of-history
 bindkey -M vicmd "^R" history-incremental-search-backward
-# bindkey -M vicmd "^R" zaw-history
 bindkey -M vicmd "^[[A" history-substring-search-up
 bindkey -M vicmd "^[[B" history-substring-search-down
 bindkey -M vicmd "gg" beginning-of-history
@@ -74,7 +73,6 @@ bindkey -M viins "$key_info[Up]" history-search-backward
 bindkey -M viins "." expand-dot-to-parent-directory-path
 bindkey -M viins "^O" expand-cmd-path
 bindkey -M viins "^R" history-incremental-search-backward
-# bindkey -M viins "^R" zaw-history
 bindkey -M viins "^[[A" history-substring-search-up
 bindkey -M viins "^[[B" history-substring-search-down
 bindkey -M viins ' ' magic-space
