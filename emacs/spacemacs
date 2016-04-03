@@ -507,7 +507,7 @@ Entered on %U
                             (require 'ox-reveal)
                             (require 'ox-rst)
                             (require 'ox-twbs))))
-        org-startup-folded 'showeverything
+        org-startup-folded 'content
         org-startup-indented t
         org-startup-with-latex-preview t
         org-startup-align-all-tables t
