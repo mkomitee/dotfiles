@@ -339,13 +339,13 @@ before packages are loaded. If you are unsure, you should try in setting them in
                                                            (sql . t)
                                                            (sqlite . t)))
                             (add-to-list 'org-structure-template-alist
-                                         '("py" "#+BEGIN_SRC python\n?\n#+END_SRC")
+                                         '("py" "#+BEGIN_SRC python -n -r\n?\n#+END_SRC")
                                          )
                             (add-to-list 'org-structure-template-alist
-                                         '("pl" "#+BEGIN_SRC perl\n?\n#+END_SRC")
+                                         '("pl" "#+BEGIN_SRC perl -n -r\n?\n#+END_SRC")
                             )
                             (add-to-list 'org-structure-template-alist
-                                         '("sh" "#+BEGIN_SRC shell\n?\n#+END_SRC")
+                                         '("sh" "#+BEGIN_SRC shell -n -r\n?\n#+END_SRC")
                                          )
                             (require 'ox-confluence)
                             (require 'ox-reveal)
