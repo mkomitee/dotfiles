@@ -438,6 +438,9 @@ you should place you code here."
                                  (case-fn . downcase)))
 
   ;; org config
+  (font-lock-add-keywords 'org-mode
+                          '(("^ +\\([-*]\\) "
+                             (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
   (spacemacs/set-leader-keys
     "aA" 'org-agenda
     "aC" 'org-capture)
@@ -472,6 +475,7 @@ Entered on %U
         org-directory "~/notes"
         org-enforce-todo-checkbox-dependencies t
         org-enforce-todo-dependencies t
+        org-hide-emphasis-markers t
         org-load-hook '((lambda nil
                           (progn
                             (org-babel-do-load-languages 'org-babel-load-languages
@@ -501,6 +505,9 @@ Entered on %U
                             (require 'ox-rst)
                             (require 'ox-twbs))))
         org-startup-folded 'showeverything
+        org-startup-indented t
+        org-startup-with-latex-preview t
+        org-startup-align-all-tables t
         org-use-sub-superscripts '{}
         org-todo-keywords '((sequence "☛ TODO(t)" "|" "✔ DONE(d)")
                             (sequence "ᐞ HOLD(h)" "|")
@@ -561,3 +568,19 @@ Entered on %U
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(org-document-title ((t (:inherit outline-1 :height 1.5 :underline t))))
+ '(org-level-1 ((t (:inherit outline-1 :height 1.75))))
+ '(org-level-2 ((t (:inherit outline-2 :height 1.5))))
+ '(org-level-3 ((t (:inherit outline-3 :height 1.25))))
+ '(org-level-4 ((t (:inherit outline-4 :height 1.1)))))
