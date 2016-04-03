@@ -320,6 +320,39 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (setq server-socket-dir "~/.emacs.d/server"
         server-host system-name
         server-use-tcp t
+        org-load-hook '((lambda nil
+                          (progn
+                            (org-babel-do-load-languages 'org-babel-load-languages
+                                                         '((C . t)
+                                                           (awk . t)
+                                                           (css . t)
+                                                           (dot . t)
+                                                           (emacs-lisp)
+                                                           (haskell . t)
+                                                           (java . t)
+                                                           (js . t)
+                                                           (org . t)
+                                                           (perl . t)
+                                                           (python . t)
+                                                           (ruby . t)
+                                                           (sh . t)
+                                                           (sql . t)
+                                                           (sqlite . t)))
+                            (add-to-list 'org-structure-template-alist
+                                         '("py" "#+BEGIN_SRC python\n?\n#+END_SRC")
+                                         )
+                            (add-to-list 'org-structure-template-alist
+                                         '("pl" "#+BEGIN_SRC perl\n?\n#+END_SRC")
+                            )
+                            (add-to-list 'org-structure-template-alist
+                                         '("sh" "#+BEGIN_SRC shell\n?\n#+END_SRC")
+                                         )
+                            (require 'ox-confluence)
+                            (require 'ox-reveal)
+                            (require 'ox-rst)
+                            (require 'ox-twbs))))
+
+
         )
   )
 
@@ -476,37 +509,7 @@ Entered on %U
         org-catch-invisible-edits "smart"
         org-default-notes-file "~/notes/NOTES.org"
         org-directory "~/notes"
-        org-enforce-todo-checkbox-dependencies t
-        org-enforce-todo-dependencies t
         org-hide-emphasis-markers t
-        org-load-hook '((lambda nil
-                          (progn
-                            (org-babel-do-load-languages 'org-babel-load-languages
-                                                         '((C . t)
-                                                           (awk . t)
-                                                           (css . t)
-                                                           (dot . t)
-                                                           (emacs-lisp)
-                                                           (haskell . t)
-                                                           (java . t)
-                                                           (js . t)
-                                                           (org . t)
-                                                           (perl . t)
-                                                           (python . t)
-                                                           (ruby . t)
-                                                           (sh . t)
-                                                           (sql . t)
-                                                           (sqlite . t)))
-                            (add-to-list 'org-structure-template-alist
-                                         '("p" "#+BEGIN_SRC python
-?
-#+END_SRC" "<src lang=\"python\">
-?
-</src>"))
-                            (require 'ox-confluence)
-                            (require 'ox-reveal)
-                            (require 'ox-rst)
-                            (require 'ox-twbs))))
         org-startup-folded 'content
         org-startup-indented t
         org-startup-with-latex-preview t
