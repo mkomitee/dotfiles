@@ -1,5 +1,5 @@
 FCODES="$HOME/.locate.database"
 SEARCHPATHS="$HOME"
-PRUNEPATHS="$HOME/.snapshots $HOME/.vim/data $HOME/.emacs.d/elpa $HOME/.emacs.d/.cache $HOME/Library/Caches"
+PRUNEPATHS="$HOME/.snapshots $HOME/.vim/data $HOME/.emacs.d/elpa $HOME/.emacs.d/.cache $HOME/Library/Caches $HOME/.local/share/Trash"
 PRUNENAMES=".git .svn CVS"
 FILESYSTEMS="hfs ufs nfs"
