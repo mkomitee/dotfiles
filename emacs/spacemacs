@@ -445,7 +445,10 @@ you should place you code here."
     "aA" 'org-agenda
     "aC" 'org-capture)
   (spacemacs/set-leader-keys-for-major-mode 'org-mode
-    "X" 'org-toggle-checkbox)
+    "Xc" 'org-toggle-checkbox
+    "Xl" 'org-toggle-latex-fragment
+    "xl" 'org-latex-convert-region-to-latex
+    )
   (add-hook 'org-mode-hook 'turn-on-visual-line-mode)
   (add-hook 'org-mode-hook 'turn-off-fci-mode)
   ;; Fix org-html-export fci-mode issues
