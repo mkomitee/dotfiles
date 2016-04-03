@@ -3,3 +3,6 @@
 # and placed the appropriate parts in zshenv.local & zshrc.local
 export PATH="/Users/mkomitee/.pyenv/shims:${PATH}"
 export PYENV_SHELL=zsh
+
+# Add mactex bins to PATH
+export PATH="${PATH}:/usr/local/texlive/2015/bin/x86_64-darwin"
