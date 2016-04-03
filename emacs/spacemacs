@@ -414,7 +414,7 @@ you should place you code here."
   ;; https://github.com/alpaker/Fill-Column-Indicator/issues/46
   (add-hook 'after-change-major-mode-hook
             (lambda () (if (string= major-mode "web-mode")
-                           (turn-off-fci-mode) (turn-on-fci-mode))))
+                           (turn-off-fci-mode))))
   ;; Need to require it because web-mode needs to be loaded to use it in the
   ;; auto-mode-alist
   (require 'web-mode)
