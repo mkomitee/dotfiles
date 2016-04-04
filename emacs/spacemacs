@@ -392,15 +392,18 @@ you should place you code here."
 
   ;; misc configuration settings
   (add-hook 'python-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
+  (spacemacs/declare-prefix "o" "user")
+  (spacemacs/declare-prefix "oa" "apps")
+  (spacemacs/declare-prefix "oA" "abbrev")
   (spacemacs/set-leader-keys
     "SPC" 'avy-goto-char-timer
-    "ail" 'ein:notebooklist-login
-    "bs" 'scratch
+    "bS" 'scratch
+    "oAg" 'define-global-abbrev
+    "oAm" 'define-mode-abbrev
+    "oai" 'ein:notebooklist-login'
     "w-" 'split-window-below-and-focus
-    "w/" 'split-window-right-and-focus)
-
-  (evil-define-key 'motion global-map
-    "gc" 'evilnc-comment-operator)
+    "w/" 'split-window-right-and-focus
+    )
 
   ;; Cleanup projectile projects if they no longer exist.
   (projectile-cleanup-known-projects)
@@ -467,14 +470,12 @@ you should place you code here."
   (font-lock-add-keywords 'org-mode
                           '(("^ +\\([-*]\\) "
                              (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
-  (spacemacs/set-leader-keys
-    "aA" 'org-agenda
-    "aC" 'org-capture)
+  (spacemacs/declare-prefix-for-mode 'org-mode "mo" "user")
   (spacemacs/set-leader-keys-for-major-mode 'org-mode
-    "Xc" 'org-toggle-checkbox
-    "Xl" 'org-toggle-latex-fragment
-    "xl" 'org-latex-convert-region-to-latex
-    "p" 'org-priority
+    "oc" 'org-toggle-checkbox
+    "ol" 'org-toggle-latex-fragment
+    "oL" 'org-latex-convert-region-to-latex
+    "op" 'org-priority
     )
   (add-hook 'org-mode-hook 'turn-on-visual-line-mode)
   (add-hook 'org-mode-hook 'turn-off-fci-mode)
@@ -508,13 +509,11 @@ Entered on %U
         org-startup-indented t
         org-startup-with-latex-preview t
         org-startup-align-all-tables t
-        org-enforce-todo-checkbox-dependencies t
-        org-enforce-todo-dependencies t
         org-highest-priority ?1
         org-default-priority ?3
         org-priority-start-cycle-with-default t
         org-lowest-priority ?5
-        org-startup-folded 'showeverything
+        org-startup-folded 'content
         org-use-sub-superscripts '{}
         org-todo-keywords '((sequence "☛ TODO(t)" "|" "✔ DONE(d)")
                             (sequence "ᐞ HOLD(h)" "|")
@@ -570,6 +569,9 @@ Entered on %U
   (spacemacs/toggle-auto-fill-mode-on)
   (spacemacs/toggle-visual-line-navigation-on)
   (spacemacs/toggle-whitespace-globally-on)
+
+  (setq-default abbrev-mode t)
+  (setq save-abbrevs t)
 
   (if (file-exists-p "~/.post-local.el")
       (load "~/.post-local.el"))
