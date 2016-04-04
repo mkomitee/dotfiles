@@ -72,7 +72,7 @@ values."
      osx
      puppet
      python
-     (shell :variables shell-default-shell 'eshell)
+     (shell :variables shell-default-shell 'ansi-term)
      shell-scripts
      spacemacs-ivy
      spacemacs-layouts
@@ -166,6 +166,7 @@ values."
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(
                          gruvbox
+                         zenburn
                          sanityinc-tomorrow-eighties
                          sanityinc-tomorrow-night
                          sanityinc-tomorrow-bright
@@ -379,14 +380,6 @@ you should place you code here."
            '(yas-hippie-try-expand)))
       (call-interactively 'hippie-expand)))
 
-  ;; vim like completion maps
-  (evil-define-key 'insert global-map
-    (kbd "C-x C-o") 'company-complete
-    (kbd "C-x C-y") 'komitee/complete-yas)
-  (evil-define-key 'normal global-map
-    (kbd "C-x C-o") 'company-complete
-    (kbd "C-x C-y") 'komitee/complete-yas)
-
   (evil-define-key 'normal dired-mode-map
     (kbd "/") 'dired-narrow)
 
@@ -481,6 +474,7 @@ you should place you code here."
     "Xc" 'org-toggle-checkbox
     "Xl" 'org-toggle-latex-fragment
     "xl" 'org-latex-convert-region-to-latex
+    "p" 'org-priority
     )
   (add-hook 'org-mode-hook 'turn-on-visual-line-mode)
   (add-hook 'org-mode-hook 'turn-off-fci-mode)
@@ -514,12 +508,21 @@ Entered on %U
         org-startup-indented t
         org-startup-with-latex-preview t
         org-startup-align-all-tables t
+        org-enforce-todo-checkbox-dependencies t
+        org-enforce-todo-dependencies t
+        org-highest-priority ?1
+        org-default-priority ?3
+        org-priority-start-cycle-with-default t
+        org-lowest-priority ?5
+        org-startup-folded 'showeverything
         org-use-sub-superscripts '{}
         org-todo-keywords '((sequence "☛ TODO(t)" "|" "✔ DONE(d)")
                             (sequence "ᐞ HOLD(h)" "|")
                             (sequence "⚑ WAITING(w)" "|")
                             (sequence "β RESEARCH(r)" "|")
-                            (sequence "|" "✘ CANCELED(c)")))
+                            (sequence "↡ DELEGATED(D)" "|")
+                            (sequence "|" "✘ CANCELED(c)")
+                            ))
 
   ;; eshell config
   (setq eshell-aliases-file "~/.dotfiles/emacs/aliases")
