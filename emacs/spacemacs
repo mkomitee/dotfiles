@@ -518,7 +518,6 @@ Entered on %U
         org-hide-emphasis-markers t
         org-startup-folded 'content
         org-startup-indented t
-        org-startup-with-latex-preview t
         org-startup-align-all-tables t
         org-highest-priority ?1
         org-default-priority ?3
