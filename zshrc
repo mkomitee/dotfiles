@@ -12,15 +12,6 @@ source $ZSH/aliases.zsh
 source $ZSH/key-bindings.zsh
 source $ZSH/functions.zsh
 source $ZSH/prompt.zsh
-source $DOT/contrib/tarruda/zsh-autosuggestions/zsh-autosuggestions.zsh
-source $DOT/contrib/zsh-users/zsh-history-substring-search/zsh-history-substring-search.zsh
-source $DOT/contrib/Tarrasch/zsh-autoenv/autoenv.plugin.zsh
-
-ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(
-    expand-or-complete
-    history-incremental-search-forward
-    history-incremental-search-backward
-)
 
 # LS CONFIG
 # Find the option for using colors in ls, depending on the version: Linux or BSD

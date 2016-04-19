@@ -41,25 +41,6 @@ path=(
 path=($^path(N))
 export PATH
 
-# Aaaand manpath
-manpath=(
-    $HOME/share/man
-    $HOME/.cabal/share/man
-    $HOME/.dotfiles/contrib/visionmedia/git-extras/man
-    $HOME/.rvm/man
-    $HOME/.${UNAME}.${ARCH}/share/man
-    /usr/local/java/jdk/man
-    /usr/local/opt/coreutils/libexec/gnuman
-    /usr/local/share/man
-    /usr/local/man
-    /usr/share/man
-    /opt/X11/share/man
-    /usr/texbin/man
-    /opt/share/man
-)
-manpath=($^manpath(N))
-export MANPATH
-
 # perl path, ...
 perl5lib=(
     $HOME/.${UNAME}.${ARCH}/lib64/perl5
