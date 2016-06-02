@@ -25,10 +25,10 @@
 *color7:  #bdae93
 *color15: #ebdbb2
 
-*.font:                     xft:Droid Sans Mono:size=10
-*.boldFont:                 xft:Droid Sans Mono:style=bold:size=10
-emacs*font:                 Droid Sans Mono:style=regular:size=11
-emacs*boldFont:             Droid Sans Mono:style=bold:size=11
+!*.font:                     xft:Droid Sans Mono:size=10
+!*.boldFont:                 xft:Droid Sans Mono:style=bold:size=10
+! emacs*font:                 Droid Sans Mono:style=regular:size=11
+! emacs*boldFont:             Droid Sans Mono:style=bold:size=11
 xterm*faceName:             Droid Sans Mono:style=regular:size=10
 URxvt.depth:                32
 URxvt.transparent:          false
@@ -48,7 +48,7 @@ URxvt.scrollBar:            false
 
 URxvt.perl-lib:             /u/komitee/.dotfiles/urxvt/
 URxvt.perl-ext-common:      default,matcher,keyboard-select,clipboard
-URxvt.keysym.3-Escape:      perl:keyboard-select:activate
+URxvt.keysym.M-Escape:      perl:keyboard-select:activate
 URxvt.keysym.M-v:           perl:keyboard-select:activate
 URxvt.keysym.M-p:           perl:clipboard:paste
 URxvt.clipboard.autocopy:   true
@@ -71,5 +71,5 @@ Xft.lcdfilter:              lcddefault
 Xft.rgba:                   rgb
 
 ! ImageMagick display command
-Display.font:               xft:Droid Sans Mono:size=11
-Display.boldFont:           xft:Droid Sans Mono:size=11
+!Display.font:               xft:Droid Sans Mono:size=11
+!Display.boldFont:           xft:Droid Sans Mono:size=11
