@@ -21,16 +21,22 @@
 
     st = status -sb
 
-    amend = commit --amend -v --no-edit
-    reword = commit --amend -v
-    fixup = commit --fixup HEAD
 
     aa = add -A :/
+
     branches = branch -avv
     remotes = remote -v
     tags = tag -l
+		stashes = stash list
     shelve = stash save --include-untracked
     unshelve = stash pop
+    unstage = reset -q HEAD --
+    discard = checkout --
+    uncommit = reset --mixed HEAD~
+    amend = commit --amend -v --no-edit
+    reword = commit --amend -v
+    fixup = commit --fixup HEAD
+    graph = log --graph --branches --remotes --tags  --format=format:'%Cgreen%h%Creset %<(75,trunc)%s (%cN, %cr) %Cred%d' --date-order
 
     log-date=log --pretty=oneline-date
     ld=!git log-date
@@ -62,7 +68,7 @@
     date-only = "format:%ad"
 
 [diff]
-    algorithm = patience
+    algorithm = minimal
     renames = copies
 
 [github]
