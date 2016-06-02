@@ -60,3 +60,7 @@ bindkey -M viins "$key_info[Up]" history-search-backward
 bindkey -M viins "^O" expand-cmd-path
 bindkey -M viins "^R" history-incremental-search-backward
 bindkey -M viins ' ' magic-space
+
+# vi-backward-delete-char does not go back across newlines.
+bindkey -M viins "^H" backward-delete-char
+bindkey -M viins "^?" backward-delete-char
