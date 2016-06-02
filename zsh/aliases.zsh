@@ -33,8 +33,6 @@ alias exw="command emacsclient -a emacs -q"
 alias ec="command emacsclient -a emacs -q -t"
 alias ecw="command emacsclient -a emacs -q -t"
 
-alias vim="ec"
-
 alias type='type -a'
 
 alias pyprofile='python -mcProfile -o $(uuid -v4).profile'
