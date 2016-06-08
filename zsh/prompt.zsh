@@ -16,6 +16,22 @@ autoload -Uz add-zsh-hook
 setopt prompt_subst
 setopt transient_rprompt
 
+typeset -AHg FX FG BG
+
+FX=(
+    reset     "%{[00m%}"
+    bold      "%{[01m%}" no-bold      "%{[22m%}"
+    italic    "%{[03m%}" no-italic    "%{[23m%}"
+    underline "%{[04m%}" no-underline "%{[24m%}"
+    blink     "%{[05m%}" no-blink     "%{[25m%}"
+    reverse   "%{[07m%}" no-reverse   "%{[27m%}"
+)
+
+for color in {000..255}; do
+    FG[$color]="%{[38;5;${color}m%}"
+    BG[$color]="%{[48;5;${color}m%}"
+done
+
 # %! %h          - Current history event number
 # %#             - # if superuser, else %
 # %%             - a literal %
@@ -51,31 +67,31 @@ setopt transient_rprompt
 # %>str>         - Truncate to n on right, str on right if so
 
 function mkprompt_history() {
-    echo "%(!,%{$fg[red]%},%{$fg[yellow]%})=%!= %{$reset_color%}"
+    echo "%(!,%{$FG[124]%},%{$FG[027]%})=%!= %{$reset_color%}"
 }
 
 function mkprompt_host() {
     if [ "$MKPROMPT_KEYMAP" = 'vicmd' ]; then
-        echo "%{$fg[blue]%}%m%{$reset_color%}"
+        echo "%(!.%{$BG[124]%}.%{$BG[027]%})%{$FG[007]%}%m%{$reset_color%}"
     else
-        echo "%(!.%{$fg[red]%}.%{$fg[yellow]%})%m%{$reset_color%}"
+        echo "%(!.%{$FG[124]%}.%{$FG[027]%})%m%{$reset_color%}"
     fi
 }
 
 function mkprompt_prompt() {
-    echo "%(!,%{$fg[red]%},%{$fg[yellow]%})%#%{$reset_color%}"
+    echo "%(!,%{$FG[124]%},%{$FG[027]%})%#%{$reset_color%}"
 }
 
 function mkprompt_jobs() {
-    echo "%(1j,%{$fg[yellow]%}(%j%)%{$reset_color%} ,)"
+    echo "%(1j,%{$FG[027]%}(%j%)%{$reset_color%} ,)"
 }
 
 function mkprompt_exit() {
-    echo "%(?,,%{$fg[red]%}[%?]%{$reset_color%} )"
+    echo "%(?,,%{$FG[124]%}[%?]%{$reset_color%} )"
 }
 
 function mkprompt_cwd() {
-    echo "%(!,%{$fg[red]%},%{$fg[yellow]%})%~%{$reset_color%}"
+    echo "%(!,%{$FG[124]%},%{$FG[027]%})%~%{$reset_color%}"
 }
 
 function mkprompt_timer() {
@@ -91,7 +107,7 @@ function mkprompt_elapsed() {
             local minutes=$((${remainder}/60))
             local seconds=$((${remainder}%60))
             local clock=$(printf '%d:%02d:%02d' $hours $minutes $seconds)
-            echo "%{$fg[red]%}[${clock}]%{$reset_color%} "
+            echo "%{$FG[124]%}[${clock}]%{$reset_color%} "
         fi
     fi
     MKPROMPT_TIMER=0
@@ -104,12 +120,12 @@ function mkprompt_branch() {
     while [[ $current_dir != '/' ]]; do
         # Git repository
         if [[ -d "${current_dir}/.git" ]]; then
-            echo "%{$fg[yellow]%}±" $(git_remote)@${"$(<"$current_dir/.git/HEAD")"##*/}%{$reset_color%}
+            echo "%{$FG[027]%}±" $(git_remote)@${"$(<"$current_dir/.git/HEAD")"##*/}%{$reset_color%}
             return;
         fi
         # Mercurial repository
         if [[ -d "${current_dir}/.hg" ]]; then
-            echo "%{$fg[yellow]%}☿" $(<"$current_dir/.hg/branch")%{$reset_color%}
+            echo "%{$FG[027]%}☿" $(<"$current_dir/.hg/branch")%{$reset_color%}
             return;
         fi
         # Defines path as parent directory and keeps looking for :)

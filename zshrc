@@ -8,6 +8,7 @@ SAVEHIST=10000
 
 hash -d dot=$DOT
 
+source $ZSH/spectrum.zsh
 source $ZSH/aliases.zsh
 source $ZSH/key-bindings.zsh
 source $ZSH/functions.zsh

@@ -22,7 +22,7 @@ focus_follows_mouse no
 # hide_edge_borders both
 
 # start a terminal
-bindsym $mod+Return exec /usr/bin/urxvt
+bindsym $mod+Return exec /usr/bin/urxvt256c
 
 # kill focused window
 bindsym $mod+Shift+Q kill
@@ -52,11 +52,11 @@ bindsym $mod+Shift+l move right
 
 # split in horizontal orientation
 bindsym $mod+Shift+slash split h
-bindsym $mod+slash split h; exec /usr/bin/urxvt
+bindsym $mod+slash split h; exec /usr/bin/urxvt256c
 
 # split in vertical orientation
 bindsym $mod+Shift+minus split v
-bindsym $mod+minus split v; exec /usr/bin/urxvt
+bindsym $mod+minus split v; exec /usr/bin/urxvt256c
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
@@ -184,9 +184,12 @@ bindsym $mod+m mode "$mode_move"
 
 set $mode_launcher Launch: [e]macs [f]irefox g[v]im
 mode "$mode_launcher" {
-  bindsym e exec emacsclient -a emacs -q -n -c; mode "default"
-  bindsym f exec firefox; mode "default"
-  bindsym v exec gvim; mode "default"
+  bindsym e split h; exec emacsclient -a emacs -q -n -c; mode "default"
+  bindsym E split v; exec emacsclient -a emacs -q -n -c; mode "default"
+  bindsym f split h; exec firefox; mode "default"
+  bindsym F split h; exec firefox; mode "default"
+  bindsym v split h; exec gvim; mode "default"
+  bindsym V split v; exec gvim; mode "default"
 
   # back to normal: Enter or Escape
   bindsym Escape mode "default"

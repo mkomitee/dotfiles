@@ -30,37 +30,37 @@
 ! emacs*font:                 Droid Sans Mono:style=regular:size=11
 ! emacs*boldFont:             Droid Sans Mono:style=bold:size=11
 xterm*faceName:             Droid Sans Mono:style=regular:size=10
-URxvt.depth:                32
-URxvt.transparent:          false
-URxvt.cursorBlink:          false
-URxvt.cursorUnderline:      false
-URxvt.internalBorder:       0
-URxvt.scrollTtyKeypress:    true
-URxvt.scrollTtyOutput:      false
-URxvt.scrollstyle:          plain
-URxvt.shading:              15
-URxvt.underlineURLs:        true
-URxvt.url-launcher:         /usr/bin/firefox --new-tab
-URxvt.xftAntialias:         true
-Urxvt.loginShell:           true
-URxvt.saveLines:            12000
-URxvt.scrollBar:            false
+urxvt256c.depth:                32
+urxvt256c.transparent:          false
+urxvt256c.cursorBlink:          false
+urxvt256c.cursorUnderline:      false
+urxvt256c.internalBorder:       0
+urxvt256c.scrollTtyKeypress:    true
+urxvt256c.scrollTtyOutput:      false
+urxvt256c.scrollstyle:          plain
+urxvt256c.shading:              15
+urxvt256c.underlineURLs:        true
+urxvt256c.url-launcher:         /usr/bin/firefox --new-tab
+urxvt256c.xftAntialias:         true
+urxvt256c.loginShell:           true
+urxvt256c.saveLines:            12000
+urxvt256c.scrollBar:            false
 
-URxvt.perl-lib:             /u/komitee/.dotfiles/urxvt/
-URxvt.perl-ext-common:      default,matcher,keyboard-select,clipboard
-URxvt.keysym.M-Escape:      perl:keyboard-select:activate
-URxvt.keysym.M-v:           perl:keyboard-select:activate
-URxvt.keysym.M-p:           perl:clipboard:paste
-URxvt.clipboard.autocopy:   true
-URxvt.clipboard.copycmd:    xclip -i -selection clipboard
-URxvt.clipboard.pastecmd:   xclip -o -selection clipboard
+urxvt256c.perl-lib:             /u/komitee/.dotfiles/urxvt/
+urxvt256c.perl-ext-common:      default,matcher,keyboard-select,clipboard
+urxvt256c.keysym.M-Escape:      perl:keyboard-select:activate
+urxvt256c.keysym.M-v:           perl:keyboard-select:activate
+urxvt256c.keysym.M-p:           perl:clipboard:paste
+urxvt256c.clipboard.autocopy:   true
+urxvt256c.clipboard.copycmd:    xclip -i -selection clipboard
+urxvt256c.clipboard.pastecmd:   xclip -o -selection clipboard
 
-URxvt.matcher.button:       1
-URxvt.keysym.Shift-Down:    command:\033]721;1\007
-URxvt.keysym.Shift-Up:      command:\033]720;1\007
-URxvt.copyCommand:          xclip -i -selection clipboard
-URxvt.pasteCommand:         xclip -o -selection clipboard
-URxvt.skipBuiltinGlyphs:    true
+urxvt256c.matcher.button:       1
+urxvt256c.keysym.Shift-Down:    command:\033]721;1\007
+urxvt256c.keysym.Shift-Up:      command:\033]720;1\007
+urxvt256c.copyCommand:          xclip -i -selection clipboard
+urxvt256c.pasteCommand:         xclip -o -selection clipboard
+urxvt256c.skipBuiltinGlyphs:    true
 
 Xft.antialias:              true
 Xft.dpi:                    96

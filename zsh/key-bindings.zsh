@@ -45,6 +45,13 @@ key_info=(
 autoload edit-command-line
 zle -N edit-command-line
 
+zsh-widget-noop () {}
+zle -N zsh-widget-noop
+
+# pressing <ESC> in normal mode is bogus: you need to press 'i' twice to enter insert mode again.
+# rebinding <ESC> in normal mode to something harmless solves the problem.
+bindkey -M vicmd '\e' zsh-widget-noop
+
 bindkey -M vicmd "$key_info[End]" end-of-line
 bindkey -M vicmd "$key_info[Home]" beginning-of-line
 bindkey -M vicmd "?" history-incremental-search-backward
