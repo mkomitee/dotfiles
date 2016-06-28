@@ -109,11 +109,25 @@ bindsym $mod+Shift+R restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+E exit
 
-set $mode_i3_meta Meta: [r]eload [R]estart [e]xit
+
+set $mode_layout_mode Layout Mode: [s]tacking [T]abbed [t]iling
+mode "$mode_layout_mode" {
+  bindsym s layout stacking; mode "Default"
+  bindsym Shift+T layout tabbed; mode "Default"
+  bindsym t layout default; mode "Default"
+
+  # back to normal: Enter or Escape
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+
+set $mode_i3_meta Meta: [r]eload [R]estart [e]xit [k]ill window [l]ayouts
 mode "$mode_i3_meta" {
   bindsym r reload; mode "Default"
   bindsym Shift+R restart; mode "Default"
   bindsym e exit
+  bindsym k kill; mode "Default"
+  bindsym l mode "$mode_layout_mode"
 
   # back to normal: Enter or Escape
   bindsym Return mode "default"

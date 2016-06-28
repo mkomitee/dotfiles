@@ -78,3 +78,12 @@ function git_remote() {
     parts=("${(@s:/:)${remote}}")
     echo ${parts[-1]}
 }
+
+function fps() {
+    ps "$@" | fzf -i -e --header-lines=1
+}
+
+function ffind()
+{
+    find "$@" | fzf -i -e
+}

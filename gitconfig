@@ -71,13 +71,6 @@
     algorithm = minimal
     renames = copies
 
-[color "diff"]
-  old = 088
-  new = 022
-  commit = 052
-  frag = 057
-
-
 [github]
     user = mkomitee
 

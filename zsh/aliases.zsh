@@ -44,3 +44,5 @@ alias dirs='dirs -v'
 alias -g H='head'
 alias -g T='tail'
 alias -g L='less'
+
+alias fgls='git ls-files | fzf -i -e'

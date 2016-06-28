@@ -40,3 +40,9 @@
 [submodule "contrib/Tarrasch/zsh-autoenv"]
 	path = contrib/Tarrasch/zsh-autoenv
 	url = git@github.com:Tarrasch/zsh-autoenv.git
+[submodule "contrib/b4b4r07/enhancd"]
+	path = contrib/b4b4r07/enhancd
+	url = git://github.com/b4b4r07/enhancd
+[submodule "contrib/junegunn/fzf"]
+	path = contrib/junegunn/fzf
+	url = git://github.com/junegunn/fzf
