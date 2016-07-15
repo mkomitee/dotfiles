@@ -1,0 +1,51 @@
+#!/bin/sh
+
+PROG=$(basename $0)
+INTERVAL=0.1
+USAGE="Usage: $PROG [-i interval] -- command"
+NOOP=""
+
+while getopts "ndhi:" opt; do
+    case $opt in
+        i)
+            INTERVAL="$OPTARG"
+            ;;
+        d)  set -x
+            ;;
+        n) NOOP=echo
+           ;;
+        h)
+            cat <<EOS 2>&1
+$USAGE
+       -d:          debug (set -x)
+       -h:          print help
+       -i interval: set loop interval
+EOS
+            exit 0
+            ;;
+        --)
+            break
+            ;;
+        *)
+            echo $USAGE 1>&2
+            exit 1
+            ;;
+    esac
+done
+
+shift $(( $OPTIND - 1 ))
+
+if [ "$*" == "" ]; then
+    echo $USAGE 1>&2
+    exit 1
+fi
+
+while :; do
+    $NOOP $*
+    rc=$?
+    if [ $rc -ne 0 ]; then
+        exit $rc
+    fi
+    echo "'$*' exited $rc" 1>&2
+    sleep $INTERVAL
+done
