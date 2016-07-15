@@ -73,3 +73,5 @@ Xft.rgba:                   rgb
 ! ImageMagick display command
 !Display.font:               xft:Droid Sans Mono:size=11
 !Display.boldFont:           xft:Droid Sans Mono:size=11
+
+rofi.kb-row-down: Down,Control+n,Tab,Alt+Tab

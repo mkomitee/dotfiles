@@ -1,0 +1,59 @@
+#!/usr/local/bin/python
+# encoding=utf8
+from __future__ import print_function
+from __future__ import unicode_literals
+
+import subprocess
+import json
+import sys
+
+
+def walk(node):
+    seen = []
+    queue = [node]
+    while queue:
+        node = queue.pop(0)
+        if node not in seen:
+            seen.append(node)
+            for n in node['nodes']:
+                queue.append(n)
+    return seen
+
+
+def get_list():
+    result = []
+    nodes = walk(json.loads(subprocess.check_output(['i3-msg', '-t', 'get_tree'])))
+    windows = [n
+               for n in nodes
+               if n['window'] is not None
+               if n['window_properties']['class'] != 'i3bar']
+    for w in windows:
+        title = "{class} :: {instance} :: {title}\r{id}".format(id=w['id'], **w['window_properties']).encode('utf8')
+        if 'marks' in w:
+            try:
+                marks = ':'.join([m.encode('utf8') for m in w['marks']])
+                title = """[{}] :: {}""".format(marks, title)
+            except UnicodeDecodeError:
+                pass
+        result.append(title)
+    return result
+
+
+def switch(title):
+    parts = title.split('\r')
+    command = '[con_id="{}"] focus'.format(parts[-1].strip())
+    subprocess.check_output(['i3-msg', '-t', 'command', command])
+
+
+def display_list():
+    for w in get_list():
+        print(w)
+
+def main():
+    if len(sys.argv) == 1:
+        display_list()
+    else:
+        switch(sys.argv[1])
+
+if __name__ == '__main__':
+    main()

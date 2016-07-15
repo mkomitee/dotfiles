@@ -10,6 +10,7 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod3
+set $alt Mod1
 
 # font for window titles. ISO 10646 = Unicode
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -18,8 +19,11 @@ font pango:Hack 10
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
+show_marks yes
+hide_edge_borders both
 focus_follows_mouse no
-# hide_edge_borders both
+force_focus_wrapping no
+workspace_auto_back_and_forth yes
 
 # start a terminal
 bindsym $mod+Return exec /usr/bin/urxvt256c
@@ -27,8 +31,13 @@ bindsym $mod+Return exec /usr/bin/urxvt256c
 # kill focused window
 bindsym $mod+Shift+Q kill
 
-# start dmenu (a program launcher)
-bindsym $mod+d exec /usr/bin/dmenu_run
+# start rofi (a program launcher)
+bindsym $mod+d exec rofi -show run
+bindsym $mod+Tab exec rofi -modi "Windows:i3-windows" -show Windows
+bindsym $alt+Tab exec rofi -modi "Windows:i3-windows" -show Windows
+
+bindsym $mod+Shift+z move scratchpad
+bindsym $mod+z scratchpad show
 
 # change focus
 bindsym $mod+Left focus left
@@ -121,7 +130,21 @@ mode "$mode_layout_mode" {
   bindsym Escape mode "default"
 }
 
-set $mode_i3_meta Meta: [r]eload [R]estart [e]xit [k]ill window [l]ayouts
+set $mode_marks Marks: [s]et [g]o
+mode "$mode_marks" {
+  bindsym m exec i3-input -F 'mark %s' -P 'Set: '; mode "Default"
+  bindsym s exec i3-input -F 'mark %s' -P 'Set: '; mode "Default"
+  bindsym g exec i3-input -F '[con_mark=%s] focus' -P 'Go to: '; mode "Default"
+  bindsym \' exec i3-input -F '[con_mark=%s] focus' -P 'Go to: '; mode "Default"
+  bindsym \" exec i3-input -F '[con_mark=%s] focus' -P 'Go to: '; mode "Default"
+
+  # back to normal: Enter or Escape
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+bindsym $mod+Shift+M mode "$mode_marks"
+
+set $mode_i3_meta Meta: [r]eload [R]estart [e]xit [k]ill [l]ayouts
 mode "$mode_i3_meta" {
   bindsym r reload; mode "Default"
   bindsym Shift+R restart; mode "Default"
@@ -201,7 +224,7 @@ mode "$mode_launcher" {
   bindsym e split h; exec emacsclient -a emacs -q -n -c; mode "default"
   bindsym E split v; exec emacsclient -a emacs -q -n -c; mode "default"
   bindsym f split h; exec firefox; mode "default"
-  bindsym F split h; exec firefox; mode "default"
+  bindsym F split v; exec firefox; mode "default"
   bindsym v split h; exec gvim; mode "default"
   bindsym V split v; exec gvim; mode "default"
 
@@ -215,3 +238,9 @@ bindsym $mod+o mode "$mode_launcher"
 bar {
   status_command i3status
 }
+
+for_window [class="^Firefox" window_role="page-info"] floating enable
+
+title_format "%class :: %instance :: %title"
+
+for_window [class="^URxvt"] title_format "Terminal :: %instance :: %title"
