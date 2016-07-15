@@ -1,0 +1,16 @@
+* Today I Learned
+
+** Postgres
+
+*** Show connection / process list
+<2016-06-29 Wed>
+
+#+BEGIN_SRC sql
+SELECT * from pg_stat_activity;
+#+END_SRC
+
+*** Kill a query
+
+#+BEGIN_SRC sql -n -r
+SELECT pg_cancel_backend(pid)
+#+END_SRC
