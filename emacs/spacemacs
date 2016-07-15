@@ -54,7 +54,6 @@ values."
                       better-defaults-move-to-beginning-of-code-first t)
      (c-c++ :variables
             c-c++-enable-clang-support t)
-     (colors :variables colors-colorize-identifiers 'all)
      deft
      elixir
      erlang
@@ -77,8 +76,7 @@ values."
      (shell :variables shell-default-shell 'ansi-term)
      shell-scripts
      spacemacs-layouts
-     (spell-checking :variables
-                     enable-flyspell-auto-completion t)
+     spell-checking
      sql
      (syntax-checking :variables
                       syntax-checking-enable-tooltips nil)
@@ -98,23 +96,20 @@ values."
    dotspacemacs-additional-packages
    '(
      apache-mode
+     dokuwiki-mode
      confluence
      csv-mode
-     dired-narrow
-     evil-vimish-fold
-     helm-org-rifle
      jinja2-mode
      nginx-mode
-     ox-rst
      ox-twbs
      rpm-spec-mode
      scratch
-     with-editor
      )
+   ;; A list of packages that cannot be updated.
+   dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be install and loaded.
    dotspacemacs-excluded-packages
    '(
-     evil-escape
      smartparens
      )
    ;; Defines the behaviour of Spacemacs when downloading packages.
@@ -233,7 +228,7 @@ values."
    dotspacemacs-display-default-layout t
    ;; If non nil then the last auto saved layouts are resume automatically upon
    ;; start. (default nil)
-   dotspacemacs-auto-resume-layouts t
+   dotspacemacs-auto-resume-layouts nil
    ;; Size (in MB) above which spacemacs will prompt to open the large file
    ;; literally to avoid performance issues. Opening a file literally means that
    ;; no major mode or minor modes are active. (default is 1)
@@ -302,7 +297,7 @@ values."
    dotspacemacs-line-numbers t
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
-   dotspacemacs-folding-method 'evil
+   dotspacemacs-folding-method 'origami
    ;; If non-nil smartparens-strict-mode will be enabled in programming modes.
    ;; (default nil)
    dotspacemacs-smartparens-strict-mode nil
@@ -366,12 +361,14 @@ before packages are loaded. If you are unsure, you should try in setting them in
                                          )
                             (add-to-list 'org-structure-template-alist
                                          '("pl" "#+BEGIN_SRC perl -n -r\n?\n#+END_SRC")
-                            )
+                                         )
                             (add-to-list 'org-structure-template-alist
                                          '("sh" "#+BEGIN_SRC shell -n -r\n?\n#+END_SRC")
                                          )
+                            (add-to-list 'org-structure-template-alist
+                                         '("sql" "#+BEGIN_SRC sql -n -r\n?\n#+END_SRC")
+                                         )
                             (require 'ox-confluence)
-                            (require 'ox-rst)
                             (require 'ox-twbs))))
 
 
@@ -412,23 +409,15 @@ you should place your code here."
     (kbd "z=") 'flyspell-correct-previous-word-generic
     )
 
-  (defun komitee/todos ()
-    (interactive)
-    (helm-org-rifle-files '("~/notes/TODO.org"))
-    )
-
-  (require 'helm-org-rifle)
   ;; misc configuration settings
   (add-hook 'python-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
   (spacemacs/declare-prefix "o" "user")
   (spacemacs/declare-prefix "oa" "apps")
-  (spacemacs/declare-prefix "ot" "todos")
   (spacemacs/declare-prefix "oA" "abbrev")
   (spacemacs/set-leader-keys
-    "SPC" 'avy-goto-char-2
+    "SPC" 'evil-avy-goto-char
     "bS" 'scratch
     "oAg" 'define-global-abbrev
-    "ott" 'komitee/todos
     "oAm" 'define-mode-abbrev
     "oai" 'ein:notebooklist-login'
     "w-" 'split-window-below-and-focus
@@ -506,7 +495,6 @@ you should place your code here."
     "ol" 'org-toggle-latex-fragment
     "oL" 'org-latex-convert-region-to-latex
     "op" 'org-priority
-    "or" 'helm-org-rifle-current-buffer
     )
   (add-hook 'org-mode-hook 'turn-on-visual-line-mode)
   (add-hook 'org-mode-hook 'turn-off-fci-mode)
@@ -589,11 +577,6 @@ Entered on %U
             (call-interactively #'evil-ex))))))
   (add-hook 'ediff-after-quit-hook-internal 'winner-undo)
 
-  ;; Necessary until https://github.com/syl20bnr/spacemacs/issues/3226 gets some
-  ;; love.
-  (vimish-fold-global-mode t)
-  (require 'evil-vimish-fold)
-
   (add-hook 'prog-mode-hook 'turn-on-fci-mode)
   (add-hook 'text-mode-hook 'turn-on-fci-mode)
   (spacemacs/toggle-auto-fill-mode-on)
@@ -618,6 +601,4 @@ Entered on %U
  '(org-level-1 ((t (:inherit outline-1 :height 1.13))))
  '(org-level-2 ((t (:inherit outline-2 :height 1.12))))
  '(org-level-3 ((t (:inherit outline-3 :height 1.11))))
- '(org-level-4 ((t (:inherit outline-4 :height 1.1))))
- '(helm-org-rifle-fontify-headings nil)
- '(helm-org-rifle-show-path t))
+ '(org-level-4 ((t (:inherit outline-4 :height 1.1)))))
