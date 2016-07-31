@@ -23,6 +23,7 @@ path=(
     $GOROOT/bin
     $HOME/.dotfiles/contrib/visionmedia/git-extras/bin
     $HOME/.dotfiles/contrib/willgit/mainline/bin
+    $HOME/.dotfiles/contrib/brendangregg/FlameGraph
     $HOME/.gem/ruby/1.8/bin
     $HOME/.rvm/bin
     $HOME/.pyenv/bin
