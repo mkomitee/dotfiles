@@ -43,3 +43,6 @@
 [submodule "contrib/junegunn/fzf"]
 	path = contrib/junegunn/fzf
 	url = git://github.com/junegunn/fzf
+[submodule "contrib/brendangregg/FlameGraph"]
+	path = contrib/brendangregg/FlameGraph
+	url = https://github.com/brendangregg/FlameGraph
