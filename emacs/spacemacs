@@ -58,7 +58,9 @@ values."
      elixir
      erlang
      git
-     (go :variables go-tab-width 4)
+     (go :variables
+         go-tab-width 4
+         gofmt-command "goimports")
      graphviz
      html
      imenu-list
@@ -99,6 +101,7 @@ values."
      dokuwiki-mode
      confluence
      csv-mode
+     go-dlv
      jinja2-mode
      nginx-mode
      ox-twbs
@@ -490,6 +493,10 @@ you should place your code here."
                           '(("^ +\\([-*]\\) "
                              (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
   (spacemacs/declare-prefix-for-mode 'org-mode "mo" "user")
+  (spacemacs/set-leader-keys-for-major-mode 'go-mode
+    "dd" 'dlv
+    "df" 'dlv-current-func
+    )
   (spacemacs/set-leader-keys-for-major-mode 'org-mode
     "oc" 'org-toggle-checkbox
     "ol" 'org-toggle-latex-fragment
