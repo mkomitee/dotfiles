@@ -5,7 +5,6 @@ CONTRIB=$DOT/contrib
 HISTFILE=$HOME/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
-ENHANCD_COMMAND=ecd
 
 hash -d dot=$DOT
 
@@ -14,7 +13,6 @@ source $ZSH/aliases.zsh
 source $ZSH/key-bindings.zsh
 source $ZSH/functions.zsh
 source $ZSH/prompt.zsh
-source $DOT/contrib/b4b4r07/enhancd/init.sh
 
 # LS CONFIG
 # Find the option for using colors in ls, depending on the version: Linux or BSD
