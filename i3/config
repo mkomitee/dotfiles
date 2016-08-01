@@ -241,6 +241,12 @@ bar {
 
 for_window [class="^Firefox" window_role="page-info"] floating enable
 
-title_format "%class :: %instance :: %title"
-
+for_window [class=".*"]     title_format "%class :: %instance :: %title"
 for_window [class="^URxvt"] title_format "Terminal :: %instance :: %title"
+
+exec --no-startup-id /usr/libexec/mate-notification-daemon
+exec --no-startup-id /usr/bin/urxvt256c
+
+# This shouldn't be necesary, but it doesn't appear to be running correctly
+# from my xinit. It's not helping from here either, but maybe one day.
+exec --no-startup-id xmodmap $HOME/.xmodmaprc
