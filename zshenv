@@ -8,7 +8,6 @@ export GOROOT=$HOME/.${UNAME}.${ARCH}/go
 # Setup zsh fpath
 fpath=(
     $HOME/.dotfiles/zsh
-    $HOME/.dotfiles/contrib//zsh-users/zsh-completions/src
     $fpath
 )
 fpath=($^fpath(N))

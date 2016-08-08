@@ -49,34 +49,28 @@ values."
      ;; spell-checking
      ;; syntax-checking
      ;; version-control
-     auto-completion
+     ;; auto-completion
      (better-defaults :variables
                       better-defaults-move-to-beginning-of-code-first t)
      (c-c++ :variables
             c-c++-enable-clang-support t)
      deft
-     elixir
-     erlang
+     ;; elixir
+     ;; erlang
      git
      (go :variables
          go-tab-width 4
          gofmt-command "goimports"
          go-use-gometalinter t)
-     graphviz
      html
-     imenu-list
-     ipython-notebook
+     ;; ipython-notebook
      ivy
      javascript
-     markdown
      (org :variables
           org-enable-reveal-js-support t
           org-enable-github-support t)
-     osx
      puppet
      python
-     rust
-     (shell :variables shell-default-shell 'ansi-term)
      shell-scripts
      spacemacs-layouts
      spell-checking
@@ -84,9 +78,6 @@ values."
      (syntax-checking :variables
                       syntax-checking-enable-tooltips nil)
      systemd
-     themes-megapack
-     unimpaired
-     version-control
      (version-control :variables
                       version-control-diff-tool 'git-gutter
                       version-control-global-margin t)
@@ -99,15 +90,14 @@ values."
    dotspacemacs-additional-packages
    '(
      apache-mode
-     dokuwiki-mode
-     confluence
+     ;; dokuwiki-mode
      csv-mode
      go-dlv
      jinja2-mode
      nginx-mode
      ox-twbs
      rpm-spec-mode
-     scratch
+     ;; scratch
      )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -144,8 +134,10 @@ values."
    ;; Maximum allowed time in seconds to contact an ELPA repository.
    dotspacemacs-elpa-timeout 5
    ;; If non nil then spacemacs will check for updates at startup
-   ;; when the current branch is not `develop'. (default t)
-   dotspacemacs-check-for-update t
+   ;; when the current branch is not `develop'. Note that checking for
+   ;; new revisions works via git commands, thus it calls GitHub services
+   ;; whenever you start Emacs. (default nil)
+   dotspacemacs-check-for-update nil
    ;; One of `vim', `emacs' or `hybrid'.
    ;; `hybrid' is like `vim' except that `insert state' is replaced by the
    ;; `hybrid state' with `emacs' key bindings. The value can also be a list
@@ -162,8 +154,8 @@ values."
    ;; by your Emacs build.
    ;; If the value is nil then no banner is displayed. (default 'official)
    dotspacemacs-startup-banner 'official
-   ;; List of items to show in startup buffer or an association list of of
-   ;; the form `(list-type . list-size)`. If nil it is disabled.
+   ;; List of items to show in startup buffer or an association list of
+   ;; the form `(list-type . list-size)`. If nil then it is disabled.
    ;; Possible values for list-type are:
    ;; `recents' `bookmarks' `projects' `agenda' `todos'."
    dotspacemacs-startup-lists '((recents . 20)
@@ -372,7 +364,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
                             (add-to-list 'org-structure-template-alist
                                          '("sql" "#+BEGIN_SRC sql -n -r\n?\n#+END_SRC")
                                          )
-                            (require 'ox-confluence)
                             (require 'ox-twbs))))
 
 
@@ -395,15 +386,15 @@ you should place your code here."
     (evil-set-initial-state mode 'motion))
 
   ;; Completion stuff
-  (defun komitee/complete-yas ()
-    "Use hippie-expand to expand a line"
-    (interactive)
-    (let ((hippie-expand-try-functions-list
-           '(yas-hippie-try-expand)))
-      (call-interactively 'hippie-expand)))
+  ;; (defun komitee/complete-yas ()
+  ;;   "Use hippie-expand to expand a line"
+  ;;   (interactive)
+  ;;   (let ((hippie-expand-try-functions-list
+  ;;          '(yas-hippie-try-expand)))
+  ;;     (call-interactively 'hippie-expand)))
 
-  (evil-define-key 'normal dired-mode-map
-    (kbd "/") 'dired-narrow)
+  ;; (evil-define-key 'normal dired-mode-map
+  ;;   (kbd "/") 'dired-narrow)
 
   ;; vim like spelling mappings
   (evil-define-key 'normal global-map
@@ -420,10 +411,10 @@ you should place your code here."
   (spacemacs/declare-prefix "oA" "abbrev")
   (spacemacs/set-leader-keys
     "SPC" 'evil-avy-goto-char
-    "bS" 'scratch
+    ;; "bS" 'scratch
     "oAg" 'define-global-abbrev
     "oAm" 'define-mode-abbrev
-    "oai" 'ein:notebooklist-login'
+    ;; "oai" 'ein:notebooklist-login'
     "w-" 'split-window-below-and-focus
     "w/" 'split-window-right-and-focus
     )
@@ -600,13 +591,3 @@ Entered on %U
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(org-document-title ((t (:inherit outline-1 :height 1.14 :underline t))))
- '(org-level-1 ((t (:inherit outline-1 :height 1.13))))
- '(org-level-2 ((t (:inherit outline-2 :height 1.12))))
- '(org-level-3 ((t (:inherit outline-3 :height 1.11))))
- '(org-level-4 ((t (:inherit outline-4 :height 1.1)))))
