@@ -31,56 +31,32 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     ;; ----------------------------------------------------------------
-     ;; Example of useful layers you may want to use right away.
-     ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
-     ;; <M-m f e R> (Emacs style) to install them.
-     ;; ----------------------------------------------------------------
-     ;; helm
-     ;; auto-completion
-     ;; better-defaults
      emacs-lisp
-     ;; git
-     ;; markdown
-     ;; org
-     ;; (shell :variables
-     ;;        shell-default-height 30
-     ;;        shell-default-position 'bottom)
-     ;; spell-checking
-     ;; syntax-checking
-     ;; version-control
-     ;; auto-completion
      (better-defaults :variables
                       better-defaults-move-to-beginning-of-code-first t)
-     (c-c++ :variables
-            c-c++-enable-clang-support t)
+     c-c++
      deft
-     ;; elixir
-     ;; erlang
+     erlang
      git
      (go :variables
          go-tab-width 4
          gofmt-command "goimports"
-         go-use-gometalinter t)
+         go-use-gometalinter nil)
+     gtags
+     helm
      html
-     ;; ipython-notebook
+     ipython-notebook
      ivy
      javascript
-     (org :variables
-          org-enable-reveal-js-support t
-          org-enable-github-support t)
+     org
      puppet
      python
      shell-scripts
-     spacemacs-layouts
      spell-checking
      sql
-     (syntax-checking :variables
-                      syntax-checking-enable-tooltips nil)
+     syntax-checking
      systemd
-     (version-control :variables
-                      version-control-diff-tool 'git-gutter
-                      version-control-global-margin t)
+     version-control
      yaml
      )
    ;; List of additional packages that will be installed without being
@@ -90,14 +66,12 @@ values."
    dotspacemacs-additional-packages
    '(
      apache-mode
-     ;; dokuwiki-mode
      csv-mode
      go-dlv
      jinja2-mode
      nginx-mode
      ox-twbs
      rpm-spec-mode
-     ;; scratch
      )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -138,6 +112,10 @@ values."
    ;; new revisions works via git commands, thus it calls GitHub services
    ;; whenever you start Emacs. (default nil)
    dotspacemacs-check-for-update nil
+   ;; If non-nil, a form that evaluates to a package directory. For example, to
+   ;; use different package directories for different Emacs versions, set this
+   ;; to `emacs-version'.
+   dotspacemacs-elpa-subdirectory nil
    ;; One of `vim', `emacs' or `hybrid'.
    ;; `hybrid' is like `vim' except that `insert state' is replaced by the
    ;; `hybrid state' with `emacs' key bindings. The value can also be a list
@@ -293,7 +271,7 @@ values."
    dotspacemacs-line-numbers t
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
-   dotspacemacs-folding-method 'origami
+   dotspacemacs-folding-method 'evil
    ;; If non-nil smartparens-strict-mode will be enabled in programming modes.
    ;; (default nil)
    dotspacemacs-smartparens-strict-mode nil
@@ -304,7 +282,7 @@ values."
    ;; Select a scope to highlight delimiters. Possible values are `any',
    ;; `current', `all' or `nil'. Default is `all' (highlight any scope and
    ;; emphasis the current one). (default 'all)
-   dotspacemacs-highlight-delimiters 'current
+   dotspacemacs-highlight-delimiters 'nil
    ;; If non nil, advise quit functions to keep server open when quitting.
    ;; (default nil)
    dotspacemacs-persistent-server t
@@ -385,17 +363,6 @@ you should place your code here."
                   messages-buffer-mode))
     (evil-set-initial-state mode 'motion))
 
-  ;; Completion stuff
-  ;; (defun komitee/complete-yas ()
-  ;;   "Use hippie-expand to expand a line"
-  ;;   (interactive)
-  ;;   (let ((hippie-expand-try-functions-list
-  ;;          '(yas-hippie-try-expand)))
-  ;;     (call-interactively 'hippie-expand)))
-
-  ;; (evil-define-key 'normal dired-mode-map
-  ;;   (kbd "/") 'dired-narrow)
-
   ;; vim like spelling mappings
   (evil-define-key 'normal global-map
     (kbd "]s") 'flyspell-goto-next-error
@@ -438,6 +405,7 @@ you should place your code here."
                              (t
                               (setq linum-format "%4d ")))))
   (require 'recentf)
+  (setq require-final-newline t)
   (setq comment-auto-fill-only-comments t
         c-indent-offset 4
         evil-want-C-w-in-emacs-state t
@@ -445,8 +413,6 @@ you should place your code here."
         makefile-mode-hook '((lambda nil (setq indent-tabs-mode t)))
         python-fill-docstring-style 'onetwo
         recentf-load-hook '((lambda nil (recentf-cleanup)))
-        undo-tree-auto-save-history t
-        undo-tree-history-directory-alist '(("." . "~/.emacs.d/.undo"))
         vc-follow-symlinks t
         visual-line-fringe-indicators '(nil right-curly-arrow)
         whitespace-style '(empty face space-after-tab space-before-tab tabs
@@ -471,6 +437,12 @@ you should place your code here."
         web-mode-engines-alist '(("jinja" . "\\.html\\'")
                                  ("jinja" . "\\.js\\'")))
 
+  ;; go config
+  (spacemacs/set-leader-keys-for-major-mode 'go-mode
+    "dd" 'dlv
+    "df" 'dlv-current-func
+    )
+
   ;; deft config
   (setq deft-auto-save-interval 0
         deft-use-filter-string-for-filename t
@@ -485,10 +457,6 @@ you should place your code here."
                           '(("^ +\\([-*]\\) "
                              (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
   (spacemacs/declare-prefix-for-mode 'org-mode "mo" "user")
-  (spacemacs/set-leader-keys-for-major-mode 'go-mode
-    "dd" 'dlv
-    "df" 'dlv-current-func
-    )
   (spacemacs/set-leader-keys-for-major-mode 'org-mode
     "oc" 'org-toggle-checkbox
     "ol" 'org-toggle-latex-fragment
@@ -522,7 +490,7 @@ Entered on %U
         org-catch-invisible-edits "smart"
         org-default-notes-file "~/notes/NOTES.org"
         org-directory "~/notes"
-        org-hide-emphasis-markers t
+        org-hide-emphasis-markers nil
         org-startup-folded 'content
         org-startup-indented t
         org-startup-align-all-tables t
@@ -530,7 +498,6 @@ Entered on %U
         org-default-priority ?3
         org-priority-start-cycle-with-default t
         org-lowest-priority ?5
-        org-startup-folded 'content
         org-use-sub-superscripts '{}
         org-todo-keywords '((sequence "☛ TODO(t)" "|" "✔ DONE(d)")
                             (sequence "ᐞ HOLD(h)" "|")
@@ -540,40 +507,14 @@ Entered on %U
                             (sequence "|" "✘ CANCELED(c)")
                             ))
 
-  ;; eshell config
-  (setq eshell-aliases-file "~/.dotfiles/emacs/aliases")
-  (add-hook 'eshell-mode-hook
-            (lambda ()
-              (spacemacs/set-leader-keys-for-major-mode 'eshell-mode
-                "H" '(lambda ()
-                       (interactive)
-                       (insert
-                        (ivy-completing-read "Eshell history: "
-                                             (delete-dups
-                                              (ring-elements
-                                               eshell-history-ring))))))))
-
   ;; tweaks TODO(komitee) switch to common-tweaks layer once (if?)
   ;; https://github.com/syl20bnr/spacemacs/pull/4250 is accepted
   (setq counsel-find-file-ignore-regexp "\\(?:\\`[#.]\\)\\|\\(?:[#~]\\'\\)"
-        ct-evil-ex-commands '(("e" . "e ")
-                              ("s" . "s/")
-                              ("w" . "w ")
-                              ("q" . "q")
-                              ("%s" . "%s/"))
         undo-tree-auto-save-history t
         undo-tree-history-directory-alist
         `(("." . ,(concat spacemacs-cache-directory "undo"))))
   (unless (file-exists-p (concat spacemacs-cache-directory "undo"))
     (make-directory (concat spacemacs-cache-directory "undo")))
-  (which-key-declare-prefixes "SPC ." "evil-ex")
-  (dolist (command ct-evil-ex-commands)
-    (eval
-     `(spacemacs/set-leader-keys ,(concat "." (car command))
-        (lambda ()
-          (interactive)
-          (let ((evil-ex-initial-input ,(cdr command)))
-            (call-interactively #'evil-ex))))))
   (add-hook 'ediff-after-quit-hook-internal 'winner-undo)
 
   (add-hook 'prog-mode-hook 'turn-on-fci-mode)
