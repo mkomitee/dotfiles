@@ -6,6 +6,7 @@
     editor = emacsclient -a emacs -q -t
     whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
     excludesfile = ~/.dotfiles/gitignore
+    trustctime = false
 
 [log]
     abbrevcommit = yes
