@@ -20,11 +20,14 @@ Session.vim
 
 ### ~/.gitignore-boilerplates/Global/tags.gitignore
 
-# Ignore tags created by etags and ctags
+# Ignore tags created by etags and ctags and gtags
 TAGS
 !TAGS/
 tags
 !tags/
+GTAGS
+GPATH
+GRTAGS
 
 
 ### ~/.gitignore-boilerplates/Global/archives.gitignore
