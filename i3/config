@@ -61,11 +61,11 @@ bindsym $mod+Shift+l move right
 
 # split in horizontal orientation
 bindsym $mod+Shift+slash split h
-bindsym $mod+slash split h; exec /usr/bin/urxvt256c
+bindsym $mod+slash split h; exec /usr/bin/urxvt256cc
 
 # split in vertical orientation
 bindsym $mod+Shift+minus split v
-bindsym $mod+minus split v; exec /usr/bin/urxvt256c
+bindsym $mod+minus split v; exec /usr/bin/urxvt256cc
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
@@ -144,11 +144,12 @@ mode "$mode_marks" {
 }
 bindsym $mod+Shift+M mode "$mode_marks"
 
-set $mode_i3_meta Meta: [r]eload [R]estart [e]xit [k]ill [l]ayouts
+set $mode_i3_meta Meta: [r]eload [R]estart [e][x]it [k]ill [l]ayouts
 mode "$mode_i3_meta" {
   bindsym r reload; mode "Default"
   bindsym Shift+R restart; mode "Default"
   bindsym e exit
+  bindsym x exit
   bindsym k kill; mode "Default"
   bindsym l mode "$mode_layout_mode"
 
@@ -245,6 +246,7 @@ for_window [class=".*"]     title_format "%class :: %instance :: %title"
 for_window [class="^URxvt"] title_format "Terminal :: %instance :: %title"
 
 exec --no-startup-id /usr/libexec/mate-notification-daemon
+exec --no-startup-id /usr/bin/urxvt256cc
 exec --no-startup-id /usr/bin/urxvt256c
 
 # This shouldn't be necesary, but it doesn't appear to be running correctly
