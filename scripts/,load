@@ -15,7 +15,7 @@ function cores() {
         psrinfo | wc -l
     fi
 }
-
+TTY=`tty | cut -d/ -f3-`
 uname -nr
 echo
 uptime | sed 's/^\s*//'
@@ -39,7 +39,7 @@ Legend:
    +    is in the foreground process group
 EOS
     echo
-    ps -eo stat,pcpu,pmem,pid,ppid,user,args | grep -vE "^[WST][ NLsl+<]" || echo "N/A"
+    ps -o stat,pcpu,pmem,pid,ppid,user,tty,args --tty ${TTY} -N | grep -vE "^[WST][ NLsl+<]" || echo "N/A"
 else
     cat <<EOS
 Legend:
