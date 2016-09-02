@@ -36,6 +36,7 @@ values."
                       better-defaults-move-to-beginning-of-code-first t)
      c-c++
      deft
+     elixir
      erlang
      git
      (go :variables
