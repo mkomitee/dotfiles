@@ -34,7 +34,6 @@ bindsym $mod+Shift+Q kill
 # start rofi (a program launcher)
 bindsym $mod+d exec rofi -show run
 bindsym $mod+Tab exec rofi -modi "Windows:i3-windows" -show Windows
-bindsym $alt+Tab exec rofi -modi "Windows:i3-windows" -show Windows
 
 bindsym $mod+Shift+z move scratchpad
 bindsym $mod+z scratchpad show
@@ -119,11 +118,13 @@ bindsym $mod+Shift+R restart
 bindsym $mod+Shift+E exit
 
 
-set $mode_layout_mode Layout Mode: [s]tacking [T]abbed [t]iling
+
+set $mode_layout_mode Layout Mode: [s]tacking [T]abbed [t]iling [1]2x1
 mode "$mode_layout_mode" {
   bindsym s layout stacking; mode "Default"
   bindsym Shift+T layout tabbed; mode "Default"
   bindsym t layout default; mode "Default"
+  bindsym 1 exec "i3-msg append_layout $HOME/.i3/2-1.json"; mode "$mode_launcher"
 
   # back to normal: Enter or Escape
   bindsym Return mode "default"
@@ -241,6 +242,8 @@ bar {
 }
 
 for_window [class="^Firefox" window_role="page-info"] floating enable
+for_window [class="^Firefox" title="Preferences"] floating enable
+for_window [class="^Wfica_Seamless"] floating enable
 
 for_window [class=".*"]     title_format "%class :: %instance :: %title"
 for_window [class="^URxvt"] title_format "Terminal :: %instance :: %title"
@@ -248,7 +251,3 @@ for_window [class="^URxvt"] title_format "Terminal :: %instance :: %title"
 exec --no-startup-id /usr/libexec/mate-notification-daemon
 exec --no-startup-id /usr/bin/urxvt256cc
 exec --no-startup-id /usr/bin/urxvt256c
-
-# This shouldn't be necesary, but it doesn't appear to be running correctly
-# from my xinit. It's not helping from here either, but maybe one day.
-exec --no-startup-id xmodmap $HOME/.xmodmaprc

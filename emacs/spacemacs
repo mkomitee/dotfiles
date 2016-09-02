@@ -313,6 +313,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (setq server-socket-dir "~/.emacs.d/server"
         server-host system-name
         server-use-tcp t
+        require-final-newline t
         org-load-hook '((lambda nil
                           (progn
                             (org-babel-do-load-languages 'org-babel-load-languages
@@ -379,7 +380,6 @@ you should place your code here."
   (spacemacs/declare-prefix "oA" "abbrev")
   (spacemacs/set-leader-keys
     "SPC" 'evil-avy-goto-char
-    ;; "bS" 'scratch
     "oAg" 'define-global-abbrev
     "oAm" 'define-mode-abbrev
     ;; "oai" 'ein:notebooklist-login'
@@ -454,9 +454,6 @@ you should place your code here."
                                  (case-fn . downcase)))
 
   ;; org config
-  (font-lock-add-keywords 'org-mode
-                          '(("^ +\\([-*]\\) "
-                             (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
   (spacemacs/declare-prefix-for-mode 'org-mode "mo" "user")
   (spacemacs/set-leader-keys-for-major-mode 'org-mode
     "oc" 'org-toggle-checkbox
