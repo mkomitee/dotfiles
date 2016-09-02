@@ -4,6 +4,8 @@ UNAME=$(uname)
 ARCH=$(arch)
 
 export GOROOT=$HOME/.${UNAME}.${ARCH}/go
+export ERL_TOP=$HOME/.${UNAME}.${ARCH}/erlang
+export ELIXIR_TOP=$HOME/.${UNAME}.${ARCH}/elixir
 
 # Setup zsh fpath
 fpath=(
@@ -20,6 +22,8 @@ path=(
     $HOME/scripts
     $HOME/.${UNAME}.${ARCH}/bin
     $GOROOT/bin
+    $ERL_TOP/bin
+    $ELIXIR_TOP/bin
     $HOME/.dotfiles/contrib/visionmedia/git-extras/bin
     $HOME/.dotfiles/contrib/willgit/mainline/bin
     $HOME/.dotfiles/contrib/brendangregg/FlameGraph
