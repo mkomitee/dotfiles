@@ -406,7 +406,6 @@ you should place your code here."
                              (t
                               (setq linum-format "%4d ")))))
   (require 'recentf)
-  (setq require-final-newline t)
   (setq comment-auto-fill-only-comments t
         c-indent-offset 4
         evil-want-C-w-in-emacs-state t
