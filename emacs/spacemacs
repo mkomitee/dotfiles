@@ -337,6 +337,9 @@ before packages are loaded. If you are unsure, you should try in setting them in
                                                            (sql . t)
                                                            (sqlite . t)))
                             (add-to-list 'org-structure-template-alist
+                                         '("erl" "#+BEGIN_SRC erlang -n -r\n?\n#+END_SRC")
+                                         )
+                            (add-to-list 'org-structure-template-alist
                                          '("py" "#+BEGIN_SRC python -n -r\n?\n#+END_SRC")
                                          )
                             (add-to-list 'org-structure-template-alist
