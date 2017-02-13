@@ -88,3 +88,7 @@ html
 
 # Other build artifacts
 *.png
+
+
+# Erlang ...
+*.beam

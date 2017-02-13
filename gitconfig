@@ -1,7 +1,11 @@
 [user]
     name = Michael Komitee
 
+[http]
+    maxRequests = 32
+
 [core]
+    preloadindex = true
     pager = less -FRXMQigMws
     editor = emacsclient -a emacs -q -t
     whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
@@ -9,7 +13,7 @@
     trustctime = false
 
 [log]
-    abbrevcommit = yes
+    abbrevcommit = no
     decorate = short
     date = short
 
@@ -105,3 +109,6 @@
 
 [commit]
     template = ~/.dotfiles/gitcommit
+
+[submodule]
+    fetchJobs = 0

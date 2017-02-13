@@ -3,8 +3,8 @@ DOT=$HOME/.dotfiles
 ZSH=$DOT/zsh
 CONTRIB=$DOT/contrib
 HISTFILE=$HOME/.zsh_history
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=10000000000000
+SAVEHIST=10000000000000
 
 hash -d dot=$DOT
 
@@ -34,7 +34,6 @@ setopt bg_nice
 setopt case_glob
 setopt case_glob
 setopt case_match
-setopt cdable_vars
 setopt check_jobs
 setopt complete_in_word
 setopt extended_history
@@ -52,6 +51,7 @@ setopt list_packed
 setopt list_types
 setopt long_list_jobs
 setopt mark_dirs
+setopt no_clobber
 setopt no_nomatch
 setopt numericglobsort
 setopt pushd_ignore_dups

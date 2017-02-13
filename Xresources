@@ -25,11 +25,9 @@
 *color7:  #bdae93
 *color15: #ebdbb2
 
-!*.font:                     xft:Droid Sans Mono:size=10
-!*.boldFont:                 xft:Droid Sans Mono:style=bold:size=10
-! emacs*font:                 Droid Sans Mono:style=regular:size=11
-! emacs*boldFont:             Droid Sans Mono:style=bold:size=11
-xterm*faceName:             Droid Sans Mono:style=regular:size=10
+xterm*faceName:                 xft:DejaVu Sans Mono:style=regular:size=10
+urxvt256c.font:                 xft:DejaVu Sans Mono:style=normal:size=10
+urxvt256c.boldFont:             xft:DejaVu Sans Mono:style=bold:size=10
 urxvt256c.depth:                32
 urxvt256c.transparent:          false
 urxvt256c.cursorBlink:          false
@@ -69,9 +67,3 @@ Xft.hinting:                full
 Xft.hintstyle:              hintslight
 Xft.lcdfilter:              lcddefault
 Xft.rgba:                   rgb
-
-! ImageMagick display command
-!Display.font:               xft:Droid Sans Mono:size=11
-!Display.boldFont:           xft:Droid Sans Mono:size=11
-
-rofi.kb-row-down: Down,Control+n,Tab,Alt+Tab
