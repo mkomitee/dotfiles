@@ -17,8 +17,10 @@ if dein#load_state('$HOME/.config/nvim/dein')
     " call dein#add('tpope/vim-vinegar')
     call dein#add('Shougo/denite.nvim')
     call dein#add('Shougo/deol.nvim')
+    " call dein#add('kien/ctrlp.vim')
     call dein#add('Shougo/deoplete.nvim')
     call dein#add('Shougo/neosnippet-snippets')
+    call dein#add('w0rp/ale')
     call dein#add('Shougo/neosnippet.vim')
     call dein#add('Shougo/neoyank.vim')
     call dein#add('airblade/vim-gitgutter')
@@ -56,8 +58,8 @@ if dein#check_install()
     call dein#install()
 endif
 
-"End dein Scripts-------------------------
-"
+"End dein Scripts
+
 let mapleader="\<space>"
 let localleader = '\\'
 
@@ -88,7 +90,7 @@ vnoremap <silent> gj gj
 vnoremap <silent> gk gk
 vnoremap <silent> g$ g$
 
-" smart-home: ^ and 0 will toggle between one another {{{
+" smart-home: ^ and 0 will toggle between one another
 nnoremap <expr> <silent> ^ col('.') == match(getline('.'),'\S')+1 ? 'g0' : 'g^'
 vnoremap <expr> <silent> ^ col('.') == match(getline('.'),'\S')+1 ? 'g0' : 'g^'
 onoremap <expr> <silent> ^ col('.') == match(getline('.'),'\S')+1 ? 'g0' : 'g^'
@@ -96,7 +98,7 @@ nnoremap <expr> <silent> 0 col('.') == 1 ? 'g^' : 'g0'
 vnoremap <expr> <silent> 0 col('.') == 1 ? 'g^' : 'g0'
 onoremap <expr> <silent> 0 col('.') == 1 ? 'g^' : 'g0'
 
-" Reselect visually selected text after indenting 
+" Reselect visually selected text after indenting
 vnoremap <silent> > >gv
 vnoremap <silent> < <gv<Paste>
 
@@ -121,6 +123,8 @@ nnoremap <silent> <leader>wL <C-W>L
 
 " Implement spacemacs <leader>b buffer map
 nnoremap <silent> <leader>bd :bdelete<CR>
+" nnoremap <silent> <leader>bl :CtrlPBuffer<CR>
+" nnoremap <silent> <leader>bb :CtrlPBuffer<CR>
 nnoremap <silent> <leader>bl :Denite buffer<CR>
 nnoremap <silent> <leader>bb :Denite buffer<CR>
 
@@ -128,9 +132,10 @@ nnoremap <silent> <leader>bb :Denite buffer<CR>
 nnoremap <silent> <leader>ti :IndentGuidesToggle<CR>
 nnoremap <silent> <leader>tm :SignatureToggle<CR>
 nnoremap <silent> <leader>tt :TagbarToggle<CR>
-"
+
 " Implement spacemacs <leader>f file map
 nnoremap <silent> <leader>fed :e $HOME/.config/nvim/init.vim<CR>
+" nnoremap <silent> <leader>ff :CtrlP<CR>
 nnoremap <silent> <leader>ff :DeniteBufferDir file_rec<CR>
 
 " Implement spacemacs <leader>p project map
@@ -138,108 +143,206 @@ call denite#custom#alias('source', 'file_rec/git', 'file_rec')
 call denite#custom#var('file_rec/git', 'command',
             \ ['git', 'ls-files', '-co', '--exclude-standard'])
 nnoremap <silent> <leader>pf :DeniteBufferDir file_rec/git<CR>
-"
+" nnoremap <silent> <leader>ff :CtrlP<CR>
+
 " Implement spacemacs <leader>g git map
 nnoremap <silent> <leader>gs :Gstatus<CR>
 nnoremap <silent> <leader>gl :Extradite<CR>
 
 map <silent> <Leader><Leader><Leader> <Plug>(easymotion-s2)
 
-" . returns to starting place after repeat 
+" . returns to starting place after repeat
 nnoremap <silent> . .`[
 
 highlight ExtraWhiteSpace ctermbg=darkgreen guibg=darkgreen
 match ExtraWhitespace /\s\+$\|\t/
 
-set background=dark
+" Move all automatically generated files
+silent execute '!mkdir -p $HOME/.config/nvim/.cache/backup/'
+silent execute '!mkdir -p $HOME/.config/nvim/.cache/swap/'
+silent execute '!mkdir -p $HOME/.config/nvim/.cache/undo/'
+silent execute '!mkdir -p $HOME/.config/nvim/.cache/views/'
 set backupdir=$HOME/.config/nvim/.cache/backup/
-set breakindent
-set colorcolumn=+1
 set directory=$HOME/.config/nvim/.cache/swap/
-set expandtab
-set foldlevelstart=99
-set hidden
-set ignorecase
-set list
-set magic
-set nojoinspaces
-set nostartofline
-set notimeout
-set number
-set pumheight=10
-set secure
-set shiftwidth=4
-set showbreak=↪
-set showcmd
-set showmatch
-set smartcase
-set softtabstop=4
-set spellfile=$HOME/.dotfiles/vim/en.utf-8.add
-set spelllang=en_US
-set spellsuggest=best,10
-set splitbelow
-set splitright
-set tabstop=4
-set termguicolors
 set undodir=$HOME/.config/nvim/.cache/undo/
-set undofile
 set viewdir=$HOME/.config/nvim/.cache/views/
 set viminfo+=n~/.config/nvim/.cache/viminfo
 
-set fillchars=         " reset fillchars
-set fillchars+=fold:-  " fill foldtext with dashes
-set fillchars+=diff:⣿  " indicate deleted lines in diffs with ⣿
-set fillchars+=vert:│  " indicate vertical splits with │
-set fillchars+=stlnc:━ " indicate horizontal splits with -
+" 4 Spaces!
+set expandtab
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
 
-set listchars+=tab:▸▸     " display tabs
-set listchars+=extends:❯  " hint that theres more to the right, ...
-set listchars+=precedes:❮ " hint that theres more to the left, ...
+set breakindent           " preserve horizontal indentation when breaking
+set colorcolumn=+1        " show @80 cols
+set foldlevelstart=99     " open all folds on open
+set hidden                " Allow for hidden buffers
+set ignorecase            " Ignore case in searches (modified by smartcase)
+set smartcase             " when caps are included in searches, make it case
+                          "  sensitive
+set list                  " show invisibles
+set magic                 " Improve searching
+set nojoinspaces          " 1 space when joining w/ a period, not 2
+set nostartofline         " don't move the cursor when moving vertically
+set notimeout             " wait for keystrokes ...
+set number                " line numbers
+set pumheight=10          " 10 entries in completion menus
+set secure                " limit commands in local .nvimrc files
+set showbreak=↪           " special character showing breaks
+set showcmd               " show commands as they're entered
+set showmatch             " show matching parens on insertion
+set spellsuggest=best,10  " suggest spelling corrections, at most 10
+set splitbelow            " split below, not above
+set splitright            " split to right, not left
+set undofile              " Keep track between invocation
 
-set shortmess=   " reset shortmess
-set shortmess+=f " '(3 of 5)' instead of '(file 3 of 5)'
-set shortmess+=i " '[noeol] instead of '[Incompelte last line]'
-set shortmess+=l " '999L, 888C' instead of '999 lines, 888 characters'
-set shortmess+=m " '[+]' instead of '[Modified]'
-set shortmess+=n " '[New]' instead of '[New File]'
-set shortmess+=r " '[RO]' instead of '[readonly]'
-set shortmess+=w " '[w]' instead of 'written' '[a]' instead of 'appended'
-set shortmess+=x " '[dos]' instead of '[dos format]', '[unix]' instead of
-                 "  '[unix format]', '[mac]' instead of '[mac format]'
-set shortmess+=o " overwrite message for writing a file with subsequent message
-                 "  for reading a file (useful for ":wn" or when 'autowrite' on)
-set shortmess+=O " message for reading a file overwrites any previous message.
-                 "  Also for quickfix message (e.g., ":cn").
-set shortmess+=t " truncate file message at the start if it is too long to fit
-                 "  on the command-line, "<" will appear in the left most column.
-                 "  Ignored in Ex mode.
-set shortmess+=T " truncate other messages in the middle if they are too long to
-                 "  fit on the command line.  "..." will appear  in the middle.
-                 "  Ignored in Ex mode.
-set shortmess+=I " don't give the intro message when starting Vim |:intro|.
+" Spelling ...
+set spellfile=$HOME/.dotfiles/vim/en.utf-8.add
+set spelllang=en_US
 
-set virtualedit=        " reset virtualedit
-set virtualedit+=block  " can move past the end of the line in visual block mode
-set virtualedit+=insert " can move past the end of the line in insert mode
+set fillchars=          " reset fillchars
+set fillchars+=fold:-   " fill foldtext with dashes
+set fillchars+=diff:⣿   " indicate deleted lines in diffs with ⣿
+set fillchars+=vert:│   " indicate vertical splits with │
+set fillchars+=stlnc:━  " indicate horizontal splits with -
 
-set formatoptions=   " reset formatoptions
-set formatoptions+=c " autowrap comments using textwidth
-set formatoptions+=q " format comments with gq
-set formatoptions+=n " recognize numbered lists
-set formatoptions+=j " joining comments deletes comment leader
+set listchars+=tab:▸▸      " display tabs
+set listchars+=extends:❯   " hint that theres more to the right, ...
+set listchars+=precedes:❮  " hint that theres more to the left, ...
+
+set shortmess=    " reset shortmess
+set shortmess+=f  " '(3 of 5)' instead of '(file 3 of 5)'
+set shortmess+=i  " '[noeol] instead of '[Incompelte last line]'
+set shortmess+=l  " '999L, 888C' instead of '999 lines, 888 characters'
+set shortmess+=m  " '[+]' instead of '[Modified]'
+set shortmess+=n  " '[New]' instead of '[New File]'
+set shortmess+=r  " '[RO]' instead of '[readonly]'
+set shortmess+=w  " '[w]' instead of 'written' '[a]' instead of 'appended'
+set shortmess+=x  " '[dos]' instead of '[dos format]', '[unix]' instead of
+                  "  '[unix format]', '[mac]' instead of '[mac format]'
+set shortmess+=o  " overwrite message for writing a file with subsequent
+                  "  message or reading a file (useful for ":wn" or when
+                  "  'autowrite' on)
+set shortmess+=O  " message for reading a file overwrites any previous
+                  "  message. Also for quickfix message (e.g., ":cn").
+set shortmess+=t  " truncate file message at the start if it is too long to
+                  "  fit on the command-line, "<" will appear in the left most
+                  "  column. Ignored in Ex mode.
+set shortmess+=T  " truncate other messages in the middle if they are too long
+                  "  to fit on the command line.  "..." will appear  in the
+                  "  middle. Ignored in Ex mode.
+set shortmess+=I  " don't give the intro message when starting Vim |:intro|.
+
+set virtualedit=         " reset virtualedit
+set virtualedit+=block   " can move past the end of the line in visual block
+                         "  mode
+set virtualedit+=insert  " can move past the end of the line in insert mode
+
+set formatoptions=    " reset formatoptions
+set formatoptions+=c  " autowrap comments using textwidth
+set formatoptions+=q  " format comments with gq
+set formatoptions+=n  " recognize numbered lists
+set formatoptions+=j  " joining comments deletes comment leader
 
 set wildmode=list:longest
 
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/CVS/*   " ignore vcs directories
-set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg      " ignore images
-set wildignore+=*.o,*.so,*.out                      " ignore compiled objects
-set wildignore+=*.sw?                               " ignore swap files
-set wildignore+=*.DS_Store                          " ignore mac crap
-set wildignore+=*.pyc,*.pyo                         " ignore compiled python
-set wildignore+=*.log,*.LOG                         " ignore log files
-set wildignore+=*.[12345678]                        " ignore rotated logs
-set wildignore+=*.gz,*.tar,*.tgz,*.bz2,*.cpio,*.rpm " ignore archives
-set wildignore+=*.ignore                            " ignore extras
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/CVS/*    " ignore vcs directories
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg       " ignore images
+set wildignore+=*.o,*.so,*.out                       " ignore compiled objects
+set wildignore+=*.sw?                                " ignore swap files
+set wildignore+=*.DS_Store                           " ignore mac crap
+set wildignore+=*.pyc,*.pyo                          " ignore compiled python
+set wildignore+=*.log,*.LOG                          " ignore log files
+set wildignore+=*.[12345678]                         " ignore rotated logs
+set wildignore+=*.gz,*.tar,*.tgz,*.bz2,*.cpio,*.rpm  " ignore archives
+set wildignore+=*.ignore                             " ignore extras
 
+set completeopt=          " reset completeopt
+set completeopt+=longest  " insert the longest match
+set completeopt+=menuone  " show the menu when there are matches
+
+set termguicolors    " Be pretty
+set background=dark  " And dark!
 let g:gruvbox_contrast_dark="hard"
 colorscheme gruvbox
+
+function! Preserve(command)
+  " Preparation: save last search, and cursor position.
+  let _s=@/
+  let l = line(".")
+  let c = col(".")
+  " Do the business:
+  execute a:command
+  " Clean up: restore previous search history, and cursor position
+  let @/=_s
+  call cursor(l, c)
+endfunction
+
+function! RemoveTrailingWhiteSpace()
+    " Allow a buffer local variable trailing_witespace_ok  to permit trailing
+    " whitspace -- sometimes I need to do this if im editing someone elses code
+    " and don't want to own the entire file in vcs. Enable it with let
+    " trailing_witespace_ok=1, disable it with unlet trailing_witespace_ok
+    if !exists("b:trailing_whitespace_ok")
+        call Preserve("%s/\\s\\+$//e")
+    endif
+endfun
+command! RemoveTrailingWhiteSpace :call RemoveTrailingWhiteSpace()
+
+function! RestoreCursorPosition()
+    " Restore cursor position to the last time you were in the file, this uses
+    " marks so it's dependent on viminfo
+    for ft in ['gitcommit', 'hgcommit', 'cvs', 'svn']
+        if &filetype==ft
+            return
+        endif
+    endfor
+    normal! g`"
+endfunction
+"
+" Highlight VCS conflict markers
+match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
+
+" Restore cursor position
+augroup restoreCursorPosition
+  autocmd!
+  autocmd BufReadPost * call RestoreCursorPosition()
+augroup END
+
+au FileType make au BufWritePre <buffer> RemoveTrailingWhiteSpace
+au FileType make setl noexpandtab
+au FileType make setl nosmarttab
+au FileType make setl softtabstop=0
+au FileType make setl tabstop=4
+
+au FileType perl setl iskeyword+=$,%,@
+au FileType perl au BufWritePre <buffer> RemoveTrailingWhiteSpace
+
+au FileType puppet au BufWritePre <buffer> RemoveTrailingWhiteSpace
+
+au FileType python au BufWritePre <buffer> RemoveTrailingWhiteSpace
+au FileType python setl textwidth=79
+
+au FileType sh,zsh au BufWritePre <buffer> RemoveTrailingWhiteSpace
+
+au FileType vim au BufWritePre <buffer> RemoveTrailingWhiteSpace
+
+au FileType help setl nolist
+au FileType help setl nonumber
+au FileType help setl nomodified
+au FileType help setl nomodifiable
+au FileType help nnoremap <buffer> q :close<cr>
+
+au FileType qf nnoremap <buffer> q :close<cr>
+
+let g:deoplete#enable_at_startup=1
+let g:deoplete#max_list=10
+
+let g:ale_sign_error = '>>'
+let g:ale_sign_warning = '__'
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 1
+let g:ale_open_list=1
+
+nnoremap <leader>qf :cwin<cr>
