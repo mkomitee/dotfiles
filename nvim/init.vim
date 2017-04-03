@@ -17,10 +17,8 @@ if dein#load_state('$HOME/.config/nvim/dein')
     " call dein#add('tpope/vim-vinegar')
     call dein#add('Shougo/denite.nvim')
     call dein#add('Shougo/deol.nvim')
-    " call dein#add('kien/ctrlp.vim')
     call dein#add('Shougo/deoplete.nvim')
     call dein#add('Shougo/neosnippet-snippets')
-    call dein#add('w0rp/ale')
     call dein#add('Shougo/neosnippet.vim')
     call dein#add('Shougo/neoyank.vim')
     call dein#add('airblade/vim-gitgutter')
@@ -33,16 +31,17 @@ if dein#load_state('$HOME/.config/nvim/dein')
     call dein#add('morhetz/gruvbox')
     call dein#add('nathanaelkane/vim-indent-guides')
     call dein#add('tpope/vim-commentary')
-    call dein#add('tpope/vim-rsi')
-    call dein#add('tpope/vim-obsession')
     call dein#add('tpope/vim-eunuch')
     call dein#add('tpope/vim-fugitive')
+    call dein#add('tpope/vim-obsession')
     call dein#add('tpope/vim-repeat')
+    call dein#add('tpope/vim-rsi')
     call dein#add('tpope/vim-sensible')
     call dein#add('tpope/vim-sleuth')
     call dein#add('tpope/vim-surround')
     call dein#add('tpope/vim-unimpaired')
     call dein#add('vim-airline/vim-airline')
+    call dein#add('w0rp/ale')
 
     " Required:
     call dein#end()
@@ -125,24 +124,25 @@ nnoremap <silent> <leader>wL <C-W>L
 nnoremap <silent> <leader>bd :bdelete<CR>
 " nnoremap <silent> <leader>bl :CtrlPBuffer<CR>
 " nnoremap <silent> <leader>bb :CtrlPBuffer<CR>
-nnoremap <silent> <leader>bl :Denite buffer<CR>
-nnoremap <silent> <leader>bb :Denite buffer<CR>
+nnoremap <silent> <leader>bl :Denite -auto-resize -winminheight=5 buffer<CR>
+nnoremap <silent> <leader>bb :Denite -auto-resize -winminheight=5 buffer<CR>
 
 " Implement spacemacs <leader>t toggle map
 nnoremap <silent> <leader>ti :IndentGuidesToggle<CR>
 nnoremap <silent> <leader>tm :SignatureToggle<CR>
 nnoremap <silent> <leader>tt :TagbarToggle<CR>
+nnoremap <silent> <leader>tc :Denite -auto-resize -winminheight=5 colorscheme<CR>
 
 " Implement spacemacs <leader>f file map
 nnoremap <silent> <leader>fed :e $HOME/.config/nvim/init.vim<CR>
 " nnoremap <silent> <leader>ff :CtrlP<CR>
-nnoremap <silent> <leader>ff :DeniteBufferDir file_rec<CR>
+nnoremap <silent> <leader>ff :DeniteBufferDir -auto-resize -winminheight=5 file_rec<CR>
 
 " Implement spacemacs <leader>p project map
 call denite#custom#alias('source', 'file_rec/git', 'file_rec')
 call denite#custom#var('file_rec/git', 'command',
             \ ['git', 'ls-files', '-co', '--exclude-standard'])
-nnoremap <silent> <leader>pf :DeniteBufferDir file_rec/git<CR>
+nnoremap <silent> <leader>pf :DeniteBufferDir -auto-resize -winminheight=5 file_rec/git<CR>
 " nnoremap <silent> <leader>ff :CtrlP<CR>
 
 " Implement spacemacs <leader>g git map
@@ -345,4 +345,18 @@ let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 1
 let g:ale_open_list=1
 
-nnoremap <leader>qf :cwin<cr>
+nnoremap <leader>wqf :cwin<cr>
+nnoremap <leader>wll :lwin<cr>
+
+" <C-G> can act like emacs <C-G>
+if empty(mapcheck('<C-G>', 'i'))
+  inoremap <C-G> <C-C>
+endif
+if empty(mapcheck('<C-G>', 'n'))
+  nnoremap <C-G> <C-C>
+endif
+if empty(mapcheck('<C-G>', 'c'))
+  cnoremap <C-G> <C-C>
+endif
+
+nnoremap <silent> <M-x> :Denite -auto-resize -winminheight=5 command<CR>
