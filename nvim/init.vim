@@ -14,14 +14,19 @@ if dein#load_state('$HOME/.config/nvim/dein')
     " Required:
     call dein#add('$HOME/.config/nvim/dein/repos/github.com/Shougo/dein.vim')
 
+    " Issues installing
+    " call dein#add('majutsushi/tagbar')
+
+    " Some combination of these causes segfaults, unsure why.
+    " call dein#add('Shougo/neosnippet-snippets')
+    " call dein#add('Shougo/neosnippet.vim')
+    " call dein#add('airblade/vim-gitgutter')
+    " call dein#add('vim-airline/vim-airline')
+
     call dein#add('Shougo/denite.nvim')
-    call dein#add('Shougo/deol.nvim')
     call dein#add('Shougo/deoplete.nvim')
     call dein#add('Shougo/neomru.vim')
-    call dein#add('Shougo/neosnippet-snippets')
-    call dein#add('Shougo/neosnippet.vim')
     call dein#add('Shougo/neoyank.vim')
-    call dein#add('airblade/vim-gitgutter')
     call dein#add('chemzqm/unite-location')
     call dein#add('easymotion/vim-easymotion')
     call dein#add('gregsexton/gitv')
@@ -29,9 +34,9 @@ if dein#load_state('$HOME/.config/nvim/dein')
     call dein#add('jceb/vim-orgmode')
     call dein#add('justinmk/vim-sneak')
     call dein#add('kshenoy/vim-signature')
-    " call dein#add('majutsushi/tagbar')
     call dein#add('morhetz/gruvbox')
     call dein#add('nathanaelkane/vim-indent-guides')
+    call dein#add('neomake/neomake')
     call dein#add('roxma/vim-tmux-clipboard')
     call dein#add('tpope/vim-commentary')
     call dein#add('tpope/vim-eunuch')
@@ -44,8 +49,6 @@ if dein#load_state('$HOME/.config/nvim/dein')
     call dein#add('tpope/vim-speeddating')
     call dein#add('tpope/vim-surround')
     call dein#add('tpope/vim-unimpaired')
-    call dein#add('vim-airline/vim-airline')
-    call dein#add('w0rp/ale')
 
     " Required:
     call dein#end()
@@ -126,8 +129,6 @@ nnoremap <silent> <leader>wL <C-W>L
 
 " Implement spacemacs <leader>b buffer map
 nnoremap <silent> <leader>bd :bdelete<CR>
-" nnoremap <silent> <leader>bl :CtrlPBuffer<CR>
-" nnoremap <silent> <leader>bb :CtrlPBuffer<CR>
 nnoremap <silent> <leader>bl :Denite -auto-resize -winminheight=5 buffer<CR>
 nnoremap <silent> <leader>bb :Denite -auto-resize -winminheight=5 buffer<CR>
 
@@ -147,7 +148,7 @@ call denite#custom#alias('source', 'file_rec/git', 'file_rec')
 call denite#custom#var('file_rec/git', 'command',
             \ ['git', 'ls-files', '-co', '--exclude-standard'])
 nnoremap <silent> <leader>pf :DeniteBufferDir -auto-resize -winminheight=5 file_rec/git<CR>
-"
+
 
 " Implement spacemacs <leader>g git map
 nnoremap <silent> <leader>gs :Gstatus<CR>
@@ -345,12 +346,6 @@ au FileType qf nnoremap <buffer> q :close<cr>
 let g:deoplete#enable_at_startup=1
 let g:deoplete#max_list=10
 
-let g:ale_sign_error = '>>'
-let g:ale_sign_warning = '__'
-let g:ale_set_loclist = 0
-let g:ale_set_quickfix = 1
-let g:ale_open_list=0
-
 nnoremap <leader>wqf :Denite -auto-resize -winminheight=5 quickfix<cr>
 nnoremap <leader>wll :Denite -auto-resize -winminheight=5 location_list<cr>
 
@@ -385,3 +380,15 @@ nnoremap <silent> <leader>rl :Denite -resume -auto-resize -winminheight=5<cr>
 nnoremap <silent> <leader>rm :Denite mark -auto-resize -winminheight=5<cr>
 
 nnoremap <silent> <leader>h :Denite help -auto-resize -winminheight=5<cr>
+
+autocmd! BufWritePost * Neomake
+autocmd! BufReadPost * Neomake
+
+let g:neomake_error_sign = { 'text': '>>' } ", 'texthl': 'NeomakeErrorSign' }
+let g:neomake_warning_sign = { 'text': '==' } ", 'texthl': 'NeomakeWarningSign' }
+let g:neomake_info_sign = { 'text': '--'} " , 'texthl': 'NeomakeInfoSign' }
+let g:neomake_message_sign = { 'text': '~~' } ", 'texthl': 'NeomakeMessageSign' }
+hi NeomakeError cterm=NONE ctermfg=167 gui=NONE guisp=#fb4934
+hi NeomakeWarning cterm=NONE ctermfg=223 gui=NONE guisp=#ebdbb2
+hi NeomakeInfo cterm=NONE ctermfg=208 gui=NONE guisp=#fe8019
+hi NeomakeMessage cterm=NONE ctermfg=214 gui=NONE guisp=#fabd2f
