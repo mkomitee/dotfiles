@@ -14,23 +14,25 @@ if dein#load_state('$HOME/.config/nvim/dein')
     " Required:
     call dein#add('$HOME/.config/nvim/dein/repos/github.com/Shougo/dein.vim')
 
-    " call dein#add('tpope/vim-vinegar')
     call dein#add('Shougo/denite.nvim')
     call dein#add('Shougo/deol.nvim')
     call dein#add('Shougo/deoplete.nvim')
+    call dein#add('Shougo/neomru.vim')
     call dein#add('Shougo/neosnippet-snippets')
     call dein#add('Shougo/neosnippet.vim')
     call dein#add('Shougo/neoyank.vim')
     call dein#add('airblade/vim-gitgutter')
-    call dein#add('easymotion/vim-easymotion')
     call dein#add('chemzqm/unite-location')
+    call dein#add('easymotion/vim-easymotion')
     call dein#add('gregsexton/gitv')
     call dein#add('int3/vim-extradite')
+    call dein#add('jceb/vim-orgmode')
     call dein#add('justinmk/vim-sneak')
     call dein#add('kshenoy/vim-signature')
-    call dein#add('majutsushi/tagbar')
+    " call dein#add('majutsushi/tagbar')
     call dein#add('morhetz/gruvbox')
     call dein#add('nathanaelkane/vim-indent-guides')
+    call dein#add('roxma/vim-tmux-clipboard')
     call dein#add('tpope/vim-commentary')
     call dein#add('tpope/vim-eunuch')
     call dein#add('tpope/vim-fugitive')
@@ -39,13 +41,11 @@ if dein#load_state('$HOME/.config/nvim/dein')
     call dein#add('tpope/vim-rsi')
     call dein#add('tpope/vim-sensible')
     call dein#add('tpope/vim-sleuth')
+    call dein#add('tpope/vim-speeddating')
     call dein#add('tpope/vim-surround')
     call dein#add('tpope/vim-unimpaired')
-    call dein#add('tpope/vim-speeddating')
     call dein#add('vim-airline/vim-airline')
     call dein#add('w0rp/ale')
-    call dein#add('jceb/vim-orgmode')
-    call dein#add('roxma/vim-tmux-clipboard')
 
     " Required:
     call dein#end()
@@ -139,8 +139,8 @@ nnoremap <silent> <leader>tc :Denite -auto-resize -winminheight=5 colorscheme<CR
 
 " Implement spacemacs <leader>f file map
 nnoremap <silent> <leader>fed :e $HOME/.config/nvim/init.vim<CR>
-" nnoremap <silent> <leader>ff :CtrlP<CR>
 nnoremap <silent> <leader>ff :DeniteBufferDir -auto-resize -winminheight=5 file_rec<CR>
+nnoremap <silent> <leader>fr :Denite file_mru -auto-resize -winminheight=5<CR>
 
 " Implement spacemacs <leader>p project map
 call denite#custom#alias('source', 'file_rec/git', 'file_rec')
