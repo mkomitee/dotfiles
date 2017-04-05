@@ -23,6 +23,7 @@ if dein#load_state('$HOME/.config/nvim/dein')
     call dein#add('Shougo/neoyank.vim')
     call dein#add('airblade/vim-gitgutter')
     call dein#add('easymotion/vim-easymotion')
+    call dein#add('chemzqm/unite-location')
     call dein#add('gregsexton/gitv')
     call dein#add('int3/vim-extradite')
     call dein#add('justinmk/vim-sneak')
@@ -40,8 +41,11 @@ if dein#load_state('$HOME/.config/nvim/dein')
     call dein#add('tpope/vim-sleuth')
     call dein#add('tpope/vim-surround')
     call dein#add('tpope/vim-unimpaired')
+    call dein#add('tpope/vim-speeddating')
     call dein#add('vim-airline/vim-airline')
     call dein#add('w0rp/ale')
+    call dein#add('jceb/vim-orgmode')
+    call dein#add('roxma/vim-tmux-clipboard')
 
     " Required:
     call dein#end()
@@ -143,7 +147,7 @@ call denite#custom#alias('source', 'file_rec/git', 'file_rec')
 call denite#custom#var('file_rec/git', 'command',
             \ ['git', 'ls-files', '-co', '--exclude-standard'])
 nnoremap <silent> <leader>pf :DeniteBufferDir -auto-resize -winminheight=5 file_rec/git<CR>
-" nnoremap <silent> <leader>ff :CtrlP<CR>
+"
 
 " Implement spacemacs <leader>g git map
 nnoremap <silent> <leader>gs :Gstatus<CR>
@@ -334,6 +338,8 @@ au FileType help setl nomodified
 au FileType help setl nomodifiable
 au FileType help nnoremap <buffer> q :close<cr>
 
+au FileType org nnoremap <buffer> <leader>meeh :OrgExportToHTML<cr>
+
 au FileType qf nnoremap <buffer> q :close<cr>
 
 let g:deoplete#enable_at_startup=1
@@ -343,10 +349,10 @@ let g:ale_sign_error = '>>'
 let g:ale_sign_warning = '__'
 let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 1
-let g:ale_open_list=1
+let g:ale_open_list=0
 
-nnoremap <leader>wqf :cwin<cr>
-nnoremap <leader>wll :lwin<cr>
+nnoremap <leader>wqf :Denite -auto-resize -winminheight=5 quickfix<cr>
+nnoremap <leader>wll :Denite -auto-resize -winminheight=5 location_list<cr>
 
 " <C-G> can act like emacs <C-G>
 if empty(mapcheck('<C-G>', 'i'))
@@ -360,3 +366,22 @@ if empty(mapcheck('<C-G>', 'c'))
 endif
 
 nnoremap <silent> <M-x> :Denite -auto-resize -winminheight=5 command<CR>
+call denite#custom#map('insert', '<Up>', '<denite:move_to_previous_line>', 'noremap')
+call denite#custom#map('insert', '<Down>', '<denite:move_to_next_line>', 'noremap')
+
+" From my spacemacs <leader>a map ...
+call denite#custom#alias('source', 'file_rec/notes', 'file_rec')
+call  denite#custom#var('file_rec/notes', 'command', ['bash', '-c', "ls -1 $HOME/notes/*.org"])
+nnoremap <silent> <leader>an :Denite -auto-resize -winminheight=5 file_rec/notes<CR>
+
+set clipboard+=unnamed
+
+" Implement spacemacs <leader>r git map
+nnoremap <silent> <leader>ry :Denite neoyank -auto-resize -winminheight=5<cr>
+nnoremap <silent> <leader>rj :Denite jump -auto-resize -winminheight=5<cr>
+nnoremap <silent> <leader>rr :Denite register -auto-resize -winminheight=5<cr>
+nnoremap <silent> <leader>rc :Denite change -auto-resize -winminheight=5<cr>
+nnoremap <silent> <leader>rl :Denite -resume -auto-resize -winminheight=5<cr>
+nnoremap <silent> <leader>rm :Denite mark -auto-resize -winminheight=5<cr>
+
+nnoremap <silent> <leader>h :Denite help -auto-resize -winminheight=5<cr>
