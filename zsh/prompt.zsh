@@ -6,6 +6,8 @@ fi
 
 MKPROMPT_CUTOFF=3
 MKPROMPT_KEYMAP=
+MKPROMPT_DN=`uname -n | cut -d. -f2`
+MKPROMPT_LDNS=()
 
 autoload -Uz promptinit
 promptinit
@@ -71,23 +73,28 @@ function mkprompt_history() {
 }
 
 function mkprompt_host() {
-    if [ "$MKPROMPT_KEYMAP" = 'vicmd' ]; then
-        echo "%(!.%{$BG[124]%}.%{$BG[027]%})%{$FG[007]%}%m%{$reset_color%}"
-    else
+    if [[ ${MKPROMPT_LDNS[(i)$MKPROMPT_DN]} -le ${#MKPROMPT_LDNS} ]]; then
         echo "%(!.%{$FG[124]%}.%{$FG[027]%})%m%{$reset_color%}"
+    else
+        echo "%(!.%{$FG[124]%}.%{$FG[027]%})%2m%{$reset_color%}"
     fi
 }
 
 function mkprompt_prompt() {
-    echo "%(!,%{$FG[124]%},%{$FG[027]%})%#%{$reset_color%}"
+    if [ "$MKPROMPT_KEYMAP" = 'vicmd' ]; then
+        echo "%(!,%{$BG[124]%},%{$BG[027]%})%%%{$reset_color%}"
+    else
+        echo "%(!,%{$FG[124]%},%{$FG[027]%})%%%{$reset_color%}"
+    fi
 }
 
 function mkprompt_jobs() {
-    echo "%(1j,%{$FG[027]%}(%j%)%{$reset_color%} ,)"
+    echo "%(1j,%{$FG[027]%}(%{$FG[008]%}%j%{$FG[027]%}%)%{$reset_color%} ,)"
 }
 
 function mkprompt_exit() {
-    echo "%(?,,%{$FG[124]%}[%?]%{$reset_color%} )"
+    # echo "%(?,,%{$FG[124]%}[%?]%{$reset_color%} )"
+    echo "%(?,,%{$FG[124]%}[%{$FG[008]%}%?%{$FG[124]%}]%{$reset_color%} )"
 }
 
 function mkprompt_cwd() {
@@ -136,10 +143,11 @@ function mkprompt_branch() {
 function mkprompt_setup() {
     PROMPT=""
     PROMPT="${PROMPT}$(mkprompt_exit)"
-    PROMPT="${PROMPT}$(mkprompt_history)"
+    PROMPT="${PROMPT}$(mkprompt_jobs)"
+    # PROMPT="${PROMPT}$(mkprompt_history)"
     PROMPT="${PROMPT}$(mkprompt_host) "
     PROMPT="${PROMPT}$(mkprompt_cwd) "
-    PROMPT="${PROMPT}$(mkprompt_jobs)"
+    # PROMPT="${PROMPT}$(mkprompt_jobs)"
     PROMPT="${PROMPT}$(mkprompt_prompt) "
     RPROMPT=""
     RPROMPT="${RPROMPT}$(mkprompt_elapsed)"

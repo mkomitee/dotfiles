@@ -71,3 +71,63 @@ bindkey -M viins ' ' magic-space
 # vi-backward-delete-char does not go back across newlines.
 bindkey -M viins "^H" backward-delete-char
 bindkey -M viins "^?" backward-delete-char
+
+
+zsh-widget-tmux-pane-left () {
+  if [ ! -z "$TMUX" ]; then
+    tmux select-pane -L
+  fi
+}
+zle -N zsh-widget-tmux-pane-left
+
+zsh-widget-tmux-pane-down () {
+  if [ ! -z "$TMUX" ]; then
+    tmux select-pane -D
+  fi
+}
+zle -N zsh-widget-tmux-pane-down
+
+zsh-widget-tmux-pane-up () {
+  if [ ! -z "$TMUX" ]; then
+    tmux select-pane -U
+  fi
+}
+zle -N zsh-widget-tmux-pane-up
+
+zsh-widget-tmux-pane-right () {
+  if [ ! -z "$TMUX" ]; then
+    tmux select-pane -R
+  fi
+}
+zle -N zsh-widget-tmux-pane-right
+
+zsh-widget-tmux-pane-vsplit () {
+  if [ ! -z "$TMUX" ]; then
+    tmux split
+  fi
+}
+zle -N zsh-widget-tmux-pane-vsplit
+
+zsh-widget-tmux-pane-hsplit () {
+  if [ ! -z "$TMUX" ]; then
+    tmux split -h
+  fi
+}
+zle -N zsh-widget-tmux-pane-hsplit
+
+zsh-widget-tmux-pane-delete () {
+  if [ ! -z "$TMUX" ]; then
+    tmux kill-pane
+  fi
+}
+zle -N zsh-widget-tmux-pane-hsplit
+
+
+bindkey -M vicmd -r " "
+bindkey -M vicmd " wh" zsh-widget-tmux-pane-left
+bindkey -M vicmd " wj" zsh-widget-tmux-pane-down
+bindkey -M vicmd " wk" zsh-widget-tmux-pane-up
+bindkey -M vicmd " wl" zsh-widget-tmux-pane-right
+bindkey -M vicmd " w-" zsh-widget-tmux-pane-vsplit
+bindkey -M vicmd " w/" zsh-widget-tmux-pane-hsplit
+bindkey -M vicmd " wd" zsh-widget-tmux-pane-delete
