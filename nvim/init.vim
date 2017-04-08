@@ -49,6 +49,8 @@ if dein#load_state('$HOME/.config/nvim/dein')
     call dein#add('tpope/vim-speeddating')
     call dein#add('tpope/vim-surround')
     call dein#add('tpope/vim-unimpaired')
+    call dein#add('puppetlabs/puppet-syntax-vim')
+    call dein#add('Matt-Deacalion/vim-systemd-syntax')
 
     " Required:
     call dein#end()
@@ -115,10 +117,10 @@ nnoremap <silent> ` '
 cmap <silent> w!! :SudoWrite<CR>
 
 " Implement spacemacs <leader>w window map
-nnoremap <silent> <leader>wh <C-W>h
-nnoremap <silent> <leader>wj <C-W>j
-nnoremap <silent> <leader>wk <C-W>k
-nnoremap <silent> <leader>wl <C-W>l
+" nnoremap <silent> <leader>wh <C-W>h
+" nnoremap <silent> <leader>wj <C-W>j
+" nnoremap <silent> <leader>wk <C-W>k
+" nnoremap <silent> <leader>wl <C-W>l
 nnoremap <silent> <leader>w- <C-W>s
 nnoremap <silent> <leader>w/ <C-W>v
 nnoremap <silent> <leader>wd <C-W>q
@@ -147,7 +149,9 @@ nnoremap <silent> <leader>fr :Denite file_mru -auto-resize -winminheight=5<CR>
 call denite#custom#alias('source', 'file_rec/git', 'file_rec')
 call denite#custom#var('file_rec/git', 'command',
             \ ['git', 'ls-files', '-co', '--exclude-standard'])
-nnoremap <silent> <leader>pf :DeniteBufferDir -auto-resize -winminheight=5 file_rec/git<CR>
+" nnoremap <silent> <leader>pf :DeniteBufferDir -auto-resize -winminheight=5 file_rec/git<CR>
+" nnoremap <silent> <leader>pF :DeniteProjectDir -auto-resize -winminheight=5 file_rec/git<CR>
+nnoremap <silent> <leader>pf :DeniteBufferProjectDir -auto-resize -winminheight=5 file_rec/git<CR>
 
 
 " Implement spacemacs <leader>g git map
@@ -347,7 +351,7 @@ let g:deoplete#enable_at_startup=1
 let g:deoplete#max_list=10
 
 nnoremap <leader>wqf :Denite -auto-resize -winminheight=5 quickfix<cr>
-nnoremap <leader>wll :Denite -auto-resize -winminheight=5 location_list<cr>
+nnoremap <leader>wLL :Denite -auto-resize -winminheight=5 location_list<cr>
 
 " <C-G> can act like emacs <C-G>
 if empty(mapcheck('<C-G>', 'i'))
@@ -392,3 +396,80 @@ hi NeomakeError cterm=NONE ctermfg=167 gui=NONE guisp=#fb4934
 hi NeomakeWarning cterm=NONE ctermfg=223 gui=NONE guisp=#ebdbb2
 hi NeomakeInfo cterm=NONE ctermfg=208 gui=NONE guisp=#fe8019
 hi NeomakeMessage cterm=NONE ctermfg=214 gui=NONE guisp=#fabd2f
+
+
+set statusline=         " clear statusline
+set statusline+=%F\     " full filename
+set statusline+=%m%r%w  " flags
+set statusline+=%y\     " filetype
+set statusline+=%=      " seperator
+set statusline+=c:%c\   " column
+set statusline+=l:%l/%L " line
+
+
+func! LorTmux()
+  let oldw = winnr()
+  silent! exe "normal! \<c-w>l"
+  let neww = winnr()
+  if oldw == neww
+    execute "!tmux select-pane -R"
+  endif
+endfunction
+
+func! HorTmux()
+  let oldw = winnr()
+  silent! exe "normal! \<c-w>h"
+  let neww = winnr()
+  if oldw == neww
+    execute "!tmux select-pane -L"
+  endif
+endfunction
+
+func! JorTmux()
+  let oldw = winnr()
+  silent! exe "normal! \<c-w>j"
+  let neww = winnr()
+  if oldw == neww
+    execute "!tmux select-pane -D"
+  endif
+endfunction
+
+func! KorTmux()
+  let oldw = winnr()
+  silent! exe "normal! \<c-w>k"
+  let neww = winnr()
+  if oldw == neww
+    execute "!tmux select-pane -U"
+  endif
+endfunction
+
+nnoremap <silent> <leader>wh :call HorTmux()<cr>
+nnoremap <silent> <leader>wj :call JorTmux()<cr>
+nnoremap <silent> <leader>wk :call KorTmux()<cr>
+nnoremap <silent> <leader>wl :call LorTmux()<cr>
+
+
+" Needed until/unless https://github.com/Shougo/denite.nvim/issues/237 is
+" fulfilled.
+function! denite#helper#call_denite(command, args, line1, line2) abort
+  let [args, context] = denite#helper#_parse_options_args(a:args)
+
+  let context.firstline = a:line1
+  let context.lastline = a:line2
+  let context.bufnr = bufnr('%')
+  if a:command ==# 'DeniteCursorWord'
+    let context.input = expand('<cword>')
+  elseif a:command ==# 'DeniteBufferDir'
+    let context.path = fnamemodify(bufname('%'), ':p:h')
+  elseif a:command ==# 'DeniteProjectDir'
+    let context.path = denite#util#path2project_directory(getcwd())
+  elseif a:command ==# 'DeniteBufferProjectDir'
+    let context.path = denite#util#path2project_directory(fnamemodify(bufname('%'), ':p:h'))
+  endif
+
+  call denite#start(args, context)
+endfunction
+command! -nargs=* -range -complete=customlist,denite#helper#complete
+      \ DeniteBufferProjectDir
+      \ call denite#helper#call_denite('DeniteBufferProjectDir',
+      \                                <q-args>, <line1>, <line2>)
