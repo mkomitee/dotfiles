@@ -1,0 +1,143 @@
+"dein Scripts-----------------------------
+if &compatible
+  set nocompatible               " Be iMproved
+endif
+
+" Required:
+set runtimepath+=~/.vim/bundles/repos/github.com/Shougo/dein.vim
+
+" Required:
+if dein#load_state(expand('~/.vim/bundles'))
+  call dein#begin(expand('~/.vim/bundles'))
+
+  " Let dein manage dein
+  " Required:
+  call dein#add(expand('~/.vim/bundles/repos/github.com/Shougo/dein.vim'))
+
+  " Add or remove your plugins here:
+  call dein#add('junegunn/fzf', { 'build': './install --all' })
+  call dein#add('junegunn/fzf.vim')
+  call dein#add('sheerun/vim-polyglot')
+  call dein#add('tpope/vim-commentary')
+  call dein#add('tpope/vim-repeat')
+  call dein#add('tpope/vim-sensible')
+  call dein#add('tpope/vim-endwise')
+  call dein#add('tpope/vim-surround')
+  call dein#add('tpope/vim-unimpaired.git')
+  call dein#add('kshenoy/vim-signature')
+  call dein#add('w0rp/ale')
+  call dein#add('morhetz/gruvbox')
+  call dein#add('itchyny/lightline.vim')
+
+  " Required:
+  call dein#end()
+  call dein#save_state()
+endif
+
+" Required:
+filetype plugin indent on
+syntax enable
+
+" If you want to install not installed plugins on startup.
+if dein#check_install()
+  call dein#install()
+endif
+
+"End dein Scripts-------------------------
+
+set number
+let mapleader = " "
+
+" File commands
+nnoremap <silent> <leader>fed :e $MYVIMRC<CR>
+nnoremap <silent> <leader>ff :Files<CR>
+
+" Project commands
+nnoremap <silent> <leader>pf :GFiles<CR>
+
+" Buffer commands
+nnoremap <silent> <leader>bb :Buffers<CR>
+nnoremap <silent> <leader>bd :bdelete<CR>
+nnoremap <silent> <leader>bn :bnext<CR>
+nnoremap <silent> <leader>bp :bprev<CR>
+nnoremap <silent> <leader>bq :copen<CR>
+nnoremap <silent> <leader>bl :lopen<CR>
+
+" Window commands
+nnoremap <silent> <leader>w= <C-W>=<cr>
+nnoremap <silent> <leader>w- <C-W>s<cr>
+nnoremap <silent> <leader>w/ <C-W>v<cr>
+nnoremap <silent> <leader>wj <C-W>j<cr>
+nnoremap <silent> <leader>wh <C-W>h<cr>
+nnoremap <silent> <leader>wk <C-W>k<cr>
+nnoremap <silent> <leader>wl <C-W>l<cr>
+nnoremap <silent> <leader>wd <C-W>c<cr>
+nnoremap <silent> <leader>wL <C-W>r<cr>
+nnoremap <silent> <leader>wH <C-W>R<cr>
+nnoremap <silent> <leader>ww :Windows<cr>
+
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --color "always" '.shellescape(<q-args>), 1, <bang>0)
+set grepprg=rg\ --vimgrep
+
+let g:ale_sign_column_always = 1
+let g:ale_fixers = {'python': ['yapf']}
+let g:ale_set_quickfix = 1
+let g:ale_set_loclist = 0
+
+set background=dark
+colorscheme gruvbox
+
+set splitbelow
+set splitright
+let g:lightline = {
+\ 'active': {
+\   'left': [['mode', 'paste'], ['filename', 'modified']],
+\   'right': [['lineinfo'], ['percent'], ['readonly', 'linter_warnings', 'linter_errors', 'linter_ok']]
+\ },
+\ 'component_expand': {
+\   'linter_warnings': 'LightlineLinterWarnings',
+\   'linter_errors': 'LightlineLinterErrors',
+\   'linter_ok': 'LightlineLinterOK'
+\ },
+\ 'component_type': {
+\   'readonly': 'error',
+\   'linter_warnings': 'warning',
+\   'linter_errors': 'error'
+\ },
+\ }
+
+function! LightlineLinterWarnings() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+  return l:counts.total == 0 ? '' : printf('%d ◆', all_non_errors)
+endfunction
+
+function! LightlineLinterErrors() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+  return l:counts.total == 0 ? '' : printf('%d ✗', all_errors)
+endfunction
+
+function! LightlineLinterOK() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+  return l:counts.total == 0 ? '✓ ' : ''
+endfunction
+
+autocmd User ALELint call s:MaybeUpdateLightline()
+
+" Update and show lightline but only if it's visible (e.g., not in Goyo)
+function! s:MaybeUpdateLightline()
+  if exists('#lightline')
+    call lightline#update()
+  end
+endfunction
+
+set autochdir
+
+nnoremap <silent> ≈ :Commands<cr>
+nnoremap <silent> <leader>h :Helptags<cr>
+
