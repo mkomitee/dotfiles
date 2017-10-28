@@ -402,7 +402,6 @@ augroup END
 augroup yaml
   au!
   au FileType yaml au BufWritePre <buffer> call RemoveTrailingWhiteSpace()
-  au FileType yaml setl tabstop=4
   au FileType yaml setl shiftwidth=4
 augroup END
 
@@ -410,7 +409,6 @@ augroup man
   au!
   au FileType man setl nolist
   au FileType man setl nonumber
-  au FileType man setl tabstop=8
   au FileType man setl nomodified
   au FileType man setl nomodifiable
   au FileType man nnoremap <buffer> q :q<cr>
@@ -457,7 +455,6 @@ augroup vim
   au FileType vim au BufWritePre <buffer> call RemoveTrailingWhiteSpace()
   au FileType vim setl shiftwidth=2
   au FileType vim setl softtabstop=2
-  au FileType vim setl tabstop=2
 augroup END
 
 augroup help
