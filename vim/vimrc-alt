@@ -79,8 +79,7 @@ set viewdir=$HOME/.vim/data/vimviews/    " save views here
 set wildmenu              " commandline completion is nice
 set expandtab             " by default, use spaces & no tabs
 set shiftwidth=4          " shift width (>> & autoindent)
-set softtabstop=4         " 1 tab = 4 spaces
-set tabstop=4             " 1 tab = 4 spaces
+set softtabstop=4         " 1 soft-tab = 4 spaces
 set textwidth=80          " wrap at 80 columns
 set tags=./tags;          " name of the tags files which is relative to the project
 set nojoinspaces          " 1 space when joining lines at a period, not 2
@@ -161,7 +160,7 @@ set wildignore+=*.ignore                            " ignore extras
 
 set diffopt=           " reset diffopt
 set diffopt+=filler    " add filler
-set diffopt+=veritlcal " vertical diff by default
+set diffopt+=vertical  " vertical diff by default
 
 " [S]plit lines (sister to [J]oin line)
 function! s:SplitLine()
