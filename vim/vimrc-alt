@@ -163,6 +163,16 @@ set diffopt=           " reset diffopt
 set diffopt+=filler    " add filler
 set diffopt+=veritlcal " vertical diff by default
 
+" [S]plit lines (sister to [J]oin line)
+function! s:SplitLine()
+  exe "normal! i\<CR>\<Esc>^gk"
+  silent! substitute/\v +$//
+  silent! nohlsearch
+  call histdel("search", -1)
+  normal! $
+endfunction
+nnoremap S :call <SID>SplitLine()<CR>
+
 function! Preserve(command)
   " Preparation: save last search, and cursor position.
   let _s=@/
@@ -269,6 +279,7 @@ nnoremap <silent> <leader>bn :bnext<CR>
 nnoremap <silent> <leader>bp :bprev<CR>
 nnoremap <silent> <leader>bq :copen<CR>
 nnoremap <silent> <leader>bl :lopen<CR>
+nnoremap <silent> <leader>bx <C-^>
 
 " Window commands
 nnoremap <silent> <leader>w= <C-W>=<cr>
@@ -471,3 +482,8 @@ silent execute '!mkdir -p $HOME/.vim/data/vimundo'
 silent execute '!mkdir -p $HOME/.vim/data/ctrlp'
 silent execute '!mkdir -p $HOME/.vim/data/tags'
 
+" Replace word under cursor, everywhere in the file.
+nnoremap <leader>r. :%s/\<C-r><C-w>\>/
+
+" Replace visually selected characters, everywhere in the file.
+vnoremap <leader>rv "hy:%s/<C-r>h/
