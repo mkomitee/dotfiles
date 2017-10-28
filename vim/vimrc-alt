@@ -32,6 +32,7 @@ if dein#load_state(expand('~/.vim/bundles'))
   call dein#add('tpope/vim-surround')
   call dein#add('tpope/vim-unimpaired.git')
   call dein#add('w0rp/ale')
+  call dein#add('romainl/vim-qlist')
 
   " Required:
   call dein#end()
@@ -375,6 +376,10 @@ command! -bang -nargs=* Rg
 augroup quickfix
   au!
   au FileType qf nnoremap <buffer> q :q<cr>
+  au FileType qf setl nowrap
+  au FileType qf setl norelativenumber
+  au FileType qf setl number
+  au FileType qf set nobuflisted
 augroup END
 
 augroup locationlist
