@@ -484,6 +484,7 @@ silent execute '!mkdir -p $HOME/.vim/data/tags'
 
 " Replace word under cursor, everywhere in the file.
 nnoremap <leader>r. :%s/\<C-r><C-w>\>/
-
 " Replace visually selected characters, everywhere in the file.
 vnoremap <leader>rv "hy:%s/<C-r>h/
+
+nnoremap <leader>qq :qa<cr>
