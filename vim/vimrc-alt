@@ -147,6 +147,7 @@ set formatoptions+=q " format comments with gq
 set formatoptions+=n " recognize numbered lists
 set formatoptions+=j " joining comments deletes comment leader
 
+set wildignore=                                     " reset wildignore
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/CVS/*   " ignore vcs directories
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg      " ignore images
 set wildignore+=*.o,*.so,*.out                      " ignore compiled objects
@@ -157,6 +158,10 @@ set wildignore+=*.log,*.LOG                         " ignore log files
 set wildignore+=*.[12345678]                        " ignore rotated logs
 set wildignore+=*.gz,*.tar,*.tgz,*.bz2,*.cpio,*.rpm " ignore archives
 set wildignore+=*.ignore                            " ignore extras
+
+set diffopt=           " reset diffopt
+set diffopt+=filler    " add filler
+set diffopt+=veritlcal " vertical diff by default
 
 function! Preserve(command)
   " Preparation: save last search, and cursor position.
@@ -277,6 +282,13 @@ nnoremap <silent> <leader>wd <C-W>c<cr>
 nnoremap <silent> <leader>wL <C-W>r<cr>
 nnoremap <silent> <leader>wH <C-W>R<cr>
 nnoremap <silent> <leader>ww :Windows<cr>
+
+" Git commands
+nnoremap <silent> <leader>gs :Gstatus<cr>
+nnoremap <silent> <leader>gc :Gcommit<cr>
+nnoremap <silent> <leader>gl :Glog<cr>
+nnoremap <silent> <leader>gd :Gdiff<cr>
+nnoremap <silent> <leader>gb :Gblame<cr>
 
 let g:ale_sign_column_always = 1
 let g:ale_fixers = {
