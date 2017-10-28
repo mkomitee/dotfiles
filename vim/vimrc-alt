@@ -281,16 +281,16 @@ nnoremap <silent> <leader>bl :lopen<CR>
 nnoremap <silent> <leader>bx <C-^>
 
 " Window commands
-nnoremap <silent> <leader>w= <C-W>=<cr>
-nnoremap <silent> <leader>w- <C-W>s<cr>
-nnoremap <silent> <leader>w/ <C-W>v<cr>
-nnoremap <silent> <leader>wj <C-W>j<cr>
-nnoremap <silent> <leader>wh <C-W>h<cr>
-nnoremap <silent> <leader>wk <C-W>k<cr>
-nnoremap <silent> <leader>wl <C-W>l<cr>
-nnoremap <silent> <leader>wd <C-W>c<cr>
-nnoremap <silent> <leader>wL <C-W>r<cr>
-nnoremap <silent> <leader>wH <C-W>R<cr>
+nnoremap <silent> <leader>w= <C-W>=
+nnoremap <silent> <leader>w- <C-W>s
+nnoremap <silent> <leader>w/ <C-W>v
+nnoremap <silent> <leader>wj <C-W>j
+nnoremap <silent> <leader>wh <C-W>h
+nnoremap <silent> <leader>wk <C-W>k
+nnoremap <silent> <leader>wl <C-W>l
+nnoremap <silent> <leader>wd <C-W>c
+nnoremap <silent> <leader>wL <C-W>r
+nnoremap <silent> <leader>wH <C-W>R
 nnoremap <silent> <leader>ww :Windows<cr>
 
 " Git commands
