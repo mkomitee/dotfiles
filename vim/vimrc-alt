@@ -33,6 +33,7 @@ if dein#load_state(expand('~/.vim/bundles'))
   call dein#add('tpope/vim-unimpaired.git')
   call dein#add('w0rp/ale')
   call dein#add('romainl/vim-qlist')
+  call dein#add('ludovicchabant/vim-gutentags')
 
   " Required:
   call dein#end()
@@ -263,7 +264,7 @@ nnoremap <silent> . .`[
 " https://twitter.com/dotvimrc/status/428208518487764992
 nnoremap <silent> * :let b:pos = winsaveview()<cr>*:call winrestview(b:pos)<cr>
 nnoremap <silent> # :let b:pos = winsaveview()<cr>#:call winrestview(b:pos)<cr>
-"
+
 " File commands
 nnoremap <silent> <leader>fed :e $MYVIMRC<CR>
 nnoremap <silent> <leader>ff :Files<CR>
@@ -279,10 +280,25 @@ nnoremap <silent> <leader>bn :bnext<CR>
 nnoremap <silent> <leader>bp :bprev<CR>
 nnoremap <silent> <leader>bq :copen<CR>
 nnoremap <silent> <leader>bl :lopen<CR>
-nnoremap <silent> <leader>bx <C-^>
+nnoremap <silent> <leader>b<tab> <C-^>
+
+" Tag commands
+nnoremap <silent> <leader>tt :Tags<cr>
+" go to definition / tag
+nnoremap <silent> <leader>td <C-]>
+" go to tag in a split
+nnoremap <silent> <leader>twd <C-w>}
+nnoremap <silent> <leader>tn :tnext<cr>
+nnoremap <silent> <leader>tp :tprevious<cr>
 
 " Window commands
 nnoremap <silent> <leader>w= <C-W>=
+nnoremap <silent> <leader>w> <C-W>>
+nnoremap <silent> <leader>w< <C-W><
+nnoremap <silent> <leader>w<right> <C-W>>
+nnoremap <silent> <leader>w<left> <C-W><
+nnoremap <silent> <leader>w<down> <C-W>-
+nnoremap <silent> <leader>w<up> <C-W>+
 nnoremap <silent> <leader>w- <C-W>s
 nnoremap <silent> <leader>w/ <C-W>v
 nnoremap <silent> <leader>wj <C-W>j
@@ -293,6 +309,7 @@ nnoremap <silent> <leader>wd <C-W>c
 nnoremap <silent> <leader>wL <C-W>r
 nnoremap <silent> <leader>wH <C-W>R
 nnoremap <silent> <leader>ww :Windows<cr>
+nnoremap <silent> <leader>w<tab> <C-W>p
 
 " Git commands
 nnoremap <silent> <leader>gs :Gstatus<cr>
