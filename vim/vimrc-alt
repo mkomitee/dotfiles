@@ -15,25 +15,28 @@ if dein#load_state(expand('~/.vim/bundles'))
   call dein#add(expand('~/.vim/bundles/repos/github.com/Shougo/dein.vim'))
 
   " Add or remove your plugins here:
+  call dein#add('haya14busa/incsearch.vim')
   call dein#add('itchyny/lightline.vim')
   call dein#add('junegunn/fzf', { 'build': './install --all' })
   call dein#add('junegunn/fzf.vim')
   call dein#add('kshenoy/vim-signature')
+  call dein#add('ludovicchabant/vim-gutentags')
   call dein#add('mhinz/vim-signify')
   call dein#add('morhetz/gruvbox')
+  call dein#add('pelodelfuego/vim-swoop')
   call dein#add('rgarver/Kwbd.vim')
+  call dein#add('romainl/vim-qlist')
   call dein#add('sheerun/vim-polyglot')
+  call dein#add('t9md/vim-choosewin')
   call dein#add('tpope/vim-commentary')
-  call dein#add('tpope/vim-vinegar')
   call dein#add('tpope/vim-endwise')
   call dein#add('tpope/vim-fugitive')
   call dein#add('tpope/vim-repeat')
   call dein#add('tpope/vim-sensible')
   call dein#add('tpope/vim-surround')
   call dein#add('tpope/vim-unimpaired.git')
+  call dein#add('tpope/vim-vinegar')
   call dein#add('w0rp/ale')
-  call dein#add('romainl/vim-qlist')
-  call dein#add('ludovicchabant/vim-gutentags')
 
   " Required:
   call dein#end()
@@ -282,6 +285,16 @@ nnoremap <silent> <leader>bq :copen<CR>
 nnoremap <silent> <leader>bl :lopen<CR>
 nnoremap <silent> <leader>b<tab> <C-^>
 
+" Other commands
+nnoremap <silent> <leader>ms :call Swoop()<cr>
+vnoremap <silent> <leader>ms :call SwoopSelection()<cr>
+nnoremap <silent> <leader>mS :call Swoop()<cr>
+vnoremap <silent> <leader>mS :call SwoopMultiSelection()<cr>
+" Replace word under cursor, everywhere in the file.
+nnoremap <leader>mr. :%s/\<C-r><C-w>\>/
+" Replace visually selected characters, everywhere in the file.
+vnoremap <leader>mrv "hy:%s/<C-r>h/
+
 " Tag commands
 nnoremap <silent> <leader>tt :Tags<cr>
 " go to definition / tag
@@ -310,6 +323,9 @@ nnoremap <silent> <leader>wL <C-W>r
 nnoremap <silent> <leader>wH <C-W>R
 nnoremap <silent> <leader>ww :Windows<cr>
 nnoremap <silent> <leader>w<tab> <C-W>p
+" This only works with nmap, nnoremap :-(
+nmap <silent> <leader>w? <Plug>(choosewin)
+
 
 " Git commands
 nnoremap <silent> <leader>gs :Gstatus<cr>
@@ -488,6 +504,11 @@ augroup help
   au FileType help nnoremap <buffer> q :q<cr>
 augroup END
 
+augroup swoop
+  au!
+  au BufEnter swoopBuf nnoremap <buffer> q :bdelete!<cr>
+augroup END
+
 augroup restoreCursorPosition
   autocmd!
   autocmd BufReadPost * call RestoreCursorPosition()
@@ -500,9 +521,10 @@ silent execute '!mkdir -p $HOME/.vim/data/vimundo'
 silent execute '!mkdir -p $HOME/.vim/data/ctrlp'
 silent execute '!mkdir -p $HOME/.vim/data/tags'
 
-" Replace word under cursor, everywhere in the file.
-nnoremap <leader>r. :%s/\<C-r><C-w>\>/
-" Replace visually selected characters, everywhere in the file.
-vnoremap <leader>rv "hy:%s/<C-r>h/
-
 nnoremap <leader>qq :qa<cr>
+let g:swoopUseDefaultKeyMap = 0
+
+map / <Plug>(incsearch-forward)
+map ? <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+set hlsearch
