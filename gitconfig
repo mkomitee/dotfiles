@@ -18,6 +18,9 @@
     date = short
 
 [alias]
+    showtool = "!f() { git difftool $1^ $1; }; f"
+    added = difftool --cached
+
     dc = diff --cached
     ds = diff --staged
 
@@ -56,6 +59,7 @@
 [pager]
     status = yes
     show-branch = yes
+    difftool = true
 
 [clean]
     requireForce = no
@@ -75,6 +79,13 @@
 [diff]
     algorithm = minimal
     renames = copies
+    tool = icdiff
+
+[difftool]
+  prompt = false
+
+[difftool "icdiff"]
+  cmd = icdiff --line-numbers $LOCAL $REMOTE
 
 [github]
     user = mkomitee

@@ -4,9 +4,6 @@
 [submodule "contrib/bitly/data_hacks.git"]
 	path = contrib/bitly/data_hacks.git
 	url = git://github.com/bitly/data_hacks.git
-[submodule "vim/neobundle.vim"]
-	path = vim/neobundle.vim
-	url = git://github.com/Shougo/neobundle.vim
 [submodule "contrib/Lokaltog/powerline-fonts"]
 	path = contrib/Lokaltog/powerline-fonts
 	url = git://github.com/Lokaltog/powerline-fonts

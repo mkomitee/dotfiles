@@ -1,4 +1,0 @@
-source $HOME/.dotfiles/vim/gvimrc
-set guifont=Anonymous\ Pro\ for\ Powerline\ 12
-set background=dark
-colorscheme gruvbox
