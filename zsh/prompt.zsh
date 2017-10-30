@@ -140,6 +140,12 @@ function mkprompt_branch() {
     done
 }
 
+function mkprompt_extras() {
+    if [[ ! -z "$MKPROMPT_EXTRAS" ]]; then
+        echo "%{$FG[027]%}(%{$FG[008]%}$MKPROMPT_EXTRAS%{$FG[027]%})%{$reset_color%} "
+    fi
+}
+#008
 function mkprompt_setup() {
     PROMPT=""
     PROMPT="${PROMPT}$(mkprompt_exit)"
@@ -148,6 +154,7 @@ function mkprompt_setup() {
     PROMPT="${PROMPT}$(mkprompt_host) "
     PROMPT="${PROMPT}$(mkprompt_cwd) "
     # PROMPT="${PROMPT}$(mkprompt_jobs)"
+    PROMPT="${PROMPT}$(mkprompt_extras)"
     PROMPT="${PROMPT}$(mkprompt_prompt) "
     RPROMPT=""
     RPROMPT="${RPROMPT}$(mkprompt_elapsed)"

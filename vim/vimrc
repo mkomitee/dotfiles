@@ -42,6 +42,8 @@ if dein#load_state(expand('~/.vim/bundles'))
   call dein#add('tpope/vim-vinegar')
   call dein#add('w0rp/ale')
   call dein#add('wellle/targets.vim')
+  call dein#add('tweekmonster/fzf-filemru')
+  call dein#add('airblade/vim-rooter')
 
   " Required:
   call dein#end()
@@ -99,7 +101,6 @@ set notimeout             " don't timeout mappings
 set modeline              " allow vim config in files
 set exrc                  " allow local vimrcs
 set secure                " limit valid commands in local vimrcs
-set autochdir             " change the cwd to that of the current file
 set grepprg=rg\ --vimgrep " use rg for vim-grep
 set splitbelow            " split below instead of above
 set splitright            " split to the right instead of the left
@@ -169,6 +170,7 @@ set wildignore+=*.log,*.LOG                         " ignore log files
 set wildignore+=*.[12345678]                        " ignore rotated logs
 set wildignore+=*.gz,*.tar,*.tgz,*.bz2,*.cpio,*.rpm " ignore archives
 set wildignore+=*.ignore                            " ignore extras
+set wildignore+=*/__pycache__/*                     " ignore more compiled objects
 
 set diffopt=           " reset diffopt
 set diffopt+=filler    " add filler
@@ -277,11 +279,13 @@ nnoremap <silent> # :let b:pos = winsaveview()<cr>#:call winrestview(b:pos)<cr>
 
 " File commands
 nnoremap <silent> <leader>fed :e $MYVIMRC<CR>
-nnoremap <silent> <leader>ff :Files<CR>
+nnoremap <silent> <leader>ff :FilesMru --tiebreak=end<CR>
 nnoremap <silent> <leader>fm :History<CR>
+nnoremap <silent> <leader>fh :History<CR>
 
 " Project commands
-nnoremap <silent> <leader>pf :GFiles<CR>
+nnoremap <silent> <leader>pf :ProjectMru<CR>
+nnoremap <silent> <leader>pg :GFiles<CR>
 
 " Buffer commands
 nnoremap <silent> <leader>bb :Buffers<CR>
@@ -291,6 +295,7 @@ nnoremap <silent> <leader>bp :bprev<CR>
 nnoremap <silent> <leader>bq :copen<CR>
 nnoremap <silent> <leader>bl :lopen<CR>
 nnoremap <silent> <leader>b<tab> <C-^>
+nnoremap <silent> <C-C><Left> <C-^>
 
 " Other commands
 nnoremap <silent> <leader>ms :call Swoop()<cr>
@@ -341,6 +346,7 @@ nnoremap <silent> <leader>gc :Gcommit -v<cr>
 nnoremap <silent> <leader>gl :Glog<cr>
 nnoremap <silent> <leader>gd :Gdiff<cr>
 nnoremap <silent> <leader>gb :Gblame<cr>
+nnoremap <silent> <leader>gf :GFiles<CR>
 
 let g:ale_sign_column_always = 1
 let g:ale_fixers = {
@@ -550,3 +556,9 @@ let g:mundo_preview_bottom = 1
 let g:mundo_help = 1
 
 let g:sneak#absolute_dir = 1
+
+let g:fzf_filemru_bufwrite = 1
+let g:fzf_filemru_git_ls = 1
+
+let g:rooter_silent_chdir = 1
+let g:rooter_use_lcd = 1

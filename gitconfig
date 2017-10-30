@@ -7,7 +7,7 @@
 [core]
     preloadindex = true
     pager = less -FRXMQigMws
-    editor = emacsclient -a emacs -q -t
+    editor = vim
     whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
     excludesfile = ~/.dotfiles/gitignore
     trustctime = false
@@ -20,6 +20,7 @@
 [alias]
     showtool = "!f() { git difftool $1^ $1; }; f"
     added = difftool --cached
+    cached = difftool --cached
 
     dc = diff --cached
     ds = diff --staged
@@ -35,7 +36,7 @@
     branches = branch -avv
     remotes = remote -v
     tags = tag -l
-		stashes = stash list
+    stashes = stash list
     shelve = stash save --include-untracked
     unshelve = stash pop
     unstage = reset -q HEAD --
@@ -51,6 +52,7 @@
     log-author=log --pretty=oneline-author
     la=!git log-author
     log-date-author=log --pretty=oneline-date-author
+    log-author-date=log --pretty=oneline-date-author
     lda=!git log-date-author
     log-author-date=!git log-date-author
     lad=!git log-date-author
@@ -61,6 +63,12 @@
     show-branch = yes
     difftool = true
 
+[status]
+    showUntrackedFiles = all
+
+[transfer]
+    fsck = true
+
 [clean]
     requireForce = no
 
@@ -69,12 +77,12 @@
 
 [pretty]
     # ffffffff YYYY-MM-DD (refs) Subject
-    oneline-date = "format:%C(088)%h %C(022)%ad%C(auto)%d %C(reset)%s"
+    oneline-date = "format:%C(088)%h %C(022)%cd%C(auto)%d %C(reset)%s"
     # ffffffff Author Name (refs) Subject
     oneline-author = "format:%C(088)%h %C(022)%aN%C(auto)%d%C(reset)% s"
     # ffffffff YYYY-MM-DD Author Name (refs) Subject
-    oneline-date-author = "format:%C(088)%h %C(022)%ad %C(yellow)%aN%C(auto)%d%C(reset)% s"
-    date-only = "format:%ad"
+    oneline-date-author = "format:%C(088)%h %C(022)%cd %C(yellow)%aN%C(auto)%d%C(reset)% s"
+    date-only = "format:%cd"
 
 [diff]
     algorithm = minimal
@@ -82,10 +90,10 @@
     tool = icdiff
 
 [difftool]
-  prompt = false
+    prompt = false
 
 [difftool "icdiff"]
-  cmd = icdiff --line-numbers $LOCAL $REMOTE
+    cmd = icdiff --line-numbers $LOCAL $REMOTE
 
 [github]
     user = mkomitee

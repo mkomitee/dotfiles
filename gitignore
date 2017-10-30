@@ -92,3 +92,5 @@ html
 
 # Erlang ...
 *.beam
+
+__pycache__/

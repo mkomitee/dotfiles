@@ -19,6 +19,7 @@ export FPATH
 path=(
     $HOME/bin
     $HOME/.cabal/bin
+    $HOME/.cargo/bin
     $HOME/scripts
     $HOME/.${UNAME}.${ARCH}/bin
     $GOROOT/bin
@@ -71,7 +72,8 @@ export ACKRC=~/.dotfiles/ackrc
 export LESS='-g -i -M -R -S -w -X -Q -s -z-4'
 
 export PAGER=less
-export EDITOR="emacsclient -a emacs -q -t"
+# export EDITOR="emacsclient -a emacs -q -t"
+export EDITOR="vim"
 export SVNEDITOR=$EDITOR
 export VISUAL=$EDITOR
 
