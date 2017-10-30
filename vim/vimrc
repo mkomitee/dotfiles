@@ -534,6 +534,12 @@ augroup gcommit
   autocmd FileType gitcommit setlocal spell
 augroup END
 
+augroup netrw
+  autocmd!
+  autocmd FileType netrw setlocal nolist
+  autocmd FileType netrw nnoremap <buffer> q :q<cr>
+augroup END
+
 silent execute '!mkdir -p $HOME/.vim/data/vimbackup'
 silent execute '!mkdir -p $HOME/.vim/data/vimswap'
 silent execute '!mkdir -p $HOME/.vim/data/vimviews'
@@ -562,3 +568,5 @@ let g:fzf_filemru_git_ls = 1
 
 let g:rooter_silent_chdir = 1
 let g:rooter_use_lcd = 1
+
+let g:python_highlight_all = 1
