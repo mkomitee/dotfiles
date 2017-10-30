@@ -84,6 +84,9 @@ export PYLINT_ARGS='-d C0301,W0142'
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
+export FZF_DEFAULT_COMMAND="fd --type f"
+export FZF_DEFAULT_OPTS="--inline-info"
+
 if [ -f $HOME/.zshenv.local ]; then
     source $HOME/.zshenv.local
 fi
