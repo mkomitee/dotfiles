@@ -46,3 +46,5 @@ alias -g T='tail'
 alias -g L='less'
 
 alias fgls='git ls-files | fzf -i -e'
+
+alias ag=rg
