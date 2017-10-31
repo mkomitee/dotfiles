@@ -1,14 +1,2 @@
 #!/usr/bin/env zsh
 
-export PATH="${PATH}:/usr/local/opt/go/libexec/bin"
-export GOPATH="/Users/mkomitee/src/go"
-export PATH="${PATH}:${GOPATH}/bin"
-unset GOROOT
-
-# The following lines are from 'eval "$(pyenv init -)"' I've disassembled it
-# and placed the appropriate parts in zshenv.local & zshrc.local
-export PATH="/Users/mkomitee/.pyenv/shims:${PATH}"
-export PYENV_SHELL=zsh
-
-# Add mactex bins to PATH
-export PATH="${PATH}:/usr/local/texlive/2015/bin/x86_64-darwin"
