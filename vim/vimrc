@@ -15,7 +15,7 @@ if dein#load_state(expand('~/.vim/bundles'))
   call dein#add(expand('~/.vim/bundles/repos/github.com/Shougo/dein.vim'))
 
   " Add or remove your plugins here:
-  call dein#add('Yggdroot/indentLine')
+  call dein#add('airblade/vim-rooter')
   call dein#add('haya14busa/incsearch.vim')
   call dein#add('itchyny/lightline.vim')
   call dein#add('junegunn/fzf', { 'build': './install --all' })
@@ -35,15 +35,17 @@ if dein#load_state(expand('~/.vim/bundles'))
   call dein#add('tpope/vim-commentary')
   call dein#add('tpope/vim-endwise')
   call dein#add('tpope/vim-fugitive')
+  call dein#add('tpope/vim-markdown')
   call dein#add('tpope/vim-repeat')
   call dein#add('tpope/vim-sensible')
   call dein#add('tpope/vim-surround')
   call dein#add('tpope/vim-unimpaired.git')
   call dein#add('tpope/vim-vinegar')
+  call dein#add('tweekmonster/fzf-filemru')
   call dein#add('w0rp/ale')
   call dein#add('wellle/targets.vim')
-  call dein#add('tweekmonster/fzf-filemru')
-  call dein#add('airblade/vim-rooter')
+  call dein#add('xolox/vim-misc')
+  call dein#add('xolox/vim-session')
 
   " Required:
   call dein#end()
@@ -60,6 +62,11 @@ if dein#check_install()
 endif
 
 " End dein Scripts
+
+" Clear my custom augroup.
+augroup custom
+  autocmd!
+augroup END
 
 " Preferences
 colorscheme gruvbox
@@ -106,6 +113,9 @@ set splitbelow            " split below instead of above
 set splitright            " split to the right instead of the left
 set colorcolumn=+1        " highlight the color column+1
 set breakindent           " visually indent wrapped lines
+set showbreak=⣿⣿⣿⣿⣿
+set infercase
+set synmaxcol=800
 set undofile              " track undo history
 set undodir=$HOME/.vim/data/vimundo/ " place undo history here
 set clipboard^=unnamed,unnamedplus " integrate with the system clipboard.
@@ -221,7 +231,7 @@ function! RestoreCursorPosition()
 endfunction
 
 " Try really hard to use the correct syntax highlighting
-autocmd BufEnter * :syntax sync fromstart
+autocmd custom BufEnter * :syntax sync fromstart
 
 " Tweak basic navigation
 nnoremap <silent> j gj
@@ -399,7 +409,7 @@ function! LightlineLinterOK() abort
   return l:counts.total == 0 ? '✓ ' : ''
 endfunction
 
-autocmd User ALELint call s:MaybeUpdateLightline()
+autocmd custom User ALELint call s:MaybeUpdateLightline()
 
 " Update and show lightline but only if it's visible (e.g., not in Goyo)
 function! s:MaybeUpdateLightline()
@@ -409,8 +419,12 @@ function! s:MaybeUpdateLightline()
 endfunction
 
 nnoremap <silent> ≈ :Commands<cr>
-nnoremap <silent> <leader>h :Helptags<cr>
+nnoremap <silent> <M-x> :Commands<cr>
+nnoremap <silent> <leader>ht :Helptags<cr>
+nnoremap <silent> <leader>h. :help <C-r><C-w><cr>
+
 nnoremap <silent> <leader>qq :qall<cr>
+nnoremap <silent> <leader>qr :RestartVim<cr>
 
 command! -bang -nargs=* Rg
       \ call fzf#vim#grep(
@@ -420,125 +434,106 @@ command! -bang -nargs=* Rg
       \         : fzf#vim#with_preview('right:50%:hidden', '?'),
       \ <bang>0)
 
-augroup quickfix
-  au!
-  au FileType qf nnoremap <buffer> q :q<cr>
-  au FileType qf setl nowrap
-  au FileType qf setl norelativenumber
-  au FileType qf setl number
-  au FileType qf set nobuflisted
-augroup END
+" quickfix customizations
+autocmd custom FileType qf nnoremap <buffer> q :q<cr>
+autocmd custom FileType qf set nobuflisted
+autocmd custom FileType qf setlocal nolist
+autocmd custom FileType qf setlocal norelativenumber
+autocmd custom FileType qf setlocal nowrap
+autocmd custom FileType qf setlocal number
 
-augroup locationlist
-  au!
-  au FileType ll nnoremap <buffer> q :q<cr>
-augroup END
+" locationlist customizations
+autocmd custom FileType ll nnoremap <buffer> q :q<cr>
+autocmd custom FileType ll set nobuflisted
+autocmd custom FileType ll setlocal nolist
+autocmd custom FileType ll setlocal norelativenumber
+autocmd custom FileType ll setlocal nowrap
+autocmd custom FileType ll setlocal number
 
-augroup make
-  au!
-  au FileType make au BufWritePre <buffer> call RemoveTrailingWhiteSpace()
-  au FileType make setl noexpandtab
-  au FileType make setl nosmarttab
-  au FileType make setl softtabstop=0
-  au FileType make setl tabstop=4
-augroup END
+" make customizations
+autocmd custom FileType make autocmd BufWritePre <buffer> call RemoveTrailingWhiteSpace()
+autocmd custom FileType make setlocal noexpandtab
+autocmd custom FileType make setlocal nosmarttab
+autocmd custom FileType make setlocal softtabstop=0
+autocmd custom FileType make setlocal tabstop=4
 
-augroup go
-  au!
-  au FileType go au BufWritePre <buffer> call RemoveTrailingWhiteSpace()
-  au FileType go setl noexpandtab
-  au FileType go setl tabstop=4
-  au FileType go setl shiftwidth=4
-augroup END
+" go customizations
+autocmd custom FileType go autocmd BufWritePre <buffer> call RemoveTrailingWhiteSpace()
+autocmd custom FileType go setlocal noexpandtab
+autocmd custom FileType go setlocal shiftwidth=4
+autocmd custom FileType go setlocal tabstop=4
 
-augroup yaml
-  au!
-  au FileType yaml au BufWritePre <buffer> call RemoveTrailingWhiteSpace()
-  au FileType yaml setl shiftwidth=4
-augroup END
+" yaml customizations
+autocmd custom FileType yaml autocmd BufWritePre <buffer> call RemoveTrailingWhiteSpace()
+autocmd custom FileType yaml setlocal shiftwidth=4
 
-augroup man
-  au!
-  au FileType man setl nolist
-  au FileType man setl nonumber
-  au FileType man setl nomodified
-  au FileType man setl nomodifiable
-  au FileType man nnoremap <buffer> q :q<cr>
-augroup END
+" man page customizations
+autocmd custom FileType man nnoremap <buffer> q :q<cr>
+autocmd custom FileType man setlocal nolist
+autocmd custom FileType man setlocal nomodifiable
+autocmd custom FileType man setlocal nomodified
+autocmd custom FileType man setlocal norelativenumber
+autocmd custom FileType man setlocal number
 
-augroup markdown
-  au!
-  au FileType markdown au BufWritePre <buffer> call RemoveTrailingWhiteSpace()
-  au FileType markdown setl shiftwidth=4
-  au FileType markdown setl softtabstop=4
-  au FileType markdown setlocal spell
-augroup END
+" markdown customizations
+autocmd custom FileType markdown autocmd BufWritePre <buffer> call RemoveTrailingWhiteSpace()
+autocmd custom FileType markdown setlocal complete+=kspell
+autocmd custom FileType markdown setlocal shiftwidth=4
+autocmd custom FileType markdown setlocal softtabstop=4
+autocmd custom FileType markdown setlocal spell
 
-augroup perl
-  au!
-  au FileType perl au BufWritePre <buffer> call RemoveTrailingWhiteSpace()
-  au FileType perl setl iskeyword+=$,%,@
-augroup END
+" perl customizations
+autocmd custom FileType perl autocmd BufWritePre <buffer> call RemoveTrailingWhiteSpace()
+autocmd custom FileType perl setlocal iskeyword+=$,%,@
 
-augroup puppet
-  au!
-  au FileType puppet au BufWritePre <buffer> call RemoveTrailingWhiteSpace()
-augroup END
+" puppet customizations
+autocmd custom FileType puppet autocmd BufWritePre <buffer> call RemoveTrailingWhiteSpace()
 
-augroup python
-  au!
-  au FileType python au BufWritePre <buffer> call RemoveTrailingWhiteSpace()
-  au FileType python setl textwidth=79
-  au FileType pyrex au BufWritePre <buffer> call RemoveTrailingWhiteSpace()
-  au FileType pyrex setl textwidth=79
-augroup END
+" python customizations
+autocmd custom FileType python autocmd BufWritePre <buffer> call RemoveTrailingWhiteSpace()
+autocmd custom FileType python setlocal textwidth=79
 
-augroup ruby
-  au!
-  au FileType ruby au BufWritePre <buffer> call RemoveTrailingWhiteSpace()
-augroup END
+" cython customizations
+autocmd custom FileType pyrex autocmd BufWritePre <buffer> call RemoveTrailingWhiteSpace()
+autocmd custom FileType pyrex setlocal textwidth=79
 
-augroup shell
-  au!
-  au FileType sh,zsh au BufWritePre <buffer> call RemoveTrailingWhiteSpace()
-augroup END
+" ruby customizations
+autocmd custom FileType ruby autocmd BufWritePre <buffer> call RemoveTrailingWhiteSpace()
 
-augroup vim
-  au!
-  au FileType vim au BufWritePre <buffer> call RemoveTrailingWhiteSpace()
-  au FileType vim setl shiftwidth=2
-  au FileType vim setl softtabstop=2
-augroup END
+" shell script customizations
+autocmd custom FileType sh,zsh autocmd BufWritePre <buffer> call RemoveTrailingWhiteSpace()
 
-augroup help
-  au!
-  au FileType help setl nolist
-  au FileType help setl nonumber
-  au FileType help setl nomodified
-  au FileType help setl nomodifiable
-  au FileType help nnoremap <buffer> q :q<cr>
-augroup END
+" shell vimscript customizations
+autocmd custom FileType vim autocmd BufWritePre <buffer> call RemoveTrailingWhiteSpace()
+autocmd custom FileType vim setlocal shiftwidth=2
+autocmd custom FileType vim setlocal softtabstop=2
 
-augroup swoop
-  au!
-  au BufEnter swoopBuf nnoremap <buffer> q :bdelete!<cr>
-augroup END
+" shell vim help page customizations
+autocmd custom FileType help nnoremap <buffer> q :q<cr>
+autocmd custom FileType help setlocal nolist
+autocmd custom FileType help setlocal nomodifiable
+autocmd custom FileType help setlocal nomodified
+autocmd custom FileType help setlocal norelativenumber
+autocmd custom FileType help setlocal number
 
-augroup restoreCursorPosition
-  autocmd!
-  autocmd BufReadPost * call RestoreCursorPosition()
-augroup END
+" swoop buffer customizations
+autocmd custom BufEnter swoopBuf nnoremap <buffer> q :bdelete!<cr>
 
-augroup gcommit
-  autocmd!
-  autocmd FileType gitcommit setlocal spell
-augroup END
+" gitcommit customizations
+autocmd custom FileType gitcommit setlocal complete+=kspell
+autocmd custom FileType gitcommit setlocal spell
 
-augroup netrw
-  autocmd!
-  autocmd FileType netrw setlocal nolist
-  autocmd FileType netrw nnoremap <buffer> q :q<cr>
-augroup END
+" netrw customizations
+autocmd custom FileType netrw nnoremap <buffer> q :q<cr>
+autocmd custom FileType netrw setlocal nolist
+autocmd custom FileType netrw setlocal nomodifiable
+autocmd custom FileType netrw setlocal nomodified
+autocmd custom FileType netrw setlocal norelativenumber
+autocmd custom FileType netrw setlocal number
+
+" Always restore cursor position to the last place it was when a file was last
+" opened.
+autocmd custom BufReadPost * call RestoreCursorPosition()
 
 silent execute '!mkdir -p $HOME/.vim/data/vimbackup'
 silent execute '!mkdir -p $HOME/.vim/data/vimswap'
@@ -546,7 +541,6 @@ silent execute '!mkdir -p $HOME/.vim/data/vimviews'
 silent execute '!mkdir -p $HOME/.vim/data/vimundo'
 silent execute '!mkdir -p $HOME/.vim/data/tags'
 
-nnoremap <leader>qq :qa<cr>
 let g:swoopUseDefaultKeyMap = 0
 
 " Experimenting with incsearch, not sure if it has legs.
@@ -554,12 +548,10 @@ map / <Plug>(incsearch-forward)
 map ? <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
 
-" Abolish maps are in ~/.vim/after/plugin/abolish.vim
 
-let g:indentLine_color_term = 239
-let g:mundo_right = 1
-let g:mundo_preview_bottom = 1
 let g:mundo_help = 1
+let g:mundo_preview_bottom = 1
+let g:mundo_right = 1
 
 let g:sneak#absolute_dir = 1
 
@@ -570,3 +562,33 @@ let g:rooter_silent_chdir = 1
 let g:rooter_use_lcd = 1
 
 let g:python_highlight_all = 1
+
+let g:markdown_fenced_languages = ['html', 'vim', 'python', 'bash=sh']
+
+let g:session_autoload = 'yes'
+let g:session_autosave = 'yes'
+let g:session_autosave_periodic = 5
+let g:session_autosave_silent = 1
+let g:session_default_to_last = 1
+let g:session_menu = 0
+let g:session_persist_colors = 0
+
+" Maps <ESC>{char} for all alphas in both cases to act as <A-{char}> so I can
+" use maps for alt keys.
+" let c='a'
+" while c <= 'z'
+"   exec "set <A-".c.">=\e".c
+"   exec "imap \e".c." <A-".c.">"
+"   let c = nr2char(1+char2nr(c))
+" endw
+
+" Wait for a 50ms timeout on key codes. This is relevant on key codes, meaning
+" it should only effect CTRL+ / ALT+ mappings, but unfortunately on terminals,
+" <ESC>{char} is indistinguishable an ALT+{char} mapping, so sometimes we may
+" experience some odd behavior if we type a character very quickly after <ESC>
+" set ttimeout
+" set ttimeoutlen=10
+
+" Abolish maps are in ~/.vim/after/plugin/abolish.vim
+"
+source ~/.vimrc.local

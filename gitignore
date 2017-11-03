@@ -28,6 +28,9 @@ tags
 GTAGS
 GPATH
 GRTAGS
+tags.lock
+tags.log
+tags.temp
 
 
 ### ~/.gitignore-boilerplates/Global/archives.gitignore
@@ -60,6 +63,8 @@ GRTAGS
 *.py[cod]
 .coverage
 htmlcov/
+__pycache__/
+.mypy_cache/
 
 ### ~/.gitignore-boilerplates/ruby.gitignore
 
@@ -93,4 +98,3 @@ html
 # Erlang ...
 *.beam
 
-__pycache__/
