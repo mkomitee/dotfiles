@@ -128,7 +128,7 @@ set fillchars+=vert:│  " indicate vertical splits with │
 set fillchars+=stlnc:━ " indicate horizontal splits with -
 
 set listchars=            " reset listchars
-set listchars+=tab:▸▸     " display tabs
+set listchars+=tab:▸\     " display tabs
 set listchars+=extends:❯  " hint that theres more to the right, ...
 set listchars+=precedes:❮ " hint that theres more to the left, ...
 
@@ -155,8 +155,9 @@ set shortmess+=T " truncate other messages in the middle if they are too long to
 set shortmess+=I " don't give the intro message when starting Vim |:intro|.
 
 set completeopt=         " reset completeopt
-set completeopt+=longest " insert the longest match
+set completeopt+=preview
 set completeopt+=menuone " show the menu when there are matches
+set completeopt+=noselect " show the menu when there are matches
 
 set viminfo+=n~/.vim/data/viminfo " move the viminfo file into ~/.vim/data
 
@@ -419,7 +420,7 @@ function! s:MaybeUpdateLightline()
   end
 endfunction
 
-nnoremap <silent> ≈ :Commands<cr>
+"nnoremap <silent> ≈ :Commands<cr>
 nnoremap <silent> <M-x> :Commands<cr>
 nnoremap <silent> <leader>hh :help ShortcutContents<cr>
 nnoremap <silent> <leader>ht :Helptags<cr>
@@ -592,6 +593,19 @@ let g:startify_bookmarks = [ '~/.vim/doc/shortcuts.txt', '~/.vimrc', '~/.vimrc.l
 " experience some odd behavior if we type a character very quickly after <ESC>
 " set ttimeout
 " set ttimeoutlen=10
+
+" Experimentation
+set concealcursor=iv
+set conceallevel=2
+set encoding=utf-8
+set fileencoding=utf-8
+set lazyredraw
+set matchpairs+=<:>
+set showfulltag
+set termencoding=utf-8
+set wildmode+=full
+set wildmode+=longest
+set wildmode=
 
 " Abolish maps are in ~/.vim/after/plugin/abolish.vim
 
