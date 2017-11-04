@@ -24,6 +24,7 @@ if dein#load_state(expand('~/.vim/bundles'))
   call dein#add('kshenoy/vim-signature')
   call dein#add('ludovicchabant/vim-gutentags')
   call dein#add('mhinz/vim-signify')
+  call dein#add('mhinz/vim-startify')
   call dein#add('morhetz/gruvbox')
   call dein#add('pelodelfuego/vim-swoop')
   call dein#add('rgarver/Kwbd.vim')
@@ -420,6 +421,7 @@ endfunction
 
 nnoremap <silent> ≈ :Commands<cr>
 nnoremap <silent> <M-x> :Commands<cr>
+nnoremap <silent> <leader>hh :help ShortcutContents<cr>
 nnoremap <silent> <leader>ht :Helptags<cr>
 nnoremap <silent> <leader>h. :help <C-r><C-w><cr>
 
@@ -573,6 +575,8 @@ let g:session_default_to_last = 1
 let g:session_menu = 0
 let g:session_persist_colors = 0
 
+let g:startify_bookmarks = [ '~/.vim/doc/shortcuts.txt', '~/.vimrc', '~/.vimrc.local', '~/.zshrc', '~/.zshrc.local', '~/.zshenv',  '~/.zshenv.local']
+
 " Maps <ESC>{char} for all alphas in both cases to act as <A-{char}> so I can
 " use maps for alt keys.
 " let c='a'
@@ -590,5 +594,5 @@ let g:session_persist_colors = 0
 " set ttimeoutlen=10
 
 " Abolish maps are in ~/.vim/after/plugin/abolish.vim
-"
+
 source ~/.vimrc.local

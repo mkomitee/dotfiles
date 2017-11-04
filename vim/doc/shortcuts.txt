@@ -1,0 +1,104 @@
+*shortcuts.txt*  My custom shortcuts.
+
+===============================================================================
+CONTENTS                                                     *ShortcutContents*
+
+    1. Buffers ......................................... |<leader>b| maps
+    2. Files ........................................... |<leader>f| maps
+    3. Git ............................................. |<leader>g| maps
+    4. Help ............................................ |<leader>h| maps
+    5. Miscellaneous ................................... |<leader>m| maps
+    6. Projects ........................................ |<leader>p| maps
+    7. Quit ............................................ |<leader>q| maps
+    8. Tags ............................................ |<leader>t| maps
+    9. Windows ......................................... |<leader>w| maps
+
+===============================================================================
+Section 1: Buffers                                                 *BufferMaps*
+
+
+ - |<leader>bb|     List buffers
+ - |<leader>bd|     Delete buffer
+ - |<leader>bn|     Next buffer
+ - |<leader>bp|     Previous buffer
+ - |<leader>bq|     Open quick-fix buffer
+ - |<leader>bl|     Open location-list buffer
+ - |<leader>b<tab>| Open previous buffer
+
+===============================================================================
+Section 2: Files                                                    *FilesMaps*
+
+ - |<leader>fed| Open my vimrc
+ - |<leader>ff|  List files in current directory (includes MRU files)
+ - |<leader>fm|  List Most Recently Used (MRU) files
+ - |<leader>fh|  List Most Recently Used (MRU) files
+
+===============================================================================
+Section 3: Git                                                        *GitMaps*
+
+ - |<leader>gs| Open a git-status window.
+ - |<leader>gc| Commit
+ - |<leader>gl| Display git-log
+ - |<leader>gd| Run git-diff
+ - |<leader>gb| Display git-blame
+ - |<leader>gf| List git files
+
+===============================================================================
+Section 4: Help                                                      *HelpMaps*
+
+ - |<leader>hh| List help tags
+ - |<leader>h.| Open help for the word under the cursor
+
+===============================================================================
+Section 5: Miscellaneous                                    *MiscellaneousMaps*
+
+ - |<leader>ms| Use swoop
+ - |<leader>mS| Use "multi" swoop
+ - |<leader>mr.| Search & replace the word under the cursor
+ - |<leader>mrv| Search & replace the visually selected text
+ - |<leader>mu| Navigate through time
+
+===============================================================================
+Section 6: Projects                                              *ProjectsMaps*
+
+ - |<leader>pf| List project files
+
+===============================================================================
+Section 7: Quit                                                      *QuitMaps*
+
+ - |<leader>qq| Quit vim
+ - |<leader>qr| Restart vim (only works in gvim)
+
+===============================================================================
+Section 8: Tags                                                      *TagsMaps*
+
+ - |<leader>tt| List tags
+ - |<leader>td| Jump to definition
+ - |<leader>twd| Jump to definition in a new window
+ - |<leader>tn| Jump to next tag
+ - |<leader>tp| Jump to previous tag
+
+===============================================================================
+Section 9: Windows                                                *WindowsMaps*
+
+ - |<leader>w=|       Make all windows the same height & width
+ - |<leader>w>|       Increase current window width
+ - |<leader>w<|       Decrease current window width
+ - |<leader>w<right>| Increase current window width
+ - |<leader>w<left>|  Decrease current window width
+ - |<leader>w<up>|    Increase current window height
+ - |<leader>w<down>|  Decrease current window height
+ - |<leader>w-|       Split window horizontally
+ - |<leader>w/|       Split window vertically
+ - |<leader>wh|       Go to the window to the left
+ - |<leader>wj|       Go to the window below
+ - |<leader>wk|       Go to the window above
+ - |<leader>wl|       Go to the window to the right
+ - |<leader>wd|       Delete the current window
+ - |<leader>wL|       Rotate windows down
+ - |<leader>wH|       Rotate windows up
+ - |<leader>ww|       List windows
+ - |<leader>w<tab>|   Go to the last accessed window
+ - |<leader>w?|       Chose windows
+
+vim: ft=help
