@@ -290,7 +290,7 @@ nnoremap <silent> * :let b:pos = winsaveview()<cr>*:call winrestview(b:pos)<cr>
 nnoremap <silent> # :let b:pos = winsaveview()<cr>#:call winrestview(b:pos)<cr>
 
 " File commands
-nnoremap <silent> <leader>fed :e $MYVIMRC<CR>
+nnoremap <silent> <leader>fed :e $HOME/.dotfiles/vim/vimrc<CR>
 nnoremap <silent> <leader>ff :FilesMru --tiebreak=end<CR>
 nnoremap <silent> <leader>fm :History<CR>
 nnoremap <silent> <leader>fh :History<CR>
@@ -576,7 +576,16 @@ let g:session_default_to_last = 1
 let g:session_menu = 0
 let g:session_persist_colors = 0
 
-let g:startify_bookmarks = [ '~/.vim/doc/shortcuts.txt', '~/.vimrc', '~/.vimrc.local', '~/.zshrc', '~/.zshrc.local', '~/.zshenv',  '~/.zshenv.local']
+let g:startify_bookmarks = [
+      \ '$HOME/.dotfiles/vim/vimrc',
+      \ '$HOME/.vimrc.local',
+      \ '$HOME/.dotfiles/zshrc',
+      \ '$HOME/.zshrc.local',
+      \ '$HOME/.dotfiles/zshenv',
+      \ '$HOME/.zshenv.local',
+      \ '$HOME/.aliases',
+      \ '$HOME/.vim/doc/shortcuts.txt',
+      \]
 
 " Maps <ESC>{char} for all alphas in both cases to act as <A-{char}> so I can
 " use maps for alt keys.
