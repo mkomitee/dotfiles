@@ -15,11 +15,15 @@ if dein#load_state(expand('~/.vim/bundles'))
   call dein#add(expand('~/.vim/bundles/repos/github.com/Shougo/dein.vim'))
 
   " Add or remove your plugins here:
+  call dein#add('Shougo/neosnippet-snippets')
+  call dein#add('Shougo/neosnippet.vim')
   call dein#add('airblade/vim-rooter')
+  call dein#add('cespare/vim-toml')
   call dein#add('haya14busa/incsearch.vim')
   call dein#add('itchyny/lightline.vim')
   call dein#add('junegunn/fzf', { 'build': './install --all' })
   call dein#add('junegunn/fzf.vim')
+  call dein#add('junegunn/vim-peekaboo')
   call dein#add('justinmk/vim-sneak')
   call dein#add('kshenoy/vim-signature')
   call dein#add('ludovicchabant/vim-gutentags')
@@ -39,9 +43,9 @@ if dein#load_state(expand('~/.vim/bundles'))
   call dein#add('tpope/vim-markdown')
   call dein#add('tpope/vim-repeat')
   call dein#add('tpope/vim-sensible')
+  call dein#add('tpope/vim-speeddating')
   call dein#add('tpope/vim-surround')
   call dein#add('tpope/vim-unimpaired.git')
-  call dein#add('tpope/vim-vinegar')
   call dein#add('tweekmonster/fzf-filemru')
   call dein#add('w0rp/ale')
   call dein#add('wellle/targets.vim')
@@ -236,53 +240,53 @@ endfunction
 autocmd custom BufEnter * :syntax sync fromstart
 
 " Tweak basic navigation
-nnoremap <silent> j gj
-nnoremap <silent> k gk
-nnoremap <silent> $ g$
+nnoremap j gj
+nnoremap k gk
+nnoremap $ g$
 
-nnoremap <silent> gj j
-nnoremap <silent> gk k
-nnoremap <silent> g$ $
+nnoremap gj j
+nnoremap gk k
+nnoremap g$ $
 
-onoremap <silent> j gj
-onoremap <silent> k gk
-onoremap <silent> $ g$
+onoremap j gj
+onoremap k gk
+onoremap $ g$
 
-onoremap <silent> gj j
-onoremap <silent> gk k
-onoremap <silent> g$ $
+onoremap gj j
+onoremap gk k
+onoremap g$ $
 
-vnoremap <silent> j gj
-vnoremap <silent> k gk
-vnoremap <silent> $ g$
+vnoremap j gj
+vnoremap k gk
+vnoremap $ g$
 
-vnoremap <silent> gj gj
-vnoremap <silent> gk gk
-vnoremap <silent> g$ g$
+vnoremap gj gj
+vnoremap gk gk
+vnoremap g$ g$
 
 " smart-home: ^ and 0 will toggle between one another {{{
-nnoremap <expr> <silent> ^ col('.') == match(getline('.'),'\S')+1 ? 'g0' : 'g^'
-vnoremap <expr> <silent> ^ col('.') == match(getline('.'),'\S')+1 ? 'g0' : 'g^'
-onoremap <expr> <silent> ^ col('.') == match(getline('.'),'\S')+1 ? 'g0' : 'g^'
-nnoremap <expr> <silent> 0 col('.') == 1 ? 'g^' : 'g0'
-vnoremap <expr> <silent> 0 col('.') == 1 ? 'g^' : 'g0'
-onoremap <expr> <silent> 0 col('.') == 1 ? 'g^' : 'g0'
+nnoremap <expr> ^ col('.') == match(getline('.'),'\S')+1 ? 'g0' : 'g^'
+vnoremap <expr> ^ col('.') == match(getline('.'),'\S')+1 ? 'g0' : 'g^'
+onoremap <expr> ^ col('.') == match(getline('.'),'\S')+1 ? 'g0' : 'g^'
+nnoremap <expr> 0 col('.') == 1 ? 'g^' : 'g0'
+vnoremap <expr> 0 col('.') == 1 ? 'g^' : 'g0'
+onoremap <expr> 0 col('.') == 1 ? 'g^' : 'g0'
 
 " When using marks, all by default mark columns as well
-nnoremap <silent> ' `
+nnoremap ' `
 
 " Simple map to disable highlighting
-nnoremap <silent> // :nohl<cr>
+nnoremap // :nohl<cr>
 
 " Reselect visually selected text after indenting
-vnoremap <silent> > >gv
-vnoremap <silent> < <gv
+vnoremap > >gv
+vnoremap < <gv
 
 " sudo write-file in case you're in a file you dont have privileges to write{{{
-cmap <silent> w!! w !sudo tee % >/dev/null<cr>
+cmap w!! w !sudo tee % >/dev/null<cr>
 
 " . returns to starting place after repeat
-nnoremap <silent> . .`[
+nnoremap . .`[
 
 " Don't move when you use */#
 " https://twitter.com/dotvimrc/status/428208518487764992
@@ -290,75 +294,83 @@ nnoremap <silent> * :let b:pos = winsaveview()<cr>*:call winrestview(b:pos)<cr>
 nnoremap <silent> # :let b:pos = winsaveview()<cr>#:call winrestview(b:pos)<cr>
 
 " File commands
-nnoremap <silent> <leader>fed :e $HOME/.dotfiles/vim/vimrc<CR>
-nnoremap <silent> <leader>ff :FilesMru --tiebreak=end<CR>
-nnoremap <silent> <leader>fm :History<CR>
-nnoremap <silent> <leader>fh :History<CR>
+nnoremap <leader>fed :e $HOME/.dotfiles/vim/vimrc<CR>
+nnoremap <leader>ff :FilesMru --tiebreak=end<CR>
+nnoremap <leader>fm :History<CR>
+nnoremap <leader>fh :History<CR>
 
 " Project commands
-nnoremap <silent> <leader>pf :ProjectMru<CR>
-nnoremap <silent> <leader>pg :GFiles<CR>
+nnoremap <leader>pf :ProjectMru<CR>
+nnoremap <leader>pg :GFiles<CR>
 
 " Buffer commands
-nnoremap <silent> <leader>bb :Buffers<CR>
-nnoremap <silent> <leader>bd :Kwbd<CR>
-nnoremap <silent> <leader>bn :bnext<CR>
-nnoremap <silent> <leader>bp :bprev<CR>
-nnoremap <silent> <leader>bq :copen<CR>
-nnoremap <silent> <leader>bl :lopen<CR>
-nnoremap <silent> <leader>b<tab> <C-^>
-nnoremap <silent> <C-C><Left> <C-^>
+nnoremap <leader>bb :Buffers<CR>
+nnoremap <leader>bd :Kwbd<CR>
+nnoremap <leader>bn :bnext<CR>
+nnoremap <leader>bp :bprev<CR>
+nnoremap <leader>bq :copen<CR>
+nnoremap <leader>bl :lopen<CR>
+nnoremap <leader>b<tab> <C-^>
+nnoremap <C-C><Left> <C-^>
+
+command! -bang Notes call fzf#run(fzf#wrap
+      \  ('my-stuff', {'dir': '~/notes',
+      \                'source': 'rg --files -g "*.md" -g "!archive/" -g "!contrib/"'
+      \               },
+      \  <bang>0)
+      \ )
+nnoremap <leader>an :Notes<cr>
 
 " Other commands
-nnoremap <silent> <leader>ms :call Swoop()<cr>
-vnoremap <silent> <leader>ms :call SwoopSelection()<cr>
-nnoremap <silent> <leader>mS :call Swoop()<cr>
-vnoremap <silent> <leader>mS :call SwoopMultiSelection()<cr>
+nnoremap <leader>ms :call Swoop()<cr>
+vnoremap <leader>ms :call SwoopSelection()<cr>
+nnoremap <leader>mS :call Swoop()<cr>
+vnoremap <leader>mS :call SwoopMultiSelection()<cr>
 " Replace word under cursor, everywhere in the file.
 nnoremap <leader>mr. :%s/\<C-r><C-w>\>/
 " Replace visually selected characters, everywhere in the file.
 vnoremap <leader>mrv "hy:%s/<C-r>h/
-nnoremap <silent> <leader>mu :MundoToggle<cr>
+nnoremap <leader>mu :MundoToggle<cr>
 
 " Tag commands
-nnoremap <silent> <leader>tt :Tags<cr>
+nnoremap <leader>tt :Tags<cr>
 " go to definition / tag
-nnoremap <silent> <leader>td <C-]>
+nnoremap <leader>td <C-]>
 " go to tag in a split
-nnoremap <silent> <leader>twd <C-w>}
-nnoremap <silent> <leader>tn :tnext<cr>
-nnoremap <silent> <leader>tp :tprevious<cr>
+nnoremap <leader>twd <C-w>}
+nnoremap <leader>tn :tnext<cr>
+nnoremap <leader>tp :tprevious<cr>
 
 " Window commands
-nnoremap <silent> <leader>w= <C-W>=
-nnoremap <silent> <leader>w> <C-W>>
-nnoremap <silent> <leader>w< <C-W><
-nnoremap <silent> <leader>w<right> <C-W>>
-nnoremap <silent> <leader>w<left> <C-W><
-nnoremap <silent> <leader>w<down> <C-W>-
-nnoremap <silent> <leader>w<up> <C-W>+
-nnoremap <silent> <leader>w- <C-W>s
-nnoremap <silent> <leader>w/ <C-W>v
-nnoremap <silent> <leader>wj <C-W>j
-nnoremap <silent> <leader>wh <C-W>h
-nnoremap <silent> <leader>wk <C-W>k
-nnoremap <silent> <leader>wl <C-W>l
-nnoremap <silent> <leader>wd <C-W>c
-nnoremap <silent> <leader>wL <C-W>r
-nnoremap <silent> <leader>wH <C-W>R
-nnoremap <silent> <leader>ww :Windows<cr>
-nnoremap <silent> <leader>w<tab> <C-W>p
+nnoremap <leader>w= <C-W>=
+nnoremap <leader>w> <C-W>>
+nnoremap <leader>w< <C-W><
+nnoremap <leader>w<right> <C-W>>
+nnoremap <leader>w<left> <C-W><
+nnoremap <leader>w<down> <C-W>-
+nnoremap <leader>w<up> <C-W>+
+nnoremap <leader>w- <C-W>s
+nnoremap <leader>w/ <C-W>v
+nnoremap <leader>wj <C-W>j
+nnoremap <leader>wh <C-W>h
+nnoremap <leader>wk <C-W>k
+nnoremap <leader>wl <C-W>l
+nnoremap <leader>wd <C-W>c
+nnoremap <leader>wL <C-W>r
+nnoremap <leader>wH <C-W>R
+nnoremap <leader>ww :Windows<cr>
+nnoremap <leader>w<tab> <C-W>p
 " This only works with nmap, nnoremap :-(
-nmap <silent> <leader>w? <Plug>(choosewin)
+nmap <leader>w? <Plug>(choosewin)
 
 
 " Git commands
-nnoremap <silent> <leader>gs :Gstatus<cr>
-nnoremap <silent> <leader>gc :Gcommit -v<cr>
-nnoremap <silent> <leader>gl :Glog<cr>
-nnoremap <silent> <leader>gd :Gdiff<cr>
-nnoremap <silent> <leader>gb :Gblame<cr>
-nnoremap <silent> <leader>gf :GFiles<CR>
+nnoremap <leader>gs :Gstatus<cr>
+nnoremap <leader>gc :Gcommit -v<cr>
+nnoremap <leader>gl :Glog<cr>
+nnoremap <leader>gd :Gdiff<cr>
+nnoremap <leader>gb :Gblame<cr>
+nnoremap <leader>gf :GFiles<CR>
 
 let g:ale_sign_column_always = 1
 let g:ale_fixers = {
@@ -420,14 +432,14 @@ function! s:MaybeUpdateLightline()
   end
 endfunction
 
-"nnoremap <silent> ≈ :Commands<cr>
-nnoremap <silent> <M-x> :Commands<cr>
-nnoremap <silent> <leader>hh :help ShortcutContents<cr>
-nnoremap <silent> <leader>ht :Helptags<cr>
-nnoremap <silent> <leader>h. :help <C-r><C-w><cr>
+"nnoremap ≈ :Commands<cr>
+nnoremap <M-x> :Commands<cr>
+nnoremap <leader>hh :help ShortcutContents<cr>
+nnoremap <leader>ht :Helptags<cr>
+nnoremap <leader>h. :help <C-r><C-w><cr>
 
-nnoremap <silent> <leader>qq :qall<cr>
-nnoremap <silent> <leader>qr :RestartVim<cr>
+nnoremap <leader>qq :qall<cr>
+nnoremap <leader>qr :RestartVim<cr>
 
 command! -bang -nargs=* Rg
       \ call fzf#vim#grep(
@@ -480,10 +492,15 @@ autocmd custom FileType man setlocal number
 
 " markdown customizations
 autocmd custom FileType markdown autocmd BufWritePre <buffer> call RemoveTrailingWhiteSpace()
+autocmd custom FileType markdown iabbrev <expr> <buffer> :date: '<'.strftime("%Y-%m-%d %a").'>'
 autocmd custom FileType markdown setlocal complete+=kspell
 autocmd custom FileType markdown setlocal shiftwidth=4
 autocmd custom FileType markdown setlocal softtabstop=4
 autocmd custom FileType markdown setlocal spell
+autocmd custom FileType markdown setlocal foldlevel=2
+autocmd custom Filetype markdown autocmd BufEnter <buffer> setlocal foldexpr=MarkdownLevel()
+autocmd custom Filetype markdown autocmd BufEnter <buffer> setlocal foldmethod=expr
+autocmd custom Filetype markdown autocmd BufEnter <buffer> setlocal foldtext=Foldtext_markdown()
 
 " perl customizations
 autocmd custom FileType perl autocmd BufWritePre <buffer> call RemoveTrailingWhiteSpace()
@@ -566,7 +583,31 @@ let g:rooter_use_lcd = 1
 
 let g:python_highlight_all = 1
 
-let g:markdown_fenced_languages = ['html', 'vim', 'python', 'bash=sh']
+" The markdown folding included in the markdown plugin doesn't seem to work with
+" my markdown files, even with setting g:markdown_folding = 1, so I stole a
+" simplified foldexpr and foldtext from the interwebs.
+function MarkdownLevel()
+  let h = matchstr(getline(v:lnum), '^#\+')
+  if empty(h)
+    return "="
+  else
+    return ">" . len(h)
+  endif
+endfunction
+
+function! Foldtext_markdown()
+    let line = getline(v:foldstart)
+    let has_numbers = &number || &relativenumber
+    let nucolwidth = &fdc + has_numbers * &numberwidth
+    let windowwidth = winwidth(0) - nucolwidth - 6
+    let foldedlinecount = v:foldend - v:foldstart
+    let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
+    let line = substitute(line, '\%("""\|''''''\)', '', '')
+    let fillcharcount = windowwidth - len(line) - len(foldedlinecount) + 1
+    return line . ' ' . repeat("-", fillcharcount) . ' ' . foldedlinecount
+endfunction
+
+let g:markdown_fenced_languages = ['html', 'vim', 'python', 'bash=sh', 'sql']
 
 let g:session_autoload = 'yes'
 let g:session_autosave = 'yes'
@@ -586,23 +627,7 @@ let g:startify_bookmarks = [
       \ '$HOME/.aliases',
       \ '$HOME/.vim/doc/shortcuts.txt',
       \]
-
-" Maps <ESC>{char} for all alphas in both cases to act as <A-{char}> so I can
-" use maps for alt keys.
-" let c='a'
-" while c <= 'z'
-"   exec "set <A-".c.">=\e".c
-"   exec "imap \e".c." <A-".c.">"
-"   let c = nr2char(1+char2nr(c))
-" endw
-
-" Wait for a 50ms timeout on key codes. This is relevant on key codes, meaning
-" it should only effect CTRL+ / ALT+ mappings, but unfortunately on terminals,
-" <ESC>{char} is indistinguishable an ALT+{char} mapping, so sometimes we may
-" experience some odd behavior if we type a character very quickly after <ESC>
-" set ttimeout
-" set ttimeoutlen=10
-
+"
 " Experimentation
 set concealcursor=iv
 set conceallevel=2
@@ -612,10 +637,10 @@ set lazyredraw
 set matchpairs+=<:>
 set showfulltag
 set termencoding=utf-8
+
+set wildmode=
 set wildmode+=full
 set wildmode+=longest
-set wildmode=
 
 " Abolish maps are in ~/.vim/after/plugin/abolish.vim
-
 source ~/.vimrc.local
