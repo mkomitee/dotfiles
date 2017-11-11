@@ -669,6 +669,9 @@ function! MarkdownPublish()
   let s:basename = expand('%:r')
   let s:cmd = "gpp -H " . s:basename . ".md | "
         \ . "pandoc --standalone --toc --toc-depth=2 "
+        \ . "--include-in-header=$HOME/.vim/contrib/pandoc/header.html "
+        \ . "--include-before-body=$HOME/.vim/contrib/pandoc/before-body.html "
+        \ . "--include-after-body=$HOME/.vim/contrib/pandoc/after-body.html "
         \ . "--to=html "
         \ . "--from=markdown+emoji "
         \ . "--output=" . s:basename . ".html"
