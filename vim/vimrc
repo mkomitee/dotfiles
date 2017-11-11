@@ -667,7 +667,7 @@ let g:markdown_fenced_languages = ['html', 'vim', 'python', 'bash=sh', 'sql']
 
 function! MarkdownPublish()
   let s:basename = expand('%:r')
-  let s:cmd = "gpp -H " . s:basename . ".md | "
+  let s:cmd = "gpp --nostdinc --nocurinc -H " . s:basename . ".md | "
         \ . "pandoc --standalone --toc --toc-depth=2 "
         \ . "--include-in-header=$HOME/.vim/contrib/pandoc/header.html "
         \ . "--include-before-body=$HOME/.vim/contrib/pandoc/before-body.html "
@@ -710,10 +710,6 @@ set lazyredraw
 set matchpairs+=<:>
 set showfulltag
 set termencoding=utf-8
-
-set wildmode=
-set wildmode+=full
-set wildmode+=longest
 
 nnoremap <leader>ah :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
       \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
