@@ -715,5 +715,8 @@ nnoremap <leader>ah :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") 
       \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
       \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
+" refresh all the things.
+nnoremap <silent> <c-l> :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
+
 " Abolish maps are in ~/.vim/after/plugin/abolish.vim
 source ~/.vimrc.local
