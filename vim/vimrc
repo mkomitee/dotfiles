@@ -40,7 +40,7 @@ if dein#load_state(expand('~/.vim/bundles'))
   call dein#add('tpope/vim-commentary')
   call dein#add('tpope/vim-endwise')
   call dein#add('tpope/vim-fugitive')
-  call dein#add('tpope/vim-markdown')
+  " call dein#add('tpope/vim-markdown')
   call dein#add('tpope/vim-repeat')
   call dein#add('tpope/vim-sensible')
   call dein#add('tpope/vim-speeddating')
@@ -51,6 +51,9 @@ if dein#load_state(expand('~/.vim/bundles'))
   call dein#add('wellle/targets.vim')
   call dein#add('xolox/vim-misc')
   call dein#add('xolox/vim-session')
+
+  call dein#add('vim-pandoc/vim-pandoc')
+  call dein#add('vim-pandoc/vim-pandoc-syntax')
 
   " Required:
   call dein#end()
@@ -322,15 +325,15 @@ command! -bang Notes call fzf#run(fzf#wrap
 nnoremap <leader>an :Notes<cr>
 
 " Other commands
-nnoremap <leader>ms :call Swoop()<cr>
-vnoremap <leader>ms :call SwoopSelection()<cr>
-nnoremap <leader>mS :call Swoop()<cr>
-vnoremap <leader>mS :call SwoopMultiSelection()<cr>
+nnoremap <leader>as :call Swoop()<cr>
+vnoremap <leader>as :call SwoopSelection()<cr>
+nnoremap <leader>aS :call Swoop()<cr>
+vnoremap <leader>aS :call SwoopMultiSelection()<cr>
 " Replace word under cursor, everywhere in the file.
-nnoremap <leader>mr. :%s/\<C-r><C-w>\>/
+nnoremap <leader>r. :%s/\<C-r><C-w>\>/
 " Replace visually selected characters, everywhere in the file.
-vnoremap <leader>mrv "hy:%s/<C-r>h/
-nnoremap <leader>mu :MundoToggle<cr>
+vnoremap <leader>rv "hy:%s/<C-r>h/
+nnoremap <leader>au :MundoToggle<cr>
 
 " Tag commands
 nnoremap <leader>tt :Tags<cr>
@@ -491,16 +494,93 @@ autocmd custom FileType man setlocal norelativenumber
 autocmd custom FileType man setlocal number
 
 " markdown customizations
-autocmd custom FileType markdown autocmd BufWritePre <buffer> call RemoveTrailingWhiteSpace()
-autocmd custom FileType markdown iabbrev <expr> <buffer> :date: '<'.strftime("%Y-%m-%d %a").'>'
-autocmd custom FileType markdown setlocal complete+=kspell
-autocmd custom FileType markdown setlocal shiftwidth=4
-autocmd custom FileType markdown setlocal softtabstop=4
-autocmd custom FileType markdown setlocal spell
-autocmd custom FileType markdown setlocal foldlevel=2
-autocmd custom Filetype markdown autocmd BufEnter <buffer> setlocal foldexpr=MarkdownLevel()
-autocmd custom Filetype markdown autocmd BufEnter <buffer> setlocal foldmethod=expr
-autocmd custom Filetype markdown autocmd BufEnter <buffer> setlocal foldtext=Foldtext_markdown()
+autocmd custom FileType markdown,pandoc autocmd BufWritePre <buffer> call RemoveTrailingWhiteSpace()
+autocmd custom FileType markdown,pandoc iabbrev <expr> <buffer> :date: '<'.strftime("%Y-%m-%d %a").'>'
+autocmd custom FileType markdown,pandoc setlocal complete+=kspell
+autocmd custom FileType markdown,pandoc setlocal shiftwidth=4
+autocmd custom FileType markdown,pandoc setlocal softtabstop=4
+autocmd custom FileType markdown,pandoc setlocal spell
+autocmd custom FileType markdown,pandoc setlocal foldlevel=2
+autocmd custom FileType markdown,pandoc nnoremap <buffer> <leader>mp :MarkdownPublish<cr>
+" styles
+autocmd custom FileType pandoc nmap <buffer> <leader>msi <Plug>(pandoc-keyboard-toggle-emphasis)
+autocmd custom FileType pandoc vmap <buffer> <leader>msi <Plug>(pandoc-keyboard-toggle-emphasis)
+autocmd custom FileType pandoc nmap <buffer> <leader>msb <Plug>(pandoc-keyboard-toggle-strong)
+autocmd custom FileType pandoc vmap <buffer> <leader>msb <Plug>(pandoc-keyboard-toggle-strong)
+autocmd custom FileType pandoc nmap <buffer> <leader>ms` <Plug>(pandoc-keyboard-toggle-verbatim)
+autocmd custom FileType pandoc vmap <buffer> <leader>ms` <Plug>(pandoc-keyboard-toggle-verbatim)
+autocmd custom FileType pandoc nmap <buffer> <leader>ms~ <Plug>(pandoc-keyboard-toggle-strikeout)
+autocmd custom FileType pandoc vmap <buffer> <leader>ms~ <Plug>(pandoc-keyboard-toggle-strikeout)
+autocmd custom FileType pandoc nmap <buffer> <leader>ms^ <Plug>(pandoc-keyboard-toggle-superscript)
+autocmd custom FileType pandoc vmap <buffer> <leader>ms^ <Plug>(pandoc-keyboard-toggle-superscript)
+autocmd custom FileType pandoc nmap <buffer> <leader>ms_ <Plug>(pandoc-keyboard-toggle-subscript)
+autocmd custom FileType pandoc vmap <buffer> <leader>ms_ <Plug>(pandoc-keyboard-toggle-subscript)
+autocmd custom FileType pandoc vmap <buffer> <silent> aPe <Plug>(pandoc-keyboard-select-emphasis-inclusive)
+autocmd custom FileType pandoc vmap <buffer> <silent> iPe <Plug>(pandoc-keyboard-select-emphasis-exclusive)
+autocmd custom FileType pandoc omap <buffer> aPe :normal vaPe<cr>
+autocmd custom FileType pandoc omap <buffer> iPe :normal viPe<cr>
+autocmd custom FileType pandoc vmap <buffer> <silent> aPs <Plug>(pandoc-keyboard-select-strong-inclusive)
+autocmd custom FileType pandoc vmap <buffer> <silent> iPs <Plug>(pandoc-keyboard-select-strong-exclusive)
+autocmd custom FileType pandoc omap <buffer> aPs :normal vaPs<cr>
+autocmd custom FileType pandoc omap <buffer> iPs :normal viPs<cr>
+autocmd custom FileType pandoc vmap <buffer> <silent> aPv <Plug>(pandoc-keyboard-select-verbatim-inclusive)
+autocmd custom FileType pandoc vmap <buffer> <silent> iPv <Plug>(pandoc-keyboard-select-verbatim-exclusive)
+autocmd custom FileType pandoc omap <buffer> aPv :normal vaPv<cr>
+autocmd custom FileType pandoc omap <buffer> iPv :normal viPv<cr>
+autocmd custom FileType pandoc vmap <buffer> <silent> aPk <Plug>(pandoc-keyboard-select-strikeout-inclusive)
+autocmd custom FileType pandoc vmap <buffer> <silent> iPk <Plug>(pandoc-keyboard-select-strikeout-exclusive)
+autocmd custom FileType pandoc omap <buffer> aPk :normal vaPk<cr>
+autocmd custom FileType pandoc omap <buffer> iPk :normal viPk<cr>
+autocmd custom FileType pandoc vmap <buffer> <silent> aPu <Plug>(pandoc-keyboard-select-superscript-inclusive)
+autocmd custom FileType pandoc vmap <buffer> <silent> iPu <Plug>(pandoc-keyboard-select-superscript-exclusive)
+autocmd custom FileType pandoc omap <buffer> aPu :normal vaPu<cr>
+autocmd custom FileType pandoc omap <buffer> iPu :normal viPu<cr>
+autocmd custom FileType pandoc vmap <buffer> <silent> aPt <Plug>(pandoc-keyboard-select-subscript-inclusive)
+autocmd custom FileType pandoc vmap <buffer> <silent> iPt <Plug>(pandoc-keyboard-select-subscript-exclusive)
+autocmd custom FileType pandoc omap <buffer> aPt :normal vaPl<cr>
+autocmd custom FileType pandoc omap <buffer> iPt :normal viPl<cr>
+" sections
+autocmd custom FileType pandoc nmap <buffer> <leader>m# <Plug>(pandoc-keyboard-apply-header)
+autocmd custom FileType pandoc nmap <buffer> <leader>mhd <Plug>(pandoc-keyboard-remove-header)
+autocmd custom FileType pandoc nmap <buffer> <leader>mhn <Plug>(pandoc-keyboard-next-header)
+autocmd custom FileType pandoc nmap <buffer> <leader>mhb <Plug>(pandoc-keyboard-prev-header)
+autocmd custom FileType pandoc nmap <buffer> <leader>mhh <Plug>(pandoc-keyboard-cur-header)
+autocmd custom FileType pandoc nmap <buffer> <leader>mhp <Plug>(pandoc-keyboard-cur-header-parent)
+autocmd custom FileType pandoc nmap <buffer> <leader>mhsn <Plug>(pandoc-keyboard-next-header-sibling)
+autocmd custom FileType pandoc nmap <buffer> <leader>mhsb <Plug>(pandoc-keyboard-prev-header-sibling)
+autocmd custom FileType pandoc nmap <buffer> <leader>mhcf <Plug>(pandoc-keyboard-first-header-child)
+autocmd custom FileType pandoc nmap <buffer> <leader>mhcl <Plug>(pandoc-keyboard-last-header-child)
+autocmd custom FileType pandoc nmap <buffer> <leader>mhcn <Plug>(pandoc-keyboard-nth-header-child)
+autocmd custom FileType pandoc nmap <buffer> ]] <Plug>(pandoc-keyboard-ff-header)
+autocmd custom FileType pandoc nmap <buffer> [[ <Plug>(pandoc-keyboard-rw-header)
+autocmd custom FileType pandoc nmap <buffer> ][ <Plug>(pandoc-keyboard-ff-sect-end)
+autocmd custom FileType pandoc nmap <buffer> [] <Plug>(pandoc-keyboard-rw-sect-end)
+autocmd custom FileType pandoc vmap <buffer> aS <Plug>(pandoc-keyboard-select-section-inclusive)
+autocmd custom FileType pandoc omap <buffer> aS :normal VaS<cr>
+autocmd custom FileType pandoc vmap <buffer> iS <Plug>(pandoc-keyboard-select-section-exclusive)
+autocmd custom FileType pandoc omap <buffer> iS :normal ViS<cr>
+" links
+autocmd custom FileType pandoc nmap <buffer> <leader>mgl <Plug>(pandoc-keyboard-links-open)
+autocmd custom FileType pandoc nmap <buffer> <leader>msl <Plug>(pandoc-keyboard-links-split)
+autocmd custom FileType pandoc nmap <buffer> <leader>mgb <Plug>(pandoc-keyboard-links-back)
+autocmd custom FileType pandoc nmap <buffer> <leader>mgB <Plug>(pandoc-keyboard-links-file-back)
+" lists
+autocmd custom FileType pandoc nmap <buffer> <leader>mln <Plug>(pandoc-keyboard-next-li)
+autocmd custom FileType pandoc nmap <buffer> <leader>mlp <Plug>(pandoc-keyboard-prev-li)
+autocmd custom FileType pandoc nmap <buffer> <leader>mll <Plug>(pandoc-keyboard-cur-li)
+autocmd custom FileType pandoc nmap <buffer> <leader>mllp <Plug>(pandoc-keyboard-cur-li-parent)
+autocmd custom FileType pandoc nmap <buffer> <leader>mlsn <Plug>(pandoc-keyboard-next-li-sibling)
+autocmd custom FileType pandoc nmap <buffer> <leader>mlsp <Plug>(pandoc-keyboard-prev-li-sibling)
+autocmd custom FileType pandoc nmap <buffer> <leader>mlcf <Plug>(pandoc-keyboard-first-li-child)
+autocmd custom FileType pandoc nmap <buffer> <leader>mlcl <Plug>(pandoc-keyboard-last-li-child)
+autocmd custom FileType pandoc nmap <buffer> <leader>mlcn <Plug>(pandoc-keyboard-nth-li-child)
+" references
+autocmd custom FileType pandoc nmap <buffer> <leader>mnr <Plug>(pandoc-keyboard-ref-insert)
+autocmd custom FileType pandoc nmap <buffer> <leader>mrg <Plug>(pandoc-keyboard-ref-goto)
+autocmd custom FileType pandoc nmap <buffer> <leader>mrb <Plug>(pandoc-keyboard-ref-backfrom)
+
+let g:pandoc#keyboard#use_default_mappings = 0
+
 
 " perl customizations
 autocmd custom FileType perl autocmd BufWritePre <buffer> call RemoveTrailingWhiteSpace()
@@ -583,31 +663,21 @@ let g:rooter_use_lcd = 1
 
 let g:python_highlight_all = 1
 
-" The markdown folding included in the markdown plugin doesn't seem to work with
-" my markdown files, even with setting g:markdown_folding = 1, so I stole a
-" simplified foldexpr and foldtext from the interwebs.
-function MarkdownLevel()
-  let h = matchstr(getline(v:lnum), '^#\+')
-  if empty(h)
-    return "="
-  else
-    return ">" . len(h)
-  endif
-endfunction
-
-function! Foldtext_markdown()
-    let line = getline(v:foldstart)
-    let has_numbers = &number || &relativenumber
-    let nucolwidth = &fdc + has_numbers * &numberwidth
-    let windowwidth = winwidth(0) - nucolwidth - 6
-    let foldedlinecount = v:foldend - v:foldstart
-    let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
-    let line = substitute(line, '\%("""\|''''''\)', '', '')
-    let fillcharcount = windowwidth - len(line) - len(foldedlinecount) + 1
-    return line . ' ' . repeat("-", fillcharcount) . ' ' . foldedlinecount
-endfunction
-
 let g:markdown_fenced_languages = ['html', 'vim', 'python', 'bash=sh', 'sql']
+
+function! MarkdownPublish()
+  let s:basename = expand('%:r')
+  let s:cmd = "gpp -H " . s:basename . ".md | "
+        \ . "pandoc --standalone --toc --toc-depth=2 "
+        \ . "--to=html "
+        \ . "--from=markdown+emoji "
+        \ . "--output=" . s:basename . ".html"
+  " echomsg s:cmd
+  silent execute system(s:cmd)
+endfunction
+
+command! MarkdownPublish call MarkdownPublish()
+
 
 let g:session_autoload = 'yes'
 let g:session_autosave = 'yes'
@@ -641,6 +711,10 @@ set termencoding=utf-8
 set wildmode=
 set wildmode+=full
 set wildmode+=longest
+
+nnoremap <leader>ah :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+      \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+      \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 " Abolish maps are in ~/.vim/after/plugin/abolish.vim
 source ~/.vimrc.local
