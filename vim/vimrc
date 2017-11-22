@@ -79,8 +79,8 @@ augroup custom
 augroup END
 
 " Preferences
-" colorscheme gruvbox
-colorscheme paramount
+colorscheme gruvbox
+" colorscheme paramount
 set background=dark
 
 let mapleader = " "
@@ -197,6 +197,14 @@ set wildignore+=*/__pycache__/*                     " ignore more compiled objec
 set diffopt=           " reset diffopt
 set diffopt+=filler    " add filler
 set diffopt+=vertical  " vertical diff by default
+
+set guioptions-=e  " use textual tab pages
+set guioptions-=m  " no menu bar
+set guioptions-=r  " no scroll bar (right)
+set guioptions-=R  " no scroll bar (right) for splits
+set guioptions-=l  " scroll bar (left)
+set guioptions-=L  " scroll bar (left) for splits
+set guioptions-=T  " toolbar
 
 " [S]plit lines (sister to [J]oin line)
 function! s:SplitLine()
@@ -443,7 +451,7 @@ endfunction
 
 autocmd custom User ALELint call s:MaybeUpdateLightline()
 
-autocmd custom BufWinEnter * if &buftype == 'terminal' | setlocal colorcolumn=0 | endif
+autocmd custom BufWinEnter * if &buftype == 'terminal' | setlocal colorcolumn=0 | setlocal nonumber | endif
 
 " Update and show lightline but only if it's visible (e.g., not in Goyo)
 function! s:MaybeUpdateLightline()
