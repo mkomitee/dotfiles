@@ -94,7 +94,7 @@ set showmatch            " show matching parenthesis
 set showcmd              " show partial commands
 set foldlevelstart=99    " Start with all folds open
 set dictionary=/usr/share/dict/words        " for spell checking
-set spellfile=~/.dotfiles/vim/data/en.utf-8.add  " to add words
+set spellfile=$HOME/.vim/data/en.utf-8.add  " to add words
 set spelllang=en_us      " yes, i do speak it
 set spellsuggest=best,10 " only display the 10 best suggestions
 set number               " line numbers
@@ -340,13 +340,23 @@ vnoremap <leader>rv "hy:%s/<C-r>h/
 nnoremap <leader>au :MundoToggle<cr>
 
 " Tag commands
-nnoremap <leader>tt :Tags<cr>
+nnoremap <leader>Tt :Tags<cr>
 " go to definition / tag
-nnoremap <leader>td <C-]>
+nnoremap <leader>Td <C-]>
 " go to tag in a split
-nnoremap <leader>twd <C-w>}
-nnoremap <leader>tn :tnext<cr>
-nnoremap <leader>tp :tprevious<cr>
+nnoremap <leader>Twd <C-w>}
+nnoremap <leader>Tn :tnext<cr>
+nnoremap <leader>Tp :tprevious<cr>
+
+" Tab commands
+nnoremap <leader>tt :tabs<cr>
+nnoremap <leader>td :tabclose<cr>
+nnoremap <leader>tn :tabnext<cr>
+nnoremap <leader>tp :tabprevious<cr>
+nnoremap <leader>tf :tabfirst<cr>
+nnoremap <leader>tl :tablast<cr>
+nnoremap <leader>tN :tabnew<cr>
+nnoremap <leader>to :tabonly<cr>
 
 " Window commands
 nnoremap <leader>w= <C-W>=
@@ -367,6 +377,7 @@ nnoremap <leader>wL <C-W>r
 nnoremap <leader>wH <C-W>R
 nnoremap <leader>ww :Windows<cr>
 nnoremap <leader>w<tab> <C-W>p
+nnoremap <leader>wo <C-W>o
 " This only works with nmap, nnoremap :-(
 nmap <leader>w? <Plug>(choosewin)
 
@@ -431,6 +442,8 @@ function! LightlineLinterOK() abort
 endfunction
 
 autocmd custom User ALELint call s:MaybeUpdateLightline()
+
+autocmd custom BufWinEnter * if &buftype == 'terminal' | setlocal colorcolumn=0 | endif
 
 " Update and show lightline but only if it's visible (e.g., not in Goyo)
 function! s:MaybeUpdateLightline()
