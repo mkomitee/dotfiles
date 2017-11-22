@@ -323,6 +323,7 @@ command! -bang Notes call fzf#run(fzf#wrap
       \  <bang>0)
       \ )
 nnoremap <leader>an :Notes<cr>
+nnoremap <leader>at :terminal ++curwin<cr>
 
 " Other commands
 nnoremap <leader>as :call Swoop()<cr>
