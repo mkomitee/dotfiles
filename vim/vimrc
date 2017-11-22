@@ -29,7 +29,6 @@ if dein#load_state(expand('~/.vim/bundles'))
   call dein#add('ludovicchabant/vim-gutentags')
   call dein#add('mhinz/vim-signify')
   call dein#add('mhinz/vim-startify')
-  call dein#add('morhetz/gruvbox')
   call dein#add('pelodelfuego/vim-swoop')
   call dein#add('rgarver/Kwbd.vim')
   call dein#add('romainl/vim-qlist')
@@ -40,20 +39,23 @@ if dein#load_state(expand('~/.vim/bundles'))
   call dein#add('tpope/vim-commentary')
   call dein#add('tpope/vim-endwise')
   call dein#add('tpope/vim-fugitive')
-  " call dein#add('tpope/vim-markdown')
   call dein#add('tpope/vim-repeat')
   call dein#add('tpope/vim-sensible')
   call dein#add('tpope/vim-speeddating')
   call dein#add('tpope/vim-surround')
   call dein#add('tpope/vim-unimpaired.git')
   call dein#add('tweekmonster/fzf-filemru')
+  call dein#add('vim-pandoc/vim-pandoc')
+  call dein#add('vim-pandoc/vim-pandoc-syntax')
   call dein#add('w0rp/ale')
   call dein#add('wellle/targets.vim')
   call dein#add('xolox/vim-misc')
   call dein#add('xolox/vim-session')
 
-  call dein#add('vim-pandoc/vim-pandoc')
-  call dein#add('vim-pandoc/vim-pandoc-syntax')
+  call dein#add('fxn/vim-monochrome')
+  call dein#add('morhetz/gruvbox')
+  call dein#add('owickstrom/vim-colors-paramount')
+  call dein#add('sjl/badwolf')
 
   " Required:
   call dein#end()
@@ -78,6 +80,7 @@ augroup END
 
 " Preferences
 colorscheme gruvbox
+" colorscheme paramount
 set background=dark
 
 let mapleader = " "
@@ -497,12 +500,24 @@ autocmd custom FileType man setlocal number
 " markdown customizations
 autocmd custom FileType markdown,pandoc autocmd BufWritePre <buffer> call RemoveTrailingWhiteSpace()
 autocmd custom FileType markdown,pandoc iabbrev <expr> <buffer> :date: '<'.strftime("%Y-%m-%d %a").'>'
+autocmd custom FileType markdown,pandoc iabbrev <expr> <buffer> :time: '['.strftime("%Y-%m-%d %a %H:%M").']'
+autocmd custom FileType markdown,pandoc iabbrev <expr> <buffer> :closed: 'CLOSED: ['.strftime("%Y-%m-%d %a %H:%M").']'
 autocmd custom FileType markdown,pandoc setlocal complete+=kspell
 autocmd custom FileType markdown,pandoc setlocal shiftwidth=4
 autocmd custom FileType markdown,pandoc setlocal softtabstop=4
 autocmd custom FileType markdown,pandoc setlocal spell
 autocmd custom FileType markdown,pandoc setlocal foldlevel=2
-autocmd custom FileType markdown,pandoc nnoremap <buffer> <leader>mp :MarkdownPublish<cr>
+" toggling
+autocmd custom FileType markdown,pandoc nnoremap <buffer> <leader>mtt :call ToggleState("TODO")<cr>
+autocmd custom FileType markdown,pandoc nnoremap <buffer> <leader>mtd :call ToggleState("DONE")<cr>
+autocmd custom FileType markdown,pandoc nnoremap <buffer> <leader>mtw :call ToggleState("WAITING")<cr>
+autocmd custom FileType markdown,pandoc nnoremap <buffer> <leader>mtc :call ToggleState("CANCELED")<cr>
+" publishing
+autocmd custom FileType markdown,pandoc nnoremap <buffer> <leader>meh :call MarkdownPublish("html")<cr>
+autocmd custom FileType markdown,pandoc nnoremap <buffer> <leader>meo :call MarkdownPublish("org")<cr>
+autocmd custom FileType markdown,pandoc nnoremap <buffer> <leader>mew :call MarkdownPublish("docx")<cr>
+autocmd custom FileType markdown,pandoc nnoremap <buffer> <leader>mer :call MarkdownPublish("rst")<cr>
+autocmd custom FileType markdown,pandoc nnoremap <buffer> <leader>mea :call MarkdownPublish("asciidoc")<cr>
 " styles
 autocmd custom FileType pandoc nmap <buffer> <leader>msi <Plug>(pandoc-keyboard-toggle-emphasis)
 autocmd custom FileType pandoc vmap <buffer> <leader>msi <Plug>(pandoc-keyboard-toggle-emphasis)
@@ -664,24 +679,36 @@ let g:rooter_use_lcd = 1
 
 let g:python_highlight_all = 1
 
-let g:markdown_fenced_languages = ['html', 'vim', 'python', 'bash=sh', 'sql']
+let g:markdown_fenced_languages = ['html', 'vim', 'python', 'bash=sh', 'sql', 'erlang']
 
-function! MarkdownPublish()
-  let s:basename = expand('%:r')
-  let s:cmd = "gpp --nostdinc --nocurinc -H " . s:basename . ".md | "
-        \ . "pandoc --standalone --toc --toc-depth=2 "
-        \ . "--include-in-header=$HOME/.vim/contrib/pandoc/header.html "
-        \ . "--include-before-body=$HOME/.vim/contrib/pandoc/before-body.html "
-        \ . "--include-after-body=$HOME/.vim/contrib/pandoc/after-body.html "
-        \ . "--to=html "
-        \ . "--from=markdown+emoji "
-        \ . "--output=" . s:basename . ".html"
-  " echomsg s:cmd
-  silent execute system(s:cmd)
+function! ToggleState(state)
+  let l:save = winsaveview()
+  exe "normal! V"
+  exec ":s/<#S \\(TODO\\|WAITING\\|DONE\\|CANCELED\\)/<#S " . a:state . "/"
+  call winrestview(l:save)
 endfunction
 
-command! MarkdownPublish call MarkdownPublish()
-
+function! MarkdownPublish(format)
+  let s:name = expand('%')
+  if a:format == "html"
+    let s:cmd = "gpp --nostdinc --nocurinc -H " . s:name . " | "
+          \ . "pandoc --standalone --toc --toc-depth=2 "
+          \ . "--include-in-header=$HOME/.vim/contrib/pandoc/header.html "
+          \ . "--include-before-body=$HOME/.vim/contrib/pandoc/before-body.html "
+          \ . "--include-after-body=$HOME/.vim/contrib/pandoc/after-body.html "
+          \ . "--to=html "
+          \ . "--from=markdown+emoji "
+          \ . "--output=" . s:name . ".html"
+    silent execute system(s:cmd)
+  else
+    let s:cmd = "gpp --nostdinc --nocurinc -H " . s:name . " | "
+          \ . "pandoc --standalone --toc --toc-depth=2 "
+          \ . "--to=" . a:format . " "
+          \ . "--from=markdown+emoji "
+          \ . "--output=" . s:name . "." . a:format
+    silent execute system(s:cmd)
+  endif
+endfunction
 
 let g:session_autoload = 'yes'
 let g:session_autosave = 'yes'
