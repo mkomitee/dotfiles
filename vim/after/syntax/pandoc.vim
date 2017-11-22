@@ -14,22 +14,17 @@ syn match myDONE "\<DONE\>" containedin=pandocNoFormatted contained
 syn match myCANCELED "\<CANCELED\>" containedin=pandocNoFormatted contained
 syn match myPriority "\[\#\d\+\]" containedin=pandocNoFormatted contained
 
+hi def link myCANCELED Comment
+hi def link myDate Comment
+hi def link myPriority Comment
+hi def link myTODO Todo
+hi def link myWAITING Todo
+hi def link myHOLD Todo
+hi def link myDONE Todo
+
 if g:colors_name == "gruvbox"
   hi def link myTODO GruvboxRedBold
   hi def link myWAITING GruvboxOrangeBold
   hi def link myHOLD GruvboxYellowBold
   hi def link myDONE GruvboxGreenBold
-  hi def link myCANCELED Comment
-  hi def link myDate Comment
-  hi def link myPriority Comment
-endif
-
-if g:colors_name == "paramount"
-  hi def link myTODO Todo
-  hi def link myWAITING Todo
-  hi def link myHOLD Todo
-  hi def link myDONE Todo
-  hi def link myCANCELED Comment
-  hi def link myDate Comment
-  hi def link myPriority Comment
 endif
