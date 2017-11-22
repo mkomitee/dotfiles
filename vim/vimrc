@@ -79,8 +79,8 @@ augroup custom
 augroup END
 
 " Preferences
-colorscheme gruvbox
-" colorscheme paramount
+" colorscheme gruvbox
+colorscheme paramount
 set background=dark
 
 let mapleader = " "
@@ -94,7 +94,7 @@ set showmatch            " show matching parenthesis
 set showcmd              " show partial commands
 set foldlevelstart=99    " Start with all folds open
 set dictionary=/usr/share/dict/words        " for spell checking
-set spellfile=~/.dotfiles/vim/en.utf-8.add  " to add words
+set spellfile=~/.dotfiles/vim/data/en.utf-8.add  " to add words
 set spelllang=en_us      " yes, i do speak it
 set spellsuggest=best,10 " only display the 10 best suggestions
 set number               " line numbers
@@ -497,27 +497,27 @@ autocmd custom FileType man setlocal nomodified
 autocmd custom FileType man setlocal norelativenumber
 autocmd custom FileType man setlocal number
 
-" markdown customizations
-autocmd custom FileType markdown,pandoc autocmd BufWritePre <buffer> call RemoveTrailingWhiteSpace()
-autocmd custom FileType markdown,pandoc iabbrev <expr> <buffer> :date: '<'.strftime("%Y-%m-%d %a").'>'
-autocmd custom FileType markdown,pandoc iabbrev <expr> <buffer> :time: '['.strftime("%Y-%m-%d %a %H:%M").']'
-autocmd custom FileType markdown,pandoc iabbrev <expr> <buffer> :closed: 'CLOSED: ['.strftime("%Y-%m-%d %a %H:%M").']'
-autocmd custom FileType markdown,pandoc setlocal complete+=kspell
-autocmd custom FileType markdown,pandoc setlocal shiftwidth=4
-autocmd custom FileType markdown,pandoc setlocal softtabstop=4
-autocmd custom FileType markdown,pandoc setlocal spell
-autocmd custom FileType markdown,pandoc setlocal foldlevel=2
+" pandoc/markdown customizations
+autocmd custom FileType pandoc autocmd BufWritePre <buffer> call RemoveTrailingWhiteSpace()
+autocmd custom FileType pandoc iabbrev <expr> <buffer> :date: '<'.strftime("%Y-%m-%d %a").'>'
+autocmd custom FileType pandoc iabbrev <expr> <buffer> :time: '['.strftime("%Y-%m-%d %a %H:%M").']'
+autocmd custom FileType pandoc iabbrev <expr> <buffer> :closed: 'CLOSED: ['.strftime("%Y-%m-%d %a %H:%M").']'
+autocmd custom FileType pandoc setlocal complete+=kspell
+autocmd custom FileType pandoc setlocal shiftwidth=4
+autocmd custom FileType pandoc setlocal softtabstop=4
+autocmd custom FileType pandoc setlocal spell
+autocmd custom FileType pandoc setlocal foldlevel=2
 " toggling
-autocmd custom FileType markdown,pandoc nnoremap <buffer> <leader>mtt :call ToggleState("TODO")<cr>
-autocmd custom FileType markdown,pandoc nnoremap <buffer> <leader>mtd :call ToggleState("DONE")<cr>
-autocmd custom FileType markdown,pandoc nnoremap <buffer> <leader>mtw :call ToggleState("WAITING")<cr>
-autocmd custom FileType markdown,pandoc nnoremap <buffer> <leader>mtc :call ToggleState("CANCELED")<cr>
+autocmd custom FileType pandoc nnoremap <buffer> <leader>mtt :call ToggleState("TODO")<cr>
+autocmd custom FileType pandoc nnoremap <buffer> <leader>mtd :call ToggleState("DONE")<cr>
+autocmd custom FileType pandoc nnoremap <buffer> <leader>mtw :call ToggleState("WAITING")<cr>
+autocmd custom FileType pandoc nnoremap <buffer> <leader>mtc :call ToggleState("CANCELED")<cr>
 " publishing
-autocmd custom FileType markdown,pandoc nnoremap <buffer> <leader>meh :call MarkdownPublish("html")<cr>
-autocmd custom FileType markdown,pandoc nnoremap <buffer> <leader>meo :call MarkdownPublish("org")<cr>
-autocmd custom FileType markdown,pandoc nnoremap <buffer> <leader>mew :call MarkdownPublish("docx")<cr>
-autocmd custom FileType markdown,pandoc nnoremap <buffer> <leader>mer :call MarkdownPublish("rst")<cr>
-autocmd custom FileType markdown,pandoc nnoremap <buffer> <leader>mea :call MarkdownPublish("asciidoc")<cr>
+autocmd custom FileType pandoc nnoremap <buffer> <leader>meh :call MarkdownPublish("html")<cr>
+autocmd custom FileType pandoc nnoremap <buffer> <leader>meo :call MarkdownPublish("org")<cr>
+autocmd custom FileType pandoc nnoremap <buffer> <leader>mew :call MarkdownPublish("docx")<cr>
+autocmd custom FileType pandoc nnoremap <buffer> <leader>mer :call MarkdownPublish("rst")<cr>
+autocmd custom FileType pandoc nnoremap <buffer> <leader>mea :call MarkdownPublish("asciidoc")<cr>
 " styles
 autocmd custom FileType pandoc nmap <buffer> <leader>msi <Plug>(pandoc-keyboard-toggle-emphasis)
 autocmd custom FileType pandoc vmap <buffer> <leader>msi <Plug>(pandoc-keyboard-toggle-emphasis)
@@ -683,8 +683,7 @@ let g:markdown_fenced_languages = ['html', 'vim', 'python', 'bash=sh', 'sql', 'e
 
 function! ToggleState(state)
   let l:save = winsaveview()
-  exe "normal! V"
-  exec ":s/<#S \\(TODO\\|WAITING\\|DONE\\|CANCELED\\)/<#S " . a:state . "/"
+  exe ":.,.s/<#S \\(TODO\\|WAITING\\|DONE\\|CANCELED\\)/<#S " . a:state . "/"
   call winrestview(l:save)
 endfunction
 
