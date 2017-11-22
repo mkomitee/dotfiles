@@ -25,7 +25,6 @@
 *color7:  #bdae93
 *color15: #ebdbb2
 
-xterm*faceName:                 xft:DejaVu Sans Mono:style=regular:size=10
 urxvt256c.font:                 xft:DejaVu Sans Mono:style=normal:size=10
 urxvt256c.boldFont:             xft:DejaVu Sans Mono:style=bold:size=10
 urxvt256c.depth:                32
@@ -67,3 +66,19 @@ Xft.hinting:                full
 Xft.hintstyle:              hintslight
 Xft.lcdfilter:              lcddefault
 Xft.rgba:                   rgb
+
+xterm*faceName:          xft:DejaVu Sans Mono:style=regular:size=10
+xterm*boldFont:          xft:DejaVu Sans Mono:style=bold:size=10
+xterm*eightBitInput:     true
+xterm*metaSendsEscape:   false
+xterm*jumpScroll:        true
+xterm*fastScroll:        true
+xterm*internalBorder:    0
+xterm*rightScrollBar:    false
+xterm*scrollBar:         false
+xterm*scrollKey:         true
+xterm*scrollTtyOutput:   false
+xterm*loginShell:        true
+xterm*saveLines:         12000
+xterm*selectToClipboard: true
+xterm*showMissingGlyphs: true
