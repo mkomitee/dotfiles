@@ -359,10 +359,16 @@ nnoremap <leader>Tp :tprevious<cr>
 " Tab commands
 nnoremap <leader>tt :tabs<cr>
 nnoremap <leader>td :tabclose<cr>
-nnoremap <leader>tn :tabnext<cr>
 nnoremap <leader>tp :tabprevious<cr>
-nnoremap <leader>tf :tabfirst<cr>
-nnoremap <leader>tl :tablast<cr>
+nnoremap <leader>tn :tabnext<cr>
+nnoremap <leader>th :tabprevious<cr>
+nnoremap <leader>tl :tabnext<cr>
+nnoremap <leader>tj :tabprevious<cr>
+nnoremap <leader>tk :tabnext<cr>
+nnoremap <leader>tH :tabfirst<cr>
+nnoremap <leader>tL :tablast<cr>
+nnoremap <leader>tJ :tabfirst<cr>
+nnoremap <leader>tK :tablast<cr>
 nnoremap <leader>tN :tabnew<cr>
 nnoremap <leader>to :tabonly<cr>
 
