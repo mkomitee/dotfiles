@@ -26,6 +26,7 @@ if dein#load_state(expand('~/.vim/bundles'))
   call dein#add('junegunn/vim-peekaboo')
   call dein#add('justinmk/vim-sneak')
   call dein#add('kshenoy/vim-signature')
+  call dein#add('lifepillar/vim-mucomplete')
   call dein#add('ludovicchabant/vim-gutentags')
   call dein#add('mhinz/vim-signify')
   call dein#add('mhinz/vim-startify')
@@ -51,8 +52,6 @@ if dein#load_state(expand('~/.vim/bundles'))
   call dein#add('wellle/targets.vim')
   call dein#add('xolox/vim-misc')
   call dein#add('xolox/vim-session')
-  call dein#add('yuttie/comfortable-motion.vim')
-  call dein#add('lifepillar/vim-mucomplete')
 
   call dein#add('fxn/vim-monochrome')
   call dein#add('morhetz/gruvbox')
@@ -782,11 +781,9 @@ nnoremap <leader>ah :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") 
 " refresh all the things.
 nnoremap <silent> <c-l> :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
 
-noremap <silent> <ScrollWheelDown> :call comfortable_motion#flick(40)<CR>
-noremap <silent> <ScrollWheelUp>   :call comfortable_motion#flick(-40)<CR>
-
 set belloff+=ctrlg
 let g:mucomplete#enable_auto_at_startup = 1
+let g:mucomplete#always_use_completeopt = 0
 
 " Abolish maps are in ~/.vim/after/plugin/abolish.vim
 source ~/.vimrc.local
