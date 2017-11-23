@@ -51,6 +51,7 @@ if dein#load_state(expand('~/.vim/bundles'))
   call dein#add('wellle/targets.vim')
   call dein#add('xolox/vim-misc')
   call dein#add('xolox/vim-session')
+  call dein#add('yuttie/comfortable-motion.vim')
 
   call dein#add('fxn/vim-monochrome')
   call dein#add('morhetz/gruvbox')
@@ -320,6 +321,7 @@ nnoremap <leader>pg :GFiles<CR>
 " Buffer commands
 nnoremap <leader>bb :Buffers<CR>
 nnoremap <leader>bd :Kwbd<CR>
+nnoremap <leader>bc :Kwbd<CR>
 nnoremap <leader>bn :bnext<CR>
 nnoremap <leader>bp :bprev<CR>
 nnoremap <leader>bq :copen<CR>
@@ -380,6 +382,10 @@ nnoremap <leader>w<right> <C-W>>
 nnoremap <leader>w<left> <C-W><
 nnoremap <leader>w<down> <C-W>-
 nnoremap <leader>w<up> <C-W>+
+nnoremap <C-W>- <C-W>s
+nnoremap <C-W>/ <C-W>v
+tnoremap <C-W>- <C-W>s
+tnoremap <C-W>/ <C-W>v
 nnoremap <leader>w- <C-W>s
 nnoremap <leader>w/ <C-W>v
 nnoremap <leader>wj <C-W>j
@@ -387,6 +393,7 @@ nnoremap <leader>wh <C-W>h
 nnoremap <leader>wk <C-W>k
 nnoremap <leader>wl <C-W>l
 nnoremap <leader>wd <C-W>c
+nnoremap <leader>wc <C-W>c
 nnoremap <leader>wL <C-W>r
 nnoremap <leader>wH <C-W>R
 nnoremap <leader>ww :Windows<cr>
@@ -771,6 +778,9 @@ nnoremap <leader>ah :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") 
 
 " refresh all the things.
 nnoremap <silent> <c-l> :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
+
+noremap <silent> <ScrollWheelDown> :call comfortable_motion#flick(40)<CR>
+noremap <silent> <ScrollWheelUp>   :call comfortable_motion#flick(-40)<CR>
 
 " Abolish maps are in ~/.vim/after/plugin/abolish.vim
 source ~/.vimrc.local
