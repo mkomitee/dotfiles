@@ -27,11 +27,20 @@ alias tig='tig --all'
 alias tmux='tmux -u2'
 alias y=true
 
-alias e="command emacsclient -a emacs -q -n"
-alias ex="command emacsclient -a emacs -q -n"
-alias exw="command emacsclient -a emacs -q"
-alias ec="command emacsclient -a emacs -q -t"
-alias ecw="command emacsclient -a emacs -q -t"
+# alias e="command emacsclient -a emacs -q -n"
+# alias ex="command emacsclient -a emacs -q -n"
+# alias exw="command emacsclient -a emacs -q"
+# alias ec="command emacsclient -a emacs -q -t"
+# alias ecw="command emacsclient -a emacs -q -t"
+
+if [  -z "${VIM_SERVERNAME}" ]; then
+    VIM_SERVERNAME="VIM"
+fi
+alias e="command vim --servername $VIM_SERVERNAME --remote"
+alias ec="command vim --servername $VIM_SERVERNAME --remote"
+alias ecw="command vim --servername $VIM_SERVERNAME --remote-wait"
+alias ex="command gvim --servername $VIM_SERVERNAME --remote"
+alias exw="command gvim --servername $VIM_SERVERNAME --remote-wait"
 
 alias type='type -a'
 
