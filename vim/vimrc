@@ -52,6 +52,7 @@ if dein#load_state(expand('~/.vim/bundles'))
   call dein#add('xolox/vim-misc')
   call dein#add('xolox/vim-session')
   call dein#add('yuttie/comfortable-motion.vim')
+  call dein#add('lifepillar/vim-mucomplete')
 
   call dein#add('fxn/vim-monochrome')
   call dein#add('morhetz/gruvbox')
@@ -164,11 +165,13 @@ set shortmess+=T " truncate other messages in the middle if they are too long to
                  "  fit on the command line.  "..." will appear  in the middle.
                  "  Ignored in Ex mode.
 set shortmess+=I " don't give the intro message when starting Vim |:intro|.
+set shortmess+=c " don't give information about completion.
 
 set completeopt=         " reset completeopt
 set completeopt+=preview
-set completeopt+=menuone " show the menu when there are matches
-set completeopt+=noselect " show the menu when there are matches
+set completeopt+=menuone  " show the menu when there are matches
+set completeopt+=noselect " make me select it.
+set completeopt+=noinsert " make me insert it.
 
 set viminfo+=n~/.vim/data/viminfo " move the viminfo file into ~/.vim/data
 
@@ -781,6 +784,9 @@ nnoremap <silent> <c-l> :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr>
 
 noremap <silent> <ScrollWheelDown> :call comfortable_motion#flick(40)<CR>
 noremap <silent> <ScrollWheelUp>   :call comfortable_motion#flick(-40)<CR>
+
+set belloff+=ctrlg
+let g:mucomplete#enable_auto_at_startup = 1
 
 " Abolish maps are in ~/.vim/after/plugin/abolish.vim
 source ~/.vimrc.local
