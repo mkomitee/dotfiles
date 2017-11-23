@@ -784,6 +784,7 @@ nnoremap <silent> <c-l> :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr>
 set belloff+=ctrlg
 let g:mucomplete#enable_auto_at_startup = 1
 let g:mucomplete#always_use_completeopt = 0
+autocmd custom CompleteDone * pclose
 
 " Abolish maps are in ~/.vim/after/plugin/abolish.vim
 source ~/.vimrc.local
