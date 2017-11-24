@@ -83,6 +83,7 @@ augroup END
 colorscheme gruvbox
 " colorscheme paramount
 set background=dark
+let g:gruvbox_sign_column="bg0"
 
 let mapleader = " "
 let localleader = '\\'
@@ -543,6 +544,7 @@ autocmd custom FileType pandoc setlocal shiftwidth=4
 autocmd custom FileType pandoc setlocal softtabstop=4
 autocmd custom FileType pandoc setlocal spell
 autocmd custom FileType pandoc setlocal foldlevel=2
+autocmd custom FileType pandoc setlocal foldcolumn=0
 " toggling
 autocmd custom FileType pandoc nnoremap <buffer> <leader>mtt :call ToggleState("TODO")<cr>
 autocmd custom FileType pandoc nnoremap <buffer> <leader>mtd :call ToggleState("DONE")<cr>
@@ -784,7 +786,8 @@ nnoremap <silent> <c-l> :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr>
 set belloff+=ctrlg
 let g:mucomplete#enable_auto_at_startup = 1
 let g:mucomplete#always_use_completeopt = 0
-autocmd custom CompleteDone * pclose
+let g:mucomplete#cycle_with_trigger = 1
+autocmd custom CompleteDone * if expand('%') !=# '[Command Line]' | pclose | endif
 
 " Abolish maps are in ~/.vim/after/plugin/abolish.vim
 source ~/.vimrc.local
