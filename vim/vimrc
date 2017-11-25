@@ -45,6 +45,7 @@ if dein#load_state(expand('~/.vim/bundles'))
   call dein#add('tpope/vim-speeddating')
   call dein#add('tpope/vim-surround')
   call dein#add('tpope/vim-unimpaired.git')
+  call dein#add('troydm/zoomwintab.vim')
   call dein#add('tweekmonster/fzf-filemru')
   call dein#add('vim-pandoc/vim-pandoc')
   call dein#add('vim-pandoc/vim-pandoc-syntax')
@@ -389,6 +390,7 @@ nnoremap <C-W>- <C-W>s
 nnoremap <C-W>/ <C-W>v
 tnoremap <C-W>- <C-W>s
 tnoremap <C-W>/ <C-W>v
+tnoremap <C-W>o <C-W>N:ZoomWinTabToggle<cr>a
 nnoremap <leader>w- <C-W>s
 nnoremap <leader>w/ <C-W>v
 nnoremap <leader>wj <C-W>j
@@ -401,7 +403,7 @@ nnoremap <leader>wL <C-W>r
 nnoremap <leader>wH <C-W>R
 nnoremap <leader>ww :Windows<cr>
 nnoremap <leader>w<tab> <C-W>p
-nnoremap <leader>wo <C-W>o
+nnoremap <leader>wo :ZoomWinTabToggle<cr>
 " This only works with nmap, nnoremap :-(
 nmap <leader>w? <Plug>(choosewin)
 
