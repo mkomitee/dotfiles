@@ -34,6 +34,7 @@ if dein#load_state(expand('~/.vim/bundles'))
   call dein#add('rgarver/Kwbd.vim')
   call dein#add('romainl/vim-qlist')
   call dein#add('sheerun/vim-polyglot')
+  call dein#add('shinchu/lightline-gruvbox.vim')
   call dein#add('simnalamburt/vim-mundo')
   call dein#add('t9md/vim-choosewin')
   call dein#add('tpope/vim-abolish')
@@ -82,8 +83,7 @@ augroup END
 
 " Preferences
 colorscheme gruvbox
-" colorscheme paramount
-set background=dark
+set background=light
 let g:gruvbox_sign_column="bg0"
 
 let mapleader = " "
@@ -436,6 +436,7 @@ let g:lightline = {
       \   'left': [['mode', 'paste'], ['filename', 'filetype', 'modified']],
       \   'right': [['lineinfo'], ['percent'], ['readonly', 'linter_warnings', 'linter_errors', 'linter_ok']]
       \ },
+      \ 'colorscheme': 'gruvbox',
       \ 'component_expand': {
       \   'linter_warnings': 'LightlineLinterWarnings',
       \   'linter_errors': 'LightlineLinterErrors',
