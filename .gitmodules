@@ -16,3 +16,6 @@
 [submodule "contrib/brendangregg/FlameGraph"]
 	path = contrib/brendangregg/FlameGraph
 	url = https://github.com/brendangregg/FlameGraph
+[submodule "contrib/egel/tmux-gruvbox"]
+	path = contrib/egel/tmux-gruvbox
+	url = https://github.com/egel/tmux-gruvbox

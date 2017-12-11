@@ -1,4 +1,0 @@
-# remap prefix to Control + a
-set-option -g prefix C-Space
-unbind C-b
-bind C-Space send-prefix

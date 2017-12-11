@@ -1,9 +1,0 @@
-# remap prefix to Control + Space
-set-option -g prefix C-Space
-unbind C-b
-bind C-Space send-prefix
-
-# And setup some shortcuts to use it
-bind C-c run "tmux save-buffer - | pbcopy"
-bind C-v run "tmux set-buffer $(pbpaste); tmux paste-buffer"
-set-option -g default-command "reattach-to-user-namespace -l zsh"
