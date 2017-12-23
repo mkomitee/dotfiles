@@ -15,35 +15,24 @@ if dein#load_state(expand('~/.vim/bundles'))
   call dein#add(expand('~/.vim/bundles/repos/github.com/Shougo/dein.vim'))
 
   " Add or remove your plugins here:
-  call dein#add('Shougo/neosnippet-snippets')
-  call dein#add('Shougo/neosnippet.vim')
   call dein#add('airblade/vim-rooter')
   call dein#add('cespare/vim-toml')
-  call dein#add('haya14busa/incsearch.vim')
-  call dein#add('itchyny/lightline.vim')
   call dein#add('junegunn/fzf', { 'build': './install --all' })
   call dein#add('junegunn/fzf.vim')
   call dein#add('junegunn/vim-peekaboo')
-  call dein#add('justinmk/vim-sneak')
   call dein#add('kshenoy/vim-signature')
-  call dein#add('lifepillar/vim-mucomplete')
-  call dein#add('ludovicchabant/vim-gutentags')
-  call dein#add('mhinz/vim-signify')
   call dein#add('mhinz/vim-startify')
   call dein#add('pelodelfuego/vim-swoop')
   call dein#add('rgarver/Kwbd.vim')
   call dein#add('romainl/vim-qlist')
   call dein#add('sheerun/vim-polyglot')
-  call dein#add('shinchu/lightline-gruvbox.vim')
   call dein#add('simnalamburt/vim-mundo')
-  call dein#add('t9md/vim-choosewin')
   call dein#add('tpope/vim-abolish')
   call dein#add('tpope/vim-commentary')
   call dein#add('tpope/vim-endwise')
   call dein#add('tpope/vim-fugitive')
   call dein#add('tpope/vim-repeat')
   call dein#add('tpope/vim-sensible')
-  call dein#add('tpope/vim-speeddating')
   call dein#add('tpope/vim-surround')
   call dein#add('tpope/vim-unimpaired.git')
   call dein#add('troydm/zoomwintab.vim')
@@ -52,13 +41,8 @@ if dein#load_state(expand('~/.vim/bundles'))
   call dein#add('vim-pandoc/vim-pandoc-syntax')
   call dein#add('w0rp/ale')
   call dein#add('wellle/targets.vim')
-  call dein#add('xolox/vim-misc')
-  call dein#add('xolox/vim-session')
 
-  call dein#add('fxn/vim-monochrome')
   call dein#add('morhetz/gruvbox')
-  call dein#add('owickstrom/vim-colors-paramount')
-  call dein#add('sjl/badwolf')
 
   " Required:
   call dein#end()
@@ -83,13 +67,12 @@ augroup END
 
 " Preferences
 colorscheme gruvbox
-set background=light
+set background=dark
 let g:gruvbox_sign_column="bg0"
 
 let mapleader = " "
 let localleader = '\\'
 
-set autoread             " reload files if modified outside of vim & safe
 set hidden               " Allow for hidden buffers
 set list                 " show invisibles
 set showbreak=↪          " indicate a line is the continuation of a wrapped line
@@ -116,13 +99,14 @@ set expandtab             " by default, use spaces & no tabs
 set shiftwidth=4          " shift width (>> & autoindent)
 set softtabstop=4         " 1 soft-tab = 4 spaces
 set textwidth=80          " wrap at 80 columns
-set tags=./tags;          " name of the tags files which is relative to the project
 set nojoinspaces          " 1 space when joining lines at a period, not 2
 set notimeout             " don't timeout mappings
 set modeline              " allow vim config in files
-set exrc                  " allow local vimrcs
-set secure                " limit valid commands in local vimrcs
-set grepprg=rg\ --vimgrep " use rg for vim-grep
+
+" Use rg for grep
+set grepprg=rg\ -S\ --vimgrep\ --no-heading
+set grepformat=%f:%l:%c:%m,%f:%l%m,%f\ \ %l%m|
+
 set splitbelow            " split below instead of above
 set splitright            " split to the right instead of the left
 set colorcolumn=+1        " highlight the color column+1
@@ -202,6 +186,14 @@ set wildignore+=*/__pycache__/*                     " ignore more compiled objec
 set diffopt=           " reset diffopt
 set diffopt+=filler    " add filler
 set diffopt+=vertical  " vertical diff by default
+
+set statusline=         " clear statusline
+set statusline+=%F\     " full filename
+set statusline+=%m%r%w  " flags
+set statusline+=%y\     " filetype
+set statusline+=%=      " seperator
+set statusline+=c:%c\   " column
+set statusline+=l:%l/%L " line
 
 set guioptions-=e  " use textual tab pages
 set guioptions-=m  " no menu bar
@@ -332,6 +324,7 @@ nnoremap <leader>bq :copen<CR>
 nnoremap <leader>bl :lopen<CR>
 nnoremap <leader>b<tab> <C-^>
 nnoremap <C-C><Left> <C-^>
+nnoremap <leader>bs :Scratch<CR>
 
 command! -bang Notes call fzf#run(fzf#wrap
       \  ('my-stuff', {'dir': '~/notes',
@@ -406,9 +399,6 @@ nnoremap <leader>ww :Windows<cr>
 nnoremap <leader>w<tab> <C-W>p
 nnoremap <leader>wo :ZoomWinTabToggle<cr>
 nnoremap <leader>wz :ZoomWinTabToggle<cr>
-" This only works with nmap, nnoremap :-(
-nmap <leader>w? <Plug>(choosewin)
-
 
 " Git commands
 nnoremap <leader>gs :Gstatus<cr>
@@ -417,6 +407,10 @@ nnoremap <leader>gl :Glog<cr>
 nnoremap <leader>gd :Gdiff<cr>
 nnoremap <leader>gb :Gblame<cr>
 nnoremap <leader>gf :GFiles<CR>
+
+" grep for word under cursor
+nmap <Leader># #:sil! gr! "\b<C-R><C-W>\b"<CR>:cw<CR>:redr!<CR>
+nmap <Leader>* #:sil! gr! "\b<C-R><C-W>\b"<CR>:cw<CR>:redr!<CR>
 
 let g:ale_sign_column_always = 1
 let g:ale_fixers = {
@@ -431,55 +425,7 @@ let g:ale_fixers = {
 let g:ale_set_quickfix = 1
 let g:ale_set_loclist = 0
 
-let g:lightline = {
-      \ 'active': {
-      \   'left': [['mode', 'paste'], ['filename', 'filetype', 'modified']],
-      \   'right': [['lineinfo'], ['percent'], ['readonly', 'linter_warnings', 'linter_errors', 'linter_ok']]
-      \ },
-      \ 'colorscheme': 'gruvbox',
-      \ 'component_expand': {
-      \   'linter_warnings': 'LightlineLinterWarnings',
-      \   'linter_errors': 'LightlineLinterErrors',
-      \   'linter_ok': 'LightlineLinterOK'
-      \ },
-      \ 'component_type': {
-      \   'readonly': 'error',
-      \   'linter_warnings': 'warning',
-      \   'linter_errors': 'error'
-      \ },
-      \ }
-
-function! LightlineLinterWarnings() abort
-  let l:counts = ale#statusline#Count(bufnr(''))
-  let l:all_errors = l:counts.error + l:counts.style_error
-  let l:all_non_errors = l:counts.total - l:all_errors
-  return l:counts.total == 0 ? '' : printf('%d ◆', all_non_errors)
-endfunction
-
-function! LightlineLinterErrors() abort
-  let l:counts = ale#statusline#Count(bufnr(''))
-  let l:all_errors = l:counts.error + l:counts.style_error
-  let l:all_non_errors = l:counts.total - l:all_errors
-  return l:counts.total == 0 ? '' : printf('%d ✗', all_errors)
-endfunction
-
-function! LightlineLinterOK() abort
-  let l:counts = ale#statusline#Count(bufnr(''))
-  let l:all_errors = l:counts.error + l:counts.style_error
-  let l:all_non_errors = l:counts.total - l:all_errors
-  return l:counts.total == 0 ? '✓ ' : ''
-endfunction
-
-autocmd custom User ALELint call s:MaybeUpdateLightline()
-
 autocmd custom BufWinEnter * if &buftype == 'terminal' | setlocal colorcolumn=0 | setlocal nonumber | endif
-
-" Update and show lightline but only if it's visible (e.g., not in Goyo)
-function! s:MaybeUpdateLightline()
-  if exists('#lightline')
-    call lightline#update()
-  end
-endfunction
 
 "nnoremap ≈ :Commands<cr>
 nnoremap <M-x> :Commands<cr>
@@ -651,6 +597,10 @@ autocmd custom FileType puppet autocmd BufWritePre <buffer> call RemoveTrailingW
 " python customizations
 autocmd custom FileType python autocmd BufWritePre <buffer> call RemoveTrailingWhiteSpace()
 autocmd custom FileType python setlocal textwidth=79
+"
+" javascript customizations
+autocmd custom FileType javascript autocmd BufWritePre <buffer> call RemoveTrailingWhiteSpace()
+autocmd custom FileType javascript setlocal textwidth=120
 
 " cython customizations
 autocmd custom FileType pyrex autocmd BufWritePre <buffer> call RemoveTrailingWhiteSpace()
@@ -694,6 +644,11 @@ autocmd custom FileType netrw setlocal number
 " opened.
 autocmd custom BufReadPost * call RestoreCursorPosition()
 
+" Automatically bring up location / quickfix lists
+autocmd custom QuickFixCmdPost [^l]* cwindow
+autocmd custom QuickFixCmdPost    l* lwindow
+autocmd custom VimEnter            * cwindow
+
 silent execute '!mkdir -p $HOME/.vim/data/vimbackup'
 silent execute '!mkdir -p $HOME/.vim/data/vimswap'
 silent execute '!mkdir -p $HOME/.vim/data/vimviews'
@@ -702,17 +657,9 @@ silent execute '!mkdir -p $HOME/.vim/data/tags'
 
 let g:swoopUseDefaultKeyMap = 0
 
-" Experimenting with incsearch, not sure if it has legs.
-map / <Plug>(incsearch-forward)
-map ? <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
-
-
 let g:mundo_help = 1
 let g:mundo_preview_bottom = 1
 let g:mundo_right = 1
-
-let g:sneak#absolute_dir = 1
 
 let g:fzf_filemru_bufwrite = 1
 let g:fzf_filemru_git_ls = 1
@@ -752,14 +699,6 @@ function! MarkdownPublish(format)
   endif
 endfunction
 
-let g:session_autoload = 'yes'
-let g:session_autosave = 'yes'
-let g:session_autosave_periodic = 5
-let g:session_autosave_silent = 1
-let g:session_default_to_last = 1
-let g:session_menu = 0
-let g:session_persist_colors = 0
-
 let g:startify_bookmarks = [
       \ '$HOME/.dotfiles/vim/vimrc',
       \ '$HOME/.vimrc.local',
@@ -789,10 +728,20 @@ nnoremap <leader>ah :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") 
 nnoremap <silent> <c-l> :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
 
 set belloff+=ctrlg
-let g:mucomplete#enable_auto_at_startup = 1
-let g:mucomplete#always_use_completeopt = 0
-let g:mucomplete#cycle_with_trigger = 1
-autocmd custom CompleteDone * if expand('%') !=# '[Command Line]' | pclose | endif
+
+" Insert mode Completion:
+" <C-X><C-F> filenames
+" <C-X><C-I> identifiers
+" <C-X><C-K> words in dictionary
+" <C-X><C-L> whole lines
+" <C-X><C-O> omni completion function
+" <C-X><C-S> spelling suggestions
+" <C-X><C-T> thesaurus
+" <C-X><C-U> user completion function
+" <C-X><C-V> complete like in : command line
+" <C-X><C-]> complete tags
+
+command! Scratch new | setlocal nobuflisted buftype=nofile bufhidden=wipe noswapfile
 
 " Abolish maps are in ~/.vim/after/plugin/abolish.vim
 source ~/.vimrc.local
