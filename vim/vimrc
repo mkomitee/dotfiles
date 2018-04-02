@@ -21,12 +21,16 @@ if dein#load_state(expand('~/.vim/bundles'))
   call dein#add('junegunn/fzf.vim')
   call dein#add('junegunn/vim-peekaboo')
   call dein#add('kshenoy/vim-signature')
+  call dein#add('ludovicchabant/vim-gutentags')
   call dein#add('mhinz/vim-startify')
+  call dein#add('pangloss/vim-javascript')
   call dein#add('pelodelfuego/vim-swoop')
   call dein#add('rgarver/Kwbd.vim')
+  call dein#add('romainl/vim-qf')
   call dein#add('romainl/vim-qlist')
   call dein#add('sheerun/vim-polyglot')
   call dein#add('simnalamburt/vim-mundo')
+  call dein#add('tommcdo/vim-lion')
   call dein#add('tpope/vim-abolish')
   call dein#add('tpope/vim-characterize')
   call dein#add('tpope/vim-commentary')
@@ -43,8 +47,6 @@ if dein#load_state(expand('~/.vim/bundles'))
   call dein#add('vim-pandoc/vim-pandoc-syntax')
   call dein#add('w0rp/ale')
   call dein#add('wellle/targets.vim')
-  call dein#add('tommcdo/vim-lion')
-  " investigate https://github.com/romainl/vim-qf
 
   call dein#add('morhetz/gruvbox')
 
@@ -315,7 +317,8 @@ nnoremap <leader>fm :History<CR>
 nnoremap <leader>fh :History<CR>
 
 " Project commands
-nnoremap <leader>pf :ProjectMru<CR>
+nnoremap <leader>pp :Projects<CR>
+nnoremap <leader>pf :GFiles<CR>
 nnoremap <leader>pg :GFiles<CR>
 
 " Buffer commands
@@ -336,7 +339,17 @@ command! -bang Notes call fzf#run(fzf#wrap
       \               },
       \  <bang>0)
       \ )
+
+function! NoteToday()
+  let s:basedir = expand('~/notes/daily')
+  let s:dir = expand('~/notes/daily') . strftime("/%Y/%m/")
+  let s:file = s:dir . strftime("%Y%m%d.md")
+  silent execute system('mkdir -p ' . s:dir)
+  execute "edit " . s:file
+endfunction
+
 nnoremap <leader>an :Notes<cr>
+nnoremap <leader>aN :call NoteToday()<cr>
 nnoremap <leader>at :terminal ++curwin<cr>
 
 " Other commands
@@ -426,8 +439,18 @@ let g:ale_fixers = {
       \    'trim_whitespace',
       \  ],
       \ }
+let g:ale_linters = {
+      \  'python': [
+      \    'flake8',
+      \    'pylint',
+      \  ],
+      \ }
 let g:ale_set_quickfix = 1
 let g:ale_set_loclist = 0
+let g:ale_lint_on_insert_leave = 1
+let g:ale_lint_on_text_changed = "normal"
+let g:ale_lint_delay = 0
+
 
 autocmd custom BufWinEnter * if &buftype == 'terminal' | setlocal colorcolumn=0 | setlocal nonumber | endif
 
@@ -601,6 +624,7 @@ autocmd custom FileType puppet autocmd BufWritePre <buffer> call RemoveTrailingW
 " python customizations
 autocmd custom FileType python autocmd BufWritePre <buffer> call RemoveTrailingWhiteSpace()
 autocmd custom FileType python setlocal textwidth=79
+autocmd custom BufNewFile *.py 0r ~/.vim/templates/skeleton.py
 "
 " javascript customizations
 autocmd custom FileType javascript autocmd BufWritePre <buffer> call RemoveTrailingWhiteSpace()
@@ -690,7 +714,7 @@ function! MarkdownPublish(format)
           \ . "--include-before-body=$HOME/.vim/contrib/pandoc/before-body.html "
           \ . "--include-after-body=$HOME/.vim/contrib/pandoc/after-body.html "
           \ . "--to=html "
-          \ . "--from=markdown+emoji "
+          \ . "--from=markdown+emoji+simple_tables+pipe_tables+grid_tables+multiline_tables+table_captions "
           \ . "--output=" . s:name . ".html"
     silent execute system(s:cmd)
   else
@@ -745,7 +769,8 @@ set belloff+=ctrlg
 " <C-X><C-V> complete like in : command line
 " <C-X><C-]> complete tags
 
-command! Scratch new | setlocal nobuflisted buftype=nofile bufhidden=wipe noswapfile
+command! Scratch enew | setlocal nobuflisted buftype=nofile bufhidden=wipe noswapfile
+
 
 " Abolish maps are in ~/.vim/after/plugin/abolish.vim
 source ~/.vimrc.local
