@@ -17,6 +17,7 @@ export FPATH
 
 # Setup path
 path=(
+    $HOME/.local/bin
     $HOME/bin
     $HOME/.cabal/bin
     $HOME/.cargo/bin
