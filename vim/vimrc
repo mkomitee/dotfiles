@@ -3,68 +3,50 @@ if &compatible
   set nocompatible               " Be iMproved
 endif
 
-" Required:
-set runtimepath+=~/.vim/bundles/repos/github.com/Shougo/dein.vim
-
-" Required:
-if dein#load_state(expand('~/.vim/bundles'))
-  call dein#begin(expand('~/.vim/bundles'))
-
-  " Let dein manage dein
-  " Required:
-  call dein#add(expand('~/.vim/bundles/repos/github.com/Shougo/dein.vim'))
-
-  " Add or remove your plugins here:
-  call dein#add('airblade/vim-rooter')
-  call dein#add('cespare/vim-toml')
-  call dein#add('junegunn/fzf', { 'build': './install --all' })
-  call dein#add('junegunn/fzf.vim')
-  call dein#add('junegunn/vim-peekaboo')
-  call dein#add('kshenoy/vim-signature')
-  call dein#add('ludovicchabant/vim-gutentags')
-  call dein#add('mhinz/vim-startify')
-  call dein#add('pangloss/vim-javascript')
-  call dein#add('pelodelfuego/vim-swoop')
-  call dein#add('rgarver/Kwbd.vim')
-  call dein#add('romainl/vim-qf')
-  call dein#add('romainl/vim-qlist')
-  call dein#add('sheerun/vim-polyglot')
-  call dein#add('simnalamburt/vim-mundo')
-  call dein#add('tommcdo/vim-lion')
-  call dein#add('tpope/vim-abolish')
-  call dein#add('tpope/vim-characterize')
-  call dein#add('tpope/vim-commentary')
-  call dein#add('tpope/vim-endwise')
-  call dein#add('tpope/vim-fugitive')
-  call dein#add('tpope/vim-repeat')
-  call dein#add('tpope/vim-rsi')
-  call dein#add('tpope/vim-sensible')
-  call dein#add('tpope/vim-surround')
-  call dein#add('tpope/vim-unimpaired.git')
-  call dein#add('troydm/zoomwintab.vim')
-  call dein#add('tweekmonster/fzf-filemru')
-  call dein#add('vim-pandoc/vim-pandoc')
-  call dein#add('vim-pandoc/vim-pandoc-syntax')
-  call dein#add('w0rp/ale')
-  call dein#add('wellle/targets.vim')
-
-  call dein#add('morhetz/gruvbox')
-
-  " Required:
-  call dein#end()
-  call dein#save_state()
-endif
+call plug#begin('~/.vim/plugged')
+Plug 'airblade/vim-rooter'
+Plug 'cespare/vim-toml'
+Plug 'fatih/vim-go'
+Plug 'junegunn/fzf', { 'build': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/vim-peekaboo'
+Plug 'kshenoy/vim-signature'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'maralla/completor.vim'
+Plug 'mhinz/vim-startify'
+Plug 'morhetz/gruvbox'
+Plug 'pangloss/vim-javascript'
+Plug 'pelodelfuego/vim-swoop'
+Plug 'rgarver/Kwbd.vim'
+Plug 'romainl/vim-qf'
+Plug 'romainl/vim-qlist'
+Plug 'sheerun/vim-polyglot'
+Plug 'simnalamburt/vim-mundo'
+Plug 'tommcdo/vim-lion'
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-characterize'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-rsi'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'troydm/zoomwintab.vim'
+Plug 'tweekmonster/fzf-filemru'
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'w0rp/ale'
+Plug 'wellle/targets.vim'
+call plug#end()
 
 " Required:
 filetype plugin indent on
 syntax enable
 
-" If you want to install not installed plugins on startup.
-if dein#check_install()
-  call dein#install()
-endif
-
-" End dein Scripts
+let g:completor_python_binary = '/usr/local/python/python-2.7/bin/python'
+let g:completor_debug = 1
 
 " Clear my custom augroup.
 augroup custom
@@ -122,7 +104,8 @@ set infercase
 set synmaxcol=800
 set undofile              " track undo history
 set undodir=$HOME/.vim/data/vimundo/ " place undo history here
-set clipboard^=unnamed,unnamedplus " integrate with the system clipboard.
+"set clipboard^=unnamed,unnamedplus " integrate with the system clipboard.
+set clipboard=unnamed
 
 set fillchars=         " reset fillchars
 set fillchars+=fold:-  " fill foldtext with dashes
@@ -495,10 +478,34 @@ autocmd custom FileType make setlocal softtabstop=0
 autocmd custom FileType make setlocal tabstop=4
 
 " go customizations
-autocmd custom FileType go autocmd BufWritePre <buffer> call RemoveTrailingWhiteSpace()
+" autocmd custom FileType go autocmd BufWritePre <buffer> call RemoveTrailingWhiteSpace()
 autocmd custom FileType go setlocal noexpandtab
 autocmd custom FileType go setlocal shiftwidth=4
 autocmd custom FileType go setlocal tabstop=4
+
+autocmd custom FileType go nnoremap <buffer> <leader>mdS :call FixVimGoDebugHighlights()<cr>:GoDebugStart<cr>
+autocmd custom FileType go nnoremap <buffer> <leader>mdb :call FixVimGoDebugHighlights()<cr>:GoDebugBreakpoint<cr>
+autocmd custom FileType go nnoremap <buffer> <leader>mdc :call FixVimGoDebugHighlights()<cr>:GoDebugContinue<cr>
+autocmd custom FileType go nnoremap <buffer> <leader>mdn :call FixVimGoDebugHighlights()<cr>:GoDebugNext<cr>
+autocmd custom FileType go nnoremap <buffer> <leader>mdr :call FixVimGoDebugHighlights()<cr>:GoDebugRestart<cr>
+autocmd custom FileType go nnoremap <buffer> <leader>mds :call FixVimGoDebugHighlights()<cr>:GoDebugStep<cr>
+autocmd custom FileType go nnoremap <buffer> <leader>mdx :call FixVimGoDebugHighlights()<cr>:GoDebugStop<cr>
+autocmd custom FileType go nnoremap <buffer> <leader>mdX :call FixVimGoDebugHighlights()<cr>:GoDebugStop<cr>
+autocmd custom FileType go nnoremap <buffer> <leader>mdo :call FixVimGoDebugHighlights()<cr>:GoDebugStepOut<cr>
+" autocmd custom FileType go hi! GoDebugCurrent term=underline ctermbg=237 guibg=#3c3836
+
+function! FixVimGoDebugHighlights() abort
+  highlight GoDebugCurrent term=underline ctermbg=237 guibg=#3c3836
+endfunction
+autocmd custom ColorScheme * call FixVimGoDebugHighlights()
+
+
+" TODO: change the highlight line for debug in this colorscheme, it makes it
+" impossible to read. Currently it's:
+" GoDebugCurrent xxx term=reverse ctermfg=7 ctermbg=12 guifg=White guibg=DarkBlue
+" Soemthing like this would be better ...
+" CursorLine     xxx term=underline ctermbg=237 guibg=#3c3836
+let g:go_fmt_command = "goimports"
 
 " yaml customizations
 autocmd custom FileType yaml autocmd BufWritePre <buffer> call RemoveTrailingWhiteSpace()
@@ -756,6 +763,7 @@ nnoremap <leader>ah :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") 
 nnoremap <silent> <c-l> :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
 
 set belloff+=ctrlg
+set belloff+=all
 
 " Insert mode Completion:
 " <C-X><C-F> filenames
@@ -770,7 +778,6 @@ set belloff+=ctrlg
 " <C-X><C-]> complete tags
 
 command! Scratch enew | setlocal nobuflisted buftype=nofile bufhidden=wipe noswapfile
-
 
 " Abolish maps are in ~/.vim/after/plugin/abolish.vim
 source ~/.vimrc.local
