@@ -13,7 +13,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-peekaboo'
 Plug 'kshenoy/vim-signature'
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'maralla/completor.vim'
 Plug 'mhinz/vim-startify'
 Plug 'morhetz/gruvbox'
 Plug 'pangloss/vim-javascript'
@@ -45,9 +44,6 @@ call plug#end()
 " Required:
 filetype plugin indent on
 syntax enable
-
-let g:completor_python_binary = '/usr/local/python/python-2.7/bin/python'
-let g:completor_debug = 1
 
 " Clear my custom augroup.
 augroup custom
