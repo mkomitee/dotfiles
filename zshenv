@@ -3,7 +3,6 @@
 UNAME=$(uname)
 ARCH=$(arch)
 
-export GOROOT=$HOME/.${UNAME}.${ARCH}/go
 export ERL_TOP=$HOME/.${UNAME}.${ARCH}/erlang
 export ELIXIR_TOP=$HOME/.${UNAME}.${ARCH}/elixir
 
@@ -23,7 +22,6 @@ path=(
     $HOME/.cargo/bin
     $HOME/scripts
     $HOME/.${UNAME}.${ARCH}/bin
-    $GOROOT/bin
     $ERL_TOP/bin
     $ELIXIR_TOP/bin
     $HOME/.dotfiles/contrib/visionmedia/git-extras/bin
