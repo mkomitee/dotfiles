@@ -52,6 +52,16 @@ augroup END
 
 " Preferences
 set termguicolors
+
+if exists('$TMUX')
+  " Colors in tmux
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  " Italics
+  let &t_ZH="\e[3m"
+  let &t_ZR="\e[23m"
+endif
+
 let ayucolor="dark"
 colorscheme ayu
 set background=dark
