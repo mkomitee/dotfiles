@@ -5,7 +5,6 @@ endif
 
 call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-rooter'
-Plug 'ayu-theme/ayu-vim'
 Plug 'cespare/vim-toml'
 Plug 'fatih/vim-go'
 Plug 'junegunn/fzf', { 'build': './install --all' }
@@ -13,10 +12,8 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-peekaboo'
 Plug 'kshenoy/vim-signature'
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'mhinz/vim-startify'
 Plug 'morhetz/gruvbox'
 Plug 'pangloss/vim-javascript'
-Plug 'pelodelfuego/vim-swoop'
 Plug 'rgarver/Kwbd.vim'
 Plug 'romainl/vim-qf'
 Plug 'romainl/vim-qlist'
@@ -51,21 +48,20 @@ augroup custom
 augroup END
 
 " Preferences
-set termguicolors
+" set termguicolors
 
-if exists('$TMUX')
-  " Colors in tmux
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-  " Italics
-  let &t_ZH="\e[3m"
-  let &t_ZR="\e[23m"
-endif
+" if exists('$TMUX')
+"   " Colors in tmux
+"   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+"   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+"   " Italics
+"   let &t_ZH="\e[3m"
+"   let &t_ZR="\e[23m"
+" endif
 
-let ayucolor="dark"
-colorscheme ayu
+let g:gruvbox_sign_column="bg0"
 set background=dark
-" let g:gruvbox_sign_column="bg0"
+colorscheme gruvbox
 
 let mapleader = " "
 let localleader = '\\'
@@ -88,9 +84,9 @@ set sidescroll=1         " scroll horizontally by 1
 set ignorecase           " ignore case when searching, ...
 set smartcase            " unless I search for uppercase
 set hlsearch             " and highlight searches
-set backupdir=$HOME/.vim/data/vimbackup/ " save backups in alternate location
-set directory=$HOME/.vim/data/vimswap/   " save swap files here
-set viewdir=$HOME/.vim/data/vimviews/    " save views here
+set backupdir=$HOME/.local/share/vim/backup/ " save backups in alternate location
+set directory=$HOME/.local/share/vim/swap/   " save swap files here
+set viewdir=$HOME/.local/share/vim/views/    " save views here
 set wildmenu              " commandline completion is nice
 set expandtab             " by default, use spaces & no tabs
 set shiftwidth=4          " shift width (>> & autoindent)
@@ -112,7 +108,7 @@ set showbreak=⣿⣿⣿⣿⣿
 set infercase
 set synmaxcol=800
 set undofile              " track undo history
-set undodir=$HOME/.vim/data/vimundo/ " place undo history here
+set undodir=$HOME/.local/share/vim/undo/ " place undo history here
 "set clipboard^=unnamed,unnamedplus " integrate with the system clipboard.
 set clipboard=unnamed
 
@@ -156,7 +152,11 @@ set completeopt+=menuone  " show the menu when there are matches
 set completeopt+=noselect " make me select it.
 set completeopt+=noinsert " make me insert it.
 
+if has("nvim")
+" set viminfo+=n~/.vim/data/viminfo " move the viminfo file into ~/.vim/data
+else
 set viminfo+=n~/.vim/data/viminfo " move the viminfo file into ~/.vim/data
+endif
 
 set virtualedit=        " reset virtualedit
 set virtualedit+=block  " can move past the end of the line in visual block mode
@@ -303,7 +303,11 @@ nnoremap <silent> * :let b:pos = winsaveview()<cr>*:call winrestview(b:pos)<cr>
 nnoremap <silent> # :let b:pos = winsaveview()<cr>#:call winrestview(b:pos)<cr>
 
 " File commands
-nnoremap <leader>fed :e $HOME/.dotfiles/vim/vimrc<CR>
+if has("nvim")
+  nnoremap <leader>fed :e $HOME/.dotfiles/nvim/init.vim<CR>
+else
+  nnoremap <leader>fed :e $HOME/.dotfiles/vim/vimrc<CR>
+endif
 nnoremap <leader>ff :FilesMru --tiebreak=end<CR>
 nnoremap <leader>fm :History<CR>
 nnoremap <leader>fh :History<CR>
@@ -345,10 +349,6 @@ nnoremap <leader>aN :call NoteToday()<cr>
 nnoremap <leader>at :terminal ++curwin<cr>
 
 " Other commands
-nnoremap <leader>as :call Swoop()<cr>
-vnoremap <leader>as :call SwoopSelection()<cr>
-nnoremap <leader>aS :call Swoop()<cr>
-vnoremap <leader>aS :call SwoopMultiSelection()<cr>
 " Replace word under cursor, everywhere in the file.
 nnoremap <leader>r. :%s/\<C-r><C-w>\>/
 " Replace visually selected characters, everywhere in the file.
@@ -669,9 +669,6 @@ autocmd custom FileType help setlocal nomodified
 autocmd custom FileType help setlocal norelativenumber
 autocmd custom FileType help setlocal number
 
-" swoop buffer customizations
-autocmd custom BufEnter swoopBuf nnoremap <buffer> q :bdelete!<cr>
-
 " gitcommit customizations
 autocmd custom FileType gitcommit setlocal complete+=kspell
 autocmd custom FileType gitcommit setlocal spell
@@ -693,13 +690,11 @@ autocmd custom QuickFixCmdPost [^l]* cwindow
 autocmd custom QuickFixCmdPost    l* lwindow
 autocmd custom VimEnter            * cwindow
 
-silent execute '!mkdir -p $HOME/.vim/data/vimbackup'
-silent execute '!mkdir -p $HOME/.vim/data/vimswap'
-silent execute '!mkdir -p $HOME/.vim/data/vimviews'
-silent execute '!mkdir -p $HOME/.vim/data/vimundo'
-silent execute '!mkdir -p $HOME/.vim/data/tags'
-
-let g:swoopUseDefaultKeyMap = 0
+silent execute '!mkdir -p $HOME/.local/share/vim/backup'
+silent execute '!mkdir -p $HOME/.local/share/vim/swap'
+silent execute '!mkdir -p $HOME/.local/share/vim/views'
+silent execute '!mkdir -p $HOME/.local/share/vim/undo'
+silent execute '!mkdir -p $HOME/.local/share/vim/tags'
 
 let g:mundo_help = 1
 let g:mundo_preview_bottom = 1
@@ -743,17 +738,6 @@ function! MarkdownPublish(format)
   endif
 endfunction
 
-let g:startify_bookmarks = [
-      \ '$HOME/.dotfiles/vim/vimrc',
-      \ '$HOME/.vimrc.local',
-      \ '$HOME/.dotfiles/zshrc',
-      \ '$HOME/.zshrc.local',
-      \ '$HOME/.dotfiles/zshenv',
-      \ '$HOME/.zshenv.local',
-      \ '$HOME/.aliases',
-      \ '$HOME/.vim/doc/shortcuts.txt',
-      \]
-"
 " Experimentation
 set concealcursor=iv
 set conceallevel=2
