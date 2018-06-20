@@ -109,8 +109,10 @@ set infercase
 set synmaxcol=800
 set undofile              " track undo history
 set undodir=$HOME/.local/share/vim/undo/ " place undo history here
-"set clipboard^=unnamed,unnamedplus " integrate with the system clipboard.
-set clipboard=unnamed
+if !exists("g:gui_oni")
+  "set clipboard^=unnamed,unnamedplus " integrate with the system clipboard.
+  set clipboard=unnamed
+endif
 
 set fillchars=         " reset fillchars
 set fillchars+=fold:-  " fill foldtext with dashes
