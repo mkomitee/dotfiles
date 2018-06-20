@@ -25,7 +25,7 @@ export const deactivate = (oni: Oni.Plugin.Api) => {
 export const configuration = {
     //add custom config here, such as
 
-    "ui.colorscheme": "gruvbox",
+    // "ui.colorscheme": "nord",
 
     //"oni.useDefaultConfig": true,
     //"oni.bookmarks": ["~/Documents"],
@@ -37,5 +37,8 @@ export const configuration = {
     "ui.animations.enabled": true,
     "ui.fontSmoothing": "auto",
 
+    "ui.colorscheme": "gruvbox",
     "sidebar.default.open": false,
+    "oni.bookmarks": ["~/.dotfiles"],
+    "oni.useDefaultConfig": false,
 }

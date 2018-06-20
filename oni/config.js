@@ -17,7 +17,7 @@ exports.deactivate = function (oni) {
 };
 exports.configuration = {
     //add custom config here, such as
-    "ui.colorscheme": "gruvbox",
+    // "ui.colorscheme": "nord",
     //"oni.useDefaultConfig": true,
     //"oni.bookmarks": ["~/Documents"],
     //"oni.loadInitVim": false,
@@ -26,5 +26,8 @@ exports.configuration = {
     // UI customizations
     "ui.animations.enabled": true,
     "ui.fontSmoothing": "auto",
-    "sidebar.default.open": false
+    "ui.colorscheme": "gruvbox",
+    "sidebar.default.open": false,
+    "oni.bookmarks": ["~/.dotfiles"],
+    "oni.useDefaultConfig": false
 };
