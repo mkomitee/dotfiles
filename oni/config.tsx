@@ -39,6 +39,11 @@ export const configuration = {
 
     "ui.colorscheme": "gruvbox",
     "sidebar.default.open": false,
-    "oni.bookmarks": ["~/.dotfiles"],
+    "oni.bookmarks": ["~/.dotfiles/README.md"],
     "oni.useDefaultConfig": false,
+    "oni.loadInitVim": true,
+    "autoClosingPairs.enabled": false,
+    "learning.enabled": false,
+    "achievements.enabled": false,
+    "tabs.mode": "buffer",
 }

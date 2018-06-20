@@ -70,7 +70,6 @@ set hidden               " Allow for hidden buffers
 set list                 " show invisibles
 set showbreak=↪          " indicate a line is the continuation of a wrapped line
 set showmatch            " show matching parenthesis
-set showcmd              " show partial commands
 set foldlevelstart=99    " Start with all folds open
 set dictionary=/usr/share/dict/words        " for spell checking
 set spellfile=$HOME/.vim/data/en.utf-8.add  " to add words
@@ -154,10 +153,8 @@ set completeopt+=menuone  " show the menu when there are matches
 set completeopt+=noselect " make me select it.
 set completeopt+=noinsert " make me insert it.
 
-if has("nvim")
-" set viminfo+=n~/.vim/data/viminfo " move the viminfo file into ~/.vim/data
-else
-set viminfo+=n~/.vim/data/viminfo " move the viminfo file into ~/.vim/data
+if !has("nvim")
+  set viminfo+=n~/.vim/data/viminfo " move the viminfo file into ~/.vim/data
 endif
 
 set virtualedit=        " reset virtualedit
