@@ -20,8 +20,10 @@ path=(
     $HOME/bin
     $HOME/.cabal/bin
     $HOME/.cargo/bin
+    $HOME/.go/bin
     $HOME/scripts
     $HOME/.${UNAME}.${ARCH}/bin
+    $HOME/.${UNAME}.${ARCH}/go/bin
     $ERL_TOP/bin
     $ELIXIR_TOP/bin
     $HOME/.dotfiles/contrib/visionmedia/git-extras/bin
@@ -85,6 +87,7 @@ export LANG=en_US.UTF-8
 
 export FZF_DEFAULT_COMMAND="rg --files --hidden --follow"
 export FZF_DEFAULT_OPTS="--inline-info"
+
 
 if [ -f $HOME/.zshenv.local ]; then
     source $HOME/.zshenv.local

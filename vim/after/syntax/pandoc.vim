@@ -14,6 +14,12 @@ syn match myDONE "\<DONE\>" containedin=pandocNoFormatted contained
 syn match myCANCELED "\<CANCELED\>" containedin=pandocNoFormatted contained
 syn match myPriority "\[\#\d\+\]" containedin=pandocNoFormatted contained
 
+" syn match myDESFLOW "<#desflow .*>"
+syn match myDESFLOW "<#desflow .\{-}>"
+
+" hi def link myDESFLOW pandocReferenceURL
+hi def link myDESFLOW pandocLinkTip
+
 hi def link myCANCELED Comment
 hi def link myDate Comment
 hi def link myPriority Comment

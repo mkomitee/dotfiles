@@ -9,8 +9,8 @@
 
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-set $mod Mod3
-set $alt Mod1
+set $mod Mod1
+# set $alt Mod1
 
 # font for window titles. ISO 10646 = Unicode
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -25,18 +25,22 @@ focus_follows_mouse no
 force_focus_wrapping no
 workspace_auto_back_and_forth yes
 
+set $terminal urxvt256cc
+# set $terminal xterm
+
 # start a terminal
-bindsym $mod+Return exec /usr/bin/urxvt256c
+bindsym $mod+Return exec $terminal
 
 # kill focused window
 bindsym $mod+Shift+Q kill
 
 # start rofi (a program launcher)
-bindsym $mod+d exec rofi -show run
-bindsym $mod+Tab exec rofi -modi "Windows:i3-windows" -show Windows
+# bindsym $mod+d exec rofi -show run
+# bindsym $mod+Tab exec rofi -modi "Windows:i3-windows" -show Windows
 
-bindsym $mod+Shift+z move scratchpad
-bindsym $mod+z scratchpad show
+#bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+
 
 # change focus
 bindsym $mod+Left focus left
@@ -60,19 +64,20 @@ bindsym $mod+Shift+l move right
 
 # split in horizontal orientation
 bindsym $mod+Shift+slash split h
-bindsym $mod+slash split h; exec /usr/bin/urxvt256cc
+bindsym $mod+slash split h; exec $terminal
 
 # split in vertical orientation
 bindsym $mod+Shift+minus split v
-bindsym $mod+minus split v; exec /usr/bin/urxvt256cc
+bindsym $mod+minus split v; exec $terminal
 
-# enter fullscreen mode for the focused container
+# enter fullscreen (zoom) mode for the focused container
 bindsym $mod+f fullscreen
+bindsym $mod+z exec --no-startup-id /u/komitee/.config/i3/toggle-scratchpad.py
 
 # change container layout (stacked, tabbed, default)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+t layout default
+#bindsym $mod+s layout stacking
+#bindsym $mod+w layout tabbed
+#bindsym $mod+t layout default
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -112,12 +117,20 @@ bindsym $mod+Shift+parenright move workspace 10
 
 # reload the configuration file
 bindsym $mod+Shift+C reload
+
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+R restart
+
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+E exit
 
+# Kill a window by holding the modifier and middle clicking on the title bar.
+bindsym --release $mod+button2 kill
+bindsym button3 exec --no-startup-id /u/komitee/.config/i3/toggle-scratchpad.py
 
+# Mark & swap, requires 4.14.
+#bindsym --release button3 mark swapee
+#bindsym --release $mod+button3 swap container with mark swapee
 
 set $mode_layout_mode Layout Mode: [s]tacking [T]abbed [t]iling [1]2x1
 mode "$mode_layout_mode" {
@@ -247,7 +260,6 @@ for_window [class="^Wfica_Seamless"] floating enable
 
 for_window [class=".*"]     title_format "%class :: %instance :: %title"
 for_window [class="^URxvt"] title_format "Terminal :: %instance :: %title"
+for_window [class="^xterm"] title_format "Terminal :: %instance :: %title"
 
 exec --no-startup-id /usr/libexec/mate-notification-daemon
-exec --no-startup-id /usr/bin/urxvt256cc
-exec --no-startup-id /usr/bin/urxvt256c

@@ -3,6 +3,7 @@ set keymap vi
 # set editing-mode emacs
 # set keymap emacs
 
+set enable-bracketed-paste on
 set expand-tilde on
 set visible-stats on
 

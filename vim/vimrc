@@ -48,7 +48,9 @@ augroup custom
 augroup END
 
 " Preferences
-" set termguicolors
+if $TERM !=? 'rxvt-unicode-256color'
+  set termguicolors
+endif
 
 " if exists('$TMUX')
 "   " Colors in tmux
@@ -435,13 +437,15 @@ let g:ale_linters = {
       \    'flake8',
       \    'pylint',
       \  ],
+      \  'go': [
+      \  ],
       \ }
 let g:ale_set_quickfix = 1
 let g:ale_set_loclist = 0
 let g:ale_lint_on_insert_leave = 1
 let g:ale_lint_on_text_changed = "normal"
 let g:ale_lint_delay = 0
-
+let g:ale_open_list = 0
 
 autocmd custom BufWinEnter * if &buftype == 'terminal' | setlocal colorcolumn=0 | setlocal nonumber | endif
 
@@ -491,29 +495,42 @@ autocmd custom FileType go setlocal noexpandtab
 autocmd custom FileType go setlocal shiftwidth=4
 autocmd custom FileType go setlocal tabstop=4
 
-autocmd custom FileType go nnoremap <buffer> <leader>mdS :call FixVimGoDebugHighlights()<cr>:GoDebugStart<cr>
-autocmd custom FileType go nnoremap <buffer> <leader>mdb :call FixVimGoDebugHighlights()<cr>:GoDebugBreakpoint<cr>
-autocmd custom FileType go nnoremap <buffer> <leader>mdc :call FixVimGoDebugHighlights()<cr>:GoDebugContinue<cr>
-autocmd custom FileType go nnoremap <buffer> <leader>mdn :call FixVimGoDebugHighlights()<cr>:GoDebugNext<cr>
-autocmd custom FileType go nnoremap <buffer> <leader>mdr :call FixVimGoDebugHighlights()<cr>:GoDebugRestart<cr>
-autocmd custom FileType go nnoremap <buffer> <leader>mds :call FixVimGoDebugHighlights()<cr>:GoDebugStep<cr>
-autocmd custom FileType go nnoremap <buffer> <leader>mdx :call FixVimGoDebugHighlights()<cr>:GoDebugStop<cr>
-autocmd custom FileType go nnoremap <buffer> <leader>mdX :call FixVimGoDebugHighlights()<cr>:GoDebugStop<cr>
-autocmd custom FileType go nnoremap <buffer> <leader>mdo :call FixVimGoDebugHighlights()<cr>:GoDebugStepOut<cr>
-" autocmd custom FileType go hi! GoDebugCurrent term=underline ctermbg=237 guibg=#3c3836
+autocmd custom FileType go nnoremap <buffer> <leader>mdS :GoDebugStart<cr>
+autocmd custom FileType go nnoremap <buffer> <leader>mdb :GoDebugBreakpoint<cr>
+autocmd custom FileType go nnoremap <buffer> <leader>mdc :GoDebugContinue<cr>
+autocmd custom FileType go nnoremap <buffer> <leader>mdn :GoDebugNext<cr>
+autocmd custom FileType go nnoremap <buffer> <leader>mdr :GoDebugRestart<cr>
+autocmd custom FileType go nnoremap <buffer> <leader>mds :GoDebugStep<cr>
+autocmd custom FileType go nnoremap <buffer> <leader>mdx :GoDebugStop<cr>
+autocmd custom FileType go nnoremap <buffer> <leader>mdX :GoDebugStop<cr>
+autocmd custom FileType go nnoremap <buffer> <leader>mdo :GoDebugStepOut<cr>
 
-function! FixVimGoDebugHighlights() abort
-  highlight GoDebugCurrent term=underline ctermbg=237 guibg=#3c3836
-endfunction
-autocmd custom ColorScheme * call FixVimGoDebugHighlights()
+highlight GoDebugCurrent term=underline ctermbg=237 guibg=#3c3836
 
-
-" TODO: change the highlight line for debug in this colorscheme, it makes it
-" impossible to read. Currently it's:
-" GoDebugCurrent xxx term=reverse ctermfg=7 ctermbg=12 guifg=White guibg=DarkBlue
-" Soemthing like this would be better ...
-" CursorLine     xxx term=underline ctermbg=237 guibg=#3c3836
 let g:go_fmt_command = "goimports"
+let g:go_fmt_options = {
+      \" gofmt": "-s",
+      \ "goimports": "-local u-",
+      \ "goreturns": "-local u-",
+      \ }
+let g:go_fmt_fail_silently = 1
+let g:go_fmt_experimental = 1
+let g:go_doc_keywordprg_enabled = 1
+let g:go_auto_type_info = 1
+let g:go_updatetime = 100
+let g:go_decls_mode = 'fzf'
+let g:go_addtags_transform = 'snakecase'
+let g:go_jump_to_error = 0
+let g:go_metalinter_autosave = 0
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_types = 1
+
 
 " yaml customizations
 autocmd custom FileType yaml autocmd BufWritePre <buffer> call RemoveTrailingWhiteSpace()

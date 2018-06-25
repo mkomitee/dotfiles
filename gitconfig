@@ -85,7 +85,6 @@
     date-only = "format:%cd"
 
 [diff]
-    algorithm = minimal
     renames = copies
     tool = icdiff
 
@@ -100,13 +99,10 @@
 
 [url "git@github.com:"]
     insteadOf = "gh:"
+    insteadOf = "github:"
+    insteadOf = "https://github.com/"
     pushInsteadOf = "github:"
     pushInsteadOf = "git://github.com/"
-
-[tig]
-    show-author = no
-    show-date = no
-    show-rev-graph = yes
 
 [merge]
     log = true

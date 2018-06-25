@@ -1,3 +1,4 @@
+! gruvbox
 *background: #282828
 *foreground: #ebdbb2
 ! Black + DarkGrey
@@ -25,39 +26,68 @@
 *color7:  #bdae93
 *color15: #ebdbb2
 
-urxvt256c.font:                 xft:DejaVu Sans Mono:style=normal:size=10
-urxvt256c.boldFont:             xft:DejaVu Sans Mono:style=bold:size=10
-urxvt256c.depth:                32
-urxvt256c.transparent:          false
-urxvt256c.cursorBlink:          false
-urxvt256c.cursorUnderline:      false
-urxvt256c.internalBorder:       0
-urxvt256c.scrollTtyKeypress:    true
-urxvt256c.scrollTtyOutput:      false
-urxvt256c.scrollstyle:          plain
-urxvt256c.shading:              15
-urxvt256c.underlineURLs:        true
-urxvt256c.url-launcher:         /usr/bin/firefox --new-tab
-urxvt256c.xftAntialias:         true
-urxvt256c.loginShell:           true
-urxvt256c.saveLines:            12000
-urxvt256c.scrollBar:            false
 
-urxvt256c.perl-lib:             /u/komitee/.dotfiles/urxvt/
-urxvt256c.perl-ext-common:      default,matcher,keyboard-select,clipboard
-urxvt256c.keysym.M-Escape:      perl:keyboard-select:activate
-urxvt256c.keysym.M-v:           perl:keyboard-select:activate
-urxvt256c.keysym.M-p:           perl:clipboard:paste
-urxvt256c.clipboard.autocopy:   true
-urxvt256c.clipboard.copycmd:    xclip -i -selection clipboard
-urxvt256c.clipboard.pastecmd:   xclip -o -selection clipboard
+! ayu
+!*.foreground:  #e6e1cf
+!*.background:  #0f1419
+!*.cursorColor: #f29718
+!!
+!! Black
+!*.color0:      #000000
+!*.color8:      #323232
+!!
+!! Red
+!*.color1:      #ff3333
+!*.color9:      #ff6565
+!!
+!! Green
+!*.color2:      #b8cc52
+!*.color10:     #eafe84
+!!
+!! Yellow
+!*.color3:      #e7c547
+!*.color11:     #fff779
+!!
+!! Blue
+!*.color4:      #36a3d9
+!*.color12:     #68d5ff
+!!
+!! Magenta
+!*.color5:      #f07178
+!*.color13:     #ffa3aa
+!!
+!! Cyan
+!*.color6:      #95e6cb
+!*.color14:     #c7fffd
+!!
+!! White
+!*.color7:      #ffffff
+!*.color15:     #ffffff
+!!
+!! Bold, Italic, Underline
+!*.colorBD:     #e6e1cf
+!!*.colorIT:
+!!*.colorUL:
 
-urxvt256c.matcher.button:       1
-urxvt256c.keysym.Shift-Down:    command:\033]721;1\007
-urxvt256c.keysym.Shift-Up:      command:\033]720;1\007
-urxvt256c.copyCommand:          xclip -i -selection clipboard
-urxvt256c.pasteCommand:         xclip -o -selection clipboard
-urxvt256c.skipBuiltinGlyphs:    true
+
+URxvt.font:                 xft:DejaVu Sans Mono:style=normal:size=10
+URxvt.boldFont:             xft:DejaVu Sans Mono:style=bold:size=10
+URxvt.depth:                32
+URxvt.transparent:          false
+URxvt.cursorBlink:          false
+URxvt.cursorUnderline:      false
+URxvt.internalBorder:       0
+URxvt.scrollTtyKeypress:    true
+URxvt.scrollTtyOutput:      false
+URxvt.scrollstyle:          plain
+URxvt.shading:              15
+URxvt.underlineURLs:        true
+URxvt.xftAntialias:         true
+URxvt.loginShell:           true
+URxvt.saveLines:            12000
+URxvt.scrollBar:            false
+URxvt.visualBell:           true
+URxvt.matcher.button:       1
 
 Xft.antialias:              true
 Xft.dpi:                    96
@@ -82,3 +112,14 @@ xterm*loginShell:        true
 xterm*saveLines:         12000
 xterm*selectToClipboard: true
 xterm*showMissingGlyphs: true
+xterm*termName: xterm-256color
+
+! The following is default,matcher,keyboard-select, but with
+! searchable-scrollback removed so we could free up M-s for keyboard-select,
+! which is better anyway.
+URxvt.perl-ext-common:     selection,readline,matcher,keyboard-select,confirm-paste
+URxvt.keysym.M-s:          perl:keyboard-select:search
+URxvt.keysym.M-Escape:     perl:keyboard-select:activate
+URxvt.keysym.C-M-v:        builtin:
+URxvt.keysym.C-M-s:        builtin:
+URxvt.keysym.C-M-Escape:   builtin:
