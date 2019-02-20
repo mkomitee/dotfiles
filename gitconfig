@@ -58,6 +58,9 @@
     lad=!git log-date-author
     log-all=!git log-date-aut
 
+    issues=issue
+    prs=pr
+
 [pager]
     status = yes
     show-branch = yes
@@ -90,9 +93,13 @@
 
 [difftool]
     prompt = false
+    tool = icdiff
 
 [difftool "icdiff"]
     cmd = icdiff --line-numbers $LOCAL $REMOTE
+
+[icdiff]
+    options = "--highlight --line-numbers --show-all-spaces --tabsize=4"
 
 [github]
     user = mkomitee
