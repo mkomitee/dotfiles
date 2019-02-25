@@ -104,12 +104,13 @@
 [github]
     user = mkomitee
 
-[url "git@github.com:"]
-    insteadOf = "gh:"
-    insteadOf = "github:"
-    insteadOf = "https://github.com/"
-    pushInsteadOf = "github:"
-    pushInsteadOf = "git://github.com/"
+
+; [url "git@github.com:"]
+;     insteadOf = "gh:"
+;     insteadOf = "github:"
+;     insteadOf = "https://github.com/"
+;     pushInsteadOf = "github:"
+;     pushInsteadOf = "git://github.com/"
 
 [merge]
     log = true

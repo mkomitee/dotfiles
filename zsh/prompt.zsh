@@ -73,10 +73,11 @@ function mkprompt_history() {
 }
 
 function mkprompt_host() {
-    if [[ ${MKPROMPT_LDNS[(i)$MKPROMPT_DN]} -le ${#MKPROMPT_LDNS} ]]; then
-        echo "%(!.%{$FG[124]%}.%{$FG[027]%})%m%{$reset_color%}"
+    if [[ ! -z "$PRIMARY_HOST" && ! -z "$HOSTNAME" && $PRIMARY_HOST = $HOSTNAME ]]; then
+    elif [[ ${MKPROMPT_LDNS[(i)$MKPROMPT_DN]} -le ${#MKPROMPT_LDNS} ]]; then
+        echo "%(!.%{$FG[124]%}.%{$FG[027]%})%m%{$reset_color%} "
     else
-        echo "%(!.%{$FG[124]%}.%{$FG[027]%})%2m%{$reset_color%}"
+        echo "%(!.%{$FG[124]%}.%{$FG[027]%})%2m%{$reset_color%} "
     fi
 }
 
@@ -93,12 +94,11 @@ function mkprompt_jobs() {
 }
 
 function mkprompt_exit() {
-    # echo "%(?,,%{$FG[124]%}[%?]%{$reset_color%} )"
     echo "%(?,,%{$FG[124]%}[%{$FG[008]%}%?%{$FG[124]%}]%{$reset_color%} )"
 }
 
 function mkprompt_cwd() {
-    echo "%(!,%{$FG[124]%},%{$FG[027]%})%~%{$reset_color%}"
+    echo "%(!,%{$FG[124]%},%{$FG[027]%})%25<..<%~%{$reset_color%}%<< "
 }
 
 function mkprompt_timer() {
@@ -151,14 +151,13 @@ function mkprompt_setup() {
     PROMPT="${PROMPT}$(mkprompt_exit)"
     PROMPT="${PROMPT}$(mkprompt_jobs)"
     # PROMPT="${PROMPT}$(mkprompt_history)"
-    PROMPT="${PROMPT}$(mkprompt_host) "
-    PROMPT="${PROMPT}$(mkprompt_cwd) "
-    # PROMPT="${PROMPT}$(mkprompt_jobs)"
     PROMPT="${PROMPT}$(mkprompt_extras)"
+    PROMPT="${PROMPT}$(mkprompt_host)"
+    PROMPT="${PROMPT}$(mkprompt_cwd)"
     PROMPT="${PROMPT}$(mkprompt_prompt) "
-    RPROMPT=""
-    RPROMPT="${RPROMPT}$(mkprompt_elapsed)"
-    RPROMPT="${RPROMPT}$(mkprompt_branch)"
+    # RPROMPT=""
+    # RPROMPT="${RPROMPT}$(mkprompt_elapsed)"
+    # RPROMPT="${RPROMPT}$(mkprompt_branch)"
 }
 
 function zle-line-init zle-keymap-select {

@@ -1,5 +1,0 @@
-#!/bin/sh
-
-$HOME/scripts/xresources
-
-urxvtc "$@" || (urxvtd -q -o -f; urxvtc "$@")

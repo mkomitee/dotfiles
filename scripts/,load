@@ -39,14 +39,14 @@ Legend:
    +    is in the foreground process group
 EOS
     echo
-    ps -o stat,pcpu,pmem,pid,ppid,user,tty,args --tty ${TTY} -N | grep -vE "^[WST][ NLsl+<]" || echo "N/A"
+    ps -o stat,nice,pcpu,pmem,pid,ppid,user,tty,args --tty ${TTY} -N | grep -vE "^[WST][ NLsl+<]" || echo "N/A"
 else
     cat <<EOS
 Legend:
   Displayed:
    O    Process is running on a processor.
    R    Runnable: process is on run queue.
-   W    Waiting: process is waiting for CPU usage to drop to the CPU-caps 
+   W    Waiting: process is waiting for CPU usage to drop to the CPU-caps
         enforced limits.
    Z    Zombie state: process terminated and parent not waiting.
 EOS

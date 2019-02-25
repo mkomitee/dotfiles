@@ -1,2 +1,0 @@
-#!/bin/sh
-git submodule foreach "git co master && git pull"

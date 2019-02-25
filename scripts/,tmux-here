@@ -1,3 +1,0 @@
-#!/usr/local/bin/zsh
-
-tmux set default-path $(pwd)

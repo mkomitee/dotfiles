@@ -26,16 +26,21 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-unimpaired'
 Plug 'troydm/zoomwintab.vim'
 Plug 'tweekmonster/fzf-filemru'
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'w0rp/ale'
 Plug 'wellle/targets.vim'
+
+if has("nvim")
+  Plug 'Shougo/denite.nvim'
+  Plug 'Shougo/neomru.vim'
+endif
 call plug#end()
 
 " Required:
@@ -48,9 +53,9 @@ augroup custom
 augroup END
 
 " Preferences
-if $TERM !=? 'rxvt-unicode-256color'
-  set termguicolors
-endif
+" if $TERM !=? 'rxvt-unicode-256color'
+  " set termguicolors
+" endif
 
 " if exists('$TMUX')
 "   " Colors in tmux
@@ -111,8 +116,8 @@ set synmaxcol=800
 set undofile              " track undo history
 set undodir=$HOME/.local/share/vim/undo/ " place undo history here
 if !exists("g:gui_oni")
-  "set clipboard^=unnamed,unnamedplus " integrate with the system clipboard.
-  set clipboard=unnamed
+  set clipboard^=unnamed,unnamedplus " integrate with the system clipboard.
+  " set clipboard=unnamed
 endif
 
 set fillchars=         " reset fillchars
@@ -249,6 +254,10 @@ endfunction
 " Try really hard to use the correct syntax highlighting
 autocmd custom BufEnter * :syntax sync fromstart
 
+set cursorline
+autocmd custom WinEnter * setl cursorline
+autocmd custom WinLeave * setl nocursorline
+
 " Tweak basic navigation
 nnoremap j gj
 nnoremap k gk
@@ -303,23 +312,49 @@ nnoremap . .`[
 nnoremap <silent> * :let b:pos = winsaveview()<cr>*:call winrestview(b:pos)<cr>
 nnoremap <silent> # :let b:pos = winsaveview()<cr>#:call winrestview(b:pos)<cr>
 
-" File commands
 if has("nvim")
   nnoremap <leader>fed :e $HOME/.dotfiles/nvim/init.vim<CR>
+  call denite#custom#alias('source', 'file/rec/ag', 'file/rec')
+  call denite#custom#var('file/rec/ag', 'command', ['ag', '--nocolor', '--nogroup', '-g', ''])
+  call denite#custom#alias('source', 'file/rec/rg', 'file/rec')
+  call denite#custom#var('file/rec/rg', 'command', ['rg', '--files', '--glob', '!.git'])
+
+  nnoremap <leader>ff :DeniteProjectDir file/rec/rg -auto-resize -smartcase<CR>
+  nnoremap <leader>fm :Denite file_mru -auto-resize -smartcase<CR>
+  nnoremap <leader>fh :Denite file_mru -auto-resize -smartcase<CR>
+  nnoremap <leader>pp :Denite directory_mru -auto-resize -smartcase<CR>
+
+  call denite#custom#alias('source', 'file/rec/git', 'file/rec')
+  call denite#custom#var('file/rec/git', 'command', ['git', 'ls-files', '-co', '--exclude-standard'])
+  nnoremap <leader>pf :DeniteProjectDir file/rec/git -auto-resize -smartcase<CR>
+  nnoremap <leader>pg :DeniteProjectDir file/rec/git -auto-resize -smartcase<CR>
+  nnoremap <leader>bb :Denite buffer -auto-resize -smartcase<CR>
 else
   nnoremap <leader>fed :e $HOME/.dotfiles/vim/vimrc<CR>
+  nnoremap <leader>ff :FilesMru --tiebreak=end<CR>
+  nnoremap <leader>fm :History<CR>
+  nnoremap <leader>fh :History<CR>
+  nnoremap <leader>pp :Projects<CR>
+  nnoremap <leader>pf :GFiles<CR>
+  nnoremap <leader>pg :GFiles<CR>
+  nnoremap <leader>bb :Buffers<CR>
 endif
-nnoremap <leader>ff :FilesMru --tiebreak=end<CR>
-nnoremap <leader>fm :History<CR>
-nnoremap <leader>fh :History<CR>
+command! -bang Notes call fzf#run(fzf#wrap
+      \  ('my-stuff', {'dir': '~/notes',
+      \                'source': 'rg --files -g "*.md" -g "!archive/" -g "!contrib/"'
+      \               },
+      \  <bang>0)
+      \ )
+function! NoteToday()
+  let s:basedir = expand('~/notes/daily')
+  let s:dir = expand('~/notes/daily') . strftime("/%Y/%m/")
+  let s:file = s:dir . strftime("%Y%m%d.md")
+  silent execute system('mkdir -p ' . s:dir)
+  execute "edit " . s:file
+endfunction
+nnoremap <leader>an :Notes<cr>
+nnoremap <leader>aN :call NoteToday()<cr>
 
-" Project commands
-nnoremap <leader>pp :Projects<CR>
-nnoremap <leader>pf :GFiles<CR>
-nnoremap <leader>pg :GFiles<CR>
-
-" Buffer commands
-nnoremap <leader>bb :Buffers<CR>
 nnoremap <leader>bd :Kwbd<CR>
 nnoremap <leader>bc :Kwbd<CR>
 nnoremap <leader>bn :bnext<CR>
@@ -330,23 +365,6 @@ nnoremap <leader>b<tab> <C-^>
 nnoremap <C-C><Left> <C-^>
 nnoremap <leader>bs :Scratch<CR>
 
-command! -bang Notes call fzf#run(fzf#wrap
-      \  ('my-stuff', {'dir': '~/notes',
-      \                'source': 'rg --files -g "*.md" -g "!archive/" -g "!contrib/"'
-      \               },
-      \  <bang>0)
-      \ )
-
-function! NoteToday()
-  let s:basedir = expand('~/notes/daily')
-  let s:dir = expand('~/notes/daily') . strftime("/%Y/%m/")
-  let s:file = s:dir . strftime("%Y%m%d.md")
-  silent execute system('mkdir -p ' . s:dir)
-  execute "edit " . s:file
-endfunction
-
-nnoremap <leader>an :Notes<cr>
-nnoremap <leader>aN :call NoteToday()<cr>
 nnoremap <leader>at :terminal ++curwin<cr>
 
 " Other commands
@@ -357,7 +375,11 @@ vnoremap <leader>rv "hy:%s/<C-r>h/
 nnoremap <leader>au :MundoToggle<cr>
 
 " Tag commands
-nnoremap <leader>Tt :Tags<cr>
+if has("nvim")
+  nnoremap <leader>Tt :DeniteProjectDir tag -auto-resize -smartcase<cr>
+else
+  nnoremap <leader>Tt :Tags<cr>
+endif
 " go to definition / tag
 nnoremap <leader>Td <C-]>
 " go to tag in a split
@@ -389,12 +411,9 @@ nnoremap <leader>w<right> <C-W>>
 nnoremap <leader>w<left> <C-W><
 nnoremap <leader>w<down> <C-W>-
 nnoremap <leader>w<up> <C-W>+
-nnoremap <C-W>- <C-W>s
-nnoremap <C-W>/ <C-W>v
-tnoremap <C-W>- <C-W>s
-tnoremap <C-W>/ <C-W>v
-tnoremap <C-W>o <C-W>N:ZoomWinTabToggle<cr>a
-tnoremap <C-W>z <C-W>N:ZoomWinTabToggle<cr>a
+nnoremap <C-W>z <C-W>:ZoomWinTabToggle<cr>a
+tnoremap <C-W>z <C-W>:ZoomWinTabToggle<cr>a
+tnoremap <C-W>~ <C-W>:tabnext<cr>
 nnoremap <leader>w- <C-W>s
 nnoremap <leader>w/ <C-W>v
 nnoremap <leader>wj <C-W>j
@@ -407,8 +426,45 @@ nnoremap <leader>wL <C-W>r
 nnoremap <leader>wH <C-W>R
 nnoremap <leader>ww :Windows<cr>
 nnoremap <leader>w<tab> <C-W>p
-nnoremap <leader>wo :ZoomWinTabToggle<cr>
 nnoremap <leader>wz :ZoomWinTabToggle<cr>
+
+" unimpaired-ish
+nnoremap [a :previous<cr>
+nnoremap ]a :next<cr>
+nnoremap [A :first<cr>
+nnoremap ]A :last<cr>
+
+nnoremap [b :bprevious<cr>
+nnoremap ]b :bnext<cr>
+nnoremap [B :bfirst<cr>
+nnoremap ]B :blast<cr>
+
+nnoremap [l :lprevious<cr>
+nnoremap ]l :lnext<cr>
+nnoremap [L :lfirst<cr>
+nnoremap ]L :llast<cr>
+nnoremap [<C-L> :lpfile<cr>
+nnoremap ]<C-L> :lnfile<cr>
+
+nnoremap [q :cprevious<cr>
+nnoremap ]q :cnext<cr>
+nnoremap [Q :cfirst<cr>
+nnoremap ]Q :clast<cr>
+nnoremap [<C-Q> :cpfile<cr>
+nnoremap ]<C-Q> :cnfile<cr>
+
+nnoremap [t :tabprevious<cr>
+nnoremap ]t :tabnext<cr>
+nnoremap [T :tabfirst<cr>
+nnoremap ]T :tablast<cr>
+nnoremap <C-W>[t :tabprevious<cr>
+nnoremap <C-W>]t :tabnext<cr>
+nnoremap <C-W>[T :tabfirst<cr>
+nnoremap <C-W>]T :tablast<cr>
+tnoremap <C-W>[t <C-W>:tabprevious<cr>
+tnoremap <C-W>]t <C-W>:tabnext<cr>
+tnoremap <C-W>[T <C-W>:tabfirst<cr>
+tnoremap <C-W>]T <C-W>:tablast<cr>
 
 " Git commands
 nnoremap <leader>gs :Gstatus<cr>
@@ -416,7 +472,11 @@ nnoremap <leader>gc :Gcommit -v<cr>
 nnoremap <leader>gl :Glog<cr>
 nnoremap <leader>gd :Gdiff<cr>
 nnoremap <leader>gb :Gblame<cr>
-nnoremap <leader>gf :GFiles<CR>
+if has("nvim")
+  nnoremap <leader>gf :DeniteProjectDir file/rec/git -auto-resize -smartcase<CR>
+else
+  nnoremap <leader>gf :GFiles<CR>
+endif
 
 " grep for word under cursor
 nmap <Leader># #:sil! gr! "\b<C-R><C-W>\b"<CR>:cw<CR>:redr!<CR>
@@ -450,21 +510,34 @@ let g:ale_open_list = 0
 autocmd custom BufWinEnter * if &buftype == 'terminal' | setlocal colorcolumn=0 | setlocal nonumber | endif
 
 "nnoremap ≈ :Commands<cr>
-nnoremap <M-x> :Commands<cr>
+if has("nvim")
+  nnoremap <M-x> :Denite command<cr>
+else
+  nnoremap <M-x> :Commands<cr>
+endif
 nnoremap <leader>hh :help ShortcutContents<cr>
+if has("nvim")
+nnoremap <leader>ht :Denite help<cr>
+else
 nnoremap <leader>ht :Helptags<cr>
+endif
 nnoremap <leader>h. :help <C-r><C-w><cr>
 
 nnoremap <leader>qq :qall<cr>
 nnoremap <leader>qr :RestartVim<cr>
 
-command! -bang -nargs=* Rg
-      \ call fzf#vim#grep(
-      \ 'rg --column --line-number --no-heading --smart-case --color=always '.shellescape(<q-args>),
-      \ 1,
-      \ <bang>0 ? fzf#vim#with_preview('up:60%')
-      \         : fzf#vim#with_preview('right:50%:hidden', '?'),
-      \ <bang>0)
+if has("nvim")
+  call denite#custom#alias('source', 'grep/rg', 'grep')
+  call denite#custom#var('grep/rg', 'command', ['rg', '--vimgrep'])
+else
+  command! -bang -nargs=* Rg
+        \ call fzf#vim#grep(
+        \ 'rg --column --line-number --no-heading --smart-case --color=always '.shellescape(<q-args>),
+        \ 1,
+        \ <bang>0 ? fzf#vim#with_preview('up:60%')
+        \         : fzf#vim#with_preview('right:50%:hidden', '?'),
+        \ <bang>0)
+endif
 
 " quickfix customizations
 autocmd custom FileType qf nnoremap <buffer> q :q<cr>
@@ -756,7 +829,7 @@ endfunction
 
 " Experimentation
 set concealcursor=iv
-set conceallevel=2
+set conceallevel=0
 set encoding=utf-8
 set fileencoding=utf-8
 set lazyredraw

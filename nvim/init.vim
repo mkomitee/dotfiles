@@ -26,3 +26,5 @@ autocmd TermOpen *
       \ if &buftype ==# 'terminal' |
       \ startinsert |
       \ endif
+
+source ~/.config/nvim/nvim.local

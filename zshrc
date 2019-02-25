@@ -8,7 +8,10 @@ SAVEHIST=10000000000000
 
 hash -d dot=$DOT
 
-source $ZSH/spectrum.zsh
+if [ -z "$TERM" ]; then
+    TERM="dumb"
+fi
+
 source $ZSH/aliases.zsh
 source $ZSH/key-bindings.zsh
 source $ZSH/functions.zsh
@@ -140,3 +143,6 @@ if [ -f $HOME/.zshrc.local ]; then
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+
+export DIDZSHRC=1
