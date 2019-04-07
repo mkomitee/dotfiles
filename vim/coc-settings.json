@@ -1,0 +1,14 @@
+{
+	"suggest.autoTrigger": "none",
+	// "suggest.triggerAfterInsertEnter": true,
+	// "suggest.timeout": 500,
+	// "suggest.noselect": false,
+	// "suggest.keepCompleteopt": true,
+	// "suggest.minTriggerInputLength": 2,
+	// "suggest.acceptSuggestionOnCommitCharacter": true,
+	"suggest.snippetIndicator": "⭐︎",
+	"suggest.enablePreview": true,
+        "coc.source.around.enable": true,
+        "coc.source.buffer.enable": false,
+        "coc.source.file.enable": true
+}
