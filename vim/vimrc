@@ -37,10 +37,9 @@ Plug 'w0rp/ale'
 Plug 'wellle/targets.vim'
 Plug 'jreybert/vimagit'
 
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+" CocInstall coc-rls
+" CocInstall coc-python
 
 call plug#end()
 
@@ -796,18 +795,6 @@ set belloff+=all
 " <C-X><C-]> complete tags
 
 command! Scratch enew | setlocal nobuflisted buftype=nofile bufhidden=wipe noswapfile
-
-let g:LanguageClient_serverCommands = {
-    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-    \ }
-
-nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-" Or map each action separately
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
-
-let g:LanguageClient_hoverPreview='Always'
 
 autocmd WinEnter * if &previewwindow | nnoremap <buffer> q :q<cr> | endif
 autocmd WinEnter * if &previewwindow | setlocal nolist | endif

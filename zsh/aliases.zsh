@@ -29,3 +29,7 @@ alias type='type -a'
 alias locate.home='locate -d ~/.locate.home'
 
 alias dirs='dirs -v'
+
+alias l='ls'
+alias ll='ls -l'
+alias lll='ls -la'
