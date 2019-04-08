@@ -856,4 +856,7 @@ autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 " /coc.vim recommendations ...
 
 " Abolish maps are in ~/.vim/after/plugin/abolish.vim
-source ~/.vimrc.local
+"
+ if filereadable(expand("~/.vimrc.local"))
+   source ~/.vimrc.local
+endif

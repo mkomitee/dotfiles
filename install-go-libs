@@ -1,9 +1,0 @@
-#!/bin/sh -x
-go get -u -v github.com/adjust/go-wrk
-go get -u -v github.com/derekparker/delve/cmd/dlv
-go get -u -v github.com/nsf/gocode
-go get -u -v github.com/rogpeppe/godef
-go get -u -v github.com/uber/go-torch
-go get -u -v golang.org/x/tools/cmd/goimports
-go get -u -v golang.org/x/tools/cmd/gorename
-go get -u -v golang.org/x/tools/cmd/oracle

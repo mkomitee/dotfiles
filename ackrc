@@ -1,4 +1,0 @@
---sort-files
---type-set=markdown=md,markdown
---type-set=puppet=pp
---pager=less -F

@@ -1,6 +1,0 @@
---python-kinds=cfm
---ruby-kinds=cfmF
---perl-kinds=cflps
---sh-kinds=f
---exclude=.hg
---exclude=.git

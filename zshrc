@@ -142,6 +142,10 @@ if [ -f $HOME/.zshrc.local ]; then
     source $HOME/.zshrc.local
 fi
 
+if [ -f $HOME/.aliases ]; then
+    source $HOME/.aliases
+fi
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 
