@@ -146,7 +146,10 @@ if [ -f $HOME/.aliases ]; then
     source $HOME/.aliases
 fi
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+if [ $HOME/.zshrc.hash ]; then
+    source ~/.zshrc.hash
+fi
 
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export DIDZSHRC=1
