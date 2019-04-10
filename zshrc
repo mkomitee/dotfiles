@@ -146,7 +146,7 @@ if [ -f $HOME/.aliases ]; then
     source $HOME/.aliases
 fi
 
-if [ $HOME/.zshrc.hash ]; then
+if [ -f $HOME/.zshrc.hash ]; then
     source ~/.zshrc.hash
 fi
 
