@@ -430,36 +430,46 @@ let g:ale_fixers = {
       \ }
 
 let g:ale_linters = {
-      \  'python': [
-      \    'flake8',
-      \    'pylint',
-      \    'pyls',
-      \  ],
       \  'go': [
+      \    'golangserver',
       \  ],
-      \  'rust': [
-      \    'rls',
+      \  'json': [
+      \    'jq',
+      \  ],
+      \  'markdown': [
+      \    'write-good',
       \  ],
       \  'perl': [
       \    'perl',
       \    'perlcritic',
       \    'perltidy',
       \  ],
+      \  'puppet': [
+      \    'puppetlint',
+      \  ],
+      \  'python': [
+      \    'flake8',
+      \    'pylint',
+      \    'pyls',
+      \  ],
+      \  'rust': [
+      \    'rls',
+      \  ],
       \ }
 
-let g:ale_sign_column_always = 1
+let g:ale_cache_executable_check_failures = 1
+let g:ale_close_preview_on_insert = 1
 let g:ale_completion_enabled = 1
-" let g:ale_set_quickfix = 0
-" let g:ale_set_loclist = 1
+let g:ale_fix_on_save = 1
 let g:ale_lint_on_insert_leave = 1
 let g:ale_lint_on_text_changed = "normal"
-let g:ale_lint_delay = 0
 let g:ale_open_list = 0
-let g:ale_fix_on_save = 1
+let g:ale_sign_column_always = 1
+let g:ale_cursor_detail = 0
 
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<ESC>:ALEComplete\<CR>"
 
 autocmd custom BufWinEnter * if &buftype == 'terminal' | setlocal colorcolumn=0 | setlocal nonumber | endif
 
@@ -669,10 +679,12 @@ autocmd custom FileType puppet autocmd BufWritePre <buffer> call RemoveTrailingW
 autocmd custom FileType python autocmd BufWritePre <buffer> call RemoveTrailingWhiteSpace()
 autocmd custom FileType python setlocal textwidth=79
 autocmd custom FileType python nnoremap <buffer> gd :ALEGoToDefinition<cr>
+autocmd custom FileType python nnoremap <buffer> K :ALEHover<cr>
 autocmd custom BufNewFile *.py 0r ~/.vim/templates/skeleton.py
 
 " rust customizations
 autocmd custom FileType rust nnoremap <buffer> gd :ALEGoToDefinition<cr>
+autocmd custom FileType rust nnoremap <buffer> K :ALEHover<cr>
 
 " javascript customizations
 autocmd custom FileType javascript autocmd BufWritePre <buffer> call RemoveTrailingWhiteSpace()
