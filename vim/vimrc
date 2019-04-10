@@ -36,10 +36,6 @@ Plug 'w0rp/ale'
 Plug 'wellle/targets.vim'
 Plug 'jreybert/vimagit'
 
-Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
-" CocInstall coc-rls
-" CocInstall coc-python
-
 call plug#end()
 
 " Required:
@@ -425,37 +421,45 @@ nnoremap <leader>gf :GFiles<CR>
 nmap <Leader># #:sil! gr! "\b<C-R><C-W>\b"<CR>:cw<CR>:redr!<CR>
 nmap <Leader>* #:sil! gr! "\b<C-R><C-W>\b"<CR>:cw<CR>:redr!<CR>
 
-let g:ale_sign_column_always = 1
 let g:ale_fixers = {
       \  'python': [
-      \    'yapf',
-      \    'isort',
-      \    'add_blank_lines_for_python_control_statements',
-      \    'remove_trailing_lines',
-      \    'trim_whitespace',
       \  ],
       \ 'rust': [
       \    'rustfmt',
       \  ],
       \ }
+
 let g:ale_linters = {
       \  'python': [
       \    'flake8',
       \    'pylint',
+      \    'pyls',
       \  ],
       \  'go': [
       \  ],
-      \ 'rust': [
+      \  'rust': [
       \    'rls',
       \  ],
+      \  'perl': [
+      \    'perl',
+      \    'perlcritic',
+      \    'perltidy',
+      \  ],
       \ }
-let g:ale_set_quickfix = 0
-let g:ale_set_loclist = 1
+
+let g:ale_sign_column_always = 1
+let g:ale_completion_enabled = 1
+" let g:ale_set_quickfix = 0
+" let g:ale_set_loclist = 1
 let g:ale_lint_on_insert_leave = 1
 let g:ale_lint_on_text_changed = "normal"
 let g:ale_lint_delay = 0
 let g:ale_open_list = 0
 let g:ale_fix_on_save = 1
+
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<Tab>"
 
 autocmd custom BufWinEnter * if &buftype == 'terminal' | setlocal colorcolumn=0 | setlocal nonumber | endif
 
@@ -664,8 +668,12 @@ autocmd custom FileType puppet autocmd BufWritePre <buffer> call RemoveTrailingW
 " python customizations
 autocmd custom FileType python autocmd BufWritePre <buffer> call RemoveTrailingWhiteSpace()
 autocmd custom FileType python setlocal textwidth=79
+autocmd custom FileType python nnoremap <buffer> gd :ALEGoToDefinition<cr>
 autocmd custom BufNewFile *.py 0r ~/.vim/templates/skeleton.py
-"
+
+" rust customizations
+autocmd custom FileType rust nnoremap <buffer> gd :ALEGoToDefinition<cr>
+
 " javascript customizations
 autocmd custom FileType javascript autocmd BufWritePre <buffer> call RemoveTrailingWhiteSpace()
 autocmd custom FileType javascript setlocal textwidth=120
@@ -802,58 +810,6 @@ autocmd WinEnter * if &previewwindow | setlocal nomodifiable | endif
 autocmd WinEnter * if &previewwindow | setlocal nomodified | endif
 autocmd WinEnter * if &previewwindow | setlocal norelativenumber | endif
 autocmd WinEnter * if &previewwindow | setlocal number | endif
-
-" coc.vim recommendations ...
-" Use tab for trigger completion with characters ahead and navigate.
-" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-"
-" Use <c-space> for trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
-"
-" Use <cr> for confirm completion, `<C-g>u` means break undo chain at current position.
-" Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
-" Use `[c` and `]c` for navigate diagnostics
-nmap <silent> [c <Plug>(coc-diagnostic-prev)
-nmap <silent> ]c <Plug>(coc-diagnostic-next)
-
-" Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-" Use K for show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if &filetype == 'vim'
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
-" Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Remap for rename current word
-nmap <leader>rn <Plug>(coc-rename)
-
-autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-
-" /coc.vim recommendations ...
 
 " Abolish maps are in ~/.vim/after/plugin/abolish.vim
 "
