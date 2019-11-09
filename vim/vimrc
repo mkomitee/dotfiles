@@ -36,6 +36,7 @@ Plug 'wellle/targets.vim'
 Plug 'jreybert/vimagit'
 Plug 'ayu-theme/ayu-vim'
 Plug 'tracyone/fzf-funky'
+Plug 'justinmk/vim-sneak'
 
 call plug#end()
 
