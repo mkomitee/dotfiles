@@ -8,6 +8,9 @@ ARCH=$(arch)
 OSNAME="${UNAME}.${ARCH}"
 export OSNAME
 
+GOPATH=$HOME/.go
+export GOPATH
+
 # Setup zsh fpath
 fpath=(
     $HOME/.dotfiles/zsh

@@ -3,6 +3,8 @@
 function tmux_resume() {
     if [ "$TMUX" = "" ]; then
         unset KRB5CCNAME
+        unset DIDZSHENV
+        unset DIDZSHRC
         local session="$1"
         if [ "$session" = "" ]; then
             session=main

@@ -100,3 +100,6 @@ html
 # Erlang ...
 *.beam
 
+
+# direnv stuff
+.envrc

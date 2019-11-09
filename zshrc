@@ -152,4 +152,7 @@ fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+eval "$(fasd --init auto)"
+unalias s # :(
+
 export DIDZSHRC=1
