@@ -9,6 +9,8 @@ tap "homebrew/core"
 brew "bat"
 # Reimplementation of ctags(1)
 brew "ctags"
+# Get a file from an HTTP, HTTPS or FTP server
+brew "curl"
 # Load/unload environment variables based on $PWD
 brew "direnv"
 # More intuitive version of du in rust

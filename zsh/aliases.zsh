@@ -8,21 +8,12 @@ alias run_for='python ~/.dotfiles/contrib/bitly/data_hacks.git/data_hacks/run_fo
 alias sample='python ~/.dotfiles/contrib/bitly/data_hacks.git/data_hacks/sample.py'
 
 alias vi=vim
+alias vim=nvim
 alias aa='tmux_resume main'
 alias bc='bc -l'
 alias dot='cd ~dot'
 alias tmux='tmux -u2'
 alias y=true
-
-if [  -z "${VIM_SERVERNAME}" ]; then
-    VIM_SERVERNAME="VIM"
-fi
-
-alias e="command vim --servername $VIM_SERVERNAME --remote"
-alias ec="command vim --servername $VIM_SERVERNAME --remote"
-alias ecw="command vim --servername $VIM_SERVERNAME --remote-wait"
-alias ex="command gvim --servername $VIM_SERVERNAME --remote"
-alias exw="command gvim --servername $VIM_SERVERNAME --remote-wait"
 
 alias type='type -a'
 
@@ -33,3 +24,6 @@ alias dirs='dirs -v'
 alias l='ls'
 alias ll='ls -l'
 alias lll='ls -la'
+
+alias ll='exa -lgbFs date --group-directories-first'
+alias llg='exa -lgbFs date --group-directories-first --git'
