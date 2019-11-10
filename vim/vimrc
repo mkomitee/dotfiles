@@ -199,14 +199,14 @@ set guioptions-=L  " scroll bar (left) for splits
 set guioptions-=T  " toolbar
 
 " [S]plit lines (sister to [J]oin line)
-function! s:SplitLine()
-  exe "normal! i\<CR>\<Esc>^gk"
-  silent! substitute/\v +$//
-  silent! nohlsearch
-  call histdel("search", -1)
-  normal! $
-endfunction
-nnoremap S :call <SID>SplitLine()<CR>
+" function! s:SplitLine()
+"   exe "normal! i\<CR>\<Esc>^gk"
+"   silent! substitute/\v +$//
+"   silent! nohlsearch
+"   call histdel("search", -1)
+"   normal! $
+" endfunction
+" nnoremap S :call <SID>SplitLine()<CR>
 
 function! Preserve(command)
   " Preparation: save last search, and cursor position.
