@@ -7,23 +7,42 @@ alias ninety_five_percent='python ~/.dotfiles/contrib/bitly/data_hacks.git/data_
 alias run_for='python ~/.dotfiles/contrib/bitly/data_hacks.git/data_hacks/run_for.py'
 alias sample='python ~/.dotfiles/contrib/bitly/data_hacks.git/data_hacks/sample.py'
 
-alias vi=vim
-alias vim=nvim
 alias aa='tmux_resume main'
 alias bc='bc -l'
 alias dot='cd ~dot'
 alias tmux='tmux -u2'
 alias y=true
 
-alias type='type -a'
-
 alias locate.home='locate -d ~/.locate.home'
 
+alias type='type -a'
 alias dirs='dirs -v'
 
-alias l='ls'
-alias ll='ls -l'
-alias lll='ls -la'
+alias ag=rg
 
-alias ll='exa -lgbFs date --group-directories-first'
-alias llg='exa -lgbFs date --group-directories-first --git'
+alias l='exa -gbFs date --group-directories-first'
+alias la='l --all'
+alias ll='l --long'
+alias lla='ll --all'
+alias llg='ll --git'
+alias llga='lla --git'
+alias llag='llga'
+
+# Vim w/ vim remote stuff
+NVIM_LISTEN_ADDRESS=/tmp/.komitee-nvimsocket/sock
+export NVIM_LISTEN_ADDRESS
+if [ ! -d $(dirname $NVIM_LISTEN_ADDRESS) ]; then
+    omask=$(umask)
+    umask 077
+    mkdir -p $(dirname $NVIM_LISTEN_ADDRESS)
+    umask ${omask}
+fi
+
+alias vim=nvim
+alias vi=nvim
+alias e='nvr -s'
+alias eb='nvr --remote-wait -s'
+
+alias git=hub
+alias less='less -RS'
+
