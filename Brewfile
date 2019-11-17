@@ -49,6 +49,8 @@ brew "reattach-to-user-namespace"
 brew "ripgrep"
 # The Rust toolchain installer
 brew "rustup-init"
+# Simplified and community-driven man pages
+brew "tldr"
 # Terminal multiplexer
 brew "tmux"
 # Internet file retriever
