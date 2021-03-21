@@ -15,7 +15,7 @@ fi
 source $ZSH/aliases.zsh
 source $ZSH/key-bindings.zsh
 source $ZSH/functions.zsh
-source $ZSH/prompt.zsh
+#source $ZSH/prompt.zsh
 
 # LS CONFIG
 # Find the option for using colors in ls, depending on the version: Linux or BSD
@@ -156,3 +156,5 @@ eval "$(fasd --init auto)"
 unalias s # :(
 
 export DIDZSHRC=1
+
+eval "$(starship init zsh)"
