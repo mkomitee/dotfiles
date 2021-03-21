@@ -1,3 +1,3 @@
 #!/bin/sh
 
-exec python $HOME/.dotfiles/contrib/bitly/data_hacks.git/data_hacks/histogram.py $*
+exec python2 $HOME/.dotfiles/contrib/bitly/data_hacks.git/data_hacks/histogram.py $*

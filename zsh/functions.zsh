@@ -35,9 +35,9 @@ function g {
 
 function s {
     if [[ $# > 0 ]]; then
-        sudo "$@"
+        sudo -E "$@"
     else
-        sudo -s
+        sudo -E -s
     fi
 }
 

@@ -46,6 +46,8 @@
     reword = commit --amend -v
     fixup = commit --fixup HEAD
     graph = log --graph --branches --remotes --tags  --format=format:'%Cgreen%h%Creset %<(75,trunc)%s (%cN, %cr) %Cred%d' --date-order
+    wip = for-each-ref --sort='authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)' refs/heads
+
 
     log-date=log --pretty=oneline-date
     ld=!git log-date

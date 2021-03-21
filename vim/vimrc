@@ -8,7 +8,7 @@ Plug 'ayu-theme/ayu-vim'
 Plug 'cespare/vim-toml'
 Plug 'fatih/vim-go'
 Plug 'jreybert/vimagit'
-Plug 'junegunn/fzf', { 'build': './install --all' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-peekaboo'
 Plug 'justinmk/vim-sneak'
@@ -37,6 +37,10 @@ Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'w0rp/ale'
 Plug 'wellle/targets.vim'
+
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 call plug#end()
 
 " Required:
@@ -454,7 +458,6 @@ let g:ale_linters = {
       \    'puppetlint',
       \  ],
       \  'python': [
-      \    'flake8',
       \    'pylint',
       \    'pyls',
       \  ],
@@ -517,11 +520,13 @@ autocmd custom FileType make setlocal noexpandtab
 autocmd custom FileType make setlocal nosmarttab
 autocmd custom FileType make setlocal softtabstop=0
 autocmd custom FileType make setlocal tabstop=4
+autocmd custom FileType make setlocal number
 
 " go customizations
 autocmd custom FileType go setlocal noexpandtab
 autocmd custom FileType go setlocal shiftwidth=4
 autocmd custom FileType go setlocal tabstop=4
+autocmd custom FileType go setlocal number
 
 autocmd custom FileType go nnoremap <buffer> <leader>mdS :GoDebugStart<cr>
 autocmd custom FileType go nnoremap <buffer> <leader>mdb :GoDebugBreakpoint<cr>
@@ -564,6 +569,7 @@ let g:go_bin_path = expand("$HOME/.go/bin")
 " yaml customizations
 autocmd custom FileType yaml autocmd BufWritePre <buffer> call RemoveTrailingWhiteSpace()
 autocmd custom FileType yaml setlocal shiftwidth=4
+autocmd custom FileType yaml setlocal number
 
 " man page customizations
 autocmd custom FileType man nnoremap <buffer> q :q<cr>
@@ -583,6 +589,8 @@ autocmd custom FileType pandoc setlocal shiftwidth=4
 autocmd custom FileType pandoc setlocal softtabstop=4
 autocmd custom FileType pandoc setlocal spell
 autocmd custom FileType pandoc setlocal foldlevel=2
+autocmd custom FileType pandoc setlocal conceallevel=0
+autocmd custom FileType pandoc setlocal showbreak=
 autocmd custom FileType pandoc setlocal foldcolumn=0
 " toggling
 autocmd custom FileType pandoc nnoremap <buffer> <leader>mtt :call ToggleState("TODO")<cr>
@@ -678,13 +686,16 @@ let g:pandoc#keyboard#use_default_mappings = 0
 " perl customizations
 autocmd custom FileType perl autocmd BufWritePre <buffer> call RemoveTrailingWhiteSpace()
 autocmd custom FileType perl setlocal iskeyword+=$,%,@
+autocmd custom FileType perl setlocal number
 
 " puppet customizations
 autocmd custom FileType puppet autocmd BufWritePre <buffer> call RemoveTrailingWhiteSpace()
+autocmd custom FileType puppet setlocal number
 
 " python customizations
 autocmd custom FileType python autocmd BufWritePre <buffer> call RemoveTrailingWhiteSpace()
 autocmd custom FileType python setlocal textwidth=79
+autocmd custom FileType python setlocal number
 autocmd custom FileType python nnoremap <buffer> gd :ALEGoToDefinition<cr>
 autocmd custom FileType python nnoremap <buffer> K :ALEHover<cr>
 autocmd custom BufNewFile *.py 0r ~/.vim/templates/skeleton.py
@@ -692,25 +703,31 @@ autocmd custom BufNewFile *.py 0r ~/.vim/templates/skeleton.py
 " rust customizations
 autocmd custom FileType rust nnoremap <buffer> gd :ALEGoToDefinition<cr>
 autocmd custom FileType rust nnoremap <buffer> K :ALEHover<cr>
+autocmd custom FileType rust setlocal number
 
 " javascript customizations
 autocmd custom FileType javascript autocmd BufWritePre <buffer> call RemoveTrailingWhiteSpace()
 autocmd custom FileType javascript setlocal textwidth=120
+autocmd custom FileType javascript setlocal number
 
 " cython customizations
 autocmd custom FileType pyrex autocmd BufWritePre <buffer> call RemoveTrailingWhiteSpace()
+autocmd custom FileType pyrex setlocal number
 autocmd custom FileType pyrex setlocal textwidth=79
 
 " ruby customizations
 autocmd custom FileType ruby autocmd BufWritePre <buffer> call RemoveTrailingWhiteSpace()
+autocmd custom FileType ruby setlocal number
 
 " shell script customizations
 autocmd custom FileType sh,zsh autocmd BufWritePre <buffer> call RemoveTrailingWhiteSpace()
+autocmd custom FileType sh,zsh setlocal number
 
 " shell vimscript customizations
 autocmd custom FileType vim autocmd BufWritePre <buffer> call RemoveTrailingWhiteSpace()
 autocmd custom FileType vim setlocal shiftwidth=2
 autocmd custom FileType vim setlocal softtabstop=2
+autocmd custom FileType vim setlocal number
 
 " shell vim help page customizations
 autocmd custom FileType help nnoremap <buffer> q :q<cr>
@@ -755,7 +772,7 @@ let g:fzf_filemru_bufwrite = 1
 let g:fzf_filemru_git_ls = 1
 
 let g:rooter_silent_chdir = 1
-let g:rooter_use_lcd = 1
+let g:rooter_cd_cmd="lcd"
 
 let g:python_highlight_all = 1
 
@@ -842,7 +859,7 @@ let g:git_messenger_no_default_mappings = 1
 
 " Terminal buffer options for fzf
 autocmd! FileType fzf
-autocmd  FileType fzf set noshowmode noruler nonu
+autocmd  FileType fzf setlocal noshowmode noruler nonu
 
 if has('nvim') && exists('&winblend') && &termguicolors
   set winblend=20
