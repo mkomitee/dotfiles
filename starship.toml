@@ -1,0 +1,14 @@
+[cmd_duration]
+show_milliseconds = true
+min_time = 250
+
+[status]
+disabled = false
+
+[time]
+disabled = false
+# use_12hr = true
+time_format = "%-I:%M:%S %p"
+
+[directory]
+truncation_symbol = "…"
