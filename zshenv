@@ -27,6 +27,7 @@ path=(
     $HOME/.go/bin
     $HOME/scripts
     $HOME/.${OSNAME}/bin
+    /opt/homebrew/bin
     /usr/local/bin
     /usr/local/sbin
     /usr/bin
