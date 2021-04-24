@@ -7,3 +7,6 @@
 [submodule "contrib/brendangregg/FlameGraph"]
 	path = contrib/brendangregg/FlameGraph
 	url = https://github.com/brendangregg/FlameGraph
+[submodule "contrib/zsh-users/zsh-autosuggestions"]
+	path = contrib/zsh-users/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions
