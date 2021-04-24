@@ -15,16 +15,6 @@ fi
 source $ZSH/aliases.zsh
 source $ZSH/key-bindings.zsh
 source $ZSH/functions.zsh
-#source $ZSH/prompt.zsh
-
-# LS CONFIG
-# Find the option for using colors in ls, depending on the version: Linux or BSD
-if ls --color -d . &>/dev/null; then
-    alias ls='ls -F --color=tty'
-else
-    alias ls='ls -FG'
-fi
-
 
 setopt always_to_end
 setopt append_history

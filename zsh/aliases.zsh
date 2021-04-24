@@ -8,7 +8,7 @@ alias run_for='python ~/.dotfiles/contrib/bitly/data_hacks.git/data_hacks/run_fo
 alias sample='python ~/.dotfiles/contrib/bitly/data_hacks.git/data_hacks/sample.py'
 
 alias aa='tmux_resume main'
-alias bc='bc -l'
+alias bc='eva'
 alias dot='cd ~dot'
 alias tmux='tmux -u2'
 alias y=true
@@ -21,6 +21,7 @@ alias dirs='dirs -v'
 alias ag=rg
 
 alias l='exa -gbFs date --group-directories-first'
+alias ls='l'
 alias la='l --all'
 alias ll='l --long'
 alias lla='ll --all'
@@ -52,5 +53,3 @@ alias git=hub
 alias less='less -RS'
 
 alias cat=bat
-
-alias bc=eva

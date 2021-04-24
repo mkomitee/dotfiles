@@ -46,6 +46,11 @@ function virtualenv {
     command virtualenv $*
 }
 
+function virtualenv3 {
+    local PYTHONDONTWRITEBYTECODE=0
+    command python3 -mvenv $*
+}
+
 function pip {
     local PYTHONDONTWRITEBYTECODE=0
     command pip $*
@@ -66,7 +71,7 @@ function colours() {
 
 function =
 {
-    echo "$@" | bc -l
+    echo "$@" | eva
 }
 
 alias calc="="
