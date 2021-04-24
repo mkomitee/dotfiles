@@ -127,6 +127,10 @@ zstyle ':completion:*:*:*:*files' ignored-patterns '*?.o' '*?~' '*?.pyc' '*?.pyo
 autoload -U url-quote-magic
 zle -N self-insert url-quote-magic
 
+if [ -f "$HOME/.dotfiles/contrib/zsh-users/zsh-autosuggestions/zsh-autosuggestions.zsh" ]; then
+    source $HOME/.dotfiles/contrib/zsh-users/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
+
 # Source local config
 if [ -f $HOME/.zshrc.local ]; then
     source $HOME/.zshrc.local
