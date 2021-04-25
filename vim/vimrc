@@ -10,6 +10,7 @@ Plug 'fatih/vim-go'
 Plug 'jreybert/vimagit'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'lotabout/skim'
 Plug 'junegunn/vim-peekaboo'
 Plug 'justinmk/vim-sneak'
 Plug 'kshenoy/vim-signature'
