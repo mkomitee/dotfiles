@@ -1,6 +1,21 @@
 [cmd_duration]
 show_milliseconds = true
-min_time = 250
+min_time = 1000
+
+[directory]
+truncation_symbol = "…"
+
+[git_status]
+disabled = true
+
+[package]
+disabled = true
+
+[python]
+disabled = true
+
+[rust]
+disabled = true
 
 [status]
 disabled = false
@@ -9,6 +24,3 @@ disabled = false
 disabled = false
 # use_12hr = true
 time_format = "%-I:%M:%S %p"
-
-[directory]
-truncation_symbol = "…"
