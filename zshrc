@@ -148,6 +148,6 @@ fi
 
 eval "$(zoxide init zsh)"
 
-export DIDZSHRC=1
-
 eval "$(starship init zsh)"
+
+export DIDZSHRC=1
