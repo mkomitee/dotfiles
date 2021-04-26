@@ -15,6 +15,7 @@ fi
 source $ZSH/aliases.zsh
 source $ZSH/key-bindings.zsh
 source $ZSH/functions.zsh
+source $ZSH/skim.zsh
 
 setopt always_to_end
 setopt append_history
