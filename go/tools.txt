@@ -21,6 +21,7 @@ github.com/mdempsky/unconvert
 github.com/mibk/dupl
 github.com/rogpeppe/godef
 github.com/securego/gosec/cmd/gosec
+github.com/segmentio/golines
 github.com/stamblerre/gocode
 github.com/stripe/safesql
 github.com/tsenart/deadcode
