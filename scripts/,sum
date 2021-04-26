@@ -1,4 +1,4 @@
-#!/usr/local/bin/python
+#!/usr/local/bin/python3
 import sys
 
 def main():
@@ -7,7 +7,7 @@ def main():
     for line in sys.stdin.readlines():
         total += float(line.strip())
         count += 1
-    print 'Total: {0} Average: {1}'.format(total, total/count)
+    print('Total: {0} Average: {1}'.format(total, total/count))
 
 
 if __name__ == '__main__':
