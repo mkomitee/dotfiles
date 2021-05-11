@@ -1,3 +1,16 @@
+atuin
+bat
 bb
-dust
+cargo-rr
+cargo-install-update
+du-dust
 eva
+exa
+fd-find
+hstr-rs
+hyperfine
+sd
+skim
+starship
+zellij
+zoxide

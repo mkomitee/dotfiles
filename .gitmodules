@@ -10,3 +10,6 @@
 [submodule "contrib/zsh-users/zsh-autosuggestions"]
 	path = contrib/zsh-users/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions
+[submodule "contrib/hwyncho/ayu-Terminal-app"]
+	path = contrib/hwyncho/ayu-Terminal-app
+	url = https://github.com/hwyncho/ayu-Terminal-app

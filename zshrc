@@ -151,4 +151,7 @@ eval "$(zoxide init zsh)"
 
 eval "$(starship init zsh)"
 
+eval "$(atuin init zsh | grep -v bindkey)"
+bindkey '^r' _atuin_search_widget
+
 export DIDZSHRC=1

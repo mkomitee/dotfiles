@@ -27,6 +27,7 @@ github.com/stripe/safesql
 github.com/tsenart/deadcode
 github.com/walle/lll/cmd/lll
 github.com/zmb3/gogetdoc
+github.com/TomWright/dasel
 gitlab.com/opennota/check/cmd/aligncheck
 gitlab.com/opennota/check/cmd/structcheck
 gitlab.com/opennota/check/cmd/varcheck
