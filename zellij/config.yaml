@@ -1,8 +1,0 @@
----
-keybinds:
-    unbind: false
-    pane:
-        - action: [NewPane: Down,]
-          key: [Char: '-', Char: 'd', ]
-        - action: [NewPane: Right,]
-          key: [Char: '/', Char: 'r', ]
