@@ -128,3 +128,22 @@ function perldoc() {
         LESS_TERMCAP_us=$(printf "\e[1;32m") \
         perldoc "$@"
 }
+
+function irg() {
+    sk --ansi  -i -c 'rg -pS "{}"'
+
+}
+
+# function virg() {
+#     FILE=$(sk --ansi  -i -c 'rg -pS "{}"')
+#     if [ -n "$FILE" ]; then
+#         nvim "$FILE"
+#     fi
+# }
+
+function visk() {
+    FILE=$(sk)
+    if [ -n "$FILE" ]; then
+        nvim "$FILE"
+    fi
+}
