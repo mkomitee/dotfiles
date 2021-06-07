@@ -145,13 +145,13 @@ if [ -f $HOME/.zshrc.hash ]; then
     source ~/.zshrc.hash
 fi
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-eval "$(zoxide init zsh)"
+if [ $UID -ne 0 ]; then
+    # when zoxide runs as root (in a shell started with sudo) it takes ownership
+    # of the db.
+    eval "$(zoxide init zsh )"
+    alias cd=z
+fi
 
 eval "$(starship init zsh)"
-
-eval "$(atuin init zsh | grep -v bindkey)"
-bindkey '^r' _atuin_search_widget
 
 export DIDZSHRC=1
