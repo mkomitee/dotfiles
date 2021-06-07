@@ -2,15 +2,14 @@ if &compatible
   set nocompatible               " Be iMproved
 endif
 
+let g:polyglot_disabled = ['pascal']
+
 call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-rooter'
 Plug 'ayu-theme/ayu-vim'
 Plug 'cespare/vim-toml'
 Plug 'fatih/vim-go'
 Plug 'jreybert/vimagit'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'lotabout/skim'
 Plug 'junegunn/vim-peekaboo'
 Plug 'justinmk/vim-sneak'
 Plug 'kshenoy/vim-signature'
@@ -20,7 +19,6 @@ Plug 'rhysd/git-messenger.vim'
 Plug 'romainl/vim-qf'
 Plug 'romainl/vim-qlist'
 Plug 'sheerun/vim-polyglot'
-Plug 'simnalamburt/vim-mundo'
 Plug 'tommcdo/vim-lion'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-characterize'
@@ -31,18 +29,33 @@ Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
-Plug 'tracyone/fzf-funky'
 Plug 'troydm/zoomwintab.vim'
-Plug 'tweekmonster/fzf-filemru'
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'w0rp/ale'
 Plug 'wellle/targets.vim'
 
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/playground'
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/nvim-compe'
+
+" dependencies
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
+Plug 'tami5/sql.nvim'
+" " telescope
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-frecency.nvim'
 call plug#end()
+
+lua <<EOF
+require'lspconfig'.gopls.setup{}
+require'lspconfig'.pyls.setup{}
+require'lspconfig'.rust_analyzer.setup{}
+require"telescope".load_extension("frecency")
+EOF
+
 
 " Required:
 filetype plugin indent on
@@ -284,32 +297,29 @@ nnoremap <silent> * :let b:pos = winsaveview()<cr>*:call winrestview(b:pos)<cr>
 nnoremap <silent> # :let b:pos = winsaveview()<cr>#:call winrestview(b:pos)<cr>
 
 nnoremap <leader>fed :e $HOME/.dotfiles/vim/vimrc<CR>
-nnoremap <leader>ff :FilesMru --tiebreak=end<CR>
-nnoremap <leader>fu :CtrlPFunky<CR>
-nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
-nnoremap <leader>fm :History<CR>
-nnoremap <leader>fh :History<CR>
+
+" nnoremap <leader>ff :FilesMru --tiebreak=end<CR>
+nnoremap <leader>ff :Telescope find_files<CR>
+nnoremap <leader>fh :Telescope frecency<CR>
 nnoremap <leader>pp :Projects<CR>
-nnoremap <leader>pf :GFiles<CR>
-nnoremap <leader>pg :GFiles<CR>
-nnoremap <leader>bb :Buffers<CR>
+nnoremap <leader>pf :Telescope git_files<CR>
+nnoremap <leader>pg :Telescope git_files<CR>
+nnoremap <leader>bb :Telescope buffers<CR>
 
-command! -bang Notes call fzf#run(fzf#wrap
-      \  ('my-stuff', {'dir': '~/notes',
-      \                'source': 'rg --files -g "*.md" -g "!archive/" -g "!contrib/"'
-      \               },
-      \  <bang>0)
-      \ )
+nnoremap <leader>fm :Telescope marks<CR>
+nnoremap <leader>fr :Telescope registers<CR>
+nnoremap <leader>fq :Telescope quickfix<CR>
+nnoremap <leader>fj :Telescope jumplist<CR>
+nnoremap <leader>fl :Telescope loclist<CR>
+nnoremap <leader>fk :Telescope keymaps<CR>
+nnoremap <leader>fs :Telescope spell_suggest<CR>
 
-function! NoteToday()
-  let s:basedir = expand('~/notes/daily')
-  let s:dir = expand('~/notes/daily') . strftime("/%Y/%m/")
-  let s:file = s:dir . strftime("%Y%m%d.md")
-  silent execute system('mkdir -p ' . s:dir)
-  execute "edit " . s:file
-endfunction
-nnoremap <leader>an :Notes<cr>
-nnoremap <leader>aN :call NoteToday()<cr>
+nnoremap <leader>fg :Telescope live_grep<cr>
+
+
+
+" nnoremap <leader>an :Notes<cr>
+nnoremap <leader>an :lua require('telescope.builtin').find_files({search_dirs = {'/u/komitee/notes'}})<cr>
 
 nnoremap <leader>bd :Kwbd<CR>
 nnoremap <leader>bc :Kwbd<CR>
@@ -321,14 +331,7 @@ nnoremap <leader>b<tab> <C-^>
 nnoremap <C-C><Left> <C-^>
 nnoremap <leader>bs :Scratch<CR>
 
-nnoremap <leader>at :terminal ++curwin<cr>
-
-" Other commands
-" Replace word under cursor, everywhere in the file.
-nnoremap <leader>r. :%s/\<C-r><C-w>\>/
-" Replace visually selected characters, everywhere in the file.
-vnoremap <leader>rv "hy:%s/<C-r>h/
-nnoremap <leader>au :MundoToggle<cr>
+nnoremap <leader>at :terminal<cr>
 
 " Tag commands
 nnoremap <leader>Tt :Tags<cr>
@@ -339,22 +342,6 @@ nnoremap <leader>Td <C-]>
 nnoremap <leader>Twd <C-w>}
 nnoremap <leader>Tn :tnext<cr>
 nnoremap <leader>Tp :tprevious<cr>
-
-" Tab commands
-nnoremap <leader>tt :tabs<cr>
-nnoremap <leader>td :tabclose<cr>
-nnoremap <leader>tp :tabprevious<cr>
-nnoremap <leader>tn :tabnext<cr>
-nnoremap <leader>th :tabprevious<cr>
-nnoremap <leader>tl :tabnext<cr>
-nnoremap <leader>tj :tabprevious<cr>
-nnoremap <leader>tk :tabnext<cr>
-nnoremap <leader>tH :tabfirst<cr>
-nnoremap <leader>tL :tablast<cr>
-nnoremap <leader>tJ :tabfirst<cr>
-nnoremap <leader>tK :tablast<cr>
-nnoremap <leader>tN :tabnew<cr>
-nnoremap <leader>to :tabonly<cr>
 
 " Window commands
 nnoremap <leader>w= <C-W>=
@@ -406,19 +393,6 @@ nnoremap ]Q :clast<cr>
 nnoremap [<C-Q> :cpfile<cr>
 nnoremap ]<C-Q> :cnfile<cr>
 
-nnoremap [t :tabprevious<cr>
-nnoremap ]t :tabnext<cr>
-nnoremap [T :tabfirst<cr>
-nnoremap ]T :tablast<cr>
-nnoremap <C-W>[t :tabprevious<cr>
-nnoremap <C-W>]t :tabnext<cr>
-nnoremap <C-W>[T :tabfirst<cr>
-nnoremap <C-W>]T :tablast<cr>
-tnoremap <C-W>[t <C-W>:tabprevious<cr>
-tnoremap <C-W>]t <C-W>:tabnext<cr>
-tnoremap <C-W>[T <C-W>:tabfirst<cr>
-tnoremap <C-W>]T <C-W>:tablast<cr>
-
 " Git commands
 nnoremap <leader>gs :Gstatus<cr>
 nnoremap <leader>gc :Gcommit -v<cr>
@@ -432,8 +406,10 @@ nnoremap <leader>g? :GitMessenger<cr>
 nmap <Leader># #:sil! gr! "\b<C-R><C-W>\b"<CR>:cw<CR>:redr!<CR>
 nmap <Leader>* #:sil! gr! "\b<C-R><C-W>\b"<CR>:cw<CR>:redr!<CR>
 
+
 let g:ale_fixers = {
       \  'python': [
+      \    'black',
       \  ],
       \ 'rust': [
       \    'rustfmt',
@@ -446,9 +422,6 @@ let g:ale_linters = {
       \  ],
       \  'json': [
       \    'jq',
-      \  ],
-      \  'markdown': [
-      \    'write-good',
       \  ],
       \  'perl': [
       \    'perl',
@@ -463,7 +436,7 @@ let g:ale_linters = {
       \    'pyls',
       \  ],
       \  'rust': [
-      \    'rls',
+      \    'analyzer',
       \  ],
       \ }
 
@@ -483,21 +456,14 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<ESC>:ALEComplete\<CR>"
 
 autocmd custom BufWinEnter * if &buftype == 'terminal' | setlocal colorcolumn=0 | setlocal nonumber | endif
 
-nnoremap <M-x> :Commands<cr>
+" nnoremap <M-x> :Commands<cr>
+nnoremap <M-x> :Telescope commands<cr>
 
-nnoremap <leader>hh :help ShortcutContents<cr>
-nnoremap <leader>ht :Helptags<cr>
+" nnoremap <leader>ht :Helptags<cr>
+nnoremap <leader>ht :Telescope help_tags<cr>
 nnoremap <leader>h. :help <C-r><C-w><cr>
 
 nnoremap <leader>qq :qall<cr>
-
-command! -bang -nargs=* Rg
-      \ call fzf#vim#grep(
-      \ 'rg --column --line-number --no-heading --smart-case --color=always '.shellescape(<q-args>),
-      \ 1,
-      \ <bang>0 ? fzf#vim#with_preview('up:60%')
-      \         : fzf#vim#with_preview('right:50%:hidden', '?'),
-      \ <bang>0)
 
 " quickfix customizations
 autocmd custom FileType qf nnoremap <buffer> q :q<cr>
@@ -541,13 +507,15 @@ autocmd custom FileType go nnoremap <buffer> <leader>mdo :GoDebugStepOut<cr>
 
 highlight GoDebugCurrent term=underline ctermbg=237 guibg=#3c3836
 
-let g:go_fmt_command = "gofumports"
+let g:go_fmt_command = "golines"
 let g:go_fmt_options = {
       \" gofmt": "-s",
       \ "goimports": "-local u-",
       \ "goreturns": "-local u-",
       \ "gofumports": "-local u-",
+      \ "golines": "-m 80 --shorten-comments --reformat-tags",
       \ }
+" \ "golines": "--base-formatter='gofumports -s -extra' --shorten-comments --reformat-tags",
 let g:go_fmt_fail_silently = 1
 let g:go_fmt_experimental = 1
 let g:go_doc_keywordprg_enabled = 1
@@ -765,10 +733,6 @@ silent execute '!mkdir -p $HOME/.local/share/vim/views'
 silent execute '!mkdir -p $HOME/.local/share/vim/undo'
 silent execute '!mkdir -p $HOME/.local/share/vim/tags'
 
-let g:mundo_help = 1
-let g:mundo_preview_bottom = 1
-let g:mundo_right = 1
-
 let g:fzf_filemru_bufwrite = 1
 let g:fzf_filemru_git_ls = 1
 
@@ -777,7 +741,7 @@ let g:rooter_cd_cmd="lcd"
 
 let g:python_highlight_all = 1
 
-let g:markdown_fenced_languages = ['html', 'vim', 'python', 'bash=sh', 'sql', 'erlang']
+let g:markdown_fenced_languages = ['html', 'vim', 'python', 'bash=sh', 'sql', 'erlang', 'rust', 'go']
 
 function! ToggleState(state)
   let l:save = winsaveview()
@@ -854,42 +818,11 @@ let g:ctrlp_funky_sort_by_mru = 1
 let g:ctrlp_funky_syntax_highlight = 1
 let g:ctrlp_funky_use_cache = 1
 
-
 let g:git_messenger_no_default_mappings = 1
 
 
-" Terminal buffer options for fzf
-autocmd! FileType fzf
-autocmd  FileType fzf setlocal noshowmode noruler nonu
-
-if has('nvim') && exists('&winblend') && &termguicolors
-  set winblend=20
-
-  hi NormalFloat guibg=None
-  if exists('g:fzf_colors.bg')
-    call remove(g:fzf_colors, 'bg')
-  endif
-
-  if stridx($FZF_DEFAULT_OPTS, '--border') == -1
-    let $FZF_DEFAULT_OPTS .= ' --border'
-  endif
-
-  function! FloatingFZF()
-    let width = float2nr(&columns * 0.8)
-    let height = float2nr(&lines * 0.6)
-    let opts = { 'relative': 'editor',
-               \ 'row': (&lines - height) / 2,
-               \ 'col': (&columns - width) / 2,
-               \ 'width': width,
-               \ 'height': height }
-
-    call nvim_open_win(nvim_create_buf(v:false, v:true), v:true, opts)
-  endfunction
-
-  let g:fzf_layout = { 'window': 'call FloatingFZF()' }
-endif
-
 " Abolish maps are in ~/.vim/after/plugin/abolish.vim
+
  if filereadable(expand("~/.vimrc.local"))
    source ~/.vimrc.local
 endif
