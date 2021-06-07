@@ -39,7 +39,7 @@ path=($^path(N))
 export PATH
 
 export PAGER=less
-export EDITOR="vim"
+export EDITOR="nvim"
 export SVNEDITOR=$EDITOR
 export VISUAL=$EDITOR
 
@@ -51,6 +51,7 @@ export LANG=en_US.UTF-8
 export FZF_DEFAULT_COMMAND="rg --files --hidden --follow"
 export FZF_DEFAULT_OPTS="--inline-info"
 export SKIM_DEFAULT_COMMAND="fd --type f || git ls-tree -r --name-only HEAD || rg --files || find ."
+export SKIM_DEFAULT_OPTS="--ansi --border --inline-info --color=dark"
 
 if [ -f $HOME/.zshenv.local ]; then
     source $HOME/.zshenv.local
